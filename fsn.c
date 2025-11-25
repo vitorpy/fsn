@@ -1002,12 +1002,12 @@ undefined DAT_100165e0;
 undefined4 DAT_10017610;
 undefined FUN_0040fbb0;
 char DAT_10017492;
-undefined4 DAT_100165f0;
-float DAT_100165f4;
-float DAT_100165f8;
-short DAT_10016608;
-short DAT_1001660a;
-undefined1 DAT_1001660c;
+undefined4 zoom_stack_pointer;
+float zoom_stack_size;
+float zoom_stack_capacity;
+short camera_position_x;
+short camera_position_y;
+undefined1 camera_position_z;
 undefined1 DAT_1001660d;
 undefined1 DAT_1001660e;
 undefined4 DAT_1001661c;
@@ -38500,12 +38500,12 @@ void zoomto(double param_1,double param_2)
   FUN_0040f150(0,0);
   set_main_gl_window();
   if (in_stack_00000020 == *(int *)(curcontext + 0x3c)) {
-    DAT_100165f0 = (float)param_1;
-    DAT_100165f4 = (float)param_2;
-    DAT_100165f8 = (float)(double)CONCAT44(in_register_00001080,in_stack_00000014);
-    DAT_10016608 = in_stack_0000001a;
-    DAT_1001660a = in_stack_0000001e;
-    DAT_1001660c = in_stack_0000001a != *(short *)(curcontext + 0xc);
+    zoom_stack_pointer = (float)param_1;
+    zoom_stack_size = (float)param_2;
+    zoom_stack_capacity = (float)(double)CONCAT44(in_register_00001080,in_stack_00000014);
+    camera_position_x = in_stack_0000001a;
+    camera_position_y = in_stack_0000001e;
+    camera_position_z = in_stack_0000001a != *(short *)(curcontext + 0xc);
     DAT_1001660d = in_stack_0000001e != *(short *)(curcontext + 0xe);
     if (in_stack_00000020 == 0) {
                     // WARNING: Bad instruction - Truncating control flow here
@@ -38516,7 +38516,7 @@ void zoomto(double param_1,double param_2)
     DAT_1001661c = in_stack_00000024;
     DAT_10016620 = in_stack_00000028;
     DAT_10016618 = DAT_100174e8;
-    FUN_0040f150(FUN_0040fbb0,&DAT_100165f0);
+    FUN_0040f150(FUN_0040fbb0,&zoom_stack_pointer);
   }
   else {
     if (DAT_10017492 != '\0') {
