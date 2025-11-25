@@ -12,9 +12,9 @@ FUN_00411b30 -> build_path_string : 21 calls - Returns char*, builds full paths,
 FUN_0042a788 -> gl_swap_buffers : 20 calls - Called with (1), around XRaiseWindow and context switches
 FUN_00410da4 -> set_status_message : 14 calls - Sets message in status bar widget, takes string
 FUN_00411094 -> show_error_dialog : 15 calls - Shows error message + filepath ("cannot delete", path)
-# FUN_00410264 -> set_camera_lookat : 19 calls - Takes two doubles, sets camera position/view
-# FUN_00421f10 -> check_display_capability : 18 calls - Returns int, affects config in main
-# FUN_0042a8e4 -> ? : 18 calls - TODO: needs deeper analysis
+FUN_00410264 -> set_camera_lookat : 19 calls - Takes two doubles, sets camera position/view
+FUN_00421f10 -> init_display_mode : 18 calls - Returns void, checks display capability and sets flags
+# FUN_0042a8e4 -> ? : 18 calls - TODO: needs deeper analysis, uses curcontext
 
 # Core / Main Functions
 FUN_0040eef0 -> quit_application : WM_DELETE_WINDOW callback, calls cleanup then exit(0)
@@ -26,9 +26,9 @@ FUN_0042a7f0 -> gl_pop_state : 10 calls - Called after GL rendering, pairs with 
 FUN_0040bbe0 -> set_main_gl_window : 11 calls - GL window setup, called from main
 FUN_00411ea4 -> update_display : 12 calls - Called in main after directory load, before showOverview
 # FUN_00432094 -> ? : 13 calls - Takes display + 3 pointers, builds array/table, X11 resource related
-# FUN_004341fc -> set_gl_color : 13 calls - Takes color index, applies color (bit manipulation)
+FUN_004341fc -> set_gl_color : 13 calls - Takes color index, applies color (bit manipulation)
 FUN_00435668 -> parse_typed_value : 13 calls - Returns int, reads typed data (1/2/4 byte sizes)
-# FUN_0040ff64 -> save_matrix_state : 12 calls - Cycles matrix buffer, called before view operations
+FUN_0040ff64 -> save_matrix_state : 12 calls - Cycles matrix buffer, called before view operations
 # FUN_00411998 -> ? : 12 calls - Called before directory scanning, state management
 # FUN_0041d920 -> ? : 12 calls - Directory navigation state, near menu_directory_cascade
 # FUN_0041d69c -> ? : 11 calls - No params

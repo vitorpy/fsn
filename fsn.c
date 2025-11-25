@@ -49506,7 +49506,7 @@ void FUN_0040a7ec(void)
   local_80 = 0xe3f46dd;
   local_8c = 1;
   local_7c = 1;
-  iVar2 = FUN_00421f10();
+  iVar2 = init_display_mode();
   if (iVar2 == 0) {
     local_78 = "useOverlay";
   }
@@ -49520,7 +49520,7 @@ void FUN_0040a7ec(void)
                     ("glwidget",_DAT_0e210e90,*(undefined4 *)(curcontextwindows + 0xc),&local_a0,7);
   *(undefined4 *)(curcontextwindows + 8) = uVar1;
   XtAddCallback(*(undefined4 *)(curcontextwindows + 8),"exposeCallback",FUN_0040bc64,0);
-  iVar2 = FUN_00421f10();
+  iVar2 = init_display_mode();
   if (iVar2 == 0) {
     pcVar3 = "overlayExposeWindow";
   }
@@ -49685,7 +49685,7 @@ void main(int param_1,undefined4 *param_2)
   DAT_1001665c = uStack_84;
   panel_vsep_widget = XtCreateManagedWidget("panelvsep",_DAT_0e3d8f04,panel_widget,&uStack_a0,4);
   FUN_0040df80();
-  iVar3 = FUN_00421f10();
+  iVar3 = init_display_mode();
   if (iVar3 != 0) {
     DAT_100000a4 = 0x3000;
   }
@@ -49900,7 +49900,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   DAT_1001665c = local_84;
   panel_vsep_widget = XtCreateManagedWidget("panelvsep",_DAT_0e3d8f04,panel_widget,&local_a0,4);
   FUN_0040df80();
-  iVar3 = FUN_00421f10();
+  iVar3 = init_display_mode();
   if (iVar3 != 0) {
     DAT_100000a4 = 0x3000;
   }
@@ -50305,7 +50305,7 @@ void FUN_0040c1a0(int param_1,undefined4 param_2,int param_3)
   *(uint *)(curcontext + 0x30) = (uint)*(ushort *)(param_3 + 0x12);
   *(float *)(curcontext + 0x34) =
        (float)*(int *)(curcontext + 0x2c) / (float)*(int *)(curcontext + 0x30);
-  iVar2 = FUN_00421f10();
+  iVar2 = init_display_mode();
   if (iVar2 == 0) {
     local_2c = "overlayWindow";
   }
@@ -50322,7 +50322,7 @@ void FUN_0040c1a0(int param_1,undefined4 param_2,int param_3)
   if (DAT_10000144 != 0) {
     local_2c = (char *)0xf6615ba;
     local_28 = local_34;
-    iVar2 = FUN_00421f10();
+    iVar2 = init_display_mode();
     local_20 = &local_38;
     if (iVar2 == 0) {
       local_24 = "overlayColormap";
@@ -50333,7 +50333,7 @@ void FUN_0040c1a0(int param_1,undefined4 param_2,int param_3)
     XtGetValues(DAT_10000144,&local_2c,2);
     local_2c = (char *)0xf6615ba;
     local_28 = (int *)local_34[0];
-    iVar2 = FUN_00421f10();
+    iVar2 = init_display_mode();
     if (iVar2 == 0) {
       local_24 = "overlayColormap";
     }
@@ -50574,8 +50574,8 @@ void FUN_0040cf9c(undefined8 param_1,undefined4 param_2)
 void reset_eye(void)
 
 {
-  FUN_0040ff64();
-  FUN_00410264((double)view_init_x,(double)view_init_y);
+  save_matrix_state();
+  set_camera_lookat((double)view_init_x,(double)view_init_y);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -50587,9 +50587,9 @@ void reset_eye(void)
 void FUN_0040d15c(void)
 
 {
-  FUN_0040ff64();
+  save_matrix_state();
   if (*(int *)(curcontext + 0x3c) == 0) {
-    FUN_00410264((double)*(float *)curcontext -
+    set_camera_lookat((double)*(float *)curcontext -
                  (double)*(float *)(curcontext + 0x14) * (double)*(float *)(curcontext + 0x20) *
                  (double)*(float *)(curcontext + 8),
                  (double)*(float *)(curcontext + 4) -
@@ -50597,7 +50597,7 @@ void FUN_0040d15c(void)
                  (double)*(float *)(curcontext + 8));
   }
   else {
-    FUN_00410264((double)*(float *)curcontext -
+    set_camera_lookat((double)*(float *)curcontext -
                  (double)*(float *)(curcontext + 0x14) * (double)*(float *)(curcontext + 0x20) *
                  (double)*(float *)(curcontext + 8),
                  (double)*(float *)(curcontext + 4) -
@@ -50615,12 +50615,12 @@ void FUN_0040d15c(void)
 void FUN_0040d2cc(void)
 
 {
-  FUN_0040ff64();
+  save_matrix_state();
   if (*(int *)(curcontext + 0x3c) == 0) {
-    FUN_00410264((double)view_init_x,(double)view_init_y);
+    set_camera_lookat((double)view_init_x,(double)view_init_y);
   }
   else {
-    FUN_00410264((double)DAT_100174bc,(double)DAT_100174c0);
+    set_camera_lookat((double)DAT_100174bc,(double)DAT_100174c0);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -51288,7 +51288,7 @@ void FUN_0040f42c(undefined4 param_1,int param_2)
 
 {
   set_gl_context(param_1,0);
-  FUN_0040ff64();
+  save_matrix_state();
   FUN_0040f080(param_2,&DAT_10000158,&DAT_1000015c);
   FUN_004294cc();
   FUN_0040bc28();
@@ -51505,7 +51505,7 @@ void pushzoom(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040ff64(void)
+void save_matrix_state(void)
 
 {
   undefined4 *puVar1;
@@ -51716,7 +51716,7 @@ void zoomto(double param_1,double param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00410264(double param_1,double param_2)
+void set_camera_lookat(double param_1,double param_2)
 
 {
   int iVar1;
@@ -51823,18 +51823,18 @@ void do_warp(int param_1)
   float local_4;
   
   set_main_gl_window();
-  FUN_0040ff64();
+  save_matrix_state();
   if (param_1 == 0) {
     if (*(int *)(curcontext + 0x3c) == 0) {
-      FUN_00410264((double)view_init_x,(double)view_init_y,0,&local_4);
+      set_camera_lookat((double)view_init_x,(double)view_init_y,0,&local_4);
     }
     else {
       FUN_00426e34(*(int *)(curcontext + 0x3c),&local_4,&local_8,local_c);
-      FUN_00410264((double)local_4,(double)local_8);
+      set_camera_lookat((double)local_4,(double)local_8);
     }
   }
   else {
-    FUN_00410264((double)DAT_100174bc,(double)DAT_100174c0);
+    set_camera_lookat((double)DAT_100174bc,(double)DAT_100174c0);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -51884,7 +51884,7 @@ void FUN_004108ec(undefined4 param_1,int param_2)
   
   set_gl_context(param_1,0);
   set_main_gl_window();
-  FUN_0040ff64();
+  save_matrix_state();
   if ((uint)(*(int *)(param_2 + 0x1c) - DAT_10016624) < 300) {
     FUN_0041f118((*(uint *)(param_2 + 0x30) & 8) != 0);
   }
@@ -51900,14 +51900,14 @@ void FUN_004108ec(undefined4 param_1,int param_2)
       if (local_15 == '\0') {
         if (local_14 == *(int *)(curcontext + 0x3c)) {
           if (local_16 == '\0') {
-            FUN_00410264((double)local_4,(double)local_8);
+            set_camera_lookat((double)local_4,(double)local_8);
           }
           else {
-            FUN_00410264((double)local_4,(double)local_8);
+            set_camera_lookat((double)local_4,(double)local_8);
           }
         }
         else {
-          FUN_00410264((double)local_4,(double)local_8);
+          set_camera_lookat((double)local_4,(double)local_8);
         }
       }
       else {
@@ -51937,7 +51937,7 @@ void FUN_00410b7c(undefined4 param_1,int param_2)
   
   set_gl_context(param_1,0);
   set_main_gl_window();
-  FUN_0040ff64();
+  save_matrix_state();
   if ((uint)(*(int *)(param_2 + 0x1c) - DAT_10016628) < 300) {
     FUN_0041f118((*(uint *)(param_2 + 0x30) & 8) != 0);
   }
@@ -57540,7 +57540,7 @@ void warpZoomToFile(int param_1,int param_2)
       do_warp();
     }
     if (param_2 != 0) {
-      FUN_00410264((double)*(float *)(param_2 + 0x14) -
+      set_camera_lookat((double)*(float *)(param_2 + 0x14) -
                    (double)*(float *)(curcontext + 0x14) * (double)DAT_10017530,
                    ((double)*(float *)(param_2 + 0x18) +
                    (double)*(float *)(param_1 + 0x3c) / (double)((ulonglong)uVar1 << 0x20)) -
@@ -60315,7 +60315,7 @@ void createOverview(void)
   }
   apcStack_a0[1] = (char *)auStack_b4;
   apcStack_a0[0] = (char *)0xf6615ba;
-  iVar2 = FUN_00421f10();
+  iVar2 = init_display_mode();
   apcStack_a0[3] = (char *)&pcStack_b8;
   if (iVar2 == 0) {
     apcStack_a0[2] = "overlayColormap";
@@ -60331,7 +60331,7 @@ void createOverview(void)
   uStack_a8 = XmCreateForm(DAT_10006eb4,"overviewForm",apcStack_a0,0);
   XtManageChild(uStack_a8);
   install_help_callback(uStack_a8,&overviewHelp);
-  iVar2 = FUN_00421f10();
+  iVar2 = init_display_mode();
   if (iVar2 != 0) {
     DAT_10006e64 = 0x3000;
   }
@@ -60345,7 +60345,7 @@ void createOverview(void)
   apcStack_a0[3] = (char *)0x1;
   uStack_8c = 1;
   uStack_84 = 1;
-  iVar2 = FUN_00421f10();
+  iVar2 = init_display_mode();
   if (iVar2 == 0) {
     pcStack_78 = "useOverlay";
   }
@@ -60371,7 +60371,7 @@ void createOverview(void)
   }
   iStack_64 = (int)fVar1;
   iStack_a4 = 8;
-  iVar2 = FUN_00421f10();
+  iVar2 = init_display_mode();
   if (iVar2 == 0) {
     ppcVar3 = apcStack_a0 + iStack_a4 * 2;
     *ppcVar3 = "overlayColormap";
@@ -60383,7 +60383,7 @@ void createOverview(void)
   ppcVar3[1] = pcStack_b8;
   DAT_10016c0c = GlxCreateMDraw(uStack_a8,"overviewGlw",apcStack_a0,iStack_a4 + 1);
   XtAddCallback(DAT_10016c0c,"exposeCallback",FUN_00420bfc,0);
-  iVar2 = FUN_00421f10();
+  iVar2 = init_display_mode();
   if (iVar2 == 0) {
     pcVar4 = "overlayExposeWindow";
   }
@@ -61025,7 +61025,7 @@ void FUN_00420e74(undefined4 param_1,undefined4 param_2,int param_3)
   ortho2(minx,maxx);
   window_width = (uint)*(ushort *)(param_3 + 0x10);
   window_height = (uint)*(ushort *)(param_3 + 0x12);
-  iVar1 = FUN_00421f10();
+  iVar1 = init_display_mode();
   if (iVar1 == 0) {
     local_50 = "overlayWindow";
   }
@@ -61100,8 +61100,8 @@ void FUN_004211d4(undefined4 param_1,int param_2)
     }
     fVar1 = ((float)iVar4 / (float)window_width) * (maxx - minx) + minx;
     fVar2 = ((float)iVar3 / (float)window_height) * (maxy - miny) + miny;
-    FUN_0040ff64();
-    FUN_00410264((double)fVar1 +
+    save_matrix_state();
+    set_camera_lookat((double)fVar1 +
                  (double)*(float *)(curcontext + 0x14) * (double)*(float *)(curcontext + 0x20) *
                  (double)*(float *)(curcontext + 8),
                  (double)fVar2 +
@@ -61209,12 +61209,12 @@ void FUN_0042151c(undefined4 param_1,undefined4 param_2,undefined4 param_3,undef
     FUN_004211d4(param_1,param_2,param_3,param_4);
   }
   else {
-    FUN_0040ff64();
+    save_matrix_state();
     FUN_0041d69c(iVar1);
     if (*(int *)(curcontext + 0x3c) == 0) {
       dVar2 = (double)*(float *)(iVar1 + 0x3c) / (double)((ulonglong)uVar3 << 0x20) +
               (double)DAT_10017518;
-      FUN_00410264((double)*(float *)(iVar1 + 0x34) - (double)*(float *)(curcontext + 0x14) * dVar2,
+      set_camera_lookat((double)*(float *)(iVar1 + 0x34) - (double)*(float *)(curcontext + 0x14) * dVar2,
                    (double)*(float *)(iVar1 + 0x38) - (double)*(float *)(curcontext + 0x18) * dVar2)
       ;
     }
@@ -61239,7 +61239,7 @@ void FUN_004216c0(void)
     FUN_0041fd70();
     iVar1 = FUN_004213c8();
     if (iVar1 != 0) {
-      FUN_0040ff64();
+      save_matrix_state();
       FUN_0041d69c(iVar1);
     }
   }
@@ -61746,7 +61746,7 @@ void need_pups(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00421f10(void)
+void init_display_mode(void)
 
 {
   int iVar1;
@@ -61778,7 +61778,7 @@ void newOverlayColormap(undefined4 param_1)
   int iStack_54;
   char *apcStack_50 [20];
   
-  iVar1 = FUN_00421f10();
+  iVar1 = init_display_mode();
   apcStack_50[1] = (char *)&uStack_58;
   if (iVar1 == 0) {
     apcStack_50[0] = "overlayWindow";
@@ -61787,7 +61787,7 @@ void newOverlayColormap(undefined4 param_1)
     apcStack_50[0] = "popupWindow";
   }
   iStack_54 = 1;
-  iVar1 = FUN_00421f10();
+  iVar1 = init_display_mode();
   if (iVar1 == 0) {
     ppcVar2 = apcStack_50 + iStack_54 * 2;
     *ppcVar2 = "overlayVisual";
@@ -61799,7 +61799,7 @@ void newOverlayColormap(undefined4 param_1)
   ppcVar2[1] = (char *)&puStack_5c;
   XtGetValues(param_1,apcStack_50,iStack_54 + 1);
   uVar3 = XCreateColormap(display,uStack_58,*puStack_5c,0);
-  iVar1 = FUN_00421f10();
+  iVar1 = init_display_mode();
   if (iVar1 == 0) {
     apcStack_50[0] = "overlayColormap";
   }
@@ -61880,7 +61880,7 @@ void allocOverlayColor(undefined4 param_1,undefined4 param_2)
   char *pcStack_50;
   undefined4 *puStack_4c;
   
-  iVar1 = FUN_00421f10();
+  iVar1 = init_display_mode();
   puStack_4c = auStack_58;
   if (iVar1 == 0) {
     pcStack_50 = "overlayColormap";
@@ -64427,7 +64427,7 @@ void landscapeZoomToFile(int param_1,int param_2)
     if (param_2 == 0) {
       dVar1 = (double)*(float *)(param_1 + 0x3c) / (double)(in_f4 & 0xffffffff00000000) +
               (double)DAT_10017518;
-      FUN_00410264((double)*(float *)(param_1 + 0x34) -
+      set_camera_lookat((double)*(float *)(param_1 + 0x34) -
                    (double)*(float *)(curcontext + 0x14) * dVar1,
                    (double)*(float *)(param_1 + 0x38) -
                    (double)*(float *)(curcontext + 0x18) * dVar1);
@@ -64439,7 +64439,7 @@ void landscapeZoomToFile(int param_1,int param_2)
       else {
         fVar2 = *(float *)(param_2 + 0x14);
       }
-      FUN_00410264(((double)*(float *)(param_1 + 0x34) +
+      set_camera_lookat(((double)*(float *)(param_1 + 0x34) +
                    (double)fVar2 * (double)*(float *)(param_1 + 0x58)) -
                    (double)*(float *)(curcontext + 0x14) * (double)DAT_10017524,
                    ((double)*(float *)(param_1 + 0x38) + (double)*(float *)(param_2 + 0x18)) -
@@ -68817,10 +68817,10 @@ void zoomPosition(undefined4 param_1)
     }
     if (cStack_1d == '\0') {
       curcontext[0xc50] = 0;
-      FUN_00410264((double)fStack_8,(double)fStack_c);
+      set_camera_lookat((double)fStack_8,(double)fStack_c);
     }
     else {
-      FUN_00410264((double)fStack_8,(double)fStack_c);
+      set_camera_lookat((double)fStack_8,(double)fStack_c);
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -69525,7 +69525,7 @@ void FUN_0042f4d8(void)
   iVar1 = XmListGetSelectedPos(mark_selector_list,&local_4,&local_8);
   if (iVar1 != 0) {
     if (0 < local_8) {
-      FUN_0040ff64();
+      save_matrix_state();
       iVar1 = FUN_0042e670((*local_4 + -1) * 0x40 + selection_buffer);
       if (iVar1 == 0) {
         show_error_dialog("can\'t go to",*(undefined4 *)(selection_buffer + *local_4 * 0x40 + -8));
@@ -72391,7 +72391,7 @@ void rgbStdColor__Fi(uint param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004341fc(uint param_1)
+void set_gl_color(uint param_1)
 
 {
   int unaff_gp;
@@ -74306,7 +74306,7 @@ joined_r0x00435ac4:
                                                   fVar12 = pfVar16[-1];
                                                   pfVar16 = pfVar16 + -2;
                                                   iVar19 = 0;
-                                                  FUN_004341fc(iStack_17cc);
+                                                  set_gl_color(iStack_17cc);
                                                   move2(fStack_17c4,fStack_17c8);
                                                   draw2(fVar17,fVar12);
                                                   cVar11 = pcVar18[1];
@@ -74353,7 +74353,7 @@ joined_r0x00435ac4:
                                                   }
                                                   if (cVar11 != '=') break;
                                                   iVar7 = 1;
-                                                  FUN_004341fc(iStack_17cc);
+                                                  set_gl_color(iStack_17cc);
                                                   if (iVar19 != 0) {
                                                     pmv2(afStack_17bc[0],afStack_17bc[1]);
                                                   }
@@ -74372,7 +74372,7 @@ joined_r0x00435ac4:
                                                   }
                                                   if (cVar11 != '\x14') break;
                                                   iVar7 = 0;
-                                                  FUN_004341fc(iStack_17cc);
+                                                  set_gl_color(iStack_17cc);
                                                   bgnclosedline();
                                                   pfVar5 = afStack_17bc;
                                                   if (0 < iVar19) {
@@ -74389,7 +74389,7 @@ joined_r0x00435ac4:
                                                   }
                                                   if (cVar11 != '\x15') break;
                                                   iVar7 = 0;
-                                                  FUN_004341fc(iStack_17cc);
+                                                  set_gl_color(iStack_17cc);
                                                   bgnline();
                                                   pfVar5 = afStack_17bc;
                                                   if (0 < iVar19) {
@@ -74406,7 +74406,7 @@ joined_r0x00435ac4:
                                                   }
                                                   if (cVar11 != '\x18') break;
                                                   iVar7 = 0;
-                                                  FUN_004341fc(iStack_17cc);
+                                                  set_gl_color(iStack_17cc);
                                                   bgnpoint();
                                                   pfVar5 = afStack_17bc;
                                                   if (0 < iVar19) {
@@ -74423,7 +74423,7 @@ joined_r0x00435ac4:
                                                   }
                                                   if (cVar11 != '\x19') break;
                                                   iVar7 = 0;
-                                                  FUN_004341fc(iStack_17cc);
+                                                  set_gl_color(iStack_17cc);
                                                   bgnpolygon();
                                                   pfVar5 = afStack_17bc;
                                                   if (0 < iVar19) {
@@ -74448,7 +74448,7 @@ joined_r0x00435ac4:
                                                 __s1 = (char *)(int)fVar17;
                                                 pfVar16 = pfVar16 + -1;
                                                 iVar7 = 0;
-                                                FUN_004341fc(iStack_17cc);
+                                                set_gl_color(iStack_17cc);
                                                 bgnpolygon();
                                                 pfVar5 = afStack_17bc;
                                                 if (0 < iVar19) {
@@ -74460,7 +74460,7 @@ joined_r0x00435ac4:
                                                 }
                                                 iVar7 = 0;
                                                 endpolygon();
-                                                FUN_004341fc(__s1);
+                                                set_gl_color(__s1);
                                                 bgnclosedline();
                                                 pfVar5 = afStack_17bc;
                                                 if (0 < iVar19) {
@@ -74485,7 +74485,7 @@ joined_r0x00435ac4:
                                               }
                                               __s1 = (char *)(int)fVar17;
                                               iVar7 = 1;
-                                              FUN_004341fc(iStack_17cc);
+                                              set_gl_color(iStack_17cc);
                                               if (iVar19 != 0) {
                                                 pmv2(afStack_17bc[0],afStack_17bc[1]);
                                               }
@@ -74499,7 +74499,7 @@ joined_r0x00435ac4:
                                               }
                                               iVar7 = 1;
                                               pclos();
-                                              FUN_004341fc(__s1);
+                                              set_gl_color(__s1);
                                               if (iVar19 != 0) {
                                                 move2(afStack_17bc[0],afStack_17bc[1]);
                                               }
@@ -74523,7 +74523,7 @@ joined_r0x00435ac4:
                                             fVar12 = pfVar16[-4];
                                             fVar17 = pfVar16[-5];
                                             pfVar16 = pfVar16 + -5;
-                                            FUN_004341fc(iStack_17cc);
+                                            set_gl_color(iStack_17cc);
                                             arc(fVar17,fVar12);
                                             cVar11 = pcVar18[1];
                                             pcVar18 = pcVar18 + 1;
@@ -74535,7 +74535,7 @@ joined_r0x00435ac4:
                                           fVar12 = pfVar16[-4];
                                           fVar17 = pfVar16[-5];
                                           pfVar16 = pfVar16 + -5;
-                                          FUN_004341fc(iStack_17cc);
+                                          set_gl_color(iStack_17cc);
                                           arcf(fVar17,fVar12);
                                           cVar11 = pcVar18[1];
                                           pcVar18 = pcVar18 + 1;
