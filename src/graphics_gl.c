@@ -19,7 +19,7 @@ void draw_file_pointers(int param_1,int param_2,int param_3)
   selected_id_2 = iVar2;
   loadname((int)(short)param_3);
   pushmatrix();
-  translate(*(float *)(iVar4 + 0x14) + view_offset_x + DAT_10017504,*(undefined4 *)(iVar4 + 0x18));
+  translate(*(float *)(iVar4 + 0x14) + view_offset_x + view_offset_adjustment,*(undefined4 *)(iVar4 + 0x18));
   scale(view_offset_x,view_offset_x);
   uVar1 = *(uint *)(iVar2 + 0x28);
   if ((int)(uVar1 << 3) < 0) {
@@ -38,7 +38,7 @@ void draw_file_pointers(int param_1,int param_2,int param_3)
   sStackX_6 = (short)param_2;
   loadname((int)sStackX_6);
   pushmatrix();
-  translate(*(float *)(iVar2 + 0x14) - (view_offset_x + DAT_10017504),*(undefined4 *)(iVar2 + 0x18));
+  translate(*(float *)(iVar2 + 0x14) - (view_offset_x + view_offset_adjustment),*(undefined4 *)(iVar2 + 0x18));
   scale(view_offset_x,view_offset_x);
   uVar1 = *(uint *)(iVar4 + 0x28);
   if ((int)(uVar1 << 3) < 0) {
@@ -781,11 +781,11 @@ void draw_directories(char param_1)
           cpack(DAT_100175dc);
           fStack_c = *(float *)curcontext + fVar1;
           fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
-          fStack_4 = *(float *)(curcontext + 8) + DAT_1001759c;
+          fStack_4 = *(float *)(curcontext + 8) + view_offset_z;
           v3f(&fStack_c);
           fStack_c = *(float *)curcontext - fVar1;
           fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
-          fStack_4 = *(float *)(curcontext + 8) + DAT_1001759c;
+          fStack_4 = *(float *)(curcontext + 8) + view_offset_z;
           v3f(&fStack_c);
           endpolygon();
           shademodel(0);
@@ -793,7 +793,7 @@ void draw_directories(char param_1)
           cpack(DAT_100175dc);
           fStack_c = *(float *)curcontext + fVar1;
           fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
-          fStack_4 = *(float *)(curcontext + 8) + DAT_1001759c;
+          fStack_4 = *(float *)(curcontext + 8) + view_offset_z;
           v3f(&fStack_c);
           fStack_c = *(float *)curcontext + fVar1;
           fStack_8 = (float)((double)*(float *)(curcontext + 4) + (double)view_offset_y);
@@ -809,7 +809,7 @@ void draw_directories(char param_1)
           v3f(&fStack_c);
           fStack_c = *(float *)curcontext - fVar1;
           fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
-          fStack_4 = *(float *)(curcontext + 8) + DAT_1001759c;
+          fStack_4 = *(float *)(curcontext + 8) + view_offset_z;
           v3f(&fStack_c);
           endpolygon();
           shademodel(1);
@@ -2638,11 +2638,11 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       cpack(DAT_100175dc);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
-      fStack_20 = *(float *)(curcontext + 8) + DAT_1001759c;
+      fStack_20 = *(float *)(curcontext + 8) + view_offset_z;
       v3f(&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
-      fStack_20 = *(float *)(curcontext + 8) + DAT_1001759c;
+      fStack_20 = *(float *)(curcontext + 8) + view_offset_z;
       v3f(&fStack_28);
       endpolygon();
       shademodel(0);
@@ -2650,7 +2650,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       cpack(DAT_100175dc);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
-      fStack_20 = *(float *)(curcontext + 8) + DAT_1001759c;
+      fStack_20 = *(float *)(curcontext + 8) + view_offset_z;
       v3f(&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
@@ -2664,7 +2664,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       v3f(&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
-      fStack_20 = *(float *)(curcontext + 8) + DAT_1001759c;
+      fStack_20 = *(float *)(curcontext + 8) + view_offset_z;
       v3f(&fStack_28);
       endpolygon();
       shademodel(1);
@@ -3098,7 +3098,7 @@ void highlightFileLandscape(int param_1,int param_2)
   scale(*(undefined4 *)(param_1 + 0x58));
   FUN_00427300(param_2);
   translate(*(undefined4 *)(param_2 + 0x14),*(undefined4 *)(param_2 + 0x18));
-  if (((curcontext[0xc50] == '\0') || (DAT_10017495 == '\0')) ||
+  if (((curcontext[0xc50] == '\0') || (overlay_mode_flag == '\0')) ||
      (param_1 != *(int *)(curcontext + 0x44))) {
     scale(view_offset_x,view_offset_x);
   }
@@ -5297,7 +5297,7 @@ void highlightFileWarp(int param_1,int param_2)
                        (double)((ulonglong)in_register_00001040 << 0x20)));
     FUN_00427300(param_2);
     translate(*(undefined4 *)(param_2 + 0x14),*(undefined4 *)(param_2 + 0x18));
-    if ((curcontext[0xc50] == '\0') || (DAT_10017495 == '\0')) {
+    if ((curcontext[0xc50] == '\0') || (overlay_mode_flag == '\0')) {
       scale(view_offset_x,view_offset_x);
     }
     else {
@@ -5315,7 +5315,7 @@ void checkPointerFile(int param_1,undefined4 param_2)
 {
   if (param_1 == selected_id_1) {
     pushmatrix();
-    translate(*(float *)(selected_id_2 + 0x14) - (view_offset_x + DAT_10017504),
+    translate(*(float *)(selected_id_2 + 0x14) - (view_offset_x + view_offset_adjustment),
               *(undefined4 *)(selected_id_2 + 0x18),&fsn_resources,param_2,0);
     scale(view_offset_x,view_offset_x);
     bgnclosedline();
@@ -5327,7 +5327,7 @@ void checkPointerFile(int param_1,undefined4 param_2)
   }
   else if (param_1 == selected_id_2) {
     pushmatrix();
-    translate(*(float *)(selected_id_1 + 0x14) + view_offset_x + DAT_10017504,
+    translate(*(float *)(selected_id_1 + 0x14) + view_offset_x + view_offset_adjustment,
               *(undefined4 *)(selected_id_1 + 0x18),&fsn_resources,param_2,0);
     scale(view_offset_x,view_offset_x);
     bgnclosedline();
@@ -6241,16 +6241,16 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
       }
       if (param_2 == 1) {
         bgnclosedline();
-        piVar2 = &DAT_10006fa0;
+        piVar2 = &vertex_array_start_idx;
         do {
           v3f(*piVar2 * 0xc + 0x10006f40);
           piVar2 = piVar2 + 1;
-        } while (piVar2 != &DAT_10006fb0);
+        } while (piVar2 != &vertex_array_end_idx);
         endclosedline();
       }
       else {
         bgnqstrip();
-        v3f(DAT_10006fa0 * 0xc + 0x10006f40);
+        v3f(vertex_array_start_idx * 0xc + 0x10006f40);
         v3f(DAT_10006fa4 * 0xc + 0x10006f40);
         v3f(DAT_10006fac * 0xc + 0x10006f40);
         v3f(DAT_10006fa8 * 0xc + 0x10006f40);
@@ -6263,16 +6263,16 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
     if ((param_3 & 2) != 0) {
       if (param_2 == 1) {
         bgnclosedline();
-        puVar3 = &DAT_10006fa0;
+        puVar3 = &vertex_array_start_idx;
         do {
           v3f(puVar3[4] * 0xc + 0x10006f40);
           puVar3 = puVar3 + 1;
-        } while (puVar3 != &DAT_10006fb0);
+        } while (puVar3 != &vertex_array_end_idx);
         endclosedline();
       }
       else {
         bgnqstrip();
-        v3f(DAT_10006fb0 * 0xc + 0x10006f40);
+        v3f(vertex_array_end_idx * 0xc + 0x10006f40);
         v3f(DAT_10006fb4 * 0xc + 0x10006f40);
         v3f(DAT_10006fbc * 0xc + 0x10006f40);
         v3f(DAT_10006fb8 * 0xc + 0x10006f40);
@@ -6282,11 +6282,11 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
     if ((param_3 & 4) != 0) {
       if (param_2 == 1) {
         bgnclosedline();
-        puVar3 = &DAT_10006fa0;
+        puVar3 = &vertex_array_start_idx;
         do {
           v3f(puVar3[8] * 0xc + 0x10006f40);
           puVar3 = puVar3 + 1;
-        } while (puVar3 != &DAT_10006fb0);
+        } while (puVar3 != &vertex_array_end_idx);
         endclosedline();
       }
       else {
@@ -6304,11 +6304,11 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
       }
       if (param_2 == 1) {
         bgnclosedline();
-        puVar3 = &DAT_10006fa0;
+        puVar3 = &vertex_array_start_idx;
         do {
           v3f(puVar3[0xc] * 0xc + 0x10006f40);
           puVar3 = puVar3 + 1;
-        } while (puVar3 != &DAT_10006fb0);
+        } while (puVar3 != &vertex_array_end_idx);
         endclosedline();
       }
       else {
@@ -6326,11 +6326,11 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
       }
       if (param_2 == 1) {
         bgnclosedline();
-        puVar3 = &DAT_10006fa0;
+        puVar3 = &vertex_array_start_idx;
         do {
           v3f(puVar3[0x10] * 0xc + 0x10006f40);
           puVar3 = puVar3 + 1;
-        } while (puVar3 != &DAT_10006fb0);
+        } while (puVar3 != &vertex_array_end_idx);
         endclosedline();
       }
       else {
@@ -6345,11 +6345,11 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
     if ((param_3 & 0x20) != 0) {
       if (param_2 == 1) {
         bgnclosedline();
-        puVar3 = &DAT_10006fa0;
+        puVar3 = &vertex_array_start_idx;
         do {
           v3f(puVar3[0x14] * 0xc + 0x10006f40);
           puVar3 = puVar3 + 1;
-        } while (puVar3 != &DAT_10006fb0);
+        } while (puVar3 != &vertex_array_end_idx);
         endclosedline();
       }
       else {

@@ -137,15 +137,15 @@ void first_traversal(int param_1)
   if (iVar1 == 0) {
     *(float *)(param_1 + 0x3c) =
          (float)((double)view_offset_x +
-                (double)((ulonglong)unaff_000010b0 << 0x20) * (double)DAT_10017504);
+                (double)((ulonglong)unaff_000010b0 << 0x20) * (double)view_offset_adjustment);
   }
   else {
     *(float *)(param_1 + 0x3c) =
          (float)((double)iVar1 *
                 ((double)view_offset_x +
-                (double)((ulonglong)unaff_000010b0 << 0x20) * (double)DAT_10017504));
+                (double)((ulonglong)unaff_000010b0 << 0x20) * (double)view_offset_adjustment));
   }
-  dVar3 = (double)DAT_10017504;
+  dVar3 = (double)view_offset_adjustment;
   dVar2 = (double)view_offset_x;
   *(undefined4 *)(param_1 + 0x1c) = 0;
   *(undefined4 *)(param_1 + 0x54) = 0;
@@ -406,7 +406,7 @@ void rescanDatabase(void)
       deleteMessage(local_128);
     }
     else {
-      DAT_100166b8 = local_88.st_dev._0_4_;
+      current_device_id = local_88.st_dev._0_4_;
       FUN_00415598(topdir);
       deleteMessage(local_128);
       set_status_message("file system update complete",2000);
@@ -694,7 +694,7 @@ void initialize_db(char *param_1)
                     // WARNING: Subroutine does not return
       exit(1);
     }
-    DAT_100166b8 = sStack_8c.st_dev._0_4_;
+    current_device_id = sStack_8c.st_dev._0_4_;
   }
   else {
     FUN_0042b030();

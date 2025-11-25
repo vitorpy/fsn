@@ -14,14 +14,14 @@ void landscapeZoomToFile(int param_1,int param_2)
   if (param_1 != 0) {
     if (param_2 == 0) {
       dVar1 = (double)*(float *)(param_1 + 0x3c) / (double)(in_f4 & 0xffffffff00000000) +
-              (double)DAT_10017518;
+              (double)layout_spacing_height;
       set_camera_lookat((double)*(float *)(param_1 + 0x34) -
                    (double)*(float *)(curcontext + 0x14) * dVar1,
                    (double)*(float *)(param_1 + 0x38) -
                    (double)*(float *)(curcontext + 0x18) * dVar1);
     }
     else {
-      if (DAT_10017495 == '\0') {
+      if (overlay_mode_flag == '\0') {
         fVar2 = *(float *)(param_2 + 0x14);
       }
       else {
@@ -333,11 +333,11 @@ void get_warp_entry(int param_1,float *param_2,float *param_3)
   *param_2 = (float)((double)*(float *)(param_1 + 0x34) -
                     (double)*(float *)(curcontext + 0x14) *
                     ((double)*(float *)(param_1 + 0x3c) /
-                     (double)((ulonglong)in_register_00001000 << 0x20) + (double)DAT_10017518));
+                     (double)((ulonglong)in_register_00001000 << 0x20) + (double)layout_spacing_height));
   *param_3 = (float)((double)*(float *)(param_1 + 0x38) -
                     (double)*(float *)(curcontext + 0x18) *
                     ((double)*(float *)(param_1 + 0x3c) /
-                     (double)((ulonglong)in_register_00001000 << 0x20) + (double)DAT_10017518));
+                     (double)((ulonglong)in_register_00001000 << 0x20) + (double)layout_spacing_height));
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }

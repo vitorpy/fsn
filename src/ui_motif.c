@@ -85,12 +85,12 @@ void showPreferencePanel(void)
   undefined4 local_8;
   undefined4 local_4;
   
-  if (DAT_10008940 == 0) {
+  if (preference_panel_shell == 0) {
     local_98 = 0xf662094;
     local_94 = 1;
-    DAT_10008940 = XtCreatePopupShell("preferencePanel",_DAT_0f6d16fc,toplevel,&local_98,1);
-    XtAddCallback(DAT_10008940,0xf6615c9,FUN_0042cc30,0);
-    local_4 = XmCreatePanedWindow(DAT_10008940,"preferencePane",&local_98,0);
+    preference_panel_shell = XtCreatePopupShell("preferencePanel",_DAT_0f6d16fc,toplevel,&local_98,1);
+    XtAddCallback(preference_panel_shell,0xf6615c9,FUN_0042cc30,0);
+    local_4 = XmCreatePanedWindow(preference_panel_shell,"preferencePane",&local_98,0);
     XtManageChild(local_4);
     install_help_callback(local_4,&prefPanelHelp);
     local_8 = XmCreateRowColumn(local_4,"preferenceHeader",&local_98,0);
@@ -287,14 +287,14 @@ void showPreferencePanel(void)
       ppuVar2[2] = *(undefined **)ppuVar2[1];
       ppuVar2 = ppuVar2 + 4;
     }
-    XtManageChild(DAT_10008940);
+    XtManageChild(preference_panel_shell);
   }
   else {
     XtManageChild();
-    uVar3 = XtDisplay(DAT_10008940);
-    uVar4 = XtWindow(DAT_10008940);
+    uVar3 = XtDisplay(preference_panel_shell);
+    uVar4 = XtWindow(preference_panel_shell);
     XMapWindow(uVar3,uVar4);
-    uVar3 = XtWindow(DAT_10008940);
+    uVar3 = XtWindow(preference_panel_shell);
     XRaiseWindow(display,uVar3);
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -819,7 +819,7 @@ void createHelpMenu(undefined4 param_1)
 void hidePreferencePanel(void)
 
 {
-  if (DAT_10008940 != 0) {
+  if (preference_panel_shell != 0) {
     XtUnmanageChild();
   }
                     // WARNING: Bad instruction - Truncating control flow here
