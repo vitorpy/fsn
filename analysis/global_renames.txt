@@ -15,3 +15,12 @@ DAT_10016650 -> pane_form_widget : 9 uses - XmCreateForm("paneForm")
 # X11/MOTIF CONSTANTS
 DAT_0e3f2368 -> default_charset : 21 uses - XmStringCreate charset parameter
 
+# BATCH 2: High-frequency globals (32-19 uses)
+DAT_100175ac -> home_directory : 31 uses - char*, getenv("HOME"), base path
+DAT_100175b0 -> db_filepath : 32 uses - char*, built from home_directory, used with rename/fopen
+DAT_10016b94 -> popup_menu_widget : 19 uses - XmCreatePopupMenu("popupMenu")
+DAT_10009e40 -> buffer_size : 21 uses - int, malloc size, loop limit
+DAT_10006e20 -> array_index : 21 uses - int, array indexing, incremented
+DAT_100175a4 -> view_offset_y : 29 uses - float, added to curcontext+4 (view position)
+DAT_10017500 -> view_offset_x : 32 uses - float/undefined4, used in calculations (view position)
+
