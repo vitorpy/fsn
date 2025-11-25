@@ -1088,7 +1088,7 @@ void scanDatabase(int param_1)
   }
   FUN_0041dba0();
   redraw_gl_scene();
-  FUN_0042a8e4();
+  glx_swap_buffers_wrapper();
   FUN_00414da4();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -1706,7 +1706,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_6c = 4;
   uStack_64 = *(undefined4 *)(curcontextwindows + 8);
   FUN_0042aed4(*(undefined4 *)(curcontextwindows + 0xc),&uStack_a0,8);
-  FUN_00433af4("/usr/lib/filetype/workspace.ctr");
+  load_filetype_rules_wrapper("/usr/lib/filetype/workspace.ctr");
   FUN_00427d54();
   FUN_00433f74();
   FUN_00428b6c();
@@ -1894,7 +1894,7 @@ void newcontext(uint param_1,char param_2)
       FUN_004207b4();
       curcontext[0xc53] = 0;
       altcontext[0xc53] = 1;
-      FUN_0040d804();
+      ui_layout_setup_wrapper();
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -2233,7 +2233,7 @@ void rescaleOverview(void)
     }
     iStack_44 = (int)fVar1;
     XtSetValues(overview_gl_widget,&uStack_50,2);
-    FUN_0041fd70();
+    glx_switch_context_wrapper();
     ortho2(minx,maxx);
     FUN_004207b4();
     FUN_0041fdb0();

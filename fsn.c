@@ -37137,7 +37137,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_6c = 4;
   uStack_64 = *(undefined4 *)(curcontextwindows + 8);
   FUN_0042aed4(*(undefined4 *)(curcontextwindows + 0xc),&uStack_a0,8);
-  FUN_00433af4("/usr/lib/filetype/workspace.ctr");
+  load_filetype_rules_wrapper("/usr/lib/filetype/workspace.ctr");
   FUN_00427d54();
   FUN_00433f74();
   FUN_00428b6c();
@@ -37352,7 +37352,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   local_6c = 4;
   local_64 = *(undefined4 *)(curcontextwindows + 8);
   FUN_0042aed4(*(undefined4 *)(curcontextwindows + 0xc),&local_a0,8);
-  FUN_00433af4("/usr/lib/filetype/workspace.ctr");
+  load_filetype_rules_wrapper("/usr/lib/filetype/workspace.ctr");
   FUN_00427d54();
   FUN_00433f74();
   FUN_00428b6c();
@@ -37444,7 +37444,7 @@ void setOverlayWindow(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040bc28(void)
+void glx_reset_context_wrapper(void)
 
 {
   int unaff_gp;
@@ -37487,7 +37487,7 @@ void do_perspective(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040bfa0(void)
+void gl_picking_setup_wrapper(void)
 
 {
   int unaff_gp;
@@ -37618,7 +37618,7 @@ void check_visibility(void)
 
 {
   pushmatrix();
-  FUN_0040bfa0();
+  gl_picking_setup_wrapper();
   FUN_00425c80();
   popmatrix();
                     // WARNING: Bad instruction - Truncating control flow here
@@ -37828,7 +37828,7 @@ void setScales(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040d804(void)
+void ui_layout_setup_wrapper(void)
 
 {
   int iVar1;
@@ -37976,7 +37976,7 @@ void FUN_0040dee0(void)
   undefined4 local_44;
   
   controlsShowing = 1;
-  FUN_0040d804();
+  ui_layout_setup_wrapper();
   XtManageChild(copy_button_widget);
   local_48 = 0xe3f40f2;
   local_44 = copy_button_widget;
@@ -40980,7 +40980,7 @@ void scanDatabase(int param_1)
   }
   FUN_0041dba0();
   redraw_gl_scene();
-  FUN_0042a8e4();
+  glx_swap_buffers_wrapper();
   FUN_00414da4();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -42147,7 +42147,7 @@ void pruneTree(int param_1)
   FUN_0041dba0();
   update_display();
   redraw_gl_scene();
-  FUN_0042a8e4();
+  glx_swap_buffers_wrapper();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -42168,7 +42168,7 @@ void unpruneTree(int param_1)
   FUN_00417b88();
   update_display();
   redraw_gl_scene();
-  FUN_0042a8e4();
+  glx_swap_buffers_wrapper();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -43113,7 +43113,7 @@ void pickWarp(int *param_1,undefined4 *param_2,undefined4 *param_3)
   initnames();
   picksize(10,10);
   pick(asStack_3f0,500);
-  FUN_0040bfa0();
+  gl_picking_setup_wrapper();
   scale((float)((double)((ulonglong)in_register_00001020 << 0x20) /
                (double)*(float *)(curcontext + 0x34)));
   rotate((int)*(short *)(curcontext + 0xe),0x78);
@@ -45879,7 +45879,7 @@ void setOverviewWindow(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041fd70(void)
+void glx_switch_context_wrapper(void)
 
 {
   int unaff_gp;
@@ -46412,7 +46412,7 @@ void drawOverview(void)
 
 {
   if (overviewActive != '\0') {
-    FUN_0041fd70();
+    glx_switch_context_wrapper();
     cpack(DAT_100175f0);
     clear();
     if (topdir != 0) {
@@ -46764,7 +46764,7 @@ void rescaleOverview(void)
     }
     iStack_44 = (int)fVar1;
     XtSetValues(overview_gl_widget,&uStack_50,2);
-    FUN_0041fd70();
+    glx_switch_context_wrapper();
     ortho2(minx,maxx);
     FUN_004207b4();
     FUN_0041fdb0();
@@ -48921,7 +48921,7 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
   initnames();
   picksize(5,5);
   pick(asStack_3f4,500);
-  FUN_0040bfa0();
+  gl_picking_setup_wrapper();
   scale((float)((double)((ulonglong)uVar11 << 0x20) / (double)*(float *)(curcontext + 0x34)));
   rotate((int)*(short *)(curcontext + 0xe),0x78);
   rotate((int)*(short *)(curcontext + 0xc),0x7a);
@@ -48938,7 +48938,7 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
   initnames();
   pick(asStack_7dc,500);
   uVar11 = 0;
-  FUN_0040bfa0();
+  gl_picking_setup_wrapper();
   scale((float)((double)((ulonglong)uVar11 << 0x20) / (double)*(float *)(curcontext + 0x34)));
   rotate((int)*(short *)(curcontext + 0xe),0x78);
   rotate((int)*(short *)(curcontext + 0xc),0x7a);
@@ -49362,7 +49362,7 @@ void pickPointer(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00426dc0(void)
+void gl_get_dimensions_wrapper(void)
 
 {
   int unaff_gp;
@@ -49997,7 +49997,7 @@ void dirfamInit(void)
 {
   int iVar1;
   
-  if ((fsn_resources == '\0') && (iVar1 = FUN_00439bd8(&database_root_node), iVar1 < 0)) {
+  if ((fsn_resources == '\0') && (iVar1 = fam_open_wrapper(&database_root_node), iVar1 < 0)) {
     fprintf((FILE *)0xfb52904,
             "Could not run FAM.  This program requires FAM to be installed.\nYou may need to install eoe2.sw.envm to obtain FAM\n"
            );
@@ -50017,7 +50017,7 @@ void FUN_00427d54(void)
 {
   int iVar1;
   
-  if ((fsn_resources == '\0') && (iVar1 = FUN_00439bd8(&database_root_node), iVar1 < 0)) {
+  if ((fsn_resources == '\0') && (iVar1 = fam_open_wrapper(&database_root_node), iVar1 < 0)) {
     fprintf((FILE *)0xfb52904,
             "Could not run FAM.  This program requires FAM to be installed.\nYou may need to install eoe2.sw.envm to obtain FAM\n"
            );
@@ -50104,7 +50104,7 @@ void dirfamUnmonitorDir(int param_1)
 {
   if ((fsn_resources == '\0') && (*(int *)(param_1 + 0x74) << 10 < 0)) {
     build_path_string(0,param_1);
-    FUN_0043a5bc(&database_root_node,param_1 + 0x60);
+    fam_cancel_monitor_wrapper(&database_root_node,param_1 + 0x60);
     *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) & 0xdf;
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -50918,7 +50918,7 @@ void beamup(void)
     redraw_counter = 1;
     do {
       redraw_gl_scene();
-      FUN_0042a8e4();
+      glx_swap_buffers_wrapper();
       redraw_counter = redraw_counter + 1;
     } while (redraw_counter < 4);
     redraw_counter = 3;
@@ -50943,7 +50943,7 @@ void beamdown(void)
     redraw_counter = 3;
     do {
       redraw_gl_scene();
-      FUN_0042a8e4();
+      glx_swap_buffers_wrapper();
       redraw_counter = redraw_counter + -1;
     } while (-1 < redraw_counter);
     redraw_counter = 0;
@@ -51003,7 +51003,7 @@ void locateClear(void)
 {
   if (colormap_dirty_flag != 0) {
     FUN_00429464();
-    FUN_0040bc28();
+    glx_reset_context_wrapper();
     color(0);
     clear();
     colormap_dirty_flag = 0;
@@ -51075,7 +51075,7 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
   if ((param_2 != DAT_10007994) || (param_1 != colormap_dirty_flag)) {
     colormap_dirty_flag = param_1;
     DAT_10007994 = param_2;
-    FUN_0040bc28();
+    glx_reset_context_wrapper();
     color(0);
     clear();
     color(overlayHighlightColor._2_2_);
@@ -51224,7 +51224,7 @@ void locateHighlight(void)
   undefined4 uStack_4;
   
   set_main_gl_window();
-  FUN_00426dc0(&uStack_4,&uStack_c,&uStack_8);
+  gl_get_dimensions_wrapper(&uStack_4,&uStack_c,&uStack_8);
   FUN_00429640(uStack_4,uStack_c,uStack_8);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -51258,7 +51258,7 @@ void overviewLocateHighlight(void)
 {
   undefined4 uVar1;
   
-  FUN_0041fd70();
+  glx_switch_context_wrapper();
   uVar1 = FUN_004213c8();
   FUN_00429640(uVar1,0,0);
                     // WARNING: Bad instruction - Truncating control flow here
@@ -51629,7 +51629,7 @@ void newcontext(uint param_1,char param_2)
       FUN_004207b4();
       curcontext[0xc53] = 0;
       altcontext[0xc53] = 1;
-      FUN_0040d804();
+      ui_layout_setup_wrapper();
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -51890,7 +51890,7 @@ void draw_alt(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042a8e4(void)
+void glx_swap_buffers_wrapper(void)
 
 {
   int unaff_gp;
@@ -56256,7 +56256,7 @@ void cIconInit(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00433af4(undefined4 param_1)
+void load_filetype_rules_wrapper(undefined4 param_1)
 
 {
   int unaff_gp;
@@ -56988,7 +56988,7 @@ void LoadFileTypingRules__14ByteCodeLoaderFPc(int *param_1,char *param_2)
                   *(undefined4 *)(iVar10 + 0x34) = 1;
                 }
                 else if (iStack_c == 0x27) {
-                  iVar11 = FUN_0043551c(0);
+                  iVar11 = icon_bytecode_eval_wrapper(0);
                   if (param_1[2] == 0) {
                     param_1[3] = iVar11;
                     param_1[2] = iVar11;
@@ -57932,7 +57932,7 @@ void __ct__11ConvertInfoFv(undefined4 *param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0043551c(undefined4 *param_1)
+void icon_bytecode_eval_wrapper(undefined4 *param_1)
 
 {
   int unaff_gp;
@@ -61695,7 +61695,7 @@ void FAMOpen(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00439bd8(undefined4 param_1)
+void fam_open_wrapper(undefined4 param_1)
 
 {
   int unaff_gp;
@@ -62105,7 +62105,7 @@ void FAMCancelMonitor(undefined4 *param_1,undefined4 *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0043a5bc(undefined4 *param_1,undefined4 *param_2)
+void fam_cancel_monitor_wrapper(undefined4 *param_1,undefined4 *param_2)
 
 {
   undefined4 uVar1;

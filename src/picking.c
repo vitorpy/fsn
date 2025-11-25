@@ -392,7 +392,7 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
   initnames();
   picksize(5,5);
   pick(asStack_3f4,500);
-  FUN_0040bfa0();
+  gl_picking_setup_wrapper();
   scale((float)((double)((ulonglong)uVar11 << 0x20) / (double)*(float *)(curcontext + 0x34)));
   rotate((int)*(short *)(curcontext + 0xe),0x78);
   rotate((int)*(short *)(curcontext + 0xc),0x7a);
@@ -409,7 +409,7 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
   initnames();
   pick(asStack_7dc,500);
   uVar11 = 0;
-  FUN_0040bfa0();
+  gl_picking_setup_wrapper();
   scale((float)((double)((ulonglong)uVar11 << 0x20) / (double)*(float *)(curcontext + 0x34)));
   rotate((int)*(short *)(curcontext + 0xe),0x78);
   rotate((int)*(short *)(curcontext + 0xc),0x7a);
@@ -689,7 +689,7 @@ void pickWarp(int *param_1,undefined4 *param_2,undefined4 *param_3)
   initnames();
   picksize(10,10);
   pick(asStack_3f0,500);
-  FUN_0040bfa0();
+  gl_picking_setup_wrapper();
   scale((float)((double)((ulonglong)in_register_00001020 << 0x20) /
                (double)*(float *)(curcontext + 0x34)));
   rotate((int)*(short *)(curcontext + 0xe),0x78);

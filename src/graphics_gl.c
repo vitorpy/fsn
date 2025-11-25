@@ -471,7 +471,7 @@ void check_visibility(void)
 
 {
   pushmatrix();
-  FUN_0040bfa0();
+  gl_picking_setup_wrapper();
   FUN_00425c80();
   popmatrix();
                     // WARNING: Bad instruction - Truncating control flow here
@@ -1354,7 +1354,7 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
   if ((param_2 != DAT_10007994) || (param_1 != colormap_dirty_flag)) {
     colormap_dirty_flag = param_1;
     DAT_10007994 = param_2;
-    FUN_0040bc28();
+    glx_reset_context_wrapper();
     color(0);
     clear();
     color(overlayHighlightColor._2_2_);
@@ -1687,7 +1687,7 @@ void drawOverview(void)
 
 {
   if (overviewActive != '\0') {
-    FUN_0041fd70();
+    glx_switch_context_wrapper();
     cpack(DAT_100175f0);
     clear();
     if (topdir != 0) {
@@ -3072,7 +3072,7 @@ void beamup(void)
     redraw_counter = 1;
     do {
       redraw_gl_scene();
-      FUN_0042a8e4();
+      glx_swap_buffers_wrapper();
       redraw_counter = redraw_counter + 1;
     } while (redraw_counter < 4);
     redraw_counter = 3;
@@ -5232,7 +5232,7 @@ void locateClear(void)
 {
   if (colormap_dirty_flag != 0) {
     FUN_00429464();
-    FUN_0040bc28();
+    glx_reset_context_wrapper();
     color(0);
     clear();
     colormap_dirty_flag = 0;
@@ -5250,7 +5250,7 @@ void beamdown(void)
     redraw_counter = 3;
     do {
       redraw_gl_scene();
-      FUN_0042a8e4();
+      glx_swap_buffers_wrapper();
       redraw_counter = redraw_counter + -1;
     } while (-1 < redraw_counter);
     redraw_counter = 0;
@@ -5264,7 +5264,7 @@ void overviewLocateHighlight(void)
 {
   undefined4 uVar1;
   
-  FUN_0041fd70();
+  glx_switch_context_wrapper();
   uVar1 = FUN_004213c8();
   FUN_00429640(uVar1,0,0);
                     // WARNING: Bad instruction - Truncating control flow here
@@ -7405,7 +7405,7 @@ void locateHighlight(void)
   undefined4 uStack_4;
   
   set_main_gl_window();
-  FUN_00426dc0(&uStack_4,&uStack_c,&uStack_8);
+  gl_get_dimensions_wrapper(&uStack_4,&uStack_c,&uStack_8);
   FUN_00429640(uStack_4,uStack_c,uStack_8);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();

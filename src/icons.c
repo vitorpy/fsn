@@ -229,7 +229,7 @@ void LoadFileTypingRules__14ByteCodeLoaderFPc(int *param_1,char *param_2)
                   *(undefined4 *)(iVar10 + 0x34) = 1;
                 }
                 else if (iStack_c == 0x27) {
-                  iVar11 = FUN_0043551c(0);
+                  iVar11 = icon_bytecode_eval_wrapper(0);
                   if (param_1[2] == 0) {
                     param_1[3] = iVar11;
                     param_1[2] = iVar11;

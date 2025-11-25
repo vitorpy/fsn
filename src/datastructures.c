@@ -67,7 +67,7 @@ void pruneTree(int param_1)
   FUN_0041dba0();
   update_display();
   redraw_gl_scene();
-  FUN_0042a8e4();
+  glx_swap_buffers_wrapper();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -83,7 +83,7 @@ void unpruneTree(int param_1)
   FUN_00417b88();
   update_display();
   redraw_gl_scene();
-  FUN_0042a8e4();
+  glx_swap_buffers_wrapper();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }

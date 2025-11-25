@@ -43,7 +43,7 @@ void dirfamInit(void)
 {
   int iVar1;
   
-  if ((fsn_resources == '\0') && (iVar1 = FUN_00439bd8(&database_root_node), iVar1 < 0)) {
+  if ((fsn_resources == '\0') && (iVar1 = fam_open_wrapper(&database_root_node), iVar1 < 0)) {
     fprintf((FILE *)0xfb52904,
             "Could not run FAM.  This program requires FAM to be installed.\nYou may need to install eoe2.sw.envm to obtain FAM\n"
            );
@@ -135,7 +135,7 @@ void dirfamUnmonitorDir(int param_1)
 {
   if ((fsn_resources == '\0') && (*(int *)(param_1 + 0x74) << 10 < 0)) {
     build_path_string(0,param_1);
-    FUN_0043a5bc(&database_root_node,param_1 + 0x60);
+    fam_cancel_monitor_wrapper(&database_root_node,param_1 + 0x60);
     *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) & 0xdf;
   }
                     // WARNING: Bad instruction - Truncating control flow here
