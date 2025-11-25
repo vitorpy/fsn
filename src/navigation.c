@@ -269,7 +269,7 @@ void pushzoom(void)
   undefined4 auStack_38 [12];
   undefined4 auStack_8 [2];
   
-  FUN_0042dc64(auStack_38);
+  get_view_position(auStack_38);
   iVar2 = equalPositions(auStack_38,
                          *(int *)(curcontextwindows + 0x34) + *(int *)(curcontext + 0x40) * 0x38);
   if (iVar2 == 0) {

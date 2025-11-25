@@ -22,7 +22,7 @@ void setMainWindow(void)
 void FAMMonitorFile2(void)
 
 {
-  FUN_00439c48();
+  fam_monitor_request();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -45,7 +45,7 @@ void savecontext(void)
 void FAMMonitorDirectory2(void)
 
 {
-  FUN_00439c48();
+  fam_monitor_request();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }

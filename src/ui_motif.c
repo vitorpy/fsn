@@ -705,7 +705,7 @@ void setMoveAndCopyButtons(void)
 void dumpDatabaseCB(void)
 
 {
-  FUN_00414da4();
+  refresh_after_change();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -854,7 +854,7 @@ void fileCreated(int param_1,char *param_2)
       if ((sStack_94.st_nlink & 0xf000) == 0x4000) {
         iVar2 = find_directory_by_path(param_1,param_2);
         if (iVar2 == 0) {
-          puVar3 = (undefined4 *)FUN_00411c04();
+          puVar3 = (undefined4 *)allocate_directory_entry();
           if (*(int *)(param_1 + 0x14) == 0) {
             pvVar4 = malloc(4);
             *(void **)(param_1 + 0x18) = pvVar4;
@@ -882,10 +882,10 @@ void fileCreated(int param_1,char *param_2)
           }
           *(byte *)((int)puVar3 + 0x75) = bVar7 << 4 | *(byte *)((int)puVar3 + 0x75) & 0xef;
           if ((int)(puVar3[0x1d] << 0xb) < 0) {
-            FUN_00427e30(puVar3);
+            add_directory_monitor(puVar3);
           }
           *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) | 0x80;
-          bVar6 = FUN_004138e8(puVar3,pcStack_c,__dest,0);
+          bVar6 = check_directory_flags(puVar3,pcStack_c,__dest,0);
           *(byte *)(param_1 + 0x75) = (bVar6 & 1) << 6 | *(byte *)(param_1 + 0x75) & 0xbf;
           if (((*(byte *)(param_1 + 0x74) & 1) != 0) || (*(char *)(param_1 + 0x75) < '\0')) {
             process_child_directory(param_1);
@@ -1085,17 +1085,17 @@ void setLabelColors(void)
   ppuVar2 = &dcolorBoxes;
   puVar3 = &labelColors;
   do {
-    FUN_00428cc0(*(undefined4 *)(*ppuVar2 + 4),puVar3,*puVar1,auStack_30[0]);
+    apply_label_color(*(undefined4 *)(*ppuVar2 + 4),puVar3,*puVar1,auStack_30[0]);
     puVar1 = puVar1 + 1;
     ppuVar2 = ppuVar2 + 1;
     puVar3 = puVar3 + 4;
   } while (puVar1 != (undefined4 *)&legendShowing);
   if (grid_display_flag == '\0') {
-    FUN_00428cc0(highlight_packed_color,&lhLabelColor,*(undefined4 *)(curcontextwindows + 0x2c),auStack_30[0])
+    apply_label_color(highlight_packed_color,&lhLabelColor,*(undefined4 *)(curcontextwindows + 0x2c),auStack_30[0])
     ;
   }
   else {
-    FUN_00428cc0(current_packed_color,&lhLabelColor,*(undefined4 *)(curcontextwindows + 0x2c),auStack_30[0])
+    apply_label_color(current_packed_color,&lhLabelColor,*(undefined4 *)(curcontextwindows + 0x2c),auStack_30[0])
     ;
   }
   if (*(int *)(altcontextwindows + 0x2c) != 0) {
@@ -1105,7 +1105,7 @@ void setLabelColors(void)
     uStack_20 = 0xf661554;
     XtSetValues(*(undefined4 *)(altcontextwindows + 0x2c),&uStack_28,2);
   }
-  FUN_00428cc0(DAT_10017604,&monitorLabelColor,monitorLabelWidget,auStack_30[0]);
+  apply_label_color(DAT_10017604,&monitorLabelColor,monitorLabelWidget,auStack_30[0]);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }

@@ -33,7 +33,7 @@ void fileStoppedExecuting(undefined4 param_1)
 void dumpDatabaseCB(void)
 
 {
-  FUN_00414da4();
+  refresh_after_change();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -238,7 +238,7 @@ void updateDir(int param_1)
   
   build_path_string(acStack_400,*(undefined4 *)(param_1 + 0x28));
   sVar1 = strlen(acStack_400);
-  iVar2 = FUN_004138e8(param_1,acStack_400,acStack_400 + sVar1,0);
+  iVar2 = check_directory_flags(param_1,acStack_400,acStack_400 + sVar1,0);
   if (iVar2 != 0) {
     process_child_directory(param_1);
   }
@@ -314,10 +314,10 @@ void findfile(int param_1,undefined4 param_2)
 void savePositions(void)
 
 {
-  FUN_0042dc64(&fam_connection);
+  get_view_position(&fam_connection);
   if (altcontext[0xc51] != '\0') {
     gl_swap_buffers(1);
-    FUN_0042dc64(&fam_request_id);
+    get_view_position(&fam_request_id);
     gl_swap_buffers(1);
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -382,7 +382,7 @@ void fileExecuting(int param_1)
 void databaseDumpTimeout(void)
 
 {
-  FUN_00414da4();
+  refresh_after_change();
   FUN_00415550();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -420,7 +420,7 @@ void FAMMonitorDirectory(undefined4 param_1,char *param_2,int *param_3,undefined
     *param_3 = iVar1;
     sVar2 = strlen(param_2);
     if (sVar2 < 0x401) {
-      FUN_00439c48(param_1,param_2,param_3,param_4,0x4d);
+      fam_monitor_request(param_1,param_2,param_3,param_4,0x4d);
     }
     else {
       syslog(1,s_path_too_long_10009e84);
@@ -452,7 +452,7 @@ void FAMMonitorFile(undefined4 param_1,char *param_2,int *param_3,undefined4 par
     *param_3 = iVar1;
     sVar2 = strlen(param_2);
     if (sVar2 < 0x401) {
-      FUN_00439c48(param_1,param_2,param_3,param_4,0x57);
+      fam_monitor_request(param_1,param_2,param_3,param_4,0x57);
     }
     else {
       syslog(1,s_path_too_long_10009e94);

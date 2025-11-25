@@ -1024,7 +1024,7 @@ void readPosition(undefined2 *param_1,FILE *param_2)
                     // WARNING: Subroutine does not return
       exit(1);
     }
-    uVar2 = FUN_004136a0(auStack_430);
+    uVar2 = get_path_entry(auStack_430);
     *(undefined4 *)(param_1 + 2) = uVar2;
     auStack_430[uStack_8] = 0;
   }
@@ -1039,7 +1039,7 @@ void readPosition(undefined2 *param_1,FILE *param_2)
       exit(1);
     }
     auStack_430[uStack_6] = 0;
-    uVar2 = FUN_004136a0();
+    uVar2 = get_path_entry();
     *(undefined4 *)(param_1 + 10) = uVar2;
   }
   if (uStack_4 == 0) {
@@ -1078,7 +1078,7 @@ void scanDatabase(int param_1)
     build_path_string(acStack_400);
   }
   sVar1 = strlen(acStack_400);
-  iVar2 = FUN_004138e8(param_1,acStack_400,acStack_400 + sVar1,1);
+  iVar2 = check_directory_flags(param_1,acStack_400,acStack_400 + sVar1,1);
   if (iVar2 != 0) {
     uVar3 = set_status_message("relaying out file system...please wait",0);
     process_pending_events();
@@ -1089,7 +1089,7 @@ void scanDatabase(int param_1)
   FUN_0041dba0();
   redraw_gl_scene();
   glx_swap_buffers_wrapper();
-  FUN_00414da4();
+  refresh_after_change();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -1626,7 +1626,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_8c = 3;
   copy_button_widget = uStack_84;
   panel_vsep_widget = XtCreateManagedWidget("panelvsep",_DAT_0e3d8f04,panel_widget,&uStack_a0,4);
-  FUN_0040df80();
+  init_panel_layout();
   iVar3 = init_display_mode();
   if (iVar3 != 0) {
     display_mode_flags = 0x3000;
@@ -1733,7 +1733,7 @@ void main(int param_1,undefined4 *param_2)
     toggle_legend();
   }
   if (initialControls != '\0') {
-    FUN_0040dee0();
+    show_controls();
   }
   FUN_0040ed40();
   XtSetSensitive(copy_button_widget,1);
@@ -1891,7 +1891,7 @@ void newcontext(uint param_1,char param_2)
       uVar3 = XtWindow(*(undefined4 *)(curcontextwindows + 0x28));
       XUnmapWindow(uVar2,uVar3);
       update_widget_state();
-      FUN_004207b4();
+      refresh_display();
       curcontext[0xc53] = 0;
       altcontext[0xc53] = 1;
       ui_layout_setup_wrapper();
@@ -2103,7 +2103,7 @@ void preExit(void)
   if (fsn_resources == '\0') {
     FUN_0042fb84(toplevel);
     FUN_00427de0();
-    FUN_00414da4();
+    refresh_after_change();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -2235,7 +2235,7 @@ void rescaleOverview(void)
     XtSetValues(overview_gl_widget,&uStack_50,2);
     glx_switch_context_wrapper();
     ortho2(minx,maxx);
-    FUN_004207b4();
+    refresh_display();
     FUN_0041fdb0();
     ortho2(minx,maxx);
     FUN_00420b70();

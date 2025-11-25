@@ -78,7 +78,7 @@ void unselect_directory(void)
     uStack_28 = 0xe3f40b5;
     XtSetValues(*(undefined4 *)(curcontextwindows + 0x20),&uStack_28,1);
     update_widget_state();
-    FUN_004207b4();
+    refresh_display();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -329,7 +329,7 @@ void draw_second_pick(undefined8 param_1,undefined8 param_2,int param_3)
     uVar4 = CONCAT44(uVar1,*(undefined4 *)(param_3 + 0x3c));
     scale(*(undefined4 *)(param_3 + 0x3c),uVar4);
     uVar2 = (uint)((ulonglong)uVar4 >> 0x20);
-    FUN_00422284(0,0,0x1f);
+    draw_legend_color_box(0,0,0x1f);
     popmatrix();
     translate(0,(ulonglong)uVar2 << 0x20);
     FUN_00423b3c(param_3,1,7,0x1f);
@@ -1452,7 +1452,7 @@ void select_directory(int param_1)
     *(int *)(curcontext + 0x44) = param_1;
     build_path_string((int)curcontext + 0x4c,param_1);
     draw_mark_overlay();
-    FUN_004207b4();
+    refresh_display();
     uStack_28 = 0xe3f48f1;
     uStack_24 = (uint)(*(int *)(param_1 + 0x74) << 0xb) >> 0x1f;
     XtSetValues(menu_monitor_directory,&uStack_28,1);
@@ -1466,7 +1466,7 @@ void select_directory(int param_1)
       *(undefined4 *)(param_1 + 100) = 0;
     }
     if (-1 < *(int *)(param_1 + 0x74) << 10) {
-      FUN_00427e30(param_1);
+      add_directory_monitor(param_1);
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here

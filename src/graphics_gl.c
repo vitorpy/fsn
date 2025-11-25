@@ -1423,7 +1423,7 @@ void overviewPickPointer(void)
   initnames();
   pick(asStack_3e8,500);
   ortho2(minx,maxx);
-  FUN_00420408(topdir,1);
+  setup_item_render(topdir,1);
   iVar1 = endpick(asStack_3e8);
   popmatrix();
   iVar2 = 0;
@@ -1691,7 +1691,7 @@ void drawOverview(void)
     cpack(DAT_100175f0);
     clear();
     if (topdir != 0) {
-      FUN_00420408(topdir,0);
+      setup_item_render(topdir,0);
     }
     swapbuffers();
   }
@@ -4694,7 +4694,7 @@ void highlightDirLandscape(int param_1)
       pushmatrix();
       translate(*(undefined4 *)(iVar1 + 0x34),*(undefined4 *)(iVar1 + 0x38));
       scale(*(float *)(iVar1 + 0x3c) * *(float *)(iVar1 + 0x58));
-      FUN_00422284(0,0,0x1f);
+      draw_legend_color_box(0,0,0x1f);
       popmatrix();
     }
   }
@@ -5657,7 +5657,7 @@ void drawOverviewDirectory(int param_1,char param_2)
         iVar1 = *(int *)(iVar4 + 0x74);
         if (iVar1 << 3 < 0) {
           if (param_2 != '\0') {
-            FUN_00420408(iVar4,1);
+            setup_item_render(iVar4,1);
             loadname((int)*(short *)(iVar4 + 0x5e));
             iVar1 = *(int *)(iVar4 + 0x74);
           }
@@ -5678,7 +5678,7 @@ void drawOverviewDirectory(int param_1,char param_2)
           v2f(&uStack_18);
           endline();
           if (param_2 == '\0') {
-            FUN_00420408(iVar4,0);
+            setup_item_render(iVar4,0);
           }
           iVar2 = *(int *)(param_1 + 0x14);
         }
