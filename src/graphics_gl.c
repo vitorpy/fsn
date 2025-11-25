@@ -1432,7 +1432,7 @@ void overviewPickPointer(void)
     do {
       iVar4 = (int)asStack_3e8[iVar2];
       if (iVar4 == 1) {
-        FUN_00411e68((int)asStack_3e8[iVar2 + 1]);
+        get_item_by_index((int)asStack_3e8[iVar2 + 1]);
         halt_baddata();
       }
       iVar3 = iVar3 + 1;
@@ -2747,7 +2747,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
   lVar6 = CONCAT44(uVar9,0x3cf5c28f);
   dVar15 = (double)CONCAT44(uVar11,0x3cf5c28f);
   scale(lVar6,dVar15);
-  FUN_004189b0(*param_3);
+  draw_file_icon(*param_3);
   popmatrix();
   iVar3 = 0;
   if (0 < (int)param_3[3]) {
@@ -3160,7 +3160,7 @@ void draw_visibility(void)
       do {
         iVar4 = (int)asStack_1000[iVar3];
         if (iVar4 == 1) {
-          iVar2 = FUN_00411e68((int)asStack_1000[iVar3 + 1]);
+          iVar2 = get_item_by_index((int)asStack_1000[iVar3 + 1]);
           *(byte *)(iVar2 + 0x74) =
                (byte)((*(uint *)(iVar2 + 0x74) >> 0x1e | curcontextflag) << 6) |
                *(byte *)(iVar2 + 0x74) & 0x3f;
@@ -6014,7 +6014,7 @@ void FAMDebugLevel(undefined4 *param_1,int param_2)
   }
   sprintf(acStack_c8,&DAT_10009f3c,uVar1);
   sVar2 = strlen(acStack_c8);
-  FUN_0043b318(param_1[1],*param_1,acStack_c8,sVar2 + 1);
+  write_data_buffer(param_1[1],*param_1,acStack_c8,sVar2 + 1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }

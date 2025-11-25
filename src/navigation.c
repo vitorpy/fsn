@@ -57,7 +57,7 @@ void zoomPosition(undefined4 param_1)
   if (iVar1 != 0) {
     if (iStack_18 != *(int *)(curcontext + 0x44)) {
       if (iStack_18 == 0) {
-        FUN_0041d54c(0);
+        clear_marked_state(0);
       }
       else {
         update_marked_item();
@@ -68,7 +68,7 @@ void zoomPosition(undefined4 param_1)
         clear_current_selection(0);
       }
       else {
-        FUN_0041da44();
+        get_item_screen_coords();
       }
     }
     if (cStack_1d == '\0') {
@@ -140,7 +140,7 @@ void findbestfile(char *param_1,int *param_2,undefined4 *param_3)
   pcVar4 = strchr(param_1,0x2f);
   while (pcVar4 != (char *)0x0) {
     *pcVar4 = '\0';
-    puVar5 = (undefined4 *)FUN_00413610(puVar5,param_1);
+    puVar5 = (undefined4 *)find_directory_by_path(puVar5,param_1);
     if (puVar5 == (undefined4 *)0x0) {
       *pcVar4 = '/';
       halt_baddata();

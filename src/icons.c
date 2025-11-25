@@ -276,7 +276,7 @@ void FindIconByName__14ByteCodeLoaderFPc(int *param_1)
   iVar2 = *param_1;
   FUN_004357ec(&TheFileIconInterpreter);
   if ((icon_cache_capacity == 0) && (icon_cache_size == 0)) {
-    FUN_00435938(&TheFileIconInterpreter);
+    reset_icon_interpreter(&TheFileIconInterpreter);
     FUN_004349f8(param_1,s_Unknown_10009a20);
   }
   else {
@@ -286,12 +286,12 @@ void FindIconByName__14ByteCodeLoaderFPc(int *param_1)
          (iVar1 = FUN_00435a28(&TheFileIconInterpreter,*(int *)(iVar2 + 4),
                                *(undefined4 *)(iVar2 + 8),*(undefined4 *)(iVar2 + 0x10)), iVar1 != 0
          )) {
-        FUN_00435938(&TheFileIconInterpreter);
+        reset_icon_interpreter(&TheFileIconInterpreter);
         FUN_00435034(0,iVar2);
         halt_baddata();
       }
     }
-    FUN_00435938(&TheFileIconInterpreter);
+    reset_icon_interpreter(&TheFileIconInterpreter);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -1677,7 +1677,7 @@ void FindInfoByName__14ByteCodeLoaderFPc(int *param_1)
   FUN_004357ec(&TheFileIconInterpreter);
   while( true ) {
     if (iVar2 == 0) {
-      FUN_00435938(&TheFileIconInterpreter);
+      reset_icon_interpreter(&TheFileIconInterpreter);
                     // WARNING: Bad instruction - Truncating control flow here
       halt_baddata();
     }
@@ -1687,7 +1687,7 @@ void FindInfoByName__14ByteCodeLoaderFPc(int *param_1)
                              *(undefined4 *)(iVar2 + 0x10)), iVar1 != 0)) break;
     iVar2 = *(int *)(iVar2 + 0x68);
   }
-  FUN_00435938(&TheFileIconInterpreter);
+  reset_icon_interpreter(&TheFileIconInterpreter);
   halt_baddata();
 }
 

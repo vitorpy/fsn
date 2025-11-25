@@ -852,7 +852,7 @@ void fileCreated(int param_1,char *param_2)
       *(byte *)(param_1 + 0x74) = *(byte *)(param_1 + 0x74) & 0xfe;
       *(byte *)(param_1 + 0x75) = bVar6 & 0x3f;
       if ((sStack_94.st_nlink & 0xf000) == 0x4000) {
-        iVar2 = FUN_00413610(param_1,param_2);
+        iVar2 = find_directory_by_path(param_1,param_2);
         if (iVar2 == 0) {
           puVar3 = (undefined4 *)FUN_00411c04();
           if (*(int *)(param_1 + 0x14) == 0) {
@@ -888,7 +888,7 @@ void fileCreated(int param_1,char *param_2)
           bVar6 = FUN_004138e8(puVar3,pcStack_c,__dest,0);
           *(byte *)(param_1 + 0x75) = (bVar6 & 1) << 6 | *(byte *)(param_1 + 0x75) & 0xbf;
           if (((*(byte *)(param_1 + 0x74) & 1) != 0) || (*(char *)(param_1 + 0x75) < '\0')) {
-            FUN_004144ec(param_1);
+            process_child_directory(param_1);
           }
         }
       }
@@ -917,7 +917,7 @@ void fileCreated(int param_1,char *param_2)
           uVar5 = FUN_00433b44(pcStack_c);
           puVar3[8] = uVar5;
           *(int *)(param_1 + 0x1c) = (*(int *)(param_1 + 0x1c) + sStack_94.st_blksize) - puVar3[3];
-          uVar5 = FUN_004118b0(param_1);
+          uVar5 = calculate_layout_position(param_1);
           *(undefined4 *)(param_1 + 0x24) = uVar5;
           puVar3[3] = sStack_94.st_blksize;
           if (window_width < sStack_94.st_blksize) {
@@ -927,7 +927,7 @@ void fileCreated(int param_1,char *param_2)
             window_height = *(int *)(param_1 + 0x1c);
           }
           puVar3[4] = sStack_94.st_mtim.tv_sec;
-          FUN_00412400(puVar3);
+          update_directory_bounds(puVar3);
                     // WARNING: Bad instruction - Truncating control flow here
           halt_baddata();
         }

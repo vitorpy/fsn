@@ -73,11 +73,11 @@ void unselect_directory(void)
          *(byte *)(*(int *)(curcontext + 0x44) + 0x74) & 0xdf;
     *(undefined4 *)(curcontext + 0x44) = 0;
     curcontext[0x4c] = 0;
-    FUN_0041c720();
+    draw_mark_overlay();
     uStack_24 = blankXmString;
     uStack_28 = 0xe3f40b5;
     XtSetValues(*(undefined4 *)(curcontextwindows + 0x20),&uStack_28,1);
-    FUN_0041c9e8();
+    update_widget_state();
     FUN_004207b4();
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -425,7 +425,7 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
     do {
       sVar1 = asStack_3f4[iVar5];
       if (sVar1 == 1) {
-        uVar3 = FUN_00411e68((int)asStack_3f4[iVar5 + 1]);
+        uVar3 = get_item_by_index((int)asStack_3f4[iVar5 + 1]);
         FUN_00425ee4(uVar3);
       }
       iVar7 = iVar7 + 1;
@@ -463,15 +463,15 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
   if (iStack_7fc < 0) {
     if (iVar8 < 0) {
       if (-1 < iVar9) {
-        uStack_c = FUN_00411e68(iVar9);
+        uStack_c = get_item_by_index(iVar9);
       }
     }
     else {
-      iStack_4 = FUN_00411e68(iVar8);
+      iStack_4 = get_item_by_index(iVar8);
     }
   }
   else {
-    iStack_4 = FUN_00411e68(iVar8);
+    iStack_4 = get_item_by_index(iVar8);
     uStack_8 = *(undefined4 *)(*(int *)(iStack_4 + 0x10) + iStack_7fc * 4);
   }
   *param_1 = iStack_4;
@@ -715,7 +715,7 @@ void pickWarp(int *param_1,undefined4 *param_2,undefined4 *param_3)
       iVar3 = iVar3 + 1 + iVar2;
     } while (iVar4 != iVar1);
   }
-  if ((-1 < iVar5) && (iStack_4 = FUN_00411e68(iVar5), -1 < iStack_40c)) {
+  if ((-1 < iVar5) && (iStack_4 = get_item_by_index(iVar5), -1 < iStack_40c)) {
     if (iStack_4 == *(int *)(curcontext + 0x3c)) {
       uStack_8 = *(undefined4 *)(*(int *)(iStack_4 + 0x10) + iStack_40c * 4);
     }
@@ -743,12 +743,12 @@ void unselect_file(void)
     *(byte *)(*(int *)(curcontext + 0x48) + 0x28) =
          *(byte *)(*(int *)(curcontext + 0x48) + 0x28) & 0xef;
     *(undefined4 *)(curcontext + 0x48) = 0;
-    FUN_0041c720();
+    draw_mark_overlay();
     uStack_28 = 0;
     uStack_2c = 0xe3f48f1;
     XtSetValues(menu_delete_file_1,&uStack_2c,1);
     XtSetValues(menu_delete_file_2,&uStack_2c,1);
-    FUN_0041c9e8();
+    update_widget_state();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -793,12 +793,12 @@ void select_file(undefined4 *param_1)
   *(undefined4 **)(curcontext + 0x48) = param_1;
   strcpy(curcontext + 0x44c,curcontext + 0x4c);
   strcat(curcontext + 0x44c,(char *)*param_1);
-  FUN_0041c720();
+  draw_mark_overlay();
   uStack_30 = 0xe3f48f1;
   uStack_2c = (uint)(param_1[10] << 9) >> 0x1f;
   XtSetValues(menu_delete_file_1,&uStack_30,1);
   XtSetValues(menu_delete_file_2,&uStack_30,1);
-  FUN_0041c9e8();
+  update_widget_state();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -1436,7 +1436,7 @@ void select_directory(int param_1)
   if (param_1 == *(int *)(curcontext + 0x44)) {
     clear_current_selection();
     if (mark_menu_widget != '\0') {
-      FUN_0041c720();
+      draw_mark_overlay();
     }
   }
   else {
@@ -1451,7 +1451,7 @@ void select_directory(int param_1)
     *(byte *)(param_1 + 0x74) = *(byte *)(param_1 + 0x74) | 0x20;
     *(int *)(curcontext + 0x44) = param_1;
     build_path_string((int)curcontext + 0x4c,param_1);
-    FUN_0041c720();
+    draw_mark_overlay();
     FUN_004207b4();
     uStack_28 = 0xe3f48f1;
     uStack_24 = (uint)(*(int *)(param_1 + 0x74) << 0xb) >> 0x1f;
@@ -1460,7 +1460,7 @@ void select_directory(int param_1)
     uStack_24 = (uint)(*(int *)(param_1 + 0x74) << 0xd) >> 0x1f;
     XtSetValues(current_picked_item,&uStack_28,1);
     XtSetSensitive(menu_monitor_directory,-1 < *(int *)(param_1 + 0x74) << 0xd);
-    FUN_0041c9e8();
+    update_widget_state();
     if (*(int *)(param_1 + 100) != 0) {
       XtRemoveTimeOut();
       *(undefined4 *)(param_1 + 100) = 0;

@@ -154,7 +154,7 @@ void FAMResumeMonitor(undefined4 *param_1,undefined4 *param_2)
   _Var2 = getgid();
   sprintf(acStack_bb8,s_U_d__d__d_10009f08,*param_2,_Var1,_Var2);
   sVar3 = strlen(acStack_bb8);
-  FUN_0043b318(param_1[1],*param_1,acStack_bb8,sVar3 + 1);
+  write_data_buffer(param_1[1],*param_1,acStack_bb8,sVar3 + 1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -224,7 +224,7 @@ void FAMCancelMonitor(undefined4 *param_1,undefined4 *param_2)
   _Var2 = getgid();
   sprintf(acStack_bb8,s_C_d__d__d_10009f14,*param_2,_Var1,_Var2);
   sVar3 = strlen(acStack_bb8);
-  FUN_0043b318(param_1[1],*param_1,acStack_bb8,sVar3 + 1);
+  write_data_buffer(param_1[1],*param_1,acStack_bb8,sVar3 + 1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -240,7 +240,7 @@ void updateDir(int param_1)
   sVar1 = strlen(acStack_400);
   iVar2 = FUN_004138e8(param_1,acStack_400,acStack_400 + sVar1,0);
   if (iVar2 != 0) {
-    FUN_004144ec(param_1);
+    process_child_directory(param_1);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -291,7 +291,7 @@ void FAMSuspendMonitor(undefined4 *param_1,undefined4 *param_2)
   _Var2 = getgid();
   sprintf(acStack_bb8,s_S_d__d__d_10009efc,*param_2,_Var1,_Var2);
   sVar3 = strlen(acStack_bb8);
-  FUN_0043b318(param_1[1],*param_1,acStack_bb8,sVar3 + 1);
+  write_data_buffer(param_1[1],*param_1,acStack_bb8,sVar3 + 1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -348,7 +348,7 @@ void gotoFileName(undefined4 param_1)
   if (iStack_4 != 0) {
     update_marked_item();
     if (iStack_8 != 0) {
-      FUN_0041da44();
+      get_item_screen_coords();
     }
     FUN_0041fbb4();
   }

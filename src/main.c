@@ -172,7 +172,7 @@ void first_traversal(int param_1)
   *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + *(int *)(iVar1 + 0xc);
   *(float *)(iVar1 + 0x14) = fVar4;
   *(float *)(iVar1 + 0x18) = fVar4;
-  FUN_00412400(iVar1);
+  update_directory_bounds(iVar1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -361,7 +361,7 @@ void restorePosition(undefined4 param_1)
   *(undefined4 *)(curcontext + 0x3c) = uStack_14;
   if (iStack_18 != *(int *)(curcontext + 0x44)) {
     if (iStack_18 == 0) {
-      FUN_0041d54c(0);
+      clear_marked_state(0);
     }
     else {
       update_marked_item();
@@ -372,7 +372,7 @@ void restorePosition(undefined4 param_1)
       clear_current_selection(0);
     }
     else {
-      FUN_0041da44();
+      get_item_screen_coords();
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -458,7 +458,7 @@ void fileDeleted(int param_1,char *param_2)
       *(byte *)(param_1 + 0x75) = bVar2 & 0x3f;
       iVar1 = validate_directory_access(param_1,param_2);
       if (iVar1 == 0) {
-        iVar1 = FUN_00413610(param_1,param_2);
+        iVar1 = find_directory_by_path(param_1,param_2);
         if (iVar1 != 0) {
           bVar2 = *(byte *)(iVar1 + 0x74) & 0xfd;
           *(byte *)(iVar1 + 0x74) = bVar2;
@@ -472,7 +472,7 @@ void fileDeleted(int param_1,char *param_2)
         *(byte *)(param_1 + 0x74) = *(byte *)(param_1 + 0x74) | 1;
       }
       if (((*(byte *)(param_1 + 0x74) & 1) != 0) || (*(char *)(param_1 + 0x75) < '\0')) {
-        FUN_004144ec(param_1);
+        process_child_directory(param_1);
       }
     }
   }
@@ -726,7 +726,7 @@ void layout_db(undefined4 param_1,undefined4 param_2)
     horizontal_scale_factor = 1.0;
   }
   else {
-    fVar1 = (float)FUN_00411774(window_width);
+    fVar1 = (float)process_directory_data(window_width);
     horizontal_scale_factor = DAT_100174f8 / fVar1;
   }
   *(undefined4 *)(topdir + 0x2c) = 0;
@@ -740,12 +740,12 @@ void layout_db(undefined4 param_1,undefined4 param_2)
     vertical_scale_factor = 1.0;
   }
   else if ((displayDirectoryHeight == 1) || (displayDirectoryHeight != 2)) {
-    fVar1 = (float)FUN_00411774(window_height);
+    fVar1 = (float)process_directory_data(window_height);
     in_f6 = (double)CONCAT44(uVar3,reference_dimension);
     vertical_scale_factor = reference_dimension / fVar1;
   }
   else {
-    fVar1 = (float)FUN_00411774(*(undefined4 *)(topdir + 0x20));
+    fVar1 = (float)process_directory_data(*(undefined4 *)(topdir + 0x20));
     in_f6 = (double)reference_dimension;
     vertical_scale_factor = (float)(in_f6 / (double)fVar1);
   }
@@ -884,7 +884,7 @@ void fileChanged(int param_1,char *param_2)
          (sStack_90.st_mtim.tv_sec != *(int *)(iVar1 + 0x10))) {
         *(int *)(param_1 + 0x1c) =
              (*(int *)(param_1 + 0x1c) + sStack_90.st_blksize) - *(int *)(iVar1 + 0xc);
-        uVar3 = FUN_004118b0(param_1);
+        uVar3 = calculate_layout_position(param_1);
         *(undefined4 *)(param_1 + 0x24) = uVar3;
         *(__nlink_t *)(iVar1 + 8) = sStack_90.st_nlink;
         *(__blksize_t *)(iVar1 + 0xc) = sStack_90.st_blksize;
@@ -897,7 +897,7 @@ void fileChanged(int param_1,char *param_2)
         if (window_height < *(int *)(param_1 + 0x1c)) {
           window_height = *(int *)(param_1 + 0x1c);
         }
-        FUN_00412400(iVar1);
+        update_directory_bounds(iVar1);
         FUN_00412234(param_1);
                     // WARNING: Bad instruction - Truncating control flow here
         halt_baddata();
@@ -940,7 +940,7 @@ void FAMOpen2(int *param_1,int param_2)
     _Var3 = getgid();
     sprintf(acStack_cc,s_dN0__d__d__s_10009e47 + 1,_Var2,_Var3,param_2);
     sVar4 = strlen(acStack_cc);
-    FUN_0043b318(iStack_4,*param_1,acStack_cc,sVar4 + 1);
+    write_data_buffer(iStack_4,*param_1,acStack_cc,sVar4 + 1);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -1082,7 +1082,7 @@ void scanDatabase(int param_1)
   if (iVar2 != 0) {
     uVar3 = set_status_message("relaying out file system...please wait",0);
     process_pending_events();
-    FUN_004144ec(param_1);
+    process_child_directory(param_1);
     deleteMessage(uVar3);
     update_display();
   }
@@ -1251,7 +1251,7 @@ void findDirByFullName(char *param_1)
     pcVar4 = strchr(param_1,0x2f);
     while (pcVar4 != (char *)0x0) {
       *pcVar4 = '\0';
-      puVar5 = (undefined4 *)FUN_00413610(puVar5,param_1);
+      puVar5 = (undefined4 *)find_directory_by_path(puVar5,param_1);
       if (puVar5 == (undefined4 *)0x0) {
         *pcVar4 = '/';
         halt_baddata();
@@ -1264,7 +1264,7 @@ void findDirByFullName(char *param_1)
       pcVar4 = strchr(param_1,0x2f);
     }
     if (*param_1 != '\0') {
-      FUN_00413610(puVar5,param_1);
+      find_directory_by_path(puVar5,param_1);
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -1730,7 +1730,7 @@ void main(int param_1,undefined4 *param_2)
     FUN_00411230();
   }
   if (initialLegend != '\0') {
-    FUN_0040da94();
+    toggle_legend();
   }
   if (initialControls != '\0') {
     FUN_0040dee0();
@@ -1890,7 +1890,7 @@ void newcontext(uint param_1,char param_2)
       uVar2 = XtDisplay(*(undefined4 *)(curcontextwindows + 0x28));
       uVar3 = XtWindow(*(undefined4 *)(curcontextwindows + 0x28));
       XUnmapWindow(uVar2,uVar3);
-      FUN_0041c9e8();
+      update_widget_state();
       FUN_004207b4();
       curcontext[0xc53] = 0;
       altcontext[0xc53] = 1;
@@ -2032,7 +2032,7 @@ void third_traversal(int param_1,undefined4 param_2,undefined4 param_3,undefined
   undefined4 uVar1;
   undefined4 unaff_000010a0;
   
-  uVar1 = FUN_004118b0();
+  uVar1 = calculate_layout_position();
   *(undefined4 *)(param_1 + 0x24) = uVar1;
   *(float *)(param_1 + 0x34) = (float)(double)CONCAT44(unaff_000010a0,param_4);
                     // WARNING: Bad instruction - Truncating control flow here
@@ -2329,7 +2329,7 @@ void checkValidSelections(void)
   }
   if ((*(int *)(curcontext + 0x44) != 0) && (-1 < *(int *)(*(int *)(curcontext + 0x44) + 0x74) << 3)
      ) {
-    FUN_0041d54c();
+    clear_marked_state();
   }
   if ((*(int *)(curcontext + 0x3c) != 0) && (-1 < *(int *)(*(int *)(curcontext + 0x3c) + 0x74) << 3)
      ) {
@@ -2343,7 +2343,7 @@ void checkValidSelections(void)
     }
     if ((*(int *)(curcontext + 0x44) != 0) &&
        (-1 < *(int *)(*(int *)(curcontext + 0x44) + 0x74) << 3)) {
-      FUN_0041d54c();
+      clear_marked_state();
     }
     if ((*(int *)(curcontext + 0x3c) != 0) &&
        (-1 < *(int *)(*(int *)(curcontext + 0x3c) + 0x74) << 3)) {
@@ -2351,7 +2351,7 @@ void checkValidSelections(void)
     }
     gl_swap_buffers(1);
   }
-  FUN_0041c9e8();
+  update_widget_state();
   FUN_0041c3e4();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
