@@ -1,0 +1,7554 @@
+FSN Global Variables Catalog
+================================================================================
+
+
+================================================================================
+Category: Configuration (3 globals)
+================================================================================
+
+Global: DAT_10016690
+Type: int *
+Categories: Configuration, Counter/Index, Filesystem, String/Text, Unknown
+Usage count: 97
+Sample usage:
+fined1 overviewActive;
+char DAT_10017497;
+char *DAT_100175b0;
+undefined1 fsn_resources;
+undefined databaseDumpTimeout;
+undefined4 DAT_100166b8;
+FILE *DAT_10016690;
+uint DAT_100166cc;
+int *DAT_10016690
+--------------------------------------------------------------------------------
+
+Global: DAT_10016c60
+Type: int
+Categories: Configuration, Counter/Index, Filesystem, Graphics State, String/Text
+Usage count: 7
+Sample usage:
+_10006ff8;
+undefined DAT_10007020;
+undefined DAT_1000702c;
+int DAT_100174a4;
+pointer dcolorBoxes;
+undefined DAT_10006f10;
+undefined DAT_10006f18;
+int DAT_10016c60;
+undefined DAT_10006f20;
+int DAT_1001
+--------------------------------------------------------------------------------
+
+Global: DAT_10007c28
+Type: int
+Categories: Configuration, Filesystem, Unknown
+Usage count: 4
+Sample usage:
+e_file_10007b64;
+undefined FUN_0042b3f4;
+undefined FUN_0042b5ac;
+pointer versionHelp;
+pointer modeHelp;
+int DAT_100079c0;
+undefined FUN_0042b390;
+int DAT_10007c28;
+undefined4 DAT_10016e24;
+pointer PTR
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Category: Counter/Index (90 globals)
+================================================================================
+
+Global: DAT_0fb52740
+Type: undefined
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 289
+Sample usage:
+ord e_phentsize;
+    word e_phnum;
+    word e_shentsize;
+    word e_shnum;
+    word e_shstrndx;
+};
+
+
+
+undefined4 __Argc;
+undefined4 __Argv;
+undefined DAT_0fb52740;
+undefined DAT_1001db30;
+undefined SU
+--------------------------------------------------------------------------------
+
+Global: DAT_1001db30
+Type: undefined
+Categories: Counter/Index, String/Text
+Usage count: 1
+Sample usage:
+d e_phnum;
+    word e_shentsize;
+    word e_shnum;
+    word e_shstrndx;
+};
+
+
+
+undefined4 __Argc;
+undefined4 __Argv;
+undefined DAT_0fb52740;
+undefined DAT_1001db30;
+undefined SUB_0fb6b330;
+pointer __((
+--------------------------------------------------------------------------------
+
+Global: DAT_100174a8
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 13
+Sample usage:
+c;
+undefined4 __Argv;
+undefined DAT_0fb52740;
+undefined DAT_1001db30;
+undefined SUB_0fb6b330;
+pointer __((offset(0x10017720))) curcontext;
+undefined4 DAT_100174a8;
+undefined4 DAT_100174ac;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_100174ac
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 13
+Sample usage:
+efined DAT_0fb52740;
+undefined DAT_1001db30;
+undefined SUB_0fb6b330;
+pointer __((offset(0x10017720))) curcontext;
+undefined4 DAT_100174a8;
+undefined4 DAT_100174ac;
+undefined4 DAT_100174b0;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016688
+Type: char
+Categories: Counter/Index, String/Text, Unknown, X11/Motif
+Usage count: 8
+Sample usage:
+fined4 DAT_10016660;
+undefined4 DAT_1001665c;
+undefined4 DAT_10016664;
+undefined4 DAT_10016648;
+undefined4 DAT_10016650;
+undefined DAT_0e3d616c;
+char DAT_10016688;
+undefined DAT_0e3f2368;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10016654
+Type: int
+Categories: Counter/Index, String/Text, Unknown, X11/Motif
+Usage count: 12
+Sample usage:
+hort DAT_10000148;
+undefined4 DAT_1001663c;
+short DAT_1000014c;
+undefined1 controlsShowing;
+undefined4 labelColors;
+undefined4 monitorLabelColor;
+int DAT_10016654;
+undefined DAT_100176e4;
+pointer lege
+--------------------------------------------------------------------------------
+
+Global: DAT_10000154
+Type: int
+Categories: Counter/Index, String/Text, Unknown, X11/Motif
+Usage count: 5
+Sample usage:
+AT_10016684;
+undefined showOverview;
+undefined hideOverview;
+undefined FUN_004115f8;
+undefined4 displayHeight;
+undefined4 displayDirectoryHeight;
+int DAT_10000154;
+undefined4 DAT_10000158;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10000158
+Type: undefined4
+Categories: Counter/Index, Graphics State, String/Text, Unknown
+Usage count: 8
+Sample usage:
+owOverview;
+undefined hideOverview;
+undefined FUN_004115f8;
+undefined4 displayHeight;
+undefined4 displayDirectoryHeight;
+int DAT_10000154;
+undefined4 DAT_10000158;
+undefined4 DAT_1000015c;
+undefined D
+--------------------------------------------------------------------------------
+
+Global: DAT_100165b0
+Type: undefined4
+Categories: Counter/Index, Graphics State, String/Text, Unknown
+Usage count: 4
+Sample usage:
+1000016c;
+undefined FUN_0040f20c;
+float DAT_10000158;
+float DAT_1000015c;
+float DAT_100174a0;
+float DAT_100165b4;
+undefined2 DAT_100165b8;
+undefined4 DAT_100165b0;
+float DAT_100165c4;
+float DAT_100165
+--------------------------------------------------------------------------------
+
+Global: DAT_100165c0
+Type: undefined4
+Categories: Counter/Index, Graphics State, String/Text, Unknown
+Usage count: 4
+Sample usage:
+a0;
+float DAT_100165b4;
+undefined2 DAT_100165b8;
+undefined4 DAT_100165b0;
+float DAT_100165c4;
+float DAT_100165cc;
+undefined2 DAT_100165c8;
+undefined4 DAT_100165c0;
+float DAT_100165d4;
+float DAT_100165
+--------------------------------------------------------------------------------
+
+Global: DAT_100165d0
+Type: undefined4
+Categories: Counter/Index, Graphics State, String/Text, Unknown
+Usage count: 4
+Sample usage:
+c4;
+float DAT_100165cc;
+undefined2 DAT_100165c8;
+undefined4 DAT_100165c0;
+float DAT_100165d4;
+float DAT_100165dc;
+undefined2 DAT_100165d8;
+undefined4 DAT_100165d0;
+float DAT_100165ec;
+undefined DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_100165e0
+Type: undefined
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 2
+Sample usage:
+5c8;
+undefined4 DAT_100165c0;
+float DAT_100165d4;
+float DAT_100165dc;
+undefined2 DAT_100165d8;
+undefined4 DAT_100165d0;
+float DAT_100165ec;
+undefined DAT_100165e0;
+undefined4 DAT_10017610;
+undefined F
+--------------------------------------------------------------------------------
+
+Global: DAT_10017610
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 2
+Sample usage:
+5c0;
+float DAT_100165d4;
+float DAT_100165dc;
+undefined2 DAT_100165d8;
+undefined4 DAT_100165d0;
+float DAT_100165ec;
+undefined DAT_100165e0;
+undefined4 DAT_10017610;
+undefined FUN_0040fbb0;
+char DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_1001662c
+Type: undefined4
+Categories: Counter/Index, Graphics State, String/Text
+Usage count: 5
+Sample usage:
+10;
+undefined FUN_00410858;
+int DAT_10016624;
+int DAT_10016628;
+undefined4 *DAT_10000020;
+undefined deleteMessage;
+undefined FUN_00410f30;
+undefined4 DAT_1001662c;
+undefined4 DAT_10016630;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10016630
+Type: undefined4
+Categories: Counter/Index, Graphics State, String/Text
+Usage count: 4
+Sample usage:
+8;
+int DAT_10016624;
+int DAT_10016628;
+undefined4 *DAT_10000020;
+undefined deleteMessage;
+undefined FUN_00410f30;
+undefined4 DAT_1001662c;
+undefined4 DAT_10016630;
+float DAT_10016630;
+float DAT_100166
+--------------------------------------------------------------------------------
+
+Global: DAT_100174f4
+Type: float
+Categories: Counter/Index, Filesystem, String/Text
+Usage count: 2
+Sample usage:
+01662c;
+undefined4 DAT_10016630;
+float DAT_10016630;
+float DAT_1001662c;
+char DAT_10000170;
+pointer __((offset(0x10019008))) altcontextwindows;
+float DAT_100174f4;
+undefined1 DAT_10016710;
+uint DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10016710
+Type: undefined1
+Categories: Counter/Index, Filesystem, String/Text
+Usage count: 2
+Sample usage:
+016630;
+float DAT_10016630;
+float DAT_1001662c;
+char DAT_10000170;
+pointer __((offset(0x10019008))) altcontextwindows;
+float DAT_100174f4;
+undefined1 DAT_10016710;
+uint DAT_100001f0;
+uint DAT_10016b10
+--------------------------------------------------------------------------------
+
+Global: DAT_100001f0
+Type: uint
+Categories: Counter/Index, Filesystem, String/Text
+Usage count: 3
+Sample usage:
+0016630;
+float DAT_1001662c;
+char DAT_10000170;
+pointer __((offset(0x10019008))) altcontextwindows;
+float DAT_100174f4;
+undefined1 DAT_10016710;
+uint DAT_100001f0;
+uint DAT_10016b10;
+void *DAT_100001f
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b10
+Type: uint
+Categories: Counter/Index, Filesystem, String/Text
+Usage count: 3
+Sample usage:
+1001662c;
+char DAT_10000170;
+pointer __((offset(0x10019008))) altcontextwindows;
+float DAT_100174f4;
+undefined1 DAT_10016710;
+uint DAT_100001f0;
+uint DAT_10016b10;
+void *DAT_100001f4;
+void *DAT_10016b
+--------------------------------------------------------------------------------
+
+Global: DAT_100001f4
+Type: void *
+Categories: Counter/Index, Filesystem, String/Text
+Usage count: 9
+Sample usage:
+0000170;
+pointer __((offset(0x10019008))) altcontextwindows;
+float DAT_100174f4;
+undefined1 DAT_10016710;
+uint DAT_100001f0;
+uint DAT_10016b10;
+void *DAT_100001f4;
+void *DAT_10016b14;
+undefined4 dir_i
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b14
+Type: void *
+Categories: Counter/Index, Filesystem, String/Text
+Usage count: 3
+Sample usage:
+(offset(0x10019008))) altcontextwindows;
+float DAT_100174f4;
+undefined1 DAT_10016710;
+uint DAT_100001f0;
+uint DAT_10016b10;
+void *DAT_100001f4;
+void *DAT_10016b14;
+undefined4 dir_index;
+int DAT_100001
+--------------------------------------------------------------------------------
+
+Global: DAT_100001f8
+Type: int
+Categories: Counter/Index, Filesystem
+Usage count: 6
+Sample usage:
+
+float DAT_100174f4;
+undefined1 DAT_10016710;
+uint DAT_100001f0;
+uint DAT_10016b10;
+void *DAT_100001f4;
+void *DAT_10016b14;
+undefined4 dir_index;
+int DAT_100001f8;
+int DAT_10016b18;
+undefined4 DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b18
+Type: int
+Categories: Counter/Index, Filesystem
+Usage count: 6
+Sample usage:
+4;
+undefined1 DAT_10016710;
+uint DAT_100001f0;
+uint DAT_10016b10;
+void *DAT_100001f4;
+void *DAT_10016b14;
+undefined4 dir_index;
+int DAT_100001f8;
+int DAT_10016b18;
+undefined4 DAT_100001fc;
+void *DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100001fc
+Type: undefined4
+Categories: Counter/Index, Filesystem, String/Text
+Usage count: 2
+Sample usage:
+0;
+uint DAT_100001f0;
+uint DAT_10016b10;
+void *DAT_100001f4;
+void *DAT_10016b14;
+undefined4 dir_index;
+int DAT_100001f8;
+int DAT_10016b18;
+undefined4 DAT_100001fc;
+void *DAT_10000200;
+uint DAT_10016b1
+--------------------------------------------------------------------------------
+
+Global: DAT_10000200
+Type: void *
+Categories: Counter/Index, Filesystem, String/Text
+Usage count: 6
+Sample usage:
+;
+uint DAT_10016b10;
+void *DAT_100001f4;
+void *DAT_10016b14;
+undefined4 dir_index;
+int DAT_100001f8;
+int DAT_10016b18;
+undefined4 DAT_100001fc;
+void *DAT_10000200;
+uint DAT_10016b1c;
+undefined4 maxx;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b1c
+Type: uint
+Categories: Counter/Index, Filesystem, String/Text
+Usage count: 3
+Sample usage:
+;
+void *DAT_100001f4;
+void *DAT_10016b14;
+undefined4 dir_index;
+int DAT_100001f8;
+int DAT_10016b18;
+undefined4 DAT_100001fc;
+void *DAT_10000200;
+uint DAT_10016b1c;
+undefined4 maxx;
+undefined4 miny;
+un
+--------------------------------------------------------------------------------
+
+Global: DAT_10000184
+Type: undefined4
+Categories: Counter/Index, Filesystem, Graphics State, Unknown
+Usage count: 13
+Sample usage:
+fc;
+void *DAT_10000200;
+uint DAT_10016b1c;
+undefined4 maxx;
+undefined4 miny;
+undefined4 maxy;
+undefined4 maxShrinkage;
+float DAT_100166b0;
+undefined4 DAT_10000184;
+float DAT_100174f8;
+float DAT_100166
+--------------------------------------------------------------------------------
+
+Global: DAT_1000018c
+Type: undefined4
+Categories: Counter/Index, Filesystem, Unknown
+Usage count: 13
+Sample usage:
+ined4 miny;
+undefined4 maxy;
+undefined4 maxShrinkage;
+float DAT_100166b0;
+undefined4 DAT_10000184;
+float DAT_100174f8;
+float DAT_100166b4;
+undefined4 DAT_1000018c;
+float DAT_100174fc;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100166ac
+Type: undefined4
+Categories: Counter/Index, Filesystem, Graphics State
+Usage count: 4
+Sample usage:
+rinkage;
+float DAT_100166b0;
+undefined4 DAT_10000184;
+float DAT_100174f8;
+float DAT_100166b4;
+undefined4 DAT_1000018c;
+float DAT_100174fc;
+undefined4 DAT_100166ac;
+undefined4 topdir;
+undefined4 minx;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_0fb51f00
+Type: undefined
+Categories: Configuration, Counter/Index, Filesystem, String/Text
+Usage count: 19
+Sample usage:
+d compare_files;
+undefined compare_dirs;
+undefined1[16] fstyp;
+undefined4 localFlag;
+int DAT_100166b8;
+int DAT_10000184;
+char DAT_10017493;
+undefined DAT_0fb51f00;
+char *DAT_100175ac;
+undefined1 overv
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b8c
+Type: undefined4
+Categories: Counter/Index, Filesystem, String/Text, Unknown
+Usage count: 8
+Sample usage:
+4 DAT_10016b48;
+undefined4 DAT_10016b7c;
+undefined4 DAT_10016b80;
+undefined4 DAT_10016b9c;
+undefined FUN_0041ec98;
+undefined FUN_0041ee80;
+undefined4 DAT_10016b8c;
+undefined4 DAT_10016b90;
+undefined F
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b90
+Type: undefined4
+Categories: Counter/Index, Filesystem, String/Text, Unknown
+Usage count: 8
+Sample usage:
+4 DAT_10016b7c;
+undefined4 DAT_10016b80;
+undefined4 DAT_10016b9c;
+undefined FUN_0041ec98;
+undefined FUN_0041ee80;
+undefined4 DAT_10016b8c;
+undefined4 DAT_10016b90;
+undefined FUN_0041fa18;
+undefined FU
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bd0
+Type: undefined1
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 9
+Sample usage:
+DAT_10016b34;
+undefined4 DAT_10016b38;
+undefined4 DAT_10016b40;
+undefined4 DAT_10016b44;
+undefined4 DAT_10016b4c;
+undefined4 DAT_10016b50;
+undefined1 DAT_10016bd0;
+undefined1 DAT_10016bd3;
+undefined1 
+--------------------------------------------------------------------------------
+
+Global: DAT_10006e24
+Type: undefined1
+Categories: Counter/Index, Filesystem, String/Text, Unknown
+Usage count: 5
+Sample usage:
+AT_10016bd6;
+undefined1 DAT_10016bd9;
+undefined *PTR_DAT_10006e34;
+undefined DAT_10016bd1;
+undefined DAT_10016bd4;
+undefined DAT_10016bd7;
+undefined1 DAT_10006e24;
+char DAT_10006e54;
+int DAT_1001749c;
+--------------------------------------------------------------------------------
+
+Global: DAT_10006e54
+Type: char
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 4
+Sample usage:
+ned1 DAT_10016bd9;
+undefined *PTR_DAT_10006e34;
+undefined DAT_10016bd1;
+undefined DAT_10016bd4;
+undefined DAT_10016bd7;
+undefined1 DAT_10006e24;
+char DAT_10006e54;
+int DAT_1001749c;
+undefined check_un
+--------------------------------------------------------------------------------
+
+Global: DAT_10006e5c
+Type: int
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 6
+Sample usage:
+ar DAT_10017496;
+char DAT_10006e58;
+char *DAT_10016bdc;
+char *DAT_10016be0;
+undefined DAT_1000b46c;
+undefined DAT_1000b4a0;
+pointer moveDestHelp;
+int DAT_10006e5c;
+undefined1 DAT_10016bc8;
+char DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bc8
+Type: undefined1
+Categories: Counter/Index, Filesystem, String/Text, Unknown
+Usage count: 6
+Sample usage:
+_10006e58;
+char *DAT_10016bdc;
+char *DAT_10016be0;
+undefined DAT_1000b46c;
+undefined DAT_1000b4a0;
+pointer moveDestHelp;
+int DAT_10006e5c;
+undefined1 DAT_10016bc8;
+char DAT_10016bc8;
+undefined4 DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10016c00
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown, X11/Motif
+Usage count: 3
+Sample usage:
+16be0;
+undefined DAT_1000b46c;
+undefined DAT_1000b4a0;
+pointer moveDestHelp;
+int DAT_10006e5c;
+undefined1 DAT_10016bc8;
+char DAT_10016bc8;
+undefined4 DAT_10016c00;
+undefined4 DAT_10016c04;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016c04
+Type: undefined4
+Categories: Counter/Index, String/Text, X11/Motif
+Usage count: 3
+Sample usage:
+b46c;
+undefined DAT_1000b4a0;
+pointer moveDestHelp;
+int DAT_10006e5c;
+undefined1 DAT_10016bc8;
+char DAT_10016bc8;
+undefined4 DAT_10016c00;
+undefined4 DAT_10016c04;
+undefined4 DAT_10006e64;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016c0c
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown, X11/Motif
+Usage count: 10
+Sample usage:
+;
+int DAT_10006e5c;
+undefined1 DAT_10016bc8;
+char DAT_10016bc8;
+undefined4 DAT_10016c00;
+undefined4 DAT_10016c04;
+undefined4 DAT_10006e64;
+undefined4 DAT_10016c0c;
+int DAT_10006e60;
+undefined DAT_1000
+--------------------------------------------------------------------------------
+
+Global: DAT_10006e60
+Type: int
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 4
+Sample usage:
+;
+undefined1 DAT_10016bc8;
+char DAT_10016bc8;
+undefined4 DAT_10016c00;
+undefined4 DAT_10016c04;
+undefined4 DAT_10006e64;
+undefined4 DAT_10016c0c;
+int DAT_10006e60;
+undefined DAT_10006e94;
+char DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10006eb4
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown, X11/Motif
+Usage count: 12
+Sample usage:
+ined FUN_00420bfc;
+undefined FUN_00420c50;
+undefined FUN_00420ca4;
+undefined FUN_00420e74;
+undefined FUN_00421180;
+undefined DAT_0f6d16fc;
+undefined4 DAT_10006eb4;
+int DAT_10006eb4;
+undefined4 DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10016c08
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown, X11/Motif
+Usage count: 5
+Sample usage:
+undefined FUN_00420ca4;
+undefined FUN_00420e74;
+undefined FUN_00421180;
+undefined DAT_0f6d16fc;
+undefined4 DAT_10006eb4;
+int DAT_10006eb4;
+undefined4 DAT_10016c08;
+undefined4 DAT_10017608;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_100175f0
+Type: undefined4
+Categories: Counter/Index, Filesystem, String/Text, Unknown
+Usage count: 2
+Sample usage:
+efined DAT_0f6d16fc;
+undefined4 DAT_10006eb4;
+int DAT_10006eb4;
+undefined4 DAT_10016c08;
+undefined4 DAT_10017608;
+undefined4 DAT_1001760c;
+undefined4 DAT_100175f0;
+undefined DAT_10006ed4;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bf8
+Type: uint
+Categories: Counter/Index, String/Text, Unknown, X11/Motif
+Usage count: 7
+Sample usage:
+00175f0;
+undefined DAT_10006ed4;
+undefined DAT_10006edc;
+undefined DAT_10006ee4;
+float DAT_10016bf0;
+float DAT_10016bf4;
+undefined DAT_10006ecc;
+uint DAT_10016bf8;
+uint DAT_10016bfc;
+undefined1[112] c
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bfc
+Type: uint
+Categories: Counter/Index, String/Text, Unknown, X11/Motif
+Usage count: 8
+Sample usage:
+DAT_10006ed4;
+undefined DAT_10006edc;
+undefined DAT_10006ee4;
+float DAT_10016bf0;
+float DAT_10016bf4;
+undefined DAT_10006ecc;
+uint DAT_10016bf8;
+uint DAT_10016bfc;
+undefined1[112] contextwindows;
+unde
+--------------------------------------------------------------------------------
+
+Global: DAT_1000ba54
+Type: undefined
+Categories: Counter/Index, String/Text, X11/Motif
+Usage count: 2
+Sample usage:
+6ee4;
+float DAT_10016bf0;
+float DAT_10016bf4;
+undefined DAT_10006ecc;
+uint DAT_10016bf8;
+uint DAT_10016bfc;
+undefined1[112] contextwindows;
+undefined DAT_1000ba54;
+int DAT_10016bf8;
+int DAT_10016bfc;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10017518
+Type: float
+Categories: Counter/Index, Graphics State, String/Text
+Usage count: 9
+Sample usage:
+DAT_10006ecc;
+uint DAT_10016bf8;
+uint DAT_10016bfc;
+undefined1[112] contextwindows;
+undefined DAT_1000ba54;
+int DAT_10016bf8;
+int DAT_10016bfc;
+float DAT_10017518;
+undefined4 DAT_10016c10;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016c10
+Type: undefined4
+Categories: Counter/Index, String/Text, X11/Motif
+Usage count: 5
+Sample usage:
+016bf8;
+uint DAT_10016bfc;
+undefined1[112] contextwindows;
+undefined DAT_1000ba54;
+int DAT_10016bf8;
+int DAT_10016bfc;
+float DAT_10017518;
+undefined4 DAT_10016c10;
+undefined4 numtop;
+undefined4 DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10016c38
+Type: undefined4
+Categories: Counter/Index, String/Text, X11/Motif
+Usage count: 8
+Sample usage:
+ontextwindows;
+undefined DAT_1000ba54;
+int DAT_10016bf8;
+int DAT_10016bfc;
+float DAT_10017518;
+undefined4 DAT_10016c10;
+undefined4 numtop;
+undefined4 DAT_10016c38;
+undefined4 numcmap;
+char DAT_10006f0
+--------------------------------------------------------------------------------
+
+Global: DAT_10006f04
+Type: char
+Categories: Counter/Index, String/Text
+Usage count: 3
+Sample usage:
+int DAT_10016bf8;
+int DAT_10016bfc;
+float DAT_10017518;
+undefined4 DAT_10016c10;
+undefined4 numtop;
+undefined4 DAT_10016c38;
+undefined4 numcmap;
+char DAT_10006f04;
+undefined1 DAT_10006f00;
+int DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10006f00
+Type: undefined1
+Categories: Counter/Index, String/Text
+Usage count: 2
+Sample usage:
+_10016bfc;
+float DAT_10017518;
+undefined4 DAT_10016c10;
+undefined4 numtop;
+undefined4 DAT_10016c38;
+undefined4 numcmap;
+char DAT_10006f04;
+undefined1 DAT_10006f00;
+int DAT_10007010;
+int DAT_10007014;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10007010
+Type: int
+Categories: Counter/Index, String/Text
+Usage count: 2
+Sample usage:
+AT_10017518;
+undefined4 DAT_10016c10;
+undefined4 numtop;
+undefined4 DAT_10016c38;
+undefined4 numcmap;
+char DAT_10006f04;
+undefined1 DAT_10006f00;
+int DAT_10007010;
+int DAT_10007014;
+int DAT_1000701c;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10007014
+Type: int
+Categories: Counter/Index, String/Text
+Usage count: 2
+Sample usage:
+ined4 DAT_10016c10;
+undefined4 numtop;
+undefined4 DAT_10016c38;
+undefined4 numcmap;
+char DAT_10006f04;
+undefined1 DAT_10006f00;
+int DAT_10007010;
+int DAT_10007014;
+int DAT_1000701c;
+int DAT_10007018;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_1000701c
+Type: int
+Categories: Counter/Index, String/Text
+Usage count: 2
+Sample usage:
+;
+undefined4 numtop;
+undefined4 DAT_10016c38;
+undefined4 numcmap;
+char DAT_10006f04;
+undefined1 DAT_10006f00;
+int DAT_10007010;
+int DAT_10007014;
+int DAT_1000701c;
+int DAT_10007018;
+int DAT_10007000;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10007018
+Type: int
+Categories: Counter/Index, String/Text
+Usage count: 2
+Sample usage:
+p;
+undefined4 DAT_10016c38;
+undefined4 numcmap;
+char DAT_10006f04;
+undefined1 DAT_10006f00;
+int DAT_10007010;
+int DAT_10007014;
+int DAT_1000701c;
+int DAT_10007018;
+int DAT_10007000;
+int DAT_10007004;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10007000
+Type: int
+Categories: Counter/Index, String/Text
+Usage count: 2
+Sample usage:
+10016c38;
+undefined4 numcmap;
+char DAT_10006f04;
+undefined1 DAT_10006f00;
+int DAT_10007010;
+int DAT_10007014;
+int DAT_1000701c;
+int DAT_10007018;
+int DAT_10007000;
+int DAT_10007004;
+int DAT_1000700c;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10007004
+Type: int
+Categories: Counter/Index, String/Text
+Usage count: 2
+Sample usage:
+d4 numcmap;
+char DAT_10006f04;
+undefined1 DAT_10006f00;
+int DAT_10007010;
+int DAT_10007014;
+int DAT_1000701c;
+int DAT_10007018;
+int DAT_10007000;
+int DAT_10007004;
+int DAT_1000700c;
+int DAT_10007008;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10007904
+Type: char
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 3
+Sample usage:
+defined4 DAT_10016c70;
+int DAT_100078b0;
+undefined FUN_00428044;
+float DAT_100078fc;
+float DAT_100175c8;
+float DAT_100175c0;
+float DAT_100175d0;
+char DAT_10007904;
+pointer boxRed;
+pointer boxOrange;
+p
+--------------------------------------------------------------------------------
+
+Global: DAT_10007908
+Type: undefined
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 2
+Sample usage:
+DAT_10017624;
+undefined4 DAT_10017628;
+undefined4 DAT_1001762c;
+undefined4 DAT_10017630;
+undefined4 DAT_10017634;
+undefined4 *DAT_10017654;
+undefined DAT_10007908;
+undefined DAT_10007928;
+int DAT_1000
+--------------------------------------------------------------------------------
+
+Global: DAT_10007988
+Type: int
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 12
+Sample usage:
+efined4 DAT_1001762c;
+undefined4 DAT_10017630;
+undefined4 DAT_10017634;
+undefined4 *DAT_10017654;
+undefined DAT_10007908;
+undefined DAT_10007928;
+int DAT_10007988;
+char DAT_10017491;
+int DAT_10007990;
+--------------------------------------------------------------------------------
+
+Global: DAT_10017491
+Type: char
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 3
+Sample usage:
+c;
+undefined4 DAT_10017630;
+undefined4 DAT_10017634;
+undefined4 *DAT_10017654;
+undefined DAT_10007908;
+undefined DAT_10007928;
+int DAT_10007988;
+char DAT_10017491;
+int DAT_10007990;
+undefined4 DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10007990
+Type: int
+Categories: Counter/Index, Graphics State, String/Text, Unknown
+Usage count: 5
+Sample usage:
+10017630;
+undefined4 DAT_10017634;
+undefined4 *DAT_10017654;
+undefined DAT_10007908;
+undefined DAT_10007928;
+int DAT_10007988;
+char DAT_10017491;
+int DAT_10007990;
+undefined4 DAT_10007994;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e00
+Type: undefined4
+Categories: Counter/Index, Filesystem, String/Text
+Usage count: 2
+Sample usage:
+928;
+undefined DAT_1000e930;
+undefined editCB;
+pointer viewerHelp;
+undefined FUN_00429f60;
+undefined FUN_0042a2d8;
+undefined FUN_0042a440;
+undefined4 DAT_10016e00;
+undefined4 DAT_10016e10;
+string s_FS
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e10
+Type: undefined4
+Categories: Counter/Index, Filesystem, String/Text, X11/Motif
+Usage count: 9
+Sample usage:
+30;
+undefined editCB;
+pointer viewerHelp;
+undefined FUN_00429f60;
+undefined FUN_0042a2d8;
+undefined FUN_0042a440;
+undefined4 DAT_10016e00;
+undefined4 DAT_10016e10;
+string s_FSN_the_3D_File_System_Navi
+--------------------------------------------------------------------------------
+
+Global: DAT_10012c4c
+Type: undefined
+Categories: Counter/Index, String/Text, Unknown, X11/Motif
+Usage count: 2
+Sample usage:
+;
+undefined4 DAT_10016e24;
+pointer PTR_s_noscan_10007c30;
+pointer PTR_s_landscape_10008918;
+undefined FUN_0042b6f8;
+undefined DAT_10012c44;
+undefined DAT_10012c4c;
+undefined4 DAT_10016e20;
+undefined D
+--------------------------------------------------------------------------------
+
+Global: DAT_10008940
+Type: int
+Categories: Counter/Index, String/Text, Unknown, X11/Motif
+Usage count: 10
+Sample usage:
+
+undefined4 DAT_10016e20;
+undefined DAT_0f6d07d4;
+undefined FUN_0042caa0;
+undefined FUN_0042caec;
+undefined FUN_0042cb38;
+undefined FUN_0042cbb8;
+int DAT_10008940;
+undefined FUN_0042cc30;
+undefined FU
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e50
+Type: undefined
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 3
+Sample usage:
+R_100094ec;
+undefined DAT_100094f0;
+undefined *PTR_s_mouseSpeed_10008b5c;
+int DAT_10016e4c;
+undefined FUN_0042d28c;
+undefined FUN_0042d314;
+undefined DAT_10016e50;
+undefined DAT_10016e88;
+float DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10009528
+Type: int
+Categories: Counter/Index, Unknown
+Usage count: 7
+Sample usage:
+d_10008b5c;
+int DAT_10016e4c;
+undefined FUN_0042d28c;
+undefined FUN_0042d314;
+undefined DAT_10016e50;
+undefined DAT_10016e88;
+float DAT_100174b0;
+int DAT_10009528;
+int DAT_10009524;
+int DAT_10009520;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10009524
+Type: int
+Categories: Configuration, Counter/Index, String/Text, Unknown
+Usage count: 17
+Sample usage:
+T_10016e4c;
+undefined FUN_0042d28c;
+undefined FUN_0042d314;
+undefined DAT_10016e50;
+undefined DAT_10016e88;
+float DAT_100174b0;
+int DAT_10009528;
+int DAT_10009524;
+int DAT_10009520;
+undefined4 DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ec4
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 7
+Sample usage:
+ed FUN_0042d314;
+undefined DAT_10016e50;
+undefined DAT_10016e88;
+float DAT_100174b0;
+int DAT_10009528;
+int DAT_10009524;
+int DAT_10009520;
+undefined4 DAT_10016ec4;
+undefined4 DAT_10016ec0;
+undefined D
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ec8
+Type: int
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 7
+Sample usage:
+016ec0;
+undefined DAT_10013c40;
+pointer markHelp;
+undefined FUN_0042f4d8;
+undefined FUN_0042f5d0;
+undefined FUN_0042f73c;
+undefined FUN_0042f4b4;
+int DAT_10016ec8;
+undefined FUN_0042f66c;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10009630
+Type: int
+Categories: Counter/Index, String/Text, Unknown, X11/Motif
+Usage count: 4
+Sample usage:
+42f4d8;
+undefined FUN_0042f5d0;
+undefined FUN_0042f73c;
+undefined FUN_0042f4b4;
+int DAT_10016ec8;
+undefined FUN_0042f66c;
+undefined DAT_10013c60;
+int DAT_10009630;
+undefined DAT_10009530;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10009648
+Type: undefined
+Categories: Counter/Index, String/Text
+Usage count: 3
+Sample usage:
+42f4b4;
+int DAT_10016ec8;
+undefined FUN_0042f66c;
+undefined DAT_10013c60;
+int DAT_10009630;
+undefined DAT_10009530;
+undefined DAT_100095b0;
+undefined DAT_10009648;
+undefined DAT_1000964c;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_1000964c
+Type: undefined
+Categories: Counter/Index, String/Text
+Usage count: 3
+Sample usage:
+;
+undefined FUN_0042f66c;
+undefined DAT_10013c60;
+int DAT_10009630;
+undefined DAT_10009530;
+undefined DAT_100095b0;
+undefined DAT_10009648;
+undefined DAT_1000964c;
+undefined DAT_0fb52720;
+string s_/bi
+--------------------------------------------------------------------------------
+
+Global: DAT_10016f04
+Type: char
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 8
+Sample usage:
+;
+undefined DAT_10009648;
+undefined DAT_1000964c;
+undefined DAT_0fb52720;
+string s_/bin/sh_10009640;
+uint DAT_10016f00;
+undefined4 DAT_10016f08;
+char DAT_10016f04;
+int DAT_10016f0c;
+char DAT_10016f05;
+--------------------------------------------------------------------------------
+
+Global: DAT_10016f05
+Type: char
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 8
+Sample usage:
+AT_1000964c;
+undefined DAT_0fb52720;
+string s_/bin/sh_10009640;
+uint DAT_10016f00;
+undefined4 DAT_10016f08;
+char DAT_10016f04;
+int DAT_10016f0c;
+char DAT_10016f05;
+int DAT_10016f10;
+undefined4 firstSe
+--------------------------------------------------------------------------------
+
+Global: DAT_10016edc
+Type: int
+Categories: Counter/Index, Filesystem, String/Text, Unknown
+Usage count: 10
+Sample usage:
+
+uint DAT_10016f00;
+undefined4 DAT_10016f08;
+char DAT_10016f04;
+int DAT_10016f0c;
+char DAT_10016f05;
+int DAT_10016f10;
+undefined4 firstSearchDir;
+int DAT_10016edc;
+undefined4 lastSearchDir;
+undefined4
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ee4
+Type: undefined4
+Categories: Counter/Index, Filesystem, String/Text, Unknown
+Usage count: 5
+Sample usage:
+T_10016f10;
+undefined4 firstSearchDir;
+int DAT_10016edc;
+undefined4 lastSearchDir;
+undefined4 visitedSearchDp;
+undefined4 visitedSearchFp;
+undefined4 DAT_10016ee4;
+char *DAT_10016f08;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ee8
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 5
+Sample usage:
+T_10016edc;
+undefined4 lastSearchDir;
+undefined4 visitedSearchDp;
+undefined4 visitedSearchFp;
+undefined4 DAT_10016ee4;
+char *DAT_10016f08;
+undefined4 DAT_10016ee8;
+undefined4 DAT_10016eec;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ed8
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 6
+Sample usage:
+d DAT_10013d18;
+undefined DAT_10013d1c;
+undefined DAT_10013d20;
+undefined4 DAT_10016edc;
+undefined4 DAT_10016ed0;
+undefined4 DAT_10016ed4;
+undefined4 DAT_10016ed8;
+undefined4 DAT_10016ef0;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ef0
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 5
+Sample usage:
+ DAT_10013d1c;
+undefined DAT_10013d20;
+undefined4 DAT_10016edc;
+undefined4 DAT_10016ed0;
+undefined4 DAT_10016ed4;
+undefined4 DAT_10016ed8;
+undefined4 DAT_10016ef0;
+undefined4 DAT_10016ef4;
+undefined D
+--------------------------------------------------------------------------------
+
+Global: DAT_10013d7c
+Type: undefined
+Categories: Counter/Index, Unknown
+Usage count: 2
+Sample usage:
+efined4 DAT_10016ed8;
+undefined4 DAT_10016ef0;
+undefined4 DAT_10016ef4;
+undefined DAT_10013d30;
+pointer searchHelp;
+undefined DAT_10013d5c;
+undefined DAT_10013d7c;
+undefined DAT_10013dac;
+undefined1 D
+--------------------------------------------------------------------------------
+
+Global: DAT_10016f50
+Type: undefined
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 6
+Sample usage:
+ndefined DAT_10013f3c;
+undefined DAT_10013f40;
+undefined DAT_10013f44;
+undefined DAT_10013f48;
+pointer PTR_s__SGI_MMX_mwm_nogrmem_10009670;
+undefined DAT_10016f50;
+undefined2 DAT_10016f70;
+undefined2 
+--------------------------------------------------------------------------------
+
+Global: DAT_10017010
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 3
+Sample usage:
+rmem_10009670;
+undefined DAT_10016f50;
+undefined2 DAT_10016f70;
+undefined2 DAT_10016f72;
+undefined2 DAT_10016f74;
+undefined4 DAT_10016fd0;
+undefined4 DAT_10017010;
+undefined4 DAT_10017410;
+undefined m
+--------------------------------------------------------------------------------
+
+Global: DAT_10017410
+Type: undefined4
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 8
+Sample usage:
+DAT_10016f50;
+undefined2 DAT_10016f70;
+undefined2 DAT_10016f72;
+undefined2 DAT_10016f74;
+undefined4 DAT_10016fd0;
+undefined4 DAT_10017010;
+undefined4 DAT_10017410;
+undefined magic1;
+undefined4 magic2;
+--------------------------------------------------------------------------------
+
+Global: DAT_10009f34
+Type: undefined
+Categories: Counter/Index, String/Text
+Usage count: 2
+Sample usage:
+d_%d_%d_10009f08;
+string s_C%d_%d_%d_10009f14;
+int DAT_10017418;
+undefined DAT_10009f20;
+string s_%c%d_%s_10009f24;
+undefined DAT_10009f2c;
+undefined DAT_10009f34;
+undefined DAT_10009f3c;
+int DAT_1000
+--------------------------------------------------------------------------------
+
+Global: DAT_10009f40
+Type: int
+Categories: Counter/Index, String/Text
+Usage count: 3
+Sample usage:
+f14;
+int DAT_10017418;
+undefined DAT_10009f20;
+string s_%c%d_%s_10009f24;
+undefined DAT_10009f2c;
+undefined DAT_10009f34;
+undefined DAT_10009f3c;
+int DAT_10009f40;
+int DAT_10009e40;
+void *DAT_10017410
+--------------------------------------------------------------------------------
+
+Global: DAT_10009e40
+Type: int
+Categories: Counter/Index, Graphics State, String/Text, Unknown
+Usage count: 21
+Sample usage:
+418;
+undefined DAT_10009f20;
+string s_%c%d_%s_10009f24;
+undefined DAT_10009f2c;
+undefined DAT_10009f34;
+undefined DAT_10009f3c;
+int DAT_10009f40;
+int DAT_10009e40;
+void *DAT_10017410;
+void *DAT_100174
+--------------------------------------------------------------------------------
+
+Global: DAT_10017414
+Type: void *
+Categories: Counter/Index, String/Text, Unknown
+Usage count: 12
+Sample usage:
+%d_%s_10009f24;
+undefined DAT_10009f2c;
+undefined DAT_10009f34;
+undefined DAT_10009f3c;
+int DAT_10009f40;
+int DAT_10009e40;
+void *DAT_10017410;
+void *DAT_10017414;
+void *DAT_10017418;
+int *DAT_1001741
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Category: Filesystem (1 globals)
+================================================================================
+
+Global: DAT_100174fc
+Type: float
+Categories: Filesystem
+Usage count: 4
+Sample usage:
+d4 maxy;
+undefined4 maxShrinkage;
+float DAT_100166b0;
+undefined4 DAT_10000184;
+float DAT_100174f8;
+float DAT_100166b4;
+undefined4 DAT_1000018c;
+float DAT_100174fc;
+undefined4 DAT_100166ac;
+undefined4 
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Category: Graphics State (21 globals)
+================================================================================
+
+Global: DAT_10016670
+Type: undefined4
+Categories: Graphics State, Unknown
+Usage count: 5
+Sample usage:
+efined FUN_0040de38;
+undefined FUN_0040dee0;
+undefined FUN_0040df80;
+undefined4 DAT_10016668;
+undefined FUN_0040ef44;
+pointer sessionHelp;
+undefined4 DAT_10016670;
+undefined FUN_0040eff8;
+pointer show
+--------------------------------------------------------------------------------
+
+Global: DAT_10016674
+Type: undefined4
+Categories: Graphics State, Unknown
+Usage count: 5
+Sample usage:
+;
+undefined4 DAT_10016668;
+undefined FUN_0040ef44;
+pointer sessionHelp;
+undefined4 DAT_10016670;
+undefined FUN_0040eff8;
+pointer showHelp;
+undefined4 DAT_10016674;
+pointer displayHelp;
+undefined4 DAT_
+--------------------------------------------------------------------------------
+
+Global: DAT_10016678
+Type: undefined4
+Categories: Graphics State, Unknown
+Usage count: 5
+Sample usage:
+f44;
+pointer sessionHelp;
+undefined4 DAT_10016670;
+undefined FUN_0040eff8;
+pointer showHelp;
+undefined4 DAT_10016674;
+pointer displayHelp;
+undefined4 DAT_10016678;
+undefined4 DAT_1001666c;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_1001667c
+Type: undefined4
+Categories: Graphics State, Unknown
+Usage count: 5
+Sample usage:
+
+undefined FUN_0040eff8;
+pointer showHelp;
+undefined4 DAT_10016674;
+pointer displayHelp;
+undefined4 DAT_10016678;
+undefined4 DAT_1001666c;
+undefined4 DAT_1001667c;
+undefined4 DAT_10016680;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166b0
+Type: float
+Categories: Filesystem, Graphics State, Unknown
+Usage count: 4
+Sample usage:
+18;
+undefined4 DAT_100001fc;
+void *DAT_10000200;
+uint DAT_10016b1c;
+undefined4 maxx;
+undefined4 miny;
+undefined4 maxy;
+undefined4 maxShrinkage;
+float DAT_100166b0;
+undefined4 DAT_10000184;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100174f8
+Type: float
+Categories: Filesystem, Graphics State
+Usage count: 2
+Sample usage:
+00;
+uint DAT_10016b1c;
+undefined4 maxx;
+undefined4 miny;
+undefined4 maxy;
+undefined4 maxShrinkage;
+float DAT_100166b0;
+undefined4 DAT_10000184;
+float DAT_100174f8;
+float DAT_100166b4;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100166b4
+Type: float
+Categories: Filesystem, Graphics State
+Usage count: 4
+Sample usage:
+c;
+undefined4 maxx;
+undefined4 miny;
+undefined4 maxy;
+undefined4 maxShrinkage;
+float DAT_100166b0;
+undefined4 DAT_10000184;
+float DAT_100174f8;
+float DAT_100166b4;
+undefined4 DAT_1000018c;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10017504
+Type: float
+Categories: Filesystem, Graphics State
+Usage count: 8
+Sample usage:
+oat DAT_100166b4;
+undefined4 DAT_1000018c;
+float DAT_100174fc;
+undefined4 DAT_100166ac;
+undefined4 topdir;
+undefined4 minx;
+float DAT_1001758c;
+float DAT_10017504;
+float DAT_10017500;
+int DAT_1000018c
+--------------------------------------------------------------------------------
+
+Global: DAT_1001750c
+Type: float
+Categories: Filesystem, Graphics State
+Usage count: 2
+Sample usage:
+4fc;
+undefined4 DAT_100166ac;
+undefined4 topdir;
+undefined4 minx;
+float DAT_1001758c;
+float DAT_10017504;
+float DAT_10017500;
+int DAT_1000018c;
+float DAT_1001750c;
+undefined compare_files;
+undefined c
+--------------------------------------------------------------------------------
+
+Global: DAT_100175f8
+Type: undefined4
+Categories: Graphics State, Unknown
+Usage count: 3
+Sample usage:
+0016700;
+ushort DAT_10016704;
+ushort DAT_10016706;
+undefined chrtbl;
+undefined4 DAT_10017578;
+undefined4 DAT_10017600;
+float DAT_10017574;
+undefined4 DAT_100175f8;
+undefined4 DAT_100175fc;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100175fc
+Type: undefined4
+Categories: Filesystem, Graphics State, Unknown
+Usage count: 2
+Sample usage:
+704;
+ushort DAT_10016706;
+undefined chrtbl;
+undefined4 DAT_10017578;
+undefined4 DAT_10017600;
+float DAT_10017574;
+undefined4 DAT_100175f8;
+undefined4 DAT_100175fc;
+float DAT_1001756c;
+float DAT_100175
+--------------------------------------------------------------------------------
+
+Global: DAT_10017570
+Type: float
+Categories: Graphics State, Unknown
+Usage count: 5
+Sample usage:
+bl;
+undefined4 DAT_10017578;
+undefined4 DAT_10017600;
+float DAT_10017574;
+undefined4 DAT_100175f8;
+undefined4 DAT_100175fc;
+float DAT_1001756c;
+float DAT_10017570;
+undefined DAT_1000ae90;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_1000ae90
+Type: undefined
+Categories: Graphics State, Unknown
+Usage count: 2
+Sample usage:
+578;
+undefined4 DAT_10017600;
+float DAT_10017574;
+undefined4 DAT_100175f8;
+undefined4 DAT_100175fc;
+float DAT_1001756c;
+float DAT_10017570;
+undefined DAT_1000ae90;
+undefined DAT_1000ae94;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_1000ae94
+Type: undefined
+Categories: Graphics State, Unknown
+Usage count: 2
+Sample usage:
+7600;
+float DAT_10017574;
+undefined4 DAT_100175f8;
+undefined4 DAT_100175fc;
+float DAT_1001756c;
+float DAT_10017570;
+undefined DAT_1000ae90;
+undefined DAT_1000ae94;
+undefined DAT_1000ae98;
+undefined4 D
+--------------------------------------------------------------------------------
+
+Global: DAT_1000ae98
+Type: undefined
+Categories: Graphics State, Unknown
+Usage count: 2
+Sample usage:
+;
+undefined4 DAT_100175f8;
+undefined4 DAT_100175fc;
+float DAT_1001756c;
+float DAT_10017570;
+undefined DAT_1000ae90;
+undefined DAT_1000ae94;
+undefined DAT_1000ae98;
+undefined4 DAT_10017604;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100174f0
+Type: float
+Categories: Graphics State, Unknown
+Usage count: 2
+Sample usage:
+175fc;
+float DAT_1001756c;
+float DAT_10017570;
+undefined DAT_1000ae90;
+undefined DAT_1000ae94;
+undefined DAT_1000ae98;
+undefined4 DAT_10017604;
+float DAT_100174f0;
+float DAT_100175a0;
+char DAT_1001749
+--------------------------------------------------------------------------------
+
+Global: DAT_10017560
+Type: float
+Categories: Graphics State, Unknown
+Usage count: 3
+Sample usage:
+ined4 DAT_100174c8;
+float DAT_10017530;
+char DAT_10017495;
+float DAT_10017510;
+float DAT_10017520;
+float DAT_1001752c;
+undefined4 DAT_10017534;
+float DAT_10017560;
+undefined4 DAT_10017500;
+undefined1 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ba0
+Type: undefined4
+Categories: Graphics State, Unknown
+Usage count: 8
+Sample usage:
+10;
+float DAT_10017520;
+float DAT_1001752c;
+undefined4 DAT_10017534;
+float DAT_10017560;
+undefined4 DAT_10017500;
+undefined1 DAT_10017495;
+undefined4 DAT_10016ba0;
+undefined postMenu;
+undefined FUN_00
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b68
+Type: undefined4
+Categories: Filesystem, Graphics State, Unknown
+Usage count: 5
+Sample usage:
+undefined FUN_0041e918;
+undefined4 DAT_10016b60;
+undefined FUN_0041e988;
+pointer directoryHelp;
+undefined4 DAT_10016b64;
+pointer fileHelp;
+undefined4 DAT_10016b68;
+undefined4 DAT_10016b84;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10006ed4
+Type: undefined
+Categories: Graphics State, Unknown
+Usage count: 2
+Sample usage:
+efined4 DAT_10006eb4;
+int DAT_10006eb4;
+undefined4 DAT_10016c08;
+undefined4 DAT_10017608;
+undefined4 DAT_1001760c;
+undefined4 DAT_100175f0;
+undefined DAT_10006ed4;
+undefined DAT_10006edc;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10009e44
+Type: undefined
+Categories: Graphics State, Unknown
+Usage count: 4
+Sample usage:
+
+undefined DAT_10009f3c;
+int DAT_10009f40;
+int DAT_10009e40;
+void *DAT_10017410;
+void *DAT_10017414;
+void *DAT_10017418;
+int *DAT_10017414;
+undefined DAT_10009e44;
+
+// WARNING: Globals starting with '
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Category: String/Text (244 globals)
+================================================================================
+
+Global: DAT_100174b0
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 10
+Sample usage:
+fined DAT_1001db30;
+undefined SUB_0fb6b330;
+pointer __((offset(0x10017720))) curcontext;
+undefined4 DAT_100174a8;
+undefined4 DAT_100174ac;
+undefined4 DAT_100174b0;
+undefined4 DAT_100174b8;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_100174b8
+Type: undefined4
+Categories: String/Text
+Usage count: 9
+Sample usage:
+ined SUB_0fb6b330;
+pointer __((offset(0x10017720))) curcontext;
+undefined4 DAT_100174a8;
+undefined4 DAT_100174ac;
+undefined4 DAT_100174b0;
+undefined4 DAT_100174b8;
+undefined4 DAT_100174e0;
+int DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_100174e0
+Type: undefined4
+Categories: String/Text
+Usage count: 3
+Sample usage:
+r __((offset(0x10017720))) curcontext;
+undefined4 DAT_100174a8;
+undefined4 DAT_100174ac;
+undefined4 DAT_100174b0;
+undefined4 DAT_100174b8;
+undefined4 DAT_100174e0;
+int DAT_10017658;
+undefined4 DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10017658
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+17720))) curcontext;
+undefined4 DAT_100174a8;
+undefined4 DAT_100174ac;
+undefined4 DAT_100174b0;
+undefined4 DAT_100174b8;
+undefined4 DAT_100174e0;
+int DAT_10017658;
+undefined4 DAT_10017654;
+pointer inf
+--------------------------------------------------------------------------------
+
+Global: DAT_10017654
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 4
+Sample usage:
+fined4 DAT_100174a8;
+undefined4 DAT_100174ac;
+undefined4 DAT_100174b0;
+undefined4 DAT_100174b8;
+undefined4 DAT_100174e0;
+int DAT_10017658;
+undefined4 DAT_10017654;
+pointer infoHelp;
+undefined DAT_0e3d
+--------------------------------------------------------------------------------
+
+Global: DAT_0e3d4160
+Type: undefined
+Categories: String/Text, Unknown, X11/Motif
+Usage count: 2
+Sample usage:
+ac;
+undefined4 DAT_100174b0;
+undefined4 DAT_100174b8;
+undefined4 DAT_100174e0;
+int DAT_10017658;
+undefined4 DAT_10017654;
+pointer infoHelp;
+undefined DAT_0e3d4160;
+undefined DAT_0e210e90;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_0e210e90
+Type: undefined
+Categories: Graphics State, String/Text, Unknown, X11/Motif
+Usage count: 2
+Sample usage:
+4b0;
+undefined4 DAT_100174b8;
+undefined4 DAT_100174e0;
+int DAT_10017658;
+undefined4 DAT_10017654;
+pointer infoHelp;
+undefined DAT_0e3d4160;
+undefined DAT_0e210e90;
+undefined DAT_0e3d331c;
+undefined4 D
+--------------------------------------------------------------------------------
+
+Global: DAT_0e3d331c
+Type: undefined
+Categories: String/Text, Unknown, X11/Motif
+Usage count: 4
+Sample usage:
+74b8;
+undefined4 DAT_100174e0;
+int DAT_10017658;
+undefined4 DAT_10017654;
+pointer infoHelp;
+undefined DAT_0e3d4160;
+undefined DAT_0e210e90;
+undefined DAT_0e3d331c;
+undefined4 DAT_10016634;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016634
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown
+Usage count: 4
+Sample usage:
+74e0;
+int DAT_10017658;
+undefined4 DAT_10017654;
+pointer infoHelp;
+undefined DAT_0e3d4160;
+undefined DAT_0e210e90;
+undefined DAT_0e3d331c;
+undefined4 DAT_10016634;
+undefined4 DAT_100000a4;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_100000a4
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown, X11/Motif
+Usage count: 4
+Sample usage:
+ndefined4 DAT_10017654;
+pointer infoHelp;
+undefined DAT_0e3d4160;
+undefined DAT_0e210e90;
+undefined DAT_0e3d331c;
+undefined4 DAT_10016634;
+undefined4 DAT_100000a4;
+undefined4 DAT_1001664c;
+undefined F
+--------------------------------------------------------------------------------
+
+Global: DAT_1001664c
+Type: undefined4
+Categories: String/Text, Unknown, X11/Motif
+Usage count: 5
+Sample usage:
+ointer infoHelp;
+undefined DAT_0e3d4160;
+undefined DAT_0e210e90;
+undefined DAT_0e3d331c;
+undefined4 DAT_10016634;
+undefined4 DAT_100000a4;
+undefined4 DAT_1001664c;
+undefined FUN_0040bc64;
+undefined FU
+--------------------------------------------------------------------------------
+
+Global: DAT_0e3d8f04
+Type: undefined
+Categories: Graphics State, String/Text, X11/Motif
+Usage count: 4
+Sample usage:
+ter __((offset(0x10018fd0))) curcontextwindows;
+undefined4 blankXmString;
+undefined4 curcontextid;
+pointer glHelp;
+undefined4 lhLabelColor;
+undefined DAT_0e3d8f04;
+undefined4 display;
+char DAT_1001749
+--------------------------------------------------------------------------------
+
+Global: DAT_0e3d4f98
+Type: undefined
+Categories: Graphics State, String/Text, X11/Motif
+Usage count: 3
+Sample usage:
+kXmString;
+undefined4 curcontextid;
+pointer glHelp;
+undefined4 lhLabelColor;
+undefined DAT_0e3d8f04;
+undefined4 display;
+char DAT_10017498;
+undefined DAT_0e3d4f98;
+undefined *fallback_resources;
+strin
+--------------------------------------------------------------------------------
+
+Global: DAT_10016660
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown, X11/Motif
+Usage count: 17
+Sample usage:
+ DAT_0e3d8f04;
+undefined4 display;
+char DAT_10017498;
+undefined DAT_0e3d4f98;
+undefined *fallback_resources;
+string glwidget_translations;
+undefined4 DAT_10016660;
+undefined4 DAT_1001665c;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016664
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown, X11/Motif
+Usage count: 11
+Sample usage:
+98;
+undefined DAT_0e3d4f98;
+undefined *fallback_resources;
+string glwidget_translations;
+undefined4 DAT_10016660;
+undefined4 DAT_1001665c;
+undefined4 DAT_10016664;
+undefined4 DAT_10016648;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016648
+Type: undefined4
+Categories: Graphics State, String/Text, X11/Motif
+Usage count: 11
+Sample usage:
+8;
+undefined *fallback_resources;
+string glwidget_translations;
+undefined4 DAT_10016660;
+undefined4 DAT_1001665c;
+undefined4 DAT_10016664;
+undefined4 DAT_10016648;
+undefined4 DAT_10016650;
+undefined D
+--------------------------------------------------------------------------------
+
+Global: DAT_10016650
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown, X11/Motif
+Usage count: 9
+Sample usage:
+sources;
+string glwidget_translations;
+undefined4 DAT_10016660;
+undefined4 DAT_1001665c;
+undefined4 DAT_10016664;
+undefined4 DAT_10016648;
+undefined4 DAT_10016650;
+undefined DAT_0e3d616c;
+char DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_0e3d616c
+Type: undefined
+Categories: String/Text, Unknown, X11/Motif
+Usage count: 3
+Sample usage:
+_translations;
+undefined4 DAT_10016660;
+undefined4 DAT_1001665c;
+undefined4 DAT_10016664;
+undefined4 DAT_10016648;
+undefined4 DAT_10016650;
+undefined DAT_0e3d616c;
+char DAT_10016688;
+undefined DAT_0e3
+--------------------------------------------------------------------------------
+
+Global: DAT_10000024
+Type: undefined
+Categories: String/Text, X11/Motif
+Usage count: 3
+Sample usage:
+defined4 DAT_10016664;
+undefined4 DAT_10016648;
+undefined4 DAT_10016650;
+undefined DAT_0e3d616c;
+char DAT_10016688;
+undefined DAT_0e3f2368;
+undefined DAT_10000024;
+pointer PTR_s_-landscape_100000e0;
+p
+--------------------------------------------------------------------------------
+
+Global: DAT_1000a178
+Type: undefined
+Categories: String/Text, X11/Motif
+Usage count: 3
+Sample usage:
+T_10016688;
+undefined DAT_0e3f2368;
+undefined DAT_10000024;
+pointer PTR_s_-landscape_100000e0;
+pointer __((offset(0x10018374))) altcontext;
+undefined DAT_1000a178;
+undefined DAT_1000a2fc;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_1000a2fc
+Type: undefined
+Categories: Graphics State, String/Text, X11/Motif
+Usage count: 3
+Sample usage:
+T_0e3f2368;
+undefined DAT_10000024;
+pointer PTR_s_-landscape_100000e0;
+pointer __((offset(0x10018374))) altcontext;
+undefined DAT_1000a178;
+undefined DAT_1000a2fc;
+undefined DAT_1000a300;
+undefined FU
+--------------------------------------------------------------------------------
+
+Global: DAT_1000a300
+Type: undefined
+Categories: Graphics State, String/Text, X11/Motif
+Usage count: 3
+Sample usage:
+T_10000024;
+pointer PTR_s_-landscape_100000e0;
+pointer __((offset(0x10018374))) altcontext;
+undefined DAT_1000a178;
+undefined DAT_1000a2fc;
+undefined DAT_1000a300;
+undefined FUN_0040eef0;
+pointer topH
+--------------------------------------------------------------------------------
+
+Global: DAT_1000a384
+Type: undefined
+Categories: String/Text, X11/Motif
+Usage count: 3
+Sample usage:
+(0x10018374))) altcontext;
+undefined DAT_1000a178;
+undefined DAT_1000a2fc;
+undefined DAT_1000a300;
+undefined FUN_0040eef0;
+pointer topHelp;
+undefined DAT_1000a384;
+pointer messageHelp;
+undefined4 app_
+--------------------------------------------------------------------------------
+
+Global: DAT_10016638
+Type: undefined4
+Categories: String/Text
+Usage count: 2
+Sample usage:
+_context;
+undefined4 emptyXmString;
+undefined4 toplevel;
+undefined1 initialLegend;
+undefined1 initialOverview;
+undefined1 initialControls;
+undefined4 DAT_10016638;
+undefined4 overlayHighlightColor;
+in
+--------------------------------------------------------------------------------
+
+Global: DAT_10017598
+Type: float
+Categories: Filesystem, Graphics State, String/Text, Unknown
+Usage count: 10
+Sample usage:
+tialOverview;
+undefined1 initialControls;
+undefined4 DAT_10016638;
+undefined4 overlayHighlightColor;
+int DAT_10000144;
+undefined1 DAT_10016688;
+float DAT_10017598;
+float DAT_10017594;
+float DAT_100174
+--------------------------------------------------------------------------------
+
+Global: DAT_10017594
+Type: float
+Categories: Filesystem, Graphics State, String/Text, Unknown
+Usage count: 10
+Sample usage:
+ned1 initialControls;
+undefined4 DAT_10016638;
+undefined4 overlayHighlightColor;
+int DAT_10000144;
+undefined1 DAT_10016688;
+float DAT_10017598;
+float DAT_10017594;
+float DAT_100174a8;
+float DAT_100174
+--------------------------------------------------------------------------------
+
+Global: DAT_100174bc
+Type: float
+Categories: String/Text, Unknown
+Usage count: 4
+Sample usage:
+erlayHighlightColor;
+int DAT_10000144;
+undefined1 DAT_10016688;
+float DAT_10017598;
+float DAT_10017594;
+float DAT_100174a8;
+float DAT_100174ac;
+float DAT_100174bc;
+float DAT_100174c0;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100174c0
+Type: float
+Categories: String/Text, Unknown
+Usage count: 4
+Sample usage:
+
+int DAT_10000144;
+undefined1 DAT_10016688;
+float DAT_10017598;
+float DAT_10017594;
+float DAT_100174a8;
+float DAT_100174ac;
+float DAT_100174bc;
+float DAT_100174c0;
+undefined4 DAT_10016644;
+undefined F
+--------------------------------------------------------------------------------
+
+Global: DAT_10016640
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 6
+Sample usage:
+
+undefined FUN_0040d9a8;
+undefined DAT_1000a460;
+undefined FUN_0040da14;
+pointer controlHelp;
+undefined FUN_0041069c;
+undefined reset_eye;
+undefined4 DAT_10016640;
+short DAT_10000148;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10000148
+Type: short
+Categories: String/Text
+Usage count: 3
+Sample usage:
+9a8;
+undefined DAT_1000a460;
+undefined FUN_0040da14;
+pointer controlHelp;
+undefined FUN_0041069c;
+undefined reset_eye;
+undefined4 DAT_10016640;
+short DAT_10000148;
+undefined4 DAT_1001663c;
+short DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_1001663c
+Type: undefined4
+Categories: String/Text
+Usage count: 2
+Sample usage:
+60;
+undefined FUN_0040da14;
+pointer controlHelp;
+undefined FUN_0041069c;
+undefined reset_eye;
+undefined4 DAT_10016640;
+short DAT_10000148;
+undefined4 DAT_1001663c;
+short DAT_1000014c;
+undefined1 contr
+--------------------------------------------------------------------------------
+
+Global: DAT_1000014c
+Type: short
+Categories: String/Text
+Usage count: 3
+Sample usage:
+40da14;
+pointer controlHelp;
+undefined FUN_0041069c;
+undefined reset_eye;
+undefined4 DAT_10016640;
+short DAT_10000148;
+undefined4 DAT_1001663c;
+short DAT_1000014c;
+undefined1 controlsShowing;
+undefine
+--------------------------------------------------------------------------------
+
+Global: DAT_100176e4
+Type: undefined
+Categories: String/Text, X11/Motif
+Usage count: 2
+Sample usage:
+ined4 DAT_1001663c;
+short DAT_1000014c;
+undefined1 controlsShowing;
+undefined4 labelColors;
+undefined4 monitorLabelColor;
+int DAT_10016654;
+undefined DAT_100176e4;
+pointer legendHelp;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10016658
+Type: undefined4
+Categories: String/Text, Unknown, X11/Motif
+Usage count: 5
+Sample usage:
+ined1 controlsShowing;
+undefined4 labelColors;
+undefined4 monitorLabelColor;
+int DAT_10016654;
+undefined DAT_100176e4;
+pointer legendHelp;
+undefined4 DAT_10016658;
+undefined4 monitorLabelWidget;
+undef
+--------------------------------------------------------------------------------
+
+Global: DAT_10016668
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown
+Usage count: 5
+Sample usage:
+PreferencePanel;
+undefined rescanDatabase;
+undefined FUN_0040da94;
+undefined FUN_0040de38;
+undefined FUN_0040dee0;
+undefined FUN_0040df80;
+undefined4 DAT_10016668;
+undefined FUN_0040ef44;
+pointer sess
+--------------------------------------------------------------------------------
+
+Global: DAT_1001666c
+Type: undefined4
+Categories: Filesystem, Graphics State, String/Text, Unknown
+Usage count: 5
+Sample usage:
+
+undefined4 DAT_10016670;
+undefined FUN_0040eff8;
+pointer showHelp;
+undefined4 DAT_10016674;
+pointer displayHelp;
+undefined4 DAT_10016678;
+undefined4 DAT_1001666c;
+undefined4 DAT_1001667c;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016680
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown
+Usage count: 5
+Sample usage:
+pointer showHelp;
+undefined4 DAT_10016674;
+pointer displayHelp;
+undefined4 DAT_10016678;
+undefined4 DAT_1001666c;
+undefined4 DAT_1001667c;
+undefined4 DAT_10016680;
+undefined4 DAT_10016684;
+undefined s
+--------------------------------------------------------------------------------
+
+Global: DAT_10016684
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown
+Usage count: 5
+Sample usage:
+ed4 DAT_10016674;
+pointer displayHelp;
+undefined4 DAT_10016678;
+undefined4 DAT_1001666c;
+undefined4 DAT_1001667c;
+undefined4 DAT_10016680;
+undefined4 DAT_10016684;
+undefined showOverview;
+undefined hi
+--------------------------------------------------------------------------------
+
+Global: DAT_1000015c
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown
+Usage count: 7
+Sample usage:
+eOverview;
+undefined FUN_004115f8;
+undefined4 displayHeight;
+undefined4 displayDirectoryHeight;
+int DAT_10000154;
+undefined4 DAT_10000158;
+undefined4 DAT_1000015c;
+undefined DAT_10000160;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10000160
+Type: undefined
+Categories: Graphics State, String/Text, Unknown
+Usage count: 2
+Sample usage:
+_004115f8;
+undefined4 displayHeight;
+undefined4 displayDirectoryHeight;
+int DAT_10000154;
+undefined4 DAT_10000158;
+undefined4 DAT_1000015c;
+undefined DAT_10000160;
+undefined DAT_10000164;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10000164
+Type: undefined
+Categories: Graphics State, String/Text, Unknown
+Usage count: 2
+Sample usage:
+splayHeight;
+undefined4 displayDirectoryHeight;
+int DAT_10000154;
+undefined4 DAT_10000158;
+undefined4 DAT_1000015c;
+undefined DAT_10000160;
+undefined DAT_10000164;
+undefined DAT_10000168;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10000168
+Type: undefined
+Categories: Graphics State, String/Text, Unknown
+Usage count: 2
+Sample usage:
+displayDirectoryHeight;
+int DAT_10000154;
+undefined4 DAT_10000158;
+undefined4 DAT_1000015c;
+undefined DAT_10000160;
+undefined DAT_10000164;
+undefined DAT_10000168;
+undefined DAT_1000016c;
+undefined FU
+--------------------------------------------------------------------------------
+
+Global: DAT_1000016c
+Type: undefined
+Categories: Graphics State, String/Text, Unknown
+Usage count: 2
+Sample usage:
+int DAT_10000154;
+undefined4 DAT_10000158;
+undefined4 DAT_1000015c;
+undefined DAT_10000160;
+undefined DAT_10000164;
+undefined DAT_10000168;
+undefined DAT_1000016c;
+undefined FUN_0040f20c;
+float DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_100174a0
+Type: float
+Categories: Graphics State, String/Text, Unknown
+Usage count: 7
+Sample usage:
+000160;
+undefined DAT_10000164;
+undefined DAT_10000168;
+undefined DAT_1000016c;
+undefined FUN_0040f20c;
+float DAT_10000158;
+float DAT_1000015c;
+float DAT_100174a0;
+float DAT_100165b4;
+undefined2 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100165b4
+Type: float
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+T_10000164;
+undefined DAT_10000168;
+undefined DAT_1000016c;
+undefined FUN_0040f20c;
+float DAT_10000158;
+float DAT_1000015c;
+float DAT_100174a0;
+float DAT_100165b4;
+undefined2 DAT_100165b8;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_100165b8
+Type: undefined2
+Categories: Graphics State, String/Text, Unknown
+Usage count: 3
+Sample usage:
+_10000168;
+undefined DAT_1000016c;
+undefined FUN_0040f20c;
+float DAT_10000158;
+float DAT_1000015c;
+float DAT_100174a0;
+float DAT_100165b4;
+undefined2 DAT_100165b8;
+undefined4 DAT_100165b0;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100165c4
+Type: float
+Categories: Graphics State, String/Text, Unknown
+Usage count: 4
+Sample usage:
+FUN_0040f20c;
+float DAT_10000158;
+float DAT_1000015c;
+float DAT_100174a0;
+float DAT_100165b4;
+undefined2 DAT_100165b8;
+undefined4 DAT_100165b0;
+float DAT_100165c4;
+float DAT_100165cc;
+undefined2 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100165cc
+Type: float
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+DAT_10000158;
+float DAT_1000015c;
+float DAT_100174a0;
+float DAT_100165b4;
+undefined2 DAT_100165b8;
+undefined4 DAT_100165b0;
+float DAT_100165c4;
+float DAT_100165cc;
+undefined2 DAT_100165c8;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_100165c8
+Type: undefined2
+Categories: Graphics State, String/Text, Unknown
+Usage count: 3
+Sample usage:
+000015c;
+float DAT_100174a0;
+float DAT_100165b4;
+undefined2 DAT_100165b8;
+undefined4 DAT_100165b0;
+float DAT_100165c4;
+float DAT_100165cc;
+undefined2 DAT_100165c8;
+undefined4 DAT_100165c0;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100165d4
+Type: float
+Categories: Graphics State, String/Text, Unknown
+Usage count: 4
+Sample usage:
+b4;
+undefined2 DAT_100165b8;
+undefined4 DAT_100165b0;
+float DAT_100165c4;
+float DAT_100165cc;
+undefined2 DAT_100165c8;
+undefined4 DAT_100165c0;
+float DAT_100165d4;
+float DAT_100165dc;
+undefined2 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100165dc
+Type: float
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+00165b8;
+undefined4 DAT_100165b0;
+float DAT_100165c4;
+float DAT_100165cc;
+undefined2 DAT_100165c8;
+undefined4 DAT_100165c0;
+float DAT_100165d4;
+float DAT_100165dc;
+undefined2 DAT_100165d8;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_100165d8
+Type: undefined2
+Categories: Graphics State, String/Text, Unknown
+Usage count: 3
+Sample usage:
+00165b0;
+float DAT_100165c4;
+float DAT_100165cc;
+undefined2 DAT_100165c8;
+undefined4 DAT_100165c0;
+float DAT_100165d4;
+float DAT_100165dc;
+undefined2 DAT_100165d8;
+undefined4 DAT_100165d0;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100165ec
+Type: float
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+cc;
+undefined2 DAT_100165c8;
+undefined4 DAT_100165c0;
+float DAT_100165d4;
+float DAT_100165dc;
+undefined2 DAT_100165d8;
+undefined4 DAT_100165d0;
+float DAT_100165ec;
+undefined DAT_100165e0;
+undefined4 D
+--------------------------------------------------------------------------------
+
+Global: DAT_10017492
+Type: char
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+undefined2 DAT_100165d8;
+undefined4 DAT_100165d0;
+float DAT_100165ec;
+undefined DAT_100165e0;
+undefined4 DAT_10017610;
+undefined FUN_0040fbb0;
+char DAT_10017492;
+undefined4 DAT_100165f0;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100165f0
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 3
+Sample usage:
+;
+undefined4 DAT_100165d0;
+float DAT_100165ec;
+undefined DAT_100165e0;
+undefined4 DAT_10017610;
+undefined FUN_0040fbb0;
+char DAT_10017492;
+undefined4 DAT_100165f0;
+float DAT_100165f4;
+float DAT_100165
+--------------------------------------------------------------------------------
+
+Global: DAT_100165f4
+Type: float
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+165d0;
+float DAT_100165ec;
+undefined DAT_100165e0;
+undefined4 DAT_10017610;
+undefined FUN_0040fbb0;
+char DAT_10017492;
+undefined4 DAT_100165f0;
+float DAT_100165f4;
+float DAT_100165f8;
+short DAT_100166
+--------------------------------------------------------------------------------
+
+Global: DAT_100165f8
+Type: float
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+165ec;
+undefined DAT_100165e0;
+undefined4 DAT_10017610;
+undefined FUN_0040fbb0;
+char DAT_10017492;
+undefined4 DAT_100165f0;
+float DAT_100165f4;
+float DAT_100165f8;
+short DAT_10016608;
+short DAT_100166
+--------------------------------------------------------------------------------
+
+Global: DAT_10016608
+Type: short
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+_100165e0;
+undefined4 DAT_10017610;
+undefined FUN_0040fbb0;
+char DAT_10017492;
+undefined4 DAT_100165f0;
+float DAT_100165f4;
+float DAT_100165f8;
+short DAT_10016608;
+short DAT_1001660a;
+undefined1 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_1001660a
+Type: short
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+4 DAT_10017610;
+undefined FUN_0040fbb0;
+char DAT_10017492;
+undefined4 DAT_100165f0;
+float DAT_100165f4;
+float DAT_100165f8;
+short DAT_10016608;
+short DAT_1001660a;
+undefined1 DAT_1001660c;
+undefined1 
+--------------------------------------------------------------------------------
+
+Global: DAT_1001660c
+Type: undefined1
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ FUN_0040fbb0;
+char DAT_10017492;
+undefined4 DAT_100165f0;
+float DAT_100165f4;
+float DAT_100165f8;
+short DAT_10016608;
+short DAT_1001660a;
+undefined1 DAT_1001660c;
+undefined1 DAT_1001660d;
+undefined1 
+--------------------------------------------------------------------------------
+
+Global: DAT_1001660d
+Type: undefined1
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+0017492;
+undefined4 DAT_100165f0;
+float DAT_100165f4;
+float DAT_100165f8;
+short DAT_10016608;
+short DAT_1001660a;
+undefined1 DAT_1001660c;
+undefined1 DAT_1001660d;
+undefined1 DAT_1001660e;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_1001660e
+Type: undefined1
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+00165f0;
+float DAT_100165f4;
+float DAT_100165f8;
+short DAT_10016608;
+short DAT_1001660a;
+undefined1 DAT_1001660c;
+undefined1 DAT_1001660d;
+undefined1 DAT_1001660e;
+undefined4 DAT_1001661c;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016610
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ DAT_1001660d;
+undefined1 DAT_1001660e;
+undefined4 DAT_1001661c;
+undefined4 DAT_10016620;
+undefined4 DAT_100174e8;
+undefined4 DAT_10016618;
+undefined DAT_10016610;
+undefined FUN_00410858;
+int DAT_1001
+--------------------------------------------------------------------------------
+
+Global: DAT_10000020
+Type: undefined4 *
+Categories: String/Text, Unknown, X11/Motif
+Usage count: 11
+Sample usage:
+20;
+undefined4 DAT_100174e8;
+undefined4 DAT_10016618;
+undefined DAT_10016610;
+undefined FUN_00410858;
+int DAT_10016624;
+int DAT_10016628;
+undefined4 *DAT_10000020;
+undefined deleteMessage;
+undefined F
+--------------------------------------------------------------------------------
+
+Global: DAT_10000170
+Type: char
+Categories: String/Text, Unknown
+Usage count: 3
+Sample usage:
+0020;
+undefined deleteMessage;
+undefined FUN_00410f30;
+undefined4 DAT_1001662c;
+undefined4 DAT_10016630;
+float DAT_10016630;
+float DAT_1001662c;
+char DAT_10000170;
+pointer __((offset(0x10019008))) alt
+--------------------------------------------------------------------------------
+
+Global: DAT_10017500
+Type: float
+Categories: Filesystem, Graphics State, String/Text, Unknown
+Usage count: 32
+Sample usage:
+defined4 DAT_1000018c;
+float DAT_100174fc;
+undefined4 DAT_100166ac;
+undefined4 topdir;
+undefined4 minx;
+float DAT_1001758c;
+float DAT_10017504;
+float DAT_10017500;
+int DAT_1000018c;
+float DAT_1001750c
+--------------------------------------------------------------------------------
+
+Global: DAT_100175ac
+Type: char *
+Categories: Filesystem, String/Text, Unknown
+Usage count: 31
+Sample usage:
+efined compare_dirs;
+undefined1[16] fstyp;
+undefined4 localFlag;
+int DAT_100166b8;
+int DAT_10000184;
+char DAT_10017493;
+undefined DAT_0fb51f00;
+char *DAT_100175ac;
+undefined1 overviewActive;
+char DAT_
+--------------------------------------------------------------------------------
+
+Global: DAT_10017497
+Type: char
+Categories: Filesystem, String/Text, Unknown
+Usage count: 2
+Sample usage:
+efined4 localFlag;
+int DAT_100166b8;
+int DAT_10000184;
+char DAT_10017493;
+undefined DAT_0fb51f00;
+char *DAT_100175ac;
+undefined1 overviewActive;
+char DAT_10017497;
+char *DAT_100175b0;
+undefined1 fsn_r
+--------------------------------------------------------------------------------
+
+Global: DAT_100175b0
+Type: char *
+Categories: Filesystem, String/Text, Unknown
+Usage count: 32
+Sample usage:
+nt DAT_100166b8;
+int DAT_10000184;
+char DAT_10017493;
+undefined DAT_0fb51f00;
+char *DAT_100175ac;
+undefined1 overviewActive;
+char DAT_10017497;
+char *DAT_100175b0;
+undefined1 fsn_resources;
+undefined 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166cc
+Type: uint
+Categories: Configuration, String/Text, Unknown
+Usage count: 7
+Sample usage:
+ve;
+char DAT_10017497;
+char *DAT_100175b0;
+undefined1 fsn_resources;
+undefined databaseDumpTimeout;
+undefined4 DAT_100166b8;
+FILE *DAT_10016690;
+uint DAT_100166cc;
+int *DAT_10016690;
+undefined4 vinfop
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b24
+Type: ushort
+Categories: Filesystem, String/Text
+Usage count: 4
+Sample usage:
+esources;
+undefined databaseDumpTimeout;
+undefined4 DAT_100166b8;
+FILE *DAT_10016690;
+uint DAT_100166cc;
+int *DAT_10016690;
+undefined4 vinfop;
+ushort DAT_10016b24;
+undefined DAT_10016b20;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b20
+Type: undefined
+Categories: Filesystem, String/Text
+Usage count: 2
+Sample usage:
+baseDumpTimeout;
+undefined4 DAT_100166b8;
+FILE *DAT_10016690;
+uint DAT_100166cc;
+int *DAT_10016690;
+undefined4 vinfop;
+ushort DAT_10016b24;
+undefined DAT_10016b20;
+undefined DAT_10016698;
+ushort DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10016698
+Type: undefined
+Categories: Filesystem, String/Text
+Usage count: 2
+Sample usage:
+ed4 DAT_100166b8;
+FILE *DAT_10016690;
+uint DAT_100166cc;
+int *DAT_10016690;
+undefined4 vinfop;
+ushort DAT_10016b24;
+undefined DAT_10016b20;
+undefined DAT_10016698;
+ushort DAT_100166a4;
+ushort DAT_1001
+--------------------------------------------------------------------------------
+
+Global: DAT_100166a4
+Type: ushort
+Categories: Filesystem, String/Text, Unknown
+Usage count: 4
+Sample usage:
+E *DAT_10016690;
+uint DAT_100166cc;
+int *DAT_10016690;
+undefined4 vinfop;
+ushort DAT_10016b24;
+undefined DAT_10016b20;
+undefined DAT_10016698;
+ushort DAT_100166a4;
+ushort DAT_100166a6;
+undefined1[6312
+--------------------------------------------------------------------------------
+
+Global: DAT_100166a6
+Type: ushort
+Categories: Filesystem, String/Text, Unknown
+Usage count: 5
+Sample usage:
+ DAT_100166cc;
+int *DAT_10016690;
+undefined4 vinfop;
+ushort DAT_10016b24;
+undefined DAT_10016b20;
+undefined DAT_10016698;
+ushort DAT_100166a4;
+ushort DAT_100166a6;
+undefined1[6312] context;
+undefined4
+--------------------------------------------------------------------------------
+
+Global: DAT_100166c0
+Type: undefined4
+Categories: String/Text
+Usage count: 2
+Sample usage:
+;
+ushort DAT_10016b24;
+undefined DAT_10016b20;
+undefined DAT_10016698;
+ushort DAT_100166a4;
+ushort DAT_100166a6;
+undefined1[6312] context;
+undefined4 DAT_100166c0;
+undefined2 DAT_100166c4;
+undefined2 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166c4
+Type: undefined2
+Categories: String/Text
+Usage count: 2
+Sample usage:
+defined DAT_10016b20;
+undefined DAT_10016698;
+ushort DAT_100166a4;
+ushort DAT_100166a6;
+undefined1[6312] context;
+undefined4 DAT_100166c0;
+undefined2 DAT_100166c4;
+undefined2 DAT_100166c6;
+undefined2 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166c6
+Type: undefined2
+Categories: String/Text
+Usage count: 2
+Sample usage:
+efined DAT_10016698;
+ushort DAT_100166a4;
+ushort DAT_100166a6;
+undefined1[6312] context;
+undefined4 DAT_100166c0;
+undefined2 DAT_100166c4;
+undefined2 DAT_100166c6;
+undefined2 DAT_100166c8;
+undefined1 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166c8
+Type: undefined2
+Categories: String/Text
+Usage count: 2
+Sample usage:
+rt DAT_100166a4;
+ushort DAT_100166a6;
+undefined1[6312] context;
+undefined4 DAT_100166c0;
+undefined2 DAT_100166c4;
+undefined2 DAT_100166c6;
+undefined2 DAT_100166c8;
+undefined1 DAT_100166ca;
+byte DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_100166ca
+Type: undefined1
+Categories: String/Text
+Usage count: 2
+Sample usage:
+AT_100166a6;
+undefined1[6312] context;
+undefined4 DAT_100166c0;
+undefined2 DAT_100166c4;
+undefined2 DAT_100166c6;
+undefined2 DAT_100166c8;
+undefined1 DAT_100166ca;
+byte DAT_100166cb;
+undefined4 DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_100166d0
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ined4 DAT_100166c0;
+undefined2 DAT_100166c4;
+undefined2 DAT_100166c6;
+undefined2 DAT_100166c8;
+undefined1 DAT_100166ca;
+byte DAT_100166cb;
+undefined4 DAT_100166d0;
+undefined4 DAT_100166d4;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166d4
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ined2 DAT_100166c4;
+undefined2 DAT_100166c6;
+undefined2 DAT_100166c8;
+undefined1 DAT_100166ca;
+byte DAT_100166cb;
+undefined4 DAT_100166d0;
+undefined4 DAT_100166d4;
+undefined4 DAT_100166d8;
+undefined2 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166d8
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ined2 DAT_100166c6;
+undefined2 DAT_100166c8;
+undefined1 DAT_100166ca;
+byte DAT_100166cb;
+undefined4 DAT_100166d0;
+undefined4 DAT_100166d4;
+undefined4 DAT_100166d8;
+undefined2 DAT_100166dc;
+undefined2 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166dc
+Type: undefined2
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ined2 DAT_100166c8;
+undefined1 DAT_100166ca;
+byte DAT_100166cb;
+undefined4 DAT_100166d0;
+undefined4 DAT_100166d4;
+undefined4 DAT_100166d8;
+undefined2 DAT_100166dc;
+undefined2 DAT_100166de;
+undefined1 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166de
+Type: undefined2
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ined1 DAT_100166ca;
+byte DAT_100166cb;
+undefined4 DAT_100166d0;
+undefined4 DAT_100166d4;
+undefined4 DAT_100166d8;
+undefined2 DAT_100166dc;
+undefined2 DAT_100166de;
+undefined1 DAT_100166e0;
+undefined1 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166e0
+Type: undefined1
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+DAT_100166cb;
+undefined4 DAT_100166d0;
+undefined4 DAT_100166d4;
+undefined4 DAT_100166d8;
+undefined2 DAT_100166dc;
+undefined2 DAT_100166de;
+undefined1 DAT_100166e0;
+undefined1 DAT_100166f3;
+uint DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_100166ec
+Type: ushort
+Categories: Filesystem, String/Text, Unknown
+Usage count: 4
+Sample usage:
+ndefined4 DAT_100166d8;
+undefined2 DAT_100166dc;
+undefined2 DAT_100166de;
+undefined1 DAT_100166e0;
+undefined1 DAT_100166f3;
+uint DAT_100166e8;
+ushort DAT_100166ec;
+undefined2 DAT_100166ee;
+undefined2 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016706
+Type: ushort
+Categories: Filesystem, String/Text, Unknown
+Usage count: 6
+Sample usage:
+0;
+undefined1 DAT_100166f2;
+undefined1 DAT_10016708;
+undefined4 DAT_100166f8;
+undefined4 DAT_100166fc;
+uint DAT_10016700;
+ushort DAT_10016704;
+ushort DAT_10016706;
+undefined chrtbl;
+undefined4 DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10017578
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown
+Usage count: 3
+Sample usage:
+10016708;
+undefined4 DAT_100166f8;
+undefined4 DAT_100166fc;
+uint DAT_10016700;
+ushort DAT_10016704;
+ushort DAT_10016706;
+undefined chrtbl;
+undefined4 DAT_10017578;
+undefined4 DAT_10017600;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10017600
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown
+Usage count: 2
+Sample usage:
+100166f8;
+undefined4 DAT_100166fc;
+uint DAT_10016700;
+ushort DAT_10016704;
+ushort DAT_10016706;
+undefined chrtbl;
+undefined4 DAT_10017578;
+undefined4 DAT_10017600;
+float DAT_10017574;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10017574
+Type: float
+Categories: Graphics State, String/Text, Unknown
+Usage count: 5
+Sample usage:
+ DAT_100166fc;
+uint DAT_10016700;
+ushort DAT_10016704;
+ushort DAT_10016706;
+undefined chrtbl;
+undefined4 DAT_10017578;
+undefined4 DAT_10017600;
+float DAT_10017574;
+undefined4 DAT_100175f8;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_1001756c
+Type: float
+Categories: Graphics State, String/Text, Unknown
+Usage count: 7
+Sample usage:
+6706;
+undefined chrtbl;
+undefined4 DAT_10017578;
+undefined4 DAT_10017600;
+float DAT_10017574;
+undefined4 DAT_100175f8;
+undefined4 DAT_100175fc;
+float DAT_1001756c;
+float DAT_10017570;
+undefined DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10017604
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown, X11/Motif
+Usage count: 3
+Sample usage:
+;
+undefined4 DAT_100175fc;
+float DAT_1001756c;
+float DAT_10017570;
+undefined DAT_1000ae90;
+undefined DAT_1000ae94;
+undefined DAT_1000ae98;
+undefined4 DAT_10017604;
+float DAT_100174f0;
+float DAT_100175
+--------------------------------------------------------------------------------
+
+Global: DAT_100175a0
+Type: float
+Categories: Graphics State, String/Text, Unknown
+Usage count: 3
+Sample usage:
+1756c;
+float DAT_10017570;
+undefined DAT_1000ae90;
+undefined DAT_1000ae94;
+undefined DAT_1000ae98;
+undefined4 DAT_10017604;
+float DAT_100174f0;
+float DAT_100175a0;
+char DAT_10017494;
+undefined4 DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10017494
+Type: char
+Categories: Graphics State, String/Text, Unknown
+Usage count: 4
+Sample usage:
+017570;
+undefined DAT_1000ae90;
+undefined DAT_1000ae94;
+undefined DAT_1000ae98;
+undefined4 DAT_10017604;
+float DAT_100174f0;
+float DAT_100175a0;
+char DAT_10017494;
+undefined4 DAT_100175e0;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100175e0
+Type: undefined4
+Categories: Configuration, Graphics State, String/Text, Unknown
+Usage count: 3
+Sample usage:
+0ae90;
+undefined DAT_1000ae94;
+undefined DAT_1000ae98;
+undefined4 DAT_10017604;
+float DAT_100174f0;
+float DAT_100175a0;
+char DAT_10017494;
+undefined4 DAT_100175e0;
+float DAT_100175a4;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100175a4
+Type: float
+Categories: Configuration, Graphics State, String/Text, Unknown
+Usage count: 29
+Sample usage:
+_1000ae94;
+undefined DAT_1000ae98;
+undefined4 DAT_10017604;
+float DAT_100174f0;
+float DAT_100175a0;
+char DAT_10017494;
+undefined4 DAT_100175e0;
+float DAT_100175a4;
+undefined4 DAT_100175dc;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100175dc
+Type: undefined4
+Categories: Configuration, String/Text, Unknown
+Usage count: 6
+Sample usage:
+1000ae98;
+undefined4 DAT_10017604;
+float DAT_100174f0;
+float DAT_100175a0;
+char DAT_10017494;
+undefined4 DAT_100175e0;
+float DAT_100175a4;
+undefined4 DAT_100175dc;
+float DAT_1001759c;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_1001759c
+Type: float
+Categories: Configuration, String/Text, Unknown
+Usage count: 9
+Sample usage:
+ DAT_10017604;
+float DAT_100174f0;
+float DAT_100175a0;
+char DAT_10017494;
+undefined4 DAT_100175e0;
+float DAT_100175a4;
+undefined4 DAT_100175dc;
+float DAT_1001759c;
+undefined4 DAT_100175ec;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100175ec
+Type: undefined4
+Categories: Configuration, String/Text, Unknown
+Usage count: 3
+Sample usage:
+100174f0;
+float DAT_100175a0;
+char DAT_10017494;
+undefined4 DAT_100175e0;
+float DAT_100175a4;
+undefined4 DAT_100175dc;
+float DAT_1001759c;
+undefined4 DAT_100175ec;
+float DAT_100175a8;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100175a8
+Type: float
+Categories: String/Text, Unknown
+Usage count: 5
+Sample usage:
+100175a0;
+char DAT_10017494;
+undefined4 DAT_100175e0;
+float DAT_100175a4;
+undefined4 DAT_100175dc;
+float DAT_1001759c;
+undefined4 DAT_100175ec;
+float DAT_100175a8;
+undefined4 DAT_100175e8;
+pointer box
+--------------------------------------------------------------------------------
+
+Global: DAT_100175e8
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 3
+Sample usage:
+94;
+undefined4 DAT_100175e0;
+float DAT_100175a4;
+undefined4 DAT_100175dc;
+float DAT_1001759c;
+undefined4 DAT_100175ec;
+float DAT_100175a8;
+undefined4 DAT_100175e8;
+pointer boxDir;
+undefined4 DAT_10017
+--------------------------------------------------------------------------------
+
+Global: DAT_100175d8
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 4
+Sample usage:
+0175a4;
+undefined4 DAT_100175dc;
+float DAT_1001759c;
+undefined4 DAT_100175ec;
+float DAT_100175a8;
+undefined4 DAT_100175e8;
+pointer boxDir;
+undefined4 DAT_100175d8;
+float DAT_100174c4;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100174c4
+Type: float
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+AT_100175dc;
+float DAT_1001759c;
+undefined4 DAT_100175ec;
+float DAT_100175a8;
+undefined4 DAT_100175e8;
+pointer boxDir;
+undefined4 DAT_100175d8;
+float DAT_100174c4;
+undefined4 DAT_100174c8;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_100174c8
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+01759c;
+undefined4 DAT_100175ec;
+float DAT_100175a8;
+undefined4 DAT_100175e8;
+pointer boxDir;
+undefined4 DAT_100175d8;
+float DAT_100174c4;
+undefined4 DAT_100174c8;
+float DAT_10017530;
+char DAT_1001749
+--------------------------------------------------------------------------------
+
+Global: DAT_10017530
+Type: float
+Categories: Graphics State, String/Text, Unknown
+Usage count: 5
+Sample usage:
+AT_100175ec;
+float DAT_100175a8;
+undefined4 DAT_100175e8;
+pointer boxDir;
+undefined4 DAT_100175d8;
+float DAT_100174c4;
+undefined4 DAT_100174c8;
+float DAT_10017530;
+char DAT_10017495;
+float DAT_1001751
+--------------------------------------------------------------------------------
+
+Global: DAT_10017495
+Type: char
+Categories: Graphics State, String/Text, Unknown
+Usage count: 8
+Sample usage:
+DAT_100175a8;
+undefined4 DAT_100175e8;
+pointer boxDir;
+undefined4 DAT_100175d8;
+float DAT_100174c4;
+undefined4 DAT_100174c8;
+float DAT_10017530;
+char DAT_10017495;
+float DAT_10017510;
+float DAT_100175
+--------------------------------------------------------------------------------
+
+Global: DAT_10017510
+Type: float
+Categories: String/Text, Unknown
+Usage count: 3
+Sample usage:
+ned4 DAT_100175e8;
+pointer boxDir;
+undefined4 DAT_100175d8;
+float DAT_100174c4;
+undefined4 DAT_100174c8;
+float DAT_10017530;
+char DAT_10017495;
+float DAT_10017510;
+float DAT_10017520;
+float DAT_100175
+--------------------------------------------------------------------------------
+
+Global: DAT_10017520
+Type: float
+Categories: String/Text, Unknown
+Usage count: 4
+Sample usage:
+ointer boxDir;
+undefined4 DAT_100175d8;
+float DAT_100174c4;
+undefined4 DAT_100174c8;
+float DAT_10017530;
+char DAT_10017495;
+float DAT_10017510;
+float DAT_10017520;
+float DAT_1001752c;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_1001752c
+Type: float
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ined4 DAT_100175d8;
+float DAT_100174c4;
+undefined4 DAT_100174c8;
+float DAT_10017530;
+char DAT_10017495;
+float DAT_10017510;
+float DAT_10017520;
+float DAT_1001752c;
+undefined4 DAT_10017534;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10017534
+Type: undefined4
+Categories: Filesystem, String/Text, Unknown
+Usage count: 2
+Sample usage:
+ DAT_100174c4;
+undefined4 DAT_100174c8;
+float DAT_10017530;
+char DAT_10017495;
+float DAT_10017510;
+float DAT_10017520;
+float DAT_1001752c;
+undefined4 DAT_10017534;
+float DAT_10017560;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b54
+Type: undefined4
+Categories: Filesystem, Graphics State, String/Text, Unknown
+Usage count: 7
+Sample usage:
+float DAT_10017560;
+undefined4 DAT_10017500;
+undefined1 DAT_10017495;
+undefined4 DAT_10016ba0;
+undefined postMenu;
+undefined FUN_0041dea4;
+undefined4 DAT_10016b54;
+undefined4 DAT_10016b58;
+undefined F
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b58
+Type: undefined4
+Categories: Data Structure, Graphics State, String/Text, Unknown
+Usage count: 6
+Sample usage:
+ined4 DAT_10017500;
+undefined1 DAT_10017495;
+undefined4 DAT_10016ba0;
+undefined postMenu;
+undefined FUN_0041dea4;
+undefined4 DAT_10016b54;
+undefined4 DAT_10016b58;
+undefined FUN_0041dff4;
+undefined4 D
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b98
+Type: undefined4
+Categories: Filesystem, String/Text, Unknown
+Usage count: 8
+Sample usage:
+fined4 DAT_10016ba0;
+undefined postMenu;
+undefined FUN_0041dea4;
+undefined4 DAT_10016b54;
+undefined4 DAT_10016b58;
+undefined FUN_0041dff4;
+undefined4 DAT_10016b98;
+undefined FUN_0041e0a8;
+undefined4 D
+--------------------------------------------------------------------------------
+
+Global: DAT_10006e20
+Type: int
+Categories: Filesystem, Graphics State, String/Text, Unknown
+Usage count: 21
+Sample usage:
+ndefined FUN_0041dff4;
+undefined4 DAT_10016b98;
+undefined FUN_0041e0a8;
+undefined4 DAT_10016b94;
+undefined4 DAT_10016b5c;
+undefined FUN_0041e8a8;
+int DAT_10006e20;
+undefined FUN_0041e918;
+undefined4 D
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b84
+Type: undefined4
+Categories: Filesystem, Graphics State, String/Text
+Usage count: 8
+Sample usage:
+ndefined4 DAT_10016b60;
+undefined FUN_0041e988;
+pointer directoryHelp;
+undefined4 DAT_10016b64;
+pointer fileHelp;
+undefined4 DAT_10016b68;
+undefined4 DAT_10016b84;
+undefined4 DAT_10016b88;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b88
+Type: undefined4
+Categories: Filesystem, Graphics State, String/Text, Unknown
+Usage count: 8
+Sample usage:
+ndefined FUN_0041e988;
+pointer directoryHelp;
+undefined4 DAT_10016b64;
+pointer fileHelp;
+undefined4 DAT_10016b68;
+undefined4 DAT_10016b84;
+undefined4 DAT_10016b88;
+undefined4 DAT_10016b30;
+undefined F
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b30
+Type: undefined4
+Categories: Filesystem, String/Text, Unknown
+Usage count: 4
+Sample usage:
+inter directoryHelp;
+undefined4 DAT_10016b64;
+pointer fileHelp;
+undefined4 DAT_10016b68;
+undefined4 DAT_10016b84;
+undefined4 DAT_10016b88;
+undefined4 DAT_10016b30;
+undefined FUN_0041ef30;
+undefined4 D
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b6c
+Type: undefined4
+Categories: Filesystem, String/Text, Unknown
+Usage count: 10
+Sample usage:
+nter fileHelp;
+undefined4 DAT_10016b68;
+undefined4 DAT_10016b84;
+undefined4 DAT_10016b88;
+undefined4 DAT_10016b30;
+undefined FUN_0041ef30;
+undefined4 DAT_10016b6c;
+undefined4 DAT_10016b70;
+undefined F
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b70
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 10
+Sample usage:
+ DAT_10016b68;
+undefined4 DAT_10016b84;
+undefined4 DAT_10016b88;
+undefined4 DAT_10016b30;
+undefined FUN_0041ef30;
+undefined4 DAT_10016b6c;
+undefined4 DAT_10016b70;
+undefined FUN_0041f2b4;
+undefined4 D
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b74
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 10
+Sample usage:
+4 DAT_10016b30;
+undefined FUN_0041ef30;
+undefined4 DAT_10016b6c;
+undefined4 DAT_10016b70;
+undefined FUN_0041f2b4;
+undefined4 DAT_10016b3c;
+undefined4 DAT_10016b74;
+undefined4 DAT_10016b78;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b78
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 10
+Sample usage:
+ FUN_0041ef30;
+undefined4 DAT_10016b6c;
+undefined4 DAT_10016b70;
+undefined FUN_0041f2b4;
+undefined4 DAT_10016b3c;
+undefined4 DAT_10016b74;
+undefined4 DAT_10016b78;
+undefined4 DAT_10016b48;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b7c
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 10
+Sample usage:
+ DAT_10016b70;
+undefined FUN_0041f2b4;
+undefined4 DAT_10016b3c;
+undefined4 DAT_10016b74;
+undefined4 DAT_10016b78;
+undefined4 DAT_10016b48;
+undefined4 DAT_10016b7c;
+undefined4 DAT_10016b80;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b80
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 10
+Sample usage:
+FUN_0041f2b4;
+undefined4 DAT_10016b3c;
+undefined4 DAT_10016b74;
+undefined4 DAT_10016b78;
+undefined4 DAT_10016b48;
+undefined4 DAT_10016b7c;
+undefined4 DAT_10016b80;
+undefined4 DAT_10016b9c;
+undefined F
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b9c
+Type: undefined4
+Categories: Filesystem, String/Text, Unknown
+Usage count: 8
+Sample usage:
+DAT_10016b3c;
+undefined4 DAT_10016b74;
+undefined4 DAT_10016b78;
+undefined4 DAT_10016b48;
+undefined4 DAT_10016b7c;
+undefined4 DAT_10016b80;
+undefined4 DAT_10016b9c;
+undefined FUN_0041ec98;
+undefined FU
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b34
+Type: undefined4
+Categories: Filesystem, String/Text, Unknown
+Usage count: 3
+Sample usage:
+ed4 DAT_10016b8c;
+undefined4 DAT_10016b90;
+undefined FUN_0041fa18;
+undefined FUN_0041fadc;
+undefined FUN_0041fb20;
+undefined FUN_0041fcc0;
+undefined4 DAT_10016b34;
+undefined4 DAT_10016b38;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b40
+Type: undefined4
+Categories: Filesystem, String/Text, Unknown
+Usage count: 3
+Sample usage:
+ed FUN_0041fa18;
+undefined FUN_0041fadc;
+undefined FUN_0041fb20;
+undefined FUN_0041fcc0;
+undefined4 DAT_10016b34;
+undefined4 DAT_10016b38;
+undefined4 DAT_10016b40;
+undefined4 DAT_10016b44;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b44
+Type: undefined4
+Categories: Filesystem, String/Text, Unknown
+Usage count: 3
+Sample usage:
+d FUN_0041fadc;
+undefined FUN_0041fb20;
+undefined FUN_0041fcc0;
+undefined4 DAT_10016b34;
+undefined4 DAT_10016b38;
+undefined4 DAT_10016b40;
+undefined4 DAT_10016b44;
+undefined4 DAT_10016b4c;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b4c
+Type: undefined4
+Categories: Filesystem, String/Text, Unknown
+Usage count: 3
+Sample usage:
+ FUN_0041fb20;
+undefined FUN_0041fcc0;
+undefined4 DAT_10016b34;
+undefined4 DAT_10016b38;
+undefined4 DAT_10016b40;
+undefined4 DAT_10016b44;
+undefined4 DAT_10016b4c;
+undefined4 DAT_10016b50;
+undefined1 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b50
+Type: undefined4
+Categories: Filesystem, String/Text, Unknown
+Usage count: 3
+Sample usage:
+FUN_0041fcc0;
+undefined4 DAT_10016b34;
+undefined4 DAT_10016b38;
+undefined4 DAT_10016b40;
+undefined4 DAT_10016b44;
+undefined4 DAT_10016b4c;
+undefined4 DAT_10016b50;
+undefined1 DAT_10016bd0;
+undefined1 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bd9
+Type: undefined1
+Categories: String/Text, Unknown
+Usage count: 3
+Sample usage:
+DAT_10016b44;
+undefined4 DAT_10016b4c;
+undefined4 DAT_10016b50;
+undefined1 DAT_10016bd0;
+undefined1 DAT_10016bd3;
+undefined1 DAT_10016bd6;
+undefined1 DAT_10016bd9;
+undefined *PTR_DAT_10006e34;
+undefin
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bd1
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+_10016b50;
+undefined1 DAT_10016bd0;
+undefined1 DAT_10016bd3;
+undefined1 DAT_10016bd6;
+undefined1 DAT_10016bd9;
+undefined *PTR_DAT_10006e34;
+undefined DAT_10016bd1;
+undefined DAT_10016bd4;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bd4
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+T_10016bd0;
+undefined1 DAT_10016bd3;
+undefined1 DAT_10016bd6;
+undefined1 DAT_10016bd9;
+undefined *PTR_DAT_10006e34;
+undefined DAT_10016bd1;
+undefined DAT_10016bd4;
+undefined DAT_10016bd7;
+undefined1 D
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bd7
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+AT_10016bd3;
+undefined1 DAT_10016bd6;
+undefined1 DAT_10016bd9;
+undefined *PTR_DAT_10006e34;
+undefined DAT_10016bd1;
+undefined DAT_10016bd4;
+undefined DAT_10016bd7;
+undefined1 DAT_10006e24;
+char DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_1001749c
+Type: int
+Categories: String/Text, Unknown, X11/Motif
+Usage count: 2
+Sample usage:
+
+undefined *PTR_DAT_10006e34;
+undefined DAT_10016bd1;
+undefined DAT_10016bd4;
+undefined DAT_10016bd7;
+undefined1 DAT_10006e24;
+char DAT_10006e54;
+int DAT_1001749c;
+undefined check_unmonitor_dp;
+char D
+--------------------------------------------------------------------------------
+
+Global: DAT_10017496
+Type: char
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+10016bd4;
+undefined DAT_10016bd7;
+undefined1 DAT_10006e24;
+char DAT_10006e54;
+int DAT_1001749c;
+undefined check_unmonitor_dp;
+char DAT_10006e24;
+char DAT_10017496;
+char DAT_10006e58;
+char *DAT_10016bd
+--------------------------------------------------------------------------------
+
+Global: DAT_10006e58
+Type: char
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ DAT_10016bd7;
+undefined1 DAT_10006e24;
+char DAT_10006e54;
+int DAT_1001749c;
+undefined check_unmonitor_dp;
+char DAT_10006e24;
+char DAT_10017496;
+char DAT_10006e58;
+char *DAT_10016bdc;
+char *DAT_10016b
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bdc
+Type: char *
+Categories: String/Text, Unknown
+Usage count: 4
+Sample usage:
+ined1 DAT_10006e24;
+char DAT_10006e54;
+int DAT_1001749c;
+undefined check_unmonitor_dp;
+char DAT_10006e24;
+char DAT_10017496;
+char DAT_10006e58;
+char *DAT_10016bdc;
+char *DAT_10016be0;
+undefined DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10016be0
+Type: char *
+Categories: String/Text, Unknown
+Usage count: 4
+Sample usage:
+char DAT_10006e54;
+int DAT_1001749c;
+undefined check_unmonitor_dp;
+char DAT_10006e24;
+char DAT_10017496;
+char DAT_10006e58;
+char *DAT_10016bdc;
+char *DAT_10016be0;
+undefined DAT_1000b46c;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_1000b46c
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+AT_1001749c;
+undefined check_unmonitor_dp;
+char DAT_10006e24;
+char DAT_10017496;
+char DAT_10006e58;
+char *DAT_10016bdc;
+char *DAT_10016be0;
+undefined DAT_1000b46c;
+undefined DAT_1000b4a0;
+pointer move
+--------------------------------------------------------------------------------
+
+Global: DAT_1000b4a0
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+heck_unmonitor_dp;
+char DAT_10006e24;
+char DAT_10017496;
+char DAT_10006e58;
+char *DAT_10016bdc;
+char *DAT_10016be0;
+undefined DAT_1000b46c;
+undefined DAT_1000b4a0;
+pointer moveDestHelp;
+int DAT_10006e
+--------------------------------------------------------------------------------
+
+Global: DAT_10006e64
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown
+Usage count: 3
+Sample usage:
+4a0;
+pointer moveDestHelp;
+int DAT_10006e5c;
+undefined1 DAT_10016bc8;
+char DAT_10016bc8;
+undefined4 DAT_10016c00;
+undefined4 DAT_10016c04;
+undefined4 DAT_10006e64;
+undefined4 DAT_10016c0c;
+int DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10006e94
+Type: undefined
+Categories: Graphics State, String/Text, X11/Motif
+Usage count: 2
+Sample usage:
+8;
+char DAT_10016bc8;
+undefined4 DAT_10016c00;
+undefined4 DAT_10016c04;
+undefined4 DAT_10006e64;
+undefined4 DAT_10016c0c;
+int DAT_10006e60;
+undefined DAT_10006e94;
+char DAT_10006ebc;
+pointer overviewH
+--------------------------------------------------------------------------------
+
+Global: DAT_10006ebc
+Type: char
+Categories: Graphics State, String/Text, X11/Motif
+Usage count: 3
+Sample usage:
+8;
+undefined4 DAT_10016c00;
+undefined4 DAT_10016c04;
+undefined4 DAT_10006e64;
+undefined4 DAT_10016c0c;
+int DAT_10006e60;
+undefined DAT_10006e94;
+char DAT_10006ebc;
+pointer overviewHelp;
+string overvie
+--------------------------------------------------------------------------------
+
+Global: DAT_10006edc
+Type: undefined
+Categories: Graphics State, String/Text, Unknown
+Usage count: 2
+Sample usage:
+t DAT_10006eb4;
+undefined4 DAT_10016c08;
+undefined4 DAT_10017608;
+undefined4 DAT_1001760c;
+undefined4 DAT_100175f0;
+undefined DAT_10006ed4;
+undefined DAT_10006edc;
+undefined DAT_10006ee4;
+float DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10006ee4
+Type: undefined
+Categories: Graphics State, String/Text
+Usage count: 2
+Sample usage:
+d4 DAT_10016c08;
+undefined4 DAT_10017608;
+undefined4 DAT_1001760c;
+undefined4 DAT_100175f0;
+undefined DAT_10006ed4;
+undefined DAT_10006edc;
+undefined DAT_10006ee4;
+float DAT_10016bf0;
+float DAT_10016b
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bf0
+Type: float
+Categories: Configuration, Graphics State, String/Text, Unknown
+Usage count: 5
+Sample usage:
+efined4 DAT_10017608;
+undefined4 DAT_1001760c;
+undefined4 DAT_100175f0;
+undefined DAT_10006ed4;
+undefined DAT_10006edc;
+undefined DAT_10006ee4;
+float DAT_10016bf0;
+float DAT_10016bf4;
+undefined DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10006ecc
+Type: undefined
+Categories: Graphics State, String/Text
+Usage count: 2
+Sample usage:
+c;
+undefined4 DAT_100175f0;
+undefined DAT_10006ed4;
+undefined DAT_10006edc;
+undefined DAT_10006ee4;
+float DAT_10016bf0;
+float DAT_10016bf4;
+undefined DAT_10006ecc;
+uint DAT_10016bf8;
+uint DAT_10016bfc
+--------------------------------------------------------------------------------
+
+Global: DAT_1000700c
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+AT_10006f04;
+undefined1 DAT_10006f00;
+int DAT_10007010;
+int DAT_10007014;
+int DAT_1000701c;
+int DAT_10007018;
+int DAT_10007000;
+int DAT_10007004;
+int DAT_1000700c;
+int DAT_10007008;
+undefined4 DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10007008
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ined1 DAT_10006f00;
+int DAT_10007010;
+int DAT_10007014;
+int DAT_1000701c;
+int DAT_10007018;
+int DAT_10007000;
+int DAT_10007004;
+int DAT_1000700c;
+int DAT_10007008;
+undefined4 DAT_10006fa0;
+int DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fa0
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 8
+Sample usage:
+AT_10007010;
+int DAT_10007014;
+int DAT_1000701c;
+int DAT_10007018;
+int DAT_10007000;
+int DAT_10007004;
+int DAT_1000700c;
+int DAT_10007008;
+undefined4 DAT_10006fa0;
+int DAT_10006fa4;
+int DAT_10006fac;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fa4
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+AT_10007014;
+int DAT_1000701c;
+int DAT_10007018;
+int DAT_10007000;
+int DAT_10007004;
+int DAT_1000700c;
+int DAT_10007008;
+undefined4 DAT_10006fa0;
+int DAT_10006fa4;
+int DAT_10006fac;
+int DAT_10006fa8;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fac
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+AT_1000701c;
+int DAT_10007018;
+int DAT_10007000;
+int DAT_10007004;
+int DAT_1000700c;
+int DAT_10007008;
+undefined4 DAT_10006fa0;
+int DAT_10006fa4;
+int DAT_10006fac;
+int DAT_10006fa8;
+undefined4 DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fa8
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+AT_10007018;
+int DAT_10007000;
+int DAT_10007004;
+int DAT_1000700c;
+int DAT_10007008;
+undefined4 DAT_10006fa0;
+int DAT_10006fa4;
+int DAT_10006fac;
+int DAT_10006fa8;
+undefined4 DAT_10006fb0;
+int DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fb0
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 8
+Sample usage:
+7000;
+int DAT_10007004;
+int DAT_1000700c;
+int DAT_10007008;
+undefined4 DAT_10006fa0;
+int DAT_10006fa4;
+int DAT_10006fac;
+int DAT_10006fa8;
+undefined4 DAT_10006fb0;
+int DAT_10006fb4;
+int DAT_10006fbc;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fb4
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+7004;
+int DAT_1000700c;
+int DAT_10007008;
+undefined4 DAT_10006fa0;
+int DAT_10006fa4;
+int DAT_10006fac;
+int DAT_10006fa8;
+undefined4 DAT_10006fb0;
+int DAT_10006fb4;
+int DAT_10006fbc;
+int DAT_10006fb8;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fbc
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+700c;
+int DAT_10007008;
+undefined4 DAT_10006fa0;
+int DAT_10006fa4;
+int DAT_10006fac;
+int DAT_10006fa8;
+undefined4 DAT_10006fb0;
+int DAT_10006fb4;
+int DAT_10006fbc;
+int DAT_10006fb8;
+int DAT_10006fc0;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fb8
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+7008;
+undefined4 DAT_10006fa0;
+int DAT_10006fa4;
+int DAT_10006fac;
+int DAT_10006fa8;
+undefined4 DAT_10006fb0;
+int DAT_10006fb4;
+int DAT_10006fbc;
+int DAT_10006fb8;
+int DAT_10006fc0;
+int DAT_10006fc4;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fc0
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+AT_10006fa0;
+int DAT_10006fa4;
+int DAT_10006fac;
+int DAT_10006fa8;
+undefined4 DAT_10006fb0;
+int DAT_10006fb4;
+int DAT_10006fbc;
+int DAT_10006fb8;
+int DAT_10006fc0;
+int DAT_10006fc4;
+int DAT_10006fcc;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fc4
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+AT_10006fa4;
+int DAT_10006fac;
+int DAT_10006fa8;
+undefined4 DAT_10006fb0;
+int DAT_10006fb4;
+int DAT_10006fbc;
+int DAT_10006fb8;
+int DAT_10006fc0;
+int DAT_10006fc4;
+int DAT_10006fcc;
+int DAT_10006fc8;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fcc
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+AT_10006fac;
+int DAT_10006fa8;
+undefined4 DAT_10006fb0;
+int DAT_10006fb4;
+int DAT_10006fbc;
+int DAT_10006fb8;
+int DAT_10006fc0;
+int DAT_10006fc4;
+int DAT_10006fcc;
+int DAT_10006fc8;
+int DAT_10006fd0;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fc8
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+AT_10006fa8;
+undefined4 DAT_10006fb0;
+int DAT_10006fb4;
+int DAT_10006fbc;
+int DAT_10006fb8;
+int DAT_10006fc0;
+int DAT_10006fc4;
+int DAT_10006fcc;
+int DAT_10006fc8;
+int DAT_10006fd0;
+int DAT_10006fd4;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fd0
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ined4 DAT_10006fb0;
+int DAT_10006fb4;
+int DAT_10006fbc;
+int DAT_10006fb8;
+int DAT_10006fc0;
+int DAT_10006fc4;
+int DAT_10006fcc;
+int DAT_10006fc8;
+int DAT_10006fd0;
+int DAT_10006fd4;
+int DAT_10006fdc;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fd4
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+int DAT_10006fb4;
+int DAT_10006fbc;
+int DAT_10006fb8;
+int DAT_10006fc0;
+int DAT_10006fc4;
+int DAT_10006fcc;
+int DAT_10006fc8;
+int DAT_10006fd0;
+int DAT_10006fd4;
+int DAT_10006fdc;
+int DAT_10006fd8;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fdc
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+int DAT_10006fbc;
+int DAT_10006fb8;
+int DAT_10006fc0;
+int DAT_10006fc4;
+int DAT_10006fcc;
+int DAT_10006fc8;
+int DAT_10006fd0;
+int DAT_10006fd4;
+int DAT_10006fdc;
+int DAT_10006fd8;
+int DAT_10006fe0;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fd8
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+int DAT_10006fb8;
+int DAT_10006fc0;
+int DAT_10006fc4;
+int DAT_10006fcc;
+int DAT_10006fc8;
+int DAT_10006fd0;
+int DAT_10006fd4;
+int DAT_10006fdc;
+int DAT_10006fd8;
+int DAT_10006fe0;
+int DAT_10006fe4;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fe0
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+int DAT_10006fc0;
+int DAT_10006fc4;
+int DAT_10006fcc;
+int DAT_10006fc8;
+int DAT_10006fd0;
+int DAT_10006fd4;
+int DAT_10006fdc;
+int DAT_10006fd8;
+int DAT_10006fe0;
+int DAT_10006fe4;
+int DAT_10006fec;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fe4
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+int DAT_10006fc4;
+int DAT_10006fcc;
+int DAT_10006fc8;
+int DAT_10006fd0;
+int DAT_10006fd4;
+int DAT_10006fdc;
+int DAT_10006fd8;
+int DAT_10006fe0;
+int DAT_10006fe4;
+int DAT_10006fec;
+int DAT_10006fe8;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fec
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+int DAT_10006fcc;
+int DAT_10006fc8;
+int DAT_10006fd0;
+int DAT_10006fd4;
+int DAT_10006fdc;
+int DAT_10006fd8;
+int DAT_10006fe0;
+int DAT_10006fe4;
+int DAT_10006fec;
+int DAT_10006fe8;
+int DAT_10006ff0;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006fe8
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+int DAT_10006fc8;
+int DAT_10006fd0;
+int DAT_10006fd4;
+int DAT_10006fdc;
+int DAT_10006fd8;
+int DAT_10006fe0;
+int DAT_10006fe4;
+int DAT_10006fec;
+int DAT_10006fe8;
+int DAT_10006ff0;
+int DAT_10006ff4;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006ff0
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+int DAT_10006fd0;
+int DAT_10006fd4;
+int DAT_10006fdc;
+int DAT_10006fd8;
+int DAT_10006fe0;
+int DAT_10006fe4;
+int DAT_10006fec;
+int DAT_10006fe8;
+int DAT_10006ff0;
+int DAT_10006ff4;
+int DAT_10006ffc;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006ff4
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+int DAT_10006fd4;
+int DAT_10006fdc;
+int DAT_10006fd8;
+int DAT_10006fe0;
+int DAT_10006fe4;
+int DAT_10006fec;
+int DAT_10006fe8;
+int DAT_10006ff0;
+int DAT_10006ff4;
+int DAT_10006ffc;
+int DAT_10006ff8;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10006ffc
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+int DAT_10006fdc;
+int DAT_10006fd8;
+int DAT_10006fe0;
+int DAT_10006fe4;
+int DAT_10006fec;
+int DAT_10006fe8;
+int DAT_10006ff0;
+int DAT_10006ff4;
+int DAT_10006ffc;
+int DAT_10006ff8;
+undefined DAT_1000
+--------------------------------------------------------------------------------
+
+Global: DAT_10006ff8
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+int DAT_10006fd8;
+int DAT_10006fe0;
+int DAT_10006fe4;
+int DAT_10006fec;
+int DAT_10006fe8;
+int DAT_10006ff0;
+int DAT_10006ff4;
+int DAT_10006ffc;
+int DAT_10006ff8;
+undefined DAT_10007020;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10007020
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+DAT_10006fe0;
+int DAT_10006fe4;
+int DAT_10006fec;
+int DAT_10006fe8;
+int DAT_10006ff0;
+int DAT_10006ff4;
+int DAT_10006ffc;
+int DAT_10006ff8;
+undefined DAT_10007020;
+undefined DAT_1000702c;
+int DAT_1001
+--------------------------------------------------------------------------------
+
+Global: DAT_1000702c
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+006fe4;
+int DAT_10006fec;
+int DAT_10006fe8;
+int DAT_10006ff0;
+int DAT_10006ff4;
+int DAT_10006ffc;
+int DAT_10006ff8;
+undefined DAT_10007020;
+undefined DAT_1000702c;
+int DAT_100174a4;
+pointer dcolorBoxe
+--------------------------------------------------------------------------------
+
+Global: DAT_100174a4
+Type: int
+Categories: Graphics State, String/Text, Unknown
+Usage count: 5
+Sample usage:
+006fec;
+int DAT_10006fe8;
+int DAT_10006ff0;
+int DAT_10006ff4;
+int DAT_10006ffc;
+int DAT_10006ff8;
+undefined DAT_10007020;
+undefined DAT_1000702c;
+int DAT_100174a4;
+pointer dcolorBoxes;
+undefined DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10006f10
+Type: undefined
+Categories: Filesystem, Graphics State, String/Text, Unknown
+Usage count: 3
+Sample usage:
+nt DAT_10006ff4;
+int DAT_10006ffc;
+int DAT_10006ff8;
+undefined DAT_10007020;
+undefined DAT_1000702c;
+int DAT_100174a4;
+pointer dcolorBoxes;
+undefined DAT_10006f10;
+undefined DAT_10006f18;
+int DAT_1001
+--------------------------------------------------------------------------------
+
+Global: DAT_10006f18
+Type: undefined
+Categories: Filesystem, Graphics State, String/Text, Unknown
+Usage count: 3
+Sample usage:
+_10006ffc;
+int DAT_10006ff8;
+undefined DAT_10007020;
+undefined DAT_1000702c;
+int DAT_100174a4;
+pointer dcolorBoxes;
+undefined DAT_10006f10;
+undefined DAT_10006f18;
+int DAT_10016c60;
+undefined DAT_1000
+--------------------------------------------------------------------------------
+
+Global: DAT_10006f20
+Type: undefined
+Categories: Configuration, Filesystem, Graphics State, String/Text
+Usage count: 3
+Sample usage:
+_10007020;
+undefined DAT_1000702c;
+int DAT_100174a4;
+pointer dcolorBoxes;
+undefined DAT_10006f10;
+undefined DAT_10006f18;
+int DAT_10016c60;
+undefined DAT_10006f20;
+int DAT_10016c64;
+undefined DAT_1000
+--------------------------------------------------------------------------------
+
+Global: DAT_10016c64
+Type: int
+Categories: Configuration, Filesystem, Graphics State, String/Text
+Usage count: 7
+Sample usage:
+ed DAT_1000702c;
+int DAT_100174a4;
+pointer dcolorBoxes;
+undefined DAT_10006f10;
+undefined DAT_10006f18;
+int DAT_10016c60;
+undefined DAT_10006f20;
+int DAT_10016c64;
+undefined DAT_10006f28;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10006f28
+Type: undefined
+Categories: Configuration, Graphics State, String/Text
+Usage count: 3
+Sample usage:
+_100174a4;
+pointer dcolorBoxes;
+undefined DAT_10006f10;
+undefined DAT_10006f18;
+int DAT_10016c60;
+undefined DAT_10006f20;
+int DAT_10016c64;
+undefined DAT_10006f28;
+undefined DAT_10006f30;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10006f30
+Type: undefined
+Categories: Configuration, Graphics State, String/Text
+Usage count: 3
+Sample usage:
+rBoxes;
+undefined DAT_10006f10;
+undefined DAT_10006f18;
+int DAT_10016c60;
+undefined DAT_10006f20;
+int DAT_10016c64;
+undefined DAT_10006f28;
+undefined DAT_10006f30;
+undefined DAT_10006f38;
+undefined4 c
+--------------------------------------------------------------------------------
+
+Global: DAT_10006f38
+Type: undefined
+Categories: Configuration, Graphics State, String/Text
+Usage count: 3
+Sample usage:
+006f10;
+undefined DAT_10006f18;
+int DAT_10016c60;
+undefined DAT_10006f20;
+int DAT_10016c64;
+undefined DAT_10006f28;
+undefined DAT_10006f30;
+undefined DAT_10006f38;
+undefined4 curcontextflag;
+undefined
+--------------------------------------------------------------------------------
+
+Global: DAT_10017524
+Type: float
+Categories: Configuration, String/Text
+Usage count: 5
+Sample usage:
+ined DAT_10006f28;
+undefined DAT_10006f30;
+undefined DAT_10006f38;
+undefined4 curcontextflag;
+undefined4 DAT_10016c60;
+undefined4 DAT_10016c64;
+float DAT_10017524;
+undefined4 DAT_10017528;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10017528
+Type: undefined4
+Categories: Configuration, String/Text
+Usage count: 2
+Sample usage:
+ned DAT_10006f30;
+undefined DAT_10006f38;
+undefined4 curcontextflag;
+undefined4 DAT_10016c60;
+undefined4 DAT_10016c64;
+float DAT_10017524;
+undefined4 DAT_10017528;
+float DAT_10017514;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10017514
+Type: float
+Categories: Configuration, Graphics State, String/Text
+Usage count: 3
+Sample usage:
+defined DAT_10006f38;
+undefined4 curcontextflag;
+undefined4 DAT_10016c60;
+undefined4 DAT_10016c64;
+float DAT_10017524;
+undefined4 DAT_10017528;
+float DAT_10017514;
+undefined4 DAT_1001751c;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_1001751c
+Type: undefined4
+Categories: Configuration, Graphics State, String/Text
+Usage count: 3
+Sample usage:
+efined4 curcontextflag;
+undefined4 DAT_10016c60;
+undefined4 DAT_10016c64;
+float DAT_10017524;
+undefined4 DAT_10017528;
+float DAT_10017514;
+undefined4 DAT_1001751c;
+undefined4 DAT_10016c70;
+int DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_100078fc
+Type: float
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+17524;
+undefined4 DAT_10017528;
+float DAT_10017514;
+undefined4 DAT_1001751c;
+undefined4 DAT_10016c70;
+int DAT_100078b0;
+undefined FUN_00428044;
+float DAT_100078fc;
+float DAT_100175c8;
+float DAT_100175
+--------------------------------------------------------------------------------
+
+Global: DAT_100175f4
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+DAT_100175d0;
+char DAT_10007904;
+pointer boxRed;
+pointer boxOrange;
+pointer boxYellow;
+pointer boxGreen;
+pointer boxCyan;
+pointer boxBlue;
+undefined4 DAT_100175f4;
+pointer boxMagenta;
+undefined4 DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10017630
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+r boxMagenta;
+undefined4 DAT_1001761c;
+undefined4 DAT_10017620;
+undefined4 DAT_10017624;
+undefined4 DAT_10017628;
+undefined4 DAT_1001762c;
+undefined4 DAT_10017630;
+undefined4 DAT_10017634;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10017634
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+DAT_1001761c;
+undefined4 DAT_10017620;
+undefined4 DAT_10017624;
+undefined4 DAT_10017628;
+undefined4 DAT_1001762c;
+undefined4 DAT_10017630;
+undefined4 DAT_10017634;
+undefined4 *DAT_10017654;
+undefined 
+--------------------------------------------------------------------------------
+
+Global: DAT_10007928
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ DAT_10017628;
+undefined4 DAT_1001762c;
+undefined4 DAT_10017630;
+undefined4 DAT_10017634;
+undefined4 *DAT_10017654;
+undefined DAT_10007908;
+undefined DAT_10007928;
+int DAT_10007988;
+char DAT_10017491;
+--------------------------------------------------------------------------------
+
+Global: DAT_10007994
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown
+Usage count: 5
+Sample usage:
+10017634;
+undefined4 *DAT_10017654;
+undefined DAT_10007908;
+undefined DAT_10007928;
+int DAT_10007988;
+char DAT_10017491;
+int DAT_10007990;
+undefined4 DAT_10007994;
+undefined4 *DAT_10007994;
+short DAT_
+--------------------------------------------------------------------------------
+
+Global: DAT_100174b6
+Type: short
+Categories: Graphics State, String/Text, Unknown
+Usage count: 2
+Sample usage:
+DAT_10007908;
+undefined DAT_10007928;
+int DAT_10007988;
+char DAT_10017491;
+int DAT_10007990;
+undefined4 DAT_10007994;
+undefined4 *DAT_10007994;
+short DAT_100174b6;
+undefined DAT_1000e928;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_1000e928
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+DAT_10007928;
+int DAT_10007988;
+char DAT_10017491;
+int DAT_10007990;
+undefined4 DAT_10007994;
+undefined4 *DAT_10007994;
+short DAT_100174b6;
+undefined DAT_1000e928;
+undefined DAT_1000e930;
+undefined ed
+--------------------------------------------------------------------------------
+
+Global: DAT_1000e930
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+007988;
+char DAT_10017491;
+int DAT_10007990;
+undefined4 DAT_10007994;
+undefined4 *DAT_10007994;
+short DAT_100174b6;
+undefined DAT_1000e928;
+undefined DAT_1000e930;
+undefined editCB;
+pointer viewerHelp
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e24
+Type: undefined4
+Categories: Configuration, String/Text, Unknown
+Usage count: 3
+Sample usage:
+d FUN_0042b3f4;
+undefined FUN_0042b5ac;
+pointer versionHelp;
+pointer modeHelp;
+int DAT_100079c0;
+undefined FUN_0042b390;
+int DAT_10007c28;
+undefined4 DAT_10016e24;
+pointer PTR_s_noscan_10007c30;
+point
+--------------------------------------------------------------------------------
+
+Global: DAT_10012c44
+Type: undefined
+Categories: String/Text, Unknown, X11/Motif
+Usage count: 2
+Sample usage:
+42b390;
+int DAT_10007c28;
+undefined4 DAT_10016e24;
+pointer PTR_s_noscan_10007c30;
+pointer PTR_s_landscape_10008918;
+undefined FUN_0042b6f8;
+undefined DAT_10012c44;
+undefined DAT_10012c4c;
+undefined4 D
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e20
+Type: undefined4
+Categories: String/Text, Unknown, X11/Motif
+Usage count: 7
+Sample usage:
+;
+pointer PTR_s_noscan_10007c30;
+pointer PTR_s_landscape_10008918;
+undefined FUN_0042b6f8;
+undefined DAT_10012c44;
+undefined DAT_10012c4c;
+undefined4 DAT_10016e20;
+undefined DAT_0f6d07d4;
+undefined FU
+--------------------------------------------------------------------------------
+
+Global: DAT_0f6d07d4
+Type: undefined
+Categories: String/Text, Unknown, X11/Motif
+Usage count: 2
+Sample usage:
+0007c30;
+pointer PTR_s_landscape_10008918;
+undefined FUN_0042b6f8;
+undefined DAT_10012c44;
+undefined DAT_10012c4c;
+undefined4 DAT_10016e20;
+undefined DAT_0f6d07d4;
+undefined FUN_0042caa0;
+undefined FU
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e48
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 7
+Sample usage:
+ined FUN_0042cc30;
+undefined FUN_0042ccac;
+undefined FUN_0042cf60;
+undefined FUN_0042d338;
+undefined FUN_0042d8e0;
+undefined FUN_0042d9f8;
+undefined4 DAT_10016e48;
+pointer PTR_s_shrinkOnZoom_10008950;
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e38
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 6
+Sample usage:
+Speed_10008b5c;
+pointer prefPanelHelp;
+undefined4 DAT_10016e30;
+undefined4 DAT_10016e3c;
+undefined4 DAT_10016e34;
+undefined4 DAT_10016e40;
+undefined4 DAT_10016e38;
+undefined4 DAT_10016e44;
+pointer PTR
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e44
+Type: undefined4
+Categories: Graphics State, String/Text, Unknown
+Usage count: 6
+Sample usage:
+refPanelHelp;
+undefined4 DAT_10016e30;
+undefined4 DAT_10016e3c;
+undefined4 DAT_10016e34;
+undefined4 DAT_10016e40;
+undefined4 DAT_10016e38;
+undefined4 DAT_10016e44;
+pointer PTR_s_groundColor_1000935c;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_100094f0
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 3
+Sample usage:
+undefined4 DAT_10016e40;
+undefined4 DAT_10016e38;
+undefined4 DAT_10016e44;
+pointer PTR_s_groundColor_1000935c;
+undefined *PTR_PTR_100094ec;
+undefined DAT_100094f0;
+undefined *PTR_s_mouseSpeed_10008b5c
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e4c
+Type: int
+Categories: String/Text, Unknown, X11/Motif
+Usage count: 13
+Sample usage:
+ned4 DAT_10016e44;
+pointer PTR_s_groundColor_1000935c;
+undefined *PTR_PTR_100094ec;
+undefined DAT_100094f0;
+undefined *PTR_s_mouseSpeed_10008b5c;
+int DAT_10016e4c;
+undefined FUN_0042d28c;
+undefined FU
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e88
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 3
+Sample usage:
+T_100094f0;
+undefined *PTR_s_mouseSpeed_10008b5c;
+int DAT_10016e4c;
+undefined FUN_0042d28c;
+undefined FUN_0042d314;
+undefined DAT_10016e50;
+undefined DAT_10016e88;
+float DAT_100174b0;
+int DAT_10009528
+--------------------------------------------------------------------------------
+
+Global: DAT_10009520
+Type: int
+Categories: String/Text, Unknown
+Usage count: 17
+Sample usage:
+ned FUN_0042d28c;
+undefined FUN_0042d314;
+undefined DAT_10016e50;
+undefined DAT_10016e88;
+float DAT_100174b0;
+int DAT_10009528;
+int DAT_10009524;
+int DAT_10009520;
+undefined4 DAT_10016ec4;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ec0
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 13
+Sample usage:
+d DAT_10016e50;
+undefined DAT_10016e88;
+float DAT_100174b0;
+int DAT_10009528;
+int DAT_10009524;
+int DAT_10009520;
+undefined4 DAT_10016ec4;
+undefined4 DAT_10016ec0;
+undefined DAT_10013c40;
+pointer mark
+--------------------------------------------------------------------------------
+
+Global: DAT_10013c60
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+undefined FUN_0042f4d8;
+undefined FUN_0042f5d0;
+undefined FUN_0042f73c;
+undefined FUN_0042f4b4;
+int DAT_10016ec8;
+undefined FUN_0042f66c;
+undefined DAT_10013c60;
+int DAT_10009630;
+undefined DAT_1000
+--------------------------------------------------------------------------------
+
+Global: DAT_10009530
+Type: undefined
+Categories: String/Text, X11/Motif
+Usage count: 2
+Sample usage:
+42f5d0;
+undefined FUN_0042f73c;
+undefined FUN_0042f4b4;
+int DAT_10016ec8;
+undefined FUN_0042f66c;
+undefined DAT_10013c60;
+int DAT_10009630;
+undefined DAT_10009530;
+undefined DAT_100095b0;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_100095b0
+Type: undefined
+Categories: String/Text, X11/Motif
+Usage count: 2
+Sample usage:
+42f73c;
+undefined FUN_0042f4b4;
+int DAT_10016ec8;
+undefined FUN_0042f66c;
+undefined DAT_10013c60;
+int DAT_10009630;
+undefined DAT_10009530;
+undefined DAT_100095b0;
+undefined DAT_10009648;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_0fb52720
+Type: undefined
+Categories: Filesystem, String/Text, Unknown
+Usage count: 8
+Sample usage:
+;
+undefined DAT_10013c60;
+int DAT_10009630;
+undefined DAT_10009530;
+undefined DAT_100095b0;
+undefined DAT_10009648;
+undefined DAT_1000964c;
+undefined DAT_0fb52720;
+string s_/bin/sh_10009640;
+uint DAT_
+--------------------------------------------------------------------------------
+
+Global: DAT_10016f00
+Type: uint
+Categories: Filesystem, String/Text, Unknown
+Usage count: 16
+Sample usage:
+defined DAT_10009530;
+undefined DAT_100095b0;
+undefined DAT_10009648;
+undefined DAT_1000964c;
+undefined DAT_0fb52720;
+string s_/bin/sh_10009640;
+uint DAT_10016f00;
+undefined4 DAT_10016f08;
+char DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10016f08
+Type: undefined4
+Categories: Filesystem, String/Text, Unknown
+Usage count: 8
+Sample usage:
+efined DAT_100095b0;
+undefined DAT_10009648;
+undefined DAT_1000964c;
+undefined DAT_0fb52720;
+string s_/bin/sh_10009640;
+uint DAT_10016f00;
+undefined4 DAT_10016f08;
+char DAT_10016f04;
+int DAT_10016f0c;
+--------------------------------------------------------------------------------
+
+Global: DAT_10016f0c
+Type: int
+Categories: String/Text, Unknown
+Usage count: 4
+Sample usage:
+009648;
+undefined DAT_1000964c;
+undefined DAT_0fb52720;
+string s_/bin/sh_10009640;
+uint DAT_10016f00;
+undefined4 DAT_10016f08;
+char DAT_10016f04;
+int DAT_10016f0c;
+char DAT_10016f05;
+int DAT_10016f10;
+--------------------------------------------------------------------------------
+
+Global: DAT_10016f10
+Type: int
+Categories: String/Text, Unknown
+Usage count: 4
+Sample usage:
+ined DAT_0fb52720;
+string s_/bin/sh_10009640;
+uint DAT_10016f00;
+undefined4 DAT_10016f08;
+char DAT_10016f04;
+int DAT_10016f0c;
+char DAT_10016f05;
+int DAT_10016f10;
+undefined4 firstSearchDir;
+int DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10016eec
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 5
+Sample usage:
+stSearchDir;
+undefined4 visitedSearchDp;
+undefined4 visitedSearchFp;
+undefined4 DAT_10016ee4;
+char *DAT_10016f08;
+undefined4 DAT_10016ee8;
+undefined4 DAT_10016eec;
+undefined4 DAT_10016ef8;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ee0
+Type: undefined4
+Categories: Filesystem, String/Text, Unknown
+Usage count: 5
+Sample usage:
+4 visitedSearchFp;
+undefined4 DAT_10016ee4;
+char *DAT_10016f08;
+undefined4 DAT_10016ee8;
+undefined4 DAT_10016eec;
+undefined4 DAT_10016ef8;
+undefined4 DAT_10016ee0;
+undefined DAT_10013d18;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013d18
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ined4 DAT_10016ee4;
+char *DAT_10016f08;
+undefined4 DAT_10016ee8;
+undefined4 DAT_10016eec;
+undefined4 DAT_10016ef8;
+undefined4 DAT_10016ee0;
+undefined DAT_10013d18;
+undefined DAT_10013d1c;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ed4
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 4
+Sample usage:
+d4 DAT_10016ee0;
+undefined DAT_10013d18;
+undefined DAT_10013d1c;
+undefined DAT_10013d20;
+undefined4 DAT_10016edc;
+undefined4 DAT_10016ed0;
+undefined4 DAT_10016ed4;
+undefined4 DAT_10016ed8;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ef4
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 5
+Sample usage:
+DAT_10013d20;
+undefined4 DAT_10016edc;
+undefined4 DAT_10016ed0;
+undefined4 DAT_10016ed4;
+undefined4 DAT_10016ed8;
+undefined4 DAT_10016ef0;
+undefined4 DAT_10016ef4;
+undefined DAT_10013d30;
+pointer sear
+--------------------------------------------------------------------------------
+
+Global: DAT_10013d5c
+Type: undefined
+Categories: Filesystem, String/Text, Unknown
+Usage count: 2
+Sample usage:
+fined4 DAT_10016ed4;
+undefined4 DAT_10016ed8;
+undefined4 DAT_10016ef0;
+undefined4 DAT_10016ef4;
+undefined DAT_10013d30;
+pointer searchHelp;
+undefined DAT_10013d5c;
+undefined DAT_10013d7c;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10009664
+Type: undefined4 *
+Categories: String/Text, Unknown
+Usage count: 7
+Sample usage:
+ed FUN_004308ec;
+undefined1 DAT_10016f05;
+undefined FUN_00430b70;
+undefined FUN_00430c0c;
+undefined DAT_10013d2c;
+undefined DAT_10009660;
+undefined4 *DAT_10009664;
+undefined1[464] _imsgs;
+undefined1 D
+--------------------------------------------------------------------------------
+
+Global: DAT_10013e84
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ined1 DAT_10013e50;
+undefined DAT_10013e54;
+undefined DAT_10013e58;
+undefined DAT_10013e5c;
+undefined DAT_10013e60;
+undefined DAT_10013e64;
+undefined DAT_10013e84;
+undefined DAT_10013e88;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013e88
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013e54;
+undefined DAT_10013e58;
+undefined DAT_10013e5c;
+undefined DAT_10013e60;
+undefined DAT_10013e64;
+undefined DAT_10013e84;
+undefined DAT_10013e88;
+undefined DAT_10013e8c;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013e8c
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013e58;
+undefined DAT_10013e5c;
+undefined DAT_10013e60;
+undefined DAT_10013e64;
+undefined DAT_10013e84;
+undefined DAT_10013e88;
+undefined DAT_10013e8c;
+undefined DAT_10013e90;
+undefined UN
+--------------------------------------------------------------------------------
+
+Global: DAT_10013e90
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013e5c;
+undefined DAT_10013e60;
+undefined DAT_10013e64;
+undefined DAT_10013e84;
+undefined DAT_10013e88;
+undefined DAT_10013e8c;
+undefined DAT_10013e90;
+undefined UNK_10013eb4;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10016fd0
+Type: undefined4
+Categories: String/Text, Unknown
+Usage count: 4
+Sample usage:
+er PTR_s__SGI_MMX_mwm_nogrmem_10009670;
+undefined DAT_10016f50;
+undefined2 DAT_10016f70;
+undefined2 DAT_10016f72;
+undefined2 DAT_10016f74;
+undefined4 DAT_10016fd0;
+undefined4 DAT_10017010;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10009c90
+Type: int
+Categories: String/Text, Unknown
+Usage count: 4
+Sample usage:
+2 DAT_10016f74;
+undefined4 DAT_10016fd0;
+undefined4 DAT_10017010;
+undefined4 DAT_10017410;
+undefined magic1;
+undefined4 magic2;
+undefined magic3;
+int DAT_10009c90;
+int DAT_10009c8c;
+int DAT_10009c80;
+
+--------------------------------------------------------------------------------
+
+Global: DAT_10009c8c
+Type: int
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+defined4 DAT_10016fd0;
+undefined4 DAT_10017010;
+undefined4 DAT_10017410;
+undefined magic1;
+undefined4 magic2;
+undefined magic3;
+int DAT_10009c90;
+int DAT_10009c8c;
+int DAT_10009c80;
+string s_Unknown_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10009c80
+Type: int
+Categories: String/Text, Unknown
+Usage count: 3
+Sample usage:
+fd0;
+undefined4 DAT_10017010;
+undefined4 DAT_10017410;
+undefined magic1;
+undefined4 magic2;
+undefined magic3;
+int DAT_10009c90;
+int DAT_10009c8c;
+int DAT_10009c80;
+string s_Unknown_10009a20;
+undefined
+--------------------------------------------------------------------------------
+
+Global: DAT_10009d2c
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+009c90;
+int DAT_10009c8c;
+int DAT_10009c80;
+string s_Unknown_10009a20;
+undefined TheFileIconInterpreter;
+undefined __vtbl__13ByteCodedIcon;
+undefined DAT_10009d2c;
+undefined DAT_10009d30;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10009d30
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+;
+int DAT_10009c80;
+string s_Unknown_10009a20;
+undefined TheFileIconInterpreter;
+undefined __vtbl__13ByteCodedIcon;
+undefined DAT_10009d2c;
+undefined DAT_10009d30;
+undefined DAT_10009d34;
+string s_#Ta
+--------------------------------------------------------------------------------
+
+Global: DAT_10009d34
+Type: undefined
+Categories: String/Text, Unknown
+Usage count: 2
+Sample usage:
+ng s_Unknown_10009a20;
+undefined TheFileIconInterpreter;
+undefined __vtbl__13ByteCodedIcon;
+undefined DAT_10009d2c;
+undefined DAT_10009d30;
+undefined DAT_10009d34;
+string s_#Tag_10009d38;
+pointer __((
+--------------------------------------------------------------------------------
+
+Global: DAT_10009e58
+Type: undefined
+Categories: Filesystem, String/Text
+Usage count: 2
+Sample usage:
+10009d38;
+pointer __((offset(0x438f34))) PTR_SUB_10009e30;
+pointer __((offset(0x438f34))) PTR_SUB_10009e34;
+string s_dN0_%d_%d_%s_10009e47;
+undefined DAT_10009e58;
+undefined DAT_10009e5c;
+string s_%c%
+--------------------------------------------------------------------------------
+
+Global: DAT_10009e5c
+Type: undefined
+Categories: Filesystem, String/Text
+Usage count: 2
+Sample usage:
+fset(0x438f34))) PTR_SUB_10009e30;
+pointer __((offset(0x438f34))) PTR_SUB_10009e34;
+string s_dN0_%d_%d_%s_10009e47;
+undefined DAT_10009e58;
+undefined DAT_10009e5c;
+string s_%c%d_%d_%d_%s_10009e60;
+und
+--------------------------------------------------------------------------------
+
+Global: DAT_10009e70
+Type: undefined
+Categories: Filesystem, String/Text
+Usage count: 2
+Sample usage:
+38f34))) PTR_SUB_10009e34;
+string s_dN0_%d_%d_%s_10009e47;
+undefined DAT_10009e58;
+undefined DAT_10009e5c;
+string s_%c%d_%d_%d_%s_10009e60;
+undefined DAT_10009e70;
+string s_%c%d_%d_%d_%s_10009e74;
+str
+--------------------------------------------------------------------------------
+
+Global: DAT_10009eb4
+Type: undefined
+Categories: Filesystem, String/Text
+Usage count: 2
+Sample usage:
+%s_10009e74;
+string s_path_too_long_10009e84;
+string s_path_too_long_10009e94;
+string s_%s_%d_%s_10009ef0;
+string s_path_too_long_10009ea4;
+undefined DAT_10009eb4;
+undefined DAT_10009eb8;
+string s_F%d
+--------------------------------------------------------------------------------
+
+Global: DAT_10009eb8
+Type: undefined
+Categories: Filesystem, String/Text
+Usage count: 2
+Sample usage:
+th_too_long_10009e84;
+string s_path_too_long_10009e94;
+string s_%s_%d_%s_10009ef0;
+string s_path_too_long_10009ea4;
+undefined DAT_10009eb4;
+undefined DAT_10009eb8;
+string s_F%d_%d_%d_%s_0_%d_%s_10009e
+--------------------------------------------------------------------------------
+
+Global: DAT_10017418
+Type: int
+Categories: String/Text, Unknown
+Usage count: 11
+Sample usage:
+string s_0_%d_%s_10009ed4;
+string s_F%d_%d_%d_%s_10009ee0;
+string s_S%d_%d_%d_10009efc;
+string s_U%d_%d_%d_10009f08;
+string s_C%d_%d_%d_10009f14;
+int DAT_10017418;
+undefined DAT_10009f20;
+string s_%c%
+--------------------------------------------------------------------------------
+
+Global: DAT_10009f20
+Type: undefined
+Categories: String/Text
+Usage count: 2
+Sample usage:
+4;
+string s_F%d_%d_%d_%s_10009ee0;
+string s_S%d_%d_%d_10009efc;
+string s_U%d_%d_%d_10009f08;
+string s_C%d_%d_%d_10009f14;
+int DAT_10017418;
+undefined DAT_10009f20;
+string s_%c%d_%s_10009f24;
+undefined
+--------------------------------------------------------------------------------
+
+Global: DAT_10009f2c
+Type: undefined
+Categories: String/Text
+Usage count: 2
+Sample usage:
+%d_10009efc;
+string s_U%d_%d_%d_10009f08;
+string s_C%d_%d_%d_10009f14;
+int DAT_10017418;
+undefined DAT_10009f20;
+string s_%c%d_%s_10009f24;
+undefined DAT_10009f2c;
+undefined DAT_10009f34;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10009f3c
+Type: undefined
+Categories: String/Text
+Usage count: 2
+Sample usage:
+ s_C%d_%d_%d_10009f14;
+int DAT_10017418;
+undefined DAT_10009f20;
+string s_%c%d_%s_10009f24;
+undefined DAT_10009f2c;
+undefined DAT_10009f34;
+undefined DAT_10009f3c;
+int DAT_10009f40;
+int DAT_10009e40;
+
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Category: Unknown (82 globals)
+================================================================================
+
+Global: DAT_10016644
+Type: undefined4
+Categories: Unknown
+Usage count: 5
+Sample usage:
+ned1 DAT_10016688;
+float DAT_10017598;
+float DAT_10017594;
+float DAT_100174a8;
+float DAT_100174ac;
+float DAT_100174bc;
+float DAT_100174c0;
+undefined4 DAT_10016644;
+undefined FUN_0040d15c;
+undefined FU
+--------------------------------------------------------------------------------
+
+Global: DAT_1000a458
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+174a8;
+float DAT_100174ac;
+float DAT_100174bc;
+float DAT_100174c0;
+undefined4 DAT_10016644;
+undefined FUN_0040d15c;
+undefined FUN_0040d2cc;
+undefined DAT_1000a458;
+undefined FUN_0040d9a8;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_1000a460
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+loat DAT_100174c0;
+undefined4 DAT_10016644;
+undefined FUN_0040d15c;
+undefined FUN_0040d2cc;
+undefined DAT_1000a458;
+undefined FUN_0040d9a8;
+undefined DAT_1000a460;
+undefined FUN_0040da14;
+pointer cont
+--------------------------------------------------------------------------------
+
+Global: DAT_1001661c
+Type: undefined4
+Categories: Unknown
+Usage count: 2
+Sample usage:
+f4;
+float DAT_100165f8;
+short DAT_10016608;
+short DAT_1001660a;
+undefined1 DAT_1001660c;
+undefined1 DAT_1001660d;
+undefined1 DAT_1001660e;
+undefined4 DAT_1001661c;
+undefined4 DAT_10016620;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016620
+Type: undefined4
+Categories: Unknown
+Usage count: 2
+Sample usage:
+hort DAT_10016608;
+short DAT_1001660a;
+undefined1 DAT_1001660c;
+undefined1 DAT_1001660d;
+undefined1 DAT_1001660e;
+undefined4 DAT_1001661c;
+undefined4 DAT_10016620;
+undefined4 DAT_100174e8;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_100174e8
+Type: undefined4
+Categories: Unknown
+Usage count: 2
+Sample usage:
+DAT_1001660a;
+undefined1 DAT_1001660c;
+undefined1 DAT_1001660d;
+undefined1 DAT_1001660e;
+undefined4 DAT_1001661c;
+undefined4 DAT_10016620;
+undefined4 DAT_100174e8;
+undefined4 DAT_10016618;
+undefined D
+--------------------------------------------------------------------------------
+
+Global: DAT_10016618
+Type: undefined4
+Categories: Unknown
+Usage count: 2
+Sample usage:
+DAT_1001660c;
+undefined1 DAT_1001660d;
+undefined1 DAT_1001660e;
+undefined4 DAT_1001661c;
+undefined4 DAT_10016620;
+undefined4 DAT_100174e8;
+undefined4 DAT_10016618;
+undefined DAT_10016610;
+undefined FU
+--------------------------------------------------------------------------------
+
+Global: DAT_10016624
+Type: int
+Categories: Unknown
+Usage count: 2
+Sample usage:
+defined4 DAT_1001661c;
+undefined4 DAT_10016620;
+undefined4 DAT_100174e8;
+undefined4 DAT_10016618;
+undefined DAT_10016610;
+undefined FUN_00410858;
+int DAT_10016624;
+int DAT_10016628;
+undefined4 *DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10016628
+Type: int
+Categories: Unknown
+Usage count: 2
+Sample usage:
+61c;
+undefined4 DAT_10016620;
+undefined4 DAT_100174e8;
+undefined4 DAT_10016618;
+undefined DAT_10016610;
+undefined FUN_00410858;
+int DAT_10016624;
+int DAT_10016628;
+undefined4 *DAT_10000020;
+undefined 
+--------------------------------------------------------------------------------
+
+Global: DAT_1001758c
+Type: float
+Categories: Filesystem, Unknown
+Usage count: 2
+Sample usage:
+oat DAT_100174f8;
+float DAT_100166b4;
+undefined4 DAT_1000018c;
+float DAT_100174fc;
+undefined4 DAT_100166ac;
+undefined4 topdir;
+undefined4 minx;
+float DAT_1001758c;
+float DAT_10017504;
+float DAT_100175
+--------------------------------------------------------------------------------
+
+Global: DAT_100166b8
+Type: int
+Categories: Filesystem, Unknown
+Usage count: 8
+Sample usage:
+ DAT_10017500;
+int DAT_1000018c;
+float DAT_1001750c;
+undefined compare_files;
+undefined compare_dirs;
+undefined1[16] fstyp;
+undefined4 localFlag;
+int DAT_100166b8;
+int DAT_10000184;
+char DAT_10017493;
+--------------------------------------------------------------------------------
+
+Global: DAT_10017493
+Type: char
+Categories: Filesystem, Unknown
+Usage count: 3
+Sample usage:
+t DAT_1001750c;
+undefined compare_files;
+undefined compare_dirs;
+undefined1[16] fstyp;
+undefined4 localFlag;
+int DAT_100166b8;
+int DAT_10000184;
+char DAT_10017493;
+undefined DAT_0fb51f00;
+char *DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_100166f3
+Type: undefined1
+Categories: Unknown
+Usage count: 2
+Sample usage:
+DAT_100166d0;
+undefined4 DAT_100166d4;
+undefined4 DAT_100166d8;
+undefined2 DAT_100166dc;
+undefined2 DAT_100166de;
+undefined1 DAT_100166e0;
+undefined1 DAT_100166f3;
+uint DAT_100166e8;
+ushort DAT_100166
+--------------------------------------------------------------------------------
+
+Global: DAT_100166e8
+Type: uint
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ined4 DAT_100166d4;
+undefined4 DAT_100166d8;
+undefined2 DAT_100166dc;
+undefined2 DAT_100166de;
+undefined1 DAT_100166e0;
+undefined1 DAT_100166f3;
+uint DAT_100166e8;
+ushort DAT_100166ec;
+undefined2 DAT_
+--------------------------------------------------------------------------------
+
+Global: DAT_100166ee
+Type: undefined2
+Categories: Filesystem, Unknown
+Usage count: 2
+Sample usage:
+ndefined2 DAT_100166dc;
+undefined2 DAT_100166de;
+undefined1 DAT_100166e0;
+undefined1 DAT_100166f3;
+uint DAT_100166e8;
+ushort DAT_100166ec;
+undefined2 DAT_100166ee;
+undefined2 DAT_100166f0;
+undefined1 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166f0
+Type: undefined2
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ndefined2 DAT_100166de;
+undefined1 DAT_100166e0;
+undefined1 DAT_100166f3;
+uint DAT_100166e8;
+ushort DAT_100166ec;
+undefined2 DAT_100166ee;
+undefined2 DAT_100166f0;
+undefined1 DAT_100166f2;
+undefined1 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166f2
+Type: undefined1
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ndefined1 DAT_100166e0;
+undefined1 DAT_100166f3;
+uint DAT_100166e8;
+ushort DAT_100166ec;
+undefined2 DAT_100166ee;
+undefined2 DAT_100166f0;
+undefined1 DAT_100166f2;
+undefined1 DAT_10016708;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016708
+Type: undefined1
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ndefined1 DAT_100166f3;
+uint DAT_100166e8;
+ushort DAT_100166ec;
+undefined2 DAT_100166ee;
+undefined2 DAT_100166f0;
+undefined1 DAT_100166f2;
+undefined1 DAT_10016708;
+undefined4 DAT_100166f8;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_100166f8
+Type: undefined4
+Categories: Filesystem, Unknown
+Usage count: 2
+Sample usage:
+int DAT_100166e8;
+ushort DAT_100166ec;
+undefined2 DAT_100166ee;
+undefined2 DAT_100166f0;
+undefined1 DAT_100166f2;
+undefined1 DAT_10016708;
+undefined4 DAT_100166f8;
+undefined4 DAT_100166fc;
+uint DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_100166fc
+Type: undefined4
+Categories: Unknown
+Usage count: 2
+Sample usage:
+DAT_100166ec;
+undefined2 DAT_100166ee;
+undefined2 DAT_100166f0;
+undefined1 DAT_100166f2;
+undefined1 DAT_10016708;
+undefined4 DAT_100166f8;
+undefined4 DAT_100166fc;
+uint DAT_10016700;
+ushort DAT_100167
+--------------------------------------------------------------------------------
+
+Global: DAT_10016700
+Type: uint
+Categories: Filesystem, Unknown
+Usage count: 2
+Sample usage:
+ined2 DAT_100166ee;
+undefined2 DAT_100166f0;
+undefined1 DAT_100166f2;
+undefined1 DAT_10016708;
+undefined4 DAT_100166f8;
+undefined4 DAT_100166fc;
+uint DAT_10016700;
+ushort DAT_10016704;
+ushort DAT_1001
+--------------------------------------------------------------------------------
+
+Global: DAT_10016704
+Type: ushort
+Categories: Unknown
+Usage count: 4
+Sample usage:
+ndefined2 DAT_100166f0;
+undefined1 DAT_100166f2;
+undefined1 DAT_10016708;
+undefined4 DAT_100166f8;
+undefined4 DAT_100166fc;
+uint DAT_10016700;
+ushort DAT_10016704;
+ushort DAT_10016706;
+undefined chrtb
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b5c
+Type: undefined4
+Categories: Filesystem, Unknown
+Usage count: 5
+Sample usage:
+4 DAT_10016b54;
+undefined4 DAT_10016b58;
+undefined FUN_0041dff4;
+undefined4 DAT_10016b98;
+undefined FUN_0041e0a8;
+undefined4 DAT_10016b94;
+undefined4 DAT_10016b5c;
+undefined FUN_0041e8a8;
+int DAT_1000
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b60
+Type: undefined4
+Categories: Filesystem, Unknown
+Usage count: 5
+Sample usage:
+ndefined FUN_0041e0a8;
+undefined4 DAT_10016b94;
+undefined4 DAT_10016b5c;
+undefined FUN_0041e8a8;
+int DAT_10006e20;
+undefined FUN_0041e918;
+undefined4 DAT_10016b60;
+undefined FUN_0041e988;
+pointer dire
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b64
+Type: undefined4
+Categories: Filesystem, Unknown
+Usage count: 5
+Sample usage:
+
+undefined FUN_0041e8a8;
+int DAT_10006e20;
+undefined FUN_0041e918;
+undefined4 DAT_10016b60;
+undefined FUN_0041e988;
+pointer directoryHelp;
+undefined4 DAT_10016b64;
+pointer fileHelp;
+undefined4 DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b3c
+Type: undefined4
+Categories: Filesystem, Unknown
+Usage count: 4
+Sample usage:
+4 DAT_10016b88;
+undefined4 DAT_10016b30;
+undefined FUN_0041ef30;
+undefined4 DAT_10016b6c;
+undefined4 DAT_10016b70;
+undefined FUN_0041f2b4;
+undefined4 DAT_10016b3c;
+undefined4 DAT_10016b74;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b48
+Type: undefined4
+Categories: Filesystem, Unknown
+Usage count: 4
+Sample usage:
+ DAT_10016b6c;
+undefined4 DAT_10016b70;
+undefined FUN_0041f2b4;
+undefined4 DAT_10016b3c;
+undefined4 DAT_10016b74;
+undefined4 DAT_10016b78;
+undefined4 DAT_10016b48;
+undefined4 DAT_10016b7c;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b38
+Type: undefined4
+Categories: Filesystem, Unknown
+Usage count: 3
+Sample usage:
+ed4 DAT_10016b90;
+undefined FUN_0041fa18;
+undefined FUN_0041fadc;
+undefined FUN_0041fb20;
+undefined FUN_0041fcc0;
+undefined4 DAT_10016b34;
+undefined4 DAT_10016b38;
+undefined4 DAT_10016b40;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bd3
+Type: undefined1
+Categories: Unknown
+Usage count: 3
+Sample usage:
+DAT_10016b38;
+undefined4 DAT_10016b40;
+undefined4 DAT_10016b44;
+undefined4 DAT_10016b4c;
+undefined4 DAT_10016b50;
+undefined1 DAT_10016bd0;
+undefined1 DAT_10016bd3;
+undefined1 DAT_10016bd6;
+undefined1 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bd6
+Type: undefined1
+Categories: Unknown
+Usage count: 3
+Sample usage:
+DAT_10016b40;
+undefined4 DAT_10016b44;
+undefined4 DAT_10016b4c;
+undefined4 DAT_10016b50;
+undefined1 DAT_10016bd0;
+undefined1 DAT_10016bd3;
+undefined1 DAT_10016bd6;
+undefined1 DAT_10016bd9;
+undefined *
+--------------------------------------------------------------------------------
+
+Global: DAT_10017608
+Type: undefined4
+Categories: Filesystem, Unknown
+Usage count: 3
+Sample usage:
+ndefined FUN_00420e74;
+undefined FUN_00421180;
+undefined DAT_0f6d16fc;
+undefined4 DAT_10006eb4;
+int DAT_10006eb4;
+undefined4 DAT_10016c08;
+undefined4 DAT_10017608;
+undefined4 DAT_1001760c;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_1001760c
+Type: undefined4
+Categories: Filesystem, Unknown
+Usage count: 3
+Sample usage:
+defined FUN_00421180;
+undefined DAT_0f6d16fc;
+undefined4 DAT_10006eb4;
+int DAT_10006eb4;
+undefined4 DAT_10016c08;
+undefined4 DAT_10017608;
+undefined4 DAT_1001760c;
+undefined4 DAT_100175f0;
+undefined D
+--------------------------------------------------------------------------------
+
+Global: DAT_100175c8
+Type: float
+Categories: Unknown
+Usage count: 2
+Sample usage:
+T_10017528;
+float DAT_10017514;
+undefined4 DAT_1001751c;
+undefined4 DAT_10016c70;
+int DAT_100078b0;
+undefined FUN_00428044;
+float DAT_100078fc;
+float DAT_100175c8;
+float DAT_100175c0;
+float DAT_100175
+--------------------------------------------------------------------------------
+
+Global: DAT_100175c0
+Type: float
+Categories: Unknown
+Usage count: 2
+Sample usage:
+T_10017514;
+undefined4 DAT_1001751c;
+undefined4 DAT_10016c70;
+int DAT_100078b0;
+undefined FUN_00428044;
+float DAT_100078fc;
+float DAT_100175c8;
+float DAT_100175c0;
+float DAT_100175d0;
+char DAT_1000790
+--------------------------------------------------------------------------------
+
+Global: DAT_100175d0
+Type: float
+Categories: Unknown
+Usage count: 2
+Sample usage:
+d4 DAT_1001751c;
+undefined4 DAT_10016c70;
+int DAT_100078b0;
+undefined FUN_00428044;
+float DAT_100078fc;
+float DAT_100175c8;
+float DAT_100175c0;
+float DAT_100175d0;
+char DAT_10007904;
+pointer boxRed;
+p
+--------------------------------------------------------------------------------
+
+Global: DAT_1001761c
+Type: undefined4
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ed;
+pointer boxOrange;
+pointer boxYellow;
+pointer boxGreen;
+pointer boxCyan;
+pointer boxBlue;
+undefined4 DAT_100175f4;
+pointer boxMagenta;
+undefined4 DAT_1001761c;
+undefined4 DAT_10017620;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10017620
+Type: undefined4
+Categories: Unknown
+Usage count: 2
+Sample usage:
+inter boxYellow;
+pointer boxGreen;
+pointer boxCyan;
+pointer boxBlue;
+undefined4 DAT_100175f4;
+pointer boxMagenta;
+undefined4 DAT_1001761c;
+undefined4 DAT_10017620;
+undefined4 DAT_10017624;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10017624
+Type: undefined4
+Categories: Unknown
+Usage count: 2
+Sample usage:
+boxGreen;
+pointer boxCyan;
+pointer boxBlue;
+undefined4 DAT_100175f4;
+pointer boxMagenta;
+undefined4 DAT_1001761c;
+undefined4 DAT_10017620;
+undefined4 DAT_10017624;
+undefined4 DAT_10017628;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10017628
+Type: undefined4
+Categories: Unknown
+Usage count: 2
+Sample usage:
+;
+pointer boxBlue;
+undefined4 DAT_100175f4;
+pointer boxMagenta;
+undefined4 DAT_1001761c;
+undefined4 DAT_10017620;
+undefined4 DAT_10017624;
+undefined4 DAT_10017628;
+undefined4 DAT_1001762c;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_1001762c
+Type: undefined4
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ned4 DAT_100175f4;
+pointer boxMagenta;
+undefined4 DAT_1001761c;
+undefined4 DAT_10017620;
+undefined4 DAT_10017624;
+undefined4 DAT_10017628;
+undefined4 DAT_1001762c;
+undefined4 DAT_10017630;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e30
+Type: undefined4
+Categories: Unknown
+Usage count: 6
+Sample usage:
+e48;
+pointer PTR_s_shrinkOnZoom_10008950;
+pointer PTR_s_monitorTimeout_100089f0;
+pointer PTR_s_mouseSpeed_10008b5c;
+pointer prefPanelHelp;
+undefined4 DAT_10016e30;
+undefined4 DAT_10016e3c;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e3c
+Type: undefined4
+Categories: Unknown
+Usage count: 6
+Sample usage:
+OnZoom_10008950;
+pointer PTR_s_monitorTimeout_100089f0;
+pointer PTR_s_mouseSpeed_10008b5c;
+pointer prefPanelHelp;
+undefined4 DAT_10016e30;
+undefined4 DAT_10016e3c;
+undefined4 DAT_10016e34;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e34
+Type: undefined4
+Categories: Unknown
+Usage count: 6
+Sample usage:
+PTR_s_monitorTimeout_100089f0;
+pointer PTR_s_mouseSpeed_10008b5c;
+pointer prefPanelHelp;
+undefined4 DAT_10016e30;
+undefined4 DAT_10016e3c;
+undefined4 DAT_10016e34;
+undefined4 DAT_10016e40;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016e40
+Type: undefined4
+Categories: Unknown
+Usage count: 6
+Sample usage:
+89f0;
+pointer PTR_s_mouseSpeed_10008b5c;
+pointer prefPanelHelp;
+undefined4 DAT_10016e30;
+undefined4 DAT_10016e3c;
+undefined4 DAT_10016e34;
+undefined4 DAT_10016e40;
+undefined4 DAT_10016e38;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10013c40
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+d DAT_10016e88;
+float DAT_100174b0;
+int DAT_10009528;
+int DAT_10009524;
+int DAT_10009520;
+undefined4 DAT_10016ec4;
+undefined4 DAT_10016ec0;
+undefined DAT_10013c40;
+pointer markHelp;
+undefined FUN_0042
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ef8
+Type: undefined4
+Categories: Unknown
+Usage count: 8
+Sample usage:
+isitedSearchDp;
+undefined4 visitedSearchFp;
+undefined4 DAT_10016ee4;
+char *DAT_10016f08;
+undefined4 DAT_10016ee8;
+undefined4 DAT_10016eec;
+undefined4 DAT_10016ef8;
+undefined4 DAT_10016ee0;
+undefined D
+--------------------------------------------------------------------------------
+
+Global: DAT_10013d1c
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ *DAT_10016f08;
+undefined4 DAT_10016ee8;
+undefined4 DAT_10016eec;
+undefined4 DAT_10016ef8;
+undefined4 DAT_10016ee0;
+undefined DAT_10013d18;
+undefined DAT_10013d1c;
+undefined DAT_10013d20;
+undefined4 D
+--------------------------------------------------------------------------------
+
+Global: DAT_10013d20
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+d4 DAT_10016ee8;
+undefined4 DAT_10016eec;
+undefined4 DAT_10016ef8;
+undefined4 DAT_10016ee0;
+undefined DAT_10013d18;
+undefined DAT_10013d1c;
+undefined DAT_10013d20;
+undefined4 DAT_10016edc;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016ed0
+Type: undefined4
+Categories: Unknown
+Usage count: 4
+Sample usage:
+d4 DAT_10016ef8;
+undefined4 DAT_10016ee0;
+undefined DAT_10013d18;
+undefined DAT_10013d1c;
+undefined DAT_10013d20;
+undefined4 DAT_10016edc;
+undefined4 DAT_10016ed0;
+undefined4 DAT_10016ed4;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10013d30
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ DAT_10016edc;
+undefined4 DAT_10016ed0;
+undefined4 DAT_10016ed4;
+undefined4 DAT_10016ed8;
+undefined4 DAT_10016ef0;
+undefined4 DAT_10016ef4;
+undefined DAT_10013d30;
+pointer searchHelp;
+undefined DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_10013dac
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+defined4 DAT_10016ef0;
+undefined4 DAT_10016ef4;
+undefined DAT_10013d30;
+pointer searchHelp;
+undefined DAT_10013d5c;
+undefined DAT_10013d7c;
+undefined DAT_10013dac;
+undefined1 DAT_10016f04;
+undefined F
+--------------------------------------------------------------------------------
+
+Global: DAT_10013d2c
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ined FUN_00430448;
+undefined FUN_004307bc;
+undefined FUN_004308ec;
+undefined1 DAT_10016f05;
+undefined FUN_00430b70;
+undefined FUN_00430c0c;
+undefined DAT_10013d2c;
+undefined DAT_10009660;
+undefined4 *
+--------------------------------------------------------------------------------
+
+Global: DAT_10009660
+Type: undefined
+Categories: Unknown
+Usage count: 11
+Sample usage:
+ined FUN_004307bc;
+undefined FUN_004308ec;
+undefined1 DAT_10016f05;
+undefined FUN_00430b70;
+undefined FUN_00430c0c;
+undefined DAT_10013d2c;
+undefined DAT_10009660;
+undefined4 *DAT_10009664;
+undefined1
+--------------------------------------------------------------------------------
+
+Global: DAT_10013e50
+Type: undefined1
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ed FUN_00430b70;
+undefined FUN_00430c0c;
+undefined DAT_10013d2c;
+undefined DAT_10009660;
+undefined4 *DAT_10009664;
+undefined1[464] _imsgs;
+undefined1 DAT_10013e50;
+undefined DAT_10013e54;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013e54
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ed FUN_00430c0c;
+undefined DAT_10013d2c;
+undefined DAT_10009660;
+undefined4 *DAT_10009664;
+undefined1[464] _imsgs;
+undefined1 DAT_10013e50;
+undefined DAT_10013e54;
+undefined DAT_10013e58;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013e58
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ed DAT_10013d2c;
+undefined DAT_10009660;
+undefined4 *DAT_10009664;
+undefined1[464] _imsgs;
+undefined1 DAT_10013e50;
+undefined DAT_10013e54;
+undefined DAT_10013e58;
+undefined DAT_10013e5c;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013e5c
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ed DAT_10009660;
+undefined4 *DAT_10009664;
+undefined1[464] _imsgs;
+undefined1 DAT_10013e50;
+undefined DAT_10013e54;
+undefined DAT_10013e58;
+undefined DAT_10013e5c;
+undefined DAT_10013e60;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013e60
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ed4 *DAT_10009664;
+undefined1[464] _imsgs;
+undefined1 DAT_10013e50;
+undefined DAT_10013e54;
+undefined DAT_10013e58;
+undefined DAT_10013e5c;
+undefined DAT_10013e60;
+undefined DAT_10013e64;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013e64
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+ined1[464] _imsgs;
+undefined1 DAT_10013e50;
+undefined DAT_10013e54;
+undefined DAT_10013e58;
+undefined DAT_10013e5c;
+undefined DAT_10013e60;
+undefined DAT_10013e64;
+undefined DAT_10013e84;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013efc
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013e64;
+undefined DAT_10013e84;
+undefined DAT_10013e88;
+undefined DAT_10013e8c;
+undefined DAT_10013e90;
+undefined UNK_10013eb4;
+undefined DAT_10013efc;
+undefined DAT_10013f00;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f00
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013e84;
+undefined DAT_10013e88;
+undefined DAT_10013e8c;
+undefined DAT_10013e90;
+undefined UNK_10013eb4;
+undefined DAT_10013efc;
+undefined DAT_10013f00;
+undefined DAT_10013f04;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f04
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013e88;
+undefined DAT_10013e8c;
+undefined DAT_10013e90;
+undefined UNK_10013eb4;
+undefined DAT_10013efc;
+undefined DAT_10013f00;
+undefined DAT_10013f04;
+undefined DAT_10013f08;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f08
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013e8c;
+undefined DAT_10013e90;
+undefined UNK_10013eb4;
+undefined DAT_10013efc;
+undefined DAT_10013f00;
+undefined DAT_10013f04;
+undefined DAT_10013f08;
+undefined DAT_10013f0c;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f0c
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013e90;
+undefined UNK_10013eb4;
+undefined DAT_10013efc;
+undefined DAT_10013f00;
+undefined DAT_10013f04;
+undefined DAT_10013f08;
+undefined DAT_10013f0c;
+undefined DAT_10013f10;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f10
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined UNK_10013eb4;
+undefined DAT_10013efc;
+undefined DAT_10013f00;
+undefined DAT_10013f04;
+undefined DAT_10013f08;
+undefined DAT_10013f0c;
+undefined DAT_10013f10;
+undefined DAT_10013f14;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f14
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013efc;
+undefined DAT_10013f00;
+undefined DAT_10013f04;
+undefined DAT_10013f08;
+undefined DAT_10013f0c;
+undefined DAT_10013f10;
+undefined DAT_10013f14;
+undefined DAT_10013f18;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f18
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f00;
+undefined DAT_10013f04;
+undefined DAT_10013f08;
+undefined DAT_10013f0c;
+undefined DAT_10013f10;
+undefined DAT_10013f14;
+undefined DAT_10013f18;
+undefined DAT_10013f1c;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f1c
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f04;
+undefined DAT_10013f08;
+undefined DAT_10013f0c;
+undefined DAT_10013f10;
+undefined DAT_10013f14;
+undefined DAT_10013f18;
+undefined DAT_10013f1c;
+undefined DAT_10013f20;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f20
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f08;
+undefined DAT_10013f0c;
+undefined DAT_10013f10;
+undefined DAT_10013f14;
+undefined DAT_10013f18;
+undefined DAT_10013f1c;
+undefined DAT_10013f20;
+undefined DAT_10013f24;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f24
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f0c;
+undefined DAT_10013f10;
+undefined DAT_10013f14;
+undefined DAT_10013f18;
+undefined DAT_10013f1c;
+undefined DAT_10013f20;
+undefined DAT_10013f24;
+undefined DAT_10013f28;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f28
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f10;
+undefined DAT_10013f14;
+undefined DAT_10013f18;
+undefined DAT_10013f1c;
+undefined DAT_10013f20;
+undefined DAT_10013f24;
+undefined DAT_10013f28;
+undefined DAT_10013f2c;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f2c
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f14;
+undefined DAT_10013f18;
+undefined DAT_10013f1c;
+undefined DAT_10013f20;
+undefined DAT_10013f24;
+undefined DAT_10013f28;
+undefined DAT_10013f2c;
+undefined DAT_10013f30;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f30
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f18;
+undefined DAT_10013f1c;
+undefined DAT_10013f20;
+undefined DAT_10013f24;
+undefined DAT_10013f28;
+undefined DAT_10013f2c;
+undefined DAT_10013f30;
+undefined DAT_10013f34;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f34
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f1c;
+undefined DAT_10013f20;
+undefined DAT_10013f24;
+undefined DAT_10013f28;
+undefined DAT_10013f2c;
+undefined DAT_10013f30;
+undefined DAT_10013f34;
+undefined DAT_10013f38;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f38
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f20;
+undefined DAT_10013f24;
+undefined DAT_10013f28;
+undefined DAT_10013f2c;
+undefined DAT_10013f30;
+undefined DAT_10013f34;
+undefined DAT_10013f38;
+undefined DAT_10013f3c;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f3c
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f24;
+undefined DAT_10013f28;
+undefined DAT_10013f2c;
+undefined DAT_10013f30;
+undefined DAT_10013f34;
+undefined DAT_10013f38;
+undefined DAT_10013f3c;
+undefined DAT_10013f40;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f40
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f28;
+undefined DAT_10013f2c;
+undefined DAT_10013f30;
+undefined DAT_10013f34;
+undefined DAT_10013f38;
+undefined DAT_10013f3c;
+undefined DAT_10013f40;
+undefined DAT_10013f44;
+undefined DA
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f44
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f2c;
+undefined DAT_10013f30;
+undefined DAT_10013f34;
+undefined DAT_10013f38;
+undefined DAT_10013f3c;
+undefined DAT_10013f40;
+undefined DAT_10013f44;
+undefined DAT_10013f48;
+pointer PTR_
+--------------------------------------------------------------------------------
+
+Global: DAT_10013f48
+Type: undefined
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f30;
+undefined DAT_10013f34;
+undefined DAT_10013f38;
+undefined DAT_10013f3c;
+undefined DAT_10013f40;
+undefined DAT_10013f44;
+undefined DAT_10013f48;
+pointer PTR_s__SGI_MMX_mwm_nogrmem_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10016f70
+Type: undefined2
+Categories: Unknown
+Usage count: 4
+Sample usage:
+defined DAT_10013f40;
+undefined DAT_10013f44;
+undefined DAT_10013f48;
+pointer PTR_s__SGI_MMX_mwm_nogrmem_10009670;
+undefined DAT_10016f50;
+undefined2 DAT_10016f70;
+undefined2 DAT_10016f72;
+undefined2 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016f72
+Type: undefined2
+Categories: Unknown
+Usage count: 2
+Sample usage:
+efined DAT_10013f44;
+undefined DAT_10013f48;
+pointer PTR_s__SGI_MMX_mwm_nogrmem_10009670;
+undefined DAT_10016f50;
+undefined2 DAT_10016f70;
+undefined2 DAT_10016f72;
+undefined2 DAT_10016f74;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_10016f74
+Type: undefined2
+Categories: Unknown
+Usage count: 2
+Sample usage:
+fined DAT_10013f48;
+pointer PTR_s__SGI_MMX_mwm_nogrmem_10009670;
+undefined DAT_10016f50;
+undefined2 DAT_10016f70;
+undefined2 DAT_10016f72;
+undefined2 DAT_10016f74;
+undefined4 DAT_10016fd0;
+undefined4 
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Category: X11/Motif (10 globals)
+================================================================================
+
+Global: DAT_10017498
+Type: char
+Categories: Filesystem, Graphics State, String/Text, Unknown, X11/Motif
+Usage count: 7
+Sample usage:
+windows;
+undefined4 blankXmString;
+undefined4 curcontextid;
+pointer glHelp;
+undefined4 lhLabelColor;
+undefined DAT_0e3d8f04;
+undefined4 display;
+char DAT_10017498;
+undefined DAT_0e3d4f98;
+undefined *f
+--------------------------------------------------------------------------------
+
+Global: DAT_1001665c
+Type: undefined4
+Categories: Counter/Index, Graphics State, String/Text, Unknown, X11/Motif
+Usage count: 10
+Sample usage:
+ display;
+char DAT_10017498;
+undefined DAT_0e3d4f98;
+undefined *fallback_resources;
+string glwidget_translations;
+undefined4 DAT_10016660;
+undefined4 DAT_1001665c;
+undefined4 DAT_10016664;
+undefined4 
+--------------------------------------------------------------------------------
+
+Global: DAT_0e3f2368
+Type: undefined
+Categories: Counter/Index, Filesystem, Graphics State, String/Text, Unknown, X11/Motif
+Usage count: 21
+Sample usage:
+efined4 DAT_1001665c;
+undefined4 DAT_10016664;
+undefined4 DAT_10016648;
+undefined4 DAT_10016650;
+undefined DAT_0e3d616c;
+char DAT_10016688;
+undefined DAT_0e3f2368;
+undefined DAT_10000024;
+pointer PTR_
+--------------------------------------------------------------------------------
+
+Global: DAT_10000144
+Type: int
+Categories: Configuration, Graphics State, String/Text, Unknown, X11/Motif
+Usage count: 4
+Sample usage:
+vel;
+undefined1 initialLegend;
+undefined1 initialOverview;
+undefined1 initialControls;
+undefined4 DAT_10016638;
+undefined4 overlayHighlightColor;
+int DAT_10000144;
+undefined1 DAT_10016688;
+float DAT_1
+--------------------------------------------------------------------------------
+
+Global: DAT_10016b94
+Type: undefined4
+Categories: Filesystem, Graphics State, String/Text, Unknown, X11/Motif
+Usage count: 19
+Sample usage:
+d FUN_0041dea4;
+undefined4 DAT_10016b54;
+undefined4 DAT_10016b58;
+undefined FUN_0041dff4;
+undefined4 DAT_10016b98;
+undefined FUN_0041e0a8;
+undefined4 DAT_10016b94;
+undefined4 DAT_10016b5c;
+undefined F
+--------------------------------------------------------------------------------
+
+Global: DAT_0f6d16fc
+Type: undefined
+Categories: Unknown, X11/Motif
+Usage count: 3
+Sample usage:
+ewGlw_translations;
+undefined FUN_00420bfc;
+undefined FUN_00420c50;
+undefined FUN_00420ca4;
+undefined FUN_00420e74;
+undefined FUN_00421180;
+undefined DAT_0f6d16fc;
+undefined4 DAT_10006eb4;
+int DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10016bf4
+Type: float
+Categories: Configuration, Graphics State, String/Text, Unknown, X11/Motif
+Usage count: 5
+Sample usage:
+;
+undefined4 DAT_1001760c;
+undefined4 DAT_100175f0;
+undefined DAT_10006ed4;
+undefined DAT_10006edc;
+undefined DAT_10006ee4;
+float DAT_10016bf0;
+float DAT_10016bf4;
+undefined DAT_10006ecc;
+uint DAT_100
+--------------------------------------------------------------------------------
+
+Global: DAT_10016c70
+Type: undefined4
+Categories: Counter/Index, Filesystem, String/Text, Unknown, X11/Motif
+Usage count: 10
+Sample usage:
+ndefined4 DAT_10016c60;
+undefined4 DAT_10016c64;
+float DAT_10017524;
+undefined4 DAT_10017528;
+float DAT_10017514;
+undefined4 DAT_1001751c;
+undefined4 DAT_10016c70;
+int DAT_100078b0;
+undefined FUN_0042
+--------------------------------------------------------------------------------
+
+Global: DAT_100078b0
+Type: int
+Categories: Counter/Index, Filesystem, String/Text, Unknown, X11/Motif
+Usage count: 5
+Sample usage:
+6c60;
+undefined4 DAT_10016c64;
+float DAT_10017524;
+undefined4 DAT_10017528;
+float DAT_10017514;
+undefined4 DAT_1001751c;
+undefined4 DAT_10016c70;
+int DAT_100078b0;
+undefined FUN_00428044;
+float DAT_10
+--------------------------------------------------------------------------------
+
+Global: DAT_100079c0
+Type: int
+Categories: Configuration, Counter/Index, Filesystem, String/Text, Unknown, X11/Motif
+Usage count: 11
+Sample usage:
+ndefined *PTR_s_Please_be_patient_while_the_file_10007b64;
+undefined FUN_0042b3f4;
+undefined FUN_0042b5ac;
+pointer versionHelp;
+pointer modeHelp;
+int DAT_100079c0;
+undefined FUN_0042b390;
+int DAT_1000
+--------------------------------------------------------------------------------
+
