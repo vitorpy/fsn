@@ -10,11 +10,11 @@ FUN_0042b6c0 -> install_help_callback : 27 calls - Adds help callback to widgets
 FUN_0042a82c -> set_gl_context : 21 calls - GL context management, takes widget and bool param
 FUN_00411b30 -> build_path_string : 21 calls - Returns char*, builds full paths, uses strlen/strcat
 FUN_0042a788 -> gl_swap_buffers : 20 calls - Called with (1), around XRaiseWindow and context switches
-# FUN_00410264 -> ? : 19 calls - TODO: analyze
-# FUN_00421f10 -> ? : 18 calls - TODO: analyze (seen in main, returns int)
-# FUN_0042a8e4 -> ? : 18 calls - TODO: analyze
-# FUN_00411094 -> ? : 15 calls - TODO: analyze
-# FUN_00410da4 -> ? : 14 calls - TODO: analyze (seen in main with message string!)
+FUN_00410da4 -> set_status_message : 14 calls - Sets message in status bar widget, takes string
+# FUN_00410264 -> set_camera_lookat : 19 calls - Takes two doubles, sets camera position/view
+# FUN_00421f10 -> check_display_capability : 18 calls - Returns int, affects config in main
+# FUN_0042a8e4 -> ? : 18 calls - TODO: needs deeper analysis
+# FUN_00411094 -> ? : 15 calls - TODO: needs deeper analysis
 
 # Core / Main Functions
 FUN_0040eef0 -> quit_application : WM_DELETE_WINDOW callback, calls cleanup then exit(0)

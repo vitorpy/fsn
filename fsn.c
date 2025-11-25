@@ -903,7 +903,7 @@ pointer __((offset(0x10018374))) altcontext;
 undefined DAT_1000a178;
 undefined DAT_1000a2fc;
 undefined DAT_1000a300;
-undefined FUN_0040eef0;
+undefined quit_application;
 pointer topHelp;
 undefined DAT_1000a384;
 pointer messageHelp;
@@ -49457,7 +49457,7 @@ void FUN_0040a7ec(void)
   
   uVar1 = XtCreateWidget("contextTopWidget",_DAT_0e3d331c,DAT_1001664c,&local_a0,0);
   *(undefined4 *)(curcontextwindows + 0xc) = uVar1;
-  FUN_0042b6c0(*(undefined4 *)(curcontextwindows + 0xc),&infoHelp);
+  install_help_callback(*(undefined4 *)(curcontextwindows + 0xc),&infoHelp);
   local_9c = 1;
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f40cb;
@@ -49531,7 +49531,7 @@ void FUN_0040a7ec(void)
   XtAddCallback(*(undefined4 *)(curcontextwindows + 8),"resizeCallback",FUN_0040bdb4,0);
   XtAddCallback(*(undefined4 *)(curcontextwindows + 8),"ginitCallback",FUN_0040c1a0,0);
   XtOverrideTranslations(*(undefined4 *)(curcontextwindows + 8),DAT_10016634);
-  FUN_0042b6c0(*(undefined4 *)(curcontextwindows + 8),&glHelp);
+  install_help_callback(*(undefined4 *)(curcontextwindows + 8),&glHelp);
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f4ba9;
   local_9c = 4;
@@ -49664,10 +49664,10 @@ void main(int param_1,undefined4 *param_2)
   uVar1 = XtDisplay(toplevel);
   uVar1 = XmInternAtom(uVar1,"WM_PROTOCOLS",0);
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
-  XmAddProtocolCallback(toplevel,uVar1,uVar2,FUN_0040eef0,0);
+  XmAddProtocolCallback(toplevel,uVar1,uVar2,quit_application,0);
   XtAppAddActions(app_context,&DAT_10000024,0x10);
   uStack_a8 = XtCreateManagedWidget("mainw",_DAT_0e3d4f98,toplevel,&uStack_a0,0);
-  FUN_0042b6c0(uStack_a8,&topHelp);
+  install_help_callback(uStack_a8,&topHelp);
   uStack_ac = FUN_0040dff8(uStack_a8);
   DAT_10016660 = XtCreateManagedWidget("panel",_DAT_0e3d331c,uStack_a8,&uStack_a0,0);
   uStack_a0 = 0xe3f40cb;
@@ -49707,8 +49707,8 @@ void main(int param_1,undefined4 *param_2)
   uStack_8c = uStack_b8;
   DAT_10016648 = XmCreateLabel(DAT_10016660,"message",&uStack_a0,4);
   XtManageChild(DAT_10016648);
-  FUN_0042b6c0(DAT_10016648,&messageHelp);
-  FUN_00410da4("a 3D File System Navigator",0);
+  install_help_callback(DAT_10016648,&messageHelp);
+  set_status_message("a 3D File System Navigator",0);
   uStack_98 = 0xe3f4ba9;
   uStack_94 = DAT_10016648;
   uStack_a0 = 0xe3f4b1d;
@@ -49804,7 +49804,7 @@ void main(int param_1,undefined4 *param_2)
   FUN_0042fd50(toplevel);
   do {
     if ((DAT_10016688 != '\0') && (iVar3 = XtAppPending(app_context), iVar3 == 0)) {
-      FUN_0040cad0();
+      redraw_gl_scene();
       DAT_10016688 = '\0';
     }
     XtAppNextEvent(app_context,auStack_124);
@@ -49879,10 +49879,10 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   uVar1 = XtDisplay(toplevel);
   uVar1 = XmInternAtom(uVar1,"WM_PROTOCOLS",0);
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
-  XmAddProtocolCallback(toplevel,uVar1,uVar2,FUN_0040eef0,0);
+  XmAddProtocolCallback(toplevel,uVar1,uVar2,quit_application,0);
   XtAppAddActions(app_context,&DAT_10000024,0x10);
   local_a8 = XtCreateManagedWidget("mainw",_DAT_0e3d4f98,toplevel,&local_a0,0);
-  FUN_0042b6c0(local_a8,&topHelp);
+  install_help_callback(local_a8,&topHelp);
   local_ac = FUN_0040dff8(local_a8);
   DAT_10016660 = XtCreateManagedWidget("panel",_DAT_0e3d331c,local_a8,&local_a0,0);
   local_a0 = 0xe3f40cb;
@@ -49922,8 +49922,8 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   local_8c = local_b8;
   DAT_10016648 = XmCreateLabel(DAT_10016660,"message",&local_a0,4);
   XtManageChild(DAT_10016648);
-  FUN_0042b6c0(DAT_10016648,&messageHelp);
-  FUN_00410da4("a 3D File System Navigator",0);
+  install_help_callback(DAT_10016648,&messageHelp);
+  set_status_message("a 3D File System Navigator",0);
   local_98 = 0xe3f4ba9;
   local_94 = DAT_10016648;
   local_a0 = 0xe3f4b1d;
@@ -50019,7 +50019,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   FUN_0042fd50(toplevel);
   do {
     if ((DAT_10016688 != '\0') && (iVar3 = XtAppPending(app_context), iVar3 == 0)) {
-      FUN_0040cad0();
+      redraw_gl_scene();
       DAT_10016688 = '\0';
     }
     XtAppNextEvent(app_context,auStack_124);
@@ -50091,8 +50091,8 @@ void FUN_0040bc64(undefined4 param_1)
 
 {
   FUN_0042a7d0();
-  FUN_0042a82c(param_1,1);
-  FUN_0040cad0();
+  set_gl_context(param_1,1);
+  redraw_gl_scene();
   FUN_0042a7f0();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -50106,7 +50106,7 @@ void FUN_0040bce8(undefined4 param_1)
 
 {
   FUN_0042a7d0();
-  FUN_0042a82c(param_1,1);
+  set_gl_context(param_1,1);
   FUN_0040bc28();
   color(0);
   clear();
@@ -50125,7 +50125,7 @@ void FUN_0040bdb4(undefined4 param_1,undefined4 param_2,int param_3)
 {
   FUN_0040bbe0();
   FUN_0042a7d0();
-  FUN_0042a82c(param_1,1);
+  set_gl_context(param_1,1);
   *(uint *)(curcontext + 0x2c) = (uint)*(ushort *)(param_3 + 0x10);
   *(uint *)(curcontext + 0x30) = (uint)*(ushort *)(param_3 + 0x12);
   *(float *)(curcontext + 0x34) =
@@ -50139,7 +50139,7 @@ void FUN_0040bdb4(undefined4 param_1,undefined4 param_2,int param_3)
   FUN_0040bbe0();
   viewport(0,(*(short *)(param_3 + 0x10) + -1) * 0x10000 >> 0x10,0,
            (*(short *)(param_3 + 0x12) + -1) * 0x10000 >> 0x10);
-  FUN_0040cad0();
+  redraw_gl_scene();
   FUN_0042a7f0();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -50297,7 +50297,7 @@ void FUN_0040c1a0(int param_1,undefined4 param_2,int param_3)
   undefined4 *local_20;
   
   FUN_0042a7d0();
-  FUN_0042a82c(param_1,1);
+  set_gl_context(param_1,1);
   FUN_004291fc();
   uVar1 = XtWindow(param_1);
   *(undefined4 *)curcontextwindows = uVar1;
@@ -50458,7 +50458,7 @@ void draw_scene(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040cad0(void)
+void redraw_gl_scene(void)
 
 {
   code *pcVar1;
@@ -50480,7 +50480,7 @@ void checkRedrawScene(void)
 
 {
   if (DAT_10016688 != '\0') {
-    FUN_0040cad0();
+    redraw_gl_scene();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -50526,7 +50526,7 @@ void movehoriz(undefined8 param_1,undefined4 param_2)
               (double)-*(float *)(curcontext + 0x14) * (double)CONCAT44(uVar2,param_2) +
               (double)*(float *)(curcontext + 0x18) *
               (double)CONCAT44(in_register_00001010,(int)param_1));
-  FUN_0040cad0();
+  redraw_gl_scene();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -50638,7 +50638,7 @@ void FUN_0040d3cc(undefined4 param_1,undefined4 param_2,undefined4 param_3)
   
   uVar1 = XmCreateRowColumn(param_1,"controls",param_2,param_3);
   XtManageChild(uVar1);
-  FUN_0042b6c0(uVar1,&controlHelp);
+  install_help_callback(uVar1,&controlHelp);
   uVar2 = XmCreatePushButton(uVar1,"reset",param_2,0);
   XtManageChild(uVar2);
   XtAddCallback(uVar2,0xe3f35b3,reset_eye,0);
@@ -50751,7 +50751,7 @@ void FUN_0040d9a8(undefined4 param_1,undefined4 param_2,int param_3)
 {
   *(short *)(curcontext + 0xe) = (short)*(undefined4 *)(param_3 + 8);
   FUN_0040c0cc();
-  FUN_0040cad0();
+  redraw_gl_scene();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -50769,7 +50769,7 @@ void FUN_0040da14(undefined4 param_1,undefined4 param_2,int param_3)
   fVar1 = (float)((double)*(int *)(param_3 + 8) / (double)((ulonglong)in_register_00001050 << 0x20))
   ;
   *(float *)(curcontext + 8) = fVar1 * fVar1;
-  FUN_0040cad0();
+  redraw_gl_scene();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -50811,7 +50811,7 @@ void FUN_0040da94(void)
     local_3c = 1;
     local_34 = 1;
     DAT_10016654 = XmCreateRowColumn(DAT_10016660,"legend",&local_50,4);
-    FUN_0042b6c0(DAT_10016654,&legendHelp);
+    install_help_callback(DAT_10016654,&legendHelp);
     uVar1 = XmCreateLabel(DAT_10016654,"colorslabel",&local_50,0);
     XtManageChild(uVar1);
     iVar2 = 0;
@@ -50955,7 +50955,7 @@ void FUN_0040dff8(undefined4 param_1)
   local_c = XmCreatePulldownMenu(local_4,"session_pane",&local_74,local_78);
   XtAddCallback(local_c,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(local_c,0xe3f4c38,overlayMenuUnmappedCB,0);
-  FUN_0042b6c0(local_c,&sessionHelp);
+  install_help_callback(local_c,&sessionHelp);
   local_78 = 0;
   DAT_10016668 = XmCreateToggleButton(local_c,"menuSplit",&local_74,0);
   XtManageChild(DAT_10016668);
@@ -50972,20 +50972,20 @@ void FUN_0040dff8(undefined4 param_1)
   local_78 = 0;
   local_24 = XmCreatePushButton(local_c,"menuQuit",&local_74,0);
   XtManageChild(local_24);
-  XtAddCallback(local_24,0xe3f35b3,FUN_0040eef0,0);
+  XtAddCallback(local_24,0xe3f35b3,quit_application,0);
   local_74 = 0xe3f4a31;
   local_78 = 1;
   local_70 = local_c;
   local_8 = XmCreateCascadeButton(local_4,"menuSession",&local_74,1);
   XtManageChild(local_8);
-  FUN_0042b6c0(local_8,&sessionHelp);
+  install_help_callback(local_8,&sessionHelp);
   local_78 = 0;
   FUN_00432094(display,0,&local_74,&local_78);
   local_14 = XmCreatePulldownMenu(local_4,"show_pane",&local_74,local_78);
   XtAddCallback(local_14,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(local_14,0xe3f4c38,overlayMenuUnmappedCB,0);
   XtManageChild(local_14);
-  FUN_0042b6c0(local_14,&showHelp);
+  install_help_callback(local_14,&showHelp);
   local_78 = 0;
   local_24 = XmCreatePushButton(local_14,"menuOverview",&local_74,0);
   XtManageChild(local_24);
@@ -51031,20 +51031,20 @@ void FUN_0040dff8(undefined4 param_1)
   local_70 = local_14;
   local_8 = XmCreateCascadeButton(local_4,"menuShow",&local_74,1);
   XtManageChild(local_8);
-  FUN_0042b6c0(local_8,&showHelp);
+  install_help_callback(local_8,&showHelp);
   local_78 = 0;
   FUN_00432094(display,0,&local_74,&local_78);
   local_10 = XmCreatePulldownMenu(local_4,"display_pane",&local_74,local_78);
   XtAddCallback(local_10,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(local_10,0xe3f4c38,overlayMenuUnmappedCB,0);
   XtManageChild(local_10);
-  FUN_0042b6c0(local_10,&displayHelp);
+  install_help_callback(local_10,&displayHelp);
   local_74 = 0xe3f4a31;
   local_78 = 1;
   local_70 = local_10;
   local_8 = XmCreateCascadeButton(local_4,"menuDisplay",&local_74,1);
   XtManageChild(local_8);
-  FUN_0042b6c0(local_8,&displayHelp);
+  install_help_callback(local_8,&displayHelp);
   local_70 = 1;
   local_74 = 0xe3f464e;
   local_78 = 1;
@@ -51135,10 +51135,10 @@ void FUN_0040ed40(void)
 
 
 
-void FUN_0040eef0(void)
+void quit_application(void)
 
 {
-  FUN_0041892c();
+  cleanup_before_exit();
                     // WARNING: Subroutine does not return
   exit(0);
 }
@@ -51155,7 +51155,7 @@ void FUN_0040ef44(undefined4 param_1,int param_2,int param_3)
     displayHeight = param_2;
     XtSetSensitive(DAT_1001666c,param_2 != 0);
     FUN_00411ea4();
-    FUN_0040cad0();
+    redraw_gl_scene();
     FUN_0042a8e4();
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -51172,7 +51172,7 @@ void FUN_0040eff8(undefined4 param_1,undefined4 param_2,int param_3)
   if (*(int *)(param_3 + 8) != 0) {
     displayDirectoryHeight = param_2;
     FUN_00411ea4();
-    FUN_0040cad0();
+    redraw_gl_scene();
     FUN_0042a8e4();
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -51287,7 +51287,7 @@ void FUN_0040f36c(void)
 void FUN_0040f42c(undefined4 param_1,int param_2)
 
 {
-  FUN_0042a82c(param_1,0);
+  set_gl_context(param_1,0);
   FUN_0040ff64();
   FUN_0040f080(param_2,&DAT_10000158,&DAT_1000015c);
   FUN_004294cc();
@@ -51325,7 +51325,7 @@ void FUN_0040f668(undefined4 param_1,undefined4 param_2)
   float local_4;
   
   uVar1 = (uint)((ulonglong)in_f4 >> 0x20);
-  FUN_0042a82c(param_1,0);
+  set_gl_context(param_1,0);
   FUN_0040f080(param_2,&local_4,&local_8);
   local_4 = local_4 - DAT_10000158;
   local_8 = local_8 - DAT_1000015c;
@@ -51362,7 +51362,7 @@ void FUN_0040f7c8(undefined4 param_1,undefined4 param_2)
   float local_8;
   float local_4;
   
-  FUN_0042a82c(param_1,0);
+  set_gl_context(param_1,0);
   FUN_0040f080(param_2,&local_4,&local_8);
   local_4 = local_4 - DAT_10000158;
   local_8 = local_8 - DAT_1000015c;
@@ -51706,7 +51706,7 @@ void zoomto(double param_1,double param_2)
     FUN_0040bfec();
     *(short *)(curcontext + 0xe) = in_stack_0000001e;
     FUN_0040c0cc();
-    FUN_0040cad0();
+    redraw_gl_scene();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -51793,7 +51793,7 @@ void FUN_00410264(double param_1,double param_2)
 void FUN_00410644(undefined4 param_1)
 
 {
-  FUN_0042a82c(param_1,0);
+  set_gl_context(param_1,0);
   FUN_00410088();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -51848,7 +51848,7 @@ void FUN_00410858(void)
 
 {
   curcontext[0xc50] = 1;
-  FUN_0040cad0();
+  redraw_gl_scene();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -51882,7 +51882,7 @@ void FUN_004108ec(undefined4 param_1,int param_2)
   float local_8;
   float local_4;
   
-  FUN_0042a82c(param_1,0);
+  set_gl_context(param_1,0);
   FUN_0040bbe0();
   FUN_0040ff64();
   if ((uint)(*(int *)(param_2 + 0x1c) - DAT_10016624) < 300) {
@@ -51891,7 +51891,7 @@ void FUN_004108ec(undefined4 param_1,int param_2)
   else {
     iVar1 = FUN_00426d1c(&local_4,&local_8,local_c,local_e,local_10,&local_14,&local_15,&local_16);
     if (iVar1 == 0) {
-      FUN_0040cad0();
+      redraw_gl_scene();
     }
     else {
       if (local_16 == '\0') {
@@ -51935,7 +51935,7 @@ void FUN_00410b7c(undefined4 param_1,int param_2)
   undefined1 auStack_8 [4];
   undefined1 auStack_4 [4];
   
-  FUN_0042a82c(param_1,0);
+  set_gl_context(param_1,0);
   FUN_0040bbe0();
   FUN_0040ff64();
   if ((uint)(*(int *)(param_2 + 0x1c) - DAT_10016628) < 300) {
@@ -51944,7 +51944,7 @@ void FUN_00410b7c(undefined4 param_1,int param_2)
   else {
     FUN_00426d1c(auStack_4,auStack_8,auStack_c,auStack_e,auStack_10,auStack_14,&uStack_15,&uStack_16
                 );
-    FUN_0040cad0();
+    redraw_gl_scene();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -52018,7 +52018,7 @@ void message(undefined4 param_1,int param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00410da4(undefined4 param_1,int param_2)
+void set_status_message(undefined4 param_1,int param_2)
 
 {
   undefined4 *puVar1;
@@ -52073,7 +52073,7 @@ void filemessage(char *param_1,char *param_2,undefined4 param_3)
   strcpy(acStack_434,param_1);
   strcat(acStack_434," ");
   strcat(acStack_434,param_2);
-  FUN_00410da4(acStack_434,param_3);
+  set_status_message(acStack_434,param_3);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -52220,7 +52220,7 @@ void FUN_00411094(undefined4 param_1,undefined4 param_2)
 void FUN_00411114(undefined4 param_1,undefined4 param_2)
 
 {
-  FUN_0042a82c(param_1,0);
+  set_gl_context(param_1,0);
   FUN_0040f080(param_2,&DAT_1001662c,&DAT_10016630);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -52262,10 +52262,10 @@ void FUN_00411230(void)
   ushort local_2;
   
   if (DAT_10000170 == '\0') {
-    FUN_0042a788(1);
+    gl_swap_buffers(1);
     FUN_0040a7ec();
     DAT_10000170 = '\x01';
-    FUN_0042a788(1);
+    gl_swap_buffers(1);
   }
   local_28 = &local_2;
   local_2c = 0xf66160a;
@@ -52294,9 +52294,9 @@ void FUN_00411230(void)
   XtManageChild(*(undefined4 *)(altcontextwindows + 0x24));
   uVar1 = XtWindow(*(undefined4 *)(altcontextwindows + 0x24));
   XRaiseWindow(display,uVar1);
-  FUN_0042a788(1);
+  gl_swap_buffers(1);
   FUN_0041c720();
-  FUN_0042a788(1);
+  gl_swap_buffers(1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -52516,7 +52516,7 @@ void dirToPath(undefined1 *param_1,int param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00411b30(undefined1 *param_1,int param_2)
+void build_path_string(undefined1 *param_1,int param_2)
 
 {
   int unaff_gp;
@@ -54084,7 +54084,7 @@ void FUN_00414da4(void)
   
   if (((topdir != 0) && (*(int *)(topdir + 0x74) << 3 < 0)) && (fsn_resources == '\0')) {
     FUN_00427fe0();
-    local_10 = FUN_00410da4("updating on disk database",0);
+    local_10 = set_status_message("updating on disk database",0);
     FUN_00411998();
     sVar2 = strlen(DAT_100175ac);
     local_4 = (char *)malloc(sVar2 + 0xc);
@@ -54289,19 +54289,19 @@ void scanDatabase(int param_1)
   
   acStack_400[0] = '\0';
   if (*(int *)(param_1 + 0x28) != 0) {
-    FUN_00411b30(acStack_400);
+    build_path_string(acStack_400);
   }
   sVar1 = strlen(acStack_400);
   iVar2 = FUN_004138e8(param_1,acStack_400,acStack_400 + sVar1,1);
   if (iVar2 != 0) {
-    uVar3 = FUN_00410da4("relaying out file system...please wait",0);
+    uVar3 = set_status_message("relaying out file system...please wait",0);
     FUN_00411998();
     FUN_004144ec(param_1);
     deleteMessage(uVar3);
     FUN_00411ea4();
   }
   FUN_0041dba0();
-  FUN_0040cad0();
+  redraw_gl_scene();
   FUN_0042a8e4();
   FUN_00414da4();
                     // WARNING: Bad instruction - Truncating control flow here
@@ -54354,12 +54354,12 @@ void rescanDatabase(void)
   statvfs asStack_124 [2];
   stat local_88;
   
-  local_128 = FUN_00410da4("rescanning file system",0);
+  local_128 = set_status_message("rescanning file system",0);
   FUN_00411998();
   iVar1 = statvfs((char *)*topdir,asStack_124);
   if (iVar1 < 0) {
     sprintf(acStack_510,"cannot statvfs %s, leaving display unchanged",*topdir);
-    FUN_00410da4(acStack_510,1000);
+    set_status_message(acStack_510,1000);
     deleteMessage(local_128);
   }
   else {
@@ -54368,14 +54368,14 @@ void rescanDatabase(void)
     iVar1 = lstat((char *)*topdir,&local_88);
     if (iVar1 < 0) {
       sprintf(acStack_510,"cannot stat %s, leaving display unchanged",*topdir);
-      FUN_00410da4(acStack_510,1000);
+      set_status_message(acStack_510,1000);
       deleteMessage(local_128);
     }
     else {
       DAT_100166b8 = local_88.st_dev._0_4_;
       FUN_00415598(topdir);
       deleteMessage(local_128);
-      FUN_00410da4("file system update complete",2000);
+      set_status_message("file system update complete",2000);
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -54396,7 +54396,7 @@ void FUN_004158d4(char *param_1)
   statvfs asStack_124 [2];
   stat local_88;
   
-  uVar1 = FUN_00410da4("no database available...building...please wait",0);
+  uVar1 = set_status_message("no database available...building...please wait",0);
   FUN_00411998();
   iVar2 = lstat(param_1,&local_88);
   if (iVar2 < 0) {
@@ -54428,7 +54428,7 @@ void FUN_004158d4(char *param_1)
   topdir[10] = 0;
   *(byte *)(topdir + 0x1d) = *(byte *)(topdir + 0x1d) | 2;
   FUN_00415598(topdir);
-  FUN_00410da4("file system database built",2000);
+  set_status_message("file system database built",2000);
   deleteMessage(uVar1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -55192,7 +55192,7 @@ void initialize_db(char *param_1)
   }
   if ((bVar1) || (DAT_10016690 = fopen(DAT_100175b0,"r"), DAT_10016690 != (FILE *)0x0)) {
     FUN_0042afd4();
-    uStack_4 = FUN_00410da4("reading file system database",0);
+    uStack_4 = set_status_message("reading file system database",0);
     FUN_004172d4();
     *(byte *)(topdir + 0x1d) = *(byte *)(topdir + 0x1d) | 2;
     if (bVar2) {
@@ -55324,7 +55324,7 @@ void FUN_004174d0(char *param_1)
   }
   if ((bVar1) || (DAT_10016690 = fopen(DAT_100175b0,"r"), DAT_10016690 != (FILE *)0x0)) {
     FUN_0042afd4();
-    local_4 = FUN_00410da4("reading file system database",0);
+    local_4 = set_status_message("reading file system database",0);
     FUN_004172d4();
     *(byte *)(topdir + 0x1d) = *(byte *)(topdir + 0x1d) | 2;
     if (bVar2) {
@@ -55370,7 +55370,7 @@ void updateDir(int param_1)
   int iVar2;
   char acStack_400 [1024];
   
-  FUN_00411b30(acStack_400,*(undefined4 *)(param_1 + 0x28));
+  build_path_string(acStack_400,*(undefined4 *)(param_1 + 0x28));
   sVar1 = strlen(acStack_400);
   iVar2 = FUN_004138e8(param_1,acStack_400,acStack_400 + sVar1,0);
   if (iVar2 != 0) {
@@ -55417,7 +55417,7 @@ void fileChanged(int param_1,char *param_2)
   
   iVar1 = FUN_00413580();
   if (iVar1 != 0) {
-    pcStack_8 = (char *)FUN_00411b30(0,param_1);
+    pcStack_8 = (char *)build_path_string(0,param_1);
     strcat(pcStack_8,param_2);
     iVar2 = lstat(pcStack_8,&sStack_90);
     if (-1 < iVar2) {
@@ -55525,7 +55525,7 @@ void fileCreated(int param_1,char *param_2)
   char *pcStack_c;
   
   if (-1 < *(int *)(param_1 + 0x74) << 0xd) {
-    pcStack_c = (char *)FUN_00411b30(0,param_1);
+    pcStack_c = (char *)build_path_string(0,param_1);
     sVar1 = strlen(pcStack_c);
     __dest = pcStack_c + sVar1;
     strcpy(__dest,param_2);
@@ -55766,7 +55766,7 @@ void fileDeleted(int param_1,char *param_2)
   char *pcStack_c;
   
   if (-1 < *(int *)(param_1 + 0x74) << 0xd) {
-    pcStack_c = (char *)FUN_00411b30(0,param_1);
+    pcStack_c = (char *)build_path_string(0,param_1);
     strcat(pcStack_c,param_2);
     iVar1 = lstat(pcStack_c,&sStack_94);
     if (iVar1 < 0) {
@@ -56037,7 +56037,7 @@ void pruneTree(int param_1)
   FUN_004186a0();
   FUN_0041dba0();
   FUN_00411ea4();
-  FUN_0040cad0();
+  redraw_gl_scene();
   FUN_0042a8e4();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -56072,7 +56072,7 @@ void unpruneTree(int param_1)
   *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) & 0xfb;
   FUN_00417b88();
   FUN_00411ea4();
-  FUN_0040cad0();
+  redraw_gl_scene();
   FUN_0042a8e4();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -56116,7 +56116,7 @@ void preExit(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041892c(void)
+void cleanup_before_exit(void)
 
 {
   int unaff_gp;
@@ -57612,7 +57612,7 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   uStack_4 = XmCreatePulldownMenu(param_1,"dirPane",&uStack_68,uStack_6c);
   XtAddCallback(uStack_4,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(uStack_4,0xe3f4c38,overlayMenuUnmappedCB,0);
-  FUN_0042b6c0(uStack_4,&directoryHelp);
+  install_help_callback(uStack_4,&directoryHelp);
   uStack_6c = 0;
   DAT_10016b54 = XmCreateToggleButton(uStack_4,"menuMonitorDirectory",&uStack_68,0);
   XtAddCallback(DAT_10016b54,0xe3f4ca5,FUN_0041dea4,0);
@@ -57640,20 +57640,20 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   uStack_64 = uStack_4;
   DAT_10016b98 = XmCreateCascadeButton(param_1,"menuDirectory",&uStack_68,2);
   XtManageChild(DAT_10016b98);
-  FUN_0042b6c0(DAT_10016b98,&directoryHelp);
+  install_help_callback(DAT_10016b98,&directoryHelp);
   XtAddEventHandler(param_2,4,0,postMenu,0);
   uStack_6c = 0;
   FUN_00432094(display,0,&uStack_68,&uStack_6c);
   XtSetSensitive(DAT_10016b98,0);
   DAT_10016b94 = XmCreatePopupMenu(param_2,"popupMenu",&uStack_68,uStack_6c);
   XtAddCallback(DAT_10016b94,0xe3f4c38,overlayMenuUnmappedCB,0);
-  FUN_0042b6c0(DAT_10016b94,&fileHelp);
+  install_help_callback(DAT_10016b94,&fileHelp);
   uStack_6c = 0;
   FUN_00432094(display,0,&uStack_68,&uStack_6c);
   uStack_8 = XmCreatePulldownMenu(param_1,"filePane",&uStack_68,uStack_6c);
   XtAddCallback(uStack_8,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(uStack_8,0xe3f4c38,overlayMenuUnmappedCB,0);
-  FUN_0042b6c0(uStack_8,&fileHelp);
+  install_help_callback(uStack_8,&fileHelp);
   uStack_6c = 0;
   uVar1 = XmCreateLabel(DAT_10016b94,"menuFile",&uStack_68,0);
   XtManageChild(uVar1);
@@ -57735,7 +57735,7 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   uStack_64 = uStack_8;
   DAT_10016b9c = XmCreateCascadeButton(param_1,"menuFile",&uStack_68,2);
   XtManageChild(DAT_10016b9c);
-  FUN_0042b6c0(DAT_10016b9c,&fileHelp);
+  install_help_callback(DAT_10016b9c,&fileHelp);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -59065,7 +59065,7 @@ void select_directory(int param_1)
     XtSetSensitive(DAT_10016b98,1);
     *(byte *)(param_1 + 0x74) = *(byte *)(param_1 + 0x74) | 0x20;
     *(int *)(curcontext + 0x44) = param_1;
-    FUN_00411b30((int)curcontext + 0x4c,param_1);
+    build_path_string((int)curcontext + 0x4c,param_1);
     FUN_0041c720();
     FUN_004207b4();
     uStack_28 = 0xe3f48f1;
@@ -59294,7 +59294,7 @@ void checkValidSelections(void)
     reset_eye();
   }
   if (altcontext[0xc51] != '\0') {
-    FUN_0042a788(1);
+    gl_swap_buffers(1);
     if ((*(int *)(curcontext + 0x48) != 0) &&
        (-1 < *(int *)(*(int *)(curcontext + 0x48) + 0x28) << 5)) {
       FUN_0041d920();
@@ -59307,7 +59307,7 @@ void checkValidSelections(void)
        (-1 < *(int *)(*(int *)(curcontext + 0x3c) + 0x74) << 3)) {
       reset_eye();
     }
-    FUN_0042a788(1);
+    gl_swap_buffers(1);
   }
   FUN_0041c9e8();
   FUN_0041c3e4();
@@ -59391,7 +59391,7 @@ void FUN_0041dea4(undefined4 param_1,undefined4 param_2,int param_3)
   if (*(int *)(curcontext + 0x44) != 0) {
     FUN_0041ddf8(*(int *)(curcontext + 0x44),*(undefined4 *)(param_3 + 8));
     FUN_0041c3e4();
-    FUN_0040cad0();
+    redraw_gl_scene();
     FUN_0042a8e4();
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -59432,7 +59432,7 @@ void FUN_0041dff4(undefined4 param_1,undefined1 param_2)
   if (*(int *)(curcontext + 0x44) != 0) {
     FUN_0041df54(*(int *)(curcontext + 0x44),param_2);
     FUN_0041c3e4();
-    FUN_0040cad0();
+    redraw_gl_scene();
     FUN_0042a8e4();
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -59469,7 +59469,7 @@ void editCB(void)
      (pcVar1 = getenv("WINEDITOR"), pcVar1 != (char *)0x0)) {
     sprintf(acStack_564,"%s ",pcVar1);
     sVar2 = strlen(acStack_564);
-    FUN_00411b30(acStack_564 + sVar2,*(undefined4 *)(curcontext + 0x44));
+    build_path_string(acStack_564 + sVar2,*(undefined4 *)(curcontext + 0x44));
     strcat(acStack_564,(char *)**(undefined4 **)(curcontext + 0x48));
     strcat(acStack_564,"&");
     system(acStack_564);
@@ -59498,7 +59498,7 @@ void FUN_0041e260(int param_1,undefined4 *param_2,undefined4 param_3,char param_
     FUN_00410f74(acStack_464);
   }
   else {
-    pcVar1 = (char *)FUN_00411b30(0,param_1);
+    pcVar1 = (char *)build_path_string(0,param_1);
     strcat(pcVar1,(char *)*param_2);
     if (param_2[8] == 0) {
       sprintf(acStack_464,"Don\'t know how to %s %s",param_5,*param_2);
@@ -59603,7 +59603,7 @@ void FUN_0041e988(undefined4 param_1,undefined4 param_2,int param_3)
       XtSetSensitive(DAT_10016b8c,1);
       XtSetSensitive(DAT_10016b90,1);
     }
-    FUN_0040cad0();
+    redraw_gl_scene();
     FUN_0042a8e4();
     local_2c = 0xe3f48f1;
     local_28 = (uint)(*(int *)(*(int *)(curcontext + 0x48) + 0x28) << 9) >> 0x1f;
@@ -59635,7 +59635,7 @@ void FUN_0041eaf8(int param_1)
       do {
         puVar2 = *(undefined4 **)(*(int *)(param_1 + 0x10) + iVar3);
         if ((int)(puVar2[10] << 9) < 0) {
-          __dest = (char *)FUN_00411b30(0,param_1);
+          __dest = (char *)build_path_string(0,param_1);
           strcat(__dest,(char *)*puVar2);
           iVar1 = unlink(__dest);
           if (iVar1 < 0) {
@@ -59675,7 +59675,7 @@ void FUN_0041ec98(void)
   FUN_0041dba0();
   FUN_0041c3e4();
   FUN_00411ea4();
-  FUN_0040cad0();
+  redraw_gl_scene();
   FUN_0042a8e4();
   XtSetSensitive(DAT_10016b8c,0);
   XtSetSensitive(DAT_10016b90,0);
@@ -59726,7 +59726,7 @@ void FUN_0041ee80(void)
 
 {
   FUN_0041ed94(topdir);
-  FUN_0040cad0();
+  redraw_gl_scene();
   FUN_0042a8e4();
   XtSetSensitive(DAT_10016b8c,0);
   XtSetSensitive(DAT_10016b90,0);
@@ -59856,7 +59856,7 @@ void FUN_0041f1d8(uint param_1)
     local_28 = 1;
     DAT_10006e5c = XmCreateWarningDialog(toplevel,"moveDestExists",&local_2c,1);
     XtAddCallback(DAT_10006e5c,0xe3f44b6,FUN_0041f2b4,param_1 | 0x100);
-    FUN_0042b6c0(DAT_10006e5c,&moveDestHelp);
+    install_help_callback(DAT_10006e5c,&moveDestHelp);
   }
   XtManageChild(DAT_10006e5c);
                     // WARNING: Bad instruction - Truncating control flow here
@@ -59952,8 +59952,8 @@ LAB_0041f400:
     FUN_00410f74("source and destination are the same");
   }
   else {
-    FUN_00411b30(acStack_410,local_4);
-    local_414 = (char *)FUN_00411b30(0,local_8);
+    build_path_string(acStack_410,local_4);
+    local_414 = (char *)build_path_string(0,local_8);
     strcat(acStack_410,(char *)*local_c);
     strcat(local_414,(char *)*local_c);
     if ((bVar1) || (iVar6 = access(local_414,0), iVar6 < 0)) {
@@ -60001,11 +60001,11 @@ LAB_0041f400:
         local_10 = FUN_00413580(local_8,*local_c);
         if (local_10 != 0) {
           if (bVar3) {
-            FUN_0042a788(1);
+            gl_swap_buffers(1);
           }
           FUN_0041da44(local_10);
           if (bVar3) {
-            FUN_0042a788(1);
+            gl_swap_buffers(1);
           }
         }
         *(byte *)(local_10 + 0x29) = *(byte *)(local_10 + 0x29) | 0x20;
@@ -60038,11 +60038,11 @@ LAB_0041f400:
       *(byte *)((int)local_c + 0x29) = *(byte *)((int)local_c + 0x29) & 0xdf;
       if (local_10 != 0) {
         if (bVar3) {
-          FUN_0042a788(1);
+          gl_swap_buffers(1);
         }
         FUN_0041d920();
         if (bVar3) {
-          FUN_0042a788(1);
+          gl_swap_buffers(1);
         }
       }
       if (local_res4 == 1) {
@@ -60050,7 +60050,7 @@ LAB_0041f400:
         *(byte *)((int)local_c + 0x29) = *(byte *)((int)local_c + 0x29) & 0xef;
         FUN_00411ea4();
       }
-      FUN_0040cad0();
+      redraw_gl_scene();
       FUN_0042a8e4();
     }
     else {
@@ -60073,7 +60073,7 @@ void FUN_0041fa18(undefined4 param_1,undefined4 param_2)
   DAT_10016bc8 = 1;
   if (topdir != 0) {
     FUN_0042a7d0();
-    FUN_0042a82c(param_2,1);
+    set_gl_context(param_2,1);
     uVar1 = XmTextFieldGetString(param_1);
     FUN_00429bc8(uVar1);
     FUN_0042a7f0();
@@ -60105,7 +60105,7 @@ void FUN_0041fb20(undefined4 param_1,undefined4 param_2)
   undefined4 uVar1;
   
   if (DAT_10016bc8 != '\0') {
-    FUN_0042a82c(param_2);
+    set_gl_context(param_2);
     DAT_10006e24 = 1;
     uVar1 = XmTextFieldGetString(param_1);
     FUN_00429bc8(uVar1);
@@ -60208,7 +60208,7 @@ void FUN_0041fcc0(undefined4 param_1,undefined4 param_2)
   int iVar2;
   
   if (DAT_10016bc8 != '\0') {
-    FUN_0042a82c(param_2);
+    set_gl_context(param_2);
     uVar1 = XmTextFieldGetString(param_1);
     iVar2 = FUN_0041fc30(uVar1);
     if (iVar2 == 0) {
@@ -60330,7 +60330,7 @@ void createOverview(void)
   XtAddCallback(DAT_10006eb4,0xf6615c9,FUN_00421180,0);
   uStack_a8 = XmCreateForm(DAT_10006eb4,"overviewForm",apcStack_a0,0);
   XtManageChild(uStack_a8);
-  FUN_0042b6c0(uStack_a8,&overviewHelp);
+  install_help_callback(uStack_a8,&overviewHelp);
   iVar2 = FUN_00421f10();
   if (iVar2 != 0) {
     DAT_10006e64 = 0x3000;
@@ -60904,9 +60904,9 @@ void FUN_00420acc(void)
 
 {
   if (altcontext[0xc51] != '\0') {
-    FUN_0042a788(1);
+    gl_swap_buffers(1);
     FUN_0042087c();
-    FUN_0042a788(1);
+    gl_swap_buffers(1);
   }
   FUN_0042087c();
                     // WARNING: Bad instruction - Truncating control flow here
@@ -61386,7 +61386,7 @@ void highlightOverviewDir(int param_1)
     pushmatrix();
     ortho2();
     cmov2(0xbf733333,0xbf666666);
-    uVar1 = FUN_00411b30(0,param_1);
+    uVar1 = build_path_string(0,param_1);
     charstr(uVar1);
     popmatrix();
     FUN_00420acc();
@@ -64725,7 +64725,7 @@ void dirfamMonitorDir(int param_1)
   undefined4 uVar1;
   
   if ((fsn_resources == '\0') && (-1 < *(int *)(param_1 + 0x74) << 10)) {
-    uVar1 = FUN_00411b30(0,param_1);
+    uVar1 = build_path_string(0,param_1);
     FUN_00439eec(&DAT_10016c70,uVar1,param_1 + 0x60);
     *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) | 0x20;
   }
@@ -64760,7 +64760,7 @@ void dirfamUnmonitorDir(int param_1)
 
 {
   if ((fsn_resources == '\0') && (*(int *)(param_1 + 0x74) << 10 < 0)) {
-    FUN_00411b30(0,param_1);
+    build_path_string(0,param_1);
     FUN_0043a5bc(&DAT_10016c70,param_1 + 0x60);
     *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) & 0xdf;
   }
@@ -64880,7 +64880,7 @@ void FUN_00428044(void)
       iVar1 = FUN_0043ab5c(&DAT_10016c70);
     }
     FUN_0041dba0();
-    FUN_0040cad0();
+    redraw_gl_scene();
     FUN_0042a8e4();
     FUN_00427f5c();
   }
@@ -65619,7 +65619,7 @@ void beamup(void)
   if (DAT_10017491 != '\0') {
     DAT_10007988 = 1;
     do {
-      FUN_0040cad0();
+      redraw_gl_scene();
       FUN_0042a8e4();
       DAT_10007988 = DAT_10007988 + 1;
     } while (DAT_10007988 < 4);
@@ -65665,7 +65665,7 @@ void beamdown(void)
   if (DAT_10017491 != '\0') {
     DAT_10007988 = 3;
     do {
-      FUN_0040cad0();
+      redraw_gl_scene();
       FUN_0042a8e4();
       DAT_10007988 = DAT_10007988 + -1;
     } while (-1 < DAT_10007988);
@@ -65791,7 +65791,7 @@ void locateClearAction(undefined4 param_1,int param_2)
 {
   if (*(int *)(param_2 + 0x30) == 0) {
     FUN_0042a7d0();
-    FUN_0042a82c(param_1,1);
+    set_gl_context(param_1,1);
     FUN_004294cc();
     FUN_0042a7f0();
     gflush();
@@ -65851,7 +65851,7 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
       FUN_00429464();
     }
     else {
-      __dest = (char *)FUN_00411b30(0);
+      __dest = (char *)build_path_string(0);
       if (param_2 == (undefined4 *)0x0) {
         if (-1 < *(int *)(param_1 + 0x74) << 2) {
           FUN_004293e8(__dest);
@@ -66018,7 +66018,7 @@ void locateHighlightAction(undefined4 param_1,int param_2)
 {
   if (*(int *)(param_2 + 0x30) == 0) {
     FUN_0042a7d0();
-    FUN_0042a82c(param_1,1);
+    set_gl_context(param_1,1);
     FUN_00429a48();
     FUN_0042a7f0();
     gflush();
@@ -66082,7 +66082,7 @@ void createViewer(undefined4 param_1,undefined4 *param_2,undefined4 param_3)
   
   uVar1 = XmCreateForm(param_1,"viewer",param_2,param_3);
   *(undefined4 *)(curcontextwindows + 0x10) = uVar1;
-  FUN_0042b6c0(*(undefined4 *)(curcontextwindows + 0x10),&viewerHelp);
+  install_help_callback(*(undefined4 *)(curcontextwindows + 0x10),&viewerHelp);
   *param_2 = 0xe3f3701;
   param_2[1] = 1;
   param_2[2] = 0xe3f40cb;
@@ -66214,7 +66214,7 @@ void FUN_00429c44(undefined4 param_1,int *param_2,undefined4 param_3)
 void FUN_00429f60(undefined4 param_1,undefined4 param_2)
 
 {
-  FUN_0042a82c(param_2,0);
+  set_gl_context(param_2,0);
   XtUnmanageChild(*(undefined4 *)(curcontextwindows + 0x10));
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -66233,7 +66233,7 @@ void viewFile(undefined4 param_1,undefined4 *param_2)
   stat sStack_8c;
   void *pvStack_4;
   
-  FUN_00411b30((int)curcontext + 0x84c,param_1);
+  build_path_string((int)curcontext + 0x84c,param_1);
   strcat(curcontext + 0x84c,(char *)*param_2);
   iVar1 = stat(curcontext + 0x84c,&sStack_8c);
   if (iVar1 < 0) {
@@ -66354,7 +66354,7 @@ void FUN_0042a2d8(undefined4 param_1,undefined4 param_2)
   size_t sVar1;
   undefined4 local_4;
   
-  FUN_0042a82c(param_2,0);
+  set_gl_context(param_2,0);
   __s = (char *)XmTextGetString(*(undefined4 *)(curcontextwindows + 0x14));
   __n = strlen(__s);
   __fd = open(curcontext + 0x84c,0x301,0x1b6);
@@ -66383,7 +66383,7 @@ void FUN_0042a2d8(undefined4 param_1,undefined4 param_2)
 void FUN_0042a440(undefined4 param_1,undefined4 param_2,int param_3)
 
 {
-  FUN_0042a82c(param_2,0);
+  set_gl_context(param_2,0);
   if (*(int *)(param_3 + 0x34) == 1) {
     XtUnmanageChild(*(undefined4 *)(curcontextwindows + 0x10));
   }
@@ -66534,7 +66534,7 @@ void swapcontext(undefined1 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042a788(undefined1 param_1)
+void gl_swap_buffers(undefined1 param_1)
 
 {
   int unaff_gp;
@@ -66601,7 +66601,7 @@ void setcontext(int param_1,undefined1 param_2)
 {
   if ((param_1 == *(int *)(altcontextwindows + 8)) || (param_1 == *(int *)(altcontextwindows + 0xc))
      ) {
-    FUN_0042a788(param_2);
+    gl_swap_buffers(param_2);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -66611,7 +66611,7 @@ void setcontext(int param_1,undefined1 param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042a82c(int param_1,undefined1 param_2)
+void set_gl_context(int param_1,undefined1 param_2)
 
 {
   int unaff_gp;
@@ -66687,9 +66687,9 @@ void draw_alt(void)
 
 {
   if (altcontext[0xc51] != '\0') {
-    FUN_0042a788(1);
-    FUN_0040cad0();
-    FUN_0042a788(1);
+    gl_swap_buffers(1);
+    redraw_gl_scene();
+    gl_swap_buffers(1);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -66720,7 +66720,7 @@ void FUN_0042a8e4(void)
 void myContext(undefined4 param_1,undefined4 param_2)
 
 {
-  FUN_0042a82c(param_2,0);
+  set_gl_context(param_2,0);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -67411,7 +67411,7 @@ void widgetHelp(undefined4 param_1,undefined4 param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042b6c0(undefined4 param_1,undefined4 param_2)
+void install_help_callback(undefined4 param_1,undefined4 param_2)
 
 {
   int unaff_gp;
@@ -67588,7 +67588,7 @@ void showPreferencePanel(void)
     XtAddCallback(DAT_10008940,0xf6615c9,FUN_0042cc30,0);
     local_4 = XmCreatePanedWindow(DAT_10008940,"preferencePane",&local_98,0);
     XtManageChild(local_4);
-    FUN_0042b6c0(local_4,&prefPanelHelp);
+    install_help_callback(local_4,&prefPanelHelp);
     local_8 = XmCreateRowColumn(local_4,"preferenceHeader",&local_98,0);
     XtManageChild(local_8);
     uVar3 = XmCreateLabel(local_8,"preferenceHeaderLabel",&local_98,0);
@@ -67816,7 +67816,7 @@ void FUN_0042c970(uint param_1)
     FUN_0040bfa0();
   }
   if ((param_1 & 2) != 0) {
-    FUN_0040cad0();
+    redraw_gl_scene();
     FUN_0042a8e4();
     FUN_004207b4();
   }
@@ -68309,7 +68309,7 @@ void FUN_0042d9f8(void)
   **(int **)(PTR_PTR_100094ec + 4) = (int)dVar1 * 0x100 + (int)dVar3 + (int)dVar2 * 0x10000;
   FUN_0042d618();
   FUN_0042c970(6);
-  FUN_0040cad0();
+  redraw_gl_scene();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -68435,9 +68435,9 @@ void savePositions(void)
 {
   FUN_0042dc64(&DAT_10016e50);
   if (altcontext[0xc51] != '\0') {
-    FUN_0042a788(1);
+    gl_swap_buffers(1);
     FUN_0042dc64(&DAT_10016e88);
-    FUN_0042a788(1);
+    gl_swap_buffers(1);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -68751,9 +68751,9 @@ void restorePositions(void)
 {
   FUN_0042e3bc(&DAT_10016e50);
   if (altcontext[0xc51] != '\0') {
-    FUN_0042a788(1);
+    gl_swap_buffers(1);
     FUN_0042e3bc(&DAT_10016e88);
-    FUN_0042a788(1);
+    gl_swap_buffers(1);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -68934,7 +68934,7 @@ void writePosition(undefined2 *param_1,FILE *param_2)
     uStack_8 = 0;
   }
   else {
-    pcVar1 = (char *)FUN_00411b30(0,*(int *)(param_1 + 2));
+    pcVar1 = (char *)build_path_string(0,*(int *)(param_1 + 2));
     sVar2 = strlen(pcVar1);
     uStack_8 = (short)sVar2;
   }
@@ -68942,7 +68942,7 @@ void writePosition(undefined2 *param_1,FILE *param_2)
     uStack_6 = 0;
   }
   else {
-    pcVar1 = (char *)FUN_00411b30(0);
+    pcVar1 = (char *)build_path_string(0);
     sVar2 = strlen(pcVar1);
     uStack_6 = (short)sVar2;
   }
@@ -68955,11 +68955,11 @@ void writePosition(undefined2 *param_1,FILE *param_2)
   }
   fwrite(&uStack_30,0x30,1,param_2);
   if (*(int *)(param_1 + 2) != 0) {
-    pvVar3 = (void *)FUN_00411b30(0,*(int *)(param_1 + 2));
+    pvVar3 = (void *)build_path_string(0,*(int *)(param_1 + 2));
     fwrite(pvVar3,1,(size_t)uStack_8,param_2);
   }
   if (*(int *)(param_1 + 10) != 0) {
-    pvVar3 = (void *)FUN_00411b30(0);
+    pvVar3 = (void *)build_path_string(0);
     fwrite(pvVar3,1,(size_t)uStack_6,param_2);
   }
   if (*(undefined4 **)(param_1 + 0x12) != (undefined4 *)0x0) {
@@ -69442,11 +69442,11 @@ void createMarkControls(undefined4 param_1)
   XtAddCallback(DAT_10016ec0,0xe3f44b6,FUN_0042f4d8,0);
   XtAddCallback(DAT_10016ec0,0xe3f380d,FUN_0042f5d0,0);
   XtManageChild(DAT_10016ec0);
-  FUN_0042b6c0(DAT_10016ec0,&markHelp);
+  install_help_callback(DAT_10016ec0,&markHelp);
   uVar1 = XmCreatePushButton(param_1,&DAT_10013c40,&uStack_54,0);
   XtAddCallback(uVar1,0xe3f35b3,FUN_0042f73c,0);
   XtManageChild(uVar1);
-  FUN_0042b6c0(uVar1,&markHelp);
+  install_help_callback(uVar1,&markHelp);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -70160,7 +70160,7 @@ void FUN_00430448(void)
   local_8 = uVar3;
   XtSetValues(DAT_10016ee0,&local_c,1);
   XmStringFree(uVar3);
-  FUN_0040cad0();
+  redraw_gl_scene();
   FUN_0042a8e4();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -70185,7 +70185,7 @@ void FUN_004307bc(void)
   local_24 = DAT_10016ed0;
   local_28 = 0xe3f40b5;
   XtSetValues(DAT_10016ee0,&local_28,1);
-  FUN_0040cad0();
+  redraw_gl_scene();
   FUN_0042a8e4();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -70400,7 +70400,7 @@ void createSearch(undefined4 param_1)
   DAT_10016f05 = 0;
   DAT_10016eec = XmCreateTextField(uVar2,"agetext",&uStack_28,0);
   XtManageChild(DAT_10016eec);
-  FUN_0042b6c0(uVar1,&searchHelp);
+  install_help_callback(uVar1,&searchHelp);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
