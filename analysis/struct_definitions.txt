@@ -1,0 +1,306 @@
+FSN Struct Definitions
+================================================================================
+
+
+================================================================================
+Struct #1: _IO_FILE
+================================================================================
+
+struct _IO_FILE {
+    int _flags;
+    char *_IO_read_ptr;
+    char *_IO_read_end;
+    char *_IO_read_base;
+    char *_IO_write_base;
+    char *_IO_write_ptr;
+    char *_IO_write_end;
+    char *_IO_buf_base;
+    char *_IO_buf_end;
+    char *_IO_save_base;
+    char *_IO_backup_base;
+    char *_IO_save_end;
+    struct _IO_marker *_markers;
+    struct _IO_FILE *_chain;
+    int _fileno;
+    int _flags2;
+    __off_t _old_offset;
+    ushort _cur_column;
+    char _vtable_offset;
+    char _shortbuf[1];
+    _IO_lock_t *_lock;
+    __off64_t _offset;
+    void *__pad1;
+    void *__pad2;
+    void *__pad3;
+    void *__pad4;
+    size_t __pad5;
+    int _mode;
+    char _unused2[40];
+};
+
+
+================================================================================
+Struct #2: _IO_marker
+================================================================================
+
+struct _IO_marker {
+    struct _IO_marker *_next;
+    struct _IO_FILE *_sbuf;
+    int _pos;
+};
+
+
+================================================================================
+Struct #3: timespec
+================================================================================
+
+struct timespec {
+    __time_t tv_sec;
+    long tv_nsec;
+};
+
+
+================================================================================
+Struct #4: stat
+================================================================================
+
+struct stat {
+    __dev_t st_dev;
+    ushort __pad1;
+    __ino_t st_ino;
+    __mode_t st_mode;
+    __nlink_t st_nlink;
+    __uid_t st_uid;
+    __gid_t st_gid;
+    __dev_t st_rdev;
+    ushort __pad2;
+    __off_t st_size;
+    __blksize_t st_blksize;
+    __blkcnt_t st_blocks;
+    struct timespec st_atim;
+    struct timespec st_mtim;
+    struct timespec st_ctim;
+    ulong __unused4;
+    ulong __unused5;
+};
+
+
+================================================================================
+Struct #5: statvfs
+================================================================================
+
+struct statvfs {
+    ulong f_bsize;
+    ulong f_frsize;
+    __fsblkcnt_t f_blocks;
+    __fsblkcnt_t f_bfree;
+    __fsblkcnt_t f_bavail;
+    __fsfilcnt_t f_files;
+    __fsfilcnt_t f_ffree;
+    __fsfilcnt_t f_favail;
+    ulong f_fsid;
+    int __f_unused;
+    ulong f_flag;
+    ulong f_namemax;
+    int __f_spare[6];
+};
+
+
+================================================================================
+Struct #6: timezone
+================================================================================
+
+struct timezone {
+    int tz_minuteswest;
+    int tz_dsttime;
+};
+
+
+================================================================================
+Struct #7: timeval
+================================================================================
+
+struct timeval {
+    __time_t tv_sec;
+    __suseconds_t tv_usec;
+};
+
+
+================================================================================
+Struct #8: itimerval
+================================================================================
+
+struct itimerval {
+    struct timeval it_interval;
+    struct timeval it_value;
+};
+
+
+================================================================================
+Struct #9: in_addr
+================================================================================
+
+struct in_addr {
+    in_addr_t s_addr;
+};
+
+
+================================================================================
+Struct #10: sockaddr_in
+================================================================================
+
+struct sockaddr_in {
+    sa_family_t sin_family;
+    in_port_t sin_port;
+    struct in_addr sin_addr;
+    uchar sin_zero[8];
+};
+
+
+================================================================================
+Struct #11: sockaddr
+================================================================================
+
+struct sockaddr {
+    sa_family_t sa_family;
+    char sa_data[14];
+};
+
+
+================================================================================
+Struct #12: fd_set
+================================================================================
+
+struct fd_set {
+    __fd_mask fds_bits[32];
+};
+
+
+================================================================================
+Struct #13: __dirstream
+================================================================================
+
+struct __dirstream {
+};
+
+
+================================================================================
+Struct #14: dirent
+================================================================================
+
+struct dirent {
+    __ino_t d_ino;
+    __off_t d_off;
+    ushort d_reclen;
+    uchar d_type;
+    char d_name[256];
+};
+
+
+================================================================================
+Struct #15: Elf32_RegInfo_MIPS
+================================================================================
+
+struct Elf32_RegInfo_MIPS {
+    enum Elf32_GPRMask_MIPS ri_gprmask;
+    dword field1_0x4[4];
+    dword ri_gp_value;
+};
+
+
+================================================================================
+Struct #16: Elf32_Sym
+================================================================================
+
+struct Elf32_Sym {
+    dword st_name;
+    dword st_value;
+    dword st_size;
+    byte st_info;
+    byte st_other;
+    word st_shndx;
+};
+
+
+================================================================================
+Struct #17: Elf32_Phdr
+================================================================================
+
+struct Elf32_Phdr {
+    enum Elf_ProgramHeaderType_MIPS p_type;
+    dword p_offset;
+    dword p_vaddr;
+    dword p_paddr;
+    dword p_filesz;
+    dword p_memsz;
+    dword p_flags;
+    dword p_align;
+};
+
+
+================================================================================
+Struct #18: Elf32_Shdr
+================================================================================
+
+struct Elf32_Shdr {
+    dword sh_name;
+    enum Elf_SectionHeaderType_MIPS sh_type;
+    dword sh_flags;
+    dword sh_addr;
+    dword sh_offset;
+    dword sh_size;
+    dword sh_link;
+    dword sh_info;
+    dword sh_addralign;
+    dword sh_entsize;
+};
+
+
+================================================================================
+Struct #19: Elf32_Rel
+================================================================================
+
+struct Elf32_Rel {
+    dword r_offset; // location to apply the relocation action
+    dword r_info; // the symbol table index and the type of relocation
+};
+
+
+================================================================================
+Struct #20: Elf32_Dyn_MIPS
+================================================================================
+
+struct Elf32_Dyn_MIPS {
+    enum Elf32_DynTag_MIPS d_tag;
+    dword d_val;
+};
+
+
+================================================================================
+Struct #21: Elf32_Ehdr
+================================================================================
+
+struct Elf32_Ehdr {
+    byte e_ident_magic_num;
+    char e_ident_magic_str[3];
+    byte e_ident_class;
+    byte e_ident_data;
+    byte e_ident_version;
+    byte e_ident_osabi;
+    byte e_ident_abiversion;
+    byte e_ident_pad[7];
+    word e_type;
+    word e_machine;
+    dword e_version;
+    dword e_entry;
+    dword e_phoff;
+    dword e_shoff;
+    dword e_flags;
+    word e_ehsize;
+    word e_phentsize;
+    word e_phnum;
+    word e_shentsize;
+    word e_shnum;
+    word e_shstrndx;
+};
+

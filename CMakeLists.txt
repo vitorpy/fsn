@@ -65,10 +65,18 @@ set(FSN_SOURCES
     src/main.c
 )
 
-# Executable target (disabled until we have buildable source)
-# add_executable(fsn ${FSN_SOURCES})
+# Phase 2: Test that headers compile correctly
+add_executable(test_headers src/test_headers.c)
+target_link_libraries(test_headers
+    ${XM_LIBRARY}
+    ${XT_LIBRARY}
+    ${X11_LIBRARIES}
+    ${OPENGL_LIBRARIES}
+    m
+)
 
-# Link libraries
+# Main executable (disabled until we have buildable source - Phase 6)
+# add_executable(fsn ${FSN_SOURCES})
 # target_link_libraries(fsn
 #     ${XM_LIBRARY}
 #     ${XT_LIBRARY}
@@ -87,4 +95,5 @@ message(STATUS "  OpenMotif library: ${XM_LIBRARY}")
 message(STATUS "  Xt library: ${XT_LIBRARY}")
 message(STATUS "  OpenGL libraries: ${OPENGL_LIBRARIES}")
 message(STATUS "")
-message(STATUS "Build targets currently disabled - will enable after Phase 3")
+message(STATUS "Phase 2: test_headers target enabled")
+message(STATUS "Main fsn target will be enabled in Phase 6")
