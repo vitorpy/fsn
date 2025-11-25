@@ -60,9 +60,15 @@ endif()
 
 # Source files (to be populated as we modularize)
 set(FSN_SOURCES
-    # Phase 1-3: Start with monolithic fsn.c
-    # Phase 4: Will split into modules
-    src/main.c
+    # Phase 4: Module extraction in progress
+    src/datastructures.c
+    # TODO: Add more modules as extracted
+    # src/filesystem.c
+    # src/utility.c
+    # src/picking.c
+    # src/graphics_gl.c
+    # src/ui_motif.c
+    # src/main.c
 )
 
 # Phase 2: Test that headers compile correctly
