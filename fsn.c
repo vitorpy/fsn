@@ -1132,7 +1132,7 @@ pointer boxDir;
 undefined4 DAT_100175d8;
 float DAT_100174c4;
 undefined4 DAT_100174c8;
-float DAT_10017530;
+float database_version;
 char DAT_10017495;
 float DAT_10017510;
 float DAT_10017520;
@@ -1302,8 +1302,8 @@ float DAT_10017524;
 undefined4 DAT_10017528;
 float DAT_10017514;
 undefined4 DAT_1001751c;
-undefined4 DAT_10016c70;
-int DAT_100078b0;
+undefined4 database_root_node;
+int database_loaded_flag;
 undefined FUN_00428044;
 float DAT_100078fc;
 float normal_colormap;
@@ -1390,8 +1390,8 @@ undefined *PTR_s_mouseSpeed_10008b5c;
 int file_selection_dialog;
 undefined FUN_0042d28c;
 undefined FUN_0042d314;
-undefined DAT_10016e50;
-undefined DAT_10016e88;
+undefined fam_connection;
+undefined fam_request_id;
 float view_init_z;
 int DAT_10009528;
 int selection_count;
@@ -1498,13 +1498,13 @@ undefined4 DAT_10017410;
 undefined magic1;
 undefined4 magic2;
 undefined magic3;
-int DAT_10009c90;
-int DAT_10009c8c;
-int DAT_10009c80;
+int icon_cache_capacity;
+int icon_cache_size;
+int icon_loader_instance;
 string s_Unknown_10009a20;
 undefined TheFileIconInterpreter;
 undefined __vtbl__13ByteCodedIcon;
-undefined DAT_10009d2c;
+undefined current_icon_rules;
 undefined DAT_10009d30;
 undefined DAT_10009d34;
 string s_#Tag_10009d38;
@@ -1532,7 +1532,7 @@ int path_buffer;
 undefined DAT_10009f20;
 string s_%c%d_%s_10009f24;
 undefined DAT_10009f2c;
-undefined DAT_10009f34;
+undefined database_dirty_flag;
 undefined DAT_10009f3c;
 int DAT_10009f40;
 int buffer_size;
@@ -43266,12 +43266,12 @@ void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *para
   else if (iStack_4 == *(int *)(curcontext + 0x3c)) {
     FUN_0041da44(iStack_8);
     fVar1 = *(float *)(iStack_8 + 0x14);
-    *param_1 = (float)((double)fVar1 - (double)*(float *)(curcontext + 0x14) * (double)DAT_10017530)
+    *param_1 = (float)((double)fVar1 - (double)*(float *)(curcontext + 0x14) * (double)database_version)
     ;
     *param_2 = (float)(((double)*(float *)(iStack_8 + 0x18) +
                        (double)*(float *)(iStack_4 + 0x3c) /
                        (double)((ulonglong)(double)fVar1 & 0xffffffff00000000)) -
-                      (double)*(float *)(curcontext + 0x18) * (double)DAT_10017530);
+                      (double)*(float *)(curcontext + 0x18) * (double)database_version);
     if (DAT_10017495 == '\0') {
       *param_3 = DAT_1001752c + *(float *)(iStack_8 + 0x1c);
     }
@@ -43623,10 +43623,10 @@ void warpZoomToFile(int param_1,int param_2)
     }
     if (param_2 != 0) {
       set_camera_lookat((double)*(float *)(param_2 + 0x14) -
-                   (double)*(float *)(curcontext + 0x14) * (double)DAT_10017530,
+                   (double)*(float *)(curcontext + 0x14) * (double)database_version,
                    ((double)*(float *)(param_2 + 0x18) +
                    (double)*(float *)(param_1 + 0x3c) / (double)((ulonglong)uVar1 << 0x20)) -
-                   (double)*(float *)(curcontext + 0x18) * (double)DAT_10017530);
+                   (double)*(float *)(curcontext + 0x18) * (double)database_version);
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -49997,7 +49997,7 @@ void dirfamInit(void)
 {
   int iVar1;
   
-  if ((fsn_resources == '\0') && (iVar1 = FUN_00439bd8(&DAT_10016c70), iVar1 < 0)) {
+  if ((fsn_resources == '\0') && (iVar1 = FUN_00439bd8(&database_root_node), iVar1 < 0)) {
     fprintf((FILE *)0xfb52904,
             "Could not run FAM.  This program requires FAM to be installed.\nYou may need to install eoe2.sw.envm to obtain FAM\n"
            );
@@ -50017,7 +50017,7 @@ void FUN_00427d54(void)
 {
   int iVar1;
   
-  if ((fsn_resources == '\0') && (iVar1 = FUN_00439bd8(&DAT_10016c70), iVar1 < 0)) {
+  if ((fsn_resources == '\0') && (iVar1 = FUN_00439bd8(&database_root_node), iVar1 < 0)) {
     fprintf((FILE *)0xfb52904,
             "Could not run FAM.  This program requires FAM to be installed.\nYou may need to install eoe2.sw.envm to obtain FAM\n"
            );
@@ -50036,7 +50036,7 @@ void dirfamDone(void)
 
 {
   if (fsn_resources == '\0') {
-    FUN_00439c0c(&DAT_10016c70);
+    FUN_00439c0c(&database_root_node);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -50069,7 +50069,7 @@ void dirfamMonitorDir(int param_1)
   
   if ((fsn_resources == '\0') && (-1 < *(int *)(param_1 + 0x74) << 10)) {
     uVar1 = build_path_string(0,param_1);
-    FUN_00439eec(&DAT_10016c70,uVar1,param_1 + 0x60);
+    FUN_00439eec(&database_root_node,uVar1,param_1 + 0x60);
     *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) | 0x20;
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -50104,7 +50104,7 @@ void dirfamUnmonitorDir(int param_1)
 {
   if ((fsn_resources == '\0') && (*(int *)(param_1 + 0x74) << 10 < 0)) {
     build_path_string(0,param_1);
-    FUN_0043a5bc(&DAT_10016c70,param_1 + 0x60);
+    FUN_0043a5bc(&database_root_node,param_1 + 0x60);
     *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) & 0xdf;
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -50136,8 +50136,8 @@ void FUN_00427ec8(int param_1)
 void dirfamMonitor(void)
 
 {
-  if ((fsn_resources == '\0') && (DAT_100078b0 == 0)) {
-    DAT_100078b0 = XtAppAddInput(app_context,DAT_10016c70,1,FUN_00428044,0);
+  if ((fsn_resources == '\0') && (database_loaded_flag == 0)) {
+    database_loaded_flag = XtAppAddInput(app_context,database_root_node,1,FUN_00428044,0);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -50172,9 +50172,9 @@ void FUN_00427f5c(void)
 void dirfamUnmonitor(void)
 
 {
-  if ((fsn_resources == '\0') && (DAT_100078b0 != 0)) {
+  if ((fsn_resources == '\0') && (database_loaded_flag != 0)) {
     XtRemoveInput();
-    DAT_100078b0 = 0;
+    database_loaded_flag = 0;
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -53165,10 +53165,10 @@ void FUN_0042dc64(undefined2 *param_1)
 void savePositions(void)
 
 {
-  FUN_0042dc64(&DAT_10016e50);
+  FUN_0042dc64(&fam_connection);
   if (altcontext[0xc51] != '\0') {
     gl_swap_buffers(1);
-    FUN_0042dc64(&DAT_10016e88);
+    FUN_0042dc64(&fam_request_id);
     gl_swap_buffers(1);
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -53481,10 +53481,10 @@ void FUN_0042e3bc(undefined4 param_1)
 void restorePositions(void)
 
 {
-  FUN_0042e3bc(&DAT_10016e50);
+  FUN_0042e3bc(&fam_connection);
   if (altcontext[0xc51] != '\0') {
     gl_swap_buffers(1);
-    FUN_0042e3bc(&DAT_10016e88);
+    FUN_0042e3bc(&fam_request_id);
     gl_swap_buffers(1);
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -57294,14 +57294,14 @@ void FindIconByName__14ByteCodeLoaderFPc(int *param_1)
   
   iVar2 = *param_1;
   FUN_004357ec(&TheFileIconInterpreter);
-  if ((DAT_10009c90 == 0) && (DAT_10009c8c == 0)) {
+  if ((icon_cache_capacity == 0) && (icon_cache_size == 0)) {
     FUN_00435938(&TheFileIconInterpreter);
     FUN_004349f8(param_1,s_Unknown_10009a20);
   }
   else {
     for (; iVar2 != 0; iVar2 = *(int *)(iVar2 + 0x68)) {
-      if ((((*(int *)(iVar2 + 4) != 0) && (DAT_10009c90 == *(int *)(iVar2 + 0x34))) &&
-          (DAT_10009c80 != 0)) &&
+      if ((((*(int *)(iVar2 + 4) != 0) && (icon_cache_capacity == *(int *)(iVar2 + 0x34))) &&
+          (icon_loader_instance != 0)) &&
          (iVar1 = FUN_00435a28(&TheFileIconInterpreter,*(int *)(iVar2 + 4),
                                *(undefined4 *)(iVar2 + 8),*(undefined4 *)(iVar2 + 0x10)), iVar1 != 0
          )) {
@@ -57371,8 +57371,8 @@ void FindInfoByName__14ByteCodeLoaderFPc(int *param_1)
                     // WARNING: Bad instruction - Truncating control flow here
       halt_baddata();
     }
-    if ((((*(int *)(iVar2 + 4) != 0) && (DAT_10009c90 == *(int *)(iVar2 + 0x34))) &&
-        (DAT_10009c80 != 0)) &&
+    if ((((*(int *)(iVar2 + 4) != 0) && (icon_cache_capacity == *(int *)(iVar2 + 0x34))) &&
+        (icon_loader_instance != 0)) &&
        (iVar1 = FUN_00435a28(&TheFileIconInterpreter,*(int *)(iVar2 + 4),*(undefined4 *)(iVar2 + 8),
                              *(undefined4 *)(iVar2 + 0x10)), iVar1 != 0)) break;
     iVar2 = *(int *)(iVar2 + 0x68);
@@ -59588,7 +59588,7 @@ LAB_00437ddc:
             pfVar16 = pfVar16 + 1;
           }
           else if (cVar11 == 'D') {
-            printf(&DAT_10009d2c);
+            printf(&current_icon_rules);
             cVar11 = pcVar18[1];
             pcVar18 = pcVar18 + 1;
             pfVar16 = pfVar16 + -1;
@@ -62276,7 +62276,7 @@ void FAMPending(uint *param_1)
   bzero(&fStack_80,0x80);
   p_Var1 = fStack_80.fds_bits + (*param_1 >> 5);
   *p_Var1 = *p_Var1 | 1 << (*param_1 & 0x1f);
-  select(0x400,&fStack_80,(fd_set *)0x0,(fd_set *)0x0,(timeval *)&DAT_10009f34);
+  select(0x400,&fStack_80,(fd_set *)0x0,(fd_set *)0x0,(timeval *)&database_dirty_flag);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }

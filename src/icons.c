@@ -275,14 +275,14 @@ void FindIconByName__14ByteCodeLoaderFPc(int *param_1)
   
   iVar2 = *param_1;
   FUN_004357ec(&TheFileIconInterpreter);
-  if ((DAT_10009c90 == 0) && (DAT_10009c8c == 0)) {
+  if ((icon_cache_capacity == 0) && (icon_cache_size == 0)) {
     FUN_00435938(&TheFileIconInterpreter);
     FUN_004349f8(param_1,s_Unknown_10009a20);
   }
   else {
     for (; iVar2 != 0; iVar2 = *(int *)(iVar2 + 0x68)) {
-      if ((((*(int *)(iVar2 + 4) != 0) && (DAT_10009c90 == *(int *)(iVar2 + 0x34))) &&
-          (DAT_10009c80 != 0)) &&
+      if ((((*(int *)(iVar2 + 4) != 0) && (icon_cache_capacity == *(int *)(iVar2 + 0x34))) &&
+          (icon_loader_instance != 0)) &&
          (iVar1 = FUN_00435a28(&TheFileIconInterpreter,*(int *)(iVar2 + 4),
                                *(undefined4 *)(iVar2 + 8),*(undefined4 *)(iVar2 + 0x10)), iVar1 != 0
          )) {
@@ -1631,7 +1631,7 @@ LAB_00437ddc:
             pfVar16 = pfVar16 + 1;
           }
           else if (cVar11 == 'D') {
-            printf(&DAT_10009d2c);
+            printf(&current_icon_rules);
             cVar11 = pcVar18[1];
             pcVar18 = pcVar18 + 1;
             pfVar16 = pfVar16 + -1;
@@ -1681,8 +1681,8 @@ void FindInfoByName__14ByteCodeLoaderFPc(int *param_1)
                     // WARNING: Bad instruction - Truncating control flow here
       halt_baddata();
     }
-    if ((((*(int *)(iVar2 + 4) != 0) && (DAT_10009c90 == *(int *)(iVar2 + 0x34))) &&
-        (DAT_10009c80 != 0)) &&
+    if ((((*(int *)(iVar2 + 4) != 0) && (icon_cache_capacity == *(int *)(iVar2 + 0x34))) &&
+        (icon_loader_instance != 0)) &&
        (iVar1 = FUN_00435a28(&TheFileIconInterpreter,*(int *)(iVar2 + 4),*(undefined4 *)(iVar2 + 8),
                              *(undefined4 *)(iVar2 + 0x10)), iVar1 != 0)) break;
     iVar2 = *(int *)(iVar2 + 0x68);

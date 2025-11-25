@@ -7,10 +7,10 @@
 void restorePositions(void)
 
 {
-  FUN_0042e3bc(&DAT_10016e50);
+  FUN_0042e3bc(&fam_connection);
   if (altcontext[0xc51] != '\0') {
     gl_swap_buffers(1);
-    FUN_0042e3bc(&DAT_10016e88);
+    FUN_0042e3bc(&fam_request_id);
     gl_swap_buffers(1);
   }
                     // WARNING: Bad instruction - Truncating control flow here

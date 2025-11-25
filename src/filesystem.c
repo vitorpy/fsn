@@ -7,9 +7,9 @@
 void dirfamUnmonitor(void)
 
 {
-  if ((fsn_resources == '\0') && (DAT_100078b0 != 0)) {
+  if ((fsn_resources == '\0') && (database_loaded_flag != 0)) {
     XtRemoveInput();
-    DAT_100078b0 = 0;
+    database_loaded_flag = 0;
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -43,7 +43,7 @@ void dirfamInit(void)
 {
   int iVar1;
   
-  if ((fsn_resources == '\0') && (iVar1 = FUN_00439bd8(&DAT_10016c70), iVar1 < 0)) {
+  if ((fsn_resources == '\0') && (iVar1 = FUN_00439bd8(&database_root_node), iVar1 < 0)) {
     fprintf((FILE *)0xfb52904,
             "Could not run FAM.  This program requires FAM to be installed.\nYou may need to install eoe2.sw.envm to obtain FAM\n"
            );
@@ -67,10 +67,10 @@ void warpZoomToFile(int param_1,int param_2)
     }
     if (param_2 != 0) {
       set_camera_lookat((double)*(float *)(param_2 + 0x14) -
-                   (double)*(float *)(curcontext + 0x14) * (double)DAT_10017530,
+                   (double)*(float *)(curcontext + 0x14) * (double)database_version,
                    ((double)*(float *)(param_2 + 0x18) +
                    (double)*(float *)(param_1 + 0x3c) / (double)((ulonglong)uVar1 << 0x20)) -
-                   (double)*(float *)(curcontext + 0x18) * (double)DAT_10017530);
+                   (double)*(float *)(curcontext + 0x18) * (double)database_version);
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -135,7 +135,7 @@ void dirfamUnmonitorDir(int param_1)
 {
   if ((fsn_resources == '\0') && (*(int *)(param_1 + 0x74) << 10 < 0)) {
     build_path_string(0,param_1);
-    FUN_0043a5bc(&DAT_10016c70,param_1 + 0x60);
+    FUN_0043a5bc(&database_root_node,param_1 + 0x60);
     *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) & 0xdf;
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -183,7 +183,7 @@ void FAMPending(uint *param_1)
   bzero(&fStack_80,0x80);
   p_Var1 = fStack_80.fds_bits + (*param_1 >> 5);
   *p_Var1 = *p_Var1 | 1 << (*param_1 & 0x1f);
-  select(0x400,&fStack_80,(fd_set *)0x0,(fd_set *)0x0,(timeval *)&DAT_10009f34);
+  select(0x400,&fStack_80,(fd_set *)0x0,(fd_set *)0x0,(timeval *)&database_dirty_flag);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -273,7 +273,7 @@ void dirfamDone(void)
 
 {
   if (fsn_resources == '\0') {
-    FUN_00439c0c(&DAT_10016c70);
+    FUN_00439c0c(&database_root_node);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -314,10 +314,10 @@ void findfile(int param_1,undefined4 param_2)
 void savePositions(void)
 
 {
-  FUN_0042dc64(&DAT_10016e50);
+  FUN_0042dc64(&fam_connection);
   if (altcontext[0xc51] != '\0') {
     gl_swap_buffers(1);
-    FUN_0042dc64(&DAT_10016e88);
+    FUN_0042dc64(&fam_request_id);
     gl_swap_buffers(1);
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -331,7 +331,7 @@ void dirfamMonitorDir(int param_1)
   
   if ((fsn_resources == '\0') && (-1 < *(int *)(param_1 + 0x74) << 10)) {
     uVar1 = build_path_string(0,param_1);
-    FUN_00439eec(&DAT_10016c70,uVar1,param_1 + 0x60);
+    FUN_00439eec(&database_root_node,uVar1,param_1 + 0x60);
     *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) | 0x20;
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -434,8 +434,8 @@ void FAMMonitorDirectory(undefined4 param_1,char *param_2,int *param_3,undefined
 void dirfamMonitor(void)
 
 {
-  if ((fsn_resources == '\0') && (DAT_100078b0 == 0)) {
-    DAT_100078b0 = XtAppAddInput(app_context,DAT_10016c70,1,FUN_00428044,0);
+  if ((fsn_resources == '\0') && (database_loaded_flag == 0)) {
+    database_loaded_flag = XtAppAddInput(app_context,database_root_node,1,FUN_00428044,0);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
