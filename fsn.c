@@ -1417,7 +1417,7 @@ string s_/bin/sh_10009640;
 uint pattern_match_enabled;
 undefined4 DAT_10016f08;
 char DAT_10016f04;
-int DAT_10016f0c;
+int search_number_value;
 char DAT_10016f05;
 int DAT_10016f10;
 undefined4 firstSearchDir;
@@ -1425,21 +1425,21 @@ int DAT_10016edc;
 undefined4 lastSearchDir;
 undefined4 visitedSearchDp;
 undefined4 visitedSearchFp;
-undefined4 DAT_10016ee4;
+undefined4 search_name_field;
 char *DAT_10016f08;
-undefined4 DAT_10016ee8;
-undefined4 DAT_10016eec;
+undefined4 search_size_field;
+undefined4 search_age_field;
 undefined4 DAT_10016ef8;
-undefined4 DAT_10016ee0;
+undefined4 search_count_label;
 undefined DAT_10013d18;
 undefined DAT_10013d1c;
 undefined DAT_10013d20;
 undefined4 DAT_10016edc;
-undefined4 DAT_10016ed0;
-undefined4 DAT_10016ed4;
+undefined4 search_xmstring_1;
+undefined4 search_xmstring_2;
 undefined4 search_xmstring_3;
-undefined4 DAT_10016ef0;
-undefined4 DAT_10016ef4;
+undefined4 search_size_comp_button;
+undefined4 search_age_comp_button;
 undefined DAT_10013d30;
 pointer searchHelp;
 undefined DAT_10013d5c;
@@ -70010,9 +70010,9 @@ void FUN_0042ffd8(undefined4 *param_1)
         }
         uVar2 = pattern_match_enabled & 4;
         if (((pattern_match_enabled & 2) != 0) &&
-           (((DAT_10016f04 != '\0' && (DAT_10016f0c <= (int)puVar3[3])) ||
+           (((DAT_10016f04 != '\0' && (search_number_value <= (int)puVar3[3])) ||
             ((uVar2 = pattern_match_enabled & 4, DAT_10016f04 == '\0' &&
-             (uVar2 = pattern_match_enabled & 4, (int)puVar3[3] <= DAT_10016f0c)))))) {
+             (uVar2 = pattern_match_enabled & 4, (int)puVar3[3] <= search_number_value)))))) {
           *(byte *)(puVar3 + 10) = *(byte *)(puVar3 + 10) & 0xf7;
           uVar2 = pattern_match_enabled & 4;
         }
@@ -70111,22 +70111,22 @@ void FUN_00430448(void)
   FUN_00430358();
   DAT_10016edc = 0;
   pattern_match_enabled = 0;
-  DAT_10016f08 = (char *)XmTextFieldGetString(DAT_10016ee4);
+  DAT_10016f08 = (char *)XmTextFieldGetString(search_name_field);
   if ((DAT_10016f08 != (char *)0x0) && (*DAT_10016f08 != '\0')) {
     pattern_match_enabled = pattern_match_enabled | 1;
   }
-  pbVar1 = (byte *)XmTextFieldGetString(DAT_10016ee8);
+  pbVar1 = (byte *)XmTextFieldGetString(search_size_field);
   if (pbVar1 != (byte *)0x0) {
     iVar2 = isdigit((uint)*pbVar1);
     if (iVar2 != 0) {
       pattern_match_enabled = pattern_match_enabled | 2;
-      DAT_10016f0c = atoi((char *)pbVar1);
+      search_number_value = atoi((char *)pbVar1);
     }
   }
   if (pbVar1 != (byte *)0x0) {
     XtFree(pbVar1);
   }
-  pbVar1 = (byte *)XmTextFieldGetString(DAT_10016eec);
+  pbVar1 = (byte *)XmTextFieldGetString(search_age_field);
   if (pbVar1 != (byte *)0x0) {
     iVar2 = isdigit((uint)*pbVar1);
     if (iVar2 != 0) {
@@ -70158,7 +70158,7 @@ void FUN_00430448(void)
   uVar3 = XmStringCreate(acStack_44,&default_charset);
   local_c = 0xe3f40b5;
   local_8 = uVar3;
-  XtSetValues(DAT_10016ee0,&local_c,1);
+  XtSetValues(search_count_label,&local_c,1);
   XmStringFree(uVar3);
   redraw_gl_scene();
   FUN_0042a8e4();
@@ -70177,14 +70177,14 @@ void FUN_004307bc(void)
   undefined4 local_24;
   
   DAT_10016edc = 0;
-  XmTextFieldSetString(DAT_10016ee4,&DAT_10013d18);
-  XmTextFieldSetString(DAT_10016ee8,&DAT_10013d1c);
-  XmTextFieldSetString(DAT_10016eec,&DAT_10013d20);
+  XmTextFieldSetString(search_name_field,&DAT_10013d18);
+  XmTextFieldSetString(search_size_field,&DAT_10013d1c);
+  XmTextFieldSetString(search_age_field,&DAT_10013d20);
   XtSetSensitive(DAT_10016ef8,0);
   FUN_00430358();
-  local_24 = DAT_10016ed0;
+  local_24 = search_xmstring_1;
   local_28 = 0xe3f40b5;
-  XtSetValues(DAT_10016ee0,&local_28,1);
+  XtSetValues(search_count_label,&local_28,1);
   redraw_gl_scene();
   FUN_0042a8e4();
                     // WARNING: Bad instruction - Truncating control flow here
@@ -70288,12 +70288,12 @@ void FUN_00430b70(void)
   DAT_10016f04 = DAT_10016f04 == '\0';
   local_28 = 0xe3f40b5;
   if ((bool)DAT_10016f04) {
-    local_24 = DAT_10016ed4;
+    local_24 = search_xmstring_2;
   }
   else {
     local_24 = search_xmstring_3;
   }
-  XtSetValues(DAT_10016ef0,&local_28,1);
+  XtSetValues(search_size_comp_button,&local_28,1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -70311,12 +70311,12 @@ void FUN_00430c0c(void)
   DAT_10016f05 = DAT_10016f05 == '\0';
   local_28 = 0xe3f40b5;
   if ((bool)DAT_10016f05) {
-    local_24 = DAT_10016ed4;
+    local_24 = search_xmstring_2;
   }
   else {
     local_24 = search_xmstring_3;
   }
-  XtSetValues(DAT_10016ef4,&local_28,1);
+  XtSetValues(search_age_comp_button,&local_28,1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -70335,8 +70335,8 @@ void createSearch(undefined4 param_1)
   undefined4 uStack_28;
   undefined4 uStack_24;
   
-  DAT_10016ed0 = XmStringCreateSimple("Search");
-  DAT_10016ed4 = XmStringCreateSimple(&DAT_10013d2c);
+  search_xmstring_1 = XmStringCreateSimple("Search");
+  search_xmstring_2 = XmStringCreateSimple(&DAT_10013d2c);
   search_xmstring_3 = XmStringCreateSimple(&DAT_10013d30);
   uStack_28 = 0xe3f3afd;
   uStack_24 = 1;
@@ -70360,18 +70360,18 @@ void createSearch(undefined4 param_1)
   uStack_28 = 0xf661719;
   uVar2 = XmCreateRowColumn(uVar1,"search",&uStack_28,1);
   XtManageChild(uVar2);
-  uStack_24 = DAT_10016ed0;
+  uStack_24 = search_xmstring_1;
   uStack_28 = 0xe3f40b5;
-  DAT_10016ee0 = XmCreateLabel(uVar2,"searchCount",&uStack_28,1);
-  XtManageChild(DAT_10016ee0);
+  search_count_label = XmCreateLabel(uVar2,"searchCount",&uStack_28,1);
+  XtManageChild(search_count_label);
   uStack_28 = 0xf661719;
   uStack_24 = 2;
   uVar3 = XmCreateRowColumn(uVar2,"searchname",&uStack_28,1);
   XtManageChild(uVar3);
   uVar4 = XmCreateLabel(uVar3,&DAT_10013d5c,&uStack_28,0);
   XtManageChild(uVar4);
-  DAT_10016ee4 = XmCreateTextField(uVar3,"nametext",&uStack_28,0);
-  XtManageChild(DAT_10016ee4);
+  search_name_field = XmCreateTextField(uVar3,"nametext",&uStack_28,0);
+  XtManageChild(search_name_field);
   uStack_28 = 0xf661719;
   uStack_24 = 2;
   uVar3 = XmCreateRowColumn(uVar2,"searchsize",&uStack_28,1);
@@ -70380,12 +70380,12 @@ void createSearch(undefined4 param_1)
   XtManageChild(uVar4);
   uStack_24 = search_xmstring_3;
   uStack_28 = 0xe3f40b5;
-  DAT_10016ef0 = XmCreatePushButton(uVar3,"searchSizeComp",&uStack_28,1);
-  XtAddCallback(DAT_10016ef0,0xe3f35b3,FUN_00430b70,0);
-  XtManageChild(DAT_10016ef0);
+  search_size_comp_button = XmCreatePushButton(uVar3,"searchSizeComp",&uStack_28,1);
+  XtAddCallback(search_size_comp_button,0xe3f35b3,FUN_00430b70,0);
+  XtManageChild(search_size_comp_button);
   DAT_10016f04 = 0;
-  DAT_10016ee8 = XmCreateTextField(uVar3,"sizetext",&uStack_28,0);
-  XtManageChild(DAT_10016ee8);
+  search_size_field = XmCreateTextField(uVar3,"sizetext",&uStack_28,0);
+  XtManageChild(search_size_field);
   uStack_24 = 2;
   uStack_28 = 0xf661719;
   uVar2 = XmCreateRowColumn(uVar2,"searchage",&uStack_28,1);
@@ -70394,12 +70394,12 @@ void createSearch(undefined4 param_1)
   XtManageChild(uVar3);
   uStack_24 = search_xmstring_3;
   uStack_28 = 0xe3f40b5;
-  DAT_10016ef4 = XmCreatePushButton(uVar2,"searchAgeComp",&uStack_28,1);
-  XtAddCallback(DAT_10016ef4,0xe3f35b3,FUN_00430c0c,0);
-  XtManageChild(DAT_10016ef4);
+  search_age_comp_button = XmCreatePushButton(uVar2,"searchAgeComp",&uStack_28,1);
+  XtAddCallback(search_age_comp_button,0xe3f35b3,FUN_00430c0c,0);
+  XtManageChild(search_age_comp_button);
   DAT_10016f05 = 0;
-  DAT_10016eec = XmCreateTextField(uVar2,"agetext",&uStack_28,0);
-  XtManageChild(DAT_10016eec);
+  search_age_field = XmCreateTextField(uVar2,"agetext",&uStack_28,0);
+  XtManageChild(search_age_field);
   install_help_callback(uVar1,&searchHelp);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();

@@ -78,3 +78,14 @@ DAT_10016b68 -> menu_print_file_2 : 5 uses - XmCreatePushButton("menuPrintFile")
 DAT_10016bf0 -> window_scale_x : 5 uses - float, width / (maxx - minx) scale factor
 DAT_10016bf4 -> window_scale_y : 5 uses - float, height / (maxy - miny) scale factor
 
+# BATCH 7: Search dialog widgets (5-4 uses)
+DAT_10016ee0 -> search_count_label : 5 uses - XmCreateLabel("searchCount")
+DAT_10016ee4 -> search_name_field : 5 uses - XmCreateTextField("nametext") for search
+DAT_10016ee8 -> search_size_field : 5 uses - XmCreateTextField("sizetext") for search
+DAT_10016eec -> search_age_field : 5 uses - XmCreateTextField("agetext") for search
+DAT_10016ef0 -> search_size_comp_button : 5 uses - XmCreatePushButton("searchSizeComp")
+DAT_10016ef4 -> search_age_comp_button : 5 uses - XmCreatePushButton("searchAgeComp")
+DAT_10016ed0 -> search_xmstring_1 : 4 uses - XmStringCreateSimple("Search")
+DAT_10016ed4 -> search_xmstring_2 : 4 uses - XmStringCreateSimple(...)
+DAT_10016f0c -> search_number_value : 4 uses - int, atoi() result for pattern matching
+
