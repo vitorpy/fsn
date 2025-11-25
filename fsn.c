@@ -37136,10 +37136,10 @@ void main(int param_1,undefined4 *param_2)
   uStack_68 = 0xe3f4707;
   uStack_6c = 4;
   uStack_64 = *(undefined4 *)(curcontextwindows + 8);
-  FUN_0042aed4(*(undefined4 *)(curcontextwindows + 0xc),&uStack_a0,8);
+  set_window_property(*(undefined4 *)(curcontextwindows + 0xc),&uStack_a0,8);
   load_filetype_rules_wrapper("/usr/lib/filetype/workspace.ctr");
   FUN_00427d54();
-  FUN_00433f74();
+  init_icon_context();
   FUN_00428b6c();
   if ((*pcStack_bc != '/') && (relative_path_flag == '\0')) {
     pcStack_c0 = getcwd((char *)0x0,0x400);
@@ -37351,10 +37351,10 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   local_68 = 0xe3f4707;
   local_6c = 4;
   local_64 = *(undefined4 *)(curcontextwindows + 8);
-  FUN_0042aed4(*(undefined4 *)(curcontextwindows + 0xc),&local_a0,8);
+  set_window_property(*(undefined4 *)(curcontextwindows + 0xc),&local_a0,8);
   load_filetype_rules_wrapper("/usr/lib/filetype/workspace.ctr");
   FUN_00427d54();
-  FUN_00433f74();
+  init_icon_context();
   FUN_00428b6c();
   if ((*local_bc != '/') && (relative_path_flag == '\0')) {
     local_c0 = getcwd((char *)0x0,0x400);
@@ -40662,7 +40662,7 @@ void FUN_00414870(FILE *param_1,undefined4 *param_2,int param_3)
         local_1a = 0;
       }
       else {
-        local_2c = (char *)FUN_00433bdc();
+        local_2c = (char *)get_icon_string();
         sVar2 = strlen(local_2c);
         local_1a = (short)sVar2;
       }
@@ -41494,7 +41494,7 @@ void initialize_db(char *param_1)
     current_device_id = sStack_8c.st_dev._0_4_;
   }
   else {
-    FUN_0042b030();
+    finalize_update();
     topdir = (undefined4 *)FUN_004158d4(param_1);
     free(pcVar4);
   }
@@ -41626,7 +41626,7 @@ void FUN_004174d0(char *param_1)
     current_device_id = local_8c.st_dev._0_4_;
   }
   else {
-    FUN_0042b030();
+    finalize_update();
     topdir = (undefined4 *)FUN_004158d4(param_1);
     free(pcVar4);
   }
@@ -41991,7 +41991,7 @@ void fileExecuting(int param_1)
   
   iVar1 = validate_directory_access();
   if ((iVar1 != 0) && (*(int *)(iVar1 + 0x20) != 0)) {
-    FUN_00433e24(*(undefined4 *)(iVar1 + 0x20),1,0,0,0,0);
+    set_icon_flags(*(undefined4 *)(iVar1 + 0x20),1,0,0,0,0);
     *(byte *)(iVar1 + 0x29) = *(byte *)(iVar1 + 0x29) & 0xf7 | 8;
     *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) | 2;
   }
@@ -42010,7 +42010,7 @@ void fileStoppedExecuting(undefined4 param_1)
   
   iVar1 = validate_directory_access();
   if ((iVar1 != 0) && (*(int *)(iVar1 + 0x20) != 0)) {
-    FUN_00433e24(*(undefined4 *)(iVar1 + 0x20),0,0,0,0,0);
+    set_icon_flags(*(undefined4 *)(iVar1 + 0x20),0,0,0,0,0);
     *(byte *)(iVar1 + 0x29) = *(byte *)(iVar1 + 0x29) & 0xf7;
   }
   FUN_004184c8(param_1);
@@ -44425,7 +44425,7 @@ void FUN_0041c3e4(void)
       uVar5 = *(undefined4 *)(iVar4 + 0xc);
     }
     else {
-      pcVar3 = (char *)FUN_00433c08(*(int *)(iVar4 + 0x20),3);
+      pcVar3 = (char *)get_icon_attribute(*(int *)(iVar4 + 0x20),3);
       uVar5 = *(undefined4 *)(*(int *)(curcontext + 0x48) + 0xc);
     }
     sprintf(acStack_c8,"%s   %d bytes, %d days old, %s%s",uVar1,uVar5,uVar2,local_100,pcVar3);
@@ -45553,7 +45553,7 @@ void FUN_0041e260(int param_1,undefined4 *param_2,undefined4 param_3,char param_
       show_error_message(acStack_464);
     }
     else {
-      __s1 = (char *)FUN_00433c08(param_2[8],param_3,param_5);
+      __s1 = (char *)get_icon_attribute(param_2[8],param_3,param_5);
       if (__s1 == (char *)0x0) {
         sprintf(acStack_464,"Don\'t know how to %s %s",param_5,*param_2);
         show_error_message(acStack_464);
@@ -45583,7 +45583,7 @@ void FUN_0041e260(int param_1,undefined4 *param_2,undefined4 param_3,char param_
           XtFree(DAT_10016bdc);
         }
         DAT_10016bdc = pcVar1;
-        uVar4 = FUN_00433bdc(param_2[8]);
+        uVar4 = get_icon_string(param_2[8]);
         sprintf(acStack_464,"LEADERTYPE=%s",uVar4);
         sVar2 = strlen(acStack_464);
         pcVar1 = (char *)XtMalloc(sVar2 + 1);
@@ -45841,7 +45841,7 @@ void gotoFileName(undefined4 param_1)
   int iStack_8;
   int iStack_4;
   
-  FUN_0042ab1c(param_1,&iStack_4,&iStack_8);
+  get_position_coords(param_1,&iStack_4,&iStack_8);
   if (iStack_4 != 0) {
     update_marked_item();
     if (iStack_8 != 0) {
@@ -51293,7 +51293,7 @@ void highlightByName(undefined4 param_1)
   undefined4 uStack_8;
   int iStack_4;
   
-  FUN_0042ab1c(param_1,&iStack_4,&uStack_8);
+  get_position_coords(param_1,&iStack_4,&uStack_8);
   if (iStack_4 == 0) {
     FUN_004294cc();
   }
@@ -52104,7 +52104,7 @@ LAB_0042ad4c:
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042ab1c(int param_1,int *param_2,undefined4 *param_3)
+void get_position_coords(int param_1,int *param_2,undefined4 *param_3)
 
 {
   char cVar1;
@@ -52268,7 +52268,7 @@ void createCopyright(undefined4 param_1,int param_2,int param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042aed4(undefined4 param_1,int param_2,int param_3)
+void set_window_property(undefined4 param_1,int param_2,int param_3)
 
 {
   int *piVar1;
@@ -52352,7 +52352,7 @@ void buildingDatabaseMessage(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042b030(void)
+void finalize_update(void)
 
 {
   undefined4 uVar1;
@@ -55005,7 +55005,7 @@ void SG_getDefaultDepth(int param_1,undefined4 param_2,int *param_3,int param_4)
        ((param_3 == (int *)0x0 || (*param_3 != 3)))) ||
       ((((param_4 != 0 || (iVar2 != 2)) && (param_4 != 2)) ||
        ((*(int *)(iVar1 + iVar2 * 4 + 0x3c) != 3 || (iVar2 != 2)))))))) {
-    FUN_00431a18();
+    read_data_section();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -55218,7 +55218,7 @@ void SG_getMaxDepth(int param_1,int param_2,int *param_3,int param_4)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00431a18(int param_1,int param_2,int *param_3,int param_4)
+void read_data_section(int param_1,int param_2,int *param_3,int param_4)
 
 {
   int iVar1;
@@ -55289,7 +55289,7 @@ void SG_getNormalArgs(undefined4 param_1,undefined4 param_2,int param_3,int *par
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00431b34(undefined4 param_1,undefined4 param_2,int param_3,int *param_4)
+void process_data_section(undefined4 param_1,undefined4 param_2,int param_3,int *param_4)
 
 {
   undefined4 uVar1;
@@ -55476,7 +55476,7 @@ void SG_getPopupArgs(undefined4 param_1,undefined4 param_2,int param_3,int *para
   uVar1 = parse_data_buffer(param_1,param_2,&temp_data_buffer,4);
   iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,4);
   if (iVar2 < 0) {
-    FUN_00431b34(param_1,param_2,param_3,param_4);
+    process_data_section(param_1,param_2,param_3,param_4);
   }
   else {
     uVar1 = eval_bytecode_instruction(param_1,param_2);
@@ -55551,7 +55551,7 @@ void SG_getUnderlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *p
   uVar1 = parse_data_buffer(param_1,param_2,&temp_data_buffer,1);
   iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,1);
   if (iVar2 < 0) {
-    FUN_00431b34(param_1,param_2,param_3,param_4);
+    process_data_section(param_1,param_2,param_3,param_4);
   }
   else {
     uVar3 = eval_bytecode_instruction(param_1,param_2);
@@ -55601,7 +55601,7 @@ void read_bytecode_value(int param_1,int param_2,int param_3,int *param_4,int pa
       iVar4 = *(int *)(iVar1 + 0x18);
       goto LAB_00432460;
     }
-    param_3 = FUN_00431a18(param_1,param_2,param_4);
+    param_3 = read_data_section(param_1,param_2,param_4);
   }
   iVar4 = *(int *)(iVar1 + 0x18);
 LAB_00432460:
@@ -56299,7 +56299,7 @@ void FUN_00433b44(undefined4 param_1)
 void cFindIconByType(undefined4 param_1)
 
 {
-  FUN_004349f8(&context_data_block,param_1);
+  load_context_data(&context_data_block,param_1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -56333,7 +56333,7 @@ void cIconToTypeName(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00433bdc(void)
+void get_icon_string(void)
 
 {
                     // WARNING: Bad instruction - Truncating control flow here
@@ -56355,7 +56355,7 @@ void cIconGetValue(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00433c08(void)
+void get_icon_attribute(void)
 
 {
                     // WARNING: Bad instruction - Truncating control flow here
@@ -56453,7 +56453,7 @@ void cSetState(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefine
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00433e24(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+void set_icon_flags(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
                  undefined4 param_5,undefined4 param_6)
 
 {
@@ -56622,7 +56622,7 @@ void initRGBColors(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00433f74(void)
+void init_icon_context(void)
 
 {
   short *psVar1;
@@ -57261,7 +57261,7 @@ void FindIconByType__14ByteCodeLoaderFPc(int *param_1,char *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004349f8(int *param_1,undefined4 param_2)
+void load_context_data(int *param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -57293,10 +57293,10 @@ void FindIconByName__14ByteCodeLoaderFPc(int *param_1)
   int iVar2;
   
   iVar2 = *param_1;
-  FUN_004357ec(&TheFileIconInterpreter);
+  reset_icon_interpreter(&TheFileIconInterpreter);
   if ((icon_cache_capacity == 0) && (icon_cache_size == 0)) {
     reset_icon_interpreter(&TheFileIconInterpreter);
-    FUN_004349f8(param_1,s_Unknown_10009a20);
+    load_context_data(param_1,s_Unknown_10009a20);
   }
   else {
     for (; iVar2 != 0; iVar2 = *(int *)(iVar2 + 0x68)) {
@@ -57364,7 +57364,7 @@ void FindInfoByName__14ByteCodeLoaderFPc(int *param_1)
   int iVar2;
   
   iVar2 = *param_1;
-  FUN_004357ec(&TheFileIconInterpreter);
+  reset_icon_interpreter(&TheFileIconInterpreter);
   while( true ) {
     if (iVar2 == 0) {
       reset_icon_interpreter(&TheFileIconInterpreter);
@@ -58175,7 +58175,7 @@ void SetFile__19FileIconInterpreterFPc(int param_1,char *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004357ec(int param_1,int param_2)
+void reset_icon_interpreter(int param_1,int param_2)
 
 {
   int iVar1;
@@ -59533,7 +59533,7 @@ LAB_00437ddc:
           }
           else if (cVar11 == '!') {
             fVar17 = pfVar16[-1];
-            __s1 = (char *)FUN_004382f4(param_1[0x8b],fVar17);
+            __s1 = (char *)pattern_match(param_1[0x8b],fVar17);
             pfVar16[-1] = (float)__s1;
             __dl__FPv(fVar17);
             cVar11 = pcVar18[1];
@@ -61045,7 +61045,7 @@ void GlobMatch__FPcT1(byte *param_1,byte *param_2)
           pbVar5 = param_2 + 1;
           param_2 = param_2 + 1;
         } while (*pbVar5 == 0x2a);
-        for (; (iVar3 = FUN_004382f4(param_1,param_2), iVar3 == 0 && (*param_1 != 0));
+        for (; (iVar3 = pattern_match(param_1,param_2), iVar3 == 0 && (*param_1 != 0));
             param_1 = param_1 + 1) {
         }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -61130,7 +61130,7 @@ void GlobMatch__FPcT1(byte *param_1,byte *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004382f4(byte *param_1,byte *param_2)
+void pattern_match(byte *param_1,byte *param_2)
 
 {
   char *pcVar1;
