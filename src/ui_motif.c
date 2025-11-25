@@ -361,13 +361,13 @@ void createSelectedInfo(undefined4 param_1,undefined4 *param_2,undefined4 param_
   undefined4 uVar1;
   undefined4 uVar2;
   
-  DAT_10016b30 = XmStringCreate("Move file",&default_charset);
+  move_file_xmstring = XmStringCreate("Move file",&default_charset);
   DAT_10016b34 = XmStringCreate("Move file out",&default_charset);
   DAT_10016b38 = XmStringCreate("Move file in",&default_charset);
-  DAT_10016b3c = XmStringCreate("Copy file",&default_charset);
+  copy_file_xmstring = XmStringCreate("Copy file",&default_charset);
   DAT_10016b40 = XmStringCreate("Copy file out",&default_charset);
   DAT_10016b44 = XmStringCreate("Copy file in",&default_charset);
-  DAT_10016b48 = XmStringCreate("Link file",&default_charset);
+  link_file_xmstring = XmStringCreate("Link file",&default_charset);
   DAT_10016b4c = XmStringCreate("Link file out",&default_charset);
   DAT_10016b50 = XmStringCreate("Link file in",&default_charset);
   uVar1 = XmCreateForm(param_1,"selectedInfo",param_2,param_3);
@@ -680,19 +680,19 @@ void setMoveAndCopyButtons(void)
       halt_baddata();
     }
   }
-  uStack_24 = DAT_10016b30;
+  uStack_24 = move_file_xmstring;
   uStack_28 = 0xe3f40b5;
   XtSetValues(menu_move_file_1,&uStack_28,1);
   XtSetValues(menu_move_file_2,&uStack_28,1);
   XtSetSensitive(menu_move_file_1,0);
   XtSetSensitive(menu_move_file_2,0);
-  uStack_24 = DAT_10016b3c;
+  uStack_24 = copy_file_xmstring;
   uStack_28 = 0xe3f40b5;
   XtSetValues(menu_copy_file_1,&uStack_28,1);
   XtSetValues(menu_copy_file_2,&uStack_28,1);
   XtSetSensitive(menu_copy_file_1,0);
   XtSetSensitive(menu_copy_file_2,0);
-  uStack_24 = DAT_10016b48;
+  uStack_24 = link_file_xmstring;
   uStack_28 = 0xe3f40b5;
   XtSetValues(menu_link_file_1,&uStack_28,1);
   XtSetValues(menu_link_file_2,&uStack_28,1);
@@ -1090,8 +1090,8 @@ void setLabelColors(void)
     ppuVar2 = ppuVar2 + 1;
     puVar3 = puVar3 + 4;
   } while (puVar1 != (undefined4 *)&legendShowing);
-  if (DAT_10017494 == '\0') {
-    FUN_00428cc0(DAT_100175d8,&lhLabelColor,*(undefined4 *)(curcontextwindows + 0x2c),auStack_30[0])
+  if (grid_display_flag == '\0') {
+    FUN_00428cc0(highlight_packed_color,&lhLabelColor,*(undefined4 *)(curcontextwindows + 0x2c),auStack_30[0])
     ;
   }
   else {
@@ -1099,7 +1099,7 @@ void setLabelColors(void)
     ;
   }
   if (*(int *)(altcontextwindows + 0x2c) != 0) {
-    puStack_24 = DAT_10017654;
+    puStack_24 = cached_context_ptr;
     uStack_1c = lhLabelColor;
     uStack_28 = 0xf6615f6;
     uStack_20 = 0xf661554;
@@ -1732,7 +1732,7 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   XtManageChild(menu_delete_file_2);
   (&menu_items_array)[array_index] = menu_delete_file_2;
   array_index = array_index + 1;
-  uStack_64 = DAT_10016b30;
+  uStack_64 = move_file_xmstring;
   uStack_68 = 0xe3f40b5;
   uStack_60 = 0xf6617e7;
   uStack_6c = 2;
@@ -1743,7 +1743,7 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   menu_move_file_2 = XmCreatePushButton(uStack_8,"menuMoveFile",&uStack_68,uStack_6c);
   XtAddCallback(menu_move_file_2,0xe3f35b3,FUN_0041f2b4,1);
   XtManageChild(menu_move_file_2);
-  uStack_64 = DAT_10016b3c;
+  uStack_64 = copy_file_xmstring;
   uStack_68 = 0xe3f40b5;
   uStack_60 = 0xf6617e7;
   uStack_6c = 2;
@@ -1754,7 +1754,7 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   menu_copy_file_2 = XmCreatePushButton(uStack_8,"menuCopyFile",&uStack_68,uStack_6c);
   XtAddCallback(menu_copy_file_2,0xe3f35b3,FUN_0041f2b4,2);
   XtManageChild(menu_copy_file_2);
-  uStack_64 = DAT_10016b48;
+  uStack_64 = link_file_xmstring;
   uStack_68 = 0xe3f40b5;
   uStack_60 = 0xf6617e7;
   uStack_6c = 2;

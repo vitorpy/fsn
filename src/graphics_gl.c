@@ -741,8 +741,8 @@ void draw_directories(char param_1)
                      *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
                      *(float *)(curcontext + 8)) / zoom_reference_height);
         fVar1 = (DAT_100175a0 * *(float *)(curcontext + 0x34)) / fVar1;
-        if (DAT_10017494 == '\0') {
-          cpack(DAT_100175d8);
+        if (grid_display_flag == '\0') {
+          cpack(highlight_packed_color);
           bgnpolygon();
           fStack_c = *(float *)curcontext - fVar1;
           fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
@@ -2598,8 +2598,8 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
   uVar5 = (uint)((ulonglong)param_1 >> 0x20);
   if (param_4 == '\0') {
     fVar8 = DAT_100175a0 * *(float *)(curcontext + 0x34);
-    if (DAT_10017494 == '\0') {
-      cpack(DAT_100175d8);
+    if (grid_display_flag == '\0') {
+      cpack(highlight_packed_color);
       bgnpolygon();
       unaff_f20 = (double)fVar8;
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);

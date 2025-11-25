@@ -594,7 +594,7 @@ void initialize_db(char *param_1)
   undefined4 uStack_4;
   
   bVar2 = false;
-  time(&DAT_100166ac);
+  time(&last_operation_time);
   if (db_filepath == (char *)0x0) {
     if (home_directory == (char *)0x0) {
       if (relative_path_flag == '\0') {
@@ -716,38 +716,38 @@ void layout_db(undefined4 param_1,undefined4 param_2)
   undefined4 in_f11;
   
   FUN_0042df08();
-  time(&DAT_100166ac);
+  time(&last_operation_time);
   miny = 0.0;
   maxy = 0.0;
   minx = 0.0;
   maxx = 0.0;
   if (displayHeight == 0) {
     in_f6 = (double)CONCAT44((int)((ulonglong)in_f6 >> 0x20),0x3f800000);
-    DAT_100166b0 = 1.0;
+    horizontal_scale_factor = 1.0;
   }
   else {
     fVar1 = (float)FUN_00411774(window_width);
-    DAT_100166b0 = DAT_100174f8 / fVar1;
+    horizontal_scale_factor = DAT_100174f8 / fVar1;
   }
   *(undefined4 *)(topdir + 0x2c) = 0;
   *(undefined4 *)(topdir + 0x30) = 0;
   FUN_00412604(topdir);
   uVar3 = (undefined4)((ulonglong)in_f6 >> 0x20);
   if (displayHeight == 0) {
-    DAT_100166b0 = 1.0;
+    horizontal_scale_factor = 1.0;
   }
   else if (displayDirectoryHeight == 0) {
-    DAT_100166b4 = 1.0;
+    vertical_scale_factor = 1.0;
   }
   else if ((displayDirectoryHeight == 1) || (displayDirectoryHeight != 2)) {
     fVar1 = (float)FUN_00411774(window_height);
-    in_f6 = (double)CONCAT44(uVar3,DAT_100174fc);
-    DAT_100166b4 = DAT_100174fc / fVar1;
+    in_f6 = (double)CONCAT44(uVar3,reference_dimension);
+    vertical_scale_factor = reference_dimension / fVar1;
   }
   else {
     fVar1 = (float)FUN_00411774(*(undefined4 *)(topdir + 0x20));
-    in_f6 = (double)DAT_100174fc;
-    DAT_100166b4 = (float)(in_f6 / (double)fVar1);
+    in_f6 = (double)reference_dimension;
+    vertical_scale_factor = (float)(in_f6 / (double)fVar1);
   }
   dVar2 = (double)*(float *)(topdir + 0x3c);
   fVar1 = powf(zoom_base_factor,
@@ -1600,7 +1600,7 @@ void main(int param_1,undefined4 *param_2)
   FUN_0040ae2c();
   FUN_00411674();
   FUN_0040a704();
-  DAT_10016634 = XtParseTranslationTable(glwidget_translations);
+  glwidget_translations = XtParseTranslationTable(glwidget_translations);
   blankXmString = XmStringCreate(&DAT_1000a2fc,&default_charset);
   emptyXmString = XmStringCreate(&DAT_1000a300,&default_charset);
   uVar1 = XtDisplay(toplevel);
@@ -1629,7 +1629,7 @@ void main(int param_1,undefined4 *param_2)
   FUN_0040df80();
   iVar3 = init_display_mode();
   if (iVar3 != 0) {
-    DAT_100000a4 = 0x3000;
+    display_mode_flags = 0x3000;
   }
   uStack_8c = panel_vsep_widget;
   uStack_a0 = 0xe3f4b1d;
