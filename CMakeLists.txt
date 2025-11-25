@@ -65,9 +65,9 @@ set(FSN_SOURCES
     src/picking.c
     src/utility.c
     src/filesystem.c
+    src/ui_motif.c
     # TODO: Add more modules as extracted
     # src/graphics_gl.c
-    # src/ui_motif.c
     # src/main.c
 )
 
