@@ -52199,7 +52199,7 @@ void fileerror(char *param_1,char *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00411094(undefined4 param_1,undefined4 param_2)
+void show_error_dialog(undefined4 param_1,undefined4 param_2)
 
 {
   int unaff_gp;
@@ -59639,7 +59639,7 @@ void FUN_0041eaf8(int param_1)
           strcat(__dest,(char *)*puVar2);
           iVar1 = unlink(__dest);
           if (iVar1 < 0) {
-            FUN_00411094("cannot delete",__dest);
+            show_error_dialog("cannot delete",__dest);
             *(byte *)((int)puVar2 + 0x29) = *(byte *)((int)puVar2 + 0x29) & 0xbf;
           }
         }
@@ -59965,31 +59965,31 @@ LAB_0041f400:
           *(byte *)((int)local_c + 0x29) = *(byte *)((int)local_c + 0x29) | 0x10;
         }
         else {
-          FUN_00411094("can\'t move",*local_c);
+          show_error_dialog("can\'t move",*local_c);
         }
         local_14aa = -1 >= iVar6;
       }
       if ((local_res4 == 3) && (iVar6 = link(acStack_410,local_414), iVar6 < 0)) {
         local_14aa = true;
-        FUN_00411094("can\'t link",*local_c);
+        show_error_dialog("can\'t link",*local_c);
       }
       if (local_res4 == 2) {
         iVar6 = stat(acStack_410,&sStack_14a8);
         if (iVar6 < 0) {
-          FUN_00411094("cannot stat",acStack_410);
+          show_error_dialog("cannot stat",acStack_410);
           local_14aa = true;
         }
         else {
           local_418 = open(acStack_410,0);
           if (local_418 < 0) {
-            FUN_00411094("can\'t open",*local_c);
+            show_error_dialog("can\'t open",*local_c);
             local_14aa = true;
           }
           else {
             local_41c = open(local_414,0x301,sStack_14a8.st_nlink);
             if (local_41c < 0) {
               local_14aa = true;
-              FUN_00411094("can\'t create",*local_c);
+              show_error_dialog("can\'t create",*local_c);
               close(local_418);
             }
           }
@@ -60015,7 +60015,7 @@ LAB_0041f400:
             local_1420 = sVar5;
             sVar5 = write(local_41c,auStack_141c,sVar5);
             if (sVar5 != local_1420) {
-              FUN_00411094("write error",*local_c);
+              show_error_dialog("write error",*local_c);
               unlink(local_414);
               sVar5 = 0;
               break;
@@ -60024,7 +60024,7 @@ LAB_0041f400:
             sVar5 = read(local_418,auStack_141c,0x1000);
           }
           if ((int)sVar5 < 0) {
-            FUN_00411094("read error",*local_c);
+            show_error_dialog("read error",*local_c);
             unlink(local_414);
           }
           close(local_418);
@@ -66237,13 +66237,13 @@ void viewFile(undefined4 param_1,undefined4 *param_2)
   strcat(curcontext + 0x84c,(char *)*param_2);
   iVar1 = stat(curcontext + 0x84c,&sStack_8c);
   if (iVar1 < 0) {
-    FUN_00411094("cannot stat",(int)curcontext + 0x84c);
+    show_error_dialog("cannot stat",(int)curcontext + 0x84c);
   }
   else {
     pvStack_4 = (void *)XtMalloc(sStack_8c.st_blksize + 1);
     iVar1 = open(curcontext + 0x84c,0);
     if (iVar1 < 0) {
-      FUN_00411094("cannot open",(int)curcontext + 0x84c);
+      show_error_dialog("cannot open",(int)curcontext + 0x84c);
     }
     else {
       sVar2 = read(iVar1,pvStack_4,sStack_8c.st_blksize);
@@ -66266,7 +66266,7 @@ void viewFile(undefined4 param_1,undefined4 *param_2)
         XRaiseWindow(display,uVar3);
       }
       else {
-        FUN_00411094("cannot read",(int)curcontext + 0x84c);
+        show_error_dialog("cannot read",(int)curcontext + 0x84c);
         close(iVar1);
       }
     }
@@ -66359,7 +66359,7 @@ void FUN_0042a2d8(undefined4 param_1,undefined4 param_2)
   __n = strlen(__s);
   __fd = open(curcontext + 0x84c,0x301,0x1b6);
   if (__fd < 0) {
-    FUN_00411094("cannot open",(int)curcontext + 0x84c);
+    show_error_dialog("cannot open",(int)curcontext + 0x84c);
   }
   else {
     sVar1 = write(__fd,__s,__n);
@@ -66367,7 +66367,7 @@ void FUN_0042a2d8(undefined4 param_1,undefined4 param_2)
       close(__fd);
     }
     else {
-      FUN_00411094("cannot write",local_4);
+      show_error_dialog("cannot write",local_4);
       close(__fd);
     }
   }
@@ -69528,7 +69528,7 @@ void FUN_0042f4d8(void)
       FUN_0040ff64();
       iVar1 = FUN_0042e670((*local_4 + -1) * 0x40 + selection_buffer);
       if (iVar1 == 0) {
-        FUN_00411094("can\'t go to",*(undefined4 *)(selection_buffer + *local_4 * 0x40 + -8));
+        show_error_dialog("can\'t go to",*(undefined4 *)(selection_buffer + *local_4 * 0x40 + -8));
       }
     }
     XtFree(local_4);
@@ -73647,7 +73647,7 @@ void getnum__FiT1PvT1(int param_1,__off_t param_2,void *param_3,size_t param_4)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00435668(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+void parse_typed_value(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   int unaff_gp;
@@ -74846,7 +74846,7 @@ joined_r0x00435ac4:
             fVar17 = -NAN;
           }
           else if (param_1[0x8d] == 0.0) {
-            iVar7 = FUN_00435668(param_1[0x8e],__s1,&bStack_17d1,1);
+            iVar7 = parse_typed_value(param_1[0x8e],__s1,&bStack_17d1,1);
             fVar17 = (float)(uint)bStack_17d1;
             if (iVar7 != 0) {
               fVar17 = -NAN;
@@ -74854,7 +74854,7 @@ joined_r0x00435ac4:
           }
           else if ((char *)param_1[0xb3] < __s1 + 1) {
             if ((char *)param_1[0xb3] == (char *)0x200) {
-              iVar7 = FUN_00435668(param_1[0x8e],__s1,&bStack_17d1,1);
+              iVar7 = parse_typed_value(param_1[0x8e],__s1,&bStack_17d1,1);
               fVar17 = (float)(uint)bStack_17d1;
               if (iVar7 != 0) {
                 fVar17 = -NAN;
@@ -74880,7 +74880,7 @@ joined_r0x00435ac4:
             fVar17 = -NAN;
           }
           else if (param_1[0x8d] == 0.0) {
-            iVar7 = FUN_00435668(param_1[0x8e],__s1,&sStack_17d4,2);
+            iVar7 = parse_typed_value(param_1[0x8e],__s1,&sStack_17d4,2);
             fVar17 = (float)(int)sStack_17d4;
             if (iVar7 != 0) {
               fVar17 = -NAN;
@@ -74888,7 +74888,7 @@ joined_r0x00435ac4:
           }
           else if ((char *)param_1[0xb3] < __s1 + 2) {
             if ((char *)param_1[0xb3] == (char *)0x200) {
-              iVar7 = FUN_00435668(param_1[0x8e],__s1,&sStack_17d4,2);
+              iVar7 = parse_typed_value(param_1[0x8e],__s1,&sStack_17d4,2);
               fVar17 = (float)(int)sStack_17d4;
               if (iVar7 != 0) {
                 fVar17 = -NAN;
@@ -74915,7 +74915,7 @@ joined_r0x00435ac4:
             fVar17 = -NAN;
           }
           else if (param_1[0x8d] == 0.0) {
-            iVar7 = FUN_00435668(param_1[0x8e],__s1,&fStack_17d8,4);
+            iVar7 = parse_typed_value(param_1[0x8e],__s1,&fStack_17d8,4);
             fVar17 = fStack_17d8;
             if (iVar7 != 0) {
               fVar17 = -NAN;
@@ -74923,7 +74923,7 @@ joined_r0x00435ac4:
           }
           else if ((char *)param_1[0xb3] < __s1 + 4) {
             if ((char *)param_1[0xb3] == (char *)0x200) {
-              iVar7 = FUN_00435668(param_1[0x8e],__s1,&fStack_17d8,4);
+              iVar7 = parse_typed_value(param_1[0x8e],__s1,&fStack_17d8,4);
               fVar17 = fStack_17d8;
               if (iVar7 != 0) {
                 fVar17 = -NAN;
@@ -74947,7 +74947,7 @@ joined_r0x00435ac4:
             fVar17 = -NAN;
           }
           else if (param_1[0x8d] == 0.0) {
-            iVar7 = FUN_00435668(param_1[0x8e],__s1,&bStack_17d9,1);
+            iVar7 = parse_typed_value(param_1[0x8e],__s1,&bStack_17d9,1);
             fVar17 = (float)(uint)bStack_17d9;
             if (iVar7 != 0) {
               fVar17 = -NAN;
@@ -74955,7 +74955,7 @@ joined_r0x00435ac4:
           }
           else if ((char *)param_1[0xb3] < __s1 + 1) {
             if ((char *)param_1[0xb3] == (char *)0x200) {
-              iVar7 = FUN_00435668(param_1[0x8e],__s1,&bStack_17d9,1);
+              iVar7 = parse_typed_value(param_1[0x8e],__s1,&bStack_17d9,1);
               fVar17 = (float)(uint)bStack_17d9;
               if (iVar7 != 0) {
                 fVar17 = -NAN;
@@ -74981,7 +74981,7 @@ joined_r0x00435ac4:
             fVar17 = -NAN;
           }
           else if (param_1[0x8d] == 0.0) {
-            iVar7 = FUN_00435668(param_1[0x8e],__s1,&uStack_17dc,2);
+            iVar7 = parse_typed_value(param_1[0x8e],__s1,&uStack_17dc,2);
             if (iVar7 == 0) {
               fVar17 = (float)(uint)uStack_17dc;
             }
@@ -74991,7 +74991,7 @@ joined_r0x00435ac4:
           }
           else if ((char *)param_1[0xb3] < __s1 + 2) {
             if ((char *)param_1[0xb3] == (char *)0x200) {
-              iVar7 = FUN_00435668(param_1[0x8e],__s1,&uStack_17dc,2);
+              iVar7 = parse_typed_value(param_1[0x8e],__s1,&uStack_17dc,2);
               if (iVar7 == 0) {
                 fVar17 = (float)(uint)uStack_17dc;
               }
@@ -75020,7 +75020,7 @@ joined_r0x00435ac4:
             fVar17 = -NAN;
           }
           else if (param_1[0x8d] == 0.0) {
-            iVar7 = FUN_00435668(param_1[0x8e],__s1,&fStack_17e0,4);
+            iVar7 = parse_typed_value(param_1[0x8e],__s1,&fStack_17e0,4);
             fVar17 = fStack_17e0;
             if (iVar7 != 0) {
               fVar17 = -NAN;
@@ -75028,7 +75028,7 @@ joined_r0x00435ac4:
           }
           else if ((char *)param_1[0xb3] < __s1 + 4) {
             if ((char *)param_1[0xb3] == (char *)0x200) {
-              iVar7 = FUN_00435668(param_1[0x8e],__s1,&fStack_17e0,4);
+              iVar7 = parse_typed_value(param_1[0x8e],__s1,&fStack_17e0,4);
               fVar17 = fStack_17e0;
               if (iVar7 != 0) {
                 fVar17 = -NAN;
