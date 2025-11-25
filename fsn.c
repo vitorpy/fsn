@@ -1121,11 +1121,11 @@ undefined4 DAT_10017604;
 float DAT_100174f0;
 float DAT_100175a0;
 char DAT_10017494;
-undefined4 DAT_100175e0;
+undefined4 graphics_state_mode;
 float view_offset_y;
 undefined4 DAT_100175dc;
 float DAT_1001759c;
-undefined4 DAT_100175ec;
+undefined4 graphics_render_flags;
 float DAT_100175a8;
 undefined4 DAT_100175e8;
 pointer boxDir;
@@ -1232,12 +1232,12 @@ undefined4 DAT_10016c08;
 undefined4 DAT_10017608;
 undefined4 DAT_1001760c;
 undefined4 DAT_100175f0;
-undefined DAT_10006ed4;
-undefined DAT_10006edc;
-undefined DAT_10006ee4;
+undefined viewport_y;
+undefined matrix_stack_index;
+undefined matrix_stack_capacity;
 float window_scale_x;
 float window_scale_y;
-undefined DAT_10006ecc;
+undefined viewport_x;
 uint window_width;
 uint window_height;
 undefined1[112] contextwindows;
@@ -1287,14 +1287,14 @@ undefined DAT_10007020;
 undefined DAT_1000702c;
 int DAT_100174a4;
 pointer dcolorBoxes;
-undefined DAT_10006f10;
-undefined DAT_10006f18;
+undefined matrix_buffer_0;
+undefined matrix_buffer_1;
 int selected_id_1;
-undefined DAT_10006f20;
+undefined matrix_buffer_2;
 int selected_id_2;
-undefined DAT_10006f28;
-undefined DAT_10006f30;
-undefined DAT_10006f38;
+undefined matrix_buffer_3;
+undefined current_matrix_ptr;
+undefined projection_matrix_ptr;
 undefined4 curcontextflag;
 undefined4 selected_id_1;
 undefined4 selected_id_2;
@@ -1306,10 +1306,10 @@ undefined4 DAT_10016c70;
 int DAT_100078b0;
 undefined FUN_00428044;
 float DAT_100078fc;
-float DAT_100175c8;
-float DAT_100175c0;
+float normal_colormap;
+float overlay_colormap;
 float DAT_100175d0;
-char DAT_10007904;
+char current_color_index;
 pointer boxRed;
 pointer boxOrange;
 pointer boxYellow;
@@ -1330,7 +1330,7 @@ undefined DAT_10007908;
 undefined DAT_10007928;
 int redraw_counter;
 char DAT_10017491;
-int DAT_10007990;
+int colormap_dirty_flag;
 undefined4 DAT_10007994;
 undefined4 *DAT_10007994;
 short DAT_100174b6;
@@ -1490,10 +1490,10 @@ undefined DAT_10013f48;
 pointer PTR_s__SGI_MMX_mwm_nogrmem_10009670;
 undefined DAT_10016f50;
 undefined2 DAT_10016f70;
-undefined2 DAT_10016f72;
-undefined2 DAT_10016f74;
+undefined2 rgb_color_r;
+undefined2 rgb_color_g;
 undefined4 DAT_10016fd0;
-undefined4 DAT_10017010;
+undefined4 rgb_color_b;
 undefined4 DAT_10017410;
 undefined magic1;
 undefined4 magic2;
@@ -42665,7 +42665,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
     else {
       shademodel(1);
       bgnpolygon();
-      cpack(DAT_100175e0);
+      cpack(graphics_state_mode);
       unaff_f20 = (double)fVar8;
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
@@ -42709,7 +42709,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       endpolygon();
       shademodel(1);
       bgnpolygon();
-      cpack(DAT_100175ec);
+      cpack(graphics_render_flags);
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) - DAT_100175a8;
       fStack_20 = -0.5;
@@ -46478,12 +46478,12 @@ void drawOverviewOverlayCursor(void)
         (float)((double)((ulonglong)uVar2 << 0x20) / (double)window_scale_y));
   linewidth(3);
   bgnline();
-  v2i(&DAT_10006ecc);
-  v2i(&DAT_10006ed4);
+  v2i(&viewport_x);
+  v2i(&viewport_y);
   endline();
   bgnline();
-  v2i(&DAT_10006edc);
-  v2i(&DAT_10006ee4);
+  v2i(&matrix_stack_index);
+  v2i(&matrix_stack_capacity);
   endline();
   linewidth(1);
   popmatrix();
@@ -47963,9 +47963,9 @@ void draw_file_pointers(int param_1,int param_2,int param_3)
   }
   cpack(uVar3);
   bgntmesh();
-  v2f(&DAT_10006f10);
-  v2f(&DAT_10006f18);
-  v2f(&DAT_10006f20);
+  v2f(&matrix_buffer_0);
+  v2f(&matrix_buffer_1);
+  v2f(&matrix_buffer_2);
   endtmesh();
   popmatrix();
   sStackX_6 = (short)param_2;
@@ -47982,9 +47982,9 @@ void draw_file_pointers(int param_1,int param_2,int param_3)
   }
   cpack(uVar3);
   bgntmesh();
-  v2f(&DAT_10006f28);
-  v2f(&DAT_10006f30);
-  v2f(&DAT_10006f38);
+  v2f(&matrix_buffer_3);
+  v2f(&current_matrix_ptr);
+  v2f(&projection_matrix_ptr);
   endtmesh();
   popmatrix();
                     // WARNING: Bad instruction - Truncating control flow here
@@ -48281,7 +48281,7 @@ void draw_directories(char param_1)
         else {
           shademodel(1);
           bgnpolygon();
-          cpack(DAT_100175e0);
+          cpack(graphics_state_mode);
           fStack_c = *(float *)curcontext - fVar1;
           fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
           fStack_4 = -0.5;
@@ -48326,7 +48326,7 @@ void draw_directories(char param_1)
           endpolygon();
           shademodel(1);
           bgnpolygon();
-          cpack(DAT_100175ec);
+          cpack(graphics_render_flags);
           fStack_c = *(float *)curcontext - fVar1;
           fStack_8 = *(float *)(curcontext + 4) - DAT_100175a8;
           fStack_4 = -0.5;
@@ -49595,9 +49595,9 @@ void checkPointerFile(int param_1,undefined4 param_2)
               *(undefined4 *)(selected_id_2 + 0x18),&fsn_resources,param_2,0);
     scale(view_offset_x,view_offset_x);
     bgnclosedline();
-    v2f(&DAT_10006f28);
-    v2f(&DAT_10006f30);
-    v2f(&DAT_10006f38);
+    v2f(&matrix_buffer_3);
+    v2f(&current_matrix_ptr);
+    v2f(&projection_matrix_ptr);
     endclosedline();
     popmatrix();
   }
@@ -49607,9 +49607,9 @@ void checkPointerFile(int param_1,undefined4 param_2)
               *(undefined4 *)(selected_id_1 + 0x18),&fsn_resources,param_2,0);
     scale(view_offset_x,view_offset_x);
     bgnclosedline();
-    v2f(&DAT_10006f10);
-    v2f(&DAT_10006f18);
-    v2f(&DAT_10006f20);
+    v2f(&matrix_buffer_0);
+    v2f(&matrix_buffer_1);
+    v2f(&matrix_buffer_2);
     endclosedline();
     popmatrix();
   }
@@ -50428,7 +50428,7 @@ void makeDColorBox(uint param_1,int param_2)
   fVar5 = (float)(param_1 & 0xff);
   fVar6 = (float)uVar4;
   rgb_to_hsv((double)(param_1 & 0xff),(double)uVar4);
-  hsv_to_rgb((double)uStack_10,(double)(uStack_14 * DAT_100175c8));
+  hsv_to_rgb((double)uStack_10,(double)(uStack_14 * normal_colormap));
   if ((((in_fcsr | 3) ^ 2) & 3) == 0) {
     fVar1 = ROUND(fVar5);
   }
@@ -50448,7 +50448,7 @@ void makeDColorBox(uint param_1,int param_2)
     fVar3 = FLOOR(fVar7);
   }
   FUN_004283cc((int)fVar1 + (int)fVar2 * 0x100 + (int)fVar3 * 0x10000,param_2 + 0x10);
-  hsv_to_rgb((double)uStack_10,(double)(uStack_14 * DAT_100175c0));
+  hsv_to_rgb((double)uStack_10,(double)(uStack_14 * overlay_colormap));
   if ((((in_fcsr | 3) ^ 2) & 3) == 0) {
     fVar1 = ROUND(fVar5);
   }
@@ -50593,9 +50593,9 @@ void FUN_004286f8(uint param_1,int param_2)
 void makeColorBoxes(void)
 
 {
-  if (DAT_10007904 == '\0') {
+  if (current_color_index == '\0') {
     FUN_00428288(toplevel);
-    DAT_10007904 = '\x01';
+    current_color_index = '\x01';
   }
   FUN_004286f8(DAT_100175f4,boxDir,7);
   FUN_004286f8(DAT_1001761c,boxRed,0);
@@ -51001,12 +51001,12 @@ void FUN_00429464(void)
 void locateClear(void)
 
 {
-  if (DAT_10007990 != 0) {
+  if (colormap_dirty_flag != 0) {
     FUN_00429464();
     FUN_0040bc28();
     color(0);
     clear();
-    DAT_10007990 = 0;
+    colormap_dirty_flag = 0;
     DAT_10007994 = 0;
     FUN_00420b70();
   }
@@ -51072,8 +51072,8 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
   if (param_1 == 0) {
     param_1 = param_3;
   }
-  if ((param_2 != DAT_10007994) || (param_1 != DAT_10007990)) {
-    DAT_10007990 = param_1;
+  if ((param_2 != DAT_10007994) || (param_1 != colormap_dirty_flag)) {
+    colormap_dirty_flag = param_1;
     DAT_10007994 = param_2;
     FUN_0040bc28();
     color(0);
@@ -56535,8 +56535,8 @@ void initRGBColors(void)
   
   uVar11 = 0;
   psVar10 = &DAT_10016f70;
-  puVar12 = &DAT_10016f72;
-  puVar13 = &DAT_10016f74;
+  puVar12 = &rgb_color_r;
+  puVar13 = &rgb_color_g;
   piVar14 = &DAT_10016fd0;
   do {
     getmcolor(uVar11 & 0xffff,psVar10,puVar12,puVar13);
@@ -56548,7 +56548,7 @@ void initRGBColors(void)
     piVar14 = piVar14 + 1;
   } while ((int)uVar11 < 0x10);
   psVar10 = &DAT_10016f70;
-  piVar14 = &DAT_10017010;
+  piVar14 = &rgb_color_b;
   do {
     iVar3 = (int)*psVar10;
     iVar4 = (int)psVar10[1];
@@ -56738,7 +56738,7 @@ void rgbStdColor__Fi(uint param_1)
 {
   if ((int)param_1 < 0) {
     if (param_1 >> 0x18 == 0) {
-      cpack((&DAT_10017010)[((int)(-param_1 & 0xf0) >> 4) + (-param_1 & 0xf) * 0x10]);
+      cpack((&rgb_color_b)[((int)(-param_1 & 0xf0) >> 4) + (-param_1 & 0xf) * 0x10]);
     }
     else {
       cpack(param_1 & 0xffffff);
