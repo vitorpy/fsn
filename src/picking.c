@@ -317,7 +317,7 @@ void draw_second_pick(undefined8 param_1,undefined8 param_2,int param_3)
     pushname((int)*(short *)(param_3 + 0x5e));
     if (*(short *)(param_3 + 0x76) < 0) {
       dVar3 = (double)maxy * (double)((ulonglong)extraout_var << 0x20);
-      FUN_00427a3c(0,dVar3);
+      draw_scaled_element(0,dVar3);
       uVar1 = (undefined4)((ulonglong)dVar3 >> 0x20);
     }
     pushmatrix();

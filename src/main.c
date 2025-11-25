@@ -349,11 +349,11 @@ void restorePosition(undefined4 param_1)
                &iStack_1c,(int)curcontext + 0xc50);
   if (sStack_2 != *(short *)(curcontext + 0xc)) {
     *(short *)(curcontext + 0xc) = sStack_2;
-    FUN_0040bfec();
+    init_view_transform();
   }
   if (sStack_4 != *(short *)(curcontext + 0xe)) {
     *(short *)(curcontext + 0xe) = sStack_4;
-    FUN_0040c0cc();
+    init_camera_state();
   }
   *(undefined4 *)curcontext = uStack_8;
   *(undefined4 *)(curcontext + 4) = uStack_c;
@@ -1678,12 +1678,12 @@ void main(int param_1,undefined4 *param_2)
   uStack_8c = 1;
   uStack_84 = 1;
   context_top_widget = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,pane_form_widget,&uStack_a0,4);
-  FUN_0040a7ec();
+  setup_context_widgets();
   XtManageChild(*(undefined4 *)(curcontextwindows + 0xc));
   XmMainWindowSetAreas(uStack_a8,uStack_ac,0,0,0,panel_widget);
   XtRealizeWidget(toplevel);
   XSetErrorHandler(0);
-  FUN_0042fb84(toplevel);
+  post_realize_setup(toplevel);
   XtSetSensitive(copy_button_widget,0);
   XtSetSensitive(uStack_ac,0);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),0);
@@ -1741,8 +1741,8 @@ void main(int param_1,undefined4 *param_2)
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),1);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 0xc),1);
   FUN_0042b08c();
-  FUN_00415550();
-  FUN_00427f5c();
+  init_database_display();
+  setup_fam_monitoring();
   FUN_0042fd50(toplevel);
   do {
     if ((redraw_flag != '\0') && (iVar3 = XtAppPending(app_context), iVar3 == 0)) {
@@ -2101,7 +2101,7 @@ void preExit(void)
 
 {
   if (fsn_resources == '\0') {
-    FUN_0042fb84(toplevel);
+    post_realize_setup(toplevel);
     FUN_00427de0();
     refresh_after_change();
   }
@@ -2236,9 +2236,9 @@ void rescaleOverview(void)
     glx_switch_context_wrapper();
     ortho2(minx,maxx);
     refresh_display();
-    FUN_0041fdb0();
+    begin_overview_render();
     ortho2(minx,maxx);
-    FUN_00420b70();
+    draw_overview_content();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();

@@ -53,7 +53,7 @@ void FAMMonitorDirectory2(void)
 void shrinkDueToZoom(void)
 
 {
-  FUN_0040f150(FUN_00410858,0);
+  init_gl_state(FUN_00410858,0);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }

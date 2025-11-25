@@ -354,7 +354,7 @@ void zoomto(double param_1,double param_2)
   undefined4 in_stack_00000024;
   undefined4 in_stack_00000028;
   
-  FUN_0040f150(0,0);
+  init_gl_state(0,0);
   set_main_gl_window();
   if (in_stack_00000020 == *(int *)(curcontext + 0x3c)) {
     zoom_stack_pointer = (float)param_1;
@@ -373,7 +373,7 @@ void zoomto(double param_1,double param_2)
     DAT_1001661c = in_stack_00000024;
     DAT_10016620 = in_stack_00000028;
     DAT_10016618 = DAT_100174e8;
-    FUN_0040f150(FUN_0040fbb0,&zoom_stack_pointer);
+    init_gl_state(FUN_0040fbb0,&zoom_stack_pointer);
   }
   else {
     if (DAT_10017492 != '\0') {
@@ -387,9 +387,9 @@ void zoomto(double param_1,double param_2)
     *(float *)(curcontext + 4) = (float)param_2;
     *(float *)(curcontext + 8) = (float)(double)CONCAT44(in_register_00001040,in_stack_00000014);
     *(short *)(curcontext + 0xc) = in_stack_0000001a;
-    FUN_0040bfec();
+    init_view_transform();
     *(short *)(curcontext + 0xe) = in_stack_0000001e;
-    FUN_0040c0cc();
+    init_camera_state();
     redraw_gl_scene();
   }
                     // WARNING: Bad instruction - Truncating control flow here

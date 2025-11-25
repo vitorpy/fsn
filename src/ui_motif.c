@@ -896,7 +896,7 @@ void fileCreated(int param_1,char *param_2)
         FUN_0042df08();
         iVar2 = validate_directory_access(param_1,param_2);
         if (iVar2 == 0) {
-          puVar3 = (undefined4 *)FUN_00411b84();
+          puVar3 = (undefined4 *)create_directory_entry();
           if (*(int *)(param_1 + 0xc) == 0) {
             pvVar4 = malloc(4);
             *(void **)(param_1 + 0x10) = pvVar4;

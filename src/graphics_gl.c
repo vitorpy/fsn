@@ -932,7 +932,7 @@ void drawOverviewOverlay(void)
 
 {
   if (overviewActive != '\0') {
-    FUN_0041fdb0();
+    begin_overview_render();
     color(0);
     clear();
     FUN_00420acc();
@@ -1399,7 +1399,7 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
     }
     zbuffer(1);
     if (param_1 == 0) {
-      FUN_00420b70();
+      draw_overview_content();
     }
     else {
       FUN_0042194c();
@@ -1645,14 +1645,14 @@ void highlightDirWarp(undefined8 param_1,undefined8 param_2,int param_3)
     pushmatrix();
     iVar4 = *(int *)(curcontext + 0x3c);
     if (param_3 == *(int *)(iVar4 + 0x28)) {
-      FUN_0041a908((ulonglong)uVar5 << 0x20,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height)
+      draw_positioned_item((ulonglong)uVar5 << 0x20,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height)
       ;
     }
     else if (param_3 == *(int *)(iVar4 + 0x2c)) {
-      FUN_0041a908((double)-DAT_10017570,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height);
+      draw_positioned_item((double)-DAT_10017570,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height);
     }
     else if (param_3 == *(int *)(iVar4 + 0x30)) {
-      FUN_0041a908((double)DAT_10017570,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height);
+      draw_positioned_item((double)DAT_10017570,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height);
     }
     else {
       iVar3 = *(int *)(iVar4 + 0x14);
@@ -2774,7 +2774,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
                   CONCAT44(uVar9,(float)((double)-(float)param_3[0xf] / dVar16)));
         dVar15 = (double)(float)param_3[0xf] * dVar16;
         lVar6 = (ulonglong)unaff_000010b0 << 0x20;
-        FUN_00427a3c(lVar6,dVar15);
+        draw_scaled_element(lVar6,dVar15);
         popmatrix();
         if (0 < iVar3) {
                     // WARNING: Bad instruction - Truncating control flow here
@@ -4717,7 +4717,7 @@ void highlightOverviewDir(int param_1)
   
   uVar4 = (uint)((ulonglong)in_f10 >> 0x20);
   if (overviewActive != '\0') {
-    FUN_0041fdb0();
+    begin_overview_render();
     color(0);
     clear();
     color(overlayHighlightColor._2_2_);
@@ -5176,7 +5176,7 @@ void draw_directory(ulonglong param_1,int param_2,char param_3)
     uStack_c = uStack_18;
     if (*(short *)(param_2 + 0x76) < 0) {
       pushmatrix();
-      FUN_00427a3c(param_1 & 0xffffffff00000000,
+      draw_scaled_element(param_1 & 0xffffffff00000000,
                    (double)maxy * (double)((ulonglong)extraout_var << 0x20));
       popmatrix();
     }
@@ -5237,7 +5237,7 @@ void locateClear(void)
     clear();
     colormap_dirty_flag = 0;
     DAT_10007994 = 0;
-    FUN_00420b70();
+    draw_overview_content();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();

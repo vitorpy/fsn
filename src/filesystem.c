@@ -383,7 +383,7 @@ void databaseDumpTimeout(void)
 
 {
   refresh_after_change();
-  FUN_00415550();
+  init_database_display();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
