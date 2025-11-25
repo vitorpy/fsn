@@ -1,0 +1,17 @@
+# FSN Global Variable Rename Mapping
+# Format: OLD_NAME -> NEW_NAME : REASON/CONTEXT
+
+# TOP GLOBALS BY USAGE FREQUENCY
+
+# FILE I/O
+DAT_10016690 -> current_file : 97 uses - FILE* used with fread, fopen, popen, rewind
+
+# MOTIF WIDGETS (created in main)
+DAT_10016660 -> panel_widget : 17 uses - XtCreateManagedWidget("panel")
+DAT_10016648 -> message_widget : 11 uses - XmCreateLabel("message") - status message display
+DAT_10016664 -> panel_vsep_widget : 11 uses - XtCreateManagedWidget("panelvsep") - panel separator
+DAT_10016650 -> pane_form_widget : 9 uses - XmCreateForm("paneForm")
+
+# X11/MOTIF CONSTANTS
+DAT_0e3f2368 -> default_charset : 21 uses - XmStringCreate charset parameter
+

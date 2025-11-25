@@ -889,14 +889,14 @@ char DAT_10017498;
 undefined DAT_0e3d4f98;
 undefined *fallback_resources;
 string glwidget_translations;
-undefined4 DAT_10016660;
+undefined4 panel_widget;
 undefined4 DAT_1001665c;
-undefined4 DAT_10016664;
-undefined4 DAT_10016648;
-undefined4 DAT_10016650;
+undefined4 panel_vsep_widget;
+undefined4 message_widget;
+undefined4 pane_form_widget;
 undefined DAT_0e3d616c;
 char DAT_10016688;
-undefined DAT_0e3f2368;
+undefined default_charset;
 undefined DAT_10000024;
 pointer PTR_s_-landscape_100000e0;
 pointer __((offset(0x10018374))) altcontext;
@@ -1072,9 +1072,9 @@ char *DAT_100175b0;
 undefined1 fsn_resources;
 undefined databaseDumpTimeout;
 undefined4 DAT_100166b8;
-FILE *DAT_10016690;
+FILE *current_file;
 uint DAT_100166cc;
-int *DAT_10016690;
+int *current_file;
 undefined4 vinfop;
 ushort DAT_10016b24;
 undefined DAT_10016b20;
@@ -49659,8 +49659,8 @@ void main(int param_1,undefined4 *param_2)
   FUN_00411674();
   FUN_0040a704();
   DAT_10016634 = XtParseTranslationTable(glwidget_translations);
-  blankXmString = XmStringCreate(&DAT_1000a2fc,&DAT_0e3f2368);
-  emptyXmString = XmStringCreate(&DAT_1000a300,&DAT_0e3f2368);
+  blankXmString = XmStringCreate(&DAT_1000a2fc,&default_charset);
+  emptyXmString = XmStringCreate(&DAT_1000a300,&default_charset);
   uVar1 = XtDisplay(toplevel);
   uVar1 = XmInternAtom(uVar1,"WM_PROTOCOLS",0);
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
@@ -49669,12 +49669,12 @@ void main(int param_1,undefined4 *param_2)
   uStack_a8 = XtCreateManagedWidget("mainw",_DAT_0e3d4f98,toplevel,&uStack_a0,0);
   install_help_callback(uStack_a8,&topHelp);
   uStack_ac = FUN_0040dff8(uStack_a8);
-  DAT_10016660 = XtCreateManagedWidget("panel",_DAT_0e3d331c,uStack_a8,&uStack_a0,0);
+  panel_widget = XtCreateManagedWidget("panel",_DAT_0e3d331c,uStack_a8,&uStack_a0,0);
   uStack_a0 = 0xe3f40cb;
   uStack_98 = 0xe3f4b1d;
   uStack_9c = 1;
   uStack_94 = 1;
-  uStack_84 = FUN_0040d3cc(DAT_10016660,&uStack_a0,2);
+  uStack_84 = FUN_0040d3cc(panel_widget,&uStack_a0,2);
   uStack_88 = 0xe3f40f2;
   uStack_a0 = 0xe3f4b1d;
   uStack_98 = 0xe3f3701;
@@ -49683,19 +49683,19 @@ void main(int param_1,undefined4 *param_2)
   uStack_94 = 1;
   uStack_8c = 3;
   DAT_1001665c = uStack_84;
-  DAT_10016664 = XtCreateManagedWidget("panelvsep",_DAT_0e3d8f04,DAT_10016660,&uStack_a0,4);
+  panel_vsep_widget = XtCreateManagedWidget("panelvsep",_DAT_0e3d8f04,panel_widget,&uStack_a0,4);
   FUN_0040df80();
   iVar3 = FUN_00421f10();
   if (iVar3 != 0) {
     DAT_100000a4 = 0x3000;
   }
-  uStack_8c = DAT_10016664;
+  uStack_8c = panel_vsep_widget;
   uStack_a0 = 0xe3f4b1d;
   uStack_98 = 0xe3f40cb;
   uStack_90 = 0xe3f40f2;
   uStack_9c = 1;
   uStack_94 = 3;
-  uStack_b8 = XmCreateLabel(DAT_10016660,"messageHeader",&uStack_a0,3);
+  uStack_b8 = XmCreateLabel(panel_widget,"messageHeader",&uStack_a0,3);
   XtManageChild(uStack_b8);
   uStack_a0 = 0xe3f4b1d;
   uStack_98 = 0xe3f40cb;
@@ -49705,15 +49705,15 @@ void main(int param_1,undefined4 *param_2)
   uStack_94 = 3;
   uStack_84 = 1;
   uStack_8c = uStack_b8;
-  DAT_10016648 = XmCreateLabel(DAT_10016660,"message",&uStack_a0,4);
-  XtManageChild(DAT_10016648);
-  install_help_callback(DAT_10016648,&messageHelp);
+  message_widget = XmCreateLabel(panel_widget,"message",&uStack_a0,4);
+  XtManageChild(message_widget);
+  install_help_callback(message_widget,&messageHelp);
   set_status_message("a 3D File System Navigator",0);
   uStack_98 = 0xe3f4ba9;
-  uStack_94 = DAT_10016648;
+  uStack_94 = message_widget;
   uStack_a0 = 0xe3f4b1d;
   uStack_70 = 0xe3f469e;
-  uStack_7c = DAT_10016664;
+  uStack_7c = panel_vsep_widget;
   uStack_9c = 3;
   uStack_90 = 0xe3f3701;
   uStack_88 = 0xe3f40cb;
@@ -49725,8 +49725,8 @@ void main(int param_1,undefined4 *param_2)
   uStack_74 = 1;
   uStack_6c = 0;
   uStack_64 = 0;
-  DAT_10016650 = XmCreateForm(DAT_10016660,"paneForm",&uStack_a0,8);
-  XtManageChild(DAT_10016650);
+  pane_form_widget = XmCreateForm(panel_widget,"paneForm",&uStack_a0,8);
+  XtManageChild(pane_form_widget);
   uStack_a0 = 0xe3f4b1d;
   uStack_98 = 0xe3f3701;
   uStack_90 = 0xe3f40cb;
@@ -49735,10 +49735,10 @@ void main(int param_1,undefined4 *param_2)
   uStack_94 = 1;
   uStack_8c = 1;
   uStack_84 = 1;
-  DAT_1001664c = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,DAT_10016650,&uStack_a0,4);
+  DAT_1001664c = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,pane_form_widget,&uStack_a0,4);
   FUN_0040a7ec();
   XtManageChild(*(undefined4 *)(curcontextwindows + 0xc));
-  XmMainWindowSetAreas(uStack_a8,uStack_ac,0,0,0,DAT_10016660);
+  XmMainWindowSetAreas(uStack_a8,uStack_ac,0,0,0,panel_widget);
   XtRealizeWidget(toplevel);
   XSetErrorHandler(0);
   FUN_0042fb84(toplevel);
@@ -49874,8 +49874,8 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   FUN_00411674();
   FUN_0040a704();
   DAT_10016634 = XtParseTranslationTable(glwidget_translations);
-  blankXmString = XmStringCreate(&DAT_1000a2fc,&DAT_0e3f2368);
-  emptyXmString = XmStringCreate(&DAT_1000a300,&DAT_0e3f2368);
+  blankXmString = XmStringCreate(&DAT_1000a2fc,&default_charset);
+  emptyXmString = XmStringCreate(&DAT_1000a300,&default_charset);
   uVar1 = XtDisplay(toplevel);
   uVar1 = XmInternAtom(uVar1,"WM_PROTOCOLS",0);
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
@@ -49884,12 +49884,12 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   local_a8 = XtCreateManagedWidget("mainw",_DAT_0e3d4f98,toplevel,&local_a0,0);
   install_help_callback(local_a8,&topHelp);
   local_ac = FUN_0040dff8(local_a8);
-  DAT_10016660 = XtCreateManagedWidget("panel",_DAT_0e3d331c,local_a8,&local_a0,0);
+  panel_widget = XtCreateManagedWidget("panel",_DAT_0e3d331c,local_a8,&local_a0,0);
   local_a0 = 0xe3f40cb;
   local_98 = 0xe3f4b1d;
   local_9c = 1;
   local_94 = 1;
-  local_84 = FUN_0040d3cc(DAT_10016660,&local_a0,2);
+  local_84 = FUN_0040d3cc(panel_widget,&local_a0,2);
   local_88 = 0xe3f40f2;
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f3701;
@@ -49898,19 +49898,19 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   local_94 = 1;
   local_8c = 3;
   DAT_1001665c = local_84;
-  DAT_10016664 = XtCreateManagedWidget("panelvsep",_DAT_0e3d8f04,DAT_10016660,&local_a0,4);
+  panel_vsep_widget = XtCreateManagedWidget("panelvsep",_DAT_0e3d8f04,panel_widget,&local_a0,4);
   FUN_0040df80();
   iVar3 = FUN_00421f10();
   if (iVar3 != 0) {
     DAT_100000a4 = 0x3000;
   }
-  local_8c = DAT_10016664;
+  local_8c = panel_vsep_widget;
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f40cb;
   local_90 = 0xe3f40f2;
   local_9c = 1;
   local_94 = 3;
-  local_b8 = XmCreateLabel(DAT_10016660,"messageHeader",&local_a0,3);
+  local_b8 = XmCreateLabel(panel_widget,"messageHeader",&local_a0,3);
   XtManageChild(local_b8);
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f40cb;
@@ -49920,15 +49920,15 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   local_94 = 3;
   local_84 = 1;
   local_8c = local_b8;
-  DAT_10016648 = XmCreateLabel(DAT_10016660,"message",&local_a0,4);
-  XtManageChild(DAT_10016648);
-  install_help_callback(DAT_10016648,&messageHelp);
+  message_widget = XmCreateLabel(panel_widget,"message",&local_a0,4);
+  XtManageChild(message_widget);
+  install_help_callback(message_widget,&messageHelp);
   set_status_message("a 3D File System Navigator",0);
   local_98 = 0xe3f4ba9;
-  local_94 = DAT_10016648;
+  local_94 = message_widget;
   local_a0 = 0xe3f4b1d;
   local_70 = 0xe3f469e;
-  local_7c = DAT_10016664;
+  local_7c = panel_vsep_widget;
   local_9c = 3;
   local_90 = 0xe3f3701;
   local_88 = 0xe3f40cb;
@@ -49940,8 +49940,8 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   local_74 = 1;
   local_6c = 0;
   local_64 = 0;
-  DAT_10016650 = XmCreateForm(DAT_10016660,"paneForm",&local_a0,8);
-  XtManageChild(DAT_10016650);
+  pane_form_widget = XmCreateForm(panel_widget,"paneForm",&local_a0,8);
+  XtManageChild(pane_form_widget);
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f3701;
   local_90 = 0xe3f40cb;
@@ -49950,10 +49950,10 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   local_94 = 1;
   local_8c = 1;
   local_84 = 1;
-  DAT_1001664c = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,DAT_10016650,&local_a0,4);
+  DAT_1001664c = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,pane_form_widget,&local_a0,4);
   FUN_0040a7ec();
   XtManageChild(*(undefined4 *)(curcontextwindows + 0xc));
-  XmMainWindowSetAreas(local_a8,local_ac,0,0,0,DAT_10016660);
+  XmMainWindowSetAreas(local_a8,local_ac,0,0,0,panel_widget);
   XtRealizeWidget(toplevel);
   XSetErrorHandler(0);
   FUN_0042fb84(toplevel);
@@ -50803,14 +50803,14 @@ void FUN_0040da94(void)
   legendShowing = 1;
   if (DAT_10016654 == 0) {
     local_48 = 0xe3f40f2;
-    local_44 = DAT_10016664;
+    local_44 = panel_vsep_widget;
     local_50 = 0xe3f40cb;
     local_40 = 0xe3f46dd;
     local_38 = 0xe3f3701;
     local_4c = 3;
     local_3c = 1;
     local_34 = 1;
-    DAT_10016654 = XmCreateRowColumn(DAT_10016660,"legend",&local_50,4);
+    DAT_10016654 = XmCreateRowColumn(panel_widget,"legend",&local_50,4);
     install_help_callback(DAT_10016654,&legendHelp);
     uVar1 = XmCreateLabel(DAT_10016654,"colorslabel",&local_50,0);
     XtManageChild(uVar1);
@@ -50840,7 +50840,7 @@ void FUN_0040da94(void)
     XtManageChild(monitorLabelWidget);
     local_2c = DAT_10016654;
     local_50 = 0xe3f40cb;
-    local_44 = DAT_10016664;
+    local_44 = panel_vsep_widget;
     local_48 = 0xe3f40f2;
     local_40 = 0xe3f46dd;
     local_38 = 0xe3f3701;
@@ -50848,7 +50848,7 @@ void FUN_0040da94(void)
     local_4c = 3;
     local_3c = 1;
     local_34 = 3;
-    DAT_10016658 = XmCreateSeparator(DAT_10016660,"legendSep",&local_50,5);
+    DAT_10016658 = XmCreateSeparator(panel_widget,"legendSep",&local_50,5);
   }
   XtManageChild(DAT_10016654);
   XtManageChild(DAT_10016658);
@@ -50856,7 +50856,7 @@ void FUN_0040da94(void)
   local_50 = 0xe3f3701;
   local_48 = 0xe3f3753;
   local_4c = 3;
-  XtSetValues(DAT_10016650,&local_50,2);
+  XtSetValues(pane_form_widget,&local_50,2);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -50875,7 +50875,7 @@ void FUN_0040de38(void)
   if (DAT_10016654 != 0) {
     local_50 = 0xe3f3701;
     local_4c = 1;
-    XtSetValues(DAT_10016650,&local_50,1);
+    XtSetValues(pane_form_widget,&local_50,1);
     XtUnmanageChild(DAT_10016658);
     XtUnmanageChild(DAT_10016654);
   }
@@ -50902,7 +50902,7 @@ void FUN_0040dee0(void)
   local_44 = DAT_1001665c;
   local_50 = 0xe3f40cb;
   local_4c = 3;
-  XtSetValues(DAT_10016664,&local_50,2);
+  XtSetValues(panel_vsep_widget,&local_50,2);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -50920,7 +50920,7 @@ void FUN_0040df80(void)
   local_50 = 0xe3f40cb;
   local_4c = 1;
   controlsShowing = 0;
-  XtSetValues(DAT_10016664,&local_50,1);
+  XtSetValues(panel_vsep_widget,&local_50,1);
   XtUnmanageChild(DAT_1001665c);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -51977,7 +51977,7 @@ void deleteMessage(undefined4 *param_1)
       local_8 = *DAT_10000020;
     }
     local_c = 0xe3f40b5;
-    XtSetValues(DAT_10016648,&local_c,1);
+    XtSetValues(message_widget,&local_c,1);
   }
   else {
     *(undefined1 *)(param_1 + 2) = 1;
@@ -52006,7 +52006,7 @@ void message(undefined4 param_1,int param_2)
   uStack_54 = 0xe3f40b5;
   uStack_50 = *puVar1;
   DAT_10000020 = puVar1;
-  XtSetValues(DAT_10016648,&uStack_54,1);
+  XtSetValues(message_widget,&uStack_54,1);
   if (param_2 != 0) {
     XtAppAddTimeOut(app_context,param_2,deleteMessage,puVar1);
   }
@@ -52131,7 +52131,7 @@ void error(undefined4 param_1)
   undefined4 uStack_50;
   undefined4 uStack_4;
   
-  uStack_50 = XmStringCreate(param_1,&DAT_0e3f2368);
+  uStack_50 = XmStringCreate(param_1,&default_charset);
   uStack_54 = 0xe3f42e0;
   uStack_4 = uStack_50;
   uVar1 = XmCreateErrorDialog(toplevel,"error",&uStack_54,1);
@@ -54446,20 +54446,20 @@ void FUN_00415b48(void)
   int iVar2;
   char acStack_8 [8];
   
-  sVar1 = fread(acStack_8,1,6,DAT_10016690);
+  sVar1 = fread(acStack_8,1,6,current_file);
   if ((sVar1 == 6) && (iVar2 = strncmp(acStack_8,"FuSioN",6), iVar2 == 0)) {
     if (_DAT_0fb51f00 == 0) {
-      DAT_10016690->_flags = DAT_10016690->_flags + -1;
-      if (DAT_10016690->_flags < 0) {
+      current_file->_flags = current_file->_flags + -1;
+      if (current_file->_flags < 0) {
         DAT_100166cc = __filbuf();
       }
       else {
-        DAT_100166cc = (uint)(byte)*DAT_10016690->_IO_read_ptr;
-        DAT_10016690->_IO_read_ptr = DAT_10016690->_IO_read_ptr + 1;
+        DAT_100166cc = (uint)(byte)*current_file->_IO_read_ptr;
+        current_file->_IO_read_ptr = current_file->_IO_read_ptr + 1;
       }
     }
     else {
-      DAT_100166cc = __semgetc(DAT_10016690);
+      DAT_100166cc = __semgetc(current_file);
     }
     if ((2 < (int)DAT_100166cc) || ((int)DAT_100166cc < 0)) {
       fprintf((FILE *)0xfb52904,"unknown database version %d, quitting\n");
@@ -54468,7 +54468,7 @@ void FUN_00415b48(void)
     }
   }
   else {
-    rewind(DAT_10016690);
+    rewind(current_file);
     DAT_100166cc = 0;
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -54484,16 +54484,16 @@ void FUN_00415d24(void)
 
 {
   if (_DAT_0fb51f00 == 0) {
-    *DAT_10016690 = *DAT_10016690 + -1;
-    if (*DAT_10016690 < 0) {
+    *current_file = *current_file + -1;
+    if (*current_file < 0) {
       __filbuf();
     }
     else {
-      DAT_10016690[1] = DAT_10016690[1] + 1;
+      current_file[1] = current_file[1] + 1;
     }
   }
   else {
-    __semgetc(DAT_10016690);
+    __semgetc(current_file);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -54631,30 +54631,30 @@ void FUN_00416220(void *param_1)
   size_t sVar2;
   
   if (_DAT_0fb51f00 == 0) {
-    DAT_10016690->_flags = DAT_10016690->_flags + -1;
-    if (DAT_10016690->_flags < 0) {
+    current_file->_flags = current_file->_flags + -1;
+    if (current_file->_flags < 0) {
       uVar1 = __filbuf();
     }
     else {
-      uVar1 = (uint)(byte)*DAT_10016690->_IO_read_ptr;
-      DAT_10016690->_IO_read_ptr = DAT_10016690->_IO_read_ptr + 1;
+      uVar1 = (uint)(byte)*current_file->_IO_read_ptr;
+      current_file->_IO_read_ptr = current_file->_IO_read_ptr + 1;
     }
   }
   else {
-    uVar1 = __semgetc(DAT_10016690);
+    uVar1 = __semgetc(current_file);
   }
   if (uVar1 != 2) {
     fprintf((FILE *)0xfb52904,"expected dir in database, didn\'t get one\n");
                     // WARNING: Subroutine does not return
     exit(1);
   }
-  sVar2 = fread(&DAT_10016b20,0xc,1,DAT_10016690);
+  sVar2 = fread(&DAT_10016b20,0xc,1,current_file);
   if (sVar2 != 1) {
     fprintf((FILE *)0xfb52904,"syntax error in reading dir from database\n");
                     // WARNING: Subroutine does not return
     exit(1);
   }
-  sVar2 = fread(param_1,1,(uint)DAT_10016b24,DAT_10016690);
+  sVar2 = fread(param_1,1,(uint)DAT_10016b24,current_file);
   if (sVar2 == DAT_10016b24) {
     *(undefined1 *)((int)param_1 + (uint)DAT_10016b24) = 0;
                     // WARNING: Bad instruction - Truncating control flow here
@@ -54677,34 +54677,34 @@ void FUN_00416428(void *param_1,void *param_2)
   size_t sVar2;
   
   if (_DAT_0fb51f00 == 0) {
-    DAT_10016690->_flags = DAT_10016690->_flags + -1;
-    if (DAT_10016690->_flags < 0) {
+    current_file->_flags = current_file->_flags + -1;
+    if (current_file->_flags < 0) {
       uVar1 = __filbuf();
     }
     else {
-      uVar1 = (uint)(byte)*DAT_10016690->_IO_read_ptr;
-      DAT_10016690->_IO_read_ptr = DAT_10016690->_IO_read_ptr + 1;
+      uVar1 = (uint)(byte)*current_file->_IO_read_ptr;
+      current_file->_IO_read_ptr = current_file->_IO_read_ptr + 1;
     }
   }
   else {
-    uVar1 = __semgetc(DAT_10016690);
+    uVar1 = __semgetc(current_file);
   }
   if (uVar1 != 3) {
     fprintf((FILE *)0xfb52904,"expected file in database, didn\'t get one\n");
                     // WARNING: Subroutine does not return
     exit(1);
   }
-  sVar2 = fread(&DAT_10016698,0x14,1,DAT_10016690);
+  sVar2 = fread(&DAT_10016698,0x14,1,current_file);
   if (sVar2 != 1) {
     fprintf((FILE *)0xfb52904,"syntax error in reading file from database\n");
                     // WARNING: Subroutine does not return
     exit(1);
   }
-  sVar2 = fread(param_1,1,(uint)DAT_100166a4,DAT_10016690);
+  sVar2 = fread(param_1,1,(uint)DAT_100166a4,current_file);
   if (sVar2 == DAT_100166a4) {
     *(undefined1 *)((int)param_1 + (uint)DAT_100166a4) = 0;
     if ((DAT_100166a6 != 0) &&
-       (sVar2 = fread(param_2,1,(uint)DAT_100166a6,DAT_10016690), sVar2 != DAT_100166a6)) {
+       (sVar2 = fread(param_2,1,(uint)DAT_100166a6,current_file), sVar2 != DAT_100166a6)) {
       fprintf((FILE *)0xfb52904,"syntax error 3 in reading file from database\n");
                     // WARNING: Subroutine does not return
       exit(1);
@@ -54730,7 +54730,7 @@ void FUN_004166c8(void)
   short local_4;
   char local_2;
   
-  sVar1 = fread(&local_4,4,1,DAT_10016690);
+  sVar1 = fread(&local_4,4,1,current_file);
   if (sVar1 != 1) {
     fprintf((FILE *)0xfb52904,"syntax error in reading window info from database\n");
                     // WARNING: Subroutine does not return
@@ -54746,7 +54746,7 @@ void FUN_004166c8(void)
   else {
     FUN_0042a4d4((int)local_4,1);
   }
-  FUN_0042ec00(auStack_3c,DAT_10016690);
+  FUN_0042ec00(auStack_3c,current_file);
   FUN_0042e3bc(auStack_3c);
   curcontext[0xc51] = local_2;
   gl_pop_state();
@@ -54764,7 +54764,7 @@ void FUN_00416834(void)
   size_t sVar1;
   ushort local_4 [2];
   
-  sVar1 = fread(local_4,2,1,DAT_10016690);
+  sVar1 = fread(local_4,2,1,current_file);
   if (sVar1 != 1) {
     fprintf((FILE *)0xfb52904,"syntax error in reading showing info from database\n");
                     // WARNING: Subroutine does not return
@@ -54787,7 +54787,7 @@ void FUN_0041692c(void)
   size_t sVar1;
   undefined4 local_8 [2];
   
-  sVar1 = fread(local_8,8,1,DAT_10016690);
+  sVar1 = fread(local_8,8,1,current_file);
   if (sVar1 != 1) {
     fprintf((FILE *)0xfb52904,"syntax error in reading display info from database\n");
                     // WARNING: Subroutine does not return
@@ -54809,20 +54809,20 @@ void FUN_004169cc(void)
   uint __c;
   
   if (_DAT_0fb51f00 == 0) {
-    DAT_10016690->_flags = DAT_10016690->_flags + -1;
-    if (DAT_10016690->_flags < 0) {
+    current_file->_flags = current_file->_flags + -1;
+    if (current_file->_flags < 0) {
       __c = __filbuf();
     }
     else {
-      __c = (uint)(byte)*DAT_10016690->_IO_read_ptr;
-      DAT_10016690->_IO_read_ptr = DAT_10016690->_IO_read_ptr + 1;
+      __c = (uint)(byte)*current_file->_IO_read_ptr;
+      current_file->_IO_read_ptr = current_file->_IO_read_ptr + 1;
     }
   }
   else {
-    __c = __semgetc(DAT_10016690);
+    __c = __semgetc(current_file);
   }
   if (__c != 0xffffffff) {
-    ungetc(__c,DAT_10016690);
+    ungetc(__c,current_file);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -54848,7 +54848,7 @@ void FUN_00416ac4(char *param_1)
   undefined1 local_8 [3];
   undefined1 uStack_5;
   
-  iVar1 = fscanf(DAT_10016690,"d %d %s %o %d %d %s\n",local_8,param_1,&local_14,local_c,local_10,
+  iVar1 = fscanf(current_file,"d %d %s %o %d %d %s\n",local_8,param_1,&local_14,local_c,local_10,
                  &local_20);
   if (iVar1 == 5) {
     local_20 = '\0';
@@ -54902,7 +54902,7 @@ void FUN_00416c64(char *param_1,char *param_2)
   undefined1 local_8 [3];
   undefined1 uStack_5;
   
-  iVar1 = fscanf(DAT_10016690,"f %d %s %o %d %d %s\n",local_8,param_1,&local_c,&local_10,&local_14,
+  iVar1 = fscanf(current_file,"f %d %s %o %d %d %s\n",local_8,param_1,&local_c,&local_10,&local_14,
                  param_2);
   if (iVar1 == 5) {
     *param_2 = '\0';
@@ -54942,24 +54942,24 @@ void FUN_00416da8(void *param_1)
   undefined1 local_3;
   
   if (_DAT_0fb51f00 == 0) {
-    DAT_10016690->_flags = DAT_10016690->_flags + -1;
-    if (DAT_10016690->_flags < 0) {
+    current_file->_flags = current_file->_flags + -1;
+    if (current_file->_flags < 0) {
       uVar1 = __filbuf();
     }
     else {
-      uVar1 = (uint)(byte)*DAT_10016690->_IO_read_ptr;
-      DAT_10016690->_IO_read_ptr = DAT_10016690->_IO_read_ptr + 1;
+      uVar1 = (uint)(byte)*current_file->_IO_read_ptr;
+      current_file->_IO_read_ptr = current_file->_IO_read_ptr + 1;
     }
   }
   else {
-    uVar1 = __semgetc(DAT_10016690);
+    uVar1 = __semgetc(current_file);
   }
   if (uVar1 != 2) {
     fprintf((FILE *)0xfb52904,"expected dir in database, didn\'t get one\n");
                     // WARNING: Subroutine does not return
     exit(1);
   }
-  sVar2 = fread(&local_c,10,1,DAT_10016690);
+  sVar2 = fread(&local_c,10,1,current_file);
   if (sVar2 != 1) {
     fprintf((FILE *)0xfb52904,"syntax error in reading dir from database\n");
                     // WARNING: Subroutine does not return
@@ -54971,7 +54971,7 @@ void FUN_00416da8(void *param_1)
   DAT_100166f2 = local_4;
   DAT_100166f3 = local_3;
   DAT_100166e8 = (uint)local_c;
-  sVar2 = fread(param_1,1,(uint)local_a,DAT_10016690);
+  sVar2 = fread(param_1,1,(uint)local_a,current_file);
   if (sVar2 == DAT_100166ec) {
     *(undefined1 *)((int)param_1 + (uint)DAT_100166ec) = 0;
                     // WARNING: Bad instruction - Truncating control flow here
@@ -55000,24 +55000,24 @@ void FUN_00416fec(void *param_1,void *param_2)
   undefined1 local_2;
   
   if (_DAT_0fb51f00 == 0) {
-    DAT_10016690->_flags = DAT_10016690->_flags + -1;
-    if (DAT_10016690->_flags < 0) {
+    current_file->_flags = current_file->_flags + -1;
+    if (current_file->_flags < 0) {
       uVar1 = __filbuf();
     }
     else {
-      uVar1 = (uint)(byte)*DAT_10016690->_IO_read_ptr;
-      DAT_10016690->_IO_read_ptr = DAT_10016690->_IO_read_ptr + 1;
+      uVar1 = (uint)(byte)*current_file->_IO_read_ptr;
+      current_file->_IO_read_ptr = current_file->_IO_read_ptr + 1;
     }
   }
   else {
-    uVar1 = __semgetc(DAT_10016690);
+    uVar1 = __semgetc(current_file);
   }
   if (uVar1 != 3) {
     fprintf((FILE *)0xfb52904,"expected file in database, didn\'t get one\n");
                     // WARNING: Subroutine does not return
     exit(1);
   }
-  sVar2 = fread(&local_10,0x10,1,DAT_10016690);
+  sVar2 = fread(&local_10,0x10,1,current_file);
   if (sVar2 != 1) {
     fprintf((FILE *)0xfb52904,"syntax error in reading file from database\n");
                     // WARNING: Subroutine does not return
@@ -55029,11 +55029,11 @@ void FUN_00416fec(void *param_1,void *param_2)
   DAT_10016704 = local_6;
   DAT_10016706 = local_4;
   DAT_10016708 = local_2;
-  sVar2 = fread(param_1,1,(uint)local_6,DAT_10016690);
+  sVar2 = fread(param_1,1,(uint)local_6,current_file);
   if (sVar2 == DAT_10016704) {
     *(undefined1 *)((int)param_1 + (uint)DAT_10016704) = 0;
     if ((DAT_10016706 != 0) &&
-       (sVar2 = fread(param_2,1,(uint)DAT_10016706,DAT_10016690), sVar2 != DAT_10016706)) {
+       (sVar2 = fread(param_2,1,(uint)DAT_10016706,current_file), sVar2 != DAT_10016706)) {
       fprintf((FILE *)0xfb52904,"syntax error 3 in reading file from database\n");
                     // WARNING: Subroutine does not return
       exit(1);
@@ -55164,42 +55164,42 @@ void initialize_db(char *param_1)
   sVar5 = strlen(DAT_100175b0);
   pcVar4 = (char *)malloc(sVar5 + 0x12);
   sprintf(pcVar4,"zcat 2>/dev/null<%s",DAT_100175b0);
-  DAT_10016690 = popen(pcVar4,"r");
+  current_file = popen(pcVar4,"r");
   bVar1 = false;
-  if (DAT_10016690 != (FILE *)0x0) {
+  if (current_file != (FILE *)0x0) {
     if (_DAT_0fb51f00 == 0) {
-      DAT_10016690->_flags = DAT_10016690->_flags + -1;
-      if (DAT_10016690->_flags < 0) {
+      current_file->_flags = current_file->_flags + -1;
+      if (current_file->_flags < 0) {
         __c = __filbuf();
       }
       else {
-        __c = (uint)(byte)*DAT_10016690->_IO_read_ptr;
-        DAT_10016690->_IO_read_ptr = DAT_10016690->_IO_read_ptr + 1;
+        __c = (uint)(byte)*current_file->_IO_read_ptr;
+        current_file->_IO_read_ptr = current_file->_IO_read_ptr + 1;
       }
     }
     else {
       __c = __semgetc();
     }
     if (__c == 0xffffffff) {
-      pclose(DAT_10016690);
+      pclose(current_file);
       bVar1 = false;
     }
     else {
-      ungetc(__c,DAT_10016690);
+      ungetc(__c,current_file);
       bVar2 = true;
       bVar1 = true;
     }
   }
-  if ((bVar1) || (DAT_10016690 = fopen(DAT_100175b0,"r"), DAT_10016690 != (FILE *)0x0)) {
+  if ((bVar1) || (current_file = fopen(DAT_100175b0,"r"), current_file != (FILE *)0x0)) {
     FUN_0042afd4();
     uStack_4 = set_status_message("reading file system database",0);
     FUN_004172d4();
     *(byte *)(topdir + 0x1d) = *(byte *)(topdir + 0x1d) | 2;
     if (bVar2) {
-      pclose(DAT_10016690);
+      pclose(current_file);
     }
     else {
-      fclose(DAT_10016690);
+      fclose(current_file);
     }
     deleteMessage(uStack_4);
     iVar6 = statvfs((char *)*topdir,asStack_128);
@@ -55296,42 +55296,42 @@ void FUN_004174d0(char *param_1)
   sVar5 = strlen(DAT_100175b0);
   pcVar4 = (char *)malloc(sVar5 + 0x12);
   sprintf(pcVar4,"zcat 2>/dev/null<%s",DAT_100175b0);
-  DAT_10016690 = popen(pcVar4,"r");
+  current_file = popen(pcVar4,"r");
   bVar1 = false;
-  if (DAT_10016690 != (FILE *)0x0) {
+  if (current_file != (FILE *)0x0) {
     if (_DAT_0fb51f00 == 0) {
-      DAT_10016690->_flags = DAT_10016690->_flags + -1;
-      if (DAT_10016690->_flags < 0) {
+      current_file->_flags = current_file->_flags + -1;
+      if (current_file->_flags < 0) {
         __c = __filbuf();
       }
       else {
-        __c = (uint)(byte)*DAT_10016690->_IO_read_ptr;
-        DAT_10016690->_IO_read_ptr = DAT_10016690->_IO_read_ptr + 1;
+        __c = (uint)(byte)*current_file->_IO_read_ptr;
+        current_file->_IO_read_ptr = current_file->_IO_read_ptr + 1;
       }
     }
     else {
       __c = __semgetc();
     }
     if (__c == 0xffffffff) {
-      pclose(DAT_10016690);
+      pclose(current_file);
       bVar1 = false;
     }
     else {
-      ungetc(__c,DAT_10016690);
+      ungetc(__c,current_file);
       bVar2 = true;
       bVar1 = true;
     }
   }
-  if ((bVar1) || (DAT_10016690 = fopen(DAT_100175b0,"r"), DAT_10016690 != (FILE *)0x0)) {
+  if ((bVar1) || (current_file = fopen(DAT_100175b0,"r"), current_file != (FILE *)0x0)) {
     FUN_0042afd4();
     local_4 = set_status_message("reading file system database",0);
     FUN_004172d4();
     *(byte *)(topdir + 0x1d) = *(byte *)(topdir + 0x1d) | 2;
     if (bVar2) {
-      pclose(DAT_10016690);
+      pclose(current_file);
     }
     else {
-      fclose(DAT_10016690);
+      fclose(current_file);
     }
     deleteMessage(local_4);
     iVar6 = statvfs((char *)*topdir,asStack_128);
@@ -58059,15 +58059,15 @@ void createSelectedInfo(undefined4 param_1,undefined4 *param_2,undefined4 param_
   undefined4 uVar1;
   undefined4 uVar2;
   
-  DAT_10016b30 = XmStringCreate("Move file",&DAT_0e3f2368);
-  DAT_10016b34 = XmStringCreate("Move file out",&DAT_0e3f2368);
-  DAT_10016b38 = XmStringCreate("Move file in",&DAT_0e3f2368);
-  DAT_10016b3c = XmStringCreate("Copy file",&DAT_0e3f2368);
-  DAT_10016b40 = XmStringCreate("Copy file out",&DAT_0e3f2368);
-  DAT_10016b44 = XmStringCreate("Copy file in",&DAT_0e3f2368);
-  DAT_10016b48 = XmStringCreate("Link file",&DAT_0e3f2368);
-  DAT_10016b4c = XmStringCreate("Link file out",&DAT_0e3f2368);
-  DAT_10016b50 = XmStringCreate("Link file in",&DAT_0e3f2368);
+  DAT_10016b30 = XmStringCreate("Move file",&default_charset);
+  DAT_10016b34 = XmStringCreate("Move file out",&default_charset);
+  DAT_10016b38 = XmStringCreate("Move file in",&default_charset);
+  DAT_10016b3c = XmStringCreate("Copy file",&default_charset);
+  DAT_10016b40 = XmStringCreate("Copy file out",&default_charset);
+  DAT_10016b44 = XmStringCreate("Copy file in",&default_charset);
+  DAT_10016b48 = XmStringCreate("Link file",&default_charset);
+  DAT_10016b4c = XmStringCreate("Link file out",&default_charset);
+  DAT_10016b50 = XmStringCreate("Link file in",&default_charset);
   uVar1 = XmCreateForm(param_1,"selectedInfo",param_2,param_3);
   XtManageChild(uVar1);
   *param_2 = 0xe3f4b1d;
@@ -58321,7 +58321,7 @@ void FUN_0041c3e4(void)
         sprintf(acStack_c8,"%s %d directories, %d files %s",uVar1,*(undefined4 *)(iVar4 + 0x14),
                 *(undefined4 *)(iVar4 + 0xc),pcVar3);
       }
-      local_f0 = XmStringCreate(acStack_c8,&DAT_0e3f2368);
+      local_f0 = XmStringCreate(acStack_c8,&default_charset);
       local_f4 = 0xe3f40b5;
       local_cc = local_f0;
       XtSetValues(*(undefined4 *)(curcontextwindows + 0x20),&local_f4,1);
@@ -58347,7 +58347,7 @@ void FUN_0041c3e4(void)
       uVar5 = *(undefined4 *)(*(int *)(curcontext + 0x48) + 0xc);
     }
     sprintf(acStack_c8,"%s   %d bytes, %d days old, %s%s",uVar1,uVar5,uVar2,local_100,pcVar3);
-    local_f0 = XmStringCreate(acStack_c8,&DAT_0e3f2368);
+    local_f0 = XmStringCreate(acStack_c8,&default_charset);
     local_f4 = 0xe3f40b5;
     local_cc = local_f0;
     XtSetValues(*(undefined4 *)(curcontextwindows + 0x20),&local_f4,1);
@@ -67340,7 +67340,7 @@ void FUN_0042b3f4(undefined4 param_1,undefined4 *param_2)
   if (DAT_100079c0 != 0) {
     XtUnmanageChild(DAT_100079c0);
   }
-  local_28 = XmStringCreateLtoR(*param_2,&DAT_0e3f2368);
+  local_28 = XmStringCreateLtoR(*param_2,&default_charset);
   local_2c = 0xe3f42e0;
   uVar1 = toplevel;
   if (*(char *)(param_2 + 2) != '\0') {
@@ -68057,7 +68057,7 @@ void FUN_0042d28c(undefined4 param_1,undefined4 param_2,int param_3)
   int iVar1;
   undefined4 local_c [3];
   
-  iVar1 = XmStringGetLtoR(*(undefined4 *)(param_3 + 8),&DAT_0e3f2368,local_c);
+  iVar1 = XmStringGetLtoR(*(undefined4 *)(param_3 + 8),&default_charset,local_c);
   if (iVar1 != 0) {
     XmTextFieldSetString(DAT_10016e48,local_c[0]);
     XtFree(local_c[0]);
@@ -69571,7 +69571,7 @@ void FUN_0042f66c(undefined4 param_1,undefined4 param_2,int param_3)
   undefined1 auStack_3c [56];
   char *local_4;
   
-  iVar1 = XmStringGetLtoR(*(undefined4 *)(param_3 + 8),&DAT_0e3f2368,&local_4);
+  iVar1 = XmStringGetLtoR(*(undefined4 *)(param_3 + 8),&default_charset,&local_4);
   if (iVar1 != 0) {
     sVar2 = strlen(local_4);
     if (sVar2 != 0) {
@@ -70155,7 +70155,7 @@ void FUN_00430448(void)
     sprintf(acStack_44,"Search: %d matches");
     XtSetSensitive(DAT_10016ef8,1);
   }
-  uVar3 = XmStringCreate(acStack_44,&DAT_0e3f2368);
+  uVar3 = XmStringCreate(acStack_44,&default_charset);
   local_c = 0xe3f40b5;
   local_8 = uVar3;
   XtSetValues(DAT_10016ee0,&local_c,1);
