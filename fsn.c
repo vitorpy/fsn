@@ -1141,13 +1141,13 @@ undefined4 DAT_10017534;
 float DAT_10017560;
 undefined4 view_offset_x;
 undefined1 DAT_10017495;
-undefined4 DAT_10016ba0;
+undefined4 menu_items_array;
 undefined postMenu;
 undefined FUN_0041dea4;
-undefined4 DAT_10016b54;
+undefined4 menu_monitor_directory;
 undefined4 DAT_10016b58;
 undefined FUN_0041dff4;
-undefined4 DAT_10016b98;
+undefined4 menu_directory_cascade;
 undefined FUN_0041e0a8;
 undefined4 popup_menu_widget;
 undefined4 DAT_10016b5c;
@@ -1173,7 +1173,7 @@ undefined4 menu_copy_file_2;
 undefined4 DAT_10016b48;
 undefined4 menu_link_file_1;
 undefined4 menu_link_file_2;
-undefined4 DAT_10016b9c;
+undefined4 menu_file_cascade;
 undefined FUN_0041ec98;
 undefined FUN_0041ee80;
 undefined4 menu_process_deletes;
@@ -1238,16 +1238,16 @@ undefined DAT_10006ee4;
 float DAT_10016bf0;
 float DAT_10016bf4;
 undefined DAT_10006ecc;
-uint DAT_10016bf8;
-uint DAT_10016bfc;
+uint window_width;
+uint window_height;
 undefined1[112] contextwindows;
 undefined DAT_1000ba54;
-int DAT_10016bf8;
-int DAT_10016bfc;
+int window_width;
+int window_height;
 float DAT_10017518;
 undefined4 DAT_10016c10;
 undefined4 numtop;
-undefined4 DAT_10016c38;
+undefined4 current_colormap;
 undefined4 numcmap;
 char DAT_10006f04;
 undefined1 DAT_10006f00;
@@ -1289,15 +1289,15 @@ int DAT_100174a4;
 pointer dcolorBoxes;
 undefined DAT_10006f10;
 undefined DAT_10006f18;
-int DAT_10016c60;
+int selected_id_1;
 undefined DAT_10006f20;
-int DAT_10016c64;
+int selected_id_2;
 undefined DAT_10006f28;
 undefined DAT_10006f30;
 undefined DAT_10006f38;
 undefined4 curcontextflag;
-undefined4 DAT_10016c60;
-undefined4 DAT_10016c64;
+undefined4 selected_id_1;
+undefined4 selected_id_2;
 float DAT_10017524;
 undefined4 DAT_10017528;
 float DAT_10017514;
@@ -1359,7 +1359,7 @@ pointer PTR_s_landscape_10008918;
 undefined FUN_0042b6f8;
 undefined DAT_10012c44;
 undefined DAT_10012c4c;
-undefined4 DAT_10016e20;
+undefined4 landscape_name;
 undefined DAT_0f6d07d4;
 undefined FUN_0042caa0;
 undefined FUN_0042caec;
@@ -1396,7 +1396,7 @@ float view_init_z;
 int DAT_10009528;
 int selection_count;
 int selection_buffer;
-undefined4 DAT_10016ec4;
+undefined4 mark_selector_list;
 undefined4 mark_selector_dialog;
 undefined DAT_10013c40;
 pointer markHelp;
@@ -1404,7 +1404,7 @@ undefined FUN_0042f4d8;
 undefined FUN_0042f5d0;
 undefined FUN_0042f73c;
 undefined FUN_0042f4b4;
-int DAT_10016ec8;
+int mark_prompt_dialog;
 undefined FUN_0042f66c;
 undefined DAT_10013c60;
 int DAT_10009630;
@@ -57614,9 +57614,9 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   XtAddCallback(uStack_4,0xe3f4c38,overlayMenuUnmappedCB,0);
   install_help_callback(uStack_4,&directoryHelp);
   uStack_6c = 0;
-  DAT_10016b54 = XmCreateToggleButton(uStack_4,"menuMonitorDirectory",&uStack_68,0);
-  XtAddCallback(DAT_10016b54,0xe3f4ca5,FUN_0041dea4,0);
-  XtManageChild(DAT_10016b54);
+  menu_monitor_directory = XmCreateToggleButton(uStack_4,"menuMonitorDirectory",&uStack_68,0);
+  XtAddCallback(menu_monitor_directory,0xe3f4ca5,FUN_0041dea4,0);
+  XtManageChild(menu_monitor_directory);
   uStack_6c = 0;
   uStack_10 = XmCreatePushButton(uStack_4,"menuMonitorTree",&uStack_68,0);
   XtAddCallback(uStack_10,0xe3f35b3,FUN_0041dff4,1);
@@ -57638,13 +57638,13 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   uStack_60 = 0xf6617e7;
   uStack_5c = 0;
   uStack_64 = uStack_4;
-  DAT_10016b98 = XmCreateCascadeButton(param_1,"menuDirectory",&uStack_68,2);
-  XtManageChild(DAT_10016b98);
-  install_help_callback(DAT_10016b98,&directoryHelp);
+  menu_directory_cascade = XmCreateCascadeButton(param_1,"menuDirectory",&uStack_68,2);
+  XtManageChild(menu_directory_cascade);
+  install_help_callback(menu_directory_cascade,&directoryHelp);
   XtAddEventHandler(param_2,4,0,postMenu,0);
   uStack_6c = 0;
   FUN_00432094(display,0,&uStack_68,&uStack_6c);
-  XtSetSensitive(DAT_10016b98,0);
+  XtSetSensitive(menu_directory_cascade,0);
   popup_menu_widget = XmCreatePopupMenu(param_2,"popupMenu",&uStack_68,uStack_6c);
   XtAddCallback(popup_menu_widget,0xe3f4c38,overlayMenuUnmappedCB,0);
   install_help_callback(popup_menu_widget,&fileHelp);
@@ -57664,36 +57664,36 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   DAT_10016b5c = XmCreatePushButton(popup_menu_widget,"menuOpenFile",&uStack_68,0);
   XtAddCallback(DAT_10016b5c,0xe3f35b3,FUN_0041e8a8,0);
   XtManageChild(DAT_10016b5c);
-  (&DAT_10016ba0)[array_index] = DAT_10016b5c;
+  (&menu_items_array)[array_index] = DAT_10016b5c;
   array_index = array_index + 1;
   DAT_10016b60 = XmCreatePushButton(uStack_8,"menuOpenFile",&uStack_68,uStack_6c);
   XtAddCallback(DAT_10016b60,0xe3f35b3,FUN_0041e8a8,0);
   XtManageChild(DAT_10016b60);
-  puVar2 = &DAT_10016ba0 + array_index;
+  puVar2 = &menu_items_array + array_index;
   array_index = array_index + 1;
   *puVar2 = DAT_10016b60;
   uStack_6c = 0;
   DAT_10016b64 = XmCreatePushButton(popup_menu_widget,"menuPrintFile",&uStack_68,0);
   XtAddCallback(DAT_10016b64,0xe3f35b3,FUN_0041e918,0);
   XtManageChild(DAT_10016b64);
-  (&DAT_10016ba0)[array_index] = DAT_10016b64;
+  (&menu_items_array)[array_index] = DAT_10016b64;
   array_index = array_index + 1;
   DAT_10016b68 = XmCreatePushButton(uStack_8,"menuPrintFile",&uStack_68,uStack_6c);
   XtAddCallback(DAT_10016b68,0xe3f35b3,FUN_0041e918,0);
   XtManageChild(DAT_10016b68);
-  puVar2 = &DAT_10016ba0 + array_index;
+  puVar2 = &menu_items_array + array_index;
   array_index = array_index + 1;
   *puVar2 = DAT_10016b68;
   uStack_6c = 0;
   menu_delete_file_1 = XmCreateToggleButton(popup_menu_widget,"menuDeleteFile",&uStack_68,0);
   XtAddCallback(menu_delete_file_1,0xe3f4ca5,FUN_0041e988,0);
   XtManageChild(menu_delete_file_1);
-  (&DAT_10016ba0)[array_index] = menu_delete_file_1;
+  (&menu_items_array)[array_index] = menu_delete_file_1;
   array_index = array_index + 1;
   menu_delete_file_2 = XmCreateToggleButton(uStack_8,"menuDeleteFile",&uStack_68,uStack_6c);
   XtAddCallback(menu_delete_file_2,0xe3f4ca5,FUN_0041e988,0);
   XtManageChild(menu_delete_file_2);
-  (&DAT_10016ba0)[array_index] = menu_delete_file_2;
+  (&menu_items_array)[array_index] = menu_delete_file_2;
   array_index = array_index + 1;
   uStack_64 = DAT_10016b30;
   uStack_68 = 0xe3f40b5;
@@ -57733,9 +57733,9 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   uStack_6c = 2;
   uStack_5c = 0;
   uStack_64 = uStack_8;
-  DAT_10016b9c = XmCreateCascadeButton(param_1,"menuFile",&uStack_68,2);
-  XtManageChild(DAT_10016b9c);
-  install_help_callback(DAT_10016b9c,&fileHelp);
+  menu_file_cascade = XmCreateCascadeButton(param_1,"menuFile",&uStack_68,2);
+  XtManageChild(menu_file_cascade);
+  install_help_callback(menu_file_cascade,&fileHelp);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -58453,7 +58453,7 @@ void FUN_0041c928(char param_1)
   
   cVar1 = DAT_10006e54;
   if ((param_1 != DAT_10006e54) && (iVar2 = 0, cVar1 = param_1, 0 < array_index)) {
-    puVar3 = &DAT_10016ba0;
+    puVar3 = &menu_items_array;
     do {
       XtSetSensitive(*puVar3,param_1);
       iVar2 = iVar2 + 1;
@@ -58479,8 +58479,8 @@ void setMoveAndCopyButtons(void)
   undefined4 uStack_28;
   undefined4 uStack_24;
   
-  XtSetSensitive(DAT_10016b98,*(int *)(curcontext + 0x44) != 0);
-  XtSetSensitive(DAT_10016b9c,*(int *)(curcontext + 0x48) != 0);
+  XtSetSensitive(menu_directory_cascade,*(int *)(curcontext + 0x44) != 0);
+  XtSetSensitive(menu_file_cascade,*(int *)(curcontext + 0x48) != 0);
   XtSetSensitive(popup_menu_widget,*(int *)(curcontext + 0x48) != 0);
   FUN_0041c928(1);
   if ((altcontext[0xc51] != '\0') && (iVar1 = *(int *)(curcontext + 0x44), iVar1 != 0)) {
@@ -58639,7 +58639,7 @@ void setMoveAndCopyButtons(void)
         iVar1 = *(int *)(altcontext + 0x48);
       }
       XtSetSensitive(menu_link_file_2,iVar1 != 0);
-      XtSetSensitive(DAT_10016b9c,1);
+      XtSetSensitive(menu_file_cascade,1);
       XtSetSensitive(popup_menu_widget,1);
       FUN_0041c928(0);
       halt_baddata();
@@ -58986,7 +58986,7 @@ void unselect_directory(void)
   if (*(int *)(curcontext + 0x44) != 0) {
     curcontext[0xc50] = 0;
     FUN_0041d418();
-    XtSetSensitive(DAT_10016b98,0);
+    XtSetSensitive(menu_directory_cascade,0);
     FUN_0041d920();
     *(byte *)(*(int *)(curcontext + 0x44) + 0x74) =
          *(byte *)(*(int *)(curcontext + 0x44) + 0x74) & 0xdf;
@@ -59062,7 +59062,7 @@ void select_directory(int param_1)
       FUN_0041d920();
       curcontext[0xc50] = 0;
     }
-    XtSetSensitive(DAT_10016b98,1);
+    XtSetSensitive(menu_directory_cascade,1);
     *(byte *)(param_1 + 0x74) = *(byte *)(param_1 + 0x74) | 0x20;
     *(int *)(curcontext + 0x44) = param_1;
     build_path_string((int)curcontext + 0x4c,param_1);
@@ -59070,11 +59070,11 @@ void select_directory(int param_1)
     FUN_004207b4();
     uStack_28 = 0xe3f48f1;
     uStack_24 = (uint)(*(int *)(param_1 + 0x74) << 0xb) >> 0x1f;
-    XtSetValues(DAT_10016b54,&uStack_28,1);
+    XtSetValues(menu_monitor_directory,&uStack_28,1);
     uStack_28 = 0xe3f48f1;
     uStack_24 = (uint)(*(int *)(param_1 + 0x74) << 0xd) >> 0x1f;
     XtSetValues(DAT_10016b58,&uStack_28,1);
-    XtSetSensitive(DAT_10016b54,-1 < *(int *)(param_1 + 0x74) << 0xd);
+    XtSetSensitive(menu_monitor_directory,-1 < *(int *)(param_1 + 0x74) << 0xd);
     FUN_0041c9e8();
     if (*(int *)(param_1 + 100) != 0) {
       XtRemoveTimeOut();
@@ -59158,7 +59158,7 @@ void unselect_file(void)
   undefined4 uStack_28;
   
   if (*(int *)(curcontext + 0x48) != 0) {
-    XtSetSensitive(DAT_10016b9c,0);
+    XtSetSensitive(menu_file_cascade,0);
     XtSetSensitive(popup_menu_widget,0);
     *(byte *)(*(int *)(curcontext + 0x48) + 0x28) =
          *(byte *)(*(int *)(curcontext + 0x48) + 0x28) & 0xef;
@@ -59221,7 +59221,7 @@ void select_file(undefined4 *param_1)
   if (iVar1 != 0) {
     *(byte *)(iVar1 + 0x28) = *(byte *)(iVar1 + 0x28) & 0xef;
   }
-  XtSetSensitive(DAT_10016b9c,1);
+  XtSetSensitive(menu_file_cascade,1);
   XtSetSensitive(popup_menu_widget,1);
   *(byte *)(param_1 + 10) = *(byte *)(param_1 + 10) | 0x10;
   *(undefined4 **)(curcontext + 0x48) = param_1;
@@ -59758,7 +59758,7 @@ void FUN_0041ef30(undefined4 param_1,undefined4 param_2,int param_3)
       local_2c = 0xe3f48f1;
       local_28 = (uint)(*(int *)(iVar1 + 0x74) << 0xd) >> 0x1f;
       XtSetValues(DAT_10016b58,&local_2c,1);
-      XtSetSensitive(DAT_10016b54,-1 < *(int *)(iVar1 + 0x74) << 0xd);
+      XtSetSensitive(menu_monitor_directory,-1 < *(int *)(iVar1 + 0x74) << 0xd);
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -60984,8 +60984,8 @@ void FUN_00420c50(void)
 void FUN_00420ca4(undefined4 param_1,undefined4 param_2,int param_3)
 
 {
-  DAT_10016bf8 = (uint)*(ushort *)(param_3 + 0x10);
-  DAT_10016bfc = (uint)*(ushort *)(param_3 + 0x12);
+  window_width = (uint)*(ushort *)(param_3 + 0x10);
+  window_height = (uint)*(ushort *)(param_3 + 0x12);
   DAT_10016bf0 = (float)*(ushort *)(param_3 + 0x10) / (maxx - minx);
   DAT_10016bf4 = (float)*(ushort *)(param_3 + 0x12) / (maxy - miny);
   FUN_0041fd70();
@@ -61023,8 +61023,8 @@ void FUN_00420e74(undefined4 param_1,undefined4 param_2,int param_3)
   DAT_10016c00 = XtWindow(param_1);
   FUN_0041fd70();
   ortho2(minx,maxx);
-  DAT_10016bf8 = (uint)*(ushort *)(param_3 + 0x10);
-  DAT_10016bfc = (uint)*(ushort *)(param_3 + 0x12);
+  window_width = (uint)*(ushort *)(param_3 + 0x10);
+  window_height = (uint)*(ushort *)(param_3 + 0x12);
   iVar1 = FUN_00421f10();
   if (iVar1 == 0) {
     local_50 = "overlayWindow";
@@ -61088,18 +61088,18 @@ void FUN_004211d4(undefined4 param_1,int param_2)
     if (iVar4 < 0) {
       iVar4 = 0;
     }
-    else if (DAT_10016bf8 <= iVar4) {
-      iVar4 = DAT_10016bf8 + -1;
+    else if (window_width <= iVar4) {
+      iVar4 = window_width + -1;
     }
-    iVar3 = (DAT_10016bfc - *(int *)(param_2 + 0x24)) + -1;
+    iVar3 = (window_height - *(int *)(param_2 + 0x24)) + -1;
     if (iVar3 < 0) {
       iVar3 = 0;
     }
-    else if (DAT_10016bfc <= iVar3) {
-      iVar3 = DAT_10016bfc + -1;
+    else if (window_height <= iVar3) {
+      iVar3 = window_height + -1;
     }
-    fVar1 = ((float)iVar4 / (float)DAT_10016bf8) * (maxx - minx) + minx;
-    fVar2 = ((float)iVar3 / (float)DAT_10016bfc) * (maxy - miny) + miny;
+    fVar1 = ((float)iVar4 / (float)window_width) * (maxx - minx) + minx;
+    fVar2 = ((float)iVar3 / (float)window_height) * (maxy - miny) + miny;
     FUN_0040ff64();
     FUN_00410264((double)fVar1 +
                  (double)*(float *)(curcontext + 0x14) * (double)*(float *)(curcontext + 0x20) *
@@ -61469,8 +61469,8 @@ void FUN_00421c14(void)
     do {
       iVar1 = numcmap;
       uVar2 = *puVar4;
-      (&DAT_10016c38)[numcmap] = uVar2;
-      XSetWMColormapWindows(display,uVar2,&DAT_10016c38,iVar1 + 1);
+      (&current_colormap)[numcmap] = uVar2;
+      XSetWMColormapWindows(display,uVar2,&current_colormap,iVar1 + 1);
       iVar3 = iVar3 + 1;
       puVar4 = puVar4 + 1;
     } while (iVar3 < numtop);
@@ -61598,15 +61598,15 @@ void newCmapWindow(undefined4 param_1)
   undefined4 *puVar2;
   
   if (0 < numcmap) {
-    puVar1 = &DAT_10016c38 + numcmap;
+    puVar1 = &current_colormap + numcmap;
     do {
       puVar2 = puVar1 + -1;
       *puVar1 = puVar1[-1];
       puVar1 = puVar2;
-    } while ((undefined4 *)((int)&DAT_10016c38 + 3) < puVar2);
+    } while ((undefined4 *)((int)&current_colormap + 3) < puVar2);
   }
   numcmap = numcmap + 1;
-  DAT_10016c38 = param_1;
+  current_colormap = param_1;
   FUN_00421c14();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -61657,7 +61657,7 @@ void deleteCmapWindow(int param_1)
   
   iVar3 = 0;
   if (0 < numcmap) {
-    piVar1 = &DAT_10016c38;
+    piVar1 = &current_colormap;
     do {
       if (param_1 == *piVar1) {
         numcmap = numcmap + -1;
@@ -61666,7 +61666,7 @@ void deleteCmapWindow(int param_1)
             piVar2 = piVar1 + 1;
             *piVar1 = piVar1[1];
             piVar1 = piVar2;
-          } while (piVar2 < &DAT_10016c38 + numcmap);
+          } while (piVar2 < &current_colormap + numcmap);
         }
         FUN_00421c14();
         halt_baddata();
@@ -62591,8 +62591,8 @@ void draw_file_pointers(int param_1,int param_2,int param_3)
   
   iVar4 = *(int *)(*(int *)(param_1 + 0x10) + param_2 * 4);
   iVar2 = *(int *)(*(int *)(param_1 + 0x10) + param_3 * 4);
-  DAT_10016c60 = iVar4;
-  DAT_10016c64 = iVar2;
+  selected_id_1 = iVar4;
+  selected_id_2 = iVar2;
   loadname((int)(short)param_3);
   pushmatrix();
   translate(*(float *)(iVar4 + 0x14) + view_offset_x + DAT_10017504,*(undefined4 *)(iVar4 + 0x18));
@@ -62886,8 +62886,8 @@ void draw_directories(char param_1)
   float fStack_8;
   float fStack_4;
   
-  DAT_10016c60 = 0;
-  DAT_10016c64 = 0;
+  selected_id_1 = 0;
+  selected_id_2 = 0;
   if (*(int *)(curcontext + 0x3c) == 0) {
     if (topdir != 0) {
       if (param_1 == '\0') {
@@ -64246,10 +64246,10 @@ void FUN_0042728c(void)
 void checkPointerFile(int param_1,undefined4 param_2)
 
 {
-  if (param_1 == DAT_10016c60) {
+  if (param_1 == selected_id_1) {
     pushmatrix();
-    translate(*(float *)(DAT_10016c64 + 0x14) - (view_offset_x + DAT_10017504),
-              *(undefined4 *)(DAT_10016c64 + 0x18),&fsn_resources,param_2,0);
+    translate(*(float *)(selected_id_2 + 0x14) - (view_offset_x + DAT_10017504),
+              *(undefined4 *)(selected_id_2 + 0x18),&fsn_resources,param_2,0);
     scale(view_offset_x,view_offset_x);
     bgnclosedline();
     v2f(&DAT_10006f28);
@@ -64258,10 +64258,10 @@ void checkPointerFile(int param_1,undefined4 param_2)
     endclosedline();
     popmatrix();
   }
-  else if (param_1 == DAT_10016c64) {
+  else if (param_1 == selected_id_2) {
     pushmatrix();
-    translate(*(float *)(DAT_10016c60 + 0x14) + view_offset_x + DAT_10017504,
-              *(undefined4 *)(DAT_10016c60 + 0x18),&fsn_resources,param_2,0);
+    translate(*(float *)(selected_id_1 + 0x14) + view_offset_x + DAT_10017504,
+              *(undefined4 *)(selected_id_1 + 0x18),&fsn_resources,param_2,0);
     scale(view_offset_x,view_offset_x);
     bgnclosedline();
     v2f(&DAT_10006f10);
@@ -67473,21 +67473,21 @@ void initResources(undefined4 param_1)
   undefined4 uVar2;
   
   XtAppAddConverter(app_context,0xf661c25,"CpColor",FUN_0042b6f8,0,0);
-  XtGetApplicationResources(param_1,&DAT_10016e20,&PTR_s_landscape_10008918,1,0,0);
-  if (DAT_10016e20 == (char *)0x0) {
+  XtGetApplicationResources(param_1,&landscape_name,&PTR_s_landscape_10008918,1,0,0);
+  if (landscape_name == (char *)0x0) {
     iVar1 = getgdesc(9);
     if (iVar1 < 4) {
-      DAT_10016e20 = "indigo";
+      landscape_name = "indigo";
     }
     else {
-      DAT_10016e20 = "grass";
+      landscape_name = "grass";
     }
   }
-  if (DAT_10016e20 == (char *)0x0) {
+  if (landscape_name == (char *)0x0) {
     XtGetApplicationResources(param_1,&fsn_resources,&PTR_s_noscan_10007c30,0x76,0,0);
   }
   else {
-    uVar2 = XtCreateWidget(DAT_10016e20,_DAT_0f6d07d4,param_1,0,0);
+    uVar2 = XtCreateWidget(landscape_name,_DAT_0f6d07d4,param_1,0,0);
     XtGetApplicationResources(uVar2,&fsn_resources,&PTR_s_noscan_10007c30,0x76,0,0);
     XtDestroyWidget(uVar2);
   }
@@ -69285,7 +69285,7 @@ void addMark(char *param_1,undefined4 *param_2)
   }
   uVar4 = XmStringCreateSimple(param_1);
   *(undefined4 *)(selection_buffer + selection_count * 0x40 + 0x3c) = uVar4;
-  XmListAddItem(DAT_10016ec4,*(undefined4 *)(selection_buffer + selection_count * 0x40 + 0x3c),0);
+  XmListAddItem(mark_selector_list,*(undefined4 *)(selection_buffer + selection_count * 0x40 + 0x3c),0);
   selection_count = selection_count + 1;
   if (selection_count == 1) {
     XtSetSensitive(mark_selector_dialog,1);
@@ -69385,7 +69385,7 @@ void FUN_0042f124(int param_1)
   undefined4 *puVar5;
   undefined4 *puVar6;
   
-  XmListDeletePos(DAT_10016ec4,param_1 + 1);
+  XmListDeletePos(mark_selector_list,param_1 + 1);
   XtFree(*(undefined4 *)(selection_buffer + param_1 * 0x40 + 0x38));
   XmStringFree(*(undefined4 *)(selection_buffer + param_1 * 0x40 + 0x3c));
   selection_count = selection_count + -1;
@@ -69438,7 +69438,7 @@ void createMarkControls(undefined4 param_1)
   XtUnmanageChild(uVar1);
   uVar1 = XmSelectionBoxGetChild(mark_selector_dialog,0xe);
   XtUnmanageChild(uVar1);
-  DAT_10016ec4 = XmSelectionBoxGetChild(mark_selector_dialog,8);
+  mark_selector_list = XmSelectionBoxGetChild(mark_selector_dialog,8);
   XtAddCallback(mark_selector_dialog,0xe3f44b6,FUN_0042f4d8,0);
   XtAddCallback(mark_selector_dialog,0xe3f380d,FUN_0042f5d0,0);
   XtManageChild(mark_selector_dialog);
@@ -69522,7 +69522,7 @@ void FUN_0042f4d8(void)
   int local_8;
   int *local_4;
   
-  iVar1 = XmListGetSelectedPos(DAT_10016ec4,&local_4,&local_8);
+  iVar1 = XmListGetSelectedPos(mark_selector_list,&local_4,&local_8);
   if (iVar1 != 0) {
     if (0 < local_8) {
       FUN_0040ff64();
@@ -69548,7 +69548,7 @@ void FUN_0042f5d0(void)
   int local_8;
   int *local_4;
   
-  iVar1 = XmListGetSelectedPos(DAT_10016ec4,&local_4,&local_8);
+  iVar1 = XmListGetSelectedPos(mark_selector_list,&local_4,&local_8);
   if (iVar1 != 0) {
     if (0 < local_8) {
       FUN_0042f124(*local_4 + -1);
@@ -69577,7 +69577,7 @@ void FUN_0042f66c(undefined4 param_1,undefined4 param_2,int param_3)
     if (sVar2 != 0) {
       FUN_0042dc64(auStack_3c);
       FUN_0042ef04(local_4,auStack_3c);
-      XmListSetBottomPos(DAT_10016ec4,0);
+      XmListSetBottomPos(mark_selector_list,0);
     }
     XtFree(local_4);
   }
@@ -69597,10 +69597,10 @@ void FUN_0042f73c(undefined4 param_1)
   undefined4 local_28;
   undefined4 local_24;
   
-  if (DAT_10016ec8 == 0) {
-    DAT_10016ec8 = XmCreatePromptDialog(param_1,"markPrompt",&local_28,0);
-    XtAddCallback(DAT_10016ec8,0xf6615c9,FUN_0042f4b4,0);
-    XtAddCallback(DAT_10016ec8,0xe3f44b6,FUN_0042f66c,0);
+  if (mark_prompt_dialog == 0) {
+    mark_prompt_dialog = XmCreatePromptDialog(param_1,"markPrompt",&local_28,0);
+    XtAddCallback(mark_prompt_dialog,0xf6615c9,FUN_0042f4b4,0);
+    XtAddCallback(mark_prompt_dialog,0xe3f44b6,FUN_0042f66c,0);
   }
   if (*(undefined4 **)(curcontext + 0x48) == (undefined4 *)0x0) {
     if (*(undefined4 **)(curcontext + 0x44) == (undefined4 *)0x0) {
@@ -69616,9 +69616,9 @@ void FUN_0042f73c(undefined4 param_1)
   uVar1 = XmStringCreateSimple(puVar2);
   local_28 = 0xe3f4ab9;
   local_24 = uVar1;
-  XtSetValues(DAT_10016ec8,&local_28,1);
+  XtSetValues(mark_prompt_dialog,&local_28,1);
   XmStringFree(uVar1);
-  XtManageChild(DAT_10016ec8);
+  XtManageChild(mark_prompt_dialog);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }

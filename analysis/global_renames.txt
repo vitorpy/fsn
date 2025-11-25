@@ -48,3 +48,17 @@ DAT_10016b88 -> menu_delete_file_2 : 8 uses - XmCreateToggleButton("menuDeleteFi
 DAT_10016b8c -> menu_process_deletes : 8 uses - XmCreatePushButton("menuProcessDeletes")
 DAT_10016b90 -> menu_undo_deletes : 8 uses - XmCreatePushButton("menuUndoDeletes")
 
+# BATCH 5: More widgets and window state (8-7 uses)
+DAT_10016b9c -> menu_file_cascade : 8 uses - XmCreateCascadeButton("menuFile")
+DAT_10016b98 -> menu_directory_cascade : 8 uses - XmCreateCascadeButton("menuDirectory")
+DAT_10016bfc -> window_height : 8 uses - uint, *(ushort*)(param_3+0x12), used in ortho2
+DAT_10016ba0 -> menu_items_array : 8 uses - array base for menu widget storage
+DAT_10016c38 -> current_colormap : 8 uses - assigned param_1 after numcmap increment
+DAT_10016bf8 -> window_width : 7 uses - uint/int, *(ushort*)(param_3+0x10), used in ortho2
+DAT_10016c60 -> selected_id_1 : 7 uses - int, picking ID used with loadname()
+DAT_10016c64 -> selected_id_2 : 7 uses - int, picking ID paired with selected_id_1
+DAT_10016ec4 -> mark_selector_list : 7 uses - XmSelectionBoxGetChild(mark_selector_dialog, 8)
+DAT_10016ec8 -> mark_prompt_dialog : 7 uses - XmCreatePromptDialog("markPrompt")
+DAT_10016e20 -> landscape_name : 7 uses - char*, resource "indigo"/"grass" for colormap
+DAT_10016b54 -> menu_monitor_directory : 7 uses - XmCreateToggleButton("menuMonitorDirectory")
+
