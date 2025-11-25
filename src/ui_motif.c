@@ -22,16 +22,16 @@ void setScales(void)
   int iStack_4c;
   
   if ((controlsShowing != '\0') && (curcontext[0xc53] == '\0')) {
-    if (DAT_10000148 != *(short *)(curcontext + 0xc)) {
+    if (cached_view_angle_1 != *(short *)(curcontext + 0xc)) {
       uStack_50 = 0xf66187b;
       iStack_4c = (int)*(short *)(curcontext + 0xc);
-      DAT_10000148 = *(short *)(curcontext + 0xc);
+      cached_view_angle_1 = *(short *)(curcontext + 0xc);
       XtSetValues(DAT_1001663c,&uStack_50,1);
     }
-    if (DAT_1000014c != *(short *)(curcontext + 0xe)) {
+    if (cached_view_angle_2 != *(short *)(curcontext + 0xe)) {
       uStack_50 = 0xf66187b;
       iStack_4c = (int)*(short *)(curcontext + 0xe);
-      DAT_1000014c = *(short *)(curcontext + 0xe);
+      cached_view_angle_2 = *(short *)(curcontext + 0xe);
       XtSetValues(vertical_scale_widget,&uStack_50,1);
     }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -876,7 +876,7 @@ void fileCreated(int param_1,char *param_2)
           puVar3[5] = 0;
           puVar3[10] = param_1;
           puVar3[2] = sStack_94.st_nlink;
-          bVar7 = DAT_10017493 != '\0';
+          bVar7 = special_display_flag != '\0';
           if (bVar7) {
             bVar7 = *(int *)(param_1 + 0x74) << 0xb < 0;
           }

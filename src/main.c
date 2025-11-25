@@ -1578,7 +1578,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_9c = 1;
   iStackX_0 = param_1;
   puStackX_4 = param_2;
-  toplevel = XtAppInitialize(&app_context,&DAT_1000a178,&PTR_s__landscape_100000e0,5,&iStackX_0,
+  toplevel = XtAppInitialize(&app_context,&app_class_name,&PTR_s__landscape_100000e0,5,&iStackX_0,
                              param_2,&fallback_resources,&uStack_a0,1);
   display = XtDisplay(toplevel);
   FUN_0042b844(toplevel);
@@ -1601,13 +1601,13 @@ void main(int param_1,undefined4 *param_2)
   FUN_00411674();
   FUN_0040a704();
   glwidget_translations = XtParseTranslationTable(glwidget_translations);
-  blankXmString = XmStringCreate(&DAT_1000a2fc,&default_charset);
+  blankXmString = XmStringCreate(&blank_string_literal,&default_charset);
   emptyXmString = XmStringCreate(&DAT_1000a300,&default_charset);
   uVar1 = XtDisplay(toplevel);
   uVar1 = XmInternAtom(uVar1,"WM_PROTOCOLS",0);
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
   XmAddProtocolCallback(toplevel,uVar1,uVar2,quit_application,0);
-  XtAppAddActions(app_context,&DAT_10000024,0x10);
+  XtAppAddActions(app_context,&xt_actions_table,0x10);
   uStack_a8 = XtCreateManagedWidget("mainw",_DAT_0e3d4f98,toplevel,&uStack_a0,0);
   install_help_callback(uStack_a8,&topHelp);
   uStack_ac = FUN_0040dff8(uStack_a8);

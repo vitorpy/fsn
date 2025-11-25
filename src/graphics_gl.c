@@ -740,7 +740,7 @@ void draw_directories(char param_1)
                      (*(float *)(curcontext + 4) -
                      *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
                      *(float *)(curcontext + 8)) / zoom_reference_height);
-        fVar1 = (DAT_100175a0 * *(float *)(curcontext + 0x34)) / fVar1;
+        fVar1 = (icon_size_multiplier * *(float *)(curcontext + 0x34)) / fVar1;
         if (grid_display_flag == '\0') {
           cpack(highlight_packed_color);
           bgnpolygon();
@@ -2597,7 +2597,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
   uVar9 = (undefined4)((ulonglong)param_2 >> 0x20);
   uVar5 = (uint)((ulonglong)param_1 >> 0x20);
   if (param_4 == '\0') {
-    fVar8 = DAT_100175a0 * *(float *)(curcontext + 0x34);
+    fVar8 = icon_size_multiplier * *(float *)(curcontext + 0x34);
     if (grid_display_flag == '\0') {
       cpack(highlight_packed_color);
       bgnpolygon();
@@ -5191,7 +5191,7 @@ void draw_directory(ulonglong param_1,int param_2,char param_3)
           uVar2 = DAT_10017608;
           if ((-1 < *(int *)(iVar3 + 0x74) << 2) &&
              (uVar2 = DAT_1001760c, *(int *)(iVar3 + 0x74) << 0xd < 0)) {
-            uVar2 = DAT_100175f8;
+            uVar2 = directory_color_active;
           }
           cpack(uVar2);
           dVar5 = (double)*(float *)(param_2 + 0x34) + (double)*(float *)(iVar3 + 0x4c);

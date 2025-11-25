@@ -862,7 +862,7 @@ pointer __((offset(0x10017720))) curcontext;
 undefined4 view_init_x;
 undefined4 view_init_y;
 undefined4 view_init_z;
-undefined4 DAT_100174b8;
+undefined4 view_init_rotation_x;
 undefined4 DAT_100174e0;
 int DAT_10017658;
 undefined4 cached_context_ptr;
@@ -897,11 +897,11 @@ undefined4 pane_form_widget;
 undefined DAT_0e3d616c;
 char redraw_flag;
 undefined default_charset;
-undefined DAT_10000024;
+undefined xt_actions_table;
 pointer PTR_s_-landscape_100000e0;
 pointer __((offset(0x10018374))) altcontext;
-undefined DAT_1000a178;
-undefined DAT_1000a2fc;
+undefined app_class_name;
+undefined blank_string_literal;
 undefined DAT_1000a300;
 undefined quit_application;
 pointer topHelp;
@@ -921,8 +921,8 @@ float zoom_reference_height;
 float zoom_base_factor;
 float view_init_x;
 float view_init_y;
-float DAT_100174bc;
-float DAT_100174c0;
+float camera_lookat_x;
+float camera_lookat_y;
 undefined4 zoom_scale_widget;
 undefined FUN_0040d15c;
 undefined FUN_0040d2cc;
@@ -934,9 +934,9 @@ pointer controlHelp;
 undefined FUN_0041069c;
 undefined reset_eye;
 undefined4 vertical_scale_widget;
-short DAT_10000148;
+short cached_view_angle_1;
 undefined4 DAT_1001663c;
-short DAT_1000014c;
+short cached_view_angle_2;
 undefined1 controlsShowing;
 undefined4 labelColors;
 undefined4 monitorLabelColor;
@@ -1025,12 +1025,12 @@ undefined4 DAT_1001662c;
 undefined4 DAT_10016630;
 float DAT_10016630;
 float DAT_1001662c;
-char DAT_10000170;
+char view_mode_flags;
 pointer __((offset(0x10019008))) altcontextwindows;
 float DAT_100174f4;
 undefined1 DAT_10016710;
-uint DAT_100001f0;
-uint DAT_10016b10;
+uint file_memory_pool_ptr;
+uint file_pool_limit;
 void *directory_memory_pool;
 void *directory_pool_limit;
 undefined4 dir_index;
@@ -1063,7 +1063,7 @@ undefined1[16] fstyp;
 undefined4 localFlag;
 int current_device_id;
 int window_width;
-char DAT_10017493;
+char special_display_flag;
 undefined DAT_0fb51f00;
 char *home_directory;
 undefined1 overviewActive;
@@ -1107,11 +1107,11 @@ uint DAT_10016700;
 ushort DAT_10016704;
 ushort DAT_10016706;
 undefined chrtbl;
-undefined4 DAT_10017578;
+undefined4 translate_y_offset;
 undefined4 DAT_10017600;
 float DAT_10017574;
-undefined4 DAT_100175f8;
-undefined4 DAT_100175fc;
+undefined4 directory_color_active;
+undefined4 directory_color_normal;
 float layout_base_height;
 float DAT_10017570;
 undefined DAT_1000ae90;
@@ -1119,7 +1119,7 @@ undefined DAT_1000ae94;
 undefined DAT_1000ae98;
 undefined4 DAT_10017604;
 float DAT_100174f0;
-float DAT_100175a0;
+float icon_size_multiplier;
 char grid_display_flag;
 undefined4 graphics_state_mode;
 float view_offset_y;
@@ -36789,7 +36789,7 @@ void FUN_0040a704(void)
   *(undefined4 *)(curcontext + 4) = view_init_y;
   *(undefined4 *)(curcontext + 8) = view_init_z;
   *(undefined2 *)(curcontext + 0xc) = 0;
-  *(short *)(curcontext + 0xe) = (short)DAT_100174b8;
+  *(short *)(curcontext + 0xe) = (short)view_init_rotation_x;
   *(short *)(curcontext + 0x10) = (short)DAT_100174e0;
   FUN_0040bfec();
   FUN_0040c0cc();
@@ -37009,7 +37009,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_9c = 1;
   iStackX_0 = param_1;
   puStackX_4 = param_2;
-  toplevel = XtAppInitialize(&app_context,&DAT_1000a178,&PTR_s__landscape_100000e0,5,&iStackX_0,
+  toplevel = XtAppInitialize(&app_context,&app_class_name,&PTR_s__landscape_100000e0,5,&iStackX_0,
                              param_2,&fallback_resources,&uStack_a0,1);
   display = XtDisplay(toplevel);
   FUN_0042b844(toplevel);
@@ -37032,13 +37032,13 @@ void main(int param_1,undefined4 *param_2)
   FUN_00411674();
   FUN_0040a704();
   glwidget_translations = XtParseTranslationTable(glwidget_translations);
-  blankXmString = XmStringCreate(&DAT_1000a2fc,&default_charset);
+  blankXmString = XmStringCreate(&blank_string_literal,&default_charset);
   emptyXmString = XmStringCreate(&DAT_1000a300,&default_charset);
   uVar1 = XtDisplay(toplevel);
   uVar1 = XmInternAtom(uVar1,"WM_PROTOCOLS",0);
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
   XmAddProtocolCallback(toplevel,uVar1,uVar2,quit_application,0);
-  XtAppAddActions(app_context,&DAT_10000024,0x10);
+  XtAppAddActions(app_context,&xt_actions_table,0x10);
   uStack_a8 = XtCreateManagedWidget("mainw",_DAT_0e3d4f98,toplevel,&uStack_a0,0);
   install_help_callback(uStack_a8,&topHelp);
   uStack_ac = FUN_0040dff8(uStack_a8);
@@ -37224,7 +37224,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   local_9c = 1;
   local_res0 = param_1;
   local_res4 = param_2;
-  toplevel = XtAppInitialize(&app_context,&DAT_1000a178,&PTR_s__landscape_100000e0,5,&local_res0,
+  toplevel = XtAppInitialize(&app_context,&app_class_name,&PTR_s__landscape_100000e0,5,&local_res0,
                              param_2,&fallback_resources,&local_a0,1);
   display = XtDisplay(toplevel);
   FUN_0042b844(toplevel);
@@ -37247,13 +37247,13 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   FUN_00411674();
   FUN_0040a704();
   glwidget_translations = XtParseTranslationTable(glwidget_translations);
-  blankXmString = XmStringCreate(&DAT_1000a2fc,&default_charset);
+  blankXmString = XmStringCreate(&blank_string_literal,&default_charset);
   emptyXmString = XmStringCreate(&DAT_1000a300,&default_charset);
   uVar1 = XtDisplay(toplevel);
   uVar1 = XmInternAtom(uVar1,"WM_PROTOCOLS",0);
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
   XmAddProtocolCallback(toplevel,uVar1,uVar2,quit_application,0);
-  XtAppAddActions(app_context,&DAT_10000024,0x10);
+  XtAppAddActions(app_context,&xt_actions_table,0x10);
   local_a8 = XtCreateManagedWidget("mainw",_DAT_0e3d4f98,toplevel,&local_a0,0);
   install_help_callback(local_a8,&topHelp);
   local_ac = FUN_0040dff8(local_a8);
@@ -37805,16 +37805,16 @@ void setScales(void)
   int iStack_4c;
   
   if ((controlsShowing != '\0') && (curcontext[0xc53] == '\0')) {
-    if (DAT_10000148 != *(short *)(curcontext + 0xc)) {
+    if (cached_view_angle_1 != *(short *)(curcontext + 0xc)) {
       uStack_50 = 0xf66187b;
       iStack_4c = (int)*(short *)(curcontext + 0xc);
-      DAT_10000148 = *(short *)(curcontext + 0xc);
+      cached_view_angle_1 = *(short *)(curcontext + 0xc);
       XtSetValues(DAT_1001663c,&uStack_50,1);
     }
-    if (DAT_1000014c != *(short *)(curcontext + 0xe)) {
+    if (cached_view_angle_2 != *(short *)(curcontext + 0xe)) {
       uStack_50 = 0xf66187b;
       iStack_4c = (int)*(short *)(curcontext + 0xe);
-      DAT_1000014c = *(short *)(curcontext + 0xe);
+      cached_view_angle_2 = *(short *)(curcontext + 0xe);
       XtSetValues(vertical_scale_widget,&uStack_50,1);
     }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -38646,7 +38646,7 @@ void do_warp(int param_1)
     }
   }
   else {
-    set_camera_lookat((double)DAT_100174bc,(double)DAT_100174c0);
+    set_camera_lookat((double)camera_lookat_x,(double)camera_lookat_y);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -38960,10 +38960,10 @@ void FUN_00411230(void)
   uint local_20;
   ushort local_2;
   
-  if (DAT_10000170 == '\0') {
+  if (view_mode_flags == '\0') {
     gl_swap_buffers(1);
     FUN_0040a7ec();
-    DAT_10000170 = '\x01';
+    view_mode_flags = '\x01';
     gl_swap_buffers(1);
   }
   local_28 = &local_2;
@@ -39219,9 +39219,9 @@ void FUN_00411b84(void)
 {
   void *pvVar1;
   
-  if ((DAT_100001f0 == 0) || (DAT_10016b10 <= DAT_100001f0)) {
+  if ((file_memory_pool_ptr == 0) || (file_pool_limit <= file_memory_pool_ptr)) {
     pvVar1 = calloc(100,0x2c);
-    DAT_10016b10 = (int)pvVar1 + 0x1130;
+    file_pool_limit = (int)pvVar1 + 0x1130;
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -40250,7 +40250,7 @@ void FUN_004138e8(undefined4 *param_1,char *param_2,char *param_3,char param_4)
                   puVar5[5] = 0;
                   puVar5[10] = param_1;
                   puVar5[2] = local_90.st_nlink;
-                  bVar10 = DAT_10017493 != '\0';
+                  bVar10 = special_display_flag != '\0';
                   if (bVar10) {
                     bVar10 = (int)(param_1[0x1d] << 0xb) < 0;
                   }
@@ -41835,7 +41835,7 @@ void fileCreated(int param_1,char *param_2)
           puVar3[5] = 0;
           puVar3[10] = param_1;
           puVar3[2] = sStack_94.st_nlink;
-          bVar7 = DAT_10017493 != '\0';
+          bVar7 = special_display_flag != '\0';
           if (bVar7) {
             bVar7 = *(int *)(param_1 + 0x74) << 0xb < 0;
           }
@@ -42367,7 +42367,7 @@ void draw_special(undefined4 *param_1,char *param_2,undefined4 param_3,undefined
     translate((float)(double)CONCAT44(unaff_000010a0,param_4),(float)(double)CONCAT44(uVar2,param_6)
              );
     rotate((int)-*(short *)(curcontext + 0xe),0x78);
-    translate(0,DAT_10017578);
+    translate(0,translate_y_offset);
     cpack(DAT_10017600);
     dVar5 = (double)-DAT_10017574;
     fVar6 = (float)(dVar5 / (double)((ulonglong)unaff_000010a0 << 0x20));
@@ -42486,9 +42486,9 @@ void draw_dir(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefine
     loadname((int)*(short *)((int)param_1 + 0x5e));
     pushmatrix();
     translate((float)(double)CONCAT44(uVar1,param_4));
-    uVar1 = DAT_100175fc;
+    uVar1 = directory_color_normal;
     if ((int)(param_1[0x1d] << 0xd) < 0) {
-      uVar1 = DAT_100175f8;
+      uVar1 = directory_color_active;
     }
     cpack(uVar1);
     pushmatrix();
@@ -42637,7 +42637,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
   uVar9 = (undefined4)((ulonglong)param_2 >> 0x20);
   uVar5 = (uint)((ulonglong)param_1 >> 0x20);
   if (param_4 == '\0') {
-    fVar8 = DAT_100175a0 * *(float *)(curcontext + 0x34);
+    fVar8 = icon_size_multiplier * *(float *)(curcontext + 0x34);
     if (grid_display_flag == '\0') {
       cpack(highlight_packed_color);
       bgnpolygon();
@@ -43252,8 +43252,8 @@ void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *para
   else if (iStack_8 == 0) {
     if (iStack_4 == *(int *)(curcontext + 0x3c)) {
       FUN_0041d920();
-      *param_1 = DAT_100174bc;
-      *param_2 = DAT_100174c0;
+      *param_1 = camera_lookat_x;
+      *param_2 = camera_lookat_y;
       *param_3 = DAT_100174c4;
       *param_4 = (short)DAT_100174c8;
       *param_6 = *(int *)(curcontext + 0x3c);
@@ -43376,7 +43376,7 @@ void highlightSpecialDir(undefined4 param_1,undefined4 param_2,undefined4 param_
   translate((float)(double)CONCAT44((int)((ulonglong)in_f4 >> 0x20),param_1),
             (float)(double)CONCAT44((int)((ulonglong)in_f6 >> 0x20),param_2),param_3,param_4,0);
   rotate((int)-*(short *)(curcontext + 0xe),0x78);
-  translate(0,DAT_10017578);
+  translate(0,translate_y_offset);
   fVar1 = (float)((double)-DAT_10017574 / (double)((ulonglong)in_register_00001080 << 0x20));
   rect(fVar1,fVar1);
                     // WARNING: Bad instruction - Truncating control flow here
@@ -48105,7 +48105,7 @@ void draw_directory(ulonglong param_1,int param_2,char param_3)
           uVar2 = DAT_10017608;
           if ((-1 < *(int *)(iVar3 + 0x74) << 2) &&
              (uVar2 = DAT_1001760c, *(int *)(iVar3 + 0x74) << 0xd < 0)) {
-            uVar2 = DAT_100175f8;
+            uVar2 = directory_color_active;
           }
           cpack(uVar2);
           dVar5 = (double)*(float *)(param_2 + 0x34) + (double)*(float *)(iVar3 + 0x4c);
@@ -48252,7 +48252,7 @@ void draw_directories(char param_1)
                      (*(float *)(curcontext + 4) -
                      *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
                      *(float *)(curcontext + 8)) / zoom_reference_height);
-        fVar1 = (DAT_100175a0 * *(float *)(curcontext + 0x34)) / fVar1;
+        fVar1 = (icon_size_multiplier * *(float *)(curcontext + 0x34)) / fVar1;
         if (grid_display_flag == '\0') {
           cpack(highlight_packed_color);
           bgnpolygon();
@@ -53254,7 +53254,7 @@ void getPosition(undefined2 *param_1,undefined2 *param_2,undefined2 *param_3,flo
     *param_5 = view_init_y;
     *param_6 = view_init_z;
     *param_2 = 0;
-    *param_3 = (short)DAT_100174b8;
+    *param_3 = (short)view_init_rotation_x;
                     // WARNING: Bad instruction - Truncating control flow here
     halt_baddata();
   }

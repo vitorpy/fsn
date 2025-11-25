@@ -252,7 +252,7 @@ void do_warp(int param_1)
     }
   }
   else {
-    set_camera_lookat((double)DAT_100174bc,(double)DAT_100174c0);
+    set_camera_lookat((double)camera_lookat_x,(double)camera_lookat_y);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
