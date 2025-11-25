@@ -958,10 +958,10 @@ undefined FUN_0040de38;
 undefined show_controls;
 undefined init_panel_layout;
 undefined4 DAT_10016668;
-undefined FUN_0040ef44;
+undefined file_height_mode_callback;
 pointer sessionHelp;
 undefined4 DAT_10016670;
-undefined FUN_0040eff8;
+undefined dir_height_mode_callback;
 pointer showHelp;
 undefined4 DAT_10016674;
 pointer displayHelp;
@@ -1346,7 +1346,7 @@ undefined4 active_file_list;
 string s_FSN_the_3D_File_System_Navigator_100079c4;
 undefined *PTR_s_Please_be_patient_while_the_file_10007b60;
 undefined *PTR_s_Please_be_patient_while_the_file_10007b64;
-undefined FUN_0042b3f4;
+undefined help_callback;
 undefined FUN_0042b5ac;
 pointer versionHelp;
 pointer modeHelp;
@@ -1368,7 +1368,7 @@ undefined FUN_0042cbb8;
 int preference_panel_shell;
 undefined FUN_0042cc30;
 undefined FUN_0042ccac;
-undefined FUN_0042cf60;
+undefined toggle_pair_callback;
 undefined FUN_0042d338;
 undefined rgb_scale_callback;
 undefined hsv_scale_callback;
@@ -37012,7 +37012,7 @@ void main(int param_1,undefined4 *param_2)
   toplevel = XtAppInitialize(&app_context,&app_class_name,&PTR_s__landscape_100000e0,5,&iStackX_0,
                              param_2,&fallback_resources,&uStack_a0,1);
   display = XtDisplay(toplevel);
-  FUN_0042b844(toplevel);
+  init_toplevel_resources(toplevel);
   if (iStackX_0 < 2) {
     if (relative_path_flag == '\0') {
       pcStack_bc = getcwd((char *)0x0,0x400);
@@ -37171,10 +37171,10 @@ void main(int param_1,undefined4 *param_2)
   XtSetSensitive(uStack_ac,1);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),1);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 0xc),1);
-  FUN_0042b08c();
+  init_display_state();
   init_database_display();
   setup_fam_monitoring();
-  FUN_0042fd50(toplevel);
+  refresh_toplevel(toplevel);
   do {
     if ((redraw_flag != '\0') && (iVar3 = XtAppPending(app_context), iVar3 == 0)) {
       redraw_gl_scene();
@@ -37227,7 +37227,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   toplevel = XtAppInitialize(&app_context,&app_class_name,&PTR_s__landscape_100000e0,5,&local_res0,
                              param_2,&fallback_resources,&local_a0,1);
   display = XtDisplay(toplevel);
-  FUN_0042b844(toplevel);
+  init_toplevel_resources(toplevel);
   if (local_res0 < 2) {
     if (relative_path_flag == '\0') {
       local_bc = getcwd((char *)0x0,0x400);
@@ -37386,10 +37386,10 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   XtSetSensitive(local_ac,1);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),1);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 0xc),1);
-  FUN_0042b08c();
+  init_display_state();
   init_database_display();
   setup_fam_monitoring();
-  FUN_0042fd50(toplevel);
+  refresh_toplevel(toplevel);
   do {
     if ((redraw_flag != '\0') && (iVar3 = XtAppPending(app_context), iVar3 == 0)) {
       redraw_gl_scene();
@@ -38138,15 +38138,15 @@ void FUN_0040dff8(undefined4 param_1)
   local_78 = 0;
   DAT_10016670 = XmCreateToggleButton(local_1c,"menuHeightNone",&local_74,0);
   XtManageChild(DAT_10016670);
-  XtAddCallback(DAT_10016670,0xe3f4ca5,FUN_0040ef44,0);
+  XtAddCallback(DAT_10016670,0xe3f4ca5,file_height_mode_callback,0);
   local_78 = 0;
   DAT_10016674 = XmCreateToggleButton(local_1c,"menuHeightLinear",&local_74,0);
   XtManageChild(DAT_10016674);
-  XtAddCallback(DAT_10016674,0xe3f4ca5,FUN_0040ef44,1);
+  XtAddCallback(DAT_10016674,0xe3f4ca5,file_height_mode_callback,1);
   local_78 = 0;
   DAT_10016678 = XmCreateToggleButton(local_1c,"menuHeightExaggerated",&local_74,0);
   XtManageChild(DAT_10016678);
-  XtAddCallback(DAT_10016678,0xe3f4ca5,FUN_0040ef44,2);
+  XtAddCallback(DAT_10016678,0xe3f4ca5,file_height_mode_callback,2);
   local_74 = 0xe3f464e;
   local_78 = 1;
   local_70 = 1;
@@ -38160,15 +38160,15 @@ void FUN_0040dff8(undefined4 param_1)
   local_78 = 0;
   DAT_1001667c = XmCreateToggleButton(local_20,"menuDirectoryFlat",&local_74,0);
   XtManageChild(DAT_1001667c);
-  XtAddCallback(DAT_1001667c,0xe3f4ca5,FUN_0040eff8,0);
+  XtAddCallback(DAT_1001667c,0xe3f4ca5,dir_height_mode_callback,0);
   local_78 = 0;
   DAT_10016680 = XmCreateToggleButton(local_20,"menuDirectoryFilesOnly",&local_74,0);
   XtManageChild(DAT_10016680);
-  XtAddCallback(DAT_10016680,0xe3f4ca5,FUN_0040eff8,1);
+  XtAddCallback(DAT_10016680,0xe3f4ca5,dir_height_mode_callback,1);
   local_78 = 0;
   DAT_10016684 = XmCreateToggleButton(local_20,"menuDirectoryChildren",&local_74,0);
   XtManageChild(DAT_10016684);
-  XtAddCallback(DAT_10016684,0xe3f4ca5,FUN_0040eff8,2);
+  XtAddCallback(DAT_10016684,0xe3f4ca5,dir_height_mode_callback,2);
   FUN_0041b040(local_4,param_1);
   FUN_0042b0c4(local_4);
                     // WARNING: Bad instruction - Truncating control flow here
@@ -40732,9 +40732,9 @@ void FUN_00414cf0(undefined4 param_1)
 
 {
   gl_push_state();
-  FUN_0042a4d4(0,1);
+  set_context_state(0,1);
   FUN_00414be4(param_1);
-  FUN_0042a4d4(1,1);
+  set_context_state(1,1);
   FUN_00414be4(param_1);
   gl_pop_state();
                     // WARNING: Bad instruction - Truncating control flow here
@@ -46938,7 +46938,7 @@ void FUN_0042194c(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00421c14(void)
+void update_colormap_windows(void)
 
 {
   int iVar1;
@@ -46971,7 +46971,7 @@ void newTopWindow(undefined4 param_1)
 {
   (&DAT_10016c10)[numtop] = param_1;
   numtop = numtop + 1;
-  FUN_00421c14();
+  update_colormap_windows();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -47042,7 +47042,7 @@ void newCmapWindow(undefined4 param_1)
   }
   numcmap = numcmap + 1;
   current_colormap = param_1;
-  FUN_00421c14();
+  update_colormap_windows();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -47103,7 +47103,7 @@ void deleteCmapWindow(int param_1)
             piVar1 = piVar2;
           } while (piVar2 < &current_colormap + numcmap);
         }
-        FUN_00421c14();
+        update_colormap_windows();
         halt_baddata();
       }
       iVar3 = iVar3 + 1;
@@ -51640,7 +51640,7 @@ void newcontext(uint param_1,char param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042a4d4(uint param_1,char param_2)
+void set_context_state(uint param_1,char param_2)
 
 {
   int *piVar1;
@@ -51716,7 +51716,7 @@ void FUN_0042a4d4(uint param_1,char param_2)
 void swapcontext(undefined1 param_1)
 
 {
-  FUN_0042a4d4(1 - curcontextid,param_1);
+  set_context_state(1 - curcontextid,param_1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -51764,7 +51764,7 @@ void gl_push_state(void)
 void restorecontext(void)
 
 {
-  FUN_0042a4d4(DAT_10016e00,1);
+  set_context_state(DAT_10016e00,1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -52382,7 +52382,7 @@ void destroyCopyright(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042b08c(void)
+void init_display_state(void)
 
 {
   int unaff_gp;
@@ -52412,7 +52412,7 @@ void createHelpMenu(undefined4 param_1)
   XtAddCallback(uVar1,0xe3f4c38,overlayMenuUnmappedCB,0);
   uStack_2c = 0;
   uVar2 = XmCreatePushButton(uVar1,"window_help",&uStack_28,0);
-  XtAddCallback(uVar2,0xe3f35b3,FUN_0042b3f4,&topHelp);
+  XtAddCallback(uVar2,0xe3f35b3,help_callback,&topHelp);
   XtManageChild(uVar2);
   uStack_2c = 0;
   uVar2 = XmCreatePushButton(uVar1,"context_help",&uStack_28,0);
@@ -52420,11 +52420,11 @@ void createHelpMenu(undefined4 param_1)
   XtManageChild(uVar2);
   uStack_2c = 0;
   uVar2 = XmCreatePushButton(uVar1,"mode_help",&uStack_28,0);
-  XtAddCallback(uVar2,0xe3f35b3,FUN_0042b3f4,&modeHelp);
+  XtAddCallback(uVar2,0xe3f35b3,help_callback,&modeHelp);
   XtManageChild(uVar2);
   uStack_2c = 0;
   uVar2 = XmCreatePushButton(uVar1,"version_help",&uStack_28,0);
-  XtAddCallback(uVar2,0xe3f35b3,FUN_0042b3f4,&versionHelp);
+  XtAddCallback(uVar2,0xe3f35b3,help_callback,&versionHelp);
   XtManageChild(uVar2);
   uStack_28 = 0xe3f4a31;
   uStack_2c = 1;
@@ -52523,7 +52523,7 @@ void FUN_0042b0c4(undefined4 param_1)
 void widgetHelp(undefined4 param_1,undefined4 param_2)
 
 {
-  XtAddCallback(param_1,0xe3f3e9f,FUN_0042b3f4,param_2);
+  XtAddCallback(param_1,0xe3f3e9f,help_callback,param_2);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -52588,7 +52588,7 @@ void initResources(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042b844(undefined4 param_1)
+void init_toplevel_resources(undefined4 param_1)
 
 {
   undefined4 uVar1;
@@ -52690,10 +52690,10 @@ void showPreferencePanel(void)
     XtAddCallback(uVar4,0xe3f35b3,FUN_0042ccac,0);
     XtManageChild(uVar4);
     uVar4 = XmCreatePushButton(uVar3,"preferenceSaveChanges",&local_98,0);
-    XtAddCallback(uVar4,0xe3f35b3,FUN_0042cf60,0);
+    XtAddCallback(uVar4,0xe3f35b3,toggle_pair_callback,0);
     XtManageChild(uVar4);
     uVar3 = XmCreatePushButton(uVar3,"preferenceSaveAll",&local_98,0);
-    XtAddCallback(uVar3,0xe3f35b3,FUN_0042cf60,1);
+    XtAddCallback(uVar3,0xe3f35b3,toggle_pair_callback,1);
     XtManageChild(uVar3);
     uVar3 = XmCreateRowColumn(local_8,"preferenceHeaderButtons2",&local_98,0);
     XtManageChild(uVar3);
@@ -54445,7 +54445,7 @@ void undisplayHourglass(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042fd50(void)
+void refresh_toplevel(void)
 
 {
   undefined4 uVar1;
@@ -55015,7 +55015,7 @@ void SG_getDefaultDepth(int param_1,undefined4 param_2,int *param_3,int param_4)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004314e0(int param_1,undefined4 param_2,int *param_3,int param_4)
+void parse_data_buffer(int param_1,undefined4 param_2,int *param_3,int param_4)
 
 {
   int iVar1;
@@ -55133,7 +55133,7 @@ void FUN_00431788(int param_1,int param_2,int *param_3,int param_4,int param_5)
         piVar3 = piVar3 + 1;
       } while (iVar4 < iVar2);
     }
-    FUN_004314e0(param_1,param_2,param_3,param_4);
+    parse_data_buffer(param_1,param_2,param_3,param_4);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -55265,7 +55265,7 @@ void SG_getNormalArgs(undefined4 param_1,undefined4 param_2,int param_3,int *par
   undefined4 uVar3;
   int iVar4;
   
-  uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,2);
+  uVar1 = parse_data_buffer(param_1,param_2,&temp_data_buffer,2);
   iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,2);
   if (-1 < iVar2) {
     uVar3 = eval_bytecode_instruction(param_1,param_2);
@@ -55335,7 +55335,7 @@ void SG_getOverlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *pa
   undefined4 uVar3;
   int iVar4;
   
-  uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,3);
+  uVar1 = parse_data_buffer(param_1,param_2,&temp_data_buffer,3);
   iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,3);
   if (iVar2 < 0) {
     setup_menu_resources(param_1,param_2,param_3,param_4);
@@ -55473,7 +55473,7 @@ void SG_getPopupArgs(undefined4 param_1,undefined4 param_2,int param_3,int *para
   int iVar2;
   int iVar3;
   
-  uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,4);
+  uVar1 = parse_data_buffer(param_1,param_2,&temp_data_buffer,4);
   iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,4);
   if (iVar2 < 0) {
     FUN_00431b34(param_1,param_2,param_3,param_4);
@@ -55548,7 +55548,7 @@ void SG_getUnderlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *p
   undefined4 uVar3;
   int iVar4;
   
-  uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,1);
+  uVar1 = parse_data_buffer(param_1,param_2,&temp_data_buffer,1);
   iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,1);
   if (iVar2 < 0) {
     FUN_00431b34(param_1,param_2,param_3,param_4);
@@ -57302,7 +57302,7 @@ void FindIconByName__14ByteCodeLoaderFPc(int *param_1)
     for (; iVar2 != 0; iVar2 = *(int *)(iVar2 + 0x68)) {
       if ((((*(int *)(iVar2 + 4) != 0) && (icon_cache_capacity == *(int *)(iVar2 + 0x34))) &&
           (icon_loader_instance != 0)) &&
-         (iVar1 = FUN_00435a28(&TheFileIconInterpreter,*(int *)(iVar2 + 4),
+         (iVar1 = run_icon_interpreter(&TheFileIconInterpreter,*(int *)(iVar2 + 4),
                                *(undefined4 *)(iVar2 + 8),*(undefined4 *)(iVar2 + 0x10)), iVar1 != 0
          )) {
         reset_icon_interpreter(&TheFileIconInterpreter);
@@ -57373,7 +57373,7 @@ void FindInfoByName__14ByteCodeLoaderFPc(int *param_1)
     }
     if ((((*(int *)(iVar2 + 4) != 0) && (icon_cache_capacity == *(int *)(iVar2 + 0x34))) &&
         (icon_loader_instance != 0)) &&
-       (iVar1 = FUN_00435a28(&TheFileIconInterpreter,*(int *)(iVar2 + 4),*(undefined4 *)(iVar2 + 8),
+       (iVar1 = run_icon_interpreter(&TheFileIconInterpreter,*(int *)(iVar2 + 4),*(undefined4 *)(iVar2 + 8),
                              *(undefined4 *)(iVar2 + 0x10)), iVar1 != 0)) break;
     iVar2 = *(int *)(iVar2 + 0x68);
   }
@@ -57771,7 +57771,7 @@ void draw__13ByteCodedIconFv(undefined1 *param_1)
     pushmatrix();
     multmatrix(param_1 + 0x20);
     linewidth(1);
-    FUN_00435a28(&TheFileIconInterpreter,*(undefined4 *)(*(int *)(param_1 + 0x14) + 0x18),
+    run_icon_interpreter(&TheFileIconInterpreter,*(undefined4 *)(*(int *)(param_1 + 0x14) + 0x18),
                  *(undefined4 *)(param_1 + 0x18),*(undefined4 *)(param_1 + 0x1c));
     popmatrix();
   }
@@ -57987,7 +57987,7 @@ void bitpat__Ff(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004355f8(void)
+void float_convert(void)
 
 {
                     // WARNING: Bad instruction - Truncating control flow here
@@ -58591,8 +58591,8 @@ joined_r0x00435ac4:
                                                   }
                                                   if (cVar11 == '3') {
                                                     fVar17 = pfVar16[-2];
-                                                    FUN_004355f8(pfVar16[-1]);
-                                                    FUN_004355f8(fVar17);
+                                                    float_convert(pfVar16[-1]);
+                                                    float_convert(fVar17);
                     // WARNING: Bad instruction - Truncating control flow here
                                                     halt_baddata();
                                                   }
@@ -58605,8 +58605,8 @@ joined_r0x00435ac4:
                                                   pfVar15 = pfVar16 + -2;
                                                   fVar17 = *pfVar15;
                                                   pfVar16 = pfVar16 + -1;
-                                                  uVar3 = FUN_004355f8(*pfVar5);
-                                                  uVar4 = FUN_004355f8(fVar17);
+                                                  uVar3 = float_convert(*pfVar5);
+                                                  uVar4 = float_convert(fVar17);
                                                   *pfVar15 = (float)(int)(uVar4 & uVar3);
                                                   cVar11 = pcVar18[1];
                                                   pcVar18 = pcVar18 + 1;
@@ -58624,8 +58624,8 @@ joined_r0x00435ac4:
                                                   pfVar15 = pfVar16 + -2;
                                                   fVar17 = *pfVar15;
                                                   pfVar16 = pfVar16 + -1;
-                                                  uVar3 = FUN_004355f8(*pfVar5);
-                                                  uVar4 = FUN_004355f8(fVar17);
+                                                  uVar3 = float_convert(*pfVar5);
+                                                  uVar4 = float_convert(fVar17);
                                                   *pfVar15 = (float)(int)(uVar4 | uVar3);
                                                   cVar11 = pcVar18[1];
                                                   pcVar18 = pcVar18 + 1;
@@ -58643,8 +58643,8 @@ joined_r0x00435ac4:
                                                   pfVar15 = pfVar16 + -2;
                                                   fVar17 = *pfVar15;
                                                   pfVar16 = pfVar16 + -1;
-                                                  uVar3 = FUN_004355f8(*pfVar5);
-                                                  uVar4 = FUN_004355f8(fVar17);
+                                                  uVar3 = float_convert(*pfVar5);
+                                                  uVar4 = float_convert(fVar17);
                                                   *pfVar15 = (float)(int)(uVar4 ^ uVar3);
                                                   cVar11 = pcVar18[1];
                                                   pcVar18 = pcVar18 + 1;
@@ -59630,7 +59630,7 @@ LAB_00437ddc:
 // WARNING: Instruction at (ram,0x00438230) overlaps instruction at (ram,0x0043822c)
 // 
 
-void FUN_00435a28(float *param_1,char *param_2,int param_3,int param_4)
+void run_icon_interpreter(float *param_1,char *param_2,int param_3,int param_4)
 
 {
   byte *pbVar1;
