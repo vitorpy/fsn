@@ -37029,7 +37029,7 @@ void main(int param_1,undefined4 *param_2)
     exit(1);
   }
   FUN_0040ae2c();
-  FUN_00411674();
+  init_database_state();
   FUN_0040a704();
   glwidget_translations = XtParseTranslationTable(glwidget_translations);
   blankXmString = XmStringCreate(&blank_string_literal,&default_charset);
@@ -37158,7 +37158,7 @@ void main(int param_1,undefined4 *param_2)
     }
   }
   else {
-    FUN_00411230();
+    setup_directory_handler();
   }
   if (initialLegend != '\0') {
     toggle_legend();
@@ -37244,7 +37244,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
     exit(1);
   }
   FUN_0040ae2c();
-  FUN_00411674();
+  init_database_state();
   FUN_0040a704();
   glwidget_translations = XtParseTranslationTable(glwidget_translations);
   blankXmString = XmStringCreate(&blank_string_literal,&default_charset);
@@ -37373,7 +37373,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
     }
   }
   else {
-    FUN_00411230();
+    setup_directory_handler();
   }
   if (initialLegend != '\0') {
     toggle_legend();
@@ -38271,7 +38271,7 @@ void activeWorkProc(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040f1f0(void)
+void check_gl_ready(void)
 
 {
                     // WARNING: Bad instruction - Truncating control flow here
@@ -38811,7 +38811,7 @@ void filemessage(char *param_1,char *param_2,undefined4 param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00410e7c(undefined4 param_1,char *param_2,undefined4 param_3)
+void display_scan_status(undefined4 param_1,char *param_2,undefined4 param_3)
 
 {
   char *pcVar1;
@@ -38949,7 +38949,7 @@ void show_error_dialog(undefined4 param_1,undefined4 param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00411230(void)
+void setup_directory_handler(void)
 
 {
   undefined4 uVar1;
@@ -39014,7 +39014,7 @@ void FUN_00411230(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00411674(void)
+void init_database_state(void)
 
 {
   char *pcVar1;
@@ -39100,7 +39100,7 @@ void handleEvents(void)
   
   iVar1 = XtAppPending(app_context);
   if (iVar1 == 0) {
-    iVar1 = FUN_0040f1f0();
+    iVar1 = check_gl_ready();
     if (iVar1 == 0) goto LAB_00411a50;
   }
   do {
@@ -39109,7 +39109,7 @@ void handleEvents(void)
       XtDispatchEvent(auStack_60);
       iVar1 = XtAppPending(app_context);
     } while (iVar1 != 0);
-    iVar1 = FUN_0040f1f0();
+    iVar1 = check_gl_ready();
   } while (iVar1 != 0);
 LAB_00411a50:
   FUN_0040cf50();
@@ -39153,13 +39153,13 @@ LAB_00411a50:
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00411a78(char *param_1,undefined4 *param_2)
+void build_path_string(char *param_1,undefined4 *param_2)
 
 {
   size_t sVar1;
   
   if (param_2[10] != 0) {
-    FUN_00411a78(param_1,param_2[10]);
+    build_path_string(param_1,param_2[10]);
   }
   strcat(param_1,(char *)*param_2);
   sVar1 = strlen(param_1);
@@ -39184,7 +39184,7 @@ void dirToPath(undefined1 *param_1,int param_2)
   }
   *param_1 = 0;
   if (param_2 != 0) {
-    FUN_00411a78();
+    build_path_string();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -39288,7 +39288,7 @@ void age(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00411e38(void)
+void count_directory_items(void)
 
 {
                     // WARNING: Bad instruction - Truncating control flow here
@@ -39347,7 +39347,7 @@ void layout_db(undefined4 param_1,undefined4 param_2)
   }
   *(undefined4 *)(topdir + 0x2c) = 0;
   *(undefined4 *)(topdir + 0x30) = 0;
-  FUN_00412604(topdir);
+  init_directory_layout(topdir);
   uVar3 = (undefined4)((ulonglong)in_f6 >> 0x20);
   if (displayHeight == 0) {
     horizontal_scale_factor = 1.0;
@@ -39369,7 +39369,7 @@ void layout_db(undefined4 param_1,undefined4 param_2)
   fVar1 = powf(zoom_base_factor,
                (float)((dVar2 / (double)((ulonglong)in_f6 & 0xffffffff00000000)) /
                       (double)zoom_reference_height));
-  FUN_00412994(topdir,param_2,0,0,in_f11,
+  calculate_tree_layout(topdir,param_2,0,0,in_f11,
                SUB84((double)((ulonglong)dVar2 & 0xffffffff00000000) / (double)fVar1,0));
   FUN_00412bc0(topdir,param_2,0,0);
   maxShrinkage = powf(zoom_base_factor,maxy / zoom_reference_height);
@@ -39487,7 +39487,7 @@ void update_display(undefined4 param_1,undefined4 param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00412234(int param_1)
+void update_directory_layout(int param_1)
 
 {
   float fVar1;
@@ -39625,13 +39625,13 @@ void first_traversal(int param_1)
                  (double)((ulonglong)dVar2 & 0xffffffff00000000));
   if (*(int *)(param_1 + 0xc) < 1) {
     *(undefined4 *)(param_1 + 0x20) = *(undefined4 *)(param_1 + 0x1c);
-    FUN_00412234(param_1);
+    update_directory_layout(param_1);
     if (window_height < *(int *)(param_1 + 0x1c)) {
       window_height = *(int *)(param_1 + 0x1c);
     }
     *(undefined4 *)(param_1 + 0x48) = 0;
     if (0 < *(int *)(param_1 + 0x14)) {
-      FUN_00412604(**(undefined4 **)(param_1 + 0x18));
+      init_directory_layout(**(undefined4 **)(param_1 + 0x18));
                     // WARNING: Bad instruction - Truncating control flow here
       halt_baddata();
     }
@@ -39652,7 +39652,7 @@ void first_traversal(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00412604(int param_1)
+void init_directory_layout(int param_1)
 
 {
   int *piVar1;
@@ -39765,7 +39765,7 @@ void second_traversal(int param_1,undefined4 param_2,undefined4 param_3,undefine
   iVar2 = 0;
   if (0 < *(int *)(param_1 + 0x14)) {
     do {
-      fVar5 = (float)FUN_00412994(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar2),param_2,in_f21,
+      fVar5 = (float)calculate_tree_layout(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar2),param_2,in_f21,
                                   SUB84((double)(float)dVar6,0),param_3,
                                   SUB84((double)(float)((double)((ulonglong)dVar9 &
                                                                 0xffffffff00000000) / (double)fVar4)
@@ -39783,7 +39783,7 @@ void second_traversal(int param_1,undefined4 param_2,undefined4 param_3,undefine
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00412994(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+void calculate_tree_layout(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
                  undefined4 param_5,undefined4 param_6)
 
 {
@@ -40079,7 +40079,7 @@ void get_path_entry(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00413824(int param_1)
+void mark_directory_item(int param_1)
 
 {
   int iVar1;
@@ -40148,7 +40148,7 @@ void check_directory_flags(undefined4 *param_1,char *param_2,char *param_3,char 
     *(byte *)(param_1 + 0x1d) = *(byte *)(param_1 + 0x1d) & 0xfe;
     *(byte *)((int)param_1 + 0x75) = bVar1 & 0x3f;
     strcpy(param_3,(char *)*param_1);
-    uVar2 = FUN_00410e7c("scanning",param_2,0);
+    uVar2 = display_scan_status("scanning",param_2,0);
     param_3[param_1[1]] = '/';
     param_3[param_1[1] + 1] = '\0';
     param_3 = param_3 + param_1[1] + 1;
@@ -40169,7 +40169,7 @@ void check_directory_flags(undefined4 *param_1,char *param_2,char *param_3,char 
         if ((localFlag != (asStack_12c[0].__f_spare[1] & 0x80000000U)) ||
            (iVar3 = strcmp((char *)&asStack_12c[0].__f_unused,fstyp), iVar3 != 0)) {
           deleteMessage(uVar2);
-          FUN_00413824(param_1);
+          mark_directory_item(param_1);
           halt_baddata();
         }
         current_device_id = local_90.st_dev._0_4_;
@@ -40177,7 +40177,7 @@ void check_directory_flags(undefined4 *param_1,char *param_2,char *param_3,char 
       local_4 = opendir(param_2);
       if (local_4 == (DIR *)0x0) {
         deleteMessage(uVar2);
-        FUN_00413824(param_1);
+        mark_directory_item(param_1);
       }
       else {
         iVar11 = param_1[3];
@@ -40386,7 +40386,7 @@ void check_directory_flags(undefined4 *param_1,char *param_2,char *param_3,char 
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004143d0(int param_1)
+void free_child_nodes(int param_1)
 
 {
   int iVar1;
@@ -40414,7 +40414,7 @@ void FUN_004143d0(int param_1)
   iVar2 = 0;
   if (0 < iVar1) {
     do {
-      FUN_004143d0(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar2));
+      free_child_nodes(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar2));
       iVar1 = *(int *)(param_1 + 0x14);
       iVar3 = iVar3 + 1;
       iVar2 = iVar2 + 4;
@@ -40516,7 +40516,7 @@ void process_child_directory(int param_1)
           if ((iVar11 < (int)sVar7) && (iVar4 = iVar11 + 1, *(int *)(*piVar6 + 0x74) << 5 < 0)) {
             bVar2 = true;
             do {
-              FUN_004143d0();
+              free_child_nodes();
               iVar8 = *(int *)(param_1 + 0x14);
               iVar3 = iVar4 * 4;
               iVar10 = iVar4;
@@ -40693,7 +40693,7 @@ void dump_directory_tree(FILE *param_1,undefined4 *param_2,int param_3)
 // WARNING: Control flow encountered bad instruction data
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-void FUN_00414be4(FILE *param_1)
+void write_file_entry(FILE *param_1)
 
 {
   int iVar1;
@@ -40733,9 +40733,9 @@ void FUN_00414cf0(undefined4 param_1)
 {
   gl_push_state();
   set_context_state(0,1);
-  FUN_00414be4(param_1);
+  write_file_entry(param_1);
   set_context_state(1,1);
-  FUN_00414be4(param_1);
+  write_file_entry(param_1);
   gl_pop_state();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -41715,7 +41715,7 @@ void fileChanged(int param_1,char *param_2)
           window_height = *(int *)(param_1 + 0x1c);
         }
         update_directory_bounds(iVar1);
-        FUN_00412234(param_1);
+        update_directory_layout(param_1);
                     // WARNING: Bad instruction - Truncating control flow here
         halt_baddata();
       }
@@ -44412,7 +44412,7 @@ void prepare_draw_frame(void)
   }
   else {
     uVar1 = lookup_context_item(*(undefined4 *)(*(int *)(curcontext + 0x48) + 8));
-    uVar2 = FUN_00411e38(*(undefined4 *)(*(int *)(curcontext + 0x48) + 0x10));
+    uVar2 = count_directory_items(*(undefined4 *)(*(int *)(curcontext + 0x48) + 0x10));
     iVar4 = *(int *)(curcontext + 0x48);
     if ((*(uint *)(iVar4 + 8) & 0xf000) == 0xa000) {
       local_100 = "link to ";
@@ -45567,7 +45567,7 @@ void FUN_0041e260(int param_1,undefined4 *param_2,undefined4 param_3,char param_
             halt_baddata();
           }
         }
-        FUN_00410e7c(param_6,pcVar1,2000);
+        display_scan_status(param_6,pcVar1,2000);
         if (DAT_10006e58 != '\0') {
           sVar2 = strlen("REST=");
           XtMalloc(sVar2 + 1);
@@ -54611,7 +54611,7 @@ void FUN_0042ffd8(undefined4 *param_1)
           uVar2 = pattern_match_enabled & 4;
         }
         if ((uVar2 != 0) &&
-           (((iVar1 = FUN_00411e38(puVar3[4]), DAT_10016f05 != '\0' && (DAT_10016f10 <= iVar1)) ||
+           (((iVar1 = count_directory_items(puVar3[4]), DAT_10016f05 != '\0' && (DAT_10016f10 <= iVar1)) ||
             ((DAT_10016f05 == '\0' && (iVar1 <= DAT_10016f10)))))) {
           *(byte *)(puVar3 + 10) = *(byte *)(puVar3 + 10) & 0xf7;
         }
