@@ -37138,9 +37138,9 @@ void main(int param_1,undefined4 *param_2)
   uStack_64 = *(undefined4 *)(curcontextwindows + 8);
   set_window_property(*(undefined4 *)(curcontextwindows + 0xc),&uStack_a0,8);
   load_filetype_rules_wrapper("/usr/lib/filetype/workspace.ctr");
-  FUN_00427d54();
+  init_gl_lists();
   init_icon_context();
-  FUN_00428b6c();
+  setup_rendering();
   if ((*pcStack_bc != '/') && (relative_path_flag == '\0')) {
     pcStack_c0 = getcwd((char *)0x0,0x400);
     strcat(pcStack_c0,"/");
@@ -37353,9 +37353,9 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   local_64 = *(undefined4 *)(curcontextwindows + 8);
   set_window_property(*(undefined4 *)(curcontextwindows + 0xc),&local_a0,8);
   load_filetype_rules_wrapper("/usr/lib/filetype/workspace.ctr");
-  FUN_00427d54();
+  init_gl_lists();
   init_icon_context();
-  FUN_00428b6c();
+  setup_rendering();
   if ((*local_bc != '/') && (relative_path_flag == '\0')) {
     local_c0 = getcwd((char *)0x0,0x400);
     strcat(local_c0,"/");
@@ -42042,7 +42042,7 @@ void pruneSubTree(int param_1)
   int iVar3;
   
   *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) & 0xef;
-  FUN_00427ec8();
+  flush_rendering();
   iVar1 = *(int *)(param_1 + 0xc);
   iVar3 = 0;
   if (0 < iVar1) {
@@ -43556,7 +43556,7 @@ void highlightFileWarp(int param_1,int param_2)
     pushmatrix();
     translate(0,(float)((double)*(float *)(param_1 + 0x3c) /
                        (double)((ulonglong)in_register_00001040 << 0x20)));
-    FUN_00427300(param_2);
+    draw_entry(param_2);
     translate(*(undefined4 *)(param_2 + 0x14),*(undefined4 *)(param_2 + 0x18));
     if ((curcontext[0xc50] == '\0') || (overlay_mode_flag == '\0')) {
       scale(view_offset_x,view_offset_x);
@@ -45017,7 +45017,7 @@ void check_unmonitor_dp(int param_1)
       iVar2 = *(int *)(altcontext + 0x44);
     }
     if ((iVar2 != param_1) && (-1 < iVar1 << 0xe)) {
-      FUN_00427ec8(param_1);
+      flush_rendering(param_1);
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -48860,7 +48860,7 @@ void FUN_00425ee4(undefined8 param_1,undefined8 param_2,int param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00426244(int param_1)
+void traverse_directories(int param_1)
 
 {
   int iVar1;
@@ -48874,7 +48874,7 @@ void FUN_00426244(int param_1)
     iVar2 = 0;
     if (0 < *(int *)(param_1 + 0x14)) {
       do {
-        FUN_00426244(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar2));
+        traverse_directories(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar2));
         iVar1 = iVar1 + 1;
         iVar2 = iVar2 + 4;
       } while (iVar1 < *(int *)(param_1 + 0x14));
@@ -48963,7 +48963,7 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
   }
   iVar7 = 0;
   iVar5 = 0;
-  FUN_00426244(topdir);
+  traverse_directories(topdir);
   iVar2 = endpick(asStack_7dc);
   popmatrix();
   if (0 < iVar2) {
@@ -49014,7 +49014,7 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042631c(int *param_1,undefined4 *param_2,undefined4 *param_3)
+void get_cursor_state(int *param_1,undefined4 *param_2,undefined4 *param_3)
 
 {
   short sVar1;
@@ -49163,7 +49163,7 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
   *param_5 = 0;
   *param_8 = 0;
   *param_7 = 0;
-  FUN_0042631c(&iStack_4,&iStack_c,&iStack_8);
+  get_cursor_state(&iStack_4,&iStack_c,&iStack_8);
   if (iStack_c == 0) {
     if (iStack_4 == 0) {
       if (iStack_8 == 0) {
@@ -49349,7 +49349,7 @@ void pickPointer(void)
 
 {
   if (*(int *)(curcontext + 0x3c) == 0) {
-    FUN_0042631c();
+    get_cursor_state();
   }
   else {
     FUN_0041a358();
@@ -49621,7 +49621,7 @@ void checkPointerFile(int param_1,undefined4 param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00427300(int param_1,undefined4 param_2)
+void draw_entry(int param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -49675,7 +49675,7 @@ void highlightFileLandscape(int param_1,int param_2)
   pushmatrix();
   translate(*(undefined4 *)(param_1 + 0x34),*(undefined4 *)(param_1 + 0x38));
   scale(*(undefined4 *)(param_1 + 0x58));
-  FUN_00427300(param_2);
+  draw_entry(param_2);
   translate(*(undefined4 *)(param_2 + 0x14),*(undefined4 *)(param_2 + 0x18));
   if (((curcontext[0xc50] == '\0') || (overlay_mode_flag == '\0')) ||
      (param_1 != *(int *)(curcontext + 0x44))) {
@@ -50012,7 +50012,7 @@ void dirfamInit(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00427d54(void)
+void init_gl_lists(void)
 
 {
   int iVar1;
@@ -50115,7 +50115,7 @@ void dirfamUnmonitorDir(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00427ec8(int param_1)
+void flush_rendering(int param_1)
 
 {
   int unaff_gp;
@@ -50325,7 +50325,7 @@ void makeColorBox(uint param_1,int *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004283cc(uint param_1,int *param_2)
+void unpack_color(uint param_1,int *param_2)
 
 {
   float fVar1;
@@ -50447,7 +50447,7 @@ void makeDColorBox(uint param_1,int param_2)
   else {
     fVar3 = FLOOR(fVar7);
   }
-  FUN_004283cc((int)fVar1 + (int)fVar2 * 0x100 + (int)fVar3 * 0x10000,param_2 + 0x10);
+  unpack_color((int)fVar1 + (int)fVar2 * 0x100 + (int)fVar3 * 0x10000,param_2 + 0x10);
   hsv_to_rgb((double)uStack_10,(double)(uStack_14 * overlay_colormap));
   if ((((in_fcsr | 3) ^ 2) & 3) == 0) {
     fVar1 = ROUND(fVar5);
@@ -50467,7 +50467,7 @@ void makeDColorBox(uint param_1,int param_2)
   else {
     fVar3 = FLOOR(fVar7);
   }
-  FUN_004283cc((int)fVar1 + (int)fVar2 * 0x100 + (int)fVar3 * 0x10000,param_2);
+  unpack_color((int)fVar1 + (int)fVar2 * 0x100 + (int)fVar3 * 0x10000,param_2);
   hsv_to_rgb((double)uStack_10,(double)(uStack_14 * DAT_100175d0));
   if ((((in_fcsr | 3) ^ 2) & 3) == 0) {
     fVar5 = ROUND(fVar5);
@@ -50614,7 +50614,7 @@ void makeColorBoxes(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00428b6c(void)
+void setup_rendering(void)
 
 {
   int iVar1;
@@ -50961,7 +50961,7 @@ void beamdown(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004293e8(void)
+void set_status_text(void)
 
 {
   undefined4 local_c;
@@ -50981,7 +50981,7 @@ void FUN_004293e8(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00429464(void)
+void update_list_state(void)
 
 {
   undefined4 local_8;
@@ -51002,7 +51002,7 @@ void locateClear(void)
 
 {
   if (colormap_dirty_flag != 0) {
-    FUN_00429464();
+    update_list_state();
     glx_reset_context_wrapper();
     color(0);
     clear();
@@ -51018,7 +51018,7 @@ void locateClear(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004294cc(void)
+void refresh_list_display(void)
 
 {
   code *pcVar1;
@@ -51048,7 +51048,7 @@ void locateClearAction(undefined4 param_1,int param_2)
   if (*(int *)(param_2 + 0x30) == 0) {
     gl_push_state();
     set_gl_context(param_1,1);
-    FUN_004294cc();
+    refresh_list_display();
     gl_pop_state();
     gflush();
   }
@@ -51104,18 +51104,18 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
     popmatrix();
     linewidth(1);
     if (param_1 == 0) {
-      FUN_00429464();
+      update_list_state();
     }
     else {
       __dest = (char *)build_path_string(0);
       if (param_2 == (undefined4 *)0x0) {
         if (-1 < *(int *)(param_1 + 0x74) << 2) {
-          FUN_004293e8(__dest);
+          set_status_text(__dest);
         }
       }
       else {
         strcat(__dest,(char *)*param_2);
-        FUN_004293e8(__dest);
+        set_status_text(__dest);
       }
     }
     zbuffer(1);
@@ -51295,7 +51295,7 @@ void highlightByName(undefined4 param_1)
   
   get_position_coords(param_1,&iStack_4,&uStack_8);
   if (iStack_4 == 0) {
-    FUN_004294cc();
+    refresh_list_display();
   }
   else {
     FUN_00429640(iStack_4,uStack_8,0);
@@ -51948,7 +51948,7 @@ void bsearch2(undefined4 param_1,uint param_2,int param_3,int param_4,undefined4
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042a9b4(undefined4 param_1,uint param_2,int param_3,int param_4,undefined4 param_5,
+void sort_entries(undefined4 param_1,uint param_2,int param_3,int param_4,undefined4 param_5,
                  uint *param_6)
 
 {
@@ -52039,7 +52039,7 @@ void findbestfile(char *param_1,int *param_2,undefined4 *param_3)
   if (puVar5[3] != 0) {
     ppcStack_90 = apcStack_108;
     apcStack_108[0] = param_1;
-    iVar3 = FUN_0042a9b4(&ppcStack_90,puVar5[4],puVar5[3],4,compare_files,&puStack_110);
+    iVar3 = sort_entries(&ppcStack_90,puVar5[4],puVar5[3],4,compare_files,&puStack_110);
     if (iVar3 != 0) {
       *param_2 = (int)puVar5;
       *param_3 = *puStack_110;
@@ -52060,7 +52060,7 @@ LAB_0042ad4c:
   else {
     apcStack_8c[0] = param_1;
     appcStack_14[0] = apcStack_8c;
-    iVar3 = FUN_0042a9b4(appcStack_14,puVar5[6],puVar5[5],4,compare_dirs,&piStack_10c);
+    iVar3 = sort_entries(appcStack_14,puVar5[6],puVar5[5],4,compare_dirs,&piStack_10c);
     if (iVar3 != 0) {
       *param_2 = *piStack_10c;
       halt_baddata();
@@ -57253,7 +57253,7 @@ void FindIconByType__14ByteCodeLoaderFPc(int *param_1,char *param_2)
     if (iVar1 == 0) break;
     puVar2 = (undefined4 *)puVar2[0x1a];
   }
-  FUN_00435034(0,puVar2);
+  setup_icon_entry(0,puVar2);
   halt_baddata();
 }
 
@@ -57306,7 +57306,7 @@ void FindIconByName__14ByteCodeLoaderFPc(int *param_1)
                                *(undefined4 *)(iVar2 + 8),*(undefined4 *)(iVar2 + 0x10)), iVar1 != 0
          )) {
         reset_icon_interpreter(&TheFileIconInterpreter);
-        FUN_00435034(0,iVar2);
+        setup_icon_entry(0,iVar2);
         halt_baddata();
       }
     }
@@ -57651,7 +57651,7 @@ void __ct__13ByteCodedIconFP8RuleInfo(undefined1 *param_1,int param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00435034(undefined1 *param_1,int param_2)
+void setup_icon_entry(undefined1 *param_1,int param_2)
 
 {
   undefined4 uVar1;
