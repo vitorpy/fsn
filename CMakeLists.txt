@@ -64,8 +64,8 @@ set(FSN_SOURCES
     src/datastructures.c
     src/picking.c
     src/utility.c
+    src/filesystem.c
     # TODO: Add more modules as extracted
-    # src/filesystem.c
     # src/graphics_gl.c
     # src/ui_motif.c
     # src/main.c
