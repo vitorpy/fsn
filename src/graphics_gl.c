@@ -778,7 +778,7 @@ void draw_directories(char param_1)
           fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
           fStack_4 = -0.5;
           v3f(&fStack_c);
-          cpack(DAT_100175dc);
+          cpack(current_packed_color);
           fStack_c = *(float *)curcontext + fVar1;
           fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
           fStack_4 = *(float *)(curcontext + 8) + view_offset_z;
@@ -790,7 +790,7 @@ void draw_directories(char param_1)
           endpolygon();
           shademodel(0);
           bgnpolygon();
-          cpack(DAT_100175dc);
+          cpack(current_packed_color);
           fStack_c = *(float *)curcontext + fVar1;
           fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
           fStack_4 = *(float *)(curcontext + 8) + view_offset_z;
@@ -1645,14 +1645,14 @@ void highlightDirWarp(undefined8 param_1,undefined8 param_2,int param_3)
     pushmatrix();
     iVar4 = *(int *)(curcontext + 0x3c);
     if (param_3 == *(int *)(iVar4 + 0x28)) {
-      FUN_0041a908((ulonglong)uVar5 << 0x20,(double)*(float *)(iVar4 + 0x3c) + (double)DAT_1001756c)
+      FUN_0041a908((ulonglong)uVar5 << 0x20,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height)
       ;
     }
     else if (param_3 == *(int *)(iVar4 + 0x2c)) {
-      FUN_0041a908((double)-DAT_10017570,(double)*(float *)(iVar4 + 0x3c) + (double)DAT_1001756c);
+      FUN_0041a908((double)-DAT_10017570,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height);
     }
     else if (param_3 == *(int *)(iVar4 + 0x30)) {
-      FUN_0041a908((double)DAT_10017570,(double)*(float *)(iVar4 + 0x3c) + (double)DAT_1001756c);
+      FUN_0041a908((double)DAT_10017570,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height);
     }
     else {
       iVar3 = *(int *)(iVar4 + 0x14);
@@ -2635,7 +2635,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = -0.5;
       v3f(&fStack_28);
-      cpack(DAT_100175dc);
+      cpack(current_packed_color);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = *(float *)(curcontext + 8) + view_offset_z;
@@ -2647,7 +2647,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       endpolygon();
       shademodel(0);
       bgnpolygon();
-      cpack(DAT_100175dc);
+      cpack(current_packed_color);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = *(float *)(curcontext + 8) + view_offset_z;

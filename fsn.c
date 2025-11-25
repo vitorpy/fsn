@@ -872,7 +872,7 @@ undefined DAT_0e210e90;
 undefined DAT_0e3d331c;
 undefined4 DAT_10016634;
 undefined4 DAT_100000a4;
-undefined4 DAT_1001664c;
+undefined4 context_top_widget;
 undefined FUN_0040bc64;
 undefined FUN_0040bce8;
 undefined FUN_0040bdb4;
@@ -885,7 +885,7 @@ pointer glHelp;
 undefined4 lhLabelColor;
 undefined DAT_0e3d8f04;
 undefined4 display;
-char DAT_10017498;
+char relative_path_flag;
 undefined DAT_0e3d4f98;
 undefined *fallback_resources;
 string glwidget_translations;
@@ -923,7 +923,7 @@ float view_init_x;
 float view_init_y;
 float DAT_100174bc;
 float DAT_100174c0;
-undefined4 DAT_10016644;
+undefined4 zoom_scale_widget;
 undefined FUN_0040d15c;
 undefined FUN_0040d2cc;
 undefined DAT_1000a458;
@@ -933,7 +933,7 @@ undefined FUN_0040da14;
 pointer controlHelp;
 undefined FUN_0041069c;
 undefined reset_eye;
-undefined4 DAT_10016640;
+undefined4 vertical_scale_widget;
 short DAT_10000148;
 undefined4 DAT_1001663c;
 short DAT_1000014c;
@@ -1034,11 +1034,11 @@ uint DAT_10016b10;
 void *directory_memory_pool;
 void *directory_pool_limit;
 undefined4 dir_index;
-int DAT_100001f8;
-int DAT_10016b18;
+int directory_pool_index;
+int directory_pool_capacity;
 undefined4 DAT_100001fc;
-void *DAT_10000200;
-uint DAT_10016b1c;
+void *string_copy_buffer;
+uint string_buffer_limit;
 undefined4 maxx;
 undefined4 miny;
 undefined4 maxy;
@@ -1073,7 +1073,7 @@ undefined1 fsn_resources;
 undefined databaseDumpTimeout;
 undefined4 current_device_id;
 FILE *current_file;
-uint DAT_100166cc;
+uint current_input_byte;
 int *current_file;
 undefined4 vinfop;
 ushort DAT_10016b24;
@@ -1112,7 +1112,7 @@ undefined4 DAT_10017600;
 float DAT_10017574;
 undefined4 DAT_100175f8;
 undefined4 DAT_100175fc;
-float DAT_1001756c;
+float layout_base_height;
 float DAT_10017570;
 undefined DAT_1000ae90;
 undefined DAT_1000ae94;
@@ -1123,7 +1123,7 @@ float DAT_100175a0;
 char DAT_10017494;
 undefined4 graphics_state_mode;
 float view_offset_y;
-undefined4 DAT_100175dc;
+undefined4 current_packed_color;
 float view_offset_z;
 undefined4 graphics_render_flags;
 float DAT_100175a8;
@@ -1393,7 +1393,7 @@ undefined FUN_0042d314;
 undefined fam_connection;
 undefined fam_request_id;
 float view_init_z;
-int DAT_10009528;
+int selection_array_capacity;
 int selection_count;
 int selection_buffer;
 undefined4 mark_selector_list;
@@ -1421,7 +1421,7 @@ int search_number_value;
 char DAT_10016f05;
 int DAT_10016f10;
 undefined4 firstSearchDir;
-int DAT_10016edc;
+int state_change_counter;
 undefined4 lastSearchDir;
 undefined4 visitedSearchDp;
 undefined4 visitedSearchFp;
@@ -1434,7 +1434,7 @@ undefined4 search_count_label;
 undefined DAT_10013d18;
 undefined DAT_10013d1c;
 undefined DAT_10013d20;
-undefined4 DAT_10016edc;
+undefined4 state_change_counter;
 undefined4 search_xmstring_1;
 undefined4 search_xmstring_2;
 undefined4 search_xmstring_3;
@@ -1454,7 +1454,7 @@ undefined FUN_00430b70;
 undefined FUN_00430c0c;
 undefined DAT_10013d2c;
 undefined temp_data_buffer;
-undefined4 *DAT_10009664;
+undefined4 *active_item_list;
 undefined1[464] _imsgs;
 undefined1 DAT_10013e50;
 undefined DAT_10013e54;
@@ -1488,7 +1488,7 @@ undefined DAT_10013f40;
 undefined DAT_10013f44;
 undefined DAT_10013f48;
 pointer PTR_s__SGI_MMX_mwm_nogrmem_10009670;
-undefined DAT_10016f50;
+undefined context_data_block;
 undefined2 DAT_10016f70;
 undefined2 rgb_color_r;
 undefined2 rgb_color_g;
@@ -36828,7 +36828,7 @@ void FUN_0040a7ec(void)
   undefined4 local_68;
   undefined4 local_64;
   
-  uVar1 = XtCreateWidget("contextTopWidget",_DAT_0e3d331c,DAT_1001664c,&local_a0,0);
+  uVar1 = XtCreateWidget("contextTopWidget",_DAT_0e3d331c,context_top_widget,&local_a0,0);
   *(undefined4 *)(curcontextwindows + 0xc) = uVar1;
   install_help_callback(*(undefined4 *)(curcontextwindows + 0xc),&infoHelp);
   local_9c = 1;
@@ -37014,7 +37014,7 @@ void main(int param_1,undefined4 *param_2)
   display = XtDisplay(toplevel);
   FUN_0042b844(toplevel);
   if (iStackX_0 < 2) {
-    if (DAT_10017498 == '\0') {
+    if (relative_path_flag == '\0') {
       pcStack_bc = getcwd((char *)0x0,0x400);
     }
     else {
@@ -37108,7 +37108,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_94 = 1;
   uStack_8c = 1;
   uStack_84 = 1;
-  DAT_1001664c = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,pane_form_widget,&uStack_a0,4);
+  context_top_widget = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,pane_form_widget,&uStack_a0,4);
   FUN_0040a7ec();
   XtManageChild(*(undefined4 *)(curcontextwindows + 0xc));
   XmMainWindowSetAreas(uStack_a8,uStack_ac,0,0,0,panel_widget);
@@ -37141,7 +37141,7 @@ void main(int param_1,undefined4 *param_2)
   FUN_00427d54();
   FUN_00433f74();
   FUN_00428b6c();
-  if ((*pcStack_bc != '/') && (DAT_10017498 == '\0')) {
+  if ((*pcStack_bc != '/') && (relative_path_flag == '\0')) {
     pcStack_c0 = getcwd((char *)0x0,0x400);
     strcat(pcStack_c0,"/");
     strcat(pcStack_c0,pcStack_bc);
@@ -37229,7 +37229,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   display = XtDisplay(toplevel);
   FUN_0042b844(toplevel);
   if (local_res0 < 2) {
-    if (DAT_10017498 == '\0') {
+    if (relative_path_flag == '\0') {
       local_bc = getcwd((char *)0x0,0x400);
     }
     else {
@@ -37323,7 +37323,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   local_94 = 1;
   local_8c = 1;
   local_84 = 1;
-  DAT_1001664c = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,pane_form_widget,&local_a0,4);
+  context_top_widget = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,pane_form_widget,&local_a0,4);
   FUN_0040a7ec();
   XtManageChild(*(undefined4 *)(curcontextwindows + 0xc));
   XmMainWindowSetAreas(local_a8,local_ac,0,0,0,panel_widget);
@@ -37356,7 +37356,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   FUN_00427d54();
   FUN_00433f74();
   FUN_00428b6c();
-  if ((*local_bc != '/') && (DAT_10017498 == '\0')) {
+  if ((*local_bc != '/') && (relative_path_flag == '\0')) {
     local_c0 = getcwd((char *)0x0,0x400);
     strcat(local_c0,"/");
     strcat(local_c0,local_bc);
@@ -37774,14 +37774,14 @@ void FUN_0040d3cc(undefined4 param_1,undefined4 param_2,undefined4 param_3)
   XtManageChild(uVar2);
   uVar2 = XmCreateRowColumn(uVar1,"control_scales",param_2,0);
   XtManageChild(uVar2);
-  DAT_10016640 = XmCreateScale(uVar2,"v_scale",param_2,0);
-  XtAddCallback(DAT_10016640,0xe3f4ca5,FUN_0040d9a8,0);
-  XtAddCallback(DAT_10016640,0xe3f3b93,FUN_0040d9a8,0);
-  XtManageChild(DAT_10016640);
-  DAT_10016644 = XmCreateScale(uVar2,"z_scale",param_2,0);
-  XtAddCallback(DAT_10016644,0xe3f4ca5,FUN_0040da14,0);
-  XtAddCallback(DAT_10016644,0xe3f3b93,FUN_0040da14,0);
-  XtManageChild(DAT_10016644);
+  vertical_scale_widget = XmCreateScale(uVar2,"v_scale",param_2,0);
+  XtAddCallback(vertical_scale_widget,0xe3f4ca5,FUN_0040d9a8,0);
+  XtAddCallback(vertical_scale_widget,0xe3f3b93,FUN_0040d9a8,0);
+  XtManageChild(vertical_scale_widget);
+  zoom_scale_widget = XmCreateScale(uVar2,"z_scale",param_2,0);
+  XtAddCallback(zoom_scale_widget,0xe3f4ca5,FUN_0040da14,0);
+  XtAddCallback(zoom_scale_widget,0xe3f3b93,FUN_0040da14,0);
+  XtManageChild(zoom_scale_widget);
   uVar2 = XmCreateSeparator(uVar1,"control_sep",param_2,0);
   XtManageChild(uVar2);
   FUN_00430cb4(uVar1);
@@ -37815,7 +37815,7 @@ void setScales(void)
       uStack_50 = 0xf66187b;
       iStack_4c = (int)*(short *)(curcontext + 0xe);
       DAT_1000014c = *(short *)(curcontext + 0xe);
-      XtSetValues(DAT_10016640,&uStack_50,1);
+      XtSetValues(vertical_scale_widget,&uStack_50,1);
     }
                     // WARNING: Bad instruction - Truncating control flow here
     halt_baddata();
@@ -38968,7 +38968,7 @@ void FUN_00411230(void)
   }
   local_28 = &local_2;
   local_2c = 0xf66160a;
-  XtGetValues(DAT_1001664c,&local_2c,1);
+  XtGetValues(context_top_widget,&local_2c,1);
   local_28 = (ushort *)(uint)(local_2 >> 1);
   local_2c = 0xe3f4572;
   local_24 = 0xe3f4566;
@@ -39237,16 +39237,16 @@ void FUN_00411c04(void)
   if ((directory_memory_pool == (void *)0x0) || (directory_pool_limit <= directory_memory_pool)) {
     directory_memory_pool = calloc(0x40,0x78);
     directory_pool_limit = (void *)((int)directory_memory_pool + 0x1e00);
-    if (DAT_100001f8 == 0) {
+    if (directory_pool_index == 0) {
       dir_index = malloc(0x40);
-      DAT_10016b18 = 0x10;
+      directory_pool_capacity = 0x10;
     }
-    else if (DAT_100001f8 == DAT_10016b18) {
-      DAT_10016b18 = DAT_10016b18 + 0x10;
-      dir_index = realloc(dir_index,DAT_10016b18 * 4);
+    else if (directory_pool_index == directory_pool_capacity) {
+      directory_pool_capacity = directory_pool_capacity + 0x10;
+      dir_index = realloc(dir_index,directory_pool_capacity * 4);
     }
-    *(void **)((int)dir_index + DAT_100001f8 * 4) = directory_memory_pool;
-    DAT_100001f8 = DAT_100001f8 + 1;
+    *(void **)((int)dir_index + directory_pool_index * 4) = directory_memory_pool;
+    directory_pool_index = directory_pool_index + 1;
   }
   *(undefined4 *)((int)directory_memory_pool + 0x5c) = DAT_100001fc;
   directory_memory_pool = (void *)((int)directory_memory_pool + 0x78);
@@ -39264,11 +39264,11 @@ void FUN_00411d68(char *param_1)
   size_t sVar1;
   
   sVar1 = strlen(param_1);
-  if ((DAT_10000200 == (void *)0x0) || (DAT_10016b1c <= (int)DAT_10000200 + sVar1 + 1)) {
-    DAT_10000200 = malloc(10000);
-    DAT_10016b1c = (int)DAT_10000200 + 10000;
+  if ((string_copy_buffer == (void *)0x0) || (string_buffer_limit <= (int)string_copy_buffer + sVar1 + 1)) {
+    string_copy_buffer = malloc(10000);
+    string_buffer_limit = (int)string_copy_buffer + 10000;
   }
-  bcopy(param_1,DAT_10000200,sVar1 + 1);
+  bcopy(param_1,string_copy_buffer,sVar1 + 1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -41129,17 +41129,17 @@ void FUN_00415b48(void)
     if (_DAT_0fb51f00 == 0) {
       current_file->_flags = current_file->_flags + -1;
       if (current_file->_flags < 0) {
-        DAT_100166cc = __filbuf();
+        current_input_byte = __filbuf();
       }
       else {
-        DAT_100166cc = (uint)(byte)*current_file->_IO_read_ptr;
+        current_input_byte = (uint)(byte)*current_file->_IO_read_ptr;
         current_file->_IO_read_ptr = current_file->_IO_read_ptr + 1;
       }
     }
     else {
-      DAT_100166cc = __semgetc(current_file);
+      current_input_byte = __semgetc(current_file);
     }
-    if ((2 < (int)DAT_100166cc) || ((int)DAT_100166cc < 0)) {
+    if ((2 < (int)current_input_byte) || ((int)current_input_byte < 0)) {
       fprintf((FILE *)0xfb52904,"unknown database version %d, quitting\n");
                     // WARNING: Subroutine does not return
       exit(1);
@@ -41147,7 +41147,7 @@ void FUN_00415b48(void)
   }
   else {
     rewind(current_file);
-    DAT_100166cc = 0;
+    current_input_byte = 0;
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -41394,7 +41394,7 @@ void initialize_db(char *param_1)
   time(&DAT_100166ac);
   if (db_filepath == (char *)0x0) {
     if (home_directory == (char *)0x0) {
-      if (DAT_10017498 == '\0') {
+      if (relative_path_flag == '\0') {
         home_directory = getenv("HOME");
         if (home_directory == (char *)0x0) {
           home_directory = ".";
@@ -41526,7 +41526,7 @@ void FUN_004174d0(char *param_1)
   time(&DAT_100166ac);
   if (db_filepath == (char *)0x0) {
     if (home_directory == (char *)0x0) {
-      if (DAT_10017498 == '\0') {
+      if (relative_path_flag == '\0') {
         home_directory = getenv("HOME");
         if (home_directory == (char *)0x0) {
           home_directory = ".";
@@ -42587,17 +42587,17 @@ void FUN_0041919c(int param_1)
   if (*(int *)(param_1 + 0x28) != 0) {
     FUN_00418c30(*(int *)(param_1 + 0x28),&DAT_1000ae90,0,0,in_f11,
                  SUB84((double)*(float *)(param_1 + 0x3c) /
-                       (double)((ulonglong)unaff_000010c0 << 0x20) + (double)DAT_1001756c,0));
+                       (double)((ulonglong)unaff_000010c0 << 0x20) + (double)layout_base_height,0));
   }
   if (*(int *)(param_1 + 0x2c) != 0) {
     FUN_00418c30(*(int *)(param_1 + 0x2c),&DAT_1000ae94,in_f5,SUB84((double)-DAT_10017570,0),in_f5,
                  SUB84((double)*(float *)(param_1 + 0x3c) /
-                       (double)((ulonglong)unaff_000010c0 << 0x20) + (double)DAT_1001756c,0));
+                       (double)((ulonglong)unaff_000010c0 << 0x20) + (double)layout_base_height,0));
   }
   if (*(int *)(param_1 + 0x30) != 0) {
     FUN_00418c30(*(int *)(param_1 + 0x30),&DAT_1000ae98,uVar3,SUB84((double)DAT_10017570,0),uVar3,
                  SUB84((double)*(float *)(param_1 + 0x3c) /
-                       (double)((ulonglong)unaff_000010c0 << 0x20) + (double)DAT_1001756c,0));
+                       (double)((ulonglong)unaff_000010c0 << 0x20) + (double)layout_base_height,0));
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -42675,7 +42675,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = -0.5;
       v3f(&fStack_28);
-      cpack(DAT_100175dc);
+      cpack(current_packed_color);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = *(float *)(curcontext + 8) + view_offset_z;
@@ -42687,7 +42687,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       endpolygon();
       shademodel(0);
       bgnpolygon();
-      cpack(DAT_100175dc);
+      cpack(current_packed_color);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = *(float *)(curcontext + 8) + view_offset_z;
@@ -43431,14 +43431,14 @@ void highlightDirWarp(undefined8 param_1,undefined8 param_2,int param_3)
     pushmatrix();
     iVar4 = *(int *)(curcontext + 0x3c);
     if (param_3 == *(int *)(iVar4 + 0x28)) {
-      FUN_0041a908((ulonglong)uVar5 << 0x20,(double)*(float *)(iVar4 + 0x3c) + (double)DAT_1001756c)
+      FUN_0041a908((ulonglong)uVar5 << 0x20,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height)
       ;
     }
     else if (param_3 == *(int *)(iVar4 + 0x2c)) {
-      FUN_0041a908((double)-DAT_10017570,(double)*(float *)(iVar4 + 0x3c) + (double)DAT_1001756c);
+      FUN_0041a908((double)-DAT_10017570,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height);
     }
     else if (param_3 == *(int *)(iVar4 + 0x30)) {
-      FUN_0041a908((double)DAT_10017570,(double)*(float *)(iVar4 + 0x3c) + (double)DAT_1001756c);
+      FUN_0041a908((double)DAT_10017570,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height);
     }
     else {
       iVar3 = *(int *)(iVar4 + 0x14);
@@ -48290,7 +48290,7 @@ void draw_directories(char param_1)
           fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
           fStack_4 = -0.5;
           v3f(&fStack_c);
-          cpack(DAT_100175dc);
+          cpack(current_packed_color);
           fStack_c = *(float *)curcontext + fVar1;
           fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
           fStack_4 = *(float *)(curcontext + 8) + view_offset_z;
@@ -48302,7 +48302,7 @@ void draw_directories(char param_1)
           endpolygon();
           shademodel(0);
           bgnpolygon();
-          cpack(DAT_100175dc);
+          cpack(current_packed_color);
           fStack_c = *(float *)curcontext + fVar1;
           fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
           fStack_4 = *(float *)(curcontext + 8) + view_offset_z;
@@ -50773,7 +50773,7 @@ void setLabelColors(void)
     ;
   }
   else {
-    FUN_00428cc0(DAT_100175dc,&lhLabelColor,*(undefined4 *)(curcontextwindows + 0x2c),auStack_30[0])
+    FUN_00428cc0(current_packed_color,&lhLabelColor,*(undefined4 *)(curcontextwindows + 0x2c),auStack_30[0])
     ;
   }
   if (*(int *)(altcontextwindows + 0x2c) != 0) {
@@ -53983,15 +53983,15 @@ void addMark(char *param_1,undefined4 *param_2)
   undefined4 *puVar6;
   undefined4 *puVar7;
   
-  if (selection_count == DAT_10009528) {
-    if (DAT_10009528 == 0) {
-      DAT_10009528 = 8;
+  if (selection_count == selection_array_capacity) {
+    if (selection_array_capacity == 0) {
+      selection_array_capacity = 8;
       selection_buffer = XtMalloc(0x200);
     }
     else {
-      DAT_10009528 = DAT_10009528 + 8;
+      selection_array_capacity = selection_array_capacity + 8;
     }
-    selection_buffer = XtRealloc(selection_buffer,DAT_10009528 << 6);
+    selection_buffer = XtRealloc(selection_buffer,selection_array_capacity << 6);
   }
   puVar1 = (undefined4 *)(selection_buffer + selection_count * 0x40);
   puVar7 = param_2;
@@ -54576,7 +54576,7 @@ void FUN_0042ffd8(undefined4 *param_1)
     if ((pattern_match_enabled == 1) && (iVar1 = gmatch(*param_1,DAT_10016f08), iVar1 != 0)) {
       *(byte *)((int)param_1 + 0x75) = *(byte *)((int)param_1 + 0x75) | 1;
       *(byte *)((int)param_1 + 0x76) = *(byte *)((int)param_1 + 0x76) | 0x80;
-      DAT_10016edc = DAT_10016edc + 1;
+      state_change_counter = state_change_counter + 1;
       if (param_1 != lastSearchDir) {
         if (lastSearchDir != (undefined4 *)0x0) {
           lastSearchDir[0x1b] = param_1;
@@ -54617,7 +54617,7 @@ void FUN_0042ffd8(undefined4 *param_1)
         }
         if ((int)(puVar3[10] << 4) < 0) {
           *(byte *)((int)param_1 + 0x75) = *(byte *)((int)param_1 + 0x75) & 0xfe | 1;
-          DAT_10016edc = DAT_10016edc + 1;
+          state_change_counter = state_change_counter + 1;
           if (param_1 != lastSearchDir) {
             if (lastSearchDir != (undefined4 *)0x0) {
               lastSearchDir[0x1b] = param_1;
@@ -55682,9 +55682,9 @@ void FUN_004325fc(int param_1,int param_2)
     if (param_2 == 0) {
       param_2 = *(int *)(param_1 + 0x84);
     }
-    if (DAT_10009664 != (undefined4 *)0x0) {
-      bVar1 = DAT_10009664 != (undefined4 *)0x0;
-      puVar2 = DAT_10009664;
+    if (active_item_list != (undefined4 *)0x0) {
+      bVar1 = active_item_list != (undefined4 *)0x0;
+      puVar2 = active_item_list;
       while (bVar1) {
         if ((param_1 == puVar2[1]) && (param_2 == puVar2[2])) {
           halt_baddata();
@@ -55776,13 +55776,13 @@ void FUN_004325fc(int param_1,int param_2)
         iVar11 = iVar11 + 0x28;
       } while (iVar4 < (int)local_8[6]);
     }
-    if (DAT_10009664 == (undefined4 *)0x0) {
+    if (active_item_list == (undefined4 *)0x0) {
       *local_8 = 0;
     }
     else {
-      *local_8 = DAT_10009664;
+      *local_8 = active_item_list;
     }
-    DAT_10009664 = local_8;
+    active_item_list = local_8;
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -56247,7 +56247,7 @@ void FUN_00433904(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 void cIconInit(undefined4 param_1)
 
 {
-  FUN_00434324(&DAT_10016f50,param_1);
+  FUN_00434324(&context_data_block,param_1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -56273,7 +56273,7 @@ void FUN_00433af4(undefined4 param_1)
 void cFindIconByName(undefined4 param_1)
 
 {
-  FUN_00434a88(&DAT_10016f50,param_1);
+  FUN_00434a88(&context_data_block,param_1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -56299,7 +56299,7 @@ void FUN_00433b44(undefined4 param_1)
 void cFindIconByType(undefined4 param_1)
 
 {
-  FUN_004349f8(&DAT_10016f50,param_1);
+  FUN_004349f8(&context_data_block,param_1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -56471,7 +56471,7 @@ void FUN_00433e24(undefined4 param_1,undefined4 param_2,undefined4 param_3,undef
 void __sti__12520_3102cde5(void)
 
 {
-  FUN_004342c4(&DAT_10016f50);
+  FUN_004342c4(&context_data_block);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -56483,7 +56483,7 @@ void __sti__12520_3102cde5(void)
 void __std__12520_3102cde5(void)
 
 {
-  FUN_00434f0c(&DAT_10016f50,2);
+  FUN_00434f0c(&context_data_block,2);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }

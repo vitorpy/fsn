@@ -32,7 +32,7 @@ void setScales(void)
       uStack_50 = 0xf66187b;
       iStack_4c = (int)*(short *)(curcontext + 0xe);
       DAT_1000014c = *(short *)(curcontext + 0xe);
-      XtSetValues(DAT_10016640,&uStack_50,1);
+      XtSetValues(vertical_scale_widget,&uStack_50,1);
     }
                     // WARNING: Bad instruction - Truncating control flow here
     halt_baddata();
@@ -1095,7 +1095,7 @@ void setLabelColors(void)
     ;
   }
   else {
-    FUN_00428cc0(DAT_100175dc,&lhLabelColor,*(undefined4 *)(curcontextwindows + 0x2c),auStack_30[0])
+    FUN_00428cc0(current_packed_color,&lhLabelColor,*(undefined4 *)(curcontextwindows + 0x2c),auStack_30[0])
     ;
   }
   if (*(int *)(altcontextwindows + 0x2c) != 0) {

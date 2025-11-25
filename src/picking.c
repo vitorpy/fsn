@@ -15,15 +15,15 @@ void addMark(char *param_1,undefined4 *param_2)
   undefined4 *puVar6;
   undefined4 *puVar7;
   
-  if (selection_count == DAT_10009528) {
-    if (DAT_10009528 == 0) {
-      DAT_10009528 = 8;
+  if (selection_count == selection_array_capacity) {
+    if (selection_array_capacity == 0) {
+      selection_array_capacity = 8;
       selection_buffer = XtMalloc(0x200);
     }
     else {
-      DAT_10009528 = DAT_10009528 + 8;
+      selection_array_capacity = selection_array_capacity + 8;
     }
-    selection_buffer = XtRealloc(selection_buffer,DAT_10009528 << 6);
+    selection_buffer = XtRealloc(selection_buffer,selection_array_capacity << 6);
   }
   puVar1 = (undefined4 *)(selection_buffer + selection_count * 0x40);
   puVar7 = param_2;

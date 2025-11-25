@@ -76,7 +76,7 @@ void myContext(undefined4 param_1,undefined4 param_2)
 void cFindIconByName(undefined4 param_1)
 
 {
-  FUN_00434a88(&DAT_10016f50,param_1);
+  FUN_00434a88(&context_data_block,param_1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -272,7 +272,7 @@ void do_perspective(void)
 void cFindIconByType(undefined4 param_1)
 
 {
-  FUN_004349f8(&DAT_10016f50,param_1);
+  FUN_004349f8(&context_data_block,param_1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -310,7 +310,7 @@ void cSetColors(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefin
 void cIconInit(undefined4 param_1)
 
 {
-  FUN_00434324(&DAT_10016f50,param_1);
+  FUN_00434324(&context_data_block,param_1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }

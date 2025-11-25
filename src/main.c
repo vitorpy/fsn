@@ -597,7 +597,7 @@ void initialize_db(char *param_1)
   time(&DAT_100166ac);
   if (db_filepath == (char *)0x0) {
     if (home_directory == (char *)0x0) {
-      if (DAT_10017498 == '\0') {
+      if (relative_path_flag == '\0') {
         home_directory = getenv("HOME");
         if (home_directory == (char *)0x0) {
           home_directory = ".";
@@ -1583,7 +1583,7 @@ void main(int param_1,undefined4 *param_2)
   display = XtDisplay(toplevel);
   FUN_0042b844(toplevel);
   if (iStackX_0 < 2) {
-    if (DAT_10017498 == '\0') {
+    if (relative_path_flag == '\0') {
       pcStack_bc = getcwd((char *)0x0,0x400);
     }
     else {
@@ -1677,7 +1677,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_94 = 1;
   uStack_8c = 1;
   uStack_84 = 1;
-  DAT_1001664c = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,pane_form_widget,&uStack_a0,4);
+  context_top_widget = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,pane_form_widget,&uStack_a0,4);
   FUN_0040a7ec();
   XtManageChild(*(undefined4 *)(curcontextwindows + 0xc));
   XmMainWindowSetAreas(uStack_a8,uStack_ac,0,0,0,panel_widget);
@@ -1710,7 +1710,7 @@ void main(int param_1,undefined4 *param_2)
   FUN_00427d54();
   FUN_00433f74();
   FUN_00428b6c();
-  if ((*pcStack_bc != '/') && (DAT_10017498 == '\0')) {
+  if ((*pcStack_bc != '/') && (relative_path_flag == '\0')) {
     pcStack_c0 = getcwd((char *)0x0,0x400);
     strcat(pcStack_c0,"/");
     strcat(pcStack_c0,pcStack_bc);
