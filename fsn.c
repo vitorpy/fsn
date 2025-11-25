@@ -38031,7 +38031,7 @@ void FUN_0040dff8(undefined4 param_1)
   local_4 = XmCreateMenuBar(param_1,"menuBar",&local_74,0);
   XtManageChild(local_4);
   local_78 = 0;
-  FUN_00432094(display,0,&local_74,&local_78);
+  setup_menu_resources(display,0,&local_74,&local_78);
   local_c = XmCreatePulldownMenu(local_4,"session_pane",&local_74,local_78);
   XtAddCallback(local_c,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(local_c,0xe3f4c38,overlayMenuUnmappedCB,0);
@@ -38060,7 +38060,7 @@ void FUN_0040dff8(undefined4 param_1)
   XtManageChild(local_8);
   install_help_callback(local_8,&sessionHelp);
   local_78 = 0;
-  FUN_00432094(display,0,&local_74,&local_78);
+  setup_menu_resources(display,0,&local_74,&local_78);
   local_14 = XmCreatePulldownMenu(local_4,"show_pane",&local_74,local_78);
   XtAddCallback(local_14,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(local_14,0xe3f4c38,overlayMenuUnmappedCB,0);
@@ -38083,7 +38083,7 @@ void FUN_0040dff8(undefined4 param_1)
   XtManageChild(local_24);
   XtAddCallback(local_24,0xe3f35b3,showPreferencePanel,0);
   local_78 = 0;
-  FUN_00432094(display,0,&local_74,&local_78);
+  setup_menu_resources(display,0,&local_74,&local_78);
   local_18 = XmCreatePulldownMenu(local_14,"hide_pane",&local_74,local_78);
   local_78 = 0;
   local_24 = XmCreatePushButton(local_18,"menuOverview",&local_74,0);
@@ -38113,7 +38113,7 @@ void FUN_0040dff8(undefined4 param_1)
   XtManageChild(local_8);
   install_help_callback(local_8,&showHelp);
   local_78 = 0;
-  FUN_00432094(display,0,&local_74,&local_78);
+  setup_menu_resources(display,0,&local_74,&local_78);
   local_10 = XmCreatePulldownMenu(local_4,"display_pane",&local_74,local_78);
   XtAddCallback(local_10,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(local_10,0xe3f4c38,overlayMenuUnmappedCB,0);
@@ -38128,7 +38128,7 @@ void FUN_0040dff8(undefined4 param_1)
   local_70 = 1;
   local_74 = 0xe3f464e;
   local_78 = 1;
-  FUN_00432094(display,0,&local_74,&local_78);
+  setup_menu_resources(display,0,&local_74,&local_78);
   local_70 = XmCreatePulldownMenu(local_10,"dheight_pane",&local_74,local_78);
   local_74 = 0xe3f4a31;
   local_78 = 1;
@@ -38150,7 +38150,7 @@ void FUN_0040dff8(undefined4 param_1)
   local_74 = 0xe3f464e;
   local_78 = 1;
   local_70 = 1;
-  FUN_00432094(display,0,&local_74,&local_78);
+  setup_menu_resources(display,0,&local_74,&local_78);
   local_70 = XmCreatePulldownMenu(local_10,"ddir_pane",&local_74,local_78);
   local_74 = 0xe3f4a31;
   local_78 = 1;
@@ -38524,7 +38524,7 @@ void zoomto(double param_1,double param_2)
     }
     *(int *)(curcontext + 0x3c) = in_stack_00000020;
     if (in_stack_00000020 != 0) {
-      FUN_0041d69c();
+      update_marked_item();
     }
     *(float *)curcontext = (float)param_1;
     *(float *)(curcontext + 4) = (float)param_2;
@@ -38872,7 +38872,7 @@ void error(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00410f74(undefined4 param_1)
+void show_error_message(undefined4 param_1)
 
 {
   undefined4 uVar1;
@@ -38912,7 +38912,7 @@ void fileerror(char *param_1,char *param_2)
   strcpy(acStack_434,param_1);
   strcat(acStack_434," ");
   strcat(acStack_434,param_2);
-  FUN_00410f74(acStack_434);
+  show_error_message(acStack_434);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -39121,7 +39121,7 @@ LAB_00411a50:
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00411998(void)
+void process_pending_events(void)
 
 {
   int iVar1;
@@ -39258,7 +39258,7 @@ void FUN_00411c04(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00411d68(char *param_1)
+void hash_filename(char *param_1)
 
 {
   size_t sVar1;
@@ -39918,7 +39918,7 @@ void findfile(int param_1,undefined4 param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00413580(int param_1,undefined4 param_2)
+void validate_directory_access(int param_1,undefined4 param_2)
 
 {
   int unaff_gp;
@@ -40141,7 +40141,7 @@ void FUN_004138e8(undefined4 *param_1,char *param_2,char *param_3,char param_4)
   stat local_90;
   DIR *local_4;
   
-  FUN_00411998();
+  process_pending_events();
   if (-1 < (int)(param_1[0x1d] << 0xd)) {
     bVar1 = *(byte *)((int)param_1 + 0x75);
     *(byte *)((int)param_1 + 0x75) = bVar1 & 0x7f;
@@ -40215,7 +40215,7 @@ void FUN_004138e8(undefined4 *param_1,char *param_2,char *param_3,char param_4)
           uVar9 = uVar14 & 0xf;
           uVar14 = uVar14 + 1;
           if (uVar9 == 0) {
-            FUN_00411998();
+            process_pending_events();
           }
           __s1 = &pdVar4->d_type;
           if (((pdVar4->d_ino != 0) && (iVar12 = strcmp((char *)__s1,"."), iVar12 != 0)) &&
@@ -40242,7 +40242,7 @@ void FUN_004138e8(undefined4 *param_1,char *param_2,char *param_3,char param_4)
                   bVar1 = *(byte *)(puVar5 + 0x1d);
                   *(byte *)(puVar5 + 0x1d) = bVar1 | 8;
                   *(byte *)(puVar5 + 0x1d) = bVar1 | 10;
-                  uVar8 = FUN_00411d68(param_3);
+                  uVar8 = hash_filename(param_3);
                   *puVar5 = uVar8;
                   sVar7 = strlen(param_3);
                   puVar5[1] = sVar7;
@@ -40268,7 +40268,7 @@ void FUN_004138e8(undefined4 *param_1,char *param_2,char *param_3,char param_4)
                 }
               }
               else {
-                iVar12 = FUN_00413580(param_1,param_3);
+                iVar12 = validate_directory_access(param_1,param_3);
                 if (iVar12 == 0) {
                   puVar5 = (undefined4 *)FUN_00411b84();
                   if (iVar11 == 0) {
@@ -40282,7 +40282,7 @@ void FUN_004138e8(undefined4 *param_1,char *param_2,char *param_3,char param_4)
                   *(undefined4 **)(param_1[4] + iVar11 * 4) = puVar5;
                   *(byte *)((int)puVar5 + 0x29) = *(byte *)((int)puVar5 + 0x29) | 0x80;
                   *(byte *)(puVar5 + 10) = *(byte *)(puVar5 + 10) | 2;
-                  uVar2 = FUN_00411d68(param_3);
+                  uVar2 = hash_filename(param_3);
                   *puVar5 = uVar2;
                   sVar7 = strlen(param_3);
                   puVar5[1] = sVar7;
@@ -40336,7 +40336,7 @@ void FUN_004138e8(undefined4 *param_1,char *param_2,char *param_3,char param_4)
         }
         iVar12 = 0;
         closedir(local_4);
-        FUN_00411998();
+        process_pending_events();
         param_1[3] = iVar11;
         param_1[5] = iVar3;
         if (0 < iVar11) {
@@ -40373,7 +40373,7 @@ void FUN_004138e8(undefined4 *param_1,char *param_2,char *param_3,char param_4)
             iVar3 = iVar3 + 4;
           } while (iVar3 < iVar11 << 2);
         }
-        FUN_00411998();
+        process_pending_events();
         deleteMessage(uVar2);
       }
     }
@@ -40598,7 +40598,7 @@ void FUN_00414870(FILE *param_1,undefined4 *param_2,int param_3)
   undefined1 local_a;
   byte local_9;
   
-  FUN_00411998();
+  process_pending_events();
   if (_DAT_0fb51f00 == 0) {
     iVar1 = param_1->_flags + -1;
     param_1->_flags = iVar1;
@@ -40763,14 +40763,14 @@ void FUN_00414da4(void)
   if (((topdir != 0) && (*(int *)(topdir + 0x74) << 3 < 0)) && (fsn_resources == '\0')) {
     FUN_00427fe0();
     local_10 = set_status_message("updating on disk database",0);
-    FUN_00411998();
+    process_pending_events();
     sVar2 = strlen(home_directory);
     local_4 = (char *)malloc(sVar2 + 0xc);
     strcpy(local_4,home_directory);
     strcat(local_4,"/.FSNXXXXXX");
     iVar3 = mkstemp(local_4);
     if (iVar3 < 0) {
-      FUN_00410f74("could not open tmp file, not updating");
+      show_error_message("could not open tmp file, not updating");
       free(local_4);
       deleteMessage(local_10);
     }
@@ -40789,7 +40789,7 @@ void FUN_00414da4(void)
         if (__s_00 == (FILE *)0x0) {
           __s_00 = fopen(local_4,"w");
           if (__s_00 == (FILE *)0x0) {
-            FUN_00410f74("could not open tmp file, not updating");
+            show_error_message("could not open tmp file, not updating");
             free(local_4);
             deleteMessage(local_10);
             halt_baddata();
@@ -40973,7 +40973,7 @@ void scanDatabase(int param_1)
   iVar2 = FUN_004138e8(param_1,acStack_400,acStack_400 + sVar1,1);
   if (iVar2 != 0) {
     uVar3 = set_status_message("relaying out file system...please wait",0);
-    FUN_00411998();
+    process_pending_events();
     FUN_004144ec(param_1);
     deleteMessage(uVar3);
     update_display();
@@ -41033,7 +41033,7 @@ void rescanDatabase(void)
   stat local_88;
   
   local_128 = set_status_message("rescanning file system",0);
-  FUN_00411998();
+  process_pending_events();
   iVar1 = statvfs((char *)*topdir,asStack_124);
   if (iVar1 < 0) {
     sprintf(acStack_510,"cannot statvfs %s, leaving display unchanged",*topdir);
@@ -41075,7 +41075,7 @@ void FUN_004158d4(char *param_1)
   stat local_88;
   
   uVar1 = set_status_message("no database available...building...please wait",0);
-  FUN_00411998();
+  process_pending_events();
   iVar2 = lstat(param_1,&local_88);
   if (iVar2 < 0) {
     fprintf((FILE *)0xfb52904,"cannot stat %s, giving up\n",param_1);
@@ -41097,7 +41097,7 @@ void FUN_004158d4(char *param_1)
   strcpy(fstyp,(char *)&asStack_124[0].__f_unused);
   localFlag = asStack_124[0].__f_spare[1] & 0x80000000;
   topdir = (undefined4 *)FUN_00411c04();
-  uVar3 = FUN_00411d68(param_1);
+  uVar3 = hash_filename(param_1);
   *topdir = uVar3;
   sVar4 = strlen(param_1);
   topdir[1] = sVar4;
@@ -41178,7 +41178,7 @@ void FUN_00415dec(uint param_1,undefined4 param_2)
   undefined1 auStack_448 [52];
   undefined1 auStack_414 [1044];
   
-  FUN_00411998();
+  process_pending_events();
   puVar3 = (undefined4 *)FUN_00411c04();
   puVar4 = (undefined4 *)(**(code **)(vinfop + 8))(auStack_414);
   if (param_1 != *(byte *)((int)puVar4 + 10)) {
@@ -41188,7 +41188,7 @@ void FUN_00415dec(uint param_1,undefined4 param_2)
     exit(1);
   }
   param_1 = param_1 + 1;
-  uVar5 = FUN_00411d68(auStack_414);
+  uVar5 = hash_filename(auStack_414);
   *puVar3 = uVar5;
   puVar3[1] = (uint)*(ushort *)(puVar4 + 1);
   puVar3[2] = *puVar4;
@@ -41232,7 +41232,7 @@ void FUN_00415dec(uint param_1,undefined4 param_2)
                     // WARNING: Subroutine does not return
         exit(1);
       }
-      uVar5 = FUN_00411d68(auStack_414);
+      uVar5 = hash_filename(auStack_414);
       *puVar4 = uVar5;
       puVar4[1] = (uint)*(ushort *)(puVar7 + 3);
       puVar4[2] = puVar7[2];
@@ -41690,7 +41690,7 @@ void fileChanged(int param_1,char *param_2)
   stat sStack_90;
   char *pcStack_8;
   
-  iVar1 = FUN_00413580();
+  iVar1 = validate_directory_access();
   if (iVar1 != 0) {
     pcStack_8 = (char *)build_path_string(0,param_1);
     strcat(pcStack_8,param_2);
@@ -41827,7 +41827,7 @@ void fileCreated(int param_1,char *param_2)
           bVar6 = *(byte *)(puVar3 + 0x1d);
           *(byte *)(puVar3 + 0x1d) = bVar6 | 8;
           *(byte *)(puVar3 + 0x1d) = bVar6 | 10;
-          uVar5 = FUN_00411d68(param_2);
+          uVar5 = hash_filename(param_2);
           *puVar3 = uVar5;
           sVar1 = strlen(param_2);
           puVar3[1] = sVar1;
@@ -41853,7 +41853,7 @@ void fileCreated(int param_1,char *param_2)
       }
       else {
         FUN_0042df08();
-        iVar2 = FUN_00413580(param_1,param_2);
+        iVar2 = validate_directory_access(param_1,param_2);
         if (iVar2 == 0) {
           puVar3 = (undefined4 *)FUN_00411b84();
           if (*(int *)(param_1 + 0xc) == 0) {
@@ -41868,7 +41868,7 @@ void fileCreated(int param_1,char *param_2)
           *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 1;
           *(byte *)(puVar3 + 10) = *(byte *)(puVar3 + 10) | 2;
           *(byte *)((int)puVar3 + 0x29) = *(byte *)((int)puVar3 + 0x29) | 0x80;
-          uVar5 = FUN_00411d68(param_2);
+          uVar5 = hash_filename(param_2);
           *puVar3 = uVar5;
           sVar1 = strlen(param_2);
           puVar3[1] = sVar1;
@@ -41924,7 +41924,7 @@ void fileDeleted(int param_1,char *param_2)
       *(byte *)(param_1 + 0x75) = bVar2 & 0x7f;
       *(byte *)(param_1 + 0x74) = *(byte *)(param_1 + 0x74) & 0xfe;
       *(byte *)(param_1 + 0x75) = bVar2 & 0x3f;
-      iVar1 = FUN_00413580(param_1,param_2);
+      iVar1 = validate_directory_access(param_1,param_2);
       if (iVar1 == 0) {
         iVar1 = FUN_00413610(param_1,param_2);
         if (iVar1 != 0) {
@@ -41989,7 +41989,7 @@ void fileExecuting(int param_1)
 {
   int iVar1;
   
-  iVar1 = FUN_00413580();
+  iVar1 = validate_directory_access();
   if ((iVar1 != 0) && (*(int *)(iVar1 + 0x20) != 0)) {
     FUN_00433e24(*(undefined4 *)(iVar1 + 0x20),1,0,0,0,0);
     *(byte *)(iVar1 + 0x29) = *(byte *)(iVar1 + 0x29) & 0xf7 | 8;
@@ -42008,7 +42008,7 @@ void fileStoppedExecuting(undefined4 param_1)
 {
   int iVar1;
   
-  iVar1 = FUN_00413580();
+  iVar1 = validate_directory_access();
   if ((iVar1 != 0) && (*(int *)(iVar1 + 0x20) != 0)) {
     FUN_00433e24(*(undefined4 *)(iVar1 + 0x20),0,0,0,0,0);
     *(byte *)(iVar1 + 0x29) = *(byte *)(iVar1 + 0x29) & 0xf7;
@@ -43251,7 +43251,7 @@ void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *para
   }
   else if (iStack_8 == 0) {
     if (iStack_4 == *(int *)(curcontext + 0x3c)) {
-      FUN_0041d920();
+      clear_current_selection();
       *param_1 = camera_lookat_x;
       *param_2 = camera_lookat_y;
       *param_3 = DAT_100174c4;
@@ -43690,7 +43690,7 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   undefined4 uStack_4;
   
   uStack_6c = 0;
-  FUN_00432094(display,0,&uStack_68,&uStack_6c);
+  setup_menu_resources(display,0,&uStack_68,&uStack_6c);
   uStack_4 = XmCreatePulldownMenu(param_1,"dirPane",&uStack_68,uStack_6c);
   XtAddCallback(uStack_4,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(uStack_4,0xe3f4c38,overlayMenuUnmappedCB,0);
@@ -43725,13 +43725,13 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   install_help_callback(menu_directory_cascade,&directoryHelp);
   XtAddEventHandler(param_2,4,0,postMenu,0);
   uStack_6c = 0;
-  FUN_00432094(display,0,&uStack_68,&uStack_6c);
+  setup_menu_resources(display,0,&uStack_68,&uStack_6c);
   XtSetSensitive(menu_directory_cascade,0);
   popup_menu_widget = XmCreatePopupMenu(param_2,"popupMenu",&uStack_68,uStack_6c);
   XtAddCallback(popup_menu_widget,0xe3f4c38,overlayMenuUnmappedCB,0);
   install_help_callback(popup_menu_widget,&fileHelp);
   uStack_6c = 0;
-  FUN_00432094(display,0,&uStack_68,&uStack_6c);
+  setup_menu_resources(display,0,&uStack_68,&uStack_6c);
   uStack_8 = XmCreatePulldownMenu(param_1,"filePane",&uStack_68,uStack_6c);
   XtAddCallback(uStack_8,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(uStack_8,0xe3f4c38,overlayMenuUnmappedCB,0);
@@ -45069,7 +45069,7 @@ void unselect_directory(void)
     curcontext[0xc50] = 0;
     FUN_0041d418();
     XtSetSensitive(menu_directory_cascade,0);
-    FUN_0041d920();
+    clear_current_selection();
     *(byte *)(*(int *)(curcontext + 0x44) + 0x74) =
          *(byte *)(*(int *)(curcontext + 0x44) + 0x74) & 0xdf;
     *(undefined4 *)(curcontext + 0x44) = 0;
@@ -45131,7 +45131,7 @@ void select_directory(int param_1)
   uint uStack_24;
   
   if (param_1 == *(int *)(curcontext + 0x44)) {
-    FUN_0041d920();
+    clear_current_selection();
     if (mark_menu_widget != '\0') {
       FUN_0041c720();
     }
@@ -45141,7 +45141,7 @@ void select_directory(int param_1)
       FUN_0041d418();
       *(byte *)(*(int *)(curcontext + 0x44) + 0x74) =
            *(byte *)(*(int *)(curcontext + 0x44) + 0x74) & 0xdf;
-      FUN_0041d920();
+      clear_current_selection();
       curcontext[0xc50] = 0;
     }
     XtSetSensitive(menu_directory_cascade,1);
@@ -45174,7 +45174,7 @@ void select_directory(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041d69c(int param_1)
+void update_marked_item(int param_1)
 
 {
   int iVar1;
@@ -45260,7 +45260,7 @@ void unselect_file(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041d920(void)
+void clear_current_selection(void)
 
 {
   int iVar1;
@@ -45365,7 +45365,7 @@ void checkValidSelections(void)
 {
   if ((*(int *)(curcontext + 0x48) != 0) && (-1 < *(int *)(*(int *)(curcontext + 0x48) + 0x28) << 5)
      ) {
-    FUN_0041d920();
+    clear_current_selection();
   }
   if ((*(int *)(curcontext + 0x44) != 0) && (-1 < *(int *)(*(int *)(curcontext + 0x44) + 0x74) << 3)
      ) {
@@ -45379,7 +45379,7 @@ void checkValidSelections(void)
     gl_swap_buffers(1);
     if ((*(int *)(curcontext + 0x48) != 0) &&
        (-1 < *(int *)(*(int *)(curcontext + 0x48) + 0x28) << 5)) {
-      FUN_0041d920();
+      clear_current_selection();
     }
     if ((*(int *)(curcontext + 0x44) != 0) &&
        (-1 < *(int *)(*(int *)(curcontext + 0x44) + 0x74) << 3)) {
@@ -45543,20 +45543,20 @@ void FUN_0041e260(int param_1,undefined4 *param_2,undefined4 param_3,char param_
   
   if ((param_1 == 0) || (param_2 == (undefined4 *)0x0)) {
     sprintf(acStack_464,"Don\'t know how to %s current selection",param_5);
-    FUN_00410f74(acStack_464);
+    show_error_message(acStack_464);
   }
   else {
     pcVar1 = (char *)build_path_string(0,param_1);
     strcat(pcVar1,(char *)*param_2);
     if (param_2[8] == 0) {
       sprintf(acStack_464,"Don\'t know how to %s %s",param_5,*param_2);
-      FUN_00410f74(acStack_464);
+      show_error_message(acStack_464);
     }
     else {
       __s1 = (char *)FUN_00433c08(param_2[8],param_3,param_5);
       if (__s1 == (char *)0x0) {
         sprintf(acStack_464,"Don\'t know how to %s %s",param_5,*param_2);
-        FUN_00410f74(acStack_464);
+        show_error_message(acStack_464);
       }
       else {
         if ((param_4 != '\0') && (DAT_10017496 != '\0')) {
@@ -45843,7 +45843,7 @@ void gotoFileName(undefined4 param_1)
   
   FUN_0042ab1c(param_1,&iStack_4,&iStack_8);
   if (iStack_4 != 0) {
-    FUN_0041d69c();
+    update_marked_item();
     if (iStack_8 != 0) {
       FUN_0041da44();
     }
@@ -49174,7 +49174,7 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
         if ((iStack_8 == *(int *)(curcontext + 0x44)) && (*(int *)(iStack_8 + 0x28) != 0)) {
           iStack_4 = *(int *)(iStack_8 + 0x28);
         }
-        FUN_0041d69c(iStack_4);
+        update_marked_item(iStack_4);
         *param_1 = (float)((double)*(float *)(iStack_4 + 0x34) -
                           (double)*(float *)(curcontext + 0x14) *
                           ((double)*(float *)(iStack_4 + 0x3c) /
@@ -49189,8 +49189,8 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
       }
     }
     else {
-      FUN_0041d920();
-      FUN_0041d69c(iStack_4);
+      clear_current_selection();
+      update_marked_item(iStack_4);
       *param_1 = (float)((double)*(float *)(iStack_4 + 0x34) -
                         (double)*(float *)(curcontext + 0x14) *
                         ((double)*(float *)(iStack_4 + 0x3c) /
@@ -49205,7 +49205,7 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
     }
   }
   else {
-    FUN_0041d69c(iStack_4);
+    update_marked_item(iStack_4);
     FUN_0041da44(iStack_c);
     *param_1 = (*(float *)(iStack_4 + 0x34) +
                *(float *)(iStack_c + 0x14) * *(float *)(iStack_4 + 0x58)) -
@@ -50496,7 +50496,7 @@ void makeDColorBox(uint param_1,int param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004286f8(uint param_1,int param_2)
+void create_color_legend_box(uint param_1,int param_2)
 
 {
   float fVar1;
@@ -50597,14 +50597,14 @@ void makeColorBoxes(void)
     FUN_00428288(toplevel);
     current_color_index = '\x01';
   }
-  FUN_004286f8(DAT_100175f4,boxDir,7);
-  FUN_004286f8(DAT_1001761c,boxRed,0);
-  FUN_004286f8(DAT_10017620,boxOrange,1);
-  FUN_004286f8(DAT_10017624,boxYellow,2);
-  FUN_004286f8(DAT_10017628,boxGreen,3);
-  FUN_004286f8(DAT_1001762c,boxCyan,4);
-  FUN_004286f8(DAT_10017630,boxBlue,5);
-  FUN_004286f8(DAT_10017634,boxMagenta,6);
+  create_color_legend_box(DAT_100175f4,boxDir,7);
+  create_color_legend_box(DAT_1001761c,boxRed,0);
+  create_color_legend_box(DAT_10017620,boxOrange,1);
+  create_color_legend_box(DAT_10017624,boxYellow,2);
+  create_color_legend_box(DAT_10017628,boxGreen,3);
+  create_color_legend_box(DAT_1001762c,boxCyan,4);
+  create_color_legend_box(DAT_10017630,boxBlue,5);
+  create_color_legend_box(DAT_10017634,boxMagenta,6);
   FUN_00429040();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -52406,7 +52406,7 @@ void createHelpMenu(undefined4 param_1)
   undefined4 uStack_24;
   
   uStack_2c = 0;
-  FUN_00432094(display,0,&uStack_28,&uStack_2c);
+  setup_menu_resources(display,0,&uStack_28,&uStack_2c);
   uVar1 = XmCreatePulldownMenu(param_1,"help_menu",&uStack_28,uStack_2c);
   XtAddCallback(uVar1,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(uVar1,0xe3f4c38,overlayMenuUnmappedCB,0);
@@ -53395,12 +53395,12 @@ void restorePosition(undefined4 param_1)
       FUN_0041d54c(0);
     }
     else {
-      FUN_0041d69c();
+      update_marked_item();
     }
   }
   if (iStack_1c != *(int *)(curcontext + 0x48)) {
     if (iStack_1c == 0) {
-      FUN_0041d920(0);
+      clear_current_selection(0);
     }
     else {
       FUN_0041da44();
@@ -53536,12 +53536,12 @@ void zoomPosition(undefined4 param_1)
         FUN_0041d54c(0);
       }
       else {
-        FUN_0041d69c();
+        update_marked_item();
       }
     }
     if (iStack_1c != *(int *)(curcontext + 0x48)) {
       if (iStack_1c == 0) {
-        FUN_0041d920(0);
+        clear_current_selection(0);
       }
       else {
         FUN_0041da44();
@@ -53862,7 +53862,7 @@ void readPosition(undefined2 *param_1,FILE *param_2)
       *(undefined4 *)(param_1 + 0x12) = 0;
     }
     else {
-      uVar2 = FUN_00413580(*(int *)(param_1 + 10),auStack_430);
+      uVar2 = validate_directory_access(*(int *)(param_1 + 10),auStack_430);
       *(undefined4 *)(param_1 + 0x12) = uVar2;
     }
   }
@@ -53958,7 +53958,7 @@ void FUN_0042ec00(undefined2 *param_1,FILE *param_2)
       *(undefined4 *)(param_1 + 0x12) = 0;
     }
     else {
-      uVar2 = FUN_00413580(*(int *)(param_1 + 10),auStack_430);
+      uVar2 = validate_directory_access(*(int *)(param_1 + 10),auStack_430);
       *(undefined4 *)(param_1 + 0x12) = uVar2;
     }
   }
@@ -54913,7 +54913,7 @@ void SG_getDefaultColormap(int param_1,int param_2,int param_3)
     }
     param_2 = param_2 * 0x50;
     if (param_3 != *(int *)(*(int *)(param_1 + 0x8c) + param_2 + 0x28)) {
-      iVar1 = FUN_004325fc(param_1);
+      iVar1 = get_bytecode_context(param_1);
       iVar4 = 0;
       if (0 < *(int *)(iVar1 + 0x18)) {
         piVar3 = *(int **)(iVar1 + 0x14);
@@ -54942,7 +54942,7 @@ void SG_getDefaultColormap(int param_1,int param_2,int param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00431354(int param_1,int param_2,int param_3)
+void eval_bytecode_instruction(int param_1,int param_2,int param_3)
 
 {
   int iVar1;
@@ -54998,7 +54998,7 @@ void SG_getDefaultDepth(int param_1,undefined4 param_2,int *param_3,int param_4)
   int iVar2;
   
   if (((param_1 != 0) &&
-      (((iVar1 = FUN_004325fc(), param_3 != (int *)0x0 &&
+      (((iVar1 = get_bytecode_context(), param_3 != (int *)0x0 &&
         (iVar2 = *(int *)(iVar1 + 0x24), *param_3 != *(int *)(iVar1 + iVar2 * 4 + 0x3c))) ||
        ((param_4 != 0 && (iVar2 = *(int *)(iVar1 + 0x24), param_4 != iVar2)))))) &&
      ((((param_3 != (int *)0x0 || (*(int *)(iVar1 + iVar2 * 4 + 0x3c) != 3)) &&
@@ -55056,7 +55056,7 @@ void FUN_00431630(int param_1,int param_2,int param_3,int param_4,int *param_5)
     if (param_2 == 0) {
       param_2 = *(int *)(param_1 + 0x84);
     }
-    iVar1 = FUN_004325fc(param_1,param_2);
+    iVar1 = get_bytecode_context(param_1,param_2);
     iVar5 = 0;
     if (0 < *(int *)(iVar1 + 0x18)) {
       piVar6 = *(int **)(iVar1 + 0x20);
@@ -55109,7 +55109,7 @@ void FUN_00431788(int param_1,int param_2,int *param_3,int param_4,int param_5)
     if (param_2 == 0) {
       param_2 = *(int *)(param_1 + 0x84);
     }
-    iVar1 = FUN_004325fc();
+    iVar1 = get_bytecode_context();
     iVar4 = 0;
     if (0 < *(int *)(iVar1 + 0x18)) {
       piVar3 = *(int **)(iVar1 + 0x20);
@@ -55153,7 +55153,7 @@ void SG_getMatchingVisual(int param_1,int param_2,int param_3,int *param_4,int p
     if (param_2 == 0) {
       param_2 = *(int *)(param_1 + 0x84);
     }
-    iVar1 = FUN_004325fc(param_1,param_2);
+    iVar1 = get_bytecode_context(param_1,param_2);
     iVar2 = 0;
     if (0 < *(int *)(iVar1 + 0x18)) {
       do {
@@ -55192,7 +55192,7 @@ void SG_getMaxDepth(int param_1,int param_2,int *param_3,int param_4)
     if (param_2 == 0) {
       param_2 = *(int *)(param_1 + 0x84);
     }
-    iVar1 = FUN_004325fc(param_1,param_2);
+    iVar1 = get_bytecode_context(param_1,param_2);
     iVar4 = 0;
     if (param_4 == 0) {
       param_4 = *(int *)(iVar1 + 0x24);
@@ -55266,9 +55266,9 @@ void SG_getNormalArgs(undefined4 param_1,undefined4 param_2,int param_3,int *par
   int iVar4;
   
   uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,2);
-  iVar2 = FUN_00432370(param_1,param_2,uVar1,&temp_data_buffer,2);
+  iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,2);
   if (-1 < iVar2) {
-    uVar3 = FUN_00431354(param_1,param_2);
+    uVar3 = eval_bytecode_instruction(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar3;
     iVar4 = *param_4;
@@ -55336,12 +55336,12 @@ void SG_getOverlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *pa
   int iVar4;
   
   uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,3);
-  iVar2 = FUN_00432370(param_1,param_2,uVar1,&temp_data_buffer,3);
+  iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,3);
   if (iVar2 < 0) {
-    FUN_00432094(param_1,param_2,param_3,param_4);
+    setup_menu_resources(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar3 = FUN_00431354(param_1,param_2);
+    uVar3 = eval_bytecode_instruction(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar3;
     iVar4 = *param_4;
@@ -55369,12 +55369,12 @@ void SG_getOverlay2Args(undefined4 param_1,undefined4 param_2,int param_3,int *p
   undefined4 uVar2;
   int iVar3;
   
-  iVar1 = FUN_00432370(param_1,param_2,2,&temp_data_buffer,3);
+  iVar1 = read_bytecode_value(param_1,param_2,2,&temp_data_buffer,3);
   if (iVar1 < 0) {
-    FUN_00432094(param_1,param_2,param_3,param_4);
+    setup_menu_resources(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar2 = FUN_00431354(param_1,param_2);
+    uVar2 = eval_bytecode_instruction(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar2;
     iVar3 = *param_4;
@@ -55440,12 +55440,12 @@ void SG_getOverlay4Args(undefined4 param_1,undefined4 param_2,int param_3,int *p
   undefined4 uVar2;
   int iVar3;
   
-  iVar1 = FUN_00432370(param_1,param_2,4,&temp_data_buffer,3);
+  iVar1 = read_bytecode_value(param_1,param_2,4,&temp_data_buffer,3);
   if (iVar1 < 0) {
     FUN_00431dfc(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar2 = FUN_00431354(param_1,param_2);
+    uVar2 = eval_bytecode_instruction(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar2;
     iVar3 = *param_4;
@@ -55474,12 +55474,12 @@ void SG_getPopupArgs(undefined4 param_1,undefined4 param_2,int param_3,int *para
   int iVar3;
   
   uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,4);
-  iVar2 = FUN_00432370(param_1,param_2,uVar1,&temp_data_buffer,4);
+  iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,4);
   if (iVar2 < 0) {
     FUN_00431b34(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar1 = FUN_00431354(param_1,param_2);
+    uVar1 = eval_bytecode_instruction(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar1;
     iVar3 = *param_4;
@@ -55500,7 +55500,7 @@ void SG_getPopupArgs(undefined4 param_1,undefined4 param_2,int param_3,int *para
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00432094(undefined4 param_1,undefined4 param_2,int param_3,int *param_4)
+void setup_menu_resources(undefined4 param_1,undefined4 param_2,int param_3,int *param_4)
 
 {
   undefined4 uVar1;
@@ -55549,12 +55549,12 @@ void SG_getUnderlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *p
   int iVar4;
   
   uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,1);
-  iVar2 = FUN_00432370(param_1,param_2,uVar1,&temp_data_buffer,1);
+  iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,1);
   if (iVar2 < 0) {
     FUN_00431b34(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar3 = FUN_00431354(param_1,param_2);
+    uVar3 = eval_bytecode_instruction(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar3;
     iVar4 = *param_4;
@@ -55575,7 +55575,7 @@ void SG_getUnderlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *p
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00432370(int param_1,int param_2,int param_3,int *param_4,int param_5)
+void read_bytecode_value(int param_1,int param_2,int param_3,int *param_4,int param_5)
 
 {
   int iVar1;
@@ -55589,7 +55589,7 @@ void FUN_00432370(int param_1,int param_2,int param_3,int *param_4,int param_5)
   if (param_2 == 0) {
     param_2 = *(int *)(param_1 + 0x84);
   }
-  iVar1 = FUN_004325fc();
+  iVar1 = get_bytecode_context();
   if (param_5 == 0) {
     param_5 = *(int *)(iVar1 + 0x24);
   }
@@ -55634,8 +55634,8 @@ void SG_getVisualArgs(undefined4 param_1,undefined4 param_2,undefined4 param_3,u
   undefined4 uVar2;
   int iVar3;
   
-  uVar1 = FUN_00432370();
-  uVar2 = FUN_00431354(param_1,param_2,uVar1,param_4,param_5);
+  uVar1 = read_bytecode_value();
+  uVar2 = eval_bytecode_instruction(param_1,param_2,uVar1,param_4,param_5);
   *(undefined4 *)(param_6 + *param_7 * 8) = 0xf6615ba;
   *(undefined4 *)(param_6 + *param_7 * 8 + 4) = uVar2;
   iVar3 = *param_7;
@@ -55655,7 +55655,7 @@ void SG_getVisualArgs(undefined4 param_1,undefined4 param_2,undefined4 param_3,u
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004325fc(int param_1,int param_2)
+void get_bytecode_context(int param_1,int param_2)
 
 {
   bool bVar1;
@@ -55792,7 +55792,7 @@ void FUN_004325fc(int param_1,int param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00432a34(undefined4 param_1,char *param_2,undefined4 param_3,undefined4 param_4,
+void format_log_message(undefined4 param_1,char *param_2,undefined4 param_3,undefined4 param_4,
                  undefined4 param_5,undefined4 param_6)
 
 {
@@ -55866,7 +55866,7 @@ void SG_defaultDepthAndTypeResources
       param_9 = (int *)0x0;
       param_8 = (int *)0x0;
     }
-    iVar5 = FUN_004325fc();
+    iVar5 = get_bytecode_context();
     if ((((bVar2) || (*(uint *)(iVar5 + 0x24) == (uint)*param_4)) &&
         ((bVar1 || (*param_3 == *(uint *)(iVar5 + *(int *)(iVar5 + 0x24) * 4 + 0x3c))))) &&
        ((bVar3 || (*param_6 == *(uint *)(iVar5 + *(int *)(iVar5 + 0x24) * 4 + 0x50))))) {
@@ -55891,9 +55891,9 @@ void SG_defaultDepthAndTypeResources
         do {
           iVar7 = isalpha(uVar6);
           if (iVar7 == 0) {
-            FUN_00432a34(param_1,_imsgs._424_4_,param_4,*pbVar13,&DAT_10013e54,&DAT_10013e58);
+            format_log_message(param_1,_imsgs._424_4_,param_4,*pbVar13,&DAT_10013e54,&DAT_10013e58);
             *pbVar13 = 0;
-            FUN_00432a34(param_1,_imsgs._428_4_,param_4,&DAT_10013e5c,&DAT_10013e60,&DAT_10013e64);
+            format_log_message(param_1,_imsgs._428_4_,param_4,&DAT_10013e5c,&DAT_10013e60,&DAT_10013e64);
             uVar6 = (uint)*param_4;
             goto LAB_00432e34;
           }
@@ -55918,7 +55918,7 @@ LAB_00432e34:
           pcVar14 = *(char **)(iVar5 + *(uint *)(iVar5 + 0x24) * 4 + 100);
           *param_5 = *(uint *)(iVar5 + 0x24);
           bVar4 = true;
-          FUN_00432a34(param_1,_imsgs._432_4_,&DAT_10013e84,&DAT_10013e88,&DAT_10013e8c,
+          format_log_message(param_1,_imsgs._432_4_,&DAT_10013e84,&DAT_10013e88,&DAT_10013e8c,
                        &DAT_10013e90);
         }
         else {
@@ -56022,8 +56022,8 @@ LAB_00432e34:
       if (((((!bVar3) && (local_4 != *param_6)) && (*param_6 != 0)) ||
           (((!bVar2 && (uVar6 != *param_5)) || (bVar4)))) &&
          (((!bVar3 || (*param_5 != 3)) || (uVar6 != 4)))) {
-        FUN_00432a34(param_1,_imsgs._436_4_,local_resc,*param_6,&DAT_10013efc,&DAT_10013f00);
-        FUN_00432a34(param_1,_imsgs._444_4_,pcVar14,local_4,&DAT_10013f04,&DAT_10013f08);
+        format_log_message(param_1,_imsgs._436_4_,local_resc,*param_6,&DAT_10013efc,&DAT_10013f00);
+        format_log_message(param_1,_imsgs._444_4_,pcVar14,local_4,&DAT_10013f04,&DAT_10013f08);
       }
       *param_6 = local_4;
       if (param_5 != (uint *)0x0) {
@@ -56036,7 +56036,7 @@ LAB_00432e34:
       uVar8 = FUN_00431630(param_1,param_2,uVar6,local_4,puVar10);
       *param_3 = uVar8;
       if (param_7 != (int *)0x0) {
-        iVar5 = FUN_00432370(param_1,param_2,local_4,param_3,uVar6);
+        iVar5 = read_bytecode_value(param_1,param_2,local_4,param_3,uVar6);
         *param_7 = iVar5;
         if (-1 < *param_7) {
           iVar5 = *(int *)(param_1 + 0x8c) + param_2 * 0x50;
@@ -56046,7 +56046,7 @@ LAB_00432e34:
             }
           }
           else if (param_8 != (int *)0x0) {
-            iVar5 = FUN_00431354(param_1,param_2);
+            iVar5 = eval_bytecode_instruction(param_1,param_2);
             *param_8 = iVar5;
           }
           if (param_9 != (int *)0x0) {
@@ -56058,23 +56058,23 @@ LAB_00432e34:
         }
       }
       if ((param_7 != (int *)0x0) && (*param_7 < 1)) {
-        FUN_00432a34(param_1,_imsgs._448_4_,&DAT_10013f0c,&DAT_10013f10,&DAT_10013f14,&DAT_10013f18)
+        format_log_message(param_1,_imsgs._448_4_,&DAT_10013f0c,&DAT_10013f10,&DAT_10013f14,&DAT_10013f18)
         ;
         local_20 = '\x01';
       }
       if ((param_8 != (int *)0x0) && (*param_8 < 1)) {
-        FUN_00432a34(param_1,_imsgs._452_4_,&DAT_10013f1c,&DAT_10013f20,&DAT_10013f24,&DAT_10013f28)
+        format_log_message(param_1,_imsgs._452_4_,&DAT_10013f1c,&DAT_10013f20,&DAT_10013f24,&DAT_10013f28)
         ;
         local_20 = local_20 + '\x01';
       }
       if ((param_9 != (int *)0x0) && (*param_9 < 1)) {
-        FUN_00432a34(param_1,_imsgs._456_4_,&DAT_10013f2c,&DAT_10013f30,&DAT_10013f34,&DAT_10013f38)
+        format_log_message(param_1,_imsgs._456_4_,&DAT_10013f2c,&DAT_10013f30,&DAT_10013f34,&DAT_10013f38)
         ;
         local_20 = local_20 + '\x01';
       }
       if (local_20 != '\0') {
         param_2 = param_2 * 0x50;
-        FUN_00432a34(param_1,_imsgs._460_4_,&DAT_10013f3c,&DAT_10013f40,&DAT_10013f44,&DAT_10013f48)
+        format_log_message(param_1,_imsgs._460_4_,&DAT_10013f3c,&DAT_10013f40,&DAT_10013f44,&DAT_10013f48)
         ;
         *param_6 = *(uint *)(*(int *)(param_1 + 0x8c) + param_2 + 0x24);
         if (param_5 != (uint *)0x0) {

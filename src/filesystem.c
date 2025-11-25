@@ -20,7 +20,7 @@ void fileStoppedExecuting(undefined4 param_1)
 {
   int iVar1;
   
-  iVar1 = FUN_00413580();
+  iVar1 = validate_directory_access();
   if ((iVar1 != 0) && (*(int *)(iVar1 + 0x20) != 0)) {
     FUN_00433e24(*(undefined4 *)(iVar1 + 0x20),0,0,0,0,0);
     *(byte *)(iVar1 + 0x29) = *(byte *)(iVar1 + 0x29) & 0xf7;
@@ -207,7 +207,7 @@ void fileerror(char *param_1,char *param_2)
   strcpy(acStack_434,param_1);
   strcat(acStack_434," ");
   strcat(acStack_434,param_2);
-  FUN_00410f74(acStack_434);
+  show_error_message(acStack_434);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -346,7 +346,7 @@ void gotoFileName(undefined4 param_1)
   
   FUN_0042ab1c(param_1,&iStack_4,&iStack_8);
   if (iStack_4 != 0) {
-    FUN_0041d69c();
+    update_marked_item();
     if (iStack_8 != 0) {
       FUN_0041da44();
     }
@@ -369,7 +369,7 @@ void fileExecuting(int param_1)
 {
   int iVar1;
   
-  iVar1 = FUN_00413580();
+  iVar1 = validate_directory_access();
   if ((iVar1 != 0) && (*(int *)(iVar1 + 0x20) != 0)) {
     FUN_00433e24(*(undefined4 *)(iVar1 + 0x20),1,0,0,0,0);
     *(byte *)(iVar1 + 0x29) = *(byte *)(iVar1 + 0x29) & 0xf7 | 8;

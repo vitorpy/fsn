@@ -783,7 +783,7 @@ void createHelpMenu(undefined4 param_1)
   undefined4 uStack_24;
   
   uStack_2c = 0;
-  FUN_00432094(display,0,&uStack_28,&uStack_2c);
+  setup_menu_resources(display,0,&uStack_28,&uStack_2c);
   uVar1 = XmCreatePulldownMenu(param_1,"help_menu",&uStack_28,uStack_2c);
   XtAddCallback(uVar1,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(uVar1,0xe3f4c38,overlayMenuUnmappedCB,0);
@@ -868,7 +868,7 @@ void fileCreated(int param_1,char *param_2)
           bVar6 = *(byte *)(puVar3 + 0x1d);
           *(byte *)(puVar3 + 0x1d) = bVar6 | 8;
           *(byte *)(puVar3 + 0x1d) = bVar6 | 10;
-          uVar5 = FUN_00411d68(param_2);
+          uVar5 = hash_filename(param_2);
           *puVar3 = uVar5;
           sVar1 = strlen(param_2);
           puVar3[1] = sVar1;
@@ -894,7 +894,7 @@ void fileCreated(int param_1,char *param_2)
       }
       else {
         FUN_0042df08();
-        iVar2 = FUN_00413580(param_1,param_2);
+        iVar2 = validate_directory_access(param_1,param_2);
         if (iVar2 == 0) {
           puVar3 = (undefined4 *)FUN_00411b84();
           if (*(int *)(param_1 + 0xc) == 0) {
@@ -909,7 +909,7 @@ void fileCreated(int param_1,char *param_2)
           *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 1;
           *(byte *)(puVar3 + 10) = *(byte *)(puVar3 + 10) | 2;
           *(byte *)((int)puVar3 + 0x29) = *(byte *)((int)puVar3 + 0x29) | 0x80;
-          uVar5 = FUN_00411d68(param_2);
+          uVar5 = hash_filename(param_2);
           *puVar3 = uVar5;
           sVar1 = strlen(param_2);
           puVar3[1] = sVar1;
@@ -1645,7 +1645,7 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   undefined4 uStack_4;
   
   uStack_6c = 0;
-  FUN_00432094(display,0,&uStack_68,&uStack_6c);
+  setup_menu_resources(display,0,&uStack_68,&uStack_6c);
   uStack_4 = XmCreatePulldownMenu(param_1,"dirPane",&uStack_68,uStack_6c);
   XtAddCallback(uStack_4,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(uStack_4,0xe3f4c38,overlayMenuUnmappedCB,0);
@@ -1680,13 +1680,13 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   install_help_callback(menu_directory_cascade,&directoryHelp);
   XtAddEventHandler(param_2,4,0,postMenu,0);
   uStack_6c = 0;
-  FUN_00432094(display,0,&uStack_68,&uStack_6c);
+  setup_menu_resources(display,0,&uStack_68,&uStack_6c);
   XtSetSensitive(menu_directory_cascade,0);
   popup_menu_widget = XmCreatePopupMenu(param_2,"popupMenu",&uStack_68,uStack_6c);
   XtAddCallback(popup_menu_widget,0xe3f4c38,overlayMenuUnmappedCB,0);
   install_help_callback(popup_menu_widget,&fileHelp);
   uStack_6c = 0;
-  FUN_00432094(display,0,&uStack_68,&uStack_6c);
+  setup_menu_resources(display,0,&uStack_68,&uStack_6c);
   uStack_8 = XmCreatePulldownMenu(param_1,"filePane",&uStack_68,uStack_6c);
   XtAddCallback(uStack_8,0xe3f41fe,overlayMenuMappedCB,0);
   XtAddCallback(uStack_8,0xe3f4c38,overlayMenuUnmappedCB,0);
@@ -1785,12 +1785,12 @@ void SG_getPopupArgs(undefined4 param_1,undefined4 param_2,int param_3,int *para
   int iVar3;
   
   uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,4);
-  iVar2 = FUN_00432370(param_1,param_2,uVar1,&temp_data_buffer,4);
+  iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,4);
   if (iVar2 < 0) {
     FUN_00431b34(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar1 = FUN_00431354(param_1,param_2);
+    uVar1 = eval_bytecode_instruction(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar1;
     iVar3 = *param_4;

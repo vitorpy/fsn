@@ -364,12 +364,12 @@ void restorePosition(undefined4 param_1)
       FUN_0041d54c(0);
     }
     else {
-      FUN_0041d69c();
+      update_marked_item();
     }
   }
   if (iStack_1c != *(int *)(curcontext + 0x48)) {
     if (iStack_1c == 0) {
-      FUN_0041d920(0);
+      clear_current_selection(0);
     }
     else {
       FUN_0041da44();
@@ -389,7 +389,7 @@ void rescanDatabase(void)
   stat local_88;
   
   local_128 = set_status_message("rescanning file system",0);
-  FUN_00411998();
+  process_pending_events();
   iVar1 = statvfs((char *)*topdir,asStack_124);
   if (iVar1 < 0) {
     sprintf(acStack_510,"cannot statvfs %s, leaving display unchanged",*topdir);
@@ -456,7 +456,7 @@ void fileDeleted(int param_1,char *param_2)
       *(byte *)(param_1 + 0x75) = bVar2 & 0x7f;
       *(byte *)(param_1 + 0x74) = *(byte *)(param_1 + 0x74) & 0xfe;
       *(byte *)(param_1 + 0x75) = bVar2 & 0x3f;
-      iVar1 = FUN_00413580(param_1,param_2);
+      iVar1 = validate_directory_access(param_1,param_2);
       if (iVar1 == 0) {
         iVar1 = FUN_00413610(param_1,param_2);
         if (iVar1 != 0) {
@@ -845,9 +845,9 @@ void SG_getNormalArgs(undefined4 param_1,undefined4 param_2,int param_3,int *par
   int iVar4;
   
   uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,2);
-  iVar2 = FUN_00432370(param_1,param_2,uVar1,&temp_data_buffer,2);
+  iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,2);
   if (-1 < iVar2) {
-    uVar3 = FUN_00431354(param_1,param_2);
+    uVar3 = eval_bytecode_instruction(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar3;
     iVar4 = *param_4;
@@ -873,7 +873,7 @@ void fileChanged(int param_1,char *param_2)
   stat sStack_90;
   char *pcStack_8;
   
-  iVar1 = FUN_00413580();
+  iVar1 = validate_directory_access();
   if (iVar1 != 0) {
     pcStack_8 = (char *)build_path_string(0,param_1);
     strcat(pcStack_8,param_2);
@@ -1057,7 +1057,7 @@ void readPosition(undefined2 *param_1,FILE *param_2)
       *(undefined4 *)(param_1 + 0x12) = 0;
     }
     else {
-      uVar2 = FUN_00413580(*(int *)(param_1 + 10),auStack_430);
+      uVar2 = validate_directory_access(*(int *)(param_1 + 10),auStack_430);
       *(undefined4 *)(param_1 + 0x12) = uVar2;
     }
   }
@@ -1081,7 +1081,7 @@ void scanDatabase(int param_1)
   iVar2 = FUN_004138e8(param_1,acStack_400,acStack_400 + sVar1,1);
   if (iVar2 != 0) {
     uVar3 = set_status_message("relaying out file system...please wait",0);
-    FUN_00411998();
+    process_pending_events();
     FUN_004144ec(param_1);
     deleteMessage(uVar3);
     update_display();
@@ -1136,7 +1136,7 @@ void SG_getDefaultDepth(int param_1,undefined4 param_2,int *param_3,int param_4)
   int iVar2;
   
   if (((param_1 != 0) &&
-      (((iVar1 = FUN_004325fc(), param_3 != (int *)0x0 &&
+      (((iVar1 = get_bytecode_context(), param_3 != (int *)0x0 &&
         (iVar2 = *(int *)(iVar1 + 0x24), *param_3 != *(int *)(iVar1 + iVar2 * 4 + 0x3c))) ||
        ((param_4 != 0 && (iVar2 = *(int *)(iVar1 + 0x24), param_4 != iVar2)))))) &&
      ((((param_3 != (int *)0x0 || (*(int *)(iVar1 + iVar2 * 4 + 0x3c) != 3)) &&
@@ -1207,12 +1207,12 @@ void SG_getUnderlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *p
   int iVar4;
   
   uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,1);
-  iVar2 = FUN_00432370(param_1,param_2,uVar1,&temp_data_buffer,1);
+  iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,1);
   if (iVar2 < 0) {
     FUN_00431b34(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar3 = FUN_00431354(param_1,param_2);
+    uVar3 = eval_bytecode_instruction(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar3;
     iVar4 = *param_4;
@@ -1830,7 +1830,7 @@ void SG_getMatchingVisual(int param_1,int param_2,int param_3,int *param_4,int p
     if (param_2 == 0) {
       param_2 = *(int *)(param_1 + 0x84);
     }
-    iVar1 = FUN_004325fc(param_1,param_2);
+    iVar1 = get_bytecode_context(param_1,param_2);
     iVar2 = 0;
     if (0 < *(int *)(iVar1 + 0x18)) {
       do {
@@ -1980,7 +1980,7 @@ void SG_getMaxDepth(int param_1,int param_2,int *param_3,int param_4)
     if (param_2 == 0) {
       param_2 = *(int *)(param_1 + 0x84);
     }
-    iVar1 = FUN_004325fc(param_1,param_2);
+    iVar1 = get_bytecode_context(param_1,param_2);
     iVar4 = 0;
     if (param_4 == 0) {
       param_4 = *(int *)(iVar1 + 0x24);
@@ -2325,7 +2325,7 @@ void checkValidSelections(void)
 {
   if ((*(int *)(curcontext + 0x48) != 0) && (-1 < *(int *)(*(int *)(curcontext + 0x48) + 0x28) << 5)
      ) {
-    FUN_0041d920();
+    clear_current_selection();
   }
   if ((*(int *)(curcontext + 0x44) != 0) && (-1 < *(int *)(*(int *)(curcontext + 0x44) + 0x74) << 3)
      ) {
@@ -2339,7 +2339,7 @@ void checkValidSelections(void)
     gl_swap_buffers(1);
     if ((*(int *)(curcontext + 0x48) != 0) &&
        (-1 < *(int *)(*(int *)(curcontext + 0x48) + 0x28) << 5)) {
-      FUN_0041d920();
+      clear_current_selection();
     }
     if ((*(int *)(curcontext + 0x44) != 0) &&
        (-1 < *(int *)(*(int *)(curcontext + 0x44) + 0x74) << 3)) {

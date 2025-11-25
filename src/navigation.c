@@ -60,12 +60,12 @@ void zoomPosition(undefined4 param_1)
         FUN_0041d54c(0);
       }
       else {
-        FUN_0041d69c();
+        update_marked_item();
       }
     }
     if (iStack_1c != *(int *)(curcontext + 0x48)) {
       if (iStack_1c == 0) {
-        FUN_0041d920(0);
+        clear_current_selection(0);
       }
       else {
         FUN_0041da44();
@@ -381,7 +381,7 @@ void zoomto(double param_1,double param_2)
     }
     *(int *)(curcontext + 0x3c) = in_stack_00000020;
     if (in_stack_00000020 != 0) {
-      FUN_0041d69c();
+      update_marked_item();
     }
     *(float *)curcontext = (float)param_1;
     *(float *)(curcontext + 4) = (float)param_2;

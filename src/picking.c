@@ -68,7 +68,7 @@ void unselect_directory(void)
     curcontext[0xc50] = 0;
     FUN_0041d418();
     XtSetSensitive(menu_directory_cascade,0);
-    FUN_0041d920();
+    clear_current_selection();
     *(byte *)(*(int *)(curcontext + 0x44) + 0x74) =
          *(byte *)(*(int *)(curcontext + 0x44) + 0x74) & 0xdf;
     *(undefined4 *)(curcontext + 0x44) = 0;
@@ -1434,7 +1434,7 @@ void select_directory(int param_1)
   uint uStack_24;
   
   if (param_1 == *(int *)(curcontext + 0x44)) {
-    FUN_0041d920();
+    clear_current_selection();
     if (mark_menu_widget != '\0') {
       FUN_0041c720();
     }
@@ -1444,7 +1444,7 @@ void select_directory(int param_1)
       FUN_0041d418();
       *(byte *)(*(int *)(curcontext + 0x44) + 0x74) =
            *(byte *)(*(int *)(curcontext + 0x44) + 0x74) & 0xdf;
-      FUN_0041d920();
+      clear_current_selection();
       curcontext[0xc50] = 0;
     }
     XtSetSensitive(menu_directory_cascade,1);

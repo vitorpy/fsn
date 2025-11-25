@@ -1205,12 +1205,12 @@ void SG_getOverlay2Args(undefined4 param_1,undefined4 param_2,int param_3,int *p
   undefined4 uVar2;
   int iVar3;
   
-  iVar1 = FUN_00432370(param_1,param_2,2,&temp_data_buffer,3);
+  iVar1 = read_bytecode_value(param_1,param_2,2,&temp_data_buffer,3);
   if (iVar1 < 0) {
-    FUN_00432094(param_1,param_2,param_3,param_4);
+    setup_menu_resources(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar2 = FUN_00431354(param_1,param_2);
+    uVar2 = eval_bytecode_instruction(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar2;
     iVar3 = *param_4;
@@ -1716,7 +1716,7 @@ void SG_getDefaultColormap(int param_1,int param_2,int param_3)
     }
     param_2 = param_2 * 0x50;
     if (param_3 != *(int *)(*(int *)(param_1 + 0x8c) + param_2 + 0x28)) {
-      iVar1 = FUN_004325fc(param_1);
+      iVar1 = get_bytecode_context(param_1);
       iVar4 = 0;
       if (0 < *(int *)(iVar1 + 0x18)) {
         piVar3 = *(int **)(iVar1 + 0x14);
@@ -1774,14 +1774,14 @@ void makeColorBoxes(void)
     FUN_00428288(toplevel);
     current_color_index = '\x01';
   }
-  FUN_004286f8(DAT_100175f4,boxDir,7);
-  FUN_004286f8(DAT_1001761c,boxRed,0);
-  FUN_004286f8(DAT_10017620,boxOrange,1);
-  FUN_004286f8(DAT_10017624,boxYellow,2);
-  FUN_004286f8(DAT_10017628,boxGreen,3);
-  FUN_004286f8(DAT_1001762c,boxCyan,4);
-  FUN_004286f8(DAT_10017630,boxBlue,5);
-  FUN_004286f8(DAT_10017634,boxMagenta,6);
+  create_color_legend_box(DAT_100175f4,boxDir,7);
+  create_color_legend_box(DAT_1001761c,boxRed,0);
+  create_color_legend_box(DAT_10017620,boxOrange,1);
+  create_color_legend_box(DAT_10017624,boxYellow,2);
+  create_color_legend_box(DAT_10017628,boxGreen,3);
+  create_color_legend_box(DAT_1001762c,boxCyan,4);
+  create_color_legend_box(DAT_10017630,boxBlue,5);
+  create_color_legend_box(DAT_10017634,boxMagenta,6);
   FUN_00429040();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -2803,12 +2803,12 @@ void SG_getOverlay4Args(undefined4 param_1,undefined4 param_2,int param_3,int *p
   undefined4 uVar2;
   int iVar3;
   
-  iVar1 = FUN_00432370(param_1,param_2,4,&temp_data_buffer,3);
+  iVar1 = read_bytecode_value(param_1,param_2,4,&temp_data_buffer,3);
   if (iVar1 < 0) {
     FUN_00431dfc(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar2 = FUN_00431354(param_1,param_2);
+    uVar2 = eval_bytecode_instruction(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar2;
     iVar3 = *param_4;
@@ -5114,12 +5114,12 @@ void SG_getOverlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *pa
   int iVar4;
   
   uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,3);
-  iVar2 = FUN_00432370(param_1,param_2,uVar1,&temp_data_buffer,3);
+  iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,3);
   if (iVar2 < 0) {
-    FUN_00432094(param_1,param_2,param_3,param_4);
+    setup_menu_resources(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar3 = FUN_00431354(param_1,param_2);
+    uVar3 = eval_bytecode_instruction(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar3;
     iVar4 = *param_4;
