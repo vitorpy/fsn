@@ -859,8 +859,8 @@ undefined DAT_0fb52740;
 undefined DAT_1001db30;
 undefined SUB_0fb6b330;
 pointer __((offset(0x10017720))) curcontext;
-undefined4 DAT_100174a8;
-undefined4 DAT_100174ac;
+undefined4 view_init_x;
+undefined4 view_init_y;
 undefined4 DAT_100174b0;
 undefined4 DAT_100174b8;
 undefined4 DAT_100174e0;
@@ -919,8 +919,8 @@ int DAT_10000144;
 undefined1 DAT_10016688;
 float DAT_10017598;
 float DAT_10017594;
-float DAT_100174a8;
-float DAT_100174ac;
+float view_init_x;
+float view_init_y;
 float DAT_100174bc;
 float DAT_100174c0;
 undefined4 DAT_10016644;
@@ -940,7 +940,7 @@ short DAT_1000014c;
 undefined1 controlsShowing;
 undefined4 labelColors;
 undefined4 monitorLabelColor;
-int DAT_10016654;
+int legend_widget;
 undefined DAT_100176e4;
 pointer legendHelp;
 undefined4 DAT_10016658;
@@ -1387,17 +1387,17 @@ pointer PTR_s_groundColor_1000935c;
 undefined *PTR_PTR_100094ec;
 undefined DAT_100094f0;
 undefined *PTR_s_mouseSpeed_10008b5c;
-int DAT_10016e4c;
+int file_selection_dialog;
 undefined FUN_0042d28c;
 undefined FUN_0042d314;
 undefined DAT_10016e50;
 undefined DAT_10016e88;
 float DAT_100174b0;
 int DAT_10009528;
-int DAT_10009524;
-int DAT_10009520;
+int selection_count;
+int selection_buffer;
 undefined4 DAT_10016ec4;
-undefined4 DAT_10016ec0;
+undefined4 mark_selector_dialog;
 undefined DAT_10013c40;
 pointer markHelp;
 undefined FUN_0042f4d8;
@@ -1414,7 +1414,7 @@ undefined DAT_10009648;
 undefined DAT_1000964c;
 undefined DAT_0fb52720;
 string s_/bin/sh_10009640;
-uint DAT_10016f00;
+uint pattern_match_enabled;
 undefined4 DAT_10016f08;
 char DAT_10016f04;
 int DAT_10016f0c;
@@ -49412,8 +49412,8 @@ void _mcount(void)
 void FUN_0040a704(void)
 
 {
-  *(undefined4 *)curcontext = DAT_100174a8;
-  *(undefined4 *)(curcontext + 4) = DAT_100174ac;
+  *(undefined4 *)curcontext = view_init_x;
+  *(undefined4 *)(curcontext + 4) = view_init_y;
   *(undefined4 *)(curcontext + 8) = DAT_100174b0;
   *(undefined2 *)(curcontext + 0xc) = 0;
   *(short *)(curcontext + 0xe) = (short)DAT_100174b8;
@@ -50346,16 +50346,16 @@ LAB_0040c5ac:
     uVar1 = XtMalloc(0x230);
     *(undefined4 *)(curcontextwindows + 0x34) = uVar1;
     iVar2 = 0x70;
-    *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 8) = DAT_100174a8;
-    *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 0xc) = DAT_100174ac;
+    *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 8) = view_init_x;
+    *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 0xc) = view_init_y;
     *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 0x10) = DAT_100174b0;
     **(undefined2 **)(curcontextwindows + 0x34) = 0;
     *(short *)(*(int *)(curcontextwindows + 0x34) + 2) = (short)DAT_100174b8;
     *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 0x14) = 0;
     *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 0x24) = 0;
     *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 4) = 0;
-    *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 0x40) = DAT_100174a8;
-    *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 0x44) = DAT_100174ac;
+    *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 0x40) = view_init_x;
+    *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 0x44) = view_init_y;
     *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 0x48) = DAT_100174b0;
     *(undefined2 *)(*(int *)(curcontextwindows + 0x34) + 0x38) = 0;
     *(short *)(*(int *)(curcontextwindows + 0x34) + 0x3a) = (short)DAT_100174b8;
@@ -50363,32 +50363,32 @@ LAB_0040c5ac:
     *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 0x5c) = 0;
     *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + 0x3c) = 0;
     do {
-      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 8) = DAT_100174a8;
-      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0xc) = DAT_100174ac;
+      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 8) = view_init_x;
+      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0xc) = view_init_y;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x10) = DAT_100174b0;
       *(undefined2 *)(*(int *)(curcontextwindows + 0x34) + iVar2) = 0;
       *(short *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 2) = (short)DAT_100174b8;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x14) = 0;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x24) = 0;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 4) = 0;
-      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x40) = DAT_100174a8;
-      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x44) = DAT_100174ac;
+      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x40) = view_init_x;
+      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x44) = view_init_y;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x48) = DAT_100174b0;
       *(undefined2 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x38) = 0;
       *(short *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x3a) = (short)DAT_100174b8;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x4c) = 0;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x5c) = 0;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x3c) = 0;
-      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x78) = DAT_100174a8;
-      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x7c) = DAT_100174ac;
+      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x78) = view_init_x;
+      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x7c) = view_init_y;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x80) = DAT_100174b0;
       *(undefined2 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x70) = 0;
       *(short *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x72) = (short)DAT_100174b8;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x84) = 0;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x94) = 0;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0x74) = 0;
-      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0xb0) = DAT_100174a8;
-      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0xb4) = DAT_100174ac;
+      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0xb0) = view_init_x;
+      *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0xb4) = view_init_y;
       *(undefined4 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0xb8) = DAT_100174b0;
       *(undefined2 *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0xa8) = 0;
       *(short *)(*(int *)(curcontextwindows + 0x34) + iVar2 + 0xaa) = (short)DAT_100174b8;
@@ -50575,7 +50575,7 @@ void reset_eye(void)
 
 {
   FUN_0040ff64();
-  FUN_00410264((double)DAT_100174a8,(double)DAT_100174ac);
+  FUN_00410264((double)view_init_x,(double)view_init_y);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -50617,7 +50617,7 @@ void FUN_0040d2cc(void)
 {
   FUN_0040ff64();
   if (*(int *)(curcontext + 0x3c) == 0) {
-    FUN_00410264((double)DAT_100174a8,(double)DAT_100174ac);
+    FUN_00410264((double)view_init_x,(double)view_init_y);
   }
   else {
     FUN_00410264((double)DAT_100174bc,(double)DAT_100174c0);
@@ -50801,7 +50801,7 @@ void FUN_0040da94(void)
   int local_2c;
   
   legendShowing = 1;
-  if (DAT_10016654 == 0) {
+  if (legend_widget == 0) {
     local_48 = 0xe3f40f2;
     local_44 = panel_vsep_widget;
     local_50 = 0xe3f40cb;
@@ -50810,9 +50810,9 @@ void FUN_0040da94(void)
     local_4c = 3;
     local_3c = 1;
     local_34 = 1;
-    DAT_10016654 = XmCreateRowColumn(panel_widget,"legend",&local_50,4);
-    install_help_callback(DAT_10016654,&legendHelp);
-    uVar1 = XmCreateLabel(DAT_10016654,"colorslabel",&local_50,0);
+    legend_widget = XmCreateRowColumn(panel_widget,"legend",&local_50,4);
+    install_help_callback(legend_widget,&legendHelp);
+    uVar1 = XmCreateLabel(legend_widget,"colorslabel",&local_50,0);
     XtManageChild(uVar1);
     iVar2 = 0;
     puVar3 = &labelColors;
@@ -50823,22 +50823,22 @@ void FUN_0040da94(void)
       local_44 = *puVar3;
       local_50 = 0xf6615f6;
       local_48 = 0xf661554;
-      uVar1 = XmCreateLabel(DAT_10016654,acStack_68,&local_50,2);
+      uVar1 = XmCreateLabel(legend_widget,acStack_68,&local_50,2);
       iVar2 = iVar2 + 1;
       puVar3 = puVar3 + 4;
       *puVar4 = uVar1;
       puVar4 = puVar4 + 1;
     } while (iVar2 != 7);
     XtManageChildren(&legendLabel,7);
-    uVar1 = XmCreateSeparator(DAT_10016654,"monitorSep",&local_50,0);
+    uVar1 = XmCreateSeparator(legend_widget,"monitorSep",&local_50,0);
     XtManageChild(uVar1);
     local_4c = _DAT_100176e4;
     local_44 = monitorLabelColor;
     local_50 = 0xf6615f6;
     local_48 = 0xf661554;
-    monitorLabelWidget = XmCreateLabel(DAT_10016654,"monitorLabel",&local_50,2);
+    monitorLabelWidget = XmCreateLabel(legend_widget,"monitorLabel",&local_50,2);
     XtManageChild(monitorLabelWidget);
-    local_2c = DAT_10016654;
+    local_2c = legend_widget;
     local_50 = 0xe3f40cb;
     local_44 = panel_vsep_widget;
     local_48 = 0xe3f40f2;
@@ -50850,7 +50850,7 @@ void FUN_0040da94(void)
     local_34 = 3;
     DAT_10016658 = XmCreateSeparator(panel_widget,"legendSep",&local_50,5);
   }
-  XtManageChild(DAT_10016654);
+  XtManageChild(legend_widget);
   XtManageChild(DAT_10016658);
   local_44 = DAT_10016658;
   local_50 = 0xe3f3701;
@@ -50872,12 +50872,12 @@ void FUN_0040de38(void)
   undefined4 local_4c;
   
   legendShowing = 0;
-  if (DAT_10016654 != 0) {
+  if (legend_widget != 0) {
     local_50 = 0xe3f3701;
     local_4c = 1;
     XtSetValues(pane_form_widget,&local_50,1);
     XtUnmanageChild(DAT_10016658);
-    XtUnmanageChild(DAT_10016654);
+    XtUnmanageChild(legend_widget);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -51826,7 +51826,7 @@ void do_warp(int param_1)
   FUN_0040ff64();
   if (param_1 == 0) {
     if (*(int *)(curcontext + 0x3c) == 0) {
-      FUN_00410264((double)DAT_100174a8,(double)DAT_100174ac,0,&local_4);
+      FUN_00410264((double)view_init_x,(double)view_init_y,0,&local_4);
     }
     else {
       FUN_00426e34(*(int *)(curcontext + 0x3c),&local_4,&local_8,local_c);
@@ -68092,7 +68092,7 @@ void FUN_0042d338(undefined4 param_1)
   char *local_30;
   undefined4 local_28 [10];
   
-  if (DAT_10016e4c == 0) {
+  if (file_selection_dialog == 0) {
     local_30 = (char *)XmTextFieldGetString(DAT_10016e48);
     iVar4 = 0;
     if (local_30 != (char *)0x0) {
@@ -68113,28 +68113,28 @@ void FUN_0042d338(undefined4 param_1)
     }
     local_28[iVar4 * 2] = 0xe3f36bf;
     local_28[iVar4 * 2 + 1] = 1;
-    DAT_10016e4c = XmCreateFileSelectionDialog(param_1,"preferenceFileSB",local_28,iVar4 + 1);
+    file_selection_dialog = XmCreateFileSelectionDialog(param_1,"preferenceFileSB",local_28,iVar4 + 1);
     if (local_30 != (char *)0x0) {
       XmStringFree(local_34);
       uVar1 = XmStringCreateSimple(local_30);
       local_28[0] = 0xe3f3b4f;
       local_28[1] = uVar1;
-      XtSetValues(DAT_10016e4c,local_28,1);
+      XtSetValues(file_selection_dialog,local_28,1);
       XmStringFree(uVar1);
     }
-    XtAddCallback(DAT_10016e4c,0xe3f44b6,FUN_0042d28c);
-    XtAddCallback(DAT_10016e4c,0xf6615c9,FUN_0042d314);
-    uVar1 = XmFileSelectionBoxGetChild(DAT_10016e4c,7);
+    XtAddCallback(file_selection_dialog,0xe3f44b6,FUN_0042d28c);
+    XtAddCallback(file_selection_dialog,0xf6615c9,FUN_0042d314);
+    uVar1 = XmFileSelectionBoxGetChild(file_selection_dialog,7);
     XtUnmanageChild(uVar1);
-    XtManageChild(DAT_10016e4c);
+    XtManageChild(file_selection_dialog);
   }
   else {
-    XtManageChild(DAT_10016e4c);
-    uVar1 = XtDisplay(DAT_10016e4c);
-    uVar2 = XtWindow(DAT_10016e4c);
+    XtManageChild(file_selection_dialog);
+    uVar1 = XtDisplay(file_selection_dialog);
+    uVar2 = XtWindow(file_selection_dialog);
     XMapWindow(uVar1,uVar2);
-    uVar1 = XtDisplay(DAT_10016e4c);
-    uVar2 = XtWindow(DAT_10016e4c);
+    uVar1 = XtDisplay(file_selection_dialog);
+    uVar2 = XtWindow(file_selection_dialog);
     XRaiseWindow(uVar1,uVar2);
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -68518,8 +68518,8 @@ void getPosition(undefined2 *param_1,undefined2 *param_2,undefined2 *param_3,flo
     *param_7 = 0;
     *param_8 = 0;
     *param_9 = 0;
-    *param_4 = DAT_100174a8;
-    *param_5 = DAT_100174ac;
+    *param_4 = view_init_x;
+    *param_5 = view_init_y;
     *param_6 = DAT_100174b0;
     *param_2 = 0;
     *param_3 = (short)DAT_100174b8;
@@ -69251,17 +69251,17 @@ void addMark(char *param_1,undefined4 *param_2)
   undefined4 *puVar6;
   undefined4 *puVar7;
   
-  if (DAT_10009524 == DAT_10009528) {
+  if (selection_count == DAT_10009528) {
     if (DAT_10009528 == 0) {
       DAT_10009528 = 8;
-      DAT_10009520 = XtMalloc(0x200);
+      selection_buffer = XtMalloc(0x200);
     }
     else {
       DAT_10009528 = DAT_10009528 + 8;
     }
-    DAT_10009520 = XtRealloc(DAT_10009520,DAT_10009528 << 6);
+    selection_buffer = XtRealloc(selection_buffer,DAT_10009528 << 6);
   }
-  puVar1 = (undefined4 *)(DAT_10009520 + DAT_10009524 * 0x40);
+  puVar1 = (undefined4 *)(selection_buffer + selection_count * 0x40);
   puVar7 = param_2;
   do {
     puVar6 = puVar7;
@@ -69275,20 +69275,20 @@ void addMark(char *param_1,undefined4 *param_2)
   puVar5[3] = *puVar7;
   puVar5[4] = puVar6[4];
   if (param_1 == (char *)0x0) {
-    *(undefined4 *)(DAT_10009520 + DAT_10009524 * 0x40 + 0x38) = 0;
+    *(undefined4 *)(selection_buffer + selection_count * 0x40 + 0x38) = 0;
   }
   else {
     sVar2 = strlen(param_1);
     pcVar3 = (char *)XtMalloc(sVar2 + 1);
     pcVar3 = strcpy(pcVar3,param_1);
-    *(char **)(DAT_10009520 + DAT_10009524 * 0x40 + 0x38) = pcVar3;
+    *(char **)(selection_buffer + selection_count * 0x40 + 0x38) = pcVar3;
   }
   uVar4 = XmStringCreateSimple(param_1);
-  *(undefined4 *)(DAT_10009520 + DAT_10009524 * 0x40 + 0x3c) = uVar4;
-  XmListAddItem(DAT_10016ec4,*(undefined4 *)(DAT_10009520 + DAT_10009524 * 0x40 + 0x3c),0);
-  DAT_10009524 = DAT_10009524 + 1;
-  if (DAT_10009524 == 1) {
-    XtSetSensitive(DAT_10016ec0,1);
+  *(undefined4 *)(selection_buffer + selection_count * 0x40 + 0x3c) = uVar4;
+  XmListAddItem(DAT_10016ec4,*(undefined4 *)(selection_buffer + selection_count * 0x40 + 0x3c),0);
+  selection_count = selection_count + 1;
+  if (selection_count == 1) {
+    XtSetSensitive(mark_selector_dialog,1);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -69386,13 +69386,13 @@ void FUN_0042f124(int param_1)
   undefined4 *puVar6;
   
   XmListDeletePos(DAT_10016ec4,param_1 + 1);
-  XtFree(*(undefined4 *)(DAT_10009520 + param_1 * 0x40 + 0x38));
-  XmStringFree(*(undefined4 *)(DAT_10009520 + param_1 * 0x40 + 0x3c));
-  DAT_10009524 = DAT_10009524 + -1;
-  if (param_1 < DAT_10009524) {
+  XtFree(*(undefined4 *)(selection_buffer + param_1 * 0x40 + 0x38));
+  XmStringFree(*(undefined4 *)(selection_buffer + param_1 * 0x40 + 0x3c));
+  selection_count = selection_count + -1;
+  if (param_1 < selection_count) {
     iVar2 = param_1 << 6;
     do {
-      puVar4 = (undefined4 *)(DAT_10009520 + iVar2);
+      puVar4 = (undefined4 *)(selection_buffer + iVar2);
       puVar1 = puVar4;
       puVar5 = puVar4;
       do {
@@ -69407,10 +69407,10 @@ void FUN_0042f124(int param_1)
       param_1 = param_1 + 1;
       *puVar6 = puVar3[0x13];
       iVar2 = iVar2 + 0x40;
-    } while (param_1 < DAT_10009524);
+    } while (param_1 < selection_count);
   }
-  if (DAT_10009524 == 0) {
-    XtSetSensitive(DAT_10016ec0,0);
+  if (selection_count == 0) {
+    XtSetSensitive(mark_selector_dialog,0);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -69429,20 +69429,20 @@ void createMarkControls(undefined4 param_1)
   
   uStack_54 = 0xf6617e7;
   uStack_50 = 0;
-  DAT_10016ec0 = XmCreateSelectionBox(param_1,"markSelector",&uStack_54,1);
-  uVar1 = XmSelectionBoxGetChild(DAT_10016ec0,7);
+  mark_selector_dialog = XmCreateSelectionBox(param_1,"markSelector",&uStack_54,1);
+  uVar1 = XmSelectionBoxGetChild(mark_selector_dialog,7);
   XtUnmanageChild(uVar1);
-  uVar1 = XmSelectionBoxGetChild(DAT_10016ec0,0xd);
+  uVar1 = XmSelectionBoxGetChild(mark_selector_dialog,0xd);
   XtUnmanageChild(uVar1);
-  uVar1 = XmSelectionBoxGetChild(DAT_10016ec0,0xb);
+  uVar1 = XmSelectionBoxGetChild(mark_selector_dialog,0xb);
   XtUnmanageChild(uVar1);
-  uVar1 = XmSelectionBoxGetChild(DAT_10016ec0,0xe);
+  uVar1 = XmSelectionBoxGetChild(mark_selector_dialog,0xe);
   XtUnmanageChild(uVar1);
-  DAT_10016ec4 = XmSelectionBoxGetChild(DAT_10016ec0,8);
-  XtAddCallback(DAT_10016ec0,0xe3f44b6,FUN_0042f4d8,0);
-  XtAddCallback(DAT_10016ec0,0xe3f380d,FUN_0042f5d0,0);
-  XtManageChild(DAT_10016ec0);
-  install_help_callback(DAT_10016ec0,&markHelp);
+  DAT_10016ec4 = XmSelectionBoxGetChild(mark_selector_dialog,8);
+  XtAddCallback(mark_selector_dialog,0xe3f44b6,FUN_0042f4d8,0);
+  XtAddCallback(mark_selector_dialog,0xe3f380d,FUN_0042f5d0,0);
+  XtManageChild(mark_selector_dialog);
+  install_help_callback(mark_selector_dialog,&markHelp);
   uVar1 = XmCreatePushButton(param_1,&DAT_10013c40,&uStack_54,0);
   XtAddCallback(uVar1,0xe3f35b3,FUN_0042f73c,0);
   XtManageChild(uVar1);
@@ -69526,9 +69526,9 @@ void FUN_0042f4d8(void)
   if (iVar1 != 0) {
     if (0 < local_8) {
       FUN_0040ff64();
-      iVar1 = FUN_0042e670((*local_4 + -1) * 0x40 + DAT_10009520);
+      iVar1 = FUN_0042e670((*local_4 + -1) * 0x40 + selection_buffer);
       if (iVar1 == 0) {
-        FUN_00411094("can\'t go to",*(undefined4 *)(DAT_10009520 + *local_4 * 0x40 + -8));
+        FUN_00411094("can\'t go to",*(undefined4 *)(selection_buffer + *local_4 * 0x40 + -8));
       }
     }
     XtFree(local_4);
@@ -69638,7 +69638,7 @@ void dumpMarks(FILE *param_1)
   short asStack_8 [4];
   
   iVar3 = 0;
-  if (0 < DAT_10009524) {
+  if (0 < selection_count) {
     iVar2 = 0;
     do {
       if (_DAT_0fb51f00 == 0) {
@@ -69655,14 +69655,14 @@ void dumpMarks(FILE *param_1)
       else {
         __semputc(7,param_1);
       }
-      sVar1 = strlen(*(char **)(DAT_10009520 + iVar2 + 0x38));
+      sVar1 = strlen(*(char **)(selection_buffer + iVar2 + 0x38));
       asStack_8[0] = (short)sVar1;
       fwrite(asStack_8,2,1,param_1);
-      fwrite(*(void **)(DAT_10009520 + iVar2 + 0x38),1,(int)asStack_8[0],param_1);
-      FUN_0042e9b4(iVar3 * 0x40 + DAT_10009520,param_1);
+      fwrite(*(void **)(selection_buffer + iVar2 + 0x38),1,(int)asStack_8[0],param_1);
+      FUN_0042e9b4(iVar3 * 0x40 + selection_buffer,param_1);
       iVar3 = iVar3 + 1;
       iVar2 = iVar2 + 0x40;
-    } while (iVar3 < DAT_10009524);
+    } while (iVar3 < selection_count);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -69979,7 +69979,7 @@ void FUN_0042ffd8(undefined4 *param_1)
   
   puVar6 = (undefined4 *)0x0;
   if ((int)(param_1[0x1d] << 3) < 0) {
-    if ((DAT_10016f00 == 1) && (iVar1 = gmatch(*param_1,DAT_10016f08), iVar1 != 0)) {
+    if ((pattern_match_enabled == 1) && (iVar1 = gmatch(*param_1,DAT_10016f08), iVar1 != 0)) {
       *(byte *)((int)param_1 + 0x75) = *(byte *)((int)param_1 + 0x75) | 1;
       *(byte *)((int)param_1 + 0x76) = *(byte *)((int)param_1 + 0x76) | 0x80;
       DAT_10016edc = DAT_10016edc + 1;
@@ -70005,16 +70005,16 @@ void FUN_0042ffd8(undefined4 *param_1)
       do {
         puVar3 = *(undefined4 **)(param_1[4] + iVar4);
         *(byte *)(puVar3 + 10) = *(byte *)(puVar3 + 10) | 8;
-        if (((DAT_10016f00 & 1) != 0) && (iVar1 = gmatch(*puVar3,DAT_10016f08), iVar1 == 0)) {
+        if (((pattern_match_enabled & 1) != 0) && (iVar1 = gmatch(*puVar3,DAT_10016f08), iVar1 == 0)) {
           *(byte *)(puVar3 + 10) = *(byte *)(puVar3 + 10) & 0xf7;
         }
-        uVar2 = DAT_10016f00 & 4;
-        if (((DAT_10016f00 & 2) != 0) &&
+        uVar2 = pattern_match_enabled & 4;
+        if (((pattern_match_enabled & 2) != 0) &&
            (((DAT_10016f04 != '\0' && (DAT_10016f0c <= (int)puVar3[3])) ||
-            ((uVar2 = DAT_10016f00 & 4, DAT_10016f04 == '\0' &&
-             (uVar2 = DAT_10016f00 & 4, (int)puVar3[3] <= DAT_10016f0c)))))) {
+            ((uVar2 = pattern_match_enabled & 4, DAT_10016f04 == '\0' &&
+             (uVar2 = pattern_match_enabled & 4, (int)puVar3[3] <= DAT_10016f0c)))))) {
           *(byte *)(puVar3 + 10) = *(byte *)(puVar3 + 10) & 0xf7;
-          uVar2 = DAT_10016f00 & 4;
+          uVar2 = pattern_match_enabled & 4;
         }
         if ((uVar2 != 0) &&
            (((iVar1 = FUN_00411e38(puVar3[4]), DAT_10016f05 != '\0' && (DAT_10016f10 <= iVar1)) ||
@@ -70110,16 +70110,16 @@ void FUN_00430448(void)
   
   FUN_00430358();
   DAT_10016edc = 0;
-  DAT_10016f00 = 0;
+  pattern_match_enabled = 0;
   DAT_10016f08 = (char *)XmTextFieldGetString(DAT_10016ee4);
   if ((DAT_10016f08 != (char *)0x0) && (*DAT_10016f08 != '\0')) {
-    DAT_10016f00 = DAT_10016f00 | 1;
+    pattern_match_enabled = pattern_match_enabled | 1;
   }
   pbVar1 = (byte *)XmTextFieldGetString(DAT_10016ee8);
   if (pbVar1 != (byte *)0x0) {
     iVar2 = isdigit((uint)*pbVar1);
     if (iVar2 != 0) {
-      DAT_10016f00 = DAT_10016f00 | 2;
+      pattern_match_enabled = pattern_match_enabled | 2;
       DAT_10016f0c = atoi((char *)pbVar1);
     }
   }
@@ -70130,14 +70130,14 @@ void FUN_00430448(void)
   if (pbVar1 != (byte *)0x0) {
     iVar2 = isdigit((uint)*pbVar1);
     if (iVar2 != 0) {
-      DAT_10016f00 = DAT_10016f00 | 4;
+      pattern_match_enabled = pattern_match_enabled | 4;
       DAT_10016f10 = atoi((char *)pbVar1);
     }
   }
   if (pbVar1 != (byte *)0x0) {
     XtFree(pbVar1);
   }
-  if (DAT_10016f00 != 0) {
+  if (pattern_match_enabled != 0) {
     FUN_0042ffd8(topdir);
   }
   if (DAT_10016f08 != (char *)0x0) {

@@ -24,3 +24,13 @@ DAT_10006e20 -> array_index : 21 uses - int, array indexing, incremented
 DAT_100175a4 -> view_offset_y : 29 uses - float, added to curcontext+4 (view position)
 DAT_10017500 -> view_offset_x : 32 uses - float/undefined4, used in calculations (view position)
 
+# BATCH 3: Medium-frequency globals (17-12 uses)
+DAT_10009520 -> selection_buffer : 17 uses - XtMalloc/XtRealloc'd buffer for selections, 0x40 byte records
+DAT_10009524 -> selection_count : 17 uses - current count of selected items, compared to capacity
+DAT_10016f00 -> pattern_match_enabled : 16 uses - uint flag for gmatch() pattern matching
+DAT_100174a8 -> view_init_x : 13 uses - float, stored in curcontext offset 0, view initialization
+DAT_100174ac -> view_init_y : 13 uses - float, stored in curcontext offset 4, view initialization
+DAT_10016e4c -> file_selection_dialog : 13 uses - XmCreateFileSelectionDialog for preferences
+DAT_10016ec0 -> mark_selector_dialog : 13 uses - XmCreateSelectionBox("markSelector"), enabled based on selection_count
+DAT_10016654 -> legend_widget : 12 uses - XmCreateRowColumn("legend") on panel_widget
+
