@@ -1667,9 +1667,9 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   XtAddCallback(uStack_10,0xe3f35b3,FUN_0041e0a8,0);
   XtManageChild(uStack_10);
   uStack_6c = 0;
-  DAT_10016b58 = XmCreateToggleButton(uStack_4,"menuPruneDirectory",&uStack_68,0);
-  XtAddCallback(DAT_10016b58,0xe3f4ca5,FUN_0041ef30,0);
-  XtManageChild(DAT_10016b58);
+  current_picked_item = XmCreateToggleButton(uStack_4,"menuPruneDirectory",&uStack_68,0);
+  XtAddCallback(current_picked_item,0xe3f4ca5,FUN_0041ef30,0);
+  XtManageChild(current_picked_item);
   uStack_6c = 2;
   uStack_68 = 0xe3f4a31;
   uStack_60 = 0xf6617e7;

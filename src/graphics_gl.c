@@ -736,10 +736,10 @@ void draw_directories(char param_1)
   if (*(int *)(curcontext + 0x3c) == 0) {
     if (topdir != 0) {
       if (param_1 == '\0') {
-        fVar1 = powf(DAT_10017594,
+        fVar1 = powf(zoom_base_factor,
                      (*(float *)(curcontext + 4) -
                      *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
-                     *(float *)(curcontext + 8)) / DAT_10017598);
+                     *(float *)(curcontext + 8)) / zoom_reference_height);
         fVar1 = (DAT_100175a0 * *(float *)(curcontext + 0x34)) / fVar1;
         if (DAT_10017494 == '\0') {
           cpack(DAT_100175d8);
@@ -1365,10 +1365,10 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
     rotate((int)*(short *)(curcontext + 0xe),0x78);
     rotate((int)*(short *)(curcontext + 0xc),0x7a);
     if (*(int *)(curcontext + 0x3c) == 0) {
-      fVar1 = powf(DAT_10017594,
+      fVar1 = powf(zoom_base_factor,
                    (*(float *)(curcontext + 4) -
                    *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
-                   *(float *)(curcontext + 8)) / DAT_10017598);
+                   *(float *)(curcontext + 8)) / zoom_reference_height);
       scale(fVar1);
     }
     translate(-*(float *)curcontext,-*(float *)(curcontext + 4));
@@ -3143,10 +3143,10 @@ void draw_visibility(void)
     scale((float)((double)((ulonglong)uVar7 << 0x20) / (double)*(float *)(curcontext + 0x34)));
     rotate((int)*(short *)(curcontext + 0xe),0x78);
     rotate((int)*(short *)(curcontext + 0xc),0x7a);
-    fVar6 = powf(DAT_10017594,
+    fVar6 = powf(zoom_base_factor,
                  (*(float *)(curcontext + 4) -
                  *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
-                 *(float *)(curcontext + 8)) / DAT_10017598);
+                 *(float *)(curcontext + 8)) / zoom_reference_height);
     scale(fVar6);
     translate(-*(float *)curcontext,-*(float *)(curcontext + 4));
     FUN_004259dc(topdir);
@@ -5555,7 +5555,7 @@ void movehoriz(undefined8 param_1,undefined4 param_2)
   undefined4 uVar2;
   
   uVar2 = (undefined4)((ulonglong)param_1 >> 0x20);
-  fVar1 = powf(DAT_10017594,*(float *)(curcontext + 4) / DAT_10017598);
+  fVar1 = powf(zoom_base_factor,*(float *)(curcontext + 4) / zoom_reference_height);
   *(float *)curcontext =
        (float)((double)*(float *)curcontext +
               ((double)*(float *)(curcontext + 0x14) *

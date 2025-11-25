@@ -750,13 +750,13 @@ void layout_db(undefined4 param_1,undefined4 param_2)
     DAT_100166b4 = (float)(in_f6 / (double)fVar1);
   }
   dVar2 = (double)*(float *)(topdir + 0x3c);
-  fVar1 = powf(DAT_10017594,
+  fVar1 = powf(zoom_base_factor,
                (float)((dVar2 / (double)((ulonglong)in_f6 & 0xffffffff00000000)) /
-                      (double)DAT_10017598));
+                      (double)zoom_reference_height));
   FUN_00412994(topdir,param_2,0,0,in_f11,
                SUB84((double)((ulonglong)dVar2 & 0xffffffff00000000) / (double)fVar1,0));
   FUN_00412bc0(topdir,param_2,0,0);
-  maxShrinkage = powf(DAT_10017594,maxy / DAT_10017598);
+  maxShrinkage = powf(zoom_base_factor,maxy / zoom_reference_height);
   maxx = (float)((double)maxx + (double)((ulonglong)in_register_00001010 << 0x20));
   minx = (float)((double)minx - (double)((ulonglong)in_register_00001010 << 0x20));
   dVar2 = (double)maxy;

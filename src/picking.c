@@ -396,10 +396,10 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
   scale((float)((double)((ulonglong)uVar11 << 0x20) / (double)*(float *)(curcontext + 0x34)));
   rotate((int)*(short *)(curcontext + 0xe),0x78);
   rotate((int)*(short *)(curcontext + 0xc),0x7a);
-  fVar10 = powf(DAT_10017594,
+  fVar10 = powf(zoom_base_factor,
                 (*(float *)(curcontext + 4) -
                 *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
-                *(float *)(curcontext + 8)) / DAT_10017598);
+                *(float *)(curcontext + 8)) / zoom_reference_height);
   scale(fVar10);
   translate(-*(float *)curcontext,-*(float *)(curcontext + 4));
   FUN_0042510c(1);
@@ -413,10 +413,10 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
   scale((float)((double)((ulonglong)uVar11 << 0x20) / (double)*(float *)(curcontext + 0x34)));
   rotate((int)*(short *)(curcontext + 0xe),0x78);
   rotate((int)*(short *)(curcontext + 0xc),0x7a);
-  fVar10 = powf(DAT_10017594,
+  fVar10 = powf(zoom_base_factor,
                 (*(float *)(curcontext + 4) -
                 *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
-                *(float *)(curcontext + 8)) / DAT_10017598);
+                *(float *)(curcontext + 8)) / zoom_reference_height);
   scale(fVar10,0x3f800000);
   translate(-*(float *)curcontext,-*(float *)(curcontext + 4));
   iVar5 = 0;
@@ -1458,7 +1458,7 @@ void select_directory(int param_1)
     XtSetValues(menu_monitor_directory,&uStack_28,1);
     uStack_28 = 0xe3f48f1;
     uStack_24 = (uint)(*(int *)(param_1 + 0x74) << 0xd) >> 0x1f;
-    XtSetValues(DAT_10016b58,&uStack_28,1);
+    XtSetValues(current_picked_item,&uStack_28,1);
     XtSetSensitive(menu_monitor_directory,-1 < *(int *)(param_1 + 0x74) << 0xd);
     FUN_0041c9e8();
     if (*(int *)(param_1 + 100) != 0) {
