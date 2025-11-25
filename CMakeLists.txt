@@ -60,7 +60,7 @@ endif()
 
 # Source files (to be populated as we modularize)
 set(FSN_SOURCES
-    # Phase 4: Module extraction in progress
+    # Phase 4: Modularization COMPLETE!
     src/datastructures.c
     src/picking.c
     src/utility.c
@@ -69,8 +69,7 @@ set(FSN_SOURCES
     src/graphics_gl.c
     src/icons.c
     src/navigation.c
-    # TODO: Add more modules as extracted
-    # src/main.c
+    src/main.c
 )
 
 # Phase 2: Test that headers compile correctly
