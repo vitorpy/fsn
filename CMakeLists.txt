@@ -67,7 +67,9 @@ set(FSN_SOURCES
     src/filesystem.c
     src/ui_motif.c
     src/graphics_gl.c
+    src/icons.c
     # TODO: Add more modules as extracted
+    # src/navigation.c
     # src/main.c
 )
 
