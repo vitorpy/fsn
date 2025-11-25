@@ -1146,7 +1146,7 @@ undefined postMenu;
 undefined menu_monitor_dir_callback;
 undefined4 menu_monitor_directory;
 undefined4 current_picked_item;
-undefined FUN_0041dff4;
+undefined toggle_state_callback;
 undefined4 menu_directory_cascade;
 undefined FUN_0041e0a8;
 undefined4 popup_menu_widget;
@@ -40287,7 +40287,7 @@ void check_directory_flags(undefined4 *param_1,char *param_2,char *param_3,char 
                   sVar7 = strlen(param_3);
                   puVar5[1] = sVar7;
                   puVar5[2] = local_90.st_nlink;
-                  uVar2 = FUN_00433b44(param_2);
+                  uVar2 = expand_path(param_2);
                   puVar5[8] = uVar2;
                   param_1[7] = (param_1[7] + local_90.st_blksize) - puVar5[3];
                   uVar2 = calculate_layout_position(param_1);
@@ -40314,7 +40314,7 @@ void check_directory_flags(undefined4 *param_1,char *param_2,char *param_3,char 
                   *(__nlink_t *)(iVar12 + 8) = local_90.st_nlink;
                   *(__blksize_t *)(iVar12 + 0xc) = local_90.st_blksize;
                   *(__time_t *)(iVar12 + 0x10) = local_90.st_mtim.tv_sec;
-                  uVar2 = FUN_00433b44(param_2);
+                  uVar2 = expand_path(param_2);
                   *(undefined4 *)(iVar12 + 0x20) = uVar2;
                   if (window_width < *(int *)(iVar12 + 0xc)) {
                     window_width = *(int *)(iVar12 + 0xc);
@@ -40978,7 +40978,7 @@ void scanDatabase(int param_1)
     deleteMessage(uVar3);
     update_display();
   }
-  FUN_0041dba0();
+  refresh_view();
   redraw_gl_scene();
   glx_swap_buffers_wrapper();
   refresh_after_change();
@@ -41706,7 +41706,7 @@ void fileChanged(int param_1,char *param_2)
         *(__nlink_t *)(iVar1 + 8) = sStack_90.st_nlink;
         *(__blksize_t *)(iVar1 + 0xc) = sStack_90.st_blksize;
         *(__time_t *)(iVar1 + 0x10) = sStack_90.st_mtim.tv_sec;
-        uVar3 = FUN_00433b44(pcStack_8);
+        uVar3 = expand_path(pcStack_8);
         *(undefined4 *)(iVar1 + 0x20) = uVar3;
         if (window_width < *(int *)(iVar1 + 0xc)) {
           window_width = *(int *)(iVar1 + 0xc);
@@ -41873,7 +41873,7 @@ void fileCreated(int param_1,char *param_2)
           sVar1 = strlen(param_2);
           puVar3[1] = sVar1;
           puVar3[2] = sStack_94.st_nlink;
-          uVar5 = FUN_00433b44(pcStack_c);
+          uVar5 = expand_path(pcStack_c);
           puVar3[8] = uVar5;
           *(int *)(param_1 + 0x1c) = (*(int *)(param_1 + 0x1c) + sStack_94.st_blksize) - puVar3[3];
           uVar5 = calculate_layout_position(param_1);
@@ -42144,7 +42144,7 @@ void pruneTree(int param_1)
 {
   *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) | 4;
   FUN_004186a0();
-  FUN_0041dba0();
+  refresh_view();
   update_display();
   redraw_gl_scene();
   glx_swap_buffers_wrapper();
@@ -43701,11 +43701,11 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   XtManageChild(menu_monitor_directory);
   uStack_6c = 0;
   uStack_10 = XmCreatePushButton(uStack_4,"menuMonitorTree",&uStack_68,0);
-  XtAddCallback(uStack_10,0xe3f35b3,FUN_0041dff4,1);
+  XtAddCallback(uStack_10,0xe3f35b3,toggle_state_callback,1);
   XtManageChild(uStack_10);
   uStack_6c = 0;
   uStack_10 = XmCreatePushButton(uStack_4,"menuStopMonitorTree",&uStack_68,0);
-  XtAddCallback(uStack_10,0xe3f35b3,FUN_0041dff4,0);
+  XtAddCallback(uStack_10,0xe3f35b3,toggle_state_callback,0);
   XtManageChild(uStack_10);
   uStack_6c = 0;
   uStack_10 = XmCreatePushButton(uStack_4,"menuRescanSubtree",&uStack_68,0);
@@ -44526,7 +44526,7 @@ void draw_mark_overlay(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041c928(char param_1)
+void set_draw_mode(char param_1)
 
 {
   char cVar1;
@@ -44564,7 +44564,7 @@ void setMoveAndCopyButtons(void)
   XtSetSensitive(menu_directory_cascade,*(int *)(curcontext + 0x44) != 0);
   XtSetSensitive(menu_file_cascade,*(int *)(curcontext + 0x48) != 0);
   XtSetSensitive(popup_menu_widget,*(int *)(curcontext + 0x48) != 0);
-  FUN_0041c928(1);
+  set_draw_mode(1);
   if ((altcontext[0xc51] != '\0') && (iVar1 = *(int *)(curcontext + 0x44), iVar1 != 0)) {
     iVar2 = 0;
     if (altcontext[0xc51] != '\0') {
@@ -44723,7 +44723,7 @@ void setMoveAndCopyButtons(void)
       XtSetSensitive(menu_link_file_2,iVar1 != 0);
       XtSetSensitive(menu_file_cascade,1);
       XtSetSensitive(popup_menu_widget,1);
-      FUN_0041c928(0);
+      set_draw_mode(0);
       halt_baddata();
     }
   }
@@ -45401,7 +45401,7 @@ void checkValidSelections(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041dba0(void)
+void refresh_view(void)
 
 {
   int iVar1;
@@ -45728,7 +45728,7 @@ void postMenu(undefined4 param_1,undefined4 param_2,int param_3)
   
   if (*(int *)(param_3 + 0x34) == 3) {
     uVar1 = XtWindow(popup_menu_widget);
-    FUN_00421dd0(uVar1);
+    setup_window_state(uVar1);
     XmMenuPosition(popup_menu_widget,param_3);
     XtManageChild(popup_menu_widget);
   }
@@ -46495,7 +46495,7 @@ void drawOverviewOverlayCursor(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042087c(void)
+void begin_rendering(void)
 
 {
   float *pfVar1;
@@ -46544,15 +46544,15 @@ void FUN_0042087c(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00420acc(void)
+void end_rendering(void)
 
 {
   if (altcontext[0xc51] != '\0') {
     gl_swap_buffers(1);
-    FUN_0042087c();
+    begin_rendering();
     gl_swap_buffers(1);
   }
-  FUN_0042087c();
+  begin_rendering();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -46568,7 +46568,7 @@ void drawOverviewOverlay(void)
     begin_overview_render();
     color(0);
     clear();
-    FUN_00420acc();
+    end_rendering();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -46872,7 +46872,7 @@ void highlightOverviewDir(int param_1)
     uVar1 = build_path_string(0,param_1);
     charstr(uVar1);
     popmatrix();
-    FUN_00420acc();
+    end_rendering();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -47051,7 +47051,7 @@ void newCmapWindow(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00421dd0(undefined4 param_1)
+void setup_window_state(undefined4 param_1)
 
 {
   undefined4 *puVar1;
@@ -47313,7 +47313,7 @@ void overlayMenuMappedCB(void)
   undefined4 uVar1;
   
   uVar1 = XtWindow();
-  FUN_00421dd0(uVar1);
+  setup_window_state(uVar1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -48100,7 +48100,7 @@ void draw_directory(ulonglong param_1,int param_2,char param_3)
       do {
         iVar3 = *(int *)(*(int *)(param_2 + 0x18) + iVar4);
         if (*(int *)(iVar3 + 0x74) << 3 < 0) {
-          FUN_0042425c(iVar3,param_3);
+          process_tree_node(iVar3,param_3);
           pushname((int)*(short *)(iVar3 + 0x5e));
           uVar2 = DAT_10017608;
           if ((-1 < *(int *)(iVar3 + 0x74) << 2) &&
@@ -48145,7 +48145,7 @@ void draw_directory(ulonglong param_1,int param_2,char param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042425c(ulonglong param_1,int param_2,char param_3)
+void process_tree_node(ulonglong param_1,int param_2,char param_3)
 
 {
   int iVar1;
@@ -48348,7 +48348,7 @@ void draw_directories(char param_1)
           shademodel(0);
         }
       }
-      FUN_0042425c(topdir,param_1);
+      process_tree_node(topdir,param_1);
     }
   }
   else {
@@ -48565,7 +48565,7 @@ void markAllVisible(int param_1)
   if (0 < *(int *)(param_1 + 0x14)) {
     iVar2 = 0;
     do {
-      FUN_00425bd8(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar2));
+      draw_directory_tree(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar2));
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 4;
     } while (iVar1 < *(int *)(param_1 + 0x14));
@@ -48578,7 +48578,7 @@ void markAllVisible(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00425bd8(int param_1)
+void draw_directory_tree(int param_1)
 
 {
   int iVar1;
@@ -48634,7 +48634,7 @@ void draw_visibility(void)
     FUN_004259dc(topdir);
     iVar1 = endselect(asStack_1000);
     if (iVar1 < 0) {
-      FUN_00425bd8(topdir);
+      draw_directory_tree(topdir);
     }
     iVar3 = 0;
     iVar5 = 0;
@@ -48792,7 +48792,7 @@ void draw_second_pick(undefined8 param_1,undefined8 param_2,int param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00425ee4(undefined8 param_1,undefined8 param_2,int param_3)
+void render_tree_level(undefined8 param_1,undefined8 param_2,int param_3)
 
 {
   int unaff_gp;
@@ -48868,7 +48868,7 @@ void traverse_directories(int param_1)
   
   if (*(int *)(param_1 + 0x74) << 3 < 0) {
     if ((*(int *)(param_1 + 0x74) << 2 < 0) || ((*(ushort *)(param_1 + 0x74) & 1) != 0)) {
-      FUN_00425ee4(param_1);
+      render_tree_level(param_1);
     }
     iVar1 = 0;
     iVar2 = 0;
@@ -48955,7 +48955,7 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
       sVar1 = asStack_3f4[iVar5];
       if (sVar1 == 1) {
         uVar3 = get_item_by_index((int)asStack_3f4[iVar5 + 1]);
-        FUN_00425ee4(uVar3);
+        render_tree_level(uVar3);
       }
       iVar7 = iVar7 + 1;
       iVar5 = iVar5 + 1 + (int)sVar1;
@@ -51134,7 +51134,7 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00429640(int param_1,undefined4 *param_2,int param_3)
+void configure_viewport(int param_1,undefined4 *param_2,int param_3)
 
 {
   int *piVar1;
@@ -51225,7 +51225,7 @@ void locateHighlight(void)
   
   set_main_gl_window();
   gl_get_dimensions_wrapper(&uStack_4,&uStack_c,&uStack_8);
-  FUN_00429640(uStack_4,uStack_c,uStack_8);
+  configure_viewport(uStack_4,uStack_c,uStack_8);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -51260,7 +51260,7 @@ void overviewLocateHighlight(void)
   
   glx_switch_context_wrapper();
   uVar1 = FUN_004213c8();
-  FUN_00429640(uVar1,0,0);
+  configure_viewport(uVar1,0,0);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -51298,7 +51298,7 @@ void highlightByName(undefined4 param_1)
     refresh_list_display();
   }
   else {
-    FUN_00429640(iStack_4,uStack_8,0);
+    configure_viewport(iStack_4,uStack_8,0);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -56282,7 +56282,7 @@ void cFindIconByName(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00433b44(undefined4 param_1)
+void expand_path(undefined4 param_1)
 
 {
   int unaff_gp;
@@ -62182,7 +62182,7 @@ void FUN_0043a664(undefined4 param_1,char *param_2,int param_3)
   uVar4 = FUN_0043ae14(local_6c);
   *(undefined4 *)(param_3 + 0x40c) = uVar4;
   if (local_2[0] == 'e') {
-    iVar5 = FUN_0043ae90(local_6c);
+    iVar5 = find_string_index(local_6c);
     if (*(char *)(path_buffer + iVar5) == '\0') {
       *(undefined4 *)(param_3 + 0x410) = 8;
     }
@@ -62191,7 +62191,7 @@ void FUN_0043a664(undefined4 param_1,char *param_2,int param_3)
     }
   }
   else if (local_2[0] == 'F') {
-    iVar5 = FUN_0043ae90(local_6c);
+    iVar5 = find_string_index(local_6c);
     if (*(char *)(path_buffer + iVar5) == '\0') {
       *(undefined4 *)(param_3 + 0x410) = 8;
     }
@@ -62200,7 +62200,7 @@ void FUN_0043a664(undefined4 param_1,char *param_2,int param_3)
     }
   }
   else if (local_2[0] == 'D') {
-    iVar5 = FUN_0043ae90(local_6c);
+    iVar5 = find_string_index(local_6c);
     if (*(char *)(path_buffer + iVar5) == '\0') {
       *(undefined4 *)(param_3 + 0x410) = 8;
     }
@@ -62222,7 +62222,7 @@ void FUN_0043a664(undefined4 param_1,char *param_2,int param_3)
   }
   else if (local_2[0] == 'P') {
     *(undefined4 *)(param_3 + 0x410) = 9;
-    iVar5 = FUN_0043ae90(local_6c);
+    iVar5 = find_string_index(local_6c);
     *(undefined1 *)(path_buffer + iVar5) = 1;
   }
   else if (local_2[0] == 'G') {
@@ -62386,7 +62386,7 @@ void FUN_0043ae14(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0043ae90(int param_1)
+void find_string_index(int param_1)
 
 {
   int iVar1;
