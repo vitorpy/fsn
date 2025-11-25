@@ -34,3 +34,17 @@ DAT_10016e4c -> file_selection_dialog : 13 uses - XmCreateFileSelectionDialog fo
 DAT_10016ec0 -> mark_selector_dialog : 13 uses - XmCreateSelectionBox("markSelector"), enabled based on selection_count
 DAT_10016654 -> legend_widget : 12 uses - XmCreateRowColumn("legend") on panel_widget
 
+# BATCH 4: Menu items and flags (10-8 uses)
+DAT_100174b0 -> view_init_z : 10 uses - float, stored in curcontext offset 8, view initialization
+DAT_10016b6c -> menu_move_file_1 : 10 uses - XmCreatePushButton("menuMoveFile") on popup_menu_widget
+DAT_10016b70 -> menu_move_file_2 : 10 uses - XmCreatePushButton("menuMoveFile") on secondary parent
+DAT_10016b74 -> menu_copy_file_1 : 10 uses - XmCreatePushButton("menuCopyFile") on popup_menu_widget
+DAT_10016b78 -> menu_copy_file_2 : 10 uses - XmCreatePushButton("menuCopyFile") on secondary parent
+DAT_10016b7c -> menu_link_file_1 : 10 uses - XmCreatePushButton("menuLinkFile") on popup_menu_widget
+DAT_10016b80 -> menu_link_file_2 : 10 uses - XmCreatePushButton("menuLinkFile") on secondary parent
+DAT_10016688 -> redraw_flag : 8 uses - char/undefined1, checked/cleared by redraw_gl_scene
+DAT_10016b84 -> menu_delete_file_1 : 8 uses - XmCreateToggleButton("menuDeleteFile") on popup_menu_widget
+DAT_10016b88 -> menu_delete_file_2 : 8 uses - XmCreateToggleButton("menuDeleteFile") on secondary parent
+DAT_10016b8c -> menu_process_deletes : 8 uses - XmCreatePushButton("menuProcessDeletes")
+DAT_10016b90 -> menu_undo_deletes : 8 uses - XmCreatePushButton("menuUndoDeletes")
+
