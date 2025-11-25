@@ -62,3 +62,19 @@ DAT_10016ec8 -> mark_prompt_dialog : 7 uses - XmCreatePromptDialog("markPrompt")
 DAT_10016e20 -> landscape_name : 7 uses - char*, resource "indigo"/"grass" for colormap
 DAT_10016b54 -> menu_monitor_directory : 7 uses - XmCreateToggleButton("menuMonitorDirectory")
 
+# BATCH 6: Color preferences and more menu items (6-5 uses)
+DAT_10016e30 -> pref_red_scale : 6 uses - XmCreateScale("preferenceRedScale")
+DAT_10016e34 -> pref_green_scale : 6 uses - XmCreateScale("preferenceGreenScale")
+DAT_10016e38 -> pref_blue_scale : 6 uses - XmCreateScale("preferenceBlueScale")
+DAT_10016e3c -> pref_hue_scale : 6 uses - XmCreateScale("preferenceHueScale")
+DAT_10016e40 -> pref_sat_scale : 6 uses - XmCreateScale("preferenceSatScale")
+DAT_10016e44 -> pref_val_scale : 6 uses - XmCreateScale("preferenceValScale")
+DAT_10016ed8 -> search_xmstring_3 : 6 uses - XmStringCreateSimple for search dialog
+DAT_10016bc8 -> drawing_active_flag : 6 uses - set to 1 during GL drawing, 0 after
+DAT_10016b5c -> menu_open_file_1 : 5 uses - XmCreatePushButton("menuOpenFile") on popup
+DAT_10016b60 -> menu_open_file_2 : 5 uses - XmCreatePushButton("menuOpenFile") on secondary
+DAT_10016b64 -> menu_print_file_1 : 5 uses - XmCreatePushButton("menuPrintFile") on popup
+DAT_10016b68 -> menu_print_file_2 : 5 uses - XmCreatePushButton("menuPrintFile") on secondary
+DAT_10016bf0 -> window_scale_x : 5 uses - float, width / (maxx - minx) scale factor
+DAT_10016bf4 -> window_scale_y : 5 uses - float, height / (maxy - miny) scale factor
+

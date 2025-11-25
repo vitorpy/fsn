@@ -1150,16 +1150,16 @@ undefined FUN_0041dff4;
 undefined4 menu_directory_cascade;
 undefined FUN_0041e0a8;
 undefined4 popup_menu_widget;
-undefined4 DAT_10016b5c;
+undefined4 menu_open_file_1;
 undefined FUN_0041e8a8;
 int array_index;
 undefined FUN_0041e918;
-undefined4 DAT_10016b60;
+undefined4 menu_open_file_2;
 undefined FUN_0041e988;
 pointer directoryHelp;
-undefined4 DAT_10016b64;
+undefined4 menu_print_file_1;
 pointer fileHelp;
-undefined4 DAT_10016b68;
+undefined4 menu_print_file_2;
 undefined4 menu_delete_file_1;
 undefined4 menu_delete_file_2;
 undefined4 DAT_10016b30;
@@ -1209,8 +1209,8 @@ undefined DAT_1000b46c;
 undefined DAT_1000b4a0;
 pointer moveDestHelp;
 int DAT_10006e5c;
-undefined1 DAT_10016bc8;
-char DAT_10016bc8;
+undefined1 drawing_active_flag;
+char drawing_active_flag;
 undefined4 DAT_10016c00;
 undefined4 DAT_10016c04;
 undefined4 DAT_10006e64;
@@ -1235,8 +1235,8 @@ undefined4 DAT_100175f0;
 undefined DAT_10006ed4;
 undefined DAT_10006edc;
 undefined DAT_10006ee4;
-float DAT_10016bf0;
-float DAT_10016bf4;
+float window_scale_x;
+float window_scale_y;
 undefined DAT_10006ecc;
 uint window_width;
 uint window_height;
@@ -1377,12 +1377,12 @@ pointer PTR_s_shrinkOnZoom_10008950;
 pointer PTR_s_monitorTimeout_100089f0;
 pointer PTR_s_mouseSpeed_10008b5c;
 pointer prefPanelHelp;
-undefined4 DAT_10016e30;
-undefined4 DAT_10016e3c;
-undefined4 DAT_10016e34;
-undefined4 DAT_10016e40;
-undefined4 DAT_10016e38;
-undefined4 DAT_10016e44;
+undefined4 pref_red_scale;
+undefined4 pref_hue_scale;
+undefined4 pref_green_scale;
+undefined4 pref_sat_scale;
+undefined4 pref_blue_scale;
+undefined4 pref_val_scale;
 pointer PTR_s_groundColor_1000935c;
 undefined *PTR_PTR_100094ec;
 undefined DAT_100094f0;
@@ -1437,7 +1437,7 @@ undefined DAT_10013d20;
 undefined4 DAT_10016edc;
 undefined4 DAT_10016ed0;
 undefined4 DAT_10016ed4;
-undefined4 DAT_10016ed8;
+undefined4 search_xmstring_3;
 undefined4 DAT_10016ef0;
 undefined4 DAT_10016ef4;
 undefined DAT_10013d30;
@@ -57661,29 +57661,29 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   uVar1 = XmCreateSeparator(popup_menu_widget,"popupSep",&uStack_68,0);
   XtManageChild(uVar1);
   uStack_6c = 0;
-  DAT_10016b5c = XmCreatePushButton(popup_menu_widget,"menuOpenFile",&uStack_68,0);
-  XtAddCallback(DAT_10016b5c,0xe3f35b3,FUN_0041e8a8,0);
-  XtManageChild(DAT_10016b5c);
-  (&menu_items_array)[array_index] = DAT_10016b5c;
+  menu_open_file_1 = XmCreatePushButton(popup_menu_widget,"menuOpenFile",&uStack_68,0);
+  XtAddCallback(menu_open_file_1,0xe3f35b3,FUN_0041e8a8,0);
+  XtManageChild(menu_open_file_1);
+  (&menu_items_array)[array_index] = menu_open_file_1;
   array_index = array_index + 1;
-  DAT_10016b60 = XmCreatePushButton(uStack_8,"menuOpenFile",&uStack_68,uStack_6c);
-  XtAddCallback(DAT_10016b60,0xe3f35b3,FUN_0041e8a8,0);
-  XtManageChild(DAT_10016b60);
+  menu_open_file_2 = XmCreatePushButton(uStack_8,"menuOpenFile",&uStack_68,uStack_6c);
+  XtAddCallback(menu_open_file_2,0xe3f35b3,FUN_0041e8a8,0);
+  XtManageChild(menu_open_file_2);
   puVar2 = &menu_items_array + array_index;
   array_index = array_index + 1;
-  *puVar2 = DAT_10016b60;
+  *puVar2 = menu_open_file_2;
   uStack_6c = 0;
-  DAT_10016b64 = XmCreatePushButton(popup_menu_widget,"menuPrintFile",&uStack_68,0);
-  XtAddCallback(DAT_10016b64,0xe3f35b3,FUN_0041e918,0);
-  XtManageChild(DAT_10016b64);
-  (&menu_items_array)[array_index] = DAT_10016b64;
+  menu_print_file_1 = XmCreatePushButton(popup_menu_widget,"menuPrintFile",&uStack_68,0);
+  XtAddCallback(menu_print_file_1,0xe3f35b3,FUN_0041e918,0);
+  XtManageChild(menu_print_file_1);
+  (&menu_items_array)[array_index] = menu_print_file_1;
   array_index = array_index + 1;
-  DAT_10016b68 = XmCreatePushButton(uStack_8,"menuPrintFile",&uStack_68,uStack_6c);
-  XtAddCallback(DAT_10016b68,0xe3f35b3,FUN_0041e918,0);
-  XtManageChild(DAT_10016b68);
+  menu_print_file_2 = XmCreatePushButton(uStack_8,"menuPrintFile",&uStack_68,uStack_6c);
+  XtAddCallback(menu_print_file_2,0xe3f35b3,FUN_0041e918,0);
+  XtManageChild(menu_print_file_2);
   puVar2 = &menu_items_array + array_index;
   array_index = array_index + 1;
-  *puVar2 = DAT_10016b68;
+  *puVar2 = menu_print_file_2;
   uStack_6c = 0;
   menu_delete_file_1 = XmCreateToggleButton(popup_menu_widget,"menuDeleteFile",&uStack_68,0);
   XtAddCallback(menu_delete_file_1,0xe3f4ca5,FUN_0041e988,0);
@@ -60070,7 +60070,7 @@ void FUN_0041fa18(undefined4 param_1,undefined4 param_2)
 {
   undefined4 uVar1;
   
-  DAT_10016bc8 = 1;
+  drawing_active_flag = 1;
   if (topdir != 0) {
     gl_push_state();
     set_gl_context(param_2,1);
@@ -60089,7 +60089,7 @@ void FUN_0041fa18(undefined4 param_1,undefined4 param_2)
 void FUN_0041fadc(void)
 
 {
-  DAT_10016bc8 = 0;
+  drawing_active_flag = 0;
   FUN_004294cc();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -60104,7 +60104,7 @@ void FUN_0041fb20(undefined4 param_1,undefined4 param_2)
 {
   undefined4 uVar1;
   
-  if (DAT_10016bc8 != '\0') {
+  if (drawing_active_flag != '\0') {
     set_gl_context(param_2);
     DAT_10006e24 = 1;
     uVar1 = XmTextFieldGetString(param_1);
@@ -60207,7 +60207,7 @@ void FUN_0041fcc0(undefined4 param_1,undefined4 param_2)
   undefined4 uVar1;
   int iVar2;
   
-  if (DAT_10016bc8 != '\0') {
+  if (drawing_active_flag != '\0') {
     set_gl_context(param_2);
     uVar1 = XmTextFieldGetString(param_1);
     iVar2 = FUN_0041fc30(uVar1);
@@ -60830,8 +60830,8 @@ void drawOverviewOverlayCursor(void)
     translate(*(undefined4 *)(iVar1 + 0x34),*(undefined4 *)(iVar1 + 0x38));
     uVar2 = extraout_var;
   }
-  scale((float)((double)((ulonglong)uVar2 << 0x20) / (double)DAT_10016bf0),
-        (float)((double)((ulonglong)uVar2 << 0x20) / (double)DAT_10016bf4));
+  scale((float)((double)((ulonglong)uVar2 << 0x20) / (double)window_scale_x),
+        (float)((double)((ulonglong)uVar2 << 0x20) / (double)window_scale_y));
   linewidth(3);
   bgnline();
   v2i(&DAT_10006ecc);
@@ -60986,8 +60986,8 @@ void FUN_00420ca4(undefined4 param_1,undefined4 param_2,int param_3)
 {
   window_width = (uint)*(ushort *)(param_3 + 0x10);
   window_height = (uint)*(ushort *)(param_3 + 0x12);
-  DAT_10016bf0 = (float)*(ushort *)(param_3 + 0x10) / (maxx - minx);
-  DAT_10016bf4 = (float)*(ushort *)(param_3 + 0x12) / (maxy - miny);
+  window_scale_x = (float)*(ushort *)(param_3 + 0x10) / (maxx - minx);
+  window_scale_y = (float)*(ushort *)(param_3 + 0x12) / (maxy - miny);
   FUN_0041fd70();
   viewport(0,(*(short *)(param_3 + 0x10) + -1) * 0x10000 >> 0x10,0,
            (*(short *)(param_3 + 0x12) + -1) * 0x10000 >> 0x10);
@@ -61016,8 +61016,8 @@ void FUN_00420e74(undefined4 param_1,undefined4 param_2,int param_3)
   
   shademodel(0);
   subpixel(1);
-  DAT_10016bf0 = (float)*(ushort *)(param_3 + 0x10) / (maxx - minx);
-  DAT_10016bf4 = (float)*(ushort *)(param_3 + 0x12) / (maxy - miny);
+  window_scale_x = (float)*(ushort *)(param_3 + 0x10) / (maxx - minx);
+  window_scale_y = (float)*(ushort *)(param_3 + 0x12) / (maxy - miny);
   DAT_10016c08 = XtWindow(DAT_10006eb4);
   FUN_00421cdc(DAT_10016c08);
   DAT_10016c00 = XtWindow(param_1);
@@ -61263,7 +61263,7 @@ void rescaleOverview(void)
   
   if (overviewActive != '\0') {
     uStack_48 = 0xf66160a;
-    fVar1 = (maxx - minx) * DAT_10016bf0;
+    fVar1 = (maxx - minx) * window_scale_x;
     uStack_50 = 0xf661888;
     if ((((in_fcsr | 3) ^ 2) & 3) == 0) {
       fVar1 = ROUND(fVar1);
@@ -61272,7 +61272,7 @@ void rescaleOverview(void)
       fVar1 = FLOOR(fVar1);
     }
     iStack_4c = (int)fVar1;
-    fVar1 = (maxy - miny) * DAT_10016bf4;
+    fVar1 = (maxy - miny) * window_scale_y;
     if ((((in_fcsr | 3) ^ 2) & 3) == 0) {
       fVar1 = ROUND(fVar1);
     }
@@ -67728,24 +67728,24 @@ void showPreferencePanel(void)
     local_84 = (undefined *)0x1;
     uVar3 = XmCreateRowColumn(local_38,"preferenceColorScales",&local_98,3);
     XtManageChild(uVar3);
-    DAT_10016e30 = XmCreateScale(uVar3,"preferenceRedScale",&local_98,0);
-    XtManageChild(DAT_10016e30);
-    XtAddCallback(DAT_10016e30,0xe3f4ca5,FUN_0042d8e0,0);
-    DAT_10016e3c = XmCreateScale(uVar3,"preferenceHueScale",&local_98,0);
-    XtManageChild(DAT_10016e3c);
-    XtAddCallback(DAT_10016e3c,0xe3f4ca5,FUN_0042d9f8,0);
-    DAT_10016e34 = XmCreateScale(uVar3,"preferenceGreenScale",&local_98,0);
-    XtManageChild(DAT_10016e34);
-    XtAddCallback(DAT_10016e34,0xe3f4ca5,FUN_0042d8e0,0);
-    DAT_10016e40 = XmCreateScale(uVar3,"preferenceSatScale",&local_98,0);
-    XtManageChild(DAT_10016e40);
-    XtAddCallback(DAT_10016e40,0xe3f4ca5,FUN_0042d9f8,0);
-    DAT_10016e38 = XmCreateScale(uVar3,"preferenceBlueScale",&local_98,0);
-    XtManageChild(DAT_10016e38);
-    XtAddCallback(DAT_10016e38,0xe3f4ca5,FUN_0042d8e0,0);
-    DAT_10016e44 = XmCreateScale(uVar3,"preferenceValScale",&local_98,0);
-    XtManageChild(DAT_10016e44);
-    XtAddCallback(DAT_10016e44,0xe3f4ca5,FUN_0042d9f8,0);
+    pref_red_scale = XmCreateScale(uVar3,"preferenceRedScale",&local_98,0);
+    XtManageChild(pref_red_scale);
+    XtAddCallback(pref_red_scale,0xe3f4ca5,FUN_0042d8e0,0);
+    pref_hue_scale = XmCreateScale(uVar3,"preferenceHueScale",&local_98,0);
+    XtManageChild(pref_hue_scale);
+    XtAddCallback(pref_hue_scale,0xe3f4ca5,FUN_0042d9f8,0);
+    pref_green_scale = XmCreateScale(uVar3,"preferenceGreenScale",&local_98,0);
+    XtManageChild(pref_green_scale);
+    XtAddCallback(pref_green_scale,0xe3f4ca5,FUN_0042d8e0,0);
+    pref_sat_scale = XmCreateScale(uVar3,"preferenceSatScale",&local_98,0);
+    XtManageChild(pref_sat_scale);
+    XtAddCallback(pref_sat_scale,0xe3f4ca5,FUN_0042d9f8,0);
+    pref_blue_scale = XmCreateScale(uVar3,"preferenceBlueScale",&local_98,0);
+    XtManageChild(pref_blue_scale);
+    XtAddCallback(pref_blue_scale,0xe3f4ca5,FUN_0042d8e0,0);
+    pref_val_scale = XmCreateScale(uVar3,"preferenceValScale",&local_98,0);
+    XtManageChild(pref_val_scale);
+    XtAddCallback(pref_val_scale,0xe3f4ca5,FUN_0042d9f8,0);
     FUN_0042d618();
     FUN_0042d6f0();
     local_88 = 0xe3f46dd;
@@ -68155,13 +68155,13 @@ void FUN_0042d618(void)
   uVar1 = **(uint **)(PTR_PTR_100094ec + 4);
   local_4 = uVar1 & 0xff;
   local_8 = 0xf66187b;
-  XtSetValues(DAT_10016e30,&local_8,1);
+  XtSetValues(pref_red_scale,&local_8,1);
   local_4 = (int)uVar1 >> 8 & 0xff;
   local_8 = 0xf66187b;
-  XtSetValues(DAT_10016e34,&local_8,1);
+  XtSetValues(pref_green_scale,&local_8,1);
   local_4 = (int)uVar1 >> 0x10 & 0xff;
   local_8 = 0xf66187b;
-  XtSetValues(DAT_10016e38,&local_8,1);
+  XtSetValues(pref_blue_scale,&local_8,1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -68212,13 +68212,13 @@ void FUN_0042d6f0(void)
     dVar2 = FLOOR(dVar2);
   }
   local_4 = (int)dVar2;
-  XtSetValues(DAT_10016e3c,&local_8,1);
+  XtSetValues(pref_hue_scale,&local_8,1);
   local_8 = 0xf66187b;
   local_4 = (int)dVar1;
-  XtSetValues(DAT_10016e40,&local_8,1);
+  XtSetValues(pref_sat_scale,&local_8,1);
   local_8 = 0xf66187b;
   local_4 = (int)dVar3;
-  XtSetValues(DAT_10016e44,&local_8,1);
+  XtSetValues(pref_val_scale,&local_8,1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -68238,13 +68238,13 @@ void FUN_0042d8e0(void)
   
   local_10 = &local_4;
   local_14 = 0xf66187b;
-  XtGetValues(DAT_10016e30,&local_14,1);
+  XtGetValues(pref_red_scale,&local_14,1);
   local_10 = &local_8;
   local_14 = 0xf66187b;
-  XtGetValues(DAT_10016e34,&local_14,1);
+  XtGetValues(pref_green_scale,&local_14,1);
   local_10 = &local_c;
   local_14 = 0xf66187b;
-  XtGetValues(DAT_10016e38,&local_14,1);
+  XtGetValues(pref_blue_scale,&local_14,1);
   **(int **)(PTR_PTR_100094ec + 4) = local_8 * 0x100 + local_4 + local_c * 0x10000;
   FUN_0042d6f0();
   FUN_0042c970(6);
@@ -68276,13 +68276,13 @@ void FUN_0042d9f8(void)
   
   local_34 = &local_4;
   local_38 = 0xf66187b;
-  XtGetValues(DAT_10016e3c,&local_38,1);
+  XtGetValues(pref_hue_scale,&local_38,1);
   local_34 = &local_8;
   local_38 = 0xf66187b;
-  XtGetValues(DAT_10016e40,&local_38,1);
+  XtGetValues(pref_sat_scale,&local_38,1);
   local_34 = (int *)local_c;
   local_38 = 0xf66187b;
-  XtGetValues(DAT_10016e44,&local_38,1);
+  XtGetValues(pref_val_scale,&local_38,1);
   hsv_to_rgb((double)(float)((double)local_4 / (double)((ulonglong)extraout_var << 0x20)),
              (double)(float)((double)local_8 / (double)((ulonglong)extraout_var << 0x20)));
   dVar1 = (double)local_2c * (double)((ulonglong)extraout_var_00 << 0x20);
@@ -70291,7 +70291,7 @@ void FUN_00430b70(void)
     local_24 = DAT_10016ed4;
   }
   else {
-    local_24 = DAT_10016ed8;
+    local_24 = search_xmstring_3;
   }
   XtSetValues(DAT_10016ef0,&local_28,1);
                     // WARNING: Bad instruction - Truncating control flow here
@@ -70314,7 +70314,7 @@ void FUN_00430c0c(void)
     local_24 = DAT_10016ed4;
   }
   else {
-    local_24 = DAT_10016ed8;
+    local_24 = search_xmstring_3;
   }
   XtSetValues(DAT_10016ef4,&local_28,1);
                     // WARNING: Bad instruction - Truncating control flow here
@@ -70337,7 +70337,7 @@ void createSearch(undefined4 param_1)
   
   DAT_10016ed0 = XmStringCreateSimple("Search");
   DAT_10016ed4 = XmStringCreateSimple(&DAT_10013d2c);
-  DAT_10016ed8 = XmStringCreateSimple(&DAT_10013d30);
+  search_xmstring_3 = XmStringCreateSimple(&DAT_10013d30);
   uStack_28 = 0xe3f3afd;
   uStack_24 = 1;
   uVar1 = XmCreateSelectionBox(param_1,"search",&uStack_28,1);
@@ -70378,7 +70378,7 @@ void createSearch(undefined4 param_1)
   XtManageChild(uVar3);
   uVar4 = XmCreateLabel(uVar3,&DAT_10013d7c,&uStack_28,0);
   XtManageChild(uVar4);
-  uStack_24 = DAT_10016ed8;
+  uStack_24 = search_xmstring_3;
   uStack_28 = 0xe3f40b5;
   DAT_10016ef0 = XmCreatePushButton(uVar3,"searchSizeComp",&uStack_28,1);
   XtAddCallback(DAT_10016ef0,0xe3f35b3,FUN_00430b70,0);
@@ -70392,7 +70392,7 @@ void createSearch(undefined4 param_1)
   XtManageChild(uVar2);
   uVar3 = XmCreateLabel(uVar2,&DAT_10013dac,&uStack_28,0);
   XtManageChild(uVar3);
-  uStack_24 = DAT_10016ed8;
+  uStack_24 = search_xmstring_3;
   uStack_28 = 0xe3f40b5;
   DAT_10016ef4 = XmCreatePushButton(uVar2,"searchAgeComp",&uStack_28,1);
   XtAddCallback(DAT_10016ef4,0xe3f35b3,FUN_00430c0c,0);
