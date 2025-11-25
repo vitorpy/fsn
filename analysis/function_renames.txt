@@ -20,6 +20,21 @@ FUN_00410da4 -> set_status_message : 14 calls - Sets message in status bar widge
 FUN_0040eef0 -> quit_application : WM_DELETE_WINDOW callback, calls cleanup then exit(0)
 FUN_0041892c -> cleanup_before_exit : Called by quit_application before exit(), likely saves state
 
+# BATCH 2: Functions 11-30 (13-10 calls)
+FUN_0042a7d0 -> gl_push_state : 10 calls - Called before GL rendering, pairs with gl_pop_state
+FUN_0042a7f0 -> gl_pop_state : 10 calls - Called after GL rendering, pairs with gl_push_state
+FUN_0040bbe0 -> set_main_gl_window : 11 calls - GL window setup, called from main
+FUN_00411ea4 -> update_display : 12 calls - Called in main after directory load, before showOverview
+# FUN_00432094 -> ? : 13 calls - Takes display + 3 pointers, X11 related
+# FUN_004341fc -> ? : 13 calls - Takes int param
+# FUN_00435668 -> ? : 13 calls - Returns int, string processing
+# FUN_0040ff64 -> ? : 12 calls - No params, init sequence
+# FUN_00411998 -> ? : 12 calls - No params
+# FUN_0041d920 -> ? : 12 calls - No params
+# FUN_0041d69c -> ? : 11 calls - No params
+# FUN_00413580 -> ? : 10 calls - Need to analyze
+# FUN_00432a34 -> ? : 10 calls - Need to analyze
+
 # Initialization Functions (called from main)
 # FUN_0042b844 -> ? : Takes toplevel widget, called early in main
 # FUN_0040ae2c -> ? : Called after arg parsing, init function

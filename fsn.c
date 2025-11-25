@@ -49746,7 +49746,7 @@ void main(int param_1,undefined4 *param_2)
   XtSetSensitive(uStack_ac,0);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),0);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 0xc),0);
-  FUN_0040bbe0();
+  set_main_gl_window();
   uStack_a0 = 0xe3f4b1d;
   uStack_98 = 0xe3f4ba9;
   uStack_9c = 4;
@@ -49775,7 +49775,7 @@ void main(int param_1,undefined4 *param_2)
     pcStack_bc = pcStack_c0;
   }
   FUN_004174d0(pcStack_bc);
-  FUN_00411ea4();
+  update_display();
   if (initialOverview != '\0') {
     showOverview();
   }
@@ -49961,7 +49961,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   XtSetSensitive(local_ac,0);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),0);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 0xc),0);
-  FUN_0040bbe0();
+  set_main_gl_window();
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f4ba9;
   local_9c = 4;
@@ -49990,7 +49990,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
     local_bc = local_c0;
   }
   FUN_004174d0(local_bc);
-  FUN_00411ea4();
+  update_display();
   if (initialOverview != '\0') {
     showOverview();
   }
@@ -50043,7 +50043,7 @@ void setMainWindow(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040bbe0(void)
+void set_main_gl_window(void)
 
 {
   int unaff_gp;
@@ -50090,10 +50090,10 @@ void FUN_0040bc28(void)
 void FUN_0040bc64(undefined4 param_1)
 
 {
-  FUN_0042a7d0();
+  gl_push_state();
   set_gl_context(param_1,1);
   redraw_gl_scene();
-  FUN_0042a7f0();
+  gl_pop_state();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -50105,13 +50105,13 @@ void FUN_0040bc64(undefined4 param_1)
 void FUN_0040bce8(undefined4 param_1)
 
 {
-  FUN_0042a7d0();
+  gl_push_state();
   set_gl_context(param_1,1);
   FUN_0040bc28();
   color(0);
   clear();
   gflush();
-  FUN_0042a7f0();
+  gl_pop_state();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -50123,8 +50123,8 @@ void FUN_0040bce8(undefined4 param_1)
 void FUN_0040bdb4(undefined4 param_1,undefined4 param_2,int param_3)
 
 {
-  FUN_0040bbe0();
-  FUN_0042a7d0();
+  set_main_gl_window();
+  gl_push_state();
   set_gl_context(param_1,1);
   *(uint *)(curcontext + 0x2c) = (uint)*(ushort *)(param_3 + 0x10);
   *(uint *)(curcontext + 0x30) = (uint)*(ushort *)(param_3 + 0x12);
@@ -50136,11 +50136,11 @@ void FUN_0040bdb4(undefined4 param_1,undefined4 param_2,int param_3)
            (*(short *)(param_3 + 0x12) + -1) * 0x10000 >> 0x10);
   color(0);
   clear();
-  FUN_0040bbe0();
+  set_main_gl_window();
   viewport(0,(*(short *)(param_3 + 0x10) + -1) * 0x10000 >> 0x10,0,
            (*(short *)(param_3 + 0x12) + -1) * 0x10000 >> 0x10);
   redraw_gl_scene();
-  FUN_0042a7f0();
+  gl_pop_state();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -50296,7 +50296,7 @@ void FUN_0040c1a0(int param_1,undefined4 param_2,int param_3)
   char *local_24;
   undefined4 *local_20;
   
-  FUN_0042a7d0();
+  gl_push_state();
   set_gl_context(param_1,1);
   FUN_004291fc();
   uVar1 = XtWindow(param_1);
@@ -50399,7 +50399,7 @@ LAB_0040c5ac:
       *(undefined4 *)(iVar3 + 0xac) = 0;
     } while (iVar2 != 0x230);
     curcontext[0xc52] = 1;
-    FUN_0042a7f0();
+    gl_pop_state();
                     // WARNING: Bad instruction - Truncating control flow here
     halt_baddata();
   }
@@ -51154,7 +51154,7 @@ void FUN_0040ef44(undefined4 param_1,int param_2,int param_3)
     curcontext[0xc50] = 0;
     displayHeight = param_2;
     XtSetSensitive(DAT_1001666c,param_2 != 0);
-    FUN_00411ea4();
+    update_display();
     redraw_gl_scene();
     FUN_0042a8e4();
   }
@@ -51171,7 +51171,7 @@ void FUN_0040eff8(undefined4 param_1,undefined4 param_2,int param_3)
 {
   if (*(int *)(param_3 + 8) != 0) {
     displayDirectoryHeight = param_2;
-    FUN_00411ea4();
+    update_display();
     redraw_gl_scene();
     FUN_0042a8e4();
   }
@@ -51671,7 +51671,7 @@ void zoomto(double param_1,double param_2)
   undefined4 in_stack_00000028;
   
   FUN_0040f150(0,0);
-  FUN_0040bbe0();
+  set_main_gl_window();
   if (in_stack_00000020 == *(int *)(curcontext + 0x3c)) {
     DAT_100165f0 = (float)param_1;
     DAT_100165f4 = (float)param_2;
@@ -51822,7 +51822,7 @@ void do_warp(int param_1)
   float local_8;
   float local_4;
   
-  FUN_0040bbe0();
+  set_main_gl_window();
   FUN_0040ff64();
   if (param_1 == 0) {
     if (*(int *)(curcontext + 0x3c) == 0) {
@@ -51883,7 +51883,7 @@ void FUN_004108ec(undefined4 param_1,int param_2)
   float local_4;
   
   set_gl_context(param_1,0);
-  FUN_0040bbe0();
+  set_main_gl_window();
   FUN_0040ff64();
   if ((uint)(*(int *)(param_2 + 0x1c) - DAT_10016624) < 300) {
     FUN_0041f118((*(uint *)(param_2 + 0x30) & 8) != 0);
@@ -51936,7 +51936,7 @@ void FUN_00410b7c(undefined4 param_1,int param_2)
   undefined1 auStack_4 [4];
   
   set_gl_context(param_1,0);
-  FUN_0040bbe0();
+  set_main_gl_window();
   FUN_0040ff64();
   if ((uint)(*(int *)(param_2 + 0x1c) - DAT_10016628) < 300) {
     FUN_0041f118((*(uint *)(param_2 + 0x30) & 8) != 0);
@@ -52712,7 +52712,7 @@ void layout_db(undefined4 param_1,undefined4 param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00411ea4(undefined4 param_1,undefined4 param_2)
+void update_display(undefined4 param_1,undefined4 param_2)
 
 {
   int *piVar1;
@@ -54053,12 +54053,12 @@ void FUN_00414be4(FILE *param_1)
 void FUN_00414cf0(undefined4 param_1)
 
 {
-  FUN_0042a7d0();
+  gl_push_state();
   FUN_0042a4d4(0,1);
   FUN_00414be4(param_1);
   FUN_0042a4d4(1,1);
   FUN_00414be4(param_1);
-  FUN_0042a7f0();
+  gl_pop_state();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -54298,7 +54298,7 @@ void scanDatabase(int param_1)
     FUN_00411998();
     FUN_004144ec(param_1);
     deleteMessage(uVar3);
-    FUN_00411ea4();
+    update_display();
   }
   FUN_0041dba0();
   redraw_gl_scene();
@@ -54736,7 +54736,7 @@ void FUN_004166c8(void)
                     // WARNING: Subroutine does not return
     exit(1);
   }
-  FUN_0042a7d0();
+  gl_push_state();
   if (local_2 == '\0') {
     FUN_0042a4d4(1,1);
   }
@@ -54749,7 +54749,7 @@ void FUN_004166c8(void)
   FUN_0042ec00(auStack_3c,DAT_10016690);
   FUN_0042e3bc(auStack_3c);
   curcontext[0xc51] = local_2;
-  FUN_0042a7f0();
+  gl_pop_state();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -56036,7 +56036,7 @@ void pruneTree(int param_1)
   *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) | 4;
   FUN_004186a0();
   FUN_0041dba0();
-  FUN_00411ea4();
+  update_display();
   redraw_gl_scene();
   FUN_0042a8e4();
                     // WARNING: Bad instruction - Truncating control flow here
@@ -56071,7 +56071,7 @@ void unpruneTree(int param_1)
 {
   *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) & 0xfb;
   FUN_00417b88();
-  FUN_00411ea4();
+  update_display();
   redraw_gl_scene();
   FUN_0042a8e4();
                     // WARNING: Bad instruction - Truncating control flow here
@@ -59674,7 +59674,7 @@ void FUN_0041ec98(void)
   FUN_0041eaf8(topdir);
   FUN_0041dba0();
   FUN_0041c3e4();
-  FUN_00411ea4();
+  update_display();
   redraw_gl_scene();
   FUN_0042a8e4();
   XtSetSensitive(DAT_10016b8c,0);
@@ -59997,7 +59997,7 @@ LAB_0041f400:
       }
       if (!local_14aa) {
         FUN_00417e28(local_8,*local_c);
-        FUN_00411ea4();
+        update_display();
         local_10 = FUN_00413580(local_8,*local_c);
         if (local_10 != 0) {
           if (bVar3) {
@@ -60048,7 +60048,7 @@ LAB_0041f400:
       if (local_res4 == 1) {
         FUN_00418340(local_4,*local_c);
         *(byte *)((int)local_c + 0x29) = *(byte *)((int)local_c + 0x29) & 0xef;
-        FUN_00411ea4();
+        update_display();
       }
       redraw_gl_scene();
       FUN_0042a8e4();
@@ -60072,11 +60072,11 @@ void FUN_0041fa18(undefined4 param_1,undefined4 param_2)
   
   DAT_10016bc8 = 1;
   if (topdir != 0) {
-    FUN_0042a7d0();
+    gl_push_state();
     set_gl_context(param_2,1);
     uVar1 = XmTextFieldGetString(param_1);
     FUN_00429bc8(uVar1);
-    FUN_0042a7f0();
+    gl_pop_state();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -65790,10 +65790,10 @@ void locateClearAction(undefined4 param_1,int param_2)
 
 {
   if (*(int *)(param_2 + 0x30) == 0) {
-    FUN_0042a7d0();
+    gl_push_state();
     set_gl_context(param_1,1);
     FUN_004294cc();
-    FUN_0042a7f0();
+    gl_pop_state();
     gflush();
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -65967,7 +65967,7 @@ void locateHighlight(void)
   undefined4 uStack_8;
   undefined4 uStack_4;
   
-  FUN_0040bbe0();
+  set_main_gl_window();
   FUN_00426dc0(&uStack_4,&uStack_c,&uStack_8);
   FUN_00429640(uStack_4,uStack_c,uStack_8);
                     // WARNING: Bad instruction - Truncating control flow here
@@ -66017,10 +66017,10 @@ void locateHighlightAction(undefined4 param_1,int param_2)
 
 {
   if (*(int *)(param_2 + 0x30) == 0) {
-    FUN_0042a7d0();
+    gl_push_state();
     set_gl_context(param_1,1);
     FUN_00429a48();
-    FUN_0042a7f0();
+    gl_pop_state();
     gflush();
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -66559,7 +66559,7 @@ void savecontext(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042a7d0(void)
+void gl_push_state(void)
 
 {
                     // WARNING: Bad instruction - Truncating control flow here
@@ -66582,7 +66582,7 @@ void restorecontext(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042a7f0(void)
+void gl_pop_state(void)
 
 {
   int unaff_gp;
@@ -67805,13 +67805,13 @@ void FUN_0042c970(uint param_1)
 
 {
   if ((param_1 & 1) != 0) {
-    FUN_00411ea4();
+    update_display();
   }
   if ((param_1 & 4) != 0) {
     FUN_00428b6c();
   }
   if ((param_1 & 0x10) != 0) {
-    FUN_0040bbe0();
+    set_main_gl_window();
     *(short *)(curcontext + 0x10) = (short)DAT_100174e0;
     FUN_0040bfa0();
   }
