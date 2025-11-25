@@ -155,8 +155,8 @@ void first_traversal(int param_1)
   if (*(int *)(param_1 + 0xc) < 1) {
     *(undefined4 *)(param_1 + 0x20) = *(undefined4 *)(param_1 + 0x1c);
     FUN_00412234(param_1);
-    if (DAT_1000018c < *(int *)(param_1 + 0x1c)) {
-      DAT_1000018c = *(int *)(param_1 + 0x1c);
+    if (window_height < *(int *)(param_1 + 0x1c)) {
+      window_height = *(int *)(param_1 + 0x1c);
     }
     *(undefined4 *)(param_1 + 0x48) = 0;
     if (0 < *(int *)(param_1 + 0x14)) {
@@ -240,20 +240,20 @@ void deleteMessage(undefined4 *param_1)
   undefined4 local_c;
   undefined4 local_8;
   
-  puVar1 = DAT_10000020;
-  if (param_1 == DAT_10000020) {
+  puVar1 = current_directory_node;
+  if (param_1 == current_directory_node) {
     do {
-      DAT_10000020 = (undefined4 *)puVar1[1];
+      current_directory_node = (undefined4 *)puVar1[1];
       XmStringFree(*puVar1);
       XtFree(puVar1);
-      if (DAT_10000020 == (undefined4 *)0x0) break;
-      puVar1 = DAT_10000020;
-    } while (*(char *)(DAT_10000020 + 2) != '\0');
-    if (DAT_10000020 == (undefined4 *)0x0) {
+      if (current_directory_node == (undefined4 *)0x0) break;
+      puVar1 = current_directory_node;
+    } while (*(char *)(current_directory_node + 2) != '\0');
+    if (current_directory_node == (undefined4 *)0x0) {
       local_8 = blankXmString;
     }
     else {
-      local_8 = *DAT_10000020;
+      local_8 = *current_directory_node;
     }
     local_c = 0xe3f40b5;
     XtSetValues(message_widget,&local_c,1);
@@ -726,7 +726,7 @@ void layout_db(undefined4 param_1,undefined4 param_2)
     DAT_100166b0 = 1.0;
   }
   else {
-    fVar1 = (float)FUN_00411774(DAT_10000184);
+    fVar1 = (float)FUN_00411774(window_width);
     DAT_100166b0 = DAT_100174f8 / fVar1;
   }
   *(undefined4 *)(topdir + 0x2c) = 0;
@@ -740,7 +740,7 @@ void layout_db(undefined4 param_1,undefined4 param_2)
     DAT_100166b4 = 1.0;
   }
   else if ((displayDirectoryHeight == 1) || (displayDirectoryHeight != 2)) {
-    fVar1 = (float)FUN_00411774(DAT_1000018c);
+    fVar1 = (float)FUN_00411774(window_height);
     in_f6 = (double)CONCAT44(uVar3,DAT_100174fc);
     DAT_100166b4 = DAT_100174fc / fVar1;
   }
@@ -844,8 +844,8 @@ void SG_getNormalArgs(undefined4 param_1,undefined4 param_2,int param_3,int *par
   undefined4 uVar3;
   int iVar4;
   
-  uVar1 = FUN_004314e0(param_1,param_2,&DAT_10009660,2);
-  iVar2 = FUN_00432370(param_1,param_2,uVar1,&DAT_10009660,2);
+  uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,2);
+  iVar2 = FUN_00432370(param_1,param_2,uVar1,&temp_data_buffer,2);
   if (-1 < iVar2) {
     uVar3 = FUN_00431354(param_1,param_2);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
@@ -891,11 +891,11 @@ void fileChanged(int param_1,char *param_2)
         *(__time_t *)(iVar1 + 0x10) = sStack_90.st_mtim.tv_sec;
         uVar3 = FUN_00433b44(pcStack_8);
         *(undefined4 *)(iVar1 + 0x20) = uVar3;
-        if (DAT_10000184 < *(int *)(iVar1 + 0xc)) {
-          DAT_10000184 = *(int *)(iVar1 + 0xc);
+        if (window_width < *(int *)(iVar1 + 0xc)) {
+          window_width = *(int *)(iVar1 + 0xc);
         }
-        if (DAT_1000018c < *(int *)(param_1 + 0x1c)) {
-          DAT_1000018c = *(int *)(param_1 + 0x1c);
+        if (window_height < *(int *)(param_1 + 0x1c)) {
+          window_height = *(int *)(param_1 + 0x1c);
         }
         FUN_00412400(iVar1);
         FUN_00412234(param_1);
@@ -1206,8 +1206,8 @@ void SG_getUnderlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *p
   undefined4 uVar3;
   int iVar4;
   
-  uVar1 = FUN_004314e0(param_1,param_2,&DAT_10009660,1);
-  iVar2 = FUN_00432370(param_1,param_2,uVar1,&DAT_10009660,1);
+  uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,1);
+  iVar2 = FUN_00432370(param_1,param_2,uVar1,&temp_data_buffer,1);
   if (iVar2 < 0) {
     FUN_00431b34(param_1,param_2,param_3,param_4);
   }
@@ -1624,7 +1624,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_9c = 1;
   uStack_94 = 1;
   uStack_8c = 3;
-  DAT_1001665c = uStack_84;
+  copy_button_widget = uStack_84;
   panel_vsep_widget = XtCreateManagedWidget("panelvsep",_DAT_0e3d8f04,panel_widget,&uStack_a0,4);
   FUN_0040df80();
   iVar3 = init_display_mode();
@@ -1684,7 +1684,7 @@ void main(int param_1,undefined4 *param_2)
   XtRealizeWidget(toplevel);
   XSetErrorHandler(0);
   FUN_0042fb84(toplevel);
-  XtSetSensitive(DAT_1001665c,0);
+  XtSetSensitive(copy_button_widget,0);
   XtSetSensitive(uStack_ac,0);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),0);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 0xc),0);
@@ -1736,7 +1736,7 @@ void main(int param_1,undefined4 *param_2)
     FUN_0040dee0();
   }
   FUN_0040ed40();
-  XtSetSensitive(DAT_1001665c,1);
+  XtSetSensitive(copy_button_widget,1);
   XtSetSensitive(uStack_ac,1);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),1);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 0xc),1);
@@ -2014,10 +2014,10 @@ void message(undefined4 param_1,int param_2)
   uVar2 = XmStringCreateSimple(param_1);
   *puVar1 = uVar2;
   *(undefined1 *)(puVar1 + 2) = 0;
-  puVar1[1] = DAT_10000020;
+  puVar1[1] = current_directory_node;
   uStack_54 = 0xe3f40b5;
   uStack_50 = *puVar1;
-  DAT_10000020 = puVar1;
+  current_directory_node = puVar1;
   XtSetValues(message_widget,&uStack_54,1);
   if (param_2 != 0) {
     XtAppAddTimeOut(app_context,param_2,deleteMessage,puVar1);
@@ -2232,7 +2232,7 @@ void rescaleOverview(void)
       fVar1 = FLOOR(fVar1);
     }
     iStack_44 = (int)fVar1;
-    XtSetValues(DAT_10016c0c,&uStack_50,2);
+    XtSetValues(overview_gl_widget,&uStack_50,2);
     FUN_0041fd70();
     ortho2(minx,maxx);
     FUN_004207b4();

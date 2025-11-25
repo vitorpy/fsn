@@ -7,7 +7,7 @@
 void hideOverview(void)
 
 {
-  if (DAT_10006eb4 != 0) {
+  if (overview_popup_shell != 0) {
     overviewActive = 0;
     XtUnmanageChild();
   }
@@ -316,9 +316,9 @@ void createCopyright(undefined4 param_1,int param_2,int param_3)
   puVar1 = (undefined4 *)(param_2 + (param_3 + 2) * 8);
   puVar1[1] = s_FSN_the_3D_File_System_Navigator_100079c4;
   *puVar1 = 0xf66187b;
-  DAT_10016e10 = XmCreateText(param_1,"copyright",param_2,param_3 + 3);
-  XtManageChild(DAT_10016e10);
-  uVar2 = XtWindow(DAT_10016e10);
+  active_file_list = XmCreateText(param_1,"copyright",param_2,param_3 + 3);
+  XtManageChild(active_file_list);
+  uVar2 = XtWindow(active_file_list);
   XRaiseWindow(display,uVar2);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -716,13 +716,13 @@ void showOverview(void)
   undefined4 uVar1;
   undefined4 uVar2;
   
-  if (DAT_10006eb4 == 0) {
+  if (overview_popup_shell == 0) {
     FUN_0041fdf0();
   }
   else {
     XtManageChild();
-    uVar1 = XtDisplay(DAT_10006eb4);
-    uVar2 = XtWindow(DAT_10006eb4);
+    uVar1 = XtDisplay(overview_popup_shell);
+    uVar2 = XtWindow(overview_popup_shell);
     XMapWindow(uVar1,uVar2);
     XRaiseWindow(display,DAT_10016c08);
   }
@@ -747,7 +747,7 @@ void redrawSelectionNames(void)
   size_t sVar1;
   
   if ((curcontext[0xc51] != '\0') && (curcontext[0xc52] != '\0')) {
-    DAT_10006e24 = 0;
+    mark_menu_widget = 0;
     if (*(int *)(curcontext + 0x48) == 0) {
       if (*(int *)(curcontext + 0x44) == 0) {
         XmTextFieldSetString(*(undefined4 *)(curcontextwindows + 0x1c),"No file");
@@ -920,11 +920,11 @@ void fileCreated(int param_1,char *param_2)
           uVar5 = FUN_004118b0(param_1);
           *(undefined4 *)(param_1 + 0x24) = uVar5;
           puVar3[3] = sStack_94.st_blksize;
-          if (DAT_10000184 < sStack_94.st_blksize) {
-            DAT_10000184 = sStack_94.st_blksize;
+          if (window_width < sStack_94.st_blksize) {
+            window_width = sStack_94.st_blksize;
           }
-          if (DAT_1000018c < *(int *)(param_1 + 0x1c)) {
-            DAT_1000018c = *(int *)(param_1 + 0x1c);
+          if (window_height < *(int *)(param_1 + 0x1c)) {
+            window_height = *(int *)(param_1 + 0x1c);
           }
           puVar3[4] = sStack_94.st_mtim.tv_sec;
           FUN_00412400(puVar3);
@@ -1524,9 +1524,9 @@ void createOverview(void)
   XtGetValues(*(undefined4 *)(curcontextwindows + 8),apcStack_a0,2);
   apcStack_a0[0] = (char *)0xf662094;
   apcStack_a0[1] = (char *)0x1;
-  DAT_10006eb4 = XtCreatePopupShell("overview",_DAT_0f6d16fc,toplevel,apcStack_a0,1);
-  XtAddCallback(DAT_10006eb4,0xf6615c9,FUN_00421180,0);
-  uStack_a8 = XmCreateForm(DAT_10006eb4,"overviewForm",apcStack_a0,0);
+  overview_popup_shell = XtCreatePopupShell("overview",_DAT_0f6d16fc,toplevel,apcStack_a0,1);
+  XtAddCallback(overview_popup_shell,0xf6615c9,FUN_00421180,0);
+  uStack_a8 = XmCreateForm(overview_popup_shell,"overviewForm",apcStack_a0,0);
   XtManageChild(uStack_a8);
   install_help_callback(uStack_a8,&overviewHelp);
   iVar2 = init_display_mode();
@@ -1579,8 +1579,8 @@ void createOverview(void)
     *ppcVar3 = "popupColormap";
   }
   ppcVar3[1] = pcStack_b8;
-  DAT_10016c0c = GlxCreateMDraw(uStack_a8,"overviewGlw",apcStack_a0,iStack_a4 + 1);
-  XtAddCallback(DAT_10016c0c,"exposeCallback",FUN_00420bfc,0);
+  overview_gl_widget = GlxCreateMDraw(uStack_a8,"overviewGlw",apcStack_a0,iStack_a4 + 1);
+  XtAddCallback(overview_gl_widget,"exposeCallback",FUN_00420bfc,0);
   iVar2 = init_display_mode();
   if (iVar2 == 0) {
     pcVar4 = "overlayExposeWindow";
@@ -1588,18 +1588,18 @@ void createOverview(void)
   else {
     pcVar4 = "popupExposeWindow";
   }
-  XtAddCallback(DAT_10016c0c,pcVar4,FUN_00420c50,0);
-  XtAddCallback(DAT_10016c0c,"resizeCallback",FUN_00420ca4,0);
-  XtAddCallback(DAT_10016c0c,"ginitCallback",FUN_00420e74,0);
-  XtManageChild(DAT_10016c0c);
+  XtAddCallback(overview_gl_widget,pcVar4,FUN_00420c50,0);
+  XtAddCallback(overview_gl_widget,"resizeCallback",FUN_00420ca4,0);
+  XtAddCallback(overview_gl_widget,"ginitCallback",FUN_00420e74,0);
+  XtManageChild(overview_gl_widget);
   if (DAT_10006e60 == 0) {
     DAT_10006e60 = XtParseTranslationTable(overviewGlw_translations);
   }
-  XtOverrideTranslations(DAT_10016c0c,DAT_10006e60);
+  XtOverrideTranslations(overview_gl_widget,DAT_10006e60);
   apcStack_a0[0] = (char *)0xf6615ba;
   apcStack_a0[1] = (char *)auStack_b4[0];
-  XtSetValues(DAT_10016c0c,apcStack_a0,1);
-  XtManageChild(DAT_10006eb4);
+  XtSetValues(overview_gl_widget,apcStack_a0,1);
+  XtManageChild(overview_popup_shell);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -1784,8 +1784,8 @@ void SG_getPopupArgs(undefined4 param_1,undefined4 param_2,int param_3,int *para
   int iVar2;
   int iVar3;
   
-  uVar1 = FUN_004314e0(param_1,param_2,&DAT_10009660,4);
-  iVar2 = FUN_00432370(param_1,param_2,uVar1,&DAT_10009660,4);
+  uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,4);
+  iVar2 = FUN_00432370(param_1,param_2,uVar1,&temp_data_buffer,4);
   if (iVar2 < 0) {
     FUN_00431b34(param_1,param_2,param_3,param_4);
   }
@@ -1810,7 +1810,7 @@ void SG_getPopupArgs(undefined4 param_1,undefined4 param_2,int param_3,int *para
 void destroyCopyright(void)
 
 {
-  XtDestroyWidget(DAT_10016e10);
+  XtDestroyWidget(active_file_list);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }

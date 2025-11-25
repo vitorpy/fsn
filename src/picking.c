@@ -1435,7 +1435,7 @@ void select_directory(int param_1)
   
   if (param_1 == *(int *)(curcontext + 0x44)) {
     FUN_0041d920();
-    if (DAT_10006e24 != '\0') {
+    if (mark_menu_widget != '\0') {
       FUN_0041c720();
     }
   }

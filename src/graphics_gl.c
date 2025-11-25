@@ -1205,7 +1205,7 @@ void SG_getOverlay2Args(undefined4 param_1,undefined4 param_2,int param_3,int *p
   undefined4 uVar2;
   int iVar3;
   
-  iVar1 = FUN_00432370(param_1,param_2,2,&DAT_10009660,3);
+  iVar1 = FUN_00432370(param_1,param_2,2,&temp_data_buffer,3);
   if (iVar1 < 0) {
     FUN_00432094(param_1,param_2,param_3,param_4);
   }
@@ -2803,7 +2803,7 @@ void SG_getOverlay4Args(undefined4 param_1,undefined4 param_2,int param_3,int *p
   undefined4 uVar2;
   int iVar3;
   
-  iVar1 = FUN_00432370(param_1,param_2,4,&DAT_10009660,3);
+  iVar1 = FUN_00432370(param_1,param_2,4,&temp_data_buffer,3);
   if (iVar1 < 0) {
     FUN_00431dfc(param_1,param_2,param_3,param_4);
   }
@@ -3069,13 +3069,13 @@ void beamup(void)
 
 {
   if (DAT_10017491 != '\0') {
-    DAT_10007988 = 1;
+    redraw_counter = 1;
     do {
       redraw_gl_scene();
       FUN_0042a8e4();
-      DAT_10007988 = DAT_10007988 + 1;
-    } while (DAT_10007988 < 4);
-    DAT_10007988 = 3;
+      redraw_counter = redraw_counter + 1;
+    } while (redraw_counter < 4);
+    redraw_counter = 3;
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -5113,8 +5113,8 @@ void SG_getOverlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *pa
   undefined4 uVar3;
   int iVar4;
   
-  uVar1 = FUN_004314e0(param_1,param_2,&DAT_10009660,3);
-  iVar2 = FUN_00432370(param_1,param_2,uVar1,&DAT_10009660,3);
+  uVar1 = FUN_004314e0(param_1,param_2,&temp_data_buffer,3);
+  iVar2 = FUN_00432370(param_1,param_2,uVar1,&temp_data_buffer,3);
   if (iVar2 < 0) {
     FUN_00432094(param_1,param_2,param_3,param_4);
   }
@@ -5247,13 +5247,13 @@ void beamdown(void)
 
 {
   if (DAT_10017491 != '\0') {
-    DAT_10007988 = 3;
+    redraw_counter = 3;
     do {
       redraw_gl_scene();
       FUN_0042a8e4();
-      DAT_10007988 = DAT_10007988 + -1;
-    } while (-1 < DAT_10007988);
-    DAT_10007988 = 0;
+      redraw_counter = redraw_counter + -1;
+    } while (-1 < redraw_counter);
+    redraw_counter = 0;
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -6820,7 +6820,7 @@ void zbuffer(void)
 void getbeam(void)
 
 {
-  if (DAT_10007988 != 0) {
+  if (redraw_counter != 0) {
                     // WARNING: Bad instruction - Truncating control flow here
     halt_baddata();
   }
