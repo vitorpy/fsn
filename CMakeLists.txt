@@ -58,22 +58,34 @@ if(glm_FOUND OR GLM_INCLUDE_DIR)
     endif()
 endif()
 
-# Source files (to be populated as we modularize)
+# Source files (Phase 5: Fresh modularization)
 set(FSN_SOURCES
-    # Phase 4: Modularization COMPLETE!
-    src/datastructures.c
-    src/picking.c
-    src/utility.c
-    src/filesystem.c
-    src/ui_motif.c
-    src/graphics_gl.c
-    src/icons.c
-    src/navigation.c
-    src/main.c
+    src/fsn_state.c
+    # Tier 1 modules (self-contained) - to be extracted
+    # src/color.c
+    # src/fam_monitor.c
+    # src/x11_wrappers.c
+    # src/xt_wrappers.c
+    # src/motif_wrappers.c
+    # Tier 2 modules (moderate coupling) - to be extracted
+    # src/icons.c
+    # src/database_io.c
+    # src/search.c
+    # src/view_camera.c
+    # Tier 3 modules (high coupling) - to be extracted
+    # src/selection.c
+    # src/rendering.c
+    # src/init.c
+    # src/main.c
 )
 
-# Phase 2: Test that headers compile correctly
-add_executable(test_headers src/test_headers.c)
+# Phase 5: Test that headers compile correctly
+add_executable(test_headers
+    src/test_headers.c
+    src/fsn_state.c
+    src/color.c
+    src/fam_monitor.c
+)
 target_link_libraries(test_headers
     ${XM_LIBRARY}
     ${XT_LIBRARY}
