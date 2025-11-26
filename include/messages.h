@@ -11,7 +11,7 @@
 
 void deleteMessage(undefined4 *param_1);
 void message(undefined4 param_1,int param_2);
-void set_status_message(undefined4 param_1,int param_2);
+undefined4 set_status_message(const char *param_1,int param_2);
 void filemessage(char *param_1,char *param_2,undefined4 param_3);
 void show_error_message(undefined4 param_1);
 void display_status_message(char *param_1);

@@ -9,7 +9,7 @@
 
 #include "fsn_types.h"
 
-void main(int param_1,undefined4 *param_2);
-void parse_command_args(int param_1,undefined4 *param_2);
+void main(int argc,char **argv);
+void parse_command_args(int argc,char **argv);
 
 #endif /* FSN_MAIN_ENTRY_H */

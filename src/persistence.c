@@ -99,7 +99,7 @@ void restorePosition(undefined4 param_1)
   short sStack_2;
   
   extract_position_data(param_1,&sStack_2,&sStack_4,&uStack_8,&uStack_c,&uStack_10,&uStack_14,&iStack_18,
-               &iStack_1c,(int)curcontext + 0xc50);
+               &iStack_1c,(undefined1 *)((int)curcontext + 0xc50));
   if (sStack_2 != *(short *)(curcontext + 0xc)) {
     *(short *)(curcontext + 0xc) = sStack_2;
     init_view_transform();

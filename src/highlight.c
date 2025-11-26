@@ -127,7 +127,7 @@ void highlightOverviewDir(int param_1)
     begin_overview_render();
     color(0);
     clear();
-    color(overlayHighlightColor._2_2_);
+    color(overlayHighlightColor);
     dVar3 = (double)*(float *)(param_1 + 0x3c) / (double)((ulonglong)uVar4 << 0x20);
     rectf((float)((double)*(float *)(param_1 + 0x34) - dVar3 * (double)*(float *)(param_1 + 0x58)),
           (float)((double)*(float *)(param_1 + 0x38) - dVar3));
@@ -141,15 +141,15 @@ void highlightOverviewDir(int param_1)
                          (double)((ulonglong)(double)*(float *)(iVar2 + 0x38) & 0xffffffff00000000))
       ;
       bgnline();
-      v2f(&fStack_c);
-      v2f(&uStack_14);
+      v2f((float *)&fStack_c);
+      v2f((float *)&uStack_14);
       endline();
     }
     pushmatrix();
     ortho2(-1.0f, 1.0f, -1.0f, 1.0f);
     cmov2(0xbf733333,0xbf666666);
-    uVar1 = build_path_string(0,param_1);
-    charstr(uVar1);
+    build_path_string((char *)0,(undefined4 *)param_1);
+    charstr((char *)uVar1);
     popmatrix();
     end_rendering();
   }
@@ -196,8 +196,8 @@ void highlightDirLandscape(int param_1)
                          (double)((ulonglong)dVar2 & 0xffffffff00000000));
       uStack_4 = uStack_10;
       bgnline();
-      v3f(&fStack_c);
-      v3f(&uStack_18);
+      v3f((float *)&fStack_c);
+      v3f((float *)&uStack_18);
       endline();
       color(0);
       pushmatrix();
@@ -263,18 +263,18 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
   float fVar1;
   uint uVar2;
   undefined8 in_f4;
-  
+
   uVar2 = (uint)((ulonglong)in_f4 >> 0x20);
   if (param_1 == 0) {
     param_1 = param_3;
   }
-  if ((param_2 != active_colormap_id) || (param_1 != colormap_dirty_flag)) {
+  if (((int)param_2 != active_colormap_id) || (param_1 != colormap_dirty_flag)) {
     colormap_dirty_flag = param_1;
-    active_colormap_id = param_2;
+    active_colormap_id = (int)param_2;
     glx_reset_context_wrapper();
     color(0);
     clear();
-    color(overlayHighlightColor._2_2_);
+    color(overlayHighlightColor);
     linewidth((int)default_line_width);
     zbuffer(0);
     pushmatrix();
@@ -295,7 +295,7 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
       }
     }
     else {
-      recalc_layout(param_1,param_2);
+      recalc_layout(param_1,(int)param_2);
     }
     popmatrix();
     linewidth(1);
@@ -303,15 +303,16 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
       update_list_state();
     }
     else {
-      __dest = (char *)build_path_string(0, NULL);
+      build_path_string((char *)0, NULL);
+      __dest = (char *)0;
       if (param_2 == (undefined4 *)0x0) {
         if (-1 < *(int *)(param_1 + 0x74) << 2) {
-          set_status_text(__dest);
+          set_status_text((int)__dest);
         }
       }
       else {
         strcat(__dest,(char *)*param_2);
-        set_status_text(__dest);
+        set_status_text((int)__dest);
       }
     }
     zbuffer(1);

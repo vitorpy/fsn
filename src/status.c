@@ -8,7 +8,7 @@
 #include "fsn_types.h"
 #include "fsn_state.h"
 
-void set_status_message(undefined4 param_1,int param_2)
+undefined4 set_status_message(const char *param_1,int param_2)
 
 {
   undefined4 *puVar1;

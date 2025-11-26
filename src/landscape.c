@@ -247,8 +247,8 @@ void highlightDirLandscape(int param_1)
                          (double)((ulonglong)dVar2 & 0xffffffff00000000));
       uStack_4 = uStack_10;
       bgnline();
-      v3f(&fStack_c);
-      v3f(&uStack_18);
+      v3f((float *)&fStack_c);
+      v3f((float *)&uStack_18);
       endline();
       color(0);
       pushmatrix();

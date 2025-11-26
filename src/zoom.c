@@ -8,6 +8,10 @@
 #include "fsn_types.h"
 #include "fsn_state.h"
 #include "fsn_igl.h"
+#include <sys/time.h>
+
+/* TODO: This should be in fsn_state.h */
+extern struct timeval zoom_start_time;
 
 void pushzoom(void)
 
@@ -21,7 +25,7 @@ void pushzoom(void)
   undefined4 auStack_8 [2];
   
   get_view_position(auStack_38);
-  iVar2 = equalPositions(auStack_38,
+  iVar2 = equalPositions((int)auStack_38,
                          *(int *)(curcontextwindows + 0x34) + *(int *)(curcontext + 0x40) * 0x38);
   if (iVar2 == 0) {
     *(int *)(curcontext + 0x40) = *(int *)(curcontext + 0x40) + 1;
@@ -150,7 +154,7 @@ void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *para
   *param_5 = 0;
   *param_7 = 0;
   *param_8 = 0;
-  get_selection_params(&iStack_4,&iStack_8,auStack_c);
+  get_selection_params(&iStack_4,&iStack_8,(int)auStack_c);
   if (iStack_4 == 0) {
     *param_7 = 1;
     *param_6 = 0;
@@ -223,10 +227,10 @@ void zoomToSelection(void)
 
 {
   if (*(int *)(curcontext + 0x3c) == 0) {
-    update_context_bounds(*(undefined4 *)(curcontext + 0x44),*(undefined4 *)(curcontext + 0x48));
+    update_context_bounds((void *)(curcontext + 0x44),(void *)(curcontext + 0x48));
   }
   else {
-    update_context_display(*(undefined4 *)(curcontext + 0x44),*(undefined4 *)(curcontext + 0x48));
+    update_context_display((void *)(curcontext + 0x44),(void *)(curcontext + 0x48));
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();

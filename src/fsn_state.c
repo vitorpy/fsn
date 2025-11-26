@@ -195,7 +195,7 @@ float base_y_offset = 0.0f;
 int main_gl_window = 0;
 int gl_buffer_size = 0;
 int display_mode_flags = 0;
-void *myContext = NULL;
+/* myContext is a function callback, see context_funcs.c */
 int vinfop = 0;
 
 /*=============================================================================

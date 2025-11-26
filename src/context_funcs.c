@@ -4,9 +4,9 @@
  * AS-IS extraction preserving all decompilation artifacts.
  */
 
-#include "context_funcs.h"
-#include "fsn_types.h"
+#include "fsn.h"
 #include "fsn_state.h"
+#include "context_funcs.h"
 
 void myContext(undefined4 param_1,undefined4 param_2)
 
@@ -31,9 +31,10 @@ void newcontext(uint param_1,char param_2)
 
 {
   int iVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  
+  Display *displayVar;
+  Window windowVar;
+  Widget widgetVar;
+
   if (param_1 != curcontextid) {
     iVar1 = *(int *)(curcontext + 0x44);
     if (iVar1 != 0) {
@@ -58,12 +59,14 @@ void newcontext(uint param_1,char param_2)
       *(byte *)(iVar1 + 0x28) = *(byte *)(iVar1 + 0x28) | 0x10;
     }
     if (param_2 == '\0') {
-      uVar2 = XtDisplay(*(undefined4 *)(altcontextwindows + 0x28));
-      uVar3 = XtWindow(*(undefined4 *)(altcontextwindows + 0x28));
-      XMapWindow(uVar2,uVar3);
-      uVar2 = XtDisplay(*(undefined4 *)(curcontextwindows + 0x28));
-      uVar3 = XtWindow(*(undefined4 *)(curcontextwindows + 0x28));
-      XUnmapWindow(uVar2,uVar3);
+      widgetVar = (Widget)*(undefined4 *)(altcontextwindows + 0x28);
+      displayVar = XtDisplay(widgetVar);
+      windowVar = XtWindow(widgetVar);
+      XMapWindow(displayVar,windowVar);
+      widgetVar = (Widget)*(undefined4 *)(curcontextwindows + 0x28);
+      displayVar = XtDisplay(widgetVar);
+      windowVar = XtWindow(widgetVar);
+      XUnmapWindow(displayVar,windowVar);
       update_widget_state();
       refresh_display();
       curcontext[0xc53] = 0;

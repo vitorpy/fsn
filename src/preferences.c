@@ -13,11 +13,11 @@ void showPreferencePanel(void)
 
 {
   float fVar1;
-  undefined **ppuVar2;
+  char **ppuVar2;
   Widget uVar3;
-  Widget uVar4;
+  XmString xmstrVar;
   char *__src;
-  undefined *puVar5;
+  Widget widgetVar;
   float fVar6;
   uint in_fcsr;
   char acStack_4b0 [1048];
@@ -38,12 +38,15 @@ void showPreferencePanel(void)
   Widget local_34;
   Widget local_8;
   Widget local_4;
+  uint argCount;
+  Display *displayVar;
+  Window windowVar;
   
   if (preference_panel_shell == 0) {
     local_98 = 0xf662094;
     local_94 = 1;
     preference_panel_shell = XtCreatePopupShell("preferencePanel",topLevelShellWidgetClass,toplevel,(Arg*)&local_98,1);
-    XtAddCallback(preference_panel_shell,(char*)0xf6615c9,pref_panel_map_callback,0);
+    XtAddCallback(preference_panel_shell,(char*)0xf6615c9,(XtCallbackProc)pref_panel_map_callback,(XtPointer)0);
     local_4 = XmCreatePanedWindow(preference_panel_shell,"preferencePane",(Arg*)&local_98,0);
     XtManageChild(local_4);
     install_help_callback(local_4,&prefPanelHelp);
@@ -53,23 +56,23 @@ void showPreferencePanel(void)
     XtManageChild(uVar3);
     uVar3 = XmCreateRowColumn(local_8,"preferenceHeaderButtons",(Arg*)&local_98,0);
     XtManageChild(uVar3);
-    uVar4 = XmCreatePushButton(uVar3,"preferenceQuit",(Arg*)&local_98,0);
-    XtAddCallback(uVar4,(char*)0xe3f35b3,hidePreferencePanel,0);
-    XtManageChild(uVar4);
-    uVar4 = XmCreatePushButton(uVar3,"preferenceUndo",(Arg*)&local_98,0);
-    XtAddCallback(uVar4,(char*)0xe3f35b3,pref_color_callback,0);
-    XtManageChild(uVar4);
-    uVar4 = XmCreatePushButton(uVar3,"preferenceSaveChanges",(Arg*)&local_98,0);
-    XtAddCallback(uVar4,(char*)0xe3f35b3,toggle_pair_callback,0);
-    XtManageChild(uVar4);
+    widgetVar = XmCreatePushButton(uVar3,"preferenceQuit",(Arg*)&local_98,0);
+    XtAddCallback(widgetVar,(char*)0xe3f35b3,(XtCallbackProc)hidePreferencePanel,(XtPointer)0);
+    XtManageChild(widgetVar);
+    widgetVar = XmCreatePushButton(uVar3,"preferenceUndo",(Arg*)&local_98,0);
+    XtAddCallback(widgetVar,(char*)0xe3f35b3,(XtCallbackProc)pref_color_callback,(XtPointer)0);
+    XtManageChild(widgetVar);
+    widgetVar = XmCreatePushButton(uVar3,"preferenceSaveChanges",(Arg*)&local_98,0);
+    XtAddCallback(widgetVar,(char*)0xe3f35b3,(XtCallbackProc)toggle_pair_callback,(XtPointer)0);
+    XtManageChild(widgetVar);
     uVar3 = XmCreatePushButton(uVar3,"preferenceSaveAll",(Arg*)&local_98,0);
-    XtAddCallback(uVar3,(char*)0xe3f35b3,toggle_pair_callback,1);
+    XtAddCallback(uVar3,(char*)0xe3f35b3,(XtCallbackProc)toggle_pair_callback,(XtPointer)1);
     XtManageChild(uVar3);
     uVar3 = XmCreateRowColumn(local_8,"preferenceHeaderButtons2",(Arg*)&local_98,0);
     XtManageChild(uVar3);
-    uVar4 = XmCreatePushButton(uVar3,"preferenceSelect",(Arg*)&local_98,0);
-    XtAddCallback(uVar4,(char*)0xe3f35b3,color_select_callback,0);
-    XtManageChild(uVar4);
+    widgetVar = XmCreatePushButton(uVar3,"preferenceSelect",(Arg*)&local_98,0);
+    XtAddCallback(widgetVar,(char*)0xe3f35b3,(XtCallbackProc)color_select_callback,(XtPointer)0);
+    XtManageChild(widgetVar);
     pref_filename_field = XmCreateTextField(uVar3,"preferenceFileName",(Arg*)&local_98,0);
     __src = getenv("HOME");
     if (__src != (char *)0x0) {
@@ -80,20 +83,20 @@ void showPreferencePanel(void)
     XtManageChild(pref_filename_field);
     uVar3 = XmCreateRowColumn(local_4,"preferenceBooleans",(Arg*)&local_98,0);
     XtManageChild(uVar3);
-    ppuVar2 = &PTR_s_shrinkOnZoom_10008950;
-    puVar5 = PTR_s_shrinkOnZoom_10008950;
-    while (puVar5 != (undefined *)0x0) {
-      uVar4 = XmStringCreateSimple(puVar5);
+    ppuVar2 = (char**)&PTR_s_shrinkOnZoom_10008950;
+    widgetVar = (Widget)PTR_s_shrinkOnZoom_10008950;
+    while (widgetVar != (Widget)0x0) {
+      xmstrVar = XmStringCreateSimple((char*)widgetVar);
       local_98 = 0xe3f40b5;
       local_90 = 0xe3f48f1;
       local_8c = (uint)(byte)*ppuVar2[1];
-      local_94 = uVar4;
-      puVar5 = (undefined *)XmCreateToggleButton(uVar3,"preferenceBoolean",(Arg*)&local_98,2);
-      ppuVar2[4] = puVar5;
-      XtAddCallback(puVar5,(char*)0xe3f4ca5,link_color_toggle_callback,ppuVar2);
-      XtManageChild(ppuVar2[4]);
-      XmStringFree(uVar4);
-      puVar5 = ppuVar2[5];
+      local_94 = (undefined4)xmstrVar;
+      widgetVar = XmCreateToggleButton(uVar3,"preferenceBoolean",(Arg*)&local_98,2);
+      ppuVar2[4] = (char*)widgetVar;
+      XtAddCallback(widgetVar,(char*)0xe3f4ca5,(XtCallbackProc)link_color_toggle_callback,(XtPointer)ppuVar2);
+      XtManageChild((Widget)ppuVar2[4]);
+      XmStringFree(xmstrVar);
+      widgetVar = (Widget)ppuVar2[5];
       *(undefined *)(ppuVar2 + 3) = *ppuVar2[1];
       ppuVar2 = ppuVar2 + 5;
     }
@@ -101,39 +104,39 @@ void showPreferencePanel(void)
     XtManageChild(uVar3);
     local_34 = XmCreateRowColumn(uVar3,"preferenceScales",(Arg*)&local_98,0);
     XtManageChild(local_34);
-    ppuVar2 = &PTR_s_monitorTimeout_100089f0;
-    puVar5 = PTR_s_monitorTimeout_100089f0;
-    while (puVar5 != (undefined *)0x0) {
-      uVar4 = 4;
-      uVar3 = XmStringCreateSimple(puVar5);
+    ppuVar2 = (char**)&PTR_s_monitorTimeout_100089f0;
+    widgetVar = (Widget)PTR_s_monitorTimeout_100089f0;
+    while (widgetVar != (Widget)0x0) {
+      argCount = 4;
+      xmstrVar = XmStringCreateSimple((char*)widgetVar);
       local_98 = 0xe3f4adf;
       local_90 = 0xf66187b;
       local_8c = *(uint *)ppuVar2[1];
       local_88 = 0xe3f430c;
-      local_84 = ppuVar2[3];
+      local_84 = (undefined*)ppuVar2[3];
       local_80 = 0xe3f4274;
-      local_7c = ppuVar2[4];
+      local_7c = (undefined*)ppuVar2[4];
       if (((uint)ppuVar2[2] & 8) != 0) {
         local_74 = (undefined *)0x2;
         local_78 = 0xe3f45e5;
-        uVar4 = 5;
+        argCount = 5;
       }
-      local_94 = uVar3;
-      puVar5 = (undefined *)XmCreateScale(local_34,"preferenceScale",(Arg*)&local_98,uVar4);
-      ppuVar2[6] = puVar5;
-      XtAddCallback(puVar5,(char*)0xe3f4ca5,exec_color_toggle_callback,ppuVar2);
-      XtManageChild(ppuVar2[6]);
-      XmStringFree(uVar3);
-      puVar5 = ppuVar2[7];
-      ppuVar2[5] = *(undefined **)ppuVar2[1];
+      local_94 = (undefined4)xmstrVar;
+      widgetVar = XmCreateScale(local_34,"preferenceScale",(Arg*)&local_98,argCount);
+      ppuVar2[6] = (char*)widgetVar;
+      XtAddCallback(widgetVar,(char*)0xe3f4ca5,(XtCallbackProc)exec_color_toggle_callback,(XtPointer)ppuVar2);
+      XtManageChild((Widget)ppuVar2[6]);
+      XmStringFree(xmstrVar);
+      widgetVar = (Widget)ppuVar2[7];
+      ppuVar2[5] = *(char**)ppuVar2[1];
       ppuVar2 = ppuVar2 + 7;
     }
-    ppuVar2 = &PTR_s_mouseSpeed_10008b5c;
-    puVar5 = PTR_s_mouseSpeed_10008b5c;
-    while (puVar5 != (undefined *)0x0) {
-      fVar6 = *(float *)(&pref_float_array + (int)ppuVar2[5] * 4);
-      uVar4 = 5;
-      uVar3 = XmStringCreateSimple(puVar5);
+    ppuVar2 = (char**)&PTR_s_mouseSpeed_10008b5c;
+    widgetVar = (Widget)PTR_s_mouseSpeed_10008b5c;
+    while (widgetVar != (Widget)0x0) {
+      fVar6 = *(float *)((char*)&pref_float_array + (int)ppuVar2[5] * 4);
+      argCount = 5;
+      xmstrVar = XmStringCreateSimple((char*)widgetVar);
       local_98 = 0xe3f4adf;
       local_90 = 0xf66187b;
       local_88 = 0xe3f430c;
@@ -160,20 +163,20 @@ void showPreferencePanel(void)
         fVar6 = FLOOR((float)(int)ppuVar2[4] * fVar6);
       }
       local_7c = (undefined *)(int)fVar6;
-      local_74 = ppuVar2[5];
+      local_74 = (undefined*)ppuVar2[5];
       if (((uint)ppuVar2[2] & 8) != 0) {
         local_6c = 2;
         local_70 = 0xe3f45e5;
-        uVar4 = 6;
+        argCount = 6;
       }
-      local_94 = uVar3;
-      puVar5 = (undefined *)XmCreateScale(local_34,"preferenceScale",(Arg*)&local_98,uVar4);
-      ppuVar2[7] = puVar5;
-      XtAddCallback(puVar5,(char*)0xe3f4ca5,file_color_toggle_callback,ppuVar2);
-      XtManageChild(ppuVar2[7]);
-      XmStringFree(uVar3);
-      puVar5 = ppuVar2[8];
-      ppuVar2[6] = *(undefined **)ppuVar2[1];
+      local_94 = (undefined4)xmstrVar;
+      widgetVar = XmCreateScale(local_34,"preferenceScale",(Arg*)&local_98,argCount);
+      ppuVar2[7] = (char*)widgetVar;
+      XtAddCallback(widgetVar,(char*)0xe3f4ca5,(XtCallbackProc)file_color_toggle_callback,(XtPointer)ppuVar2);
+      XtManageChild((Widget)ppuVar2[7]);
+      XmStringFree(xmstrVar);
+      widgetVar = (Widget)ppuVar2[8];
+      ppuVar2[6] = *(char**)ppuVar2[1];
       ppuVar2 = ppuVar2 + 8;
     }
     local_38 = XmCreateForm(local_4,"preferenceColorForm",(Arg*)&local_98,0);
@@ -188,22 +191,22 @@ void showPreferencePanel(void)
     XtManageChild(uVar3);
     pref_red_scale = XmCreateScale(uVar3,"preferenceRedScale",(Arg*)&local_98,0);
     XtManageChild(pref_red_scale);
-    XtAddCallback(pref_red_scale,(char*)0xe3f4ca5,rgb_scale_callback,0);
+    XtAddCallback(pref_red_scale,(char*)0xe3f4ca5,(XtCallbackProc)rgb_scale_callback,(XtPointer)0);
     pref_hue_scale = XmCreateScale(uVar3,"preferenceHueScale",(Arg*)&local_98,0);
     XtManageChild(pref_hue_scale);
-    XtAddCallback(pref_hue_scale,(char*)0xe3f4ca5,hsv_scale_callback,0);
+    XtAddCallback(pref_hue_scale,(char*)0xe3f4ca5,(XtCallbackProc)hsv_scale_callback,(XtPointer)0);
     pref_green_scale = XmCreateScale(uVar3,"preferenceGreenScale",(Arg*)&local_98,0);
     XtManageChild(pref_green_scale);
-    XtAddCallback(pref_green_scale,(char*)0xe3f4ca5,rgb_scale_callback,0);
+    XtAddCallback(pref_green_scale,(char*)0xe3f4ca5,(XtCallbackProc)rgb_scale_callback,(XtPointer)0);
     pref_sat_scale = XmCreateScale(uVar3,"preferenceSatScale",(Arg*)&local_98,0);
     XtManageChild(pref_sat_scale);
-    XtAddCallback(pref_sat_scale,(char*)0xe3f4ca5,hsv_scale_callback,0);
+    XtAddCallback(pref_sat_scale,(char*)0xe3f4ca5,(XtCallbackProc)hsv_scale_callback,(XtPointer)0);
     pref_blue_scale = XmCreateScale(uVar3,"preferenceBlueScale",(Arg*)&local_98,0);
     XtManageChild(pref_blue_scale);
-    XtAddCallback(pref_blue_scale,(char*)0xe3f4ca5,rgb_scale_callback,0);
+    XtAddCallback(pref_blue_scale,(char*)0xe3f4ca5,(XtCallbackProc)rgb_scale_callback,(XtPointer)0);
     pref_val_scale = XmCreateScale(uVar3,"preferenceValScale",(Arg*)&local_98,0);
     XtManageChild(pref_val_scale);
-    XtAddCallback(pref_val_scale,(char*)0xe3f4ca5,hsv_scale_callback,0);
+    XtAddCallback(pref_val_scale,(char*)0xe3f4ca5,(XtCallbackProc)hsv_scale_callback,(XtPointer)0);
     refresh_legend_colors();
     update_legend_display();
     local_88 = 0xe3f46dd;
@@ -220,36 +223,36 @@ void showPreferencePanel(void)
     XtManageChild(uVar3);
     local_40 = XmCreateRadioBox(uVar3,"preferenceColors",(Arg*)&local_98,0);
     XtManageChild(local_40);
-    ppuVar2 = &PTR_s_groundColor_1000935c;
-    puVar5 = PTR_s_groundColor_1000935c;
-    while (puVar5 != (undefined *)0x0) {
-      uVar4 = 1;
-      uVar3 = XmStringCreateSimple(puVar5);
+    ppuVar2 = (char**)&PTR_s_groundColor_1000935c;
+    widgetVar = (Widget)PTR_s_groundColor_1000935c;
+    while (widgetVar != (Widget)0x0) {
+      argCount = 1;
+      xmstrVar = XmStringCreateSimple((char*)widgetVar);
       local_98 = 0xe3f40b5;
-      if (ppuVar2 == (undefined **)PTR_PTR_100094ec) {
+      if (ppuVar2 == (char**)PTR_PTR_100094ec) {
         local_90 = 0xe3f48f1;
         local_8c = 1;
-        uVar4 = 2;
+        argCount = 2;
       }
-      local_94 = uVar3;
-      puVar5 = (undefined *)XmCreateToggleButton(local_40,"preferenceColor",(Arg*)&local_98,uVar4);
-      ppuVar2[3] = puVar5;
-      XtAddCallback(puVar5,(char*)0xe3f4ca5,dir_color_toggle_callback,ppuVar2);
-      XtManageChild(ppuVar2[3]);
-      XmStringFree(uVar3);
-      puVar5 = ppuVar2[4];
-      ppuVar2[2] = *(undefined **)ppuVar2[1];
+      local_94 = (undefined4)xmstrVar;
+      widgetVar = XmCreateToggleButton(local_40,"preferenceColor",(Arg*)&local_98,argCount);
+      ppuVar2[3] = (char*)widgetVar;
+      XtAddCallback(widgetVar,(char*)0xe3f4ca5,(XtCallbackProc)dir_color_toggle_callback,(XtPointer)ppuVar2);
+      XtManageChild((Widget)ppuVar2[3]);
+      XmStringFree(xmstrVar);
+      widgetVar = (Widget)ppuVar2[4];
+      ppuVar2[2] = *(char**)ppuVar2[1];
       ppuVar2 = ppuVar2 + 4;
     }
     XtManageChild(preference_panel_shell);
   }
   else {
     XtManageChild(preference_panel_shell);
-    uVar3 = XtDisplay(preference_panel_shell);
-    uVar4 = XtWindow(preference_panel_shell);
-    XMapWindow(uVar3,uVar4);
-    uVar3 = XtWindow(preference_panel_shell);
-    XRaiseWindow(display,uVar3);
+    displayVar = XtDisplay(preference_panel_shell);
+    windowVar = XtWindow(preference_panel_shell);
+    XMapWindow(displayVar,windowVar);
+    windowVar = XtWindow(preference_panel_shell);
+    XRaiseWindow(display,windowVar);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();

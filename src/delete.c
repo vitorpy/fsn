@@ -13,25 +13,25 @@ void deleteMessage(undefined4 *param_1)
 {
   undefined4 *puVar1;
   undefined4 local_c;
-  undefined4 local_8;
+  XmString local_8;
   
   puVar1 = current_directory_node;
   if (param_1 == current_directory_node) {
     do {
       current_directory_node = (undefined4 *)puVar1[1];
-      XmStringFree(*puVar1);
-      XtFree(puVar1);
+      XmStringFree((XmString)*puVar1);
+      XtFree((char*)puVar1);
       if (current_directory_node == (undefined4 *)0x0) break;
       puVar1 = current_directory_node;
     } while (*(char *)(current_directory_node + 2) != '\0');
     if (current_directory_node == (undefined4 *)0x0) {
-      local_8 = blankXmString;
+      local_8 = (XmString)blankXmString;
     }
     else {
-      local_8 = *current_directory_node;
+      local_8 = (XmString)*current_directory_node;
     }
     local_c = 0xe3f40b5;
-    XtSetValues(message_widget,&local_c,1);
+    XtSetValues(message_widget,(Arg*)&local_c,1);
   }
   else {
     *(undefined1 *)(param_1 + 2) = 1;

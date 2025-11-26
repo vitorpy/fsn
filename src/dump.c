@@ -8,6 +8,9 @@
 #include "fsn_types.h"
 #include "fsn_state.h"
 
+/* TODO: This should be in fsn_state.h */
+extern undefined __iob_func_result;
+
 void dumpDatabaseCB(void)
 
 {
@@ -28,7 +31,7 @@ void databaseDumpTimeout(void)
 void scheduleDatabaseDumpTimeout(void)
 
 {
-  XtAppAddTimeOut(app_context,900000,databaseDumpTimeout,0);
+  XtAppAddTimeOut(app_context,900000,(XtTimerCallbackProc)databaseDumpTimeout,0);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -64,7 +67,7 @@ void dumpMarks(FILE *param_1)
       asStack_8[0] = (short)sVar1;
       fwrite(asStack_8,2,1,param_1);
       fwrite(*(void **)(selection_buffer + iVar2 + 0x38),1,(int)asStack_8[0],param_1);
-      copy_selection_data(iVar3 * 0x40 + selection_buffer,param_1);
+      copy_selection_data((int)(iVar3 * 0x40 + selection_buffer),(int)param_1);
       iVar3 = iVar3 + 1;
       iVar2 = iVar2 + 0x40;
     } while (iVar3 < selection_count);

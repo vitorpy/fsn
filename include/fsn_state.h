@@ -221,7 +221,7 @@ extern float base_y_offset;
 extern int main_gl_window;
 extern int gl_buffer_size;
 extern int display_mode_flags;
-extern void *myContext;
+/* myContext is a function callback, see context_funcs.h */
 extern int vinfop;
 
 /*=============================================================================

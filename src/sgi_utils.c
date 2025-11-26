@@ -134,7 +134,7 @@ void SG_getOverlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *pa
   uVar1 = parse_data_buffer(param_1,param_2,&temp_data_buffer,3);
   iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,3);
   if (iVar2 < 0) {
-    setup_menu_resources(param_1,param_2,param_3,param_4);
+    setup_menu_resources((Display *)param_1,param_2,(void *)param_3,(void *)param_4);
   }
   else {
     uVar3 = eval_bytecode_instruction(param_1,param_2,0,0,0);
@@ -163,7 +163,7 @@ void SG_getOverlay2Args(undefined4 param_1,undefined4 param_2,int param_3,int *p
   
   iVar1 = read_bytecode_value(param_1,param_2,2,&temp_data_buffer,3);
   if (iVar1 < 0) {
-    setup_menu_resources(param_1,param_2,param_3,param_4);
+    setup_menu_resources((Display *)param_1,param_2,(void *)param_3,(void *)param_4);
   }
   else {
     uVar2 = eval_bytecode_instruction(param_1,param_2,0,0,0);
@@ -192,7 +192,7 @@ void SG_getOverlay4Args(undefined4 param_1,undefined4 param_2,int param_3,int *p
   
   iVar1 = read_bytecode_value(param_1,param_2,4,&temp_data_buffer,3);
   if (iVar1 < 0) {
-    process_data_recursive(param_1,param_2,param_3,param_4);
+    process_data_recursive(param_1,param_2,param_3,(int)param_4);
   }
   else {
     uVar2 = eval_bytecode_instruction(param_1,param_2,0,0,0);
@@ -222,7 +222,7 @@ void SG_getPopupArgs(undefined4 param_1,undefined4 param_2,int param_3,int *para
   uVar1 = parse_data_buffer(param_1,param_2,&temp_data_buffer,4);
   iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,4);
   if (iVar2 < 0) {
-    process_data_section(param_1,param_2,param_3,param_4);
+    process_data_section(param_1,param_2,param_3,(int)param_4);
   }
   else {
     uVar1 = eval_bytecode_instruction(param_1,param_2,0,0,0);
@@ -253,7 +253,7 @@ void SG_getUnderlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *p
   uVar1 = parse_data_buffer(param_1,param_2,&temp_data_buffer,1);
   iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,1);
   if (iVar2 < 0) {
-    process_data_section(param_1,param_2,param_3,param_4);
+    process_data_section(param_1,param_2,param_3,(int)param_4);
   }
   else {
     uVar3 = eval_bytecode_instruction(param_1,param_2,0,0,0);

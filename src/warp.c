@@ -34,7 +34,7 @@ void do_warp(int param_1)
       set_camera_lookat((double)view_init_x,(double)view_init_y);
     }
     else {
-      get_view_extents(*(int *)(curcontext + 0x3c),&local_4,&local_8,local_c);
+      get_view_extents((void *)(long)*(int *)(curcontext + 0x3c),&local_4,&local_8,(int)(long)local_c);
       set_camera_lookat((double)local_4,(double)local_8);
     }
   }
@@ -82,21 +82,21 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = -0.5;
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = -0.5;
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = (float)((double)*(float *)(curcontext + 8) +
                          (double)((ulonglong)unaff_000010b0 << 0x20));
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = (float)((double)*(float *)(curcontext + 8) +
                          (double)((ulonglong)unaff_000010b0 << 0x20));
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       endpolygon();
     }
     else {
@@ -107,20 +107,20 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = -0.5;
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = -0.5;
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       cpack(current_packed_color);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = *(float *)(curcontext + 8) + view_offset_z;
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = *(float *)(curcontext + 8) + view_offset_z;
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       endpolygon();
       shademodel(0);
       bgnpolygon();
@@ -128,21 +128,21 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = *(float *)(curcontext + 8) + view_offset_z;
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = (float)((double)*(float *)(curcontext + 8) +
                          (double)((ulonglong)unaff_000010b0 << 0x20));
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
-      fStack_20 = (float)((double)*(float *)(curcontext + 8) +
-                         (double)((ulonglong)unaff_000010b0 << 0x20));
-      v3f(&fStack_28);
+      fStack_20 = (float)((double)((ulonglong)unaff_000010b0 << 0x20) +
+                         (double)*(float *)(curcontext + 8));
+      v3f((float*)&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = *(float *)(curcontext + 8) + view_offset_z;
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       endpolygon();
       shademodel(1);
       bgnpolygon();
@@ -150,20 +150,20 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) - base_y_offset;
       fStack_20 = -0.5;
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) - base_y_offset;
       fStack_20 = -0.5;
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       cpack(highlight_color);
       fStack_28 = (float)((double)*(float *)curcontext + unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = -0.5;
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       fStack_28 = (float)((double)*(float *)curcontext - unaff_f20);
       fStack_24 = *(float *)(curcontext + 4) + view_offset_y;
       fStack_20 = -0.5;
-      v3f(&fStack_28);
+      v3f((float*)&fStack_28);
       endpolygon();
       shademodel(0);
     }
@@ -224,7 +224,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
   lVar6 = CONCAT44(uVar9,0x3cf5c28f);
   dVar15 = (double)CONCAT44(uVar11,0x3cf5c28f);
   scale(lVar6,dVar15);
-  draw_file_icon(*param_3);
+  draw_file_icon((void *)(long)*param_3);
   popmatrix();
   iVar3 = 0;
   if (0 < (int)param_3[3]) {
@@ -242,7 +242,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       else {
         uVar1 = 4;
       }
-      render_file_icon(param_3,iVar2,0,param_4 == '\0',uVar1,0x1f);
+      render_file_icon((int)(long)param_3,iVar2,0,param_4 == '\0',uVar1,0x1f);
       uVar9 = (undefined4)((ulonglong)dVar15 >> 0x20);
       uVar5 = (uint)((ulonglong)lVar6 >> 0x20);
       if (*(int *)(iVar2 + 0x28) << 3 < 0) {
@@ -267,7 +267,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       iVar4 = iVar4 + 4;
     } while (iVar3 < (int)param_3[3]);
   }
-  process_pick_item(param_3,param_4);
+  process_pick_item((int)(long)param_3,param_4);
   popmatrix();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -301,7 +301,7 @@ void pickWarp(int *param_1,undefined4 *param_2,undefined4 *param_3)
   rotate((int)*(short *)(curcontext + 0xe),0x78);
   rotate((int)*(short *)(curcontext + 0xc),0x7a);
   translate(-*(float *)curcontext,-*(float *)(curcontext + 4));
-  apply_context_changes(*(undefined4 *)(curcontext + 0x3c),1);
+  apply_context_changes((void *)(long)*(undefined4 *)(curcontext + 0x3c),1);
   iVar1 = endpick(asStack_3f0);
   popmatrix();
   iVar3 = 0;
@@ -349,7 +349,7 @@ void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *para
   *param_5 = 0;
   *param_7 = 0;
   *param_8 = 0;
-  get_selection_params(&iStack_4,&iStack_8,auStack_c);
+  get_selection_params(&iStack_4,&iStack_8,(int)(long)auStack_c);
   if (iStack_4 == 0) {
     *param_7 = 1;
     *param_6 = 0;

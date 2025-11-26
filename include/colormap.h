@@ -8,9 +8,10 @@
 #define FSN_COLORMAP_H
 
 #include "fsn_types.h"
+#include <X11/Intrinsic.h>
 
-void newOverlayColormap(undefined4 param_1);
-void allocOverlayColor(undefined4 param_1,undefined4 param_2);
+void newOverlayColormap(Widget param_1);
+void allocOverlayColor(Widget param_1,undefined4 param_2);
 void SG_getDefaultColormap(int param_1,int param_2,int param_3);
 
 #endif /* FSN_COLORMAP_H */
