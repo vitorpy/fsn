@@ -37041,7 +37041,7 @@ void main(int param_1,undefined4 *param_2)
   XtAppAddActions(app_context,&xt_actions_table,0x10);
   uStack_a8 = XtCreateManagedWidget("mainw",_DAT_0e3d4f98,toplevel,&uStack_a0,0);
   install_help_callback(uStack_a8,&topHelp);
-  uStack_ac = FUN_0040dff8(uStack_a8);
+  uStack_ac = get_panel_value(uStack_a8);
   panel_widget = XtCreateManagedWidget("panel",_DAT_0e3d331c,uStack_a8,&uStack_a0,0);
   uStack_a0 = 0xe3f40cb;
   uStack_98 = 0xe3f4b1d;
@@ -37166,7 +37166,7 @@ void main(int param_1,undefined4 *param_2)
   if (initialControls != '\0') {
     show_controls();
   }
-  FUN_0040ed40();
+  init_color_menus();
   XtSetSensitive(copy_button_widget,1);
   XtSetSensitive(uStack_ac,1);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),1);
@@ -37256,7 +37256,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   XtAppAddActions(app_context,&xt_actions_table,0x10);
   local_a8 = XtCreateManagedWidget("mainw",_DAT_0e3d4f98,toplevel,&local_a0,0);
   install_help_callback(local_a8,&topHelp);
-  local_ac = FUN_0040dff8(local_a8);
+  local_ac = get_panel_value(local_a8);
   panel_widget = XtCreateManagedWidget("panel",_DAT_0e3d331c,local_a8,&local_a0,0);
   local_a0 = 0xe3f40cb;
   local_98 = 0xe3f4b1d;
@@ -37381,7 +37381,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   if (initialControls != '\0') {
     show_controls();
   }
-  FUN_0040ed40();
+  init_color_menus();
   XtSetSensitive(copy_button_widget,1);
   XtSetSensitive(local_ac,1);
   XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),1);
@@ -38010,7 +38010,7 @@ void init_panel_layout(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040dff8(undefined4 param_1)
+void get_panel_value(undefined4 param_1)
 
 {
   undefined4 uVar1;
@@ -38179,7 +38179,7 @@ void FUN_0040dff8(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040ed40(void)
+void init_color_menus(void)
 
 {
   undefined4 local_c;
@@ -38423,7 +38423,7 @@ void popzoom(void)
   int iVar2;
   
   iVar2 = 0;
-  iVar1 = FUN_0042e670(*(int *)(curcontextwindows + 0x34) + *(int *)(curcontext + 0x40) * 0x38);
+  iVar1 = get_window_entry(*(int *)(curcontextwindows + 0x34) + *(int *)(curcontext + 0x40) * 0x38);
   if (iVar1 == 0) {
     do {
       *(int *)(curcontext + 0x40) = *(int *)(curcontext + 0x40) + -1;
@@ -38433,7 +38433,7 @@ void popzoom(void)
         iVar1 = *(int *)(curcontext + 0x40);
       }
       iVar2 = iVar2 + 1;
-      iVar1 = FUN_0042e670(*(int *)(curcontextwindows + 0x34) + iVar1 * 0x38);
+      iVar1 = get_window_entry(*(int *)(curcontextwindows + 0x34) + iVar1 * 0x38);
     } while ((iVar1 == 0) && (iVar2 != 10));
   }
   *(int *)(curcontext + 0x40) = *(int *)(curcontext + 0x40) + -1;
@@ -39331,7 +39331,7 @@ void layout_db(undefined4 param_1,undefined4 param_2)
   double in_f6;
   undefined4 in_f11;
   
-  FUN_0042df08();
+  clear_selection_state();
   time(&last_operation_time);
   miny = 0.0;
   maxy = 0.0;
@@ -40719,7 +40719,7 @@ void write_file_entry(FILE *param_1)
   local_2 = curcontext[0xc51];
   fwrite(&local_4,4,1,param_1);
   get_view_position(auStack_3c);
-  FUN_0042e9b4(auStack_3c,param_1);
+  copy_selection_data(auStack_3c,param_1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -41466,7 +41466,7 @@ void initialize_db(char *param_1)
     }
   }
   if ((bVar1) || (current_file = fopen(db_filepath,"r"), current_file != (FILE *)0x0)) {
-    FUN_0042afd4();
+    apply_pending_updates();
     uStack_4 = set_status_message("reading file system database",0);
     reset_display_state();
     *(byte *)(topdir + 0x1d) = *(byte *)(topdir + 0x1d) | 2;
@@ -41598,7 +41598,7 @@ void display_status_message(char *param_1)
     }
   }
   if ((bVar1) || (current_file = fopen(db_filepath,"r"), current_file != (FILE *)0x0)) {
-    FUN_0042afd4();
+    apply_pending_updates();
     local_4 = set_status_message("reading file system database",0);
     reset_display_state();
     *(byte *)(topdir + 0x1d) = *(byte *)(topdir + 0x1d) | 2;
@@ -41659,7 +41659,7 @@ void updateDir(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00417b88(int param_1)
+void refresh_directory_view(int param_1)
 
 {
   int iVar1;
@@ -41852,7 +41852,7 @@ void fileCreated(int param_1,char *param_2)
         }
       }
       else {
-        FUN_0042df08();
+        clear_selection_state();
         iVar2 = validate_directory_access(param_1,param_2);
         if (iVar2 == 0) {
           puVar3 = (undefined4 *)create_directory_entry();
@@ -42025,7 +42025,7 @@ void fileStoppedExecuting(undefined4 param_1)
 void doneFam(void)
 
 {
-  FUN_00417b88();
+  refresh_directory_view();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -42165,7 +42165,7 @@ void unpruneTree(int param_1)
 
 {
   *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) & 0xfb;
-  FUN_00417b88();
+  refresh_directory_view();
   update_display();
   redraw_gl_scene();
   glx_swap_buffers_wrapper();
@@ -45651,7 +45651,7 @@ void FUN_0041eaf8(int param_1)
       } while (iVar4 < *(int *)(param_1 + 0xc));
     }
     if (-1 < *(int *)(param_1 + 0x74) << 10) {
-      FUN_00417b88(param_1);
+      refresh_directory_view(param_1);
     }
   }
   iVar3 = 0;
@@ -52319,7 +52319,7 @@ void readingDatabaseMessage(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042afd4(void)
+void apply_pending_updates(void)
 
 {
   undefined4 uVar1;
@@ -53179,7 +53179,7 @@ void savePositions(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042df08(void)
+void clear_selection_state(void)
 
 {
   int unaff_gp;
@@ -53280,7 +53280,7 @@ void getPosition(undefined2 *param_1,undefined2 *param_2,undefined2 *param_3,flo
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042dfb4(undefined2 *param_1,undefined2 *param_2,undefined2 *param_3,float *param_4,
+void extract_position_data(undefined2 *param_1,undefined2 *param_2,undefined2 *param_3,float *param_4,
                  float *param_5,float *param_6,int *param_7,int *param_8,int *param_9,
                  undefined1 *param_10)
 
@@ -53376,7 +53376,7 @@ void restorePosition(undefined4 param_1)
   short sStack_4;
   short sStack_2;
   
-  FUN_0042dfb4(param_1,&sStack_2,&sStack_4,&uStack_8,&uStack_c,&uStack_10,&uStack_14,&iStack_18,
+  extract_position_data(param_1,&sStack_2,&sStack_4,&uStack_8,&uStack_c,&uStack_10,&uStack_14,&iStack_18,
                &iStack_1c,(int)curcontext + 0xc50);
   if (sStack_2 != *(short *)(curcontext + 0xc)) {
     *(short *)(curcontext + 0xc) = sStack_2;
@@ -53414,7 +53414,7 @@ void restorePosition(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042e3bc(undefined4 param_1)
+void sync_fam_state(undefined4 param_1)
 
 {
   undefined4 *puVar1;
@@ -53481,10 +53481,10 @@ void FUN_0042e3bc(undefined4 param_1)
 void restorePositions(void)
 
 {
-  FUN_0042e3bc(&fam_connection);
+  sync_fam_state(&fam_connection);
   if (altcontext[0xc51] != '\0') {
     gl_swap_buffers(1);
-    FUN_0042e3bc(&fam_request_id);
+    sync_fam_state(&fam_request_id);
     gl_swap_buffers(1);
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -53528,7 +53528,7 @@ void zoomPosition(undefined4 param_1)
   undefined1 auStack_4 [2];
   undefined1 auStack_2 [2];
   
-  iVar1 = FUN_0042dfb4(param_1,auStack_2,auStack_4,&fStack_8,&fStack_c,auStack_10,auStack_14,
+  iVar1 = extract_position_data(param_1,auStack_2,auStack_4,&fStack_8,&fStack_c,auStack_10,auStack_14,
                        &iStack_18,&iStack_1c,&cStack_1d);
   if (iVar1 != 0) {
     if (iStack_18 != *(int *)(curcontext + 0x44)) {
@@ -53563,7 +53563,7 @@ void zoomPosition(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042e670(undefined4 param_1)
+void get_window_entry(undefined4 param_1)
 
 {
   int iVar1;
@@ -53705,7 +53705,7 @@ void writePosition(undefined2 *param_1,FILE *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042e9b4(undefined2 *param_1,undefined4 param_2)
+void copy_selection_data(undefined2 *param_1,undefined4 param_2)
 
 {
   undefined4 uVar1;
@@ -54253,7 +54253,7 @@ void dumpMarks(FILE *param_1)
       asStack_8[0] = (short)sVar1;
       fwrite(asStack_8,2,1,param_1);
       fwrite(*(void **)(selection_buffer + iVar2 + 0x38),1,(int)asStack_8[0],param_1);
-      FUN_0042e9b4(iVar3 * 0x40 + selection_buffer,param_1);
+      copy_selection_data(iVar3 * 0x40 + selection_buffer,param_1);
       iVar3 = iVar3 + 1;
       iVar2 = iVar2 + 0x40;
     } while (iVar3 < selection_count);
@@ -61753,7 +61753,7 @@ void FAMMonitor__FP13FAMConnectionPcP10FAMRequestPvi
   undefined4 uStack_4;
   
   uStack_4 = *param_3;
-  FUN_0043aef8(uStack_4,param_4);
+  process_file_data(uStack_4,param_4);
   iVar1 = getgroups(0x10,a_Stack_c8);
   acStack_84[0] = '\0';
   __s = acStack_84;
@@ -61870,7 +61870,7 @@ void FAMMonitorDirectory(undefined4 param_1,char *param_2,int *param_3,undefined
   int iVar1;
   size_t sVar2;
   
-  iVar1 = FUN_0043ade8();
+  iVar1 = get_file_status();
   if (iVar1 != -1) {
     *param_3 = iVar1;
     sVar2 = strlen(param_2);
@@ -61936,7 +61936,7 @@ void FAMMonitorFile(undefined4 param_1,char *param_2,int *param_3,undefined4 par
   int iVar1;
   size_t sVar2;
   
-  iVar1 = FUN_0043ade8();
+  iVar1 = get_file_status();
   if (iVar1 != -1) {
     *param_3 = iVar1;
     sVar2 = strlen(param_2);
@@ -61986,13 +61986,13 @@ void FAMMonitorCollection
   char local_84 [128];
   int local_4;
   
-  local_4 = FUN_0043ade8();
+  local_4 = get_file_status();
   if (local_4 != -1) {
     *param_3 = local_4;
     sVar1 = strlen(param_2);
     if (sVar1 < 0x401) {
       if (param_4 != 0) {
-        FUN_0043aef8(local_4,param_4);
+        process_file_data(local_4,param_4);
       }
       iVar2 = getgroups(0x10,local_c8);
       local_84[0] = '\0';
@@ -62249,7 +62249,7 @@ void FAMNextEvent(uint *param_1,undefined4 param_2)
   auStack_80[*param_1 >> 5] = auStack_80[*param_1 >> 5] | 1 << (*param_1 & 0x1f);
   piVar2 = (int *)param_1[1];
   if (((*(int *)(*piVar2 + 0xc) != 0) ||
-      (((iVar1 = FUN_0043b3b8(), iVar1 != -1 && (*(int *)(*piVar2 + 0x179c) == 0)) &&
+      (((iVar1 = search_file_entry(), iVar1 != -1 && (*(int *)(*piVar2 + 0x179c) == 0)) &&
        (*(int *)(*piVar2 + 0xc) != 0)))) &&
      (iVar1 = FUN_0043b538(piVar2,*param_1,auStack_c38,0x400), iVar1 != -1)) {
     FUN_0043a664(param_1,auStack_c38,param_2);
@@ -62349,7 +62349,7 @@ void FUN_0043ace4(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0043ade8(void)
+void get_file_status(void)
 
 {
                     // WARNING: Bad instruction - Truncating control flow here
@@ -62415,7 +62415,7 @@ void find_string_index(int param_1)
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 // WARNING: Restarted to delay deadcode elimination for space: ram
 
-void FUN_0043aef8(int param_1,undefined4 param_2)
+void process_file_data(int param_1,undefined4 param_2)
 
 {
   int *piVar1;
@@ -62726,7 +62726,7 @@ void DoClientIn__6ClientFP11ServerEntry(undefined4 param_1,int *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0043b3b8(undefined4 param_1,undefined4 *param_2)
+void search_file_entry(undefined4 param_1,undefined4 *param_2)
 
 {
   int iVar1;
@@ -62809,7 +62809,7 @@ void ReadFromServer__6ClientFiPcT1(int *param_1,int param_2,undefined1 *param_3,
   }
   else {
     if (piVar4[3] == 0) {
-      FUN_0043b3b8(param_1,piVar4);
+      search_file_entry(param_1,piVar4);
     }
     if ((uint)(piVar4[6] - piVar4[5]) < 4) {
       iStack_14 = 0;
