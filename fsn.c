@@ -874,7 +874,7 @@ undefined4 glwidget_translations;
 undefined4 display_mode_flags;
 undefined4 context_top_widget;
 undefined glwidget_expose_callback;
-undefined FUN_0040bce8;
+undefined gl_input_callback;
 undefined glwidget_resize_callback;
 undefined glwidget_init_callback;
 undefined myContext;
@@ -924,14 +924,14 @@ float view_init_y;
 float camera_lookat_x;
 float camera_lookat_y;
 undefined4 zoom_scale_widget;
-undefined FUN_0040d15c;
-undefined FUN_0040d2cc;
+undefined height_scale_callback;
+undefined layout_scale_callback;
 undefined DAT_1000a458;
 undefined vertical_scale_callback;
 undefined DAT_1000a460;
 undefined zoom_scale_callback;
 pointer controlHelp;
-undefined FUN_0041069c;
+undefined search_button_callback;
 undefined reset_eye;
 undefined4 vertical_scale_widget;
 short cached_view_angle_1;
@@ -954,7 +954,7 @@ undefined overlayMenuMappedCB;
 undefined hidePreferencePanel;
 undefined rescanDatabase;
 undefined toggle_legend;
-undefined FUN_0040de38;
+undefined controls_button_callback;
 undefined show_controls;
 undefined init_panel_layout;
 undefined4 DAT_10016668;
@@ -982,7 +982,7 @@ undefined DAT_10000160;
 undefined DAT_10000164;
 undefined DAT_10000168;
 undefined DAT_1000016c;
-undefined FUN_0040f20c;
+undefined gl_setup_func;
 float DAT_10000158;
 float DAT_1000015c;
 float DAT_100174a0;
@@ -1000,7 +1000,7 @@ undefined4 DAT_100165d0;
 float DAT_100165ec;
 undefined DAT_100165e0;
 undefined4 DAT_10017610;
-undefined FUN_0040fbb0;
+undefined zoom_gl_init_callback;
 char DAT_10017492;
 undefined4 zoom_stack_pointer;
 float zoom_stack_size;
@@ -1015,7 +1015,7 @@ undefined4 DAT_10016620;
 undefined4 DAT_100174e8;
 undefined4 DAT_10016618;
 undefined DAT_10016610;
-undefined FUN_00410858;
+undefined search_gl_init_callback;
 int DAT_10016624;
 int DAT_10016628;
 undefined4 *current_directory_node;
@@ -1351,7 +1351,7 @@ undefined quit_menu_callback;
 pointer versionHelp;
 pointer modeHelp;
 int DAT_100079c0;
-undefined FUN_0042b390;
+undefined help_display_func;
 int DAT_10007c28;
 undefined4 DAT_10016e24;
 pointer PTR_s_noscan_10007c30;
@@ -1388,8 +1388,8 @@ undefined *PTR_PTR_100094ec;
 undefined DAT_100094f0;
 undefined *PTR_s_mouseSpeed_10008b5c;
 int file_selection_dialog;
-undefined FUN_0042d28c;
-undefined FUN_0042d314;
+undefined pref_update_func;
+undefined pref_helper_func;
 undefined fam_connection;
 undefined fam_request_id;
 float view_init_z;
@@ -1403,9 +1403,9 @@ pointer markHelp;
 undefined mark_dialog_value_callback;
 undefined mark_dialog_focus_callback;
 undefined mark_select_callback;
-undefined FUN_0042f4b4;
+undefined mark_apply_callback;
 int mark_prompt_dialog;
-undefined FUN_0042f66c;
+undefined mark_dialog_helper;
 undefined DAT_10013c60;
 int DAT_10009630;
 undefined DAT_10009530;
@@ -36900,7 +36900,7 @@ void setup_context_widgets(void)
   else {
     pcVar3 = "popupExposeWindow";
   }
-  XtAddCallback(*(undefined4 *)(curcontextwindows + 8),pcVar3,FUN_0040bce8,0);
+  XtAddCallback(*(undefined4 *)(curcontextwindows + 8),pcVar3,gl_input_callback,0);
   XtAddCallback(*(undefined4 *)(curcontextwindows + 8),"resizeCallback",glwidget_resize_callback,0);
   XtAddCallback(*(undefined4 *)(curcontextwindows + 8),"ginitCallback",glwidget_init_callback,0);
   XtOverrideTranslations(*(undefined4 *)(curcontextwindows + 8),glwidget_translations);
@@ -37676,7 +37676,7 @@ void checkRedrawScene(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040cf50(void)
+void reset_view_state(void)
 
 {
   int unaff_gp;
@@ -37763,13 +37763,13 @@ void create_panel_component(undefined4 param_1,undefined4 param_2,undefined4 par
   XtAddCallback(uVar2,0xe3f35b3,reset_eye,0);
   uVar2 = XmCreatePushButton(uVar1,&DAT_1000a458,param_2,0);
   XtManageChild(uVar2);
-  XtAddCallback(uVar2,0xe3f35b3,FUN_0041069c,0);
+  XtAddCallback(uVar2,0xe3f35b3,search_button_callback,0);
   uVar2 = XmCreatePushButton(uVar1,&DAT_1000a460,param_2,0);
   XtManageChild(uVar2);
-  XtAddCallback(uVar2,0xe3f35b3,FUN_0040d15c,0);
+  XtAddCallback(uVar2,0xe3f35b3,height_scale_callback,0);
   uVar2 = XmCreatePushButton(uVar1,"front",param_2,0);
   XtManageChild(uVar2);
-  XtAddCallback(uVar2,0xe3f35b3,FUN_0040d2cc,0);
+  XtAddCallback(uVar2,0xe3f35b3,layout_scale_callback,0);
   uVar2 = XmCreateSeparator(uVar1,"control_sep",param_2,0);
   XtManageChild(uVar2);
   uVar2 = XmCreateRowColumn(uVar1,"control_scales",param_2,0);
@@ -38096,7 +38096,7 @@ void get_panel_value(undefined4 param_1)
   local_78 = 0;
   local_24 = XmCreatePushButton(local_18,"menuLegend",&local_74,0);
   XtManageChild(local_24);
-  XtAddCallback(local_24,0xe3f35b3,FUN_0040de38,0);
+  XtAddCallback(local_24,0xe3f35b3,controls_button_callback,0);
   local_78 = 0;
   local_24 = XmCreatePushButton(local_18,"menuPreferences",&local_74,0);
   XtManageChild(local_24);
@@ -38468,7 +38468,7 @@ void draw_warp(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004101e4(void)
+void process_search_results(void)
 
 {
   int unaff_gp;
@@ -38516,11 +38516,11 @@ void zoomto(double param_1,double param_2)
     DAT_1001661c = in_stack_00000024;
     DAT_10016620 = in_stack_00000028;
     DAT_10016618 = DAT_100174e8;
-    init_gl_state(FUN_0040fbb0,&zoom_stack_pointer);
+    init_gl_state(zoom_gl_init_callback,&zoom_stack_pointer);
   }
   else {
     if (DAT_10017492 != '\0') {
-      FUN_004101e4();
+      process_search_results();
     }
     *(int *)(curcontext + 0x3c) = in_stack_00000020;
     if (in_stack_00000020 != 0) {
@@ -38664,7 +38664,7 @@ void do_warp(int param_1)
 void shrinkDueToZoom(void)
 
 {
-  init_gl_state(FUN_00410858,0);
+  init_gl_state(search_gl_init_callback,0);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -39112,7 +39112,7 @@ void handleEvents(void)
     iVar1 = check_gl_ready();
   } while (iVar1 != 0);
 LAB_00411a50:
-  FUN_0040cf50();
+  reset_view_state();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
