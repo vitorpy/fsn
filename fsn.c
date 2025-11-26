@@ -1304,7 +1304,7 @@ float DAT_10017514;
 undefined4 DAT_1001751c;
 undefined4 database_root_node;
 int database_loaded_flag;
-undefined FUN_00428044;
+undefined database_input_handler;
 float DAT_100078fc;
 float normal_colormap;
 float overlay_colormap;
@@ -1338,7 +1338,7 @@ undefined DAT_1000e928;
 undefined DAT_1000e930;
 undefined editCB;
 pointer viewerHelp;
-undefined FUN_00429f60;
+undefined gl_window_callback;
 undefined context_menu_callback;
 undefined window_event_handler;
 undefined4 DAT_10016e00;
@@ -36921,7 +36921,7 @@ void setup_context_widgets(void)
   local_68 = 0xe3f4707;
   local_6c = (undefined4 *)0x4;
   local_64 = *(undefined4 *)(curcontextwindows + 8);
-  FUN_00429c44(*(undefined4 *)(curcontextwindows + 0xc),&local_a0,8);
+  get_window_properties(*(undefined4 *)(curcontextwindows + 0xc),&local_a0,8);
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f4ba9;
   local_9c = 4;
@@ -40761,7 +40761,7 @@ void refresh_after_change(void)
   char *local_4;
   
   if (((topdir != 0) && (*(int *)(topdir + 0x74) << 3 < 0)) && (fsn_resources == '\0')) {
-    FUN_00427fe0();
+    update_database_view();
     local_10 = set_status_message("updating on disk database",0);
     process_pending_events();
     sVar2 = strlen(home_directory);
@@ -42187,7 +42187,7 @@ void preExit(void)
 {
   if (fsn_resources == '\0') {
     post_realize_setup(toplevel);
-    FUN_00427de0();
+    init_rendering();
     refresh_after_change();
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -45563,7 +45563,7 @@ void FUN_0041e260(int param_1,undefined4 *param_2,undefined4 param_3,char param_
           sVar2 = strlen("$WINEDITOR ");
           iVar3 = strncmp(__s1,"$WINEDITOR ",sVar2);
           if (iVar3 == 0) {
-            FUN_00429fd4(param_1,param_2);
+            copy_file_item(param_1,param_2);
             halt_baddata();
           }
         }
@@ -45801,7 +45801,7 @@ void zoomToSelection(void)
 
 {
   if (*(int *)(curcontext + 0x3c) == 0) {
-    FUN_00427870(*(undefined4 *)(curcontext + 0x44),*(undefined4 *)(curcontext + 0x48));
+    update_context_bounds(*(undefined4 *)(curcontext + 0x44),*(undefined4 *)(curcontext + 0x48));
   }
   else {
     FUN_0041aeec(*(undefined4 *)(curcontext + 0x44),*(undefined4 *)(curcontext + 0x48));
@@ -47734,7 +47734,7 @@ void draw_file(int param_1,undefined4 *param_2,char param_3,char param_4,undefin
   iVar2 = param_2[10];
   if ((iVar2 << 5 < 0) && (-1 < iVar2 << 0xb)) {
     if (iVar2 << 10 < 0) {
-      sVar4 = FUN_00429290();
+      sVar4 = get_selection_string();
       setpattern((int)sVar4);
     }
     bVar1 = curcontext[0xc50] != '\0';
@@ -49740,7 +49740,7 @@ void highlightFile(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004277fc(void)
+void recalc_layout(void)
 
 {
   int unaff_gp;
@@ -49797,7 +49797,7 @@ void landscapeZoomToFile(int param_1,int param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00427870(int param_1,int param_2)
+void update_context_bounds(int param_1,int param_2)
 
 {
   int unaff_gp;
@@ -50046,7 +50046,7 @@ void dirfamDone(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00427de0(void)
+void init_rendering(void)
 
 {
   int unaff_gp;
@@ -50137,7 +50137,7 @@ void dirfamMonitor(void)
 
 {
   if ((fsn_resources == '\0') && (database_loaded_flag == 0)) {
-    database_loaded_flag = XtAppAddInput(app_context,database_root_node,1,FUN_00428044,0);
+    database_loaded_flag = XtAppAddInput(app_context,database_root_node,1,database_input_handler,0);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -50184,7 +50184,7 @@ void dirfamUnmonitor(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00427fe0(void)
+void update_database_view(void)
 
 {
   int unaff_gp;
@@ -50208,7 +50208,7 @@ void FUN_00427fe0(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00428288(undefined4 param_1)
+void setup_toplevel_window(undefined4 param_1)
 
 {
   undefined4 uVar1;
@@ -50594,7 +50594,7 @@ void makeColorBoxes(void)
 
 {
   if (current_color_index == '\0') {
-    FUN_00428288(toplevel);
+    setup_toplevel_window(toplevel);
     current_color_index = '\x01';
   }
   create_color_legend_box(DAT_100175f4,boxDir,7);
@@ -50605,7 +50605,7 @@ void makeColorBoxes(void)
   create_color_legend_box(DAT_1001762c,boxCyan,4);
   create_color_legend_box(DAT_10017630,boxBlue,5);
   create_color_legend_box(DAT_10017634,boxMagenta,6);
-  FUN_00429040();
+  init_render_state();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -50792,7 +50792,7 @@ void setLabelColors(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00429040(void)
+void init_render_state(void)
 
 {
   undefined4 *puVar1;
@@ -50894,7 +50894,7 @@ void getbeam(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00429290(void)
+void get_selection_string(void)
 
 {
   int unaff_gp;
@@ -51099,7 +51099,7 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
       }
     }
     else {
-      FUN_004277fc(param_1,param_2);
+      recalc_layout(param_1,param_2);
     }
     popmatrix();
     linewidth(1);
@@ -51234,7 +51234,7 @@ void locateHighlight(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00429a48(void)
+void reset_list_state(void)
 
 {
   int unaff_gp;
@@ -51275,7 +51275,7 @@ void locateHighlightAction(undefined4 param_1,int param_2)
   if (*(int *)(param_2 + 0x30) == 0) {
     gl_push_state();
     set_gl_context(param_1,1);
-    FUN_00429a48();
+    reset_list_state();
     gl_pop_state();
     gflush();
   }
@@ -51333,7 +51333,7 @@ void createViewer(undefined4 param_1,undefined4 *param_2,undefined4 param_3)
   XtAddEventHandler(uVar1,4,0,window_event_handler,*(undefined4 *)(curcontextwindows + 8));
   uVar2 = XmCreatePushButton(uVar1,&DAT_1000e928,param_2,0);
   XtManageChild(uVar2);
-  XtAddCallback(uVar2,0xe3f35b3,FUN_00429f60,*(undefined4 *)(curcontextwindows + 8));
+  XtAddCallback(uVar2,0xe3f35b3,gl_window_callback,*(undefined4 *)(curcontextwindows + 8));
   uVar2 = XmCreatePushButton(uVar1,&DAT_1000e930,param_2,0);
   XtAddCallback(uVar2,0xe3f35b3,editCB,*(undefined4 *)(curcontextwindows + 8));
   XtManageChild(uVar2);
@@ -51367,7 +51367,7 @@ void createViewer(undefined4 param_1,undefined4 *param_2,undefined4 param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00429c44(undefined4 param_1,int *param_2,undefined4 param_3)
+void get_window_properties(undefined4 param_1,int *param_2,undefined4 param_3)
 
 {
   undefined4 uVar1;
@@ -51510,7 +51510,7 @@ void viewFile(undefined4 param_1,undefined4 *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00429fd4(undefined4 param_1,undefined4 *param_2)
+void copy_file_item(undefined4 param_1,undefined4 *param_2)
 
 {
   int iVar1;
