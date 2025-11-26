@@ -972,7 +972,7 @@ undefined4 DAT_10016680;
 undefined4 DAT_10016684;
 undefined showOverview;
 undefined hideOverview;
-undefined FUN_004115f8;
+undefined autoscan_toggle_callback;
 undefined4 displayHeight;
 undefined4 displayDirectoryHeight;
 int DAT_10000154;
@@ -1020,7 +1020,7 @@ int DAT_10016624;
 int DAT_10016628;
 undefined4 *current_directory_node;
 undefined deleteMessage;
-undefined FUN_00410f30;
+undefined search_dialog_map_callback;
 undefined4 DAT_1001662c;
 undefined4 DAT_10016630;
 float DAT_10016630;
@@ -38039,7 +38039,7 @@ void get_panel_value(undefined4 param_1)
   local_78 = 0;
   DAT_10016668 = XmCreateToggleButton(local_c,"menuSplit",&local_74,0);
   XtManageChild(DAT_10016668);
-  XtAddCallback(DAT_10016668,0xe3f4ca5,FUN_004115f8,0);
+  XtAddCallback(DAT_10016668,0xe3f4ca5,autoscan_toggle_callback,0);
   local_78 = 0;
   local_24 = XmCreatePushButton(local_c,"menuRescan",&local_74,0);
   XtManageChild(local_24);
@@ -38861,7 +38861,7 @@ void error(undefined4 param_1)
   XtUnmanageChild(uVar2);
   uVar2 = XmMessageBoxGetChild(uVar1,7);
   XtUnmanageChild(uVar2);
-  XtAddCallback(uVar1,0xf6615c9,FUN_00410f30,0);
+  XtAddCallback(uVar1,0xf6615c9,search_dialog_map_callback,0);
   XtManageChild(uVar1);
   XmStringFree(uStack_4);
                     // WARNING: Bad instruction - Truncating control flow here
@@ -39057,7 +39057,7 @@ void process_directory_data(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00411804(int param_1)
+void validate_directory(int param_1)
 
 {
   if (displayHeight == 0) {
@@ -39371,7 +39371,7 @@ void layout_db(undefined4 param_1,undefined4 param_2)
                       (double)zoom_reference_height));
   calculate_tree_layout(topdir,param_2,0,0,in_f11,
                SUB84((double)((ulonglong)dVar2 & 0xffffffff00000000) / (double)fVar1,0));
-  FUN_00412bc0(topdir,param_2,0,0);
+  layout_tree_recursive(topdir,param_2,0,0);
   maxShrinkage = powf(zoom_base_factor,maxy / zoom_reference_height);
   maxx = (float)((double)maxx + (double)((ulonglong)in_register_00001010 << 0x20));
   minx = (float)((double)minx - (double)((ulonglong)in_register_00001010 << 0x20));
@@ -39555,7 +39555,7 @@ void calculate_file_view(int param_1)
 {
   undefined4 uVar1;
   
-  uVar1 = FUN_00411804();
+  uVar1 = validate_directory();
   *(undefined4 *)(param_1 + 0x1c) = uVar1;
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -39857,7 +39857,7 @@ void third_traversal(int param_1,undefined4 param_2,undefined4 param_3,undefined
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00412bc0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+void layout_tree_recursive(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   int unaff_gp;
@@ -40728,7 +40728,7 @@ void write_file_entry(FILE *param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00414cf0(undefined4 param_1)
+void write_database_entry(undefined4 param_1)
 
 {
   gl_push_state();
@@ -40844,7 +40844,7 @@ void refresh_after_change(void)
       else {
         __semputc(4,__s_00);
       }
-      FUN_00414cf0(__s_00);
+      write_database_entry(__s_00);
       dump_database_file(__s_00);
       if (_DAT_0fb51f00 == 0) {
         iVar3 = __s_00->_flags + -1;
@@ -41163,7 +41163,7 @@ void init_directory_state(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00415dec(uint param_1,undefined4 param_2)
+void get_directory_info(uint param_1,undefined4 param_2)
 
 {
   byte bVar1;
@@ -41252,7 +41252,7 @@ void FUN_00415dec(uint param_1,undefined4 param_2)
   iVar9 = 0;
   if (0 < (int)puVar3[5]) {
     do {
-      uVar5 = FUN_00415dec(param_1,puVar3);
+      uVar5 = get_directory_info(param_1,puVar3);
       *(undefined4 *)(puVar3[6] + iVar9) = uVar5;
       iVar8 = iVar8 + 1;
       iVar9 = iVar9 + 4;
@@ -41730,7 +41730,7 @@ void fileChanged(int param_1,char *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00417c2c(int param_1,undefined4 param_2)
+void handle_item_action(int param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -41890,7 +41890,7 @@ void fileCreated(int param_1,char *param_2)
                     // WARNING: Bad instruction - Truncating control flow here
           halt_baddata();
         }
-        FUN_00417c2c(param_1,param_2);
+        handle_item_action(param_1,param_2);
       }
     }
   }
@@ -41957,7 +41957,7 @@ void fileDeleted(int param_1,char *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004184c8(int param_1)
+void update_item_state(int param_1)
 
 {
   int iVar1;
@@ -42013,7 +42013,7 @@ void fileStoppedExecuting(undefined4 param_1)
     set_icon_flags(*(undefined4 *)(iVar1 + 0x20),0,0,0,0,0);
     *(byte *)(iVar1 + 0x29) = *(byte *)(iVar1 + 0x29) & 0xf7;
   }
-  FUN_004184c8(param_1);
+  update_item_state(param_1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -42513,7 +42513,7 @@ void draw_dir(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefine
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00418f50(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+void render_item_recursive(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
                  char param_5)
 
 {
@@ -42560,7 +42560,7 @@ void FUN_00418f50(undefined4 *param_1,undefined4 param_2,undefined4 param_3,unde
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041919c(int param_1)
+void process_pick_item(int param_1)
 
 {
   int iVar1;
@@ -42578,7 +42578,7 @@ void FUN_0041919c(int param_1)
   iVar2 = 0;
   if (0 < *(int *)(param_1 + 0x14)) {
     do {
-      FUN_00418f50(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar2));
+      render_item_recursive(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar2));
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 4;
     } while (iVar1 < *(int *)(param_1 + 0x14));
@@ -42830,7 +42830,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       iVar4 = iVar4 + 4;
     } while (iVar3 < (int)param_3[3]);
   }
-  FUN_0041919c(param_3,param_4);
+  process_pick_item(param_3,param_4);
   popmatrix();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -43294,7 +43294,7 @@ void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *para
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041a648(float *param_1,float *param_2,float *param_3,undefined2 *param_4,
+void calculate_item_params(float *param_1,float *param_2,float *param_3,undefined2 *param_4,
                  undefined2 *param_5,int *param_6,undefined1 *param_7,undefined1 *param_8)
 
 {
@@ -43473,7 +43473,7 @@ void highlightDirWarp(undefined8 param_1,undefined8 param_2,int param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041aa04(undefined8 param_1,undefined8 param_2,int param_3)
+void draw_item_recursive(undefined8 param_1,undefined8 param_2,int param_3)
 
 {
   int iVar1;
@@ -49330,7 +49330,7 @@ void findzoom(void)
     calculate_view_params();
   }
   else {
-    FUN_0041a648();
+    calculate_item_params();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -49557,7 +49557,7 @@ void highlightDir(void)
     update_tree_bounds();
   }
   else {
-    FUN_0041aa04();
+    draw_item_recursive();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
