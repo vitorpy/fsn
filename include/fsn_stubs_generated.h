@@ -6,7 +6,7 @@
 #ifndef FSN_STUBS_GENERATED_H
 #define FSN_STUBS_GENERATED_H
 
-#include <X11/Intrinsic.h>  /* Widget */
+#include <X11/Intrinsic.h>  /* Widget, Arg */
 
 static inline void apply_context_changes(void * p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 /* Note: Actually defined in pathutil.c - remove stub */
@@ -14,7 +14,7 @@ static inline int check_directory_flags(int p0, int p1, int p2, int p3) { (void)
 static inline void cleanup_directory(int p0) { (void)p0; /* TODO */ }
 static inline void configure_viewport(int p0, int p1, int p2) { (void)p0; (void)p1; (void)p2; /* TODO */ }
 static inline void copy_selection_data(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
-static inline int create_panel_component(Widget p0, void * p1, int p2) { (void)p0; (void)p1; (void)p2; return 0; /* TODO */ }
+extern Widget create_panel_component(Widget parent, Arg *args, int nargs);  /* Implemented in stubs.c */
 /* display_status_message: defined in status.c and messages.c */
 static inline void draw_entry(int p0) { (void)p0; /* TODO */ }
 static inline void draw_file_icon(void * p0) { (void)p0; /* TODO */ }
@@ -27,7 +27,7 @@ static inline int extract_position_data(int p0, void * p1, void * p2, void * p3,
 static inline int get_cursor_state(void * p0, void * p1, void * p2) { (void)p0; (void)p1; (void)p2; return 0; /* TODO */ }
 static inline int get_item_by_index(int p0) { (void)p0; return 0; /* TODO */ }
 /* get_item_screen_coords: defined in items.c with 1 arg */
-static inline int get_panel_value(int p0) { (void)p0; return 0; /* TODO */ }
+extern Widget get_panel_value(Widget parent);  /* Implemented in stubs.c */
 static inline int get_position_coords(int p0, void * p1, void * p2) { (void)p0; (void)p1; (void)p2; return 0; /* TODO */ }
 static inline int get_selection_params(void * p0, void * p1, int p2) { (void)p0; (void)p1; (void)p2; return 0; /* TODO */ }
 static inline int get_view_extents(void * p0, void * p1, void * p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; return 0; /* TODO */ }

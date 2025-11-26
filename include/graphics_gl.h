@@ -6,6 +6,7 @@
 
 #include "fsn_types.h"
 #include "fsn_std.h"
+#include <X11/Xlib.h>
 
 void draw_file_pointers(int param_1,int param_2,int param_3);
 void rect(void);
@@ -78,7 +79,7 @@ void highlightDirLandscape(int param_1);
 void highlightOverviewDir(int param_1);
 void bgnqstrip(void);
 void set_gl_context(int param_1,undefined1 param_2);
-void GLXwinset(void);
+void GLXwinset(Display *dpy, Window win);
 void SG_getOverlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *param_4);
 void draw_visible_directory(int param_1);
 void draw_directory(ulonglong param_1,int param_2,char param_3);

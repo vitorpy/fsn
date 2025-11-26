@@ -523,7 +523,7 @@ extern char context_widget_name[];
  * Ghidra String Pointers (Batch 4 - main_entry.c)
  *============================================================================*/
 extern char app_class_name[];
-extern void *PTR_s__landscape_100000e0;
+extern XrmOptionDescRec *PTR_s__landscape_100000e0;
 extern char *fallback_resources[];
 extern char *glwidget_translations;
 
@@ -559,5 +559,16 @@ extern float pref_float_array[];
  *============================================================================*/
 extern char *PTR_s_Please_be_patient_while_the_file_10007b64;
 extern char *_imsgs[];
+
+/*=============================================================================
+ * Zoom State
+ *============================================================================*/
+#include <sys/time.h>
+extern struct timeval zoom_start_time;
+
+/*=============================================================================
+ * IRIX Compatibility
+ *============================================================================*/
+extern undefined __iob_func_result;
 
 #endif /* FSN_STATE_H */

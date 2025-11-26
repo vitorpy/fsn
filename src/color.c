@@ -1,321 +1,319 @@
 /**
  * color.c - Color space conversion functions
  *
- * Extracted from fsn.c (lines 61254-61558)
- * These appear to be IRIS GL color system functions.
- * Many are stubs - likely linked from an SGI library.
+ * Reimplemented from SGI IrisGL color system.
+ * Supports RGB, CMY, HSV, HLS, and YIQ color spaces.
  */
 
 #include "color.h"
 #include "fsn_types.h"
 #include <stdio.h>
+#include <math.h>
 
-/* External references from fsn.c globals */
-extern void *PTR_SUB_10009e30;
-extern void *PTR_SUB_10009e34;
+/* SGI GL Color System Constants */
+#define COLORSYS_RGB 1
+#define COLORSYS_CMY 2
+#define COLORSYS_HSV 3
+#define COLORSYS_HLS 4
+#define COLORSYS_YIQ 5
 
-void cmy_to_rgb(double param_1,double param_2)
+/* Current color system (default RGB) */
+static int current_color_system = COLORSYS_RGB;
 
+/*=============================================================================
+ * RGB Identity
+ *============================================================================*/
+
+void rgb_to_rgb(float r, float g, float b, float *or, float *og, float *ob)
 {
-  uint in_register_00001000;
-  float *in_stack_00000018;
-  float *in_stack_0000001c;
-
-  *in_stack_00000018 =
-       (float)((double)((ulonglong)in_register_00001000 << 0x20) - (double)(float)param_1);
-  *in_stack_0000001c =
-       (float)((double)((ulonglong)in_register_00001000 << 0x20) - (double)(float)param_2);
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    *or = r;
+    *og = g;
+    *ob = b;
 }
 
+/*=============================================================================
+ * CMY <-> RGB Conversion
+ * CMY is subtractive color model: C = 1-R, M = 1-G, Y = 1-B
+ *============================================================================*/
 
-
-// WARNING: Control flow encountered bad instruction data
-
-
-
-
-// WARNING: Control flow encountered bad instruction data
-
-void hls_to_rgb(void)
-
+void cmy_to_rgb(float c, float m, float y, float *r, float *g, float *b)
 {
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    *r = 1.0f - c;
+    *g = 1.0f - m;
+    *b = 1.0f - y;
 }
 
-
-
-// WARNING: Control flow encountered bad instruction data
-
-void hsv_to_rgb(double param_1, double param_2)
-
+void rgb_to_cmy(float r, float g, float b, float *c, float *m, float *y)
 {
-  (void)param_1; (void)param_2;
-  /* TODO: Implement HSV to RGB conversion */
+    *c = 1.0f - r;
+    *m = 1.0f - g;
+    *y = 1.0f - b;
 }
 
+/*=============================================================================
+ * HSV <-> RGB Conversion
+ * H: 0-360 degrees, S: 0-1, V: 0-1
+ *============================================================================*/
 
-
-// WARNING: Control flow encountered bad instruction data
-
-void hsb_to_rgb(undefined4 param_1,undefined4 param_2)
-
+void hsv_to_rgb(float h, float s, float v, float *r, float *g, float *b)
 {
-  undefined8 in_f4;
-  undefined4 in_register_00001040;
+    if (s == 0.0f) {
+        /* Achromatic (gray) */
+        *r = *g = *b = v;
+        return;
+    }
 
-  hsv_to_rgb((double)(float)(double)CONCAT44((int)((ulonglong)in_f4 >> 0x20),param_1),
-             (double)(float)(double)CONCAT44(in_register_00001040,param_2));
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    h = fmodf(h, 360.0f);
+    if (h < 0) h += 360.0f;
+    h /= 60.0f;
+
+    int i = (int)h;
+    float f = h - i;
+    float p = v * (1.0f - s);
+    float q = v * (1.0f - s * f);
+    float t = v * (1.0f - s * (1.0f - f));
+
+    switch (i) {
+        case 0:  *r = v; *g = t; *b = p; break;
+        case 1:  *r = q; *g = v; *b = p; break;
+        case 2:  *r = p; *g = v; *b = t; break;
+        case 3:  *r = p; *g = q; *b = v; break;
+        case 4:  *r = t; *g = p; *b = v; break;
+        default: *r = v; *g = p; *b = q; break;
+    }
 }
 
-
-
-// WARNING: Control flow encountered bad instruction data
-
-void yiq_to_rgb(double param_1,double param_2)
-
+void rgb_to_hsv(float r, float g, float b, float *h, float *s, float *v)
 {
-  undefined4 uVar1;
-  undefined8 in_f8;
-  undefined8 in_f18;
-  double dVar2;
-  undefined4 in_stack_00000014;
-  float *in_stack_00000018;
-  float *in_stack_0000001c;
+    float max = fmaxf(fmaxf(r, g), b);
+    float min = fminf(fminf(r, g), b);
+    float delta = max - min;
 
-  uVar1 = (undefined4)((ulonglong)in_f8 >> 0x20);
-  dVar2 = (double)(float)param_1 +
-          (double)CONCAT44((int)((ulonglong)in_f18 >> 0x20),0x8cc14403) * (double)(float)param_2 +
-          (double)CONCAT44(uVar1,0x1c68ec53) *
-          (double)(float)(double)CONCAT44(uVar1,in_stack_00000014);
-  *in_stack_00000018 = (float)dVar2;
-  *in_stack_0000001c =
-       (float)((double)(float)param_1 + (double)CONCAT44(uVar1,0xba6266fd) * (double)(float)param_2
-              + (double)CONCAT44((int)((ulonglong)dVar2 >> 0x20),0xd234eb9a) *
-                (double)(float)(double)CONCAT44(uVar1,in_stack_00000014));
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    *v = max;
+
+    if (max == 0.0f) {
+        *s = 0.0f;
+        *h = 0.0f;
+        return;
+    }
+
+    *s = delta / max;
+
+    if (delta == 0.0f) {
+        *h = 0.0f;
+        return;
+    }
+
+    if (r == max) {
+        *h = (g - b) / delta;
+    } else if (g == max) {
+        *h = 2.0f + (b - r) / delta;
+    } else {
+        *h = 4.0f + (r - g) / delta;
+    }
+
+    *h *= 60.0f;
+    if (*h < 0.0f) *h += 360.0f;
 }
 
-
-
-// WARNING: Control flow encountered bad instruction data
-
-void rgb_to_rgb(double param_1,double param_2)
-
+/* HSB is an alias for HSV */
+void hsb_to_rgb(float h, float s, float b, float *r, float *g, float *ob)
 {
-  float *in_stack_00000018;
-  float *in_stack_0000001c;
-
-  *in_stack_00000018 = (float)param_1;
-  *in_stack_0000001c = (float)param_2;
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    hsv_to_rgb(h, s, b, r, g, ob);
 }
 
-
-
-// WARNING: Control flow encountered bad instruction data
-
-void rgb_to_cmy(double param_1,double param_2)
-
+void rgb_to_hsb(float r, float g, float b, float *h, float *s, float *ob)
 {
-  uint in_register_00001000;
-  float *in_stack_00000018;
-  float *in_stack_0000001c;
-
-  *in_stack_00000018 =
-       (float)((double)((ulonglong)in_register_00001000 << 0x20) - (double)(float)param_1);
-  *in_stack_0000001c =
-       (float)((double)((ulonglong)in_register_00001000 << 0x20) - (double)(float)param_2);
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    rgb_to_hsv(r, g, b, h, s, ob);
 }
 
+/*=============================================================================
+ * HLS <-> RGB Conversion
+ * H: 0-360 degrees, L: 0-1, S: 0-1
+ *============================================================================*/
 
-
-// WARNING: Control flow encountered bad instruction data
-
-void rgb_to_irgb(double param_1,double param_2)
-
+static float hls_value(float n1, float n2, float hue)
 {
-  uint in_register_00001000;
-  uint in_register_00001010;
-  double dVar1;
-  byte in_fcsr;
-  int *in_stack_00000018;
-  int *in_stack_0000001c;
+    hue = fmodf(hue, 360.0f);
+    if (hue < 0) hue += 360.0f;
 
-  dVar1 = (double)(float)param_1 * (double)((ulonglong)in_register_00001000 << 0x20) +
-          (double)((ulonglong)in_register_00001010 << 0x20);
-  if ((((in_fcsr | 3) ^ 2) & 3) == 0) {
-    dVar1 = ROUND(dVar1);
-  }
-  else {
-    dVar1 = FLOOR(dVar1);
-  }
-  *in_stack_00000018 = (int)dVar1;
-  dVar1 = (double)(float)param_2 * (double)((ulonglong)in_register_00001000 << 0x20) +
-          (double)((ulonglong)in_register_00001010 << 0x20);
-  if ((((in_fcsr | 3) ^ 2) & 3) == 0) {
-    dVar1 = ROUND(dVar1);
-  }
-  else {
-    dVar1 = FLOOR(dVar1);
-  }
-  *in_stack_0000001c = (int)dVar1;
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    if (hue < 60.0f)
+        return n1 + (n2 - n1) * hue / 60.0f;
+    if (hue < 180.0f)
+        return n2;
+    if (hue < 240.0f)
+        return n1 + (n2 - n1) * (240.0f - hue) / 60.0f;
+    return n1;
 }
 
-
-
-// WARNING: Control flow encountered bad instruction data
-
-void rgb_to_hls(void)
-
+void hls_to_rgb(float h, float l, float s, float *r, float *g, float *b)
 {
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    if (s == 0.0f) {
+        *r = *g = *b = l;
+        return;
+    }
+
+    float m2 = (l <= 0.5f) ? l * (1.0f + s) : l + s - l * s;
+    float m1 = 2.0f * l - m2;
+
+    *r = hls_value(m1, m2, h + 120.0f);
+    *g = hls_value(m1, m2, h);
+    *b = hls_value(m1, m2, h - 120.0f);
 }
 
-
-
-// WARNING: Control flow encountered bad instruction data
-
-void rgb_to_hsv(double param_1, double param_2)
-
+void rgb_to_hls(float r, float g, float b, float *h, float *l, float *s)
 {
-  (void)param_1; (void)param_2;
-  /* TODO: Implement RGB to HSV conversion */
+    float max = fmaxf(fmaxf(r, g), b);
+    float min = fminf(fminf(r, g), b);
+    float delta = max - min;
+
+    *l = (max + min) / 2.0f;
+
+    if (delta == 0.0f) {
+        *h = 0.0f;
+        *s = 0.0f;
+        return;
+    }
+
+    *s = (*l <= 0.5f) ? delta / (max + min) : delta / (2.0f - max - min);
+
+    if (r == max) {
+        *h = (g - b) / delta;
+    } else if (g == max) {
+        *h = 2.0f + (b - r) / delta;
+    } else {
+        *h = 4.0f + (r - g) / delta;
+    }
+
+    *h *= 60.0f;
+    if (*h < 0.0f) *h += 360.0f;
 }
 
+/*=============================================================================
+ * YIQ <-> RGB Conversion
+ * NTSC color space used in analog TV
+ *============================================================================*/
 
-
-// WARNING: Control flow encountered bad instruction data
-
-void rgb_to_hsb(undefined4 param_1,undefined4 param_2)
-
+void yiq_to_rgb(float y, float i, float q, float *r, float *g, float *b)
 {
-  undefined8 in_f4;
-  undefined4 in_register_00001040;
+    *r = y + 0.956f * i + 0.621f * q;
+    *g = y - 0.272f * i - 0.647f * q;
+    *b = y - 1.106f * i + 1.703f * q;
 
-  rgb_to_hsv((double)(float)(double)CONCAT44((int)((ulonglong)in_f4 >> 0x20),param_1),
-             (double)(float)(double)CONCAT44(in_register_00001040,param_2));
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    /* Clamp to [0,1] */
+    if (*r < 0.0f) *r = 0.0f; if (*r > 1.0f) *r = 1.0f;
+    if (*g < 0.0f) *g = 0.0f; if (*g > 1.0f) *g = 1.0f;
+    if (*b < 0.0f) *b = 0.0f; if (*b > 1.0f) *b = 1.0f;
 }
 
-
-
-// WARNING: Control flow encountered bad instruction data
-
-void rgb_to_yiq(double param_1,double param_2)
-
+void rgb_to_yiq(float r, float g, float b, float *y, float *i, float *q)
 {
-  undefined8 in_f6;
-  double dVar1;
-  undefined8 in_f8;
-  double dVar2;
-  undefined4 in_register_00001090;
-  undefined4 in_stack_00000014;
-  float *in_stack_00000018;
-  float *in_stack_0000001c;
-
-  dVar2 = (double)(float)(double)CONCAT44((int)((ulonglong)in_f8 >> 0x20),in_stack_00000014);
-  dVar1 = (double)CONCAT44(in_register_00001090,0xc28f5c29) * dVar2;
-  *in_stack_00000018 =
-       (float)((double)(float)param_1 * (double)CONCAT44(in_register_00001090,0x33333333) +
-               (double)CONCAT44((int)((ulonglong)in_f6 >> 0x20),0xae147ae1) * (double)(float)param_2
-              + dVar1);
-  *in_stack_0000001c =
-       (float)(((double)(float)param_1 * (double)CONCAT44(in_register_00001090,0x33333333) -
-               (double)CONCAT44((int)((ulonglong)dVar1 >> 0x20),0x1eb851ec) * (double)(float)param_2
-               ) - (double)CONCAT44(in_register_00001090,0x47ae147b) * dVar2);
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    *y = 0.299f * r + 0.587f * g + 0.114f * b;
+    *i = 0.596f * r - 0.274f * g - 0.322f * b;
+    *q = 0.211f * r - 0.523f * g + 0.312f * b;
 }
 
+/*=============================================================================
+ * Float RGB to Integer RGB (0-255)
+ *============================================================================*/
 
-
-// WARNING: Control flow encountered bad instruction data
-
-void setcolorsys(int param_1)
-
+void rgb_to_irgb(float r, float g, float b, int *ir, int *ig, int *ib)
 {
-  if (param_1 - 1U < 5) {
-                    // WARNING: Bad instruction - Truncating control flow here
-    halt_baddata();
-  }
-  fprintf((FILE *)0xfb52904,"bad color system no %d\n",param_1);
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    *ir = (int)(r * 255.0f + 0.5f);
+    *ig = (int)(g * 255.0f + 0.5f);
+    *ib = (int)(b * 255.0f + 0.5f);
+
+    /* Clamp to [0,255] */
+    if (*ir < 0) *ir = 0; if (*ir > 255) *ir = 255;
+    if (*ig < 0) *ig = 0; if (*ig > 255) *ig = 255;
+    if (*ib < 0) *ib = 0; if (*ib > 255) *ib = 255;
 }
 
+/*=============================================================================
+ * Color System Management
+ *============================================================================*/
 
-
-// WARNING: Control flow encountered bad instruction data
-
-void getcolorsys(void)
-
+void setcolorsys(int system)
 {
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    if (system >= COLORSYS_RGB && system <= COLORSYS_YIQ) {
+        current_color_system = system;
+    } else {
+        fprintf(stderr, "bad color system no %d\n", system);
+    }
 }
 
-
-
-// WARNING: Control flow encountered bad instruction data
-
-void torgb(undefined4 param_1,undefined4 param_2)
-
+int getcolorsys(void)
 {
-  undefined8 in_f4;
-  undefined4 in_register_00001040;
-
-  ((void (*)(double, double))PTR_SUB_10009e30)
-            ((double)(float)(double)CONCAT44((int)((ulonglong)in_f4 >> 0x20),param_1),
-             (double)(float)(double)CONCAT44(in_register_00001040,param_2));
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    return current_color_system;
 }
 
+/*=============================================================================
+ * Generic Conversion Functions
+ * torgb: Convert from current color system to RGB
+ * fromrgb: Convert from RGB to current color system
+ *============================================================================*/
 
-
-// WARNING: Control flow encountered bad instruction data
-
-void fromrgb(undefined4 param_1,undefined4 param_2)
-
+void torgb(float c1, float c2, float c3, float *r, float *g, float *b)
 {
-  undefined8 in_f4;
-  undefined4 in_register_00001040;
-
-  ((void (*)(double, double))PTR_SUB_10009e34)
-            ((double)(float)(double)CONCAT44((int)((ulonglong)in_f4 >> 0x20),param_1),
-             (double)(float)(double)CONCAT44(in_register_00001040,param_2));
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+    switch (current_color_system) {
+        case COLORSYS_RGB:
+            rgb_to_rgb(c1, c2, c3, r, g, b);
+            break;
+        case COLORSYS_CMY:
+            cmy_to_rgb(c1, c2, c3, r, g, b);
+            break;
+        case COLORSYS_HSV:
+            hsv_to_rgb(c1, c2, c3, r, g, b);
+            break;
+        case COLORSYS_HLS:
+            hls_to_rgb(c1, c2, c3, r, g, b);
+            break;
+        case COLORSYS_YIQ:
+            yiq_to_rgb(c1, c2, c3, r, g, b);
+            break;
+        default:
+            /* Default to identity */
+            *r = c1; *g = c2; *b = c3;
+            break;
+    }
 }
 
-
-
-// WARNING: Control flow encountered bad instruction data
-
-void rgbcomplement(undefined4 param_1,undefined4 param_2)
-
+void fromrgb(float r, float g, float b, float *c1, float *c2, float *c3)
 {
-  undefined8 in_f4;
-  undefined8 in_f8;
-  undefined4 local_14;
-  undefined4 local_10;
+    switch (current_color_system) {
+        case COLORSYS_RGB:
+            rgb_to_rgb(r, g, b, c1, c2, c3);
+            break;
+        case COLORSYS_CMY:
+            rgb_to_cmy(r, g, b, c1, c2, c3);
+            break;
+        case COLORSYS_HSV:
+            rgb_to_hsv(r, g, b, c1, c2, c3);
+            break;
+        case COLORSYS_HLS:
+            rgb_to_hls(r, g, b, c1, c2, c3);
+            break;
+        case COLORSYS_YIQ:
+            rgb_to_yiq(r, g, b, c1, c2, c3);
+            break;
+        default:
+            /* Default to identity */
+            *c1 = r; *c2 = g; *c3 = b;
+            break;
+    }
+}
 
-  rgb_to_hsv((double)(float)(double)CONCAT44((int)((ulonglong)in_f4 >> 0x20),param_1),
-             (double)(float)(double)CONCAT44((int)((ulonglong)in_f8 >> 0x20),param_2));
-  hsv_to_rgb((double)local_10,(double)local_14);
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+/*=============================================================================
+ * RGB Complement
+ * Computes the color complement by rotating hue 180 degrees in HSV space
+ *============================================================================*/
+
+void rgbcomplement(float r, float g, float b, float *cr, float *cg, float *cb)
+{
+    float h, s, v;
+
+    rgb_to_hsv(r, g, b, &h, &s, &v);
+    h += 180.0f;
+    if (h >= 360.0f) h -= 360.0f;
+    hsv_to_rgb(h, s, v, cr, cg, cb);
 }

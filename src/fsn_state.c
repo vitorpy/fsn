@@ -7,6 +7,7 @@
 
 #include "fsn_state.h"
 #include <stddef.h>
+#include <sys/time.h>
 
 /*=============================================================================
  * Application Core State
@@ -497,7 +498,18 @@ char context_widget_name[] = "fsn_context";
  * Ghidra String Pointers (Batch 4)
  *============================================================================*/
 char app_class_name[] = "Fsn";
-void *PTR_s__landscape_100000e0 = NULL;  /* Landscape option descriptor */
+
+/* Command-line options for XtAppInitialize
+ * Based on usage: fsn [-landscape <name>] [-relative] [-db <file>] [-dbdir <dir>] [-noscan]
+ */
+static XrmOptionDescRec fsn_options[] = {
+    {"-landscape", ".landscape", XrmoptionSepArg, NULL},
+    {"-relative",  ".relative",  XrmoptionNoArg,  "True"},
+    {"-db",        ".db",        XrmoptionSepArg, NULL},
+    {"-dbdir",     ".dbdir",     XrmoptionSepArg, NULL},
+    {"-noscan",    ".noscan",    XrmoptionNoArg,  "True"},
+};
+XrmOptionDescRec *PTR_s__landscape_100000e0 = fsn_options;
 char *fallback_resources[] = {
     "*background: #c0c0c0",
     "*foreground: black",
@@ -514,3 +526,13 @@ float pref_float_array[10] = {0.0f};
 
 char *PTR_s_Please_be_patient_while_the_file_10007b64 = "Please be patient while the file system is scanned...";
 char *_imsgs[] = {NULL};
+
+/*=============================================================================
+ * Zoom State
+ *============================================================================*/
+struct timeval zoom_start_time = {0, 0};
+
+/*=============================================================================
+ * IRIX Compatibility
+ *============================================================================*/
+undefined __iob_func_result = 0;  /* IRIX stdio thread-safety check - use fast path */

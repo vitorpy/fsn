@@ -5,6 +5,7 @@
  */
 
 #include "highlight.h"
+#include "window.h"
 #include "fsn_types.h"
 #include "fsn_state.h"
 #include "fsn_igl.h"

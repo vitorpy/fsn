@@ -92,8 +92,9 @@ void zwritemask(uint32_t mask)
 
 void swapbuffers(void)
 {
-    /* This needs to be called via GLX - handled externally by FSN */
-    glFlush();
+    /* Phase 11: Call GLX swap through glue layer */
+    extern void glx_swap_current_buffer(void);
+    glx_swap_current_buffer();
 }
 
 void gflush(void)

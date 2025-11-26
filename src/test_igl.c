@@ -15,7 +15,7 @@ int main(void) {
     printf("Type sizes (should all be 4 bytes):\n");
     printf("  sizeof(Boolean) = %zu\n", sizeof(Boolean));
     printf("  sizeof(Icoord)  = %zu\n", sizeof(Icoord));
-    printf("  sizeof(Object)  = %zu\n", sizeof(Object));
+    printf("  sizeof(GLObject)= %zu\n", sizeof(GLObject));
     printf("  sizeof(Tag)     = %zu\n", sizeof(Tag));
     printf("  sizeof(Offset)  = %zu\n", sizeof(Offset));
     printf("\n");
@@ -31,7 +31,7 @@ int main(void) {
     int errors = 0;
     if (sizeof(Boolean) != 4) { printf("ERROR: Boolean is not 4 bytes!\n"); errors++; }
     if (sizeof(Icoord) != 4) { printf("ERROR: Icoord is not 4 bytes!\n"); errors++; }
-    if (sizeof(Object) != 4) { printf("ERROR: Object is not 4 bytes!\n"); errors++; }
+    if (sizeof(GLObject) != 4) { printf("ERROR: GLObject is not 4 bytes!\n"); errors++; }
     if (sizeof(Matrix) != 64) { printf("ERROR: Matrix is not 64 bytes!\n"); errors++; }
 
     /* Test getgdesc - should return default values */

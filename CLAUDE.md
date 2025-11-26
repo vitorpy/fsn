@@ -4,6 +4,54 @@
 
 FSN (File System Navigator) restoration project - converting a 78K-line Ghidra MIPS/IRIX decompile into a functional modern Linux binary. This is the 3D file browser seen in Jurassic Park (1993).
 
+## Current Status: Phase 10 Complete - Window Appears!
+
+The FSN application now:
+- Compiles and links successfully (296KB binary)
+- Launches and displays a Motif window
+- Creates proper widget hierarchy (menubar, panels, GL drawing area)
+
+### What Works:
+- X11/Motif initialization and window creation
+- Widget hierarchy (MainWindow, MenuBar, Forms, DrawingArea)
+- Context pointer initialization (curcontext, curcontextwindows)
+
+### Still Needs Work:
+- GL rendering (drawing area is empty/gray)
+- File browser functionality
+- 3D visualization
+- Mouse interaction/picking
+- Many stub functions need real implementations
+
+## Build Commands
+
+**Always build out-of-source in ./build:**
+
+```bash
+# Configure (from project root)
+cmake -B build -DCMAKE_BUILD_TYPE=Debug
+
+# Build FSN
+cmake --build build --target fsn
+
+# Run
+./build/fsn
+
+# Other targets
+cmake --build build --target test_headers
+cmake --build build --target test_igl
+```
+
+**Dependencies (Arch Linux):**
+```bash
+sudo pacman -S motif libx11 mesa glu
+```
+
+**Dependencies (Debian/Ubuntu):**
+```bash
+sudo apt-get install libmotif-dev libx11-dev libgl1-mesa-dev libglu1-mesa-dev
+```
+
 ## Critical Rules
 
 ### DO NOT:
@@ -11,12 +59,13 @@ FSN (File System Navigator) restoration project - converting a 78K-line Ghidra M
 - Manually copy/paste large code blocks from fsn.c - use extraction scripts
 - "Clean up" `halt_baddata()` calls, magic numbers, or GP indirect calls yet
 - Create new implementations of functions - we're modularizing, not rewriting
+- Build inside src/ directory - always use ./build
 
 ### DO:
 - **Use extraction scripts** in `analysis/` for all module extraction
 - Preserve decompilation artifacts (they indicate problem areas to fix later)
 - Track work in beads (`bd`) for complex multi-session tasks
-- Follow the phased approach in README.md
+- Build in ./build directory (out-of-source)
 
 ## Key Scripts (in `analysis/`)
 
@@ -56,23 +105,40 @@ fsn/
 ├── analysis/          # Python analysis/extraction scripts
 ├── .venv/             # Python venv (tree-sitter, etc.)
 ├── .beads/            # Issue tracker database (bd)
-└── build/             # CMake build directory
+├── build/             # CMake build directory (out-of-source!)
+└── CMakeLists.txt     # Build configuration
 ```
 
-## Current Phase: Modularization
+## Implemented Stub Functions (Phase 9-10)
 
-We're extracting functions from fsn.c into logical modules while preserving all decompilation artifacts.
+These were implemented in `src/stubs.c` to get FSN running:
 
-### Modules Already Extracted:
-- `color.c` - Color space conversions (IRIS GL)
-- `main.c` - Entry point and main loop
-- `init.c` - Initialization functions
-- `fsn_state.c` - Global state definitions
-- `fam_monitor.c` - File monitoring (FAM -> inotify adaptation)
+| Function | Purpose |
+|----------|---------|
+| `setup_context_widgets()` | Creates GL context and UI widgets in curcontextwindows |
+| `create_panel_component()` | Creates RowColumn control panel |
+| `get_panel_value()` | Creates MenuBar for MainWindow |
+| `set_status_message()` | Updates status bar label |
+| `set_camera_lookat()` | Sets camera target position |
+| `clear_current_selection()` | Clears file/directory selection |
+| `clear_marked_state()` | Clears file marking state |
+| `build_path_string()` | Constructs path from directory node |
+| `get_item_screen_coords()` | Gets screen position of item (stub) |
+| `get_bytecode_context()` | Returns NULL (SGI bytecode not needed) |
+| `eval_bytecode_instruction()` | No-op (SGI bytecode not needed) |
 
-### Acceptable Platform Adaptations:
-- FAM (SGI) -> inotify (Linux)
-- IRIS GL -> OpenGL (future phase)
+## 64-bit Porting Notes
+
+The original FSN was 32-bit MIPS. Key changes for 64-bit Linux:
+
+1. **Widget pointers**: Use `((Widget *)curcontextwindows)[index]` not byte offsets
+2. **Pointer casts**: Avoid `undefined4` for pointers - use proper types
+3. **contextwindows structure**: Widget indices, not byte offsets:
+   - Index 2: glwidget (GL drawing area)
+   - Index 3: contextTopWidget (main form)
+   - Index 9: activeButton (button form)
+   - Index 10: activeButtonMask (bulletin board)
+   - Index 11: locateHighlightName (highlight label)
 
 ## Beads Issue Tracking
 
@@ -92,20 +158,10 @@ These indicate issues to fix in later phases:
 - `in_register_*` - Ghidra register tracking
 - Magic numbers like `0xe3f48f1` - Xt/Motif resource constants
 
-## Build (Not Yet Working)
-
-```bash
-mkdir build && cd build
-cmake ..
-# make  # Disabled until modularization complete
-```
-
-Dependencies: libmotif-dev, libx11-dev, libgl1-mesa-dev, libglu1-mesa-dev
-
 ## Tips for Working Sessions
 
-1. **Activate venv first**: `source .venv/bin/activate`
-2. **Find functions**: `python3 analysis/extract_module_ts.py list <pattern>`
-3. **Extract functions**: `python3 analysis/extract_module_ts.py <module> func1,func2,...`
+1. **Build first**: `cmake -B build && cmake --build build --target fsn`
+2. **Activate venv**: `source .venv/bin/activate` (for analysis scripts)
+3. **Find functions**: `python3 analysis/extract_module_ts.py list <pattern>`
 4. **Track progress**: Use beads (`bd`) for multi-session work
 5. **Never read entire fsn.c** - Use scripts for context-friendly extraction

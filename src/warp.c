@@ -5,19 +5,17 @@
  */
 
 #include "warp.h"
+#include "window.h"
 #include "fsn_types.h"
 #include "fsn_state.h"
 #include "fsn_igl.h"
 
 void draw_warp(void)
-
 {
   cpack(cpack_color);
   clear();
   swapbuffers();
   gflush();
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
 }
 
 void do_warp(int param_1)
@@ -395,86 +393,7 @@ void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *para
   halt_baddata();
 }
 
-void highlightDirWarp(undefined8 param_1,undefined8 param_2,int param_3)
-
-{
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
-  undefined4 uVar6;
-  undefined4 uVar8;
-  uint in_register_00001090;
-  undefined8 uVar7;
-  
-  uVar8 = (undefined4)((ulonglong)param_2 >> 0x20);
-  uVar5 = (uint)((ulonglong)param_1 >> 0x20);
-  if (param_3 != *(int *)(curcontext + 0x3c)) {
-    pushmatrix();
-    iVar4 = *(int *)(curcontext + 0x3c);
-    if (param_3 == *(int *)(iVar4 + 0x28)) {
-      draw_positioned_item((ulonglong)uVar5 << 0x20,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height)
-      ;
-    }
-    else if (param_3 == *(int *)(iVar4 + 0x2c)) {
-      draw_positioned_item((double)-item_spacing_x,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height);
-    }
-    else if (param_3 == *(int *)(iVar4 + 0x30)) {
-      draw_positioned_item((double)item_spacing_x,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height);
-    }
-    else {
-      iVar3 = *(int *)(iVar4 + 0x14);
-      iVar1 = 0;
-      if (0 < iVar3) {
-        piVar2 = *(int **)(iVar4 + 0x18);
-        do {
-          if (param_3 == *piVar2) {
-            uVar7 = CONCAT44(uVar5,(float)((double)-icon_spacing_factor *
-                                           (double)((ulonglong)in_register_00001090 << 0x20) *
-                                           (double)(iVar3 + -1) +
-                                          (double)icon_spacing_factor * (double)iVar1));
-            translate(uVar7,iVar3,iVar4,0);
-            uVar6 = (undefined4)((ulonglong)uVar7 >> 0x20);
-            rotate(0xfffffc7c,0x7a);
-            translate(CONCAT44(uVar6,0x3f333333),CONCAT44(uVar8,0xbde66666));
-            rect(0xbca3d70a,0xbca3d70a);
-            break;
-          }
-          iVar1 = iVar1 + 1;
-          piVar2 = piVar2 + 1;
-        } while (iVar1 < iVar3);
-      }
-    }
-    popmatrix();
-  }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
-}
-
-void highlightFileWarp(int param_1,int param_2)
-
-{
-  uint in_register_00001040;
-  
-  if (param_1 == *(int *)(curcontext + 0x3c)) {
-    pushmatrix();
-    translate(0,(float)((double)*(float *)(param_1 + 0x3c) /
-                       (double)((ulonglong)in_register_00001040 << 0x20)));
-    draw_entry(param_2);
-    translate(*(undefined4 *)(param_2 + 0x14),*(undefined4 *)(param_2 + 0x18));
-    if ((curcontext[0xc50] == '\0') || (overlay_mode_flag == '\0')) {
-      scale(view_offset_x,view_offset_x);
-    }
-    else {
-      scale(view_offset_x,view_offset_x);
-    }
-                    // WARNING: Bad instruction - Truncating control flow here
-    halt_baddata();
-  }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
-}
+/* highlightDirWarp and highlightFileWarp are defined in highlight.c */
 
 void warpZoomToFile(int param_1,int param_2)
 

@@ -82,6 +82,7 @@ set(FSN_SOURCES_CLEAN
     src/context_funcs.c
     src/convert.c
     src/delete.c
+    src/drawing.c
     src/dump.c
     src/edit.c
     src/fam_monitor.c
@@ -100,6 +101,7 @@ set(FSN_SOURCES_CLEAN
     src/string_utils.c
     src/swapping.c
     src/warp.c
+    src/window.c
     src/zoom.c
 )
 
@@ -115,7 +117,6 @@ set(FSN_SOURCES_NEED_CLEANUP
     src/dir_core.c
     src/directory.c
     src/display.c
-    src/drawing.c
     src/events.c
     src/fam.c
     src/file_core.c
@@ -157,7 +158,6 @@ set(FSN_SOURCES_NEED_CLEANUP
     src/viewport.c
     src/visibility.c
     src/widget.c
-    src/window.c
 )
 
 # Stub implementations

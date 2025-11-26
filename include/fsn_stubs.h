@@ -25,6 +25,7 @@ static inline void halt_baddata(void) {
 extern void gl_picking_setup_wrapper(void);
 extern void init_display_lists(void);
 extern void flush_rendering(int param);
+extern void glx_swap_current_buffer(void);  /* Phase 11: GLX buffer swap */
 extern void redraw_gl_scene(void);
 extern void do_warp(int param_1);
 extern void clear_current_selection(void);
@@ -34,6 +35,7 @@ extern undefined4 eval_bytecode_instruction(int param_1, int param_2, int param_
 extern void build_path_string(char *param_1, undefined4 *param_2);
 extern int get_bytecode_context(int param_1, int param_2);
 extern void get_item_screen_coords(undefined4 *param_1);
+/* set_status_message and display_status_message declared in messages.h */
 
 /*=============================================================================
  * IRIX stdio internals - replace with modern equivalents
@@ -120,8 +122,8 @@ static inline void refresh_list_display(void) { /* TODO */ }
 static inline void refresh_view(void) { /* TODO */ }
 static inline void reset_list_state(void) { /* TODO */ }
 static inline void save_matrix_state(void) { /* TODO */ }
-static inline void set_main_gl_window(void) { /* TODO */ }
-static inline void setup_context_widgets(void) { /* TODO */ }
+/* set_main_gl_window moved to window.c */
+extern void setup_context_widgets(void);  /* Implemented in stubs.c */
 static inline void setup_directory_handler(void) { /* TODO */ }
 static inline void setup_event_handlers(void) { /* TODO */ }
 static inline void setup_fam_monitoring(void) { /* TODO */ }

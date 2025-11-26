@@ -5,6 +5,7 @@
  */
 
 #include "zoom.h"
+#include "window.h"
 #include "fsn_types.h"
 #include "fsn_state.h"
 #include "fsn_igl.h"
@@ -142,86 +143,7 @@ void shrinkDueToZoom(void)
   halt_baddata();
 }
 
-void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *param_4,
-                  undefined2 *param_5,int *param_6,undefined1 *param_7,undefined1 *param_8)
-
-{
-  float fVar1;
-  undefined1 auStack_c [4];
-  int iStack_8;
-  int iStack_4;
-  
-  *param_5 = 0;
-  *param_7 = 0;
-  *param_8 = 0;
-  get_selection_params(&iStack_4,&iStack_8,(int)auStack_c);
-  if (iStack_4 == 0) {
-    *param_7 = 1;
-    *param_6 = 0;
-  }
-  else if (iStack_8 == 0) {
-    if (iStack_4 == *(int *)(curcontext + 0x3c)) {
-      clear_current_selection();
-      *param_1 = camera_lookat_x;
-      *param_2 = camera_lookat_y;
-      *param_3 = camera_lookat_z;
-      *param_4 = (short)camera_rotation_angle;
-      *param_6 = *(int *)(curcontext + 0x3c);
-    }
-    else {
-      *param_7 = 1;
-      *param_6 = iStack_4;
-    }
-  }
-  else if (iStack_4 == *(int *)(curcontext + 0x3c)) {
-    get_item_screen_coords((undefined4*)iStack_8);
-    fVar1 = *(float *)(iStack_8 + 0x14);
-    *param_1 = (float)((double)fVar1 - (double)*(float *)(curcontext + 0x14) * (double)database_version)
-    ;
-    *param_2 = (float)(((double)*(float *)(iStack_8 + 0x18) +
-                       (double)*(float *)(iStack_4 + 0x3c) /
-                       (double)((ulonglong)(double)fVar1 & 0xffffffff00000000)) -
-                      (double)*(float *)(curcontext + 0x18) * (double)database_version);
-    if (overlay_mode_flag == '\0') {
-      *param_3 = overlay_position_offset + *(float *)(iStack_8 + 0x1c);
-    }
-    else {
-      *param_8 = 1;
-      *param_3 = layout_offset_base + layout_height_adjust;
-    }
-    *param_4 = (short)layout_short_value;
-    *param_6 = *(int *)(curcontext + 0x3c);
-    *param_8 = 1;
-  }
-  else {
-    fprintf((FILE *)0xfb52904,"found file in another dir\n");
-  }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
-}
-
-void warpZoomToFile(int param_1,int param_2)
-
-{
-  uint uVar1;
-  undefined8 in_f18;
-  
-  uVar1 = (uint)((ulonglong)in_f18 >> 0x20);
-  if (param_1 != 0) {
-    if (param_1 != *(int *)(curcontext + 0x3c)) {
-      do_warp(0);
-    }
-    if (param_2 != 0) {
-      set_camera_lookat((double)*(float *)(param_2 + 0x14) -
-                   (double)*(float *)(curcontext + 0x14) * (double)database_version,
-                   ((double)*(float *)(param_2 + 0x18) +
-                   (double)*(float *)(param_1 + 0x3c) / (double)((ulonglong)uVar1 << 0x20)) -
-                   (double)*(float *)(curcontext + 0x18) * (double)database_version);
-    }
-  }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
-}
+/* findzoom_warp and warpZoomToFile are defined in warp.c */
 
 void zoomToSelection(void)
 
@@ -236,82 +158,7 @@ void zoomToSelection(void)
   halt_baddata();
 }
 
-void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 *param_4,
-                       undefined2 *param_5,undefined4 *param_6,undefined1 *param_7,
-                       undefined1 *param_8)
-
-{
-  uint extraout_var;
-  uint extraout_var_00;
-  int iStack_c;
-  int iStack_8;
-  int iStack_4;
-  
-  *param_5 = 0;
-  *param_8 = 0;
-  *param_7 = 0;
-  get_cursor_state(&iStack_4,&iStack_c,&iStack_8);
-  if (iStack_c == 0) {
-    if (iStack_4 == 0) {
-      if (iStack_8 == 0) {
-        clear_marked_state();
-      }
-      else {
-        iStack_4 = iStack_8;
-        if ((iStack_8 == *(int *)(curcontext + 0x44)) && (*(int *)(iStack_8 + 0x28) != 0)) {
-          iStack_4 = *(int *)(iStack_8 + 0x28);
-        }
-        update_marked_item(iStack_4);
-        *param_1 = (float)((double)*(float *)(iStack_4 + 0x34) -
-                          (double)*(float *)(curcontext + 0x14) *
-                          ((double)*(float *)(iStack_4 + 0x3c) /
-                           (double)((ulonglong)extraout_var_00 << 0x20) + (double)layout_spacing_height));
-        *param_2 = (float)((double)*(float *)(iStack_4 + 0x38) -
-                          (double)*(float *)(curcontext + 0x18) *
-                          ((double)*(float *)(iStack_4 + 0x3c) /
-                           (double)((ulonglong)extraout_var_00 << 0x20) + (double)layout_spacing_height));
-        *param_3 = item_height_offset + *(float *)(iStack_4 + 0x24);
-        *param_4 = (short)default_item_type;
-        *param_6 = 0;
-      }
-    }
-    else {
-      clear_current_selection();
-      update_marked_item(iStack_4);
-      *param_1 = (float)((double)*(float *)(iStack_4 + 0x34) -
-                        (double)*(float *)(curcontext + 0x14) *
-                        ((double)*(float *)(iStack_4 + 0x3c) /
-                         (double)((ulonglong)extraout_var << 0x20) + (double)layout_spacing_height));
-      *param_2 = (float)((double)*(float *)(iStack_4 + 0x38) -
-                        (double)*(float *)(curcontext + 0x18) *
-                        ((double)*(float *)(iStack_4 + 0x3c) /
-                         (double)((ulonglong)extraout_var << 0x20) + (double)layout_spacing_height));
-      *param_3 = item_height_offset + *(float *)(iStack_4 + 0x24);
-      *param_4 = (short)default_item_type;
-      *param_6 = 0;
-    }
-  }
-  else {
-    update_marked_item(iStack_4);
-    get_item_screen_coords((undefined4*)iStack_c);
-    *param_1 = (*(float *)(iStack_4 + 0x34) +
-               *(float *)(iStack_c + 0x14) * *(float *)(iStack_4 + 0x58)) -
-               *(float *)(curcontext + 0x14) * view_scale_factor;
-    *param_2 = (*(float *)(iStack_4 + 0x38) + *(float *)(iStack_c + 0x18)) -
-               *(float *)(curcontext + 0x18) * view_scale_factor;
-    if (overlay_mode_flag == '\0') {
-      *param_3 = layout_offset_base + *(float *)(iStack_4 + 0x24) + *(float *)(iStack_c + 0x1c);
-    }
-    else {
-      *param_8 = 1;
-      *param_3 = layout_offset_base + *(float *)(iStack_4 + 0x24) + layout_height_adjust;
-    }
-    *param_6 = 0;
-    *param_4 = (short)layout_rotation_value;
-  }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
-}
+/* findzoom_landscape is defined in landscape.c */
 
 void findzoom(void)
 
@@ -326,39 +173,7 @@ void findzoom(void)
   halt_baddata();
 }
 
-void landscapeZoomToFile(int param_1,int param_2)
-
-{
-  double dVar1;
-  ulonglong in_f4;
-  float fVar2;
-  
-  if (param_1 != 0) {
-    if (param_2 == 0) {
-      dVar1 = (double)*(float *)(param_1 + 0x3c) / (double)(in_f4 & 0xffffffff00000000) +
-              (double)layout_spacing_height;
-      set_camera_lookat((double)*(float *)(param_1 + 0x34) -
-                   (double)*(float *)(curcontext + 0x14) * dVar1,
-                   (double)*(float *)(param_1 + 0x38) -
-                   (double)*(float *)(curcontext + 0x18) * dVar1);
-    }
-    else {
-      if (overlay_mode_flag == '\0') {
-        fVar2 = *(float *)(param_2 + 0x14);
-      }
-      else {
-        fVar2 = *(float *)(param_2 + 0x14);
-      }
-      set_camera_lookat(((double)*(float *)(param_1 + 0x34) +
-                   (double)fVar2 * (double)*(float *)(param_1 + 0x58)) -
-                   (double)*(float *)(curcontext + 0x14) * (double)view_scale_factor,
-                   ((double)*(float *)(param_1 + 0x38) + (double)*(float *)(param_2 + 0x18)) -
-                   (double)*(float *)(curcontext + 0x18) * (double)view_scale_factor);
-    }
-  }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
-}
+/* landscapeZoomToFile is defined in landscape.c */
 
 void zoomPosition(undefined4 param_1)
 
