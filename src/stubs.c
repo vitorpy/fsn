@@ -63,7 +63,6 @@ void GLXwinset(Display *dpy, Window win) {
             fprintf(stderr, "GLXwinset: could not create GLX context\n");
             return;
         }
-        fprintf(stderr, "GLXwinset: created shared GLX context\n");
     }
 
     /* Make the context current for this window */
