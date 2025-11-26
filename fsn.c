@@ -1339,15 +1339,15 @@ undefined DAT_1000e930;
 undefined editCB;
 pointer viewerHelp;
 undefined FUN_00429f60;
-undefined FUN_0042a2d8;
-undefined FUN_0042a440;
+undefined context_menu_callback;
+undefined window_event_handler;
 undefined4 DAT_10016e00;
 undefined4 active_file_list;
 string s_FSN_the_3D_File_System_Navigator_100079c4;
 undefined *PTR_s_Please_be_patient_while_the_file_10007b60;
 undefined *PTR_s_Please_be_patient_while_the_file_10007b64;
 undefined help_callback;
-undefined FUN_0042b5ac;
+undefined quit_menu_callback;
 pointer versionHelp;
 pointer modeHelp;
 int DAT_100079c0;
@@ -1356,18 +1356,18 @@ int DAT_10007c28;
 undefined4 DAT_10016e24;
 pointer PTR_s_noscan_10007c30;
 pointer PTR_s_landscape_10008918;
-undefined FUN_0042b6f8;
+undefined cp_color_converter;
 undefined DAT_10012c44;
 undefined DAT_10012c4c;
 undefined4 landscape_name;
 undefined DAT_0f6d07d4;
-undefined FUN_0042caa0;
-undefined FUN_0042caec;
-undefined FUN_0042cb38;
-undefined FUN_0042cbb8;
+undefined link_color_toggle_callback;
+undefined exec_color_toggle_callback;
+undefined file_color_toggle_callback;
+undefined dir_color_toggle_callback;
 int preference_panel_shell;
-undefined FUN_0042cc30;
-undefined FUN_0042ccac;
+undefined pref_panel_map_callback;
+undefined pref_color_callback;
 undefined toggle_pair_callback;
 undefined color_select_callback;
 undefined rgb_scale_callback;
@@ -36795,7 +36795,7 @@ void setup_event_handlers(void)
   init_camera_state();
   curcontext[0xc51] = 0;
   curcontext[0xc53] = 0;
-  FUN_0042a898();
+  init_context_windows();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -38170,7 +38170,7 @@ void get_panel_value(undefined4 param_1)
   XtManageChild(DAT_10016684);
   XtAddCallback(DAT_10016684,0xe3f4ca5,dir_height_mode_callback,2);
   FUN_0041b040(local_4,param_1);
-  FUN_0042b0c4(local_4);
+  finalize_menu_setup(local_4);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -51330,7 +51330,7 @@ void createViewer(undefined4 param_1,undefined4 *param_2,undefined4 param_3)
   param_2[5] = 1;
   uVar1 = XmCreateRowColumn(*(undefined4 *)(curcontextwindows + 0x10),"viewerButtons",param_2,3);
   XtManageChild(uVar1);
-  XtAddEventHandler(uVar1,4,0,FUN_0042a440,*(undefined4 *)(curcontextwindows + 8));
+  XtAddEventHandler(uVar1,4,0,window_event_handler,*(undefined4 *)(curcontextwindows + 8));
   uVar2 = XmCreatePushButton(uVar1,&DAT_1000e928,param_2,0);
   XtManageChild(uVar2);
   XtAddCallback(uVar2,0xe3f35b3,FUN_00429f60,*(undefined4 *)(curcontextwindows + 8));
@@ -51340,7 +51340,7 @@ void createViewer(undefined4 param_1,undefined4 *param_2,undefined4 param_3)
   uVar2 = XmCreatePushButton(uVar1,"saveFile",param_2,0);
   *(undefined4 *)(curcontextwindows + 0x18) = uVar2;
   XtManageChild(*(undefined4 *)(curcontextwindows + 0x18));
-  XtAddCallback(*(undefined4 *)(curcontextwindows + 0x18),0xe3f35b3,FUN_0042a2d8,
+  XtAddCallback(*(undefined4 *)(curcontextwindows + 0x18),0xe3f35b3,context_menu_callback,
                 *(undefined4 *)(curcontextwindows + 8));
   *param_2 = 0xe3f4b1d;
   param_2[1] = 1;
@@ -51846,7 +51846,7 @@ void copycontext(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042a898(void)
+void init_context_windows(void)
 
 {
   undefined4 *puVar1;
@@ -52416,7 +52416,7 @@ void createHelpMenu(undefined4 param_1)
   XtManageChild(uVar2);
   uStack_2c = 0;
   uVar2 = XmCreatePushButton(uVar1,"context_help",&uStack_28,0);
-  XtAddCallback(uVar2,0xe3f35b3,FUN_0042b5ac,0);
+  XtAddCallback(uVar2,0xe3f35b3,quit_menu_callback,0);
   XtManageChild(uVar2);
   uStack_2c = 0;
   uVar2 = XmCreatePushButton(uVar1,"mode_help",&uStack_28,0);
@@ -52443,7 +52443,7 @@ void createHelpMenu(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042b0c4(undefined4 param_1)
+void finalize_menu_setup(undefined4 param_1)
 
 {
   undefined4 uVar1;
@@ -52560,7 +52560,7 @@ void initResources(undefined4 param_1)
   int iVar1;
   undefined4 uVar2;
   
-  XtAppAddConverter(app_context,0xf661c25,"CpColor",FUN_0042b6f8,0,0);
+  XtAppAddConverter(app_context,0xf661c25,"CpColor",cp_color_converter,0,0);
   XtGetApplicationResources(param_1,&landscape_name,&PTR_s_landscape_10008918,1,0,0);
   if (landscape_name == (char *)0x0) {
     iVar1 = getgdesc(9);
@@ -52673,7 +52673,7 @@ void showPreferencePanel(void)
     local_98 = 0xf662094;
     local_94 = 1;
     preference_panel_shell = XtCreatePopupShell("preferencePanel",_DAT_0f6d16fc,toplevel,&local_98,1);
-    XtAddCallback(preference_panel_shell,0xf6615c9,FUN_0042cc30,0);
+    XtAddCallback(preference_panel_shell,0xf6615c9,pref_panel_map_callback,0);
     local_4 = XmCreatePanedWindow(preference_panel_shell,"preferencePane",&local_98,0);
     XtManageChild(local_4);
     install_help_callback(local_4,&prefPanelHelp);
@@ -52687,7 +52687,7 @@ void showPreferencePanel(void)
     XtAddCallback(uVar4,0xe3f35b3,hidePreferencePanel,0);
     XtManageChild(uVar4);
     uVar4 = XmCreatePushButton(uVar3,"preferenceUndo",&local_98,0);
-    XtAddCallback(uVar4,0xe3f35b3,FUN_0042ccac,0);
+    XtAddCallback(uVar4,0xe3f35b3,pref_color_callback,0);
     XtManageChild(uVar4);
     uVar4 = XmCreatePushButton(uVar3,"preferenceSaveChanges",&local_98,0);
     XtAddCallback(uVar4,0xe3f35b3,toggle_pair_callback,0);
@@ -52720,7 +52720,7 @@ void showPreferencePanel(void)
       local_94 = uVar4;
       puVar5 = (undefined *)XmCreateToggleButton(uVar3,"preferenceBoolean",&local_98,2);
       ppuVar2[4] = puVar5;
-      XtAddCallback(puVar5,0xe3f4ca5,FUN_0042caa0,ppuVar2);
+      XtAddCallback(puVar5,0xe3f4ca5,link_color_toggle_callback,ppuVar2);
       XtManageChild(ppuVar2[4]);
       XmStringFree(uVar4);
       puVar5 = ppuVar2[5];
@@ -52751,7 +52751,7 @@ void showPreferencePanel(void)
       local_94 = uVar3;
       puVar5 = (undefined *)XmCreateScale(local_34,"preferenceScale",&local_98,uVar4);
       ppuVar2[6] = puVar5;
-      XtAddCallback(puVar5,0xe3f4ca5,FUN_0042caec,ppuVar2);
+      XtAddCallback(puVar5,0xe3f4ca5,exec_color_toggle_callback,ppuVar2);
       XtManageChild(ppuVar2[6]);
       XmStringFree(uVar3);
       puVar5 = ppuVar2[7];
@@ -52799,7 +52799,7 @@ void showPreferencePanel(void)
       local_94 = uVar3;
       puVar5 = (undefined *)XmCreateScale(local_34,"preferenceScale",&local_98,uVar4);
       ppuVar2[7] = puVar5;
-      XtAddCallback(puVar5,0xe3f4ca5,FUN_0042cb38,ppuVar2);
+      XtAddCallback(puVar5,0xe3f4ca5,file_color_toggle_callback,ppuVar2);
       XtManageChild(ppuVar2[7]);
       XmStringFree(uVar3);
       puVar5 = ppuVar2[8];
@@ -52864,7 +52864,7 @@ void showPreferencePanel(void)
       local_94 = uVar3;
       puVar5 = (undefined *)XmCreateToggleButton(local_40,"preferenceColor",&local_98,uVar4);
       ppuVar2[3] = puVar5;
-      XtAddCallback(puVar5,0xe3f4ca5,FUN_0042cbb8,ppuVar2);
+      XtAddCallback(puVar5,0xe3f4ca5,dir_color_toggle_callback,ppuVar2);
       XtManageChild(ppuVar2[3]);
       XmStringFree(uVar3);
       puVar5 = ppuVar2[4];
