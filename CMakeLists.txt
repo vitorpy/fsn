@@ -85,6 +85,7 @@ add_executable(test_headers
     src/fsn_state.c
     src/color.c
     src/fam_monitor.c
+    src/init.c
 )
 target_link_libraries(test_headers
     ${XM_LIBRARY}

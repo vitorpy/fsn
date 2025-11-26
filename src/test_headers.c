@@ -8,6 +8,7 @@
 #include "fsn_state.h"
 #include "color.h"
 #include "fam_monitor.h"
+#include "init.h"
 #include <stdio.h>
 
 int main(int argc, char *argv[]) {
