@@ -48,7 +48,7 @@ extern char *db_filepath;
 /*=============================================================================
  * Context Management
  *============================================================================*/
-extern void *curcontext;
+extern char *curcontext;
 extern void *altcontext;
 extern void *curcontextwindows;
 extern void *altcontextwindows;

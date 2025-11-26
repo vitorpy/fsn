@@ -22,7 +22,7 @@ char *db_filepath = NULL;
 /*=============================================================================
  * Context Management
  *============================================================================*/
-void *curcontext = NULL;
+char *curcontext = NULL;
 void *altcontext = NULL;
 void *curcontextwindows = NULL;
 void *altcontextwindows = NULL;

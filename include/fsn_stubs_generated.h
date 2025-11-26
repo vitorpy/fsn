@@ -55,11 +55,10 @@ static inline void refresh_toplevel(int p0) { (void)p0; /* TODO */ }
 static inline void refresh_view_recursive(int p0) { (void)p0; /* TODO */ }
 static inline void render_file_icon(int p0, int p1, int p2, int p3, int p4, float p5) { (void)p0; (void)p1; (void)p2; (void)p3; (void)p4; (void)p5; /* TODO */ }
 static inline void render_tree_level(int p0) { (void)p0; /* TODO */ }
-static inline void set_camera_lookat(int p0, int p1, int p2, void * p3) { (void)p0; (void)p1; (void)p2; (void)p3; /* TODO */ }
 static inline void set_context_state(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 static inline void set_gl_context(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 static inline void set_render_flag(int p0) { (void)p0; /* TODO */ }
-static inline void set_status_message(const char * p0, int p1) { (void)p0; (void)p1; /* TODO */ }
+static inline int set_status_message(const char * p0, int p1) { (void)p0; (void)p1; return 0; /* TODO */ }
 static inline void set_status_text(int p0) { (void)p0; /* TODO */ }
 static inline void set_window_property(void * p0, void * p1, int p2) { (void)p0; (void)p1; (void)p2; /* TODO */ }
 static inline void setup_menu_resources(Display * p0, int p1, void * p2, void * p3) { (void)p0; (void)p1; (void)p2; (void)p3; /* TODO */ }

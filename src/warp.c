@@ -31,7 +31,7 @@ void do_warp(int param_1)
   save_matrix_state();
   if (param_1 == 0) {
     if (*(int *)(curcontext + 0x3c) == 0) {
-      set_camera_lookat((double)view_init_x,(double)view_init_y,0,&local_4);
+      set_camera_lookat((double)view_init_x,(double)view_init_y);
     }
     else {
       get_view_extents(*(int *)(curcontext + 0x3c),&local_4,&local_8,local_c);
