@@ -4282,7 +4282,7 @@ void * bsearch(void *__key,void *__base,size_t __nmemb,size_t __size,__compar_fn
   __Argc = iStackX_0;
   __istart();
   __readenv_sigfpe();
-  __status = FUN_0040aec8(__Argc,__Argv,_DAT_0fb52740);
+  __status = parse_command_args(__Argc,__Argv,_DAT_0fb52740);
                     // WARNING: Subroutine does not return
   exit(__status);
 }
@@ -30700,7 +30700,7 @@ u_short pmap_getport(sockaddr_in *__address,u_long __program,u_long __version,u_
   __Argc = iStackX_0;
   __istart();
   __readenv_sigfpe();
-  __status = FUN_0040aec8(__Argc,__Argv,_DAT_0fb52740);
+  __status = parse_command_args(__Argc,__Argv,_DAT_0fb52740);
                     // WARNING: Subroutine does not return
   exit(__status);
 }
@@ -36782,7 +36782,7 @@ void _mcount(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040a704(void)
+void setup_event_handlers(void)
 
 {
   *(undefined4 *)curcontext = view_init_x;
@@ -36954,7 +36954,7 @@ void setup_context_widgets(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040ae2c(void)
+void init_app_state(void)
 
 {
   size_t sVar1;
@@ -37028,9 +37028,9 @@ void main(int param_1,undefined4 *param_2)
                     // WARNING: Subroutine does not return
     exit(1);
   }
-  FUN_0040ae2c();
+  init_app_state();
   init_database_state();
-  FUN_0040a704();
+  setup_event_handlers();
   glwidget_translations = XtParseTranslationTable(glwidget_translations);
   blankXmString = XmStringCreate(&blank_string_literal,&default_charset);
   emptyXmString = XmStringCreate(&DAT_1000a300,&default_charset);
@@ -37047,7 +37047,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_98 = 0xe3f4b1d;
   uStack_9c = 1;
   uStack_94 = 1;
-  uStack_84 = FUN_0040d3cc(panel_widget,&uStack_a0,2);
+  uStack_84 = create_panel_component(panel_widget,&uStack_a0,2);
   uStack_88 = 0xe3f40f2;
   uStack_a0 = 0xe3f4b1d;
   uStack_98 = 0xe3f3701;
@@ -37189,7 +37189,7 @@ void main(int param_1,undefined4 *param_2)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-void FUN_0040aec8(int param_1,undefined4 *param_2)
+void parse_command_args(int param_1,undefined4 *param_2)
 
 {
   undefined4 uVar1;
@@ -37243,9 +37243,9 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
                     // WARNING: Subroutine does not return
     exit(1);
   }
-  FUN_0040ae2c();
+  init_app_state();
   init_database_state();
-  FUN_0040a704();
+  setup_event_handlers();
   glwidget_translations = XtParseTranslationTable(glwidget_translations);
   blankXmString = XmStringCreate(&blank_string_literal,&default_charset);
   emptyXmString = XmStringCreate(&DAT_1000a300,&default_charset);
@@ -37262,7 +37262,7 @@ void FUN_0040aec8(int param_1,undefined4 *param_2)
   local_98 = 0xe3f4b1d;
   local_9c = 1;
   local_94 = 1;
-  local_84 = FUN_0040d3cc(panel_widget,&local_a0,2);
+  local_84 = create_panel_component(panel_widget,&local_a0,2);
   local_88 = 0xe3f40f2;
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f3701;
@@ -37749,7 +37749,7 @@ void reset_eye(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0040d3cc(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+void create_panel_component(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 
 {
   undefined4 uVar1;
@@ -50036,7 +50036,7 @@ void dirfamDone(void)
 
 {
   if (fsn_resources == '\0') {
-    FUN_00439c0c(&database_root_node);
+    init_database_node(&database_root_node);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -61632,10 +61632,10 @@ void FAMOpen2(int *param_1,int param_2)
   char acStack_cc [200];
   int iStack_4;
   
-  FUN_0043ace4();
-  iStack_4 = FUN_0043b178(0);
+  init_network_state();
+  iStack_4 = create_socket(0);
   param_1[1] = iStack_4;
-  iVar1 = FUN_0043b1c8(iStack_4,0x7f000001,0x5f75a,1);
+  iVar1 = connect_network(iStack_4,0x7f000001,0x5f75a,1);
   *param_1 = iVar1;
   if ((-1 < iVar1) && (param_2 != 0)) {
     _Var2 = getuid();
@@ -61652,7 +61652,7 @@ void FAMOpen2(int *param_1,int param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00439a98(int *param_1,int param_2)
+void close_connections(int *param_1,int param_2)
 
 {
   int iVar1;
@@ -61686,7 +61686,7 @@ void FUN_00439a98(int *param_1,int param_2)
 void FAMOpen(undefined4 param_1)
 
 {
-  FUN_00439a98(param_1,0);
+  close_connections(param_1,0);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -61721,7 +61721,7 @@ void FAMClose(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00439c0c(int param_1)
+void init_database_node(int param_1)
 
 {
   int unaff_gp;
@@ -62179,7 +62179,7 @@ void FUN_0043a664(undefined4 param_1,char *param_2,int param_3)
     }
   }
   *(undefined4 *)(param_3 + 4) = local_6c;
-  uVar4 = FUN_0043ae14(local_6c);
+  uVar4 = lookup_buffer_index(local_6c);
   *(undefined4 *)(param_3 + 0x40c) = uVar4;
   if (local_2[0] == 'e') {
     iVar5 = find_string_index(local_6c);
@@ -62226,7 +62226,7 @@ void FUN_0043a664(undefined4 param_1,char *param_2,int param_3)
     *(undefined1 *)(path_buffer + iVar5) = 1;
   }
   else if (local_2[0] == 'G') {
-    FUN_0043b104(local_6c);
+    close_file_handle(local_6c);
     *(undefined4 *)(param_3 + 0x410) = 7;
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -62251,7 +62251,7 @@ void FAMNextEvent(uint *param_1,undefined4 param_2)
   if (((*(int *)(*piVar2 + 0xc) != 0) ||
       (((iVar1 = search_file_entry(), iVar1 != -1 && (*(int *)(*piVar2 + 0x179c) == 0)) &&
        (*(int *)(*piVar2 + 0xc) != 0)))) &&
-     (iVar1 = FUN_0043b538(piVar2,*param_1,auStack_c38,0x400), iVar1 != -1)) {
+     (iVar1 = read_file_buffer(piVar2,*param_1,auStack_c38,0x400), iVar1 != -1)) {
     FUN_0043a664(param_1,auStack_c38,param_2);
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -62320,7 +62320,7 @@ void FAMDebugLevel(undefined4 *param_1,int param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0043ace4(void)
+void init_network_state(void)
 
 {
   int iVar1;
@@ -62360,7 +62360,7 @@ void get_file_status(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0043ae14(int param_1)
+void lookup_buffer_index(int param_1)
 
 {
   int iVar1;
@@ -62473,7 +62473,7 @@ void process_file_data(int param_1,undefined4 param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0043b104(int param_1)
+void close_file_handle(int param_1)
 
 {
   int iVar1;
@@ -62514,7 +62514,7 @@ void __ct__6ClientFv(undefined4 *param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0043b178(undefined4 *param_1)
+void create_socket(undefined4 *param_1)
 
 {
   int unaff_gp;
@@ -62575,7 +62575,7 @@ void AddServer__6ClientFliT2(int *param_1,in_addr_t param_2,u_long param_3,u_lon
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0043b1c8(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+void connect_network(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
 
 {
   int *piVar1;
@@ -62861,7 +62861,7 @@ void ReadFromServer__6ClientFiPcT1(int *param_1,int param_2,undefined1 *param_3,
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0043b538(int *param_1,int param_2,undefined1 *param_3,int param_4)
+void read_file_buffer(int *param_1,int param_2,undefined1 *param_3,int param_4)
 
 {
   int iVar1;
