@@ -926,9 +926,9 @@ float camera_lookat_y;
 undefined4 zoom_scale_widget;
 undefined height_scale_callback;
 undefined layout_scale_callback;
-undefined DAT_1000a458;
+undefined search_button_name;
 undefined vertical_scale_callback;
-undefined DAT_1000a460;
+undefined scale_button_name;
 undefined zoom_scale_callback;
 pointer controlHelp;
 undefined search_button_callback;
@@ -1036,7 +1036,7 @@ void *directory_pool_limit;
 undefined4 dir_index;
 int directory_pool_index;
 int directory_pool_capacity;
-undefined4 DAT_100001fc;
+undefined4 dir_entry_initial_value;
 void *string_copy_buffer;
 uint string_buffer_limit;
 undefined4 maxx;
@@ -1114,9 +1114,9 @@ undefined4 directory_color_active;
 undefined4 directory_color_normal;
 float layout_base_height;
 float item_spacing_x;
-undefined DAT_1000ae90;
-undefined DAT_1000ae94;
-undefined DAT_1000ae98;
+undefined child_dir_index_1;
+undefined child_dir_index_2;
+undefined child_dir_index_3;
 undefined4 monitor_label_color;
 float layout_z_offset;
 float icon_size_multiplier;
@@ -1216,7 +1216,7 @@ undefined4 overview_gl_context;
 undefined4 gl_buffer_size;
 undefined4 overview_gl_widget;
 int overview_translations;
-undefined DAT_10006e94;
+undefined overview_app_actions;
 char overview_initialized;
 pointer overviewHelp;
 string overviewGlw_translations;
@@ -1250,41 +1250,41 @@ undefined4 numtop;
 undefined4 current_colormap;
 undefined4 numcmap;
 char cmap_initialized;
-undefined1 DAT_10006f00;
-int DAT_10007010;
-int DAT_10007014;
-int DAT_1000701c;
-int DAT_10007018;
-int DAT_10007000;
-int DAT_10007004;
-int DAT_1000700c;
-int DAT_10007008;
+undefined1 render_mode_flag;
+int vertex_idx_4;
+int vertex_idx_5;
+int vertex_idx_7;
+int vertex_idx_6;
+int vertex_idx_0;
+int vertex_idx_1;
+int vertex_idx_3;
+int vertex_idx_2;
 undefined4 vertex_array_start_idx;
-int DAT_10006fa4;
-int DAT_10006fac;
-int DAT_10006fa8;
+int face_vtx_0;
+int face_vtx_2;
+int face_vtx_1;
 undefined4 vertex_array_end_idx;
-int DAT_10006fb4;
-int DAT_10006fbc;
-int DAT_10006fb8;
-int DAT_10006fc0;
-int DAT_10006fc4;
-int DAT_10006fcc;
-int DAT_10006fc8;
-int DAT_10006fd0;
-int DAT_10006fd4;
-int DAT_10006fdc;
-int DAT_10006fd8;
-int DAT_10006fe0;
-int DAT_10006fe4;
-int DAT_10006fec;
-int DAT_10006fe8;
-int DAT_10006ff0;
-int DAT_10006ff4;
-int DAT_10006ffc;
-int DAT_10006ff8;
-undefined DAT_10007020;
-undefined DAT_1000702c;
+int face_vtx_4;
+int face_vtx_6;
+int face_vtx_5;
+int face_vtx_7;
+int face_vtx_8;
+int face_vtx_10;
+int face_vtx_9;
+int face_vtx_11;
+int face_vtx_12;
+int face_vtx_14;
+int face_vtx_13;
+int face_vtx_15;
+int face_vtx_16;
+int face_vtx_18;
+int face_vtx_17;
+int face_vtx_19;
+int face_vtx_20;
+int face_vtx_22;
+int face_vtx_21;
+undefined vertex_8_ptr;
+undefined vertex_9_ptr;
 int max_scale_limit;
 pointer dcolorBoxes;
 undefined matrix_buffer_0;
@@ -37761,10 +37761,10 @@ void create_panel_component(undefined4 param_1,undefined4 param_2,undefined4 par
   uVar2 = XmCreatePushButton(uVar1,"reset",param_2,0);
   XtManageChild(uVar2);
   XtAddCallback(uVar2,0xe3f35b3,reset_eye,0);
-  uVar2 = XmCreatePushButton(uVar1,&DAT_1000a458,param_2,0);
+  uVar2 = XmCreatePushButton(uVar1,&search_button_name,param_2,0);
   XtManageChild(uVar2);
   XtAddCallback(uVar2,0xe3f35b3,search_button_callback,0);
-  uVar2 = XmCreatePushButton(uVar1,&DAT_1000a460,param_2,0);
+  uVar2 = XmCreatePushButton(uVar1,&scale_button_name,param_2,0);
   XtManageChild(uVar2);
   XtAddCallback(uVar2,0xe3f35b3,height_scale_callback,0);
   uVar2 = XmCreatePushButton(uVar1,"front",param_2,0);
@@ -39248,7 +39248,7 @@ void allocate_directory_entry(void)
     *(void **)((int)dir_index + directory_pool_index * 4) = directory_memory_pool;
     directory_pool_index = directory_pool_index + 1;
   }
-  *(undefined4 *)((int)directory_memory_pool + 0x5c) = DAT_100001fc;
+  *(undefined4 *)((int)directory_memory_pool + 0x5c) = dir_entry_initial_value;
   directory_memory_pool = (void *)((int)directory_memory_pool + 0x78);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -42585,17 +42585,17 @@ void process_pick_item(int param_1)
   }
   popmatrix();
   if (*(int *)(param_1 + 0x28) != 0) {
-    draw_directory_recursive(*(int *)(param_1 + 0x28),&DAT_1000ae90,0,0,in_f11,
+    draw_directory_recursive(*(int *)(param_1 + 0x28),&child_dir_index_1,0,0,in_f11,
                  SUB84((double)*(float *)(param_1 + 0x3c) /
                        (double)((ulonglong)unaff_000010c0 << 0x20) + (double)layout_base_height,0));
   }
   if (*(int *)(param_1 + 0x2c) != 0) {
-    draw_directory_recursive(*(int *)(param_1 + 0x2c),&DAT_1000ae94,in_f5,SUB84((double)-item_spacing_x,0),in_f5,
+    draw_directory_recursive(*(int *)(param_1 + 0x2c),&child_dir_index_2,in_f5,SUB84((double)-item_spacing_x,0),in_f5,
                  SUB84((double)*(float *)(param_1 + 0x3c) /
                        (double)((ulonglong)unaff_000010c0 << 0x20) + (double)layout_base_height,0));
   }
   if (*(int *)(param_1 + 0x30) != 0) {
-    draw_directory_recursive(*(int *)(param_1 + 0x30),&DAT_1000ae98,uVar3,SUB84((double)item_spacing_x,0),uVar3,
+    draw_directory_recursive(*(int *)(param_1 + 0x30),&child_dir_index_3,uVar3,SUB84((double)item_spacing_x,0),uVar3,
                  SUB84((double)*(float *)(param_1 + 0x3c) /
                        (double)((ulonglong)unaff_000010c0 << 0x20) + (double)layout_base_height,0));
   }
@@ -45954,7 +45954,7 @@ void createOverview(void)
   
   uVar6 = (uint)((ulonglong)in_f18 >> 0x20);
   if (overview_initialized == '\0') {
-    XtAppAddActions(app_context,&DAT_10006e94,4);
+    XtAppAddActions(app_context,&overview_app_actions,4);
     overview_initialized = '\x01';
   }
   apcStack_a0[1] = (char *)auStack_b4;
@@ -47169,7 +47169,7 @@ void need_pups(void)
   if (cmap_initialized == '\0') {
     iVar1 = getgdesc(0x11);
     if (iVar1 < 2) {
-      DAT_10006f00 = 1;
+      render_mode_flag = 1;
     }
     cmap_initialized = '\x01';
   }
@@ -47334,10 +47334,10 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
       cpack(*param_1);
     }
     bgnqstrip();
-    v3f(DAT_10007010 * 0xc + 0x10006f40);
-    v3f(DAT_10007014 * 0xc + 0x10006f40);
-    v3f(DAT_1000701c * 0xc + 0x10006f40);
-    v3f(DAT_10007018 * 0xc + 0x10006f40);
+    v3f(vertex_idx_4 * 0xc + 0x10006f40);
+    v3f(vertex_idx_5 * 0xc + 0x10006f40);
+    v3f(vertex_idx_7 * 0xc + 0x10006f40);
+    v3f(vertex_idx_6 * 0xc + 0x10006f40);
     endqstrip();
   }
   else if (param_2 == 3) {
@@ -47345,8 +47345,8 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
       cpack(*param_1);
     }
     bgnline();
-    v3f(&DAT_10007020);
-    v3f(&DAT_1000702c);
+    v3f(&vertex_8_ptr);
+    v3f(&vertex_9_ptr);
     endline();
   }
   else if (param_2 == 2) {
@@ -47354,10 +47354,10 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
       cpack(*param_1);
     }
     bgnqstrip();
-    v3f(DAT_10007000 * 0xc + 0x10006f40);
-    v3f(DAT_10007004 * 0xc + 0x10006f40);
-    v3f(DAT_1000700c * 0xc + 0x10006f40);
-    v3f(DAT_10007008 * 0xc + 0x10006f40);
+    v3f(vertex_idx_0 * 0xc + 0x10006f40);
+    v3f(vertex_idx_1 * 0xc + 0x10006f40);
+    v3f(vertex_idx_3 * 0xc + 0x10006f40);
+    v3f(vertex_idx_2 * 0xc + 0x10006f40);
     endqstrip();
   }
   else {
@@ -47381,9 +47381,9 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
       else {
         bgnqstrip();
         v3f(vertex_array_start_idx * 0xc + 0x10006f40);
-        v3f(DAT_10006fa4 * 0xc + 0x10006f40);
-        v3f(DAT_10006fac * 0xc + 0x10006f40);
-        v3f(DAT_10006fa8 * 0xc + 0x10006f40);
+        v3f(face_vtx_0 * 0xc + 0x10006f40);
+        v3f(face_vtx_2 * 0xc + 0x10006f40);
+        v3f(face_vtx_1 * 0xc + 0x10006f40);
         endqstrip();
       }
     }
@@ -47403,9 +47403,9 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
       else {
         bgnqstrip();
         v3f(vertex_array_end_idx * 0xc + 0x10006f40);
-        v3f(DAT_10006fb4 * 0xc + 0x10006f40);
-        v3f(DAT_10006fbc * 0xc + 0x10006f40);
-        v3f(DAT_10006fb8 * 0xc + 0x10006f40);
+        v3f(face_vtx_4 * 0xc + 0x10006f40);
+        v3f(face_vtx_6 * 0xc + 0x10006f40);
+        v3f(face_vtx_5 * 0xc + 0x10006f40);
         endqstrip();
       }
     }
@@ -47421,10 +47421,10 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
       }
       else {
         bgnqstrip();
-        v3f(DAT_10006fc0 * 0xc + 0x10006f40);
-        v3f(DAT_10006fc4 * 0xc + 0x10006f40);
-        v3f(DAT_10006fcc * 0xc + 0x10006f40);
-        v3f(DAT_10006fc8 * 0xc + 0x10006f40);
+        v3f(face_vtx_7 * 0xc + 0x10006f40);
+        v3f(face_vtx_8 * 0xc + 0x10006f40);
+        v3f(face_vtx_10 * 0xc + 0x10006f40);
+        v3f(face_vtx_9 * 0xc + 0x10006f40);
         endqstrip();
       }
     }
@@ -47443,10 +47443,10 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
       }
       else {
         bgnqstrip();
-        v3f(DAT_10006fd0 * 0xc + 0x10006f40);
-        v3f(DAT_10006fd4 * 0xc + 0x10006f40);
-        v3f(DAT_10006fdc * 0xc + 0x10006f40);
-        v3f(DAT_10006fd8 * 0xc + 0x10006f40);
+        v3f(face_vtx_11 * 0xc + 0x10006f40);
+        v3f(face_vtx_12 * 0xc + 0x10006f40);
+        v3f(face_vtx_14 * 0xc + 0x10006f40);
+        v3f(face_vtx_13 * 0xc + 0x10006f40);
         endqstrip();
       }
     }
@@ -47465,10 +47465,10 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
       }
       else {
         bgnqstrip();
-        v3f(DAT_10006fe0 * 0xc + 0x10006f40);
-        v3f(DAT_10006fe4 * 0xc + 0x10006f40);
-        v3f(DAT_10006fec * 0xc + 0x10006f40);
-        v3f(DAT_10006fe8 * 0xc + 0x10006f40);
+        v3f(face_vtx_15 * 0xc + 0x10006f40);
+        v3f(face_vtx_16 * 0xc + 0x10006f40);
+        v3f(face_vtx_18 * 0xc + 0x10006f40);
+        v3f(face_vtx_17 * 0xc + 0x10006f40);
         endqstrip();
       }
     }
@@ -47484,10 +47484,10 @@ void draw_box(undefined4 *param_1,int param_2,uint param_3)
       }
       else {
         bgnqstrip();
-        v3f(DAT_10006ff0 * 0xc + 0x10006f40);
-        v3f(DAT_10006ff4 * 0xc + 0x10006f40);
-        v3f(DAT_10006ffc * 0xc + 0x10006f40);
-        v3f(DAT_10006ff8 * 0xc + 0x10006f40);
+        v3f(face_vtx_19 * 0xc + 0x10006f40);
+        v3f(face_vtx_20 * 0xc + 0x10006f40);
+        v3f(face_vtx_22 * 0xc + 0x10006f40);
+        v3f(face_vtx_21 * 0xc + 0x10006f40);
         endqstrip();
       }
     }
