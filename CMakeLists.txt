@@ -61,21 +61,11 @@ endif()
 # Source files (Phase 5: Fresh modularization)
 set(FSN_SOURCES
     src/fsn_state.c
-    # Tier 1 modules (self-contained) - to be extracted
+    src/fam_monitor.c
+    # Modules to be extracted from fsn.c:
     # src/color.c
-    # src/fam_monitor.c
-    # src/x11_wrappers.c
-    # src/xt_wrappers.c
-    # src/motif_wrappers.c
-    # Tier 2 modules (moderate coupling) - to be extracted
-    # src/icons.c
-    # src/database_io.c
-    # src/search.c
-    # src/view_camera.c
-    # Tier 3 modules (high coupling) - to be extracted
-    # src/selection.c
-    # src/rendering.c
     # src/init.c
+    # src/rendering.c
     # src/main.c
 )
 
@@ -83,9 +73,7 @@ set(FSN_SOURCES
 add_executable(test_headers
     src/test_headers.c
     src/fsn_state.c
-    src/color.c
     src/fam_monitor.c
-    src/init.c
 )
 target_link_libraries(test_headers
     ${XM_LIBRARY}
@@ -95,7 +83,7 @@ target_link_libraries(test_headers
     m
 )
 
-# Main executable (disabled until we have buildable source - Phase 6)
+# Main executable (disabled until modularization complete)
 # add_executable(fsn ${FSN_SOURCES})
 # target_link_libraries(fsn
 #     ${XM_LIBRARY}
