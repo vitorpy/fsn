@@ -12,8 +12,6 @@ static inline void apply_context_changes(void * p0, int p1) { (void)p0; (void)p1
 static inline int build_path_string(int p0, void * p1) { (void)p0; (void)p1; return 0; /* TODO */ }
 static inline int check_directory_flags(int p0, int p1, int p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; return 0; /* TODO */ }
 static inline void cleanup_directory(int p0) { (void)p0; /* TODO */ }
-static inline void clear_current_selection(int p0) { (void)p0; /* TODO */ }
-static inline void clear_marked_state(int p0) { (void)p0; /* TODO */ }
 static inline void configure_viewport(int p0, int p1, int p2) { (void)p0; (void)p1; (void)p2; /* TODO */ }
 static inline void copy_selection_data(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 static inline int create_panel_component(Widget p0, void * p1, int p2) { (void)p0; (void)p1; (void)p2; return 0; /* TODO */ }
@@ -25,7 +23,6 @@ static inline void draw_legend_color_box(int p0, int p1, float p2) { (void)p0; (
 static inline void draw_positioned_item(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 static inline void draw_scaled_element(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 static inline int equalPositions(int p0, int p1) { (void)p0; (void)p1; return 0; /* TODO */ }
-static inline void eval_bytecode_instruction(int p0, int p1, int p2, int p3, int p4) { (void)p0; (void)p1; (void)p2; (void)p3; (void)p4; /* TODO */ }
 static inline void extract_position_data(int p0, void * p1, void * p2, void * p3, void * p4, void * p5, void * p6, void * p7, void * p8, void * p9) { (void)p0; (void)p1; (void)p2; (void)p3; (void)p4; (void)p5; (void)p6; (void)p7; (void)p8; (void)p9; /* TODO */ }
 static inline void flush_rendering(int p0) { (void)p0; /* TODO */ }
 static inline int get_bytecode_context(int p0, int p1) { (void)p0; (void)p1; return 0; /* TODO */ }
@@ -43,13 +40,13 @@ static inline void gl_swap_buffers(int p0) { (void)p0; /* TODO */ }
 static inline int init_toplevel_resources(int p0) { (void)p0; return 0; /* TODO */ }
 static inline void install_help_callback(void * p0, void * p1) { (void)p0; (void)p1; /* TODO */ }
 static inline void load_filetype_rules_wrapper(const char * p0) { (void)p0; /* TODO */ }
-static inline void parse_data_buffer(int p0, int p1, void * p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; /* TODO */ }
+static inline int parse_data_buffer(int p0, int p1, void * p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; return 0; /* TODO */ }
 static inline void post_realize_setup(int p0) { (void)p0; /* TODO */ }
 static inline void process_child_directory(void * p0) { (void)p0; /* TODO */ }
 static inline void process_data_recursive(int p0, int p1, int p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; /* TODO */ }
 static inline void process_data_section(int p0, int p1, int p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; /* TODO */ }
 static inline void process_pick_item(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
-static inline void read_bytecode_value(int p0, int p1, int p2, void * p3, int p4) { (void)p0; (void)p1; (void)p2; (void)p3; (void)p4; /* TODO */ }
+static inline int read_bytecode_value(int p0, int p1, int p2, void * p3, int p4) { (void)p0; (void)p1; (void)p2; (void)p3; (void)p4; return 0; /* TODO */ }
 static inline void recalc_layout(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 static inline void refresh_toplevel(int p0) { (void)p0; /* TODO */ }
 static inline void refresh_view_recursive(int p0) { (void)p0; /* TODO */ }
