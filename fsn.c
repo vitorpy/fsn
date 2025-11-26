@@ -1148,7 +1148,7 @@ undefined4 menu_monitor_directory;
 undefined4 current_picked_item;
 undefined toggle_state_callback;
 undefined4 menu_directory_cascade;
-undefined FUN_0041e0a8;
+undefined info_button_callback;
 undefined4 popup_menu_widget;
 undefined4 menu_open_file_1;
 undefined menu_open_file_callback;
@@ -1178,7 +1178,7 @@ undefined menu_process_deletes_callback;
 undefined menu_undo_deletes_callback;
 undefined4 menu_process_deletes;
 undefined4 menu_undo_deletes;
-undefined FUN_0041fa18;
+undefined gl_motion_handler;
 undefined gl_event_handler;
 undefined gl_toggle_callback;
 undefined gl_button_callback;
@@ -36837,7 +36837,7 @@ void setup_context_widgets(void)
   local_90 = 0xe3f46dd;
   local_94 = 1;
   local_8c = 1;
-  local_94 = FUN_0041be40(*(undefined4 *)(curcontextwindows + 0xc),&local_a0,3);
+  local_94 = create_context_widget(*(undefined4 *)(curcontextwindows + 0xc),&local_a0,3);
   local_8c = 1;
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f4ba9;
@@ -38048,7 +38048,7 @@ void get_panel_value(undefined4 param_1)
   local_24 = XmCreatePushButton(local_c,"menuSave",&local_74,0);
   XtManageChild(local_24);
   XtAddCallback(local_24,0xe3f35b3,dumpDatabaseCB,0);
-  FUN_0041bd0c(local_c);
+  configure_context_widget(local_c);
   local_78 = 0;
   local_24 = XmCreatePushButton(local_c,"menuQuit",&local_74,0);
   XtManageChild(local_24);
@@ -38169,7 +38169,7 @@ void get_panel_value(undefined4 param_1)
   DAT_10016684 = XmCreateToggleButton(local_20,"menuDirectoryChildren",&local_74,0);
   XtManageChild(DAT_10016684);
   XtAddCallback(DAT_10016684,0xe3f4ca5,dir_height_mode_callback,2);
-  FUN_0041b040(local_4,param_1);
+  init_context_menus(local_4,param_1);
   finalize_menu_setup(local_4);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -43575,7 +43575,7 @@ void highlightFileWarp(int param_1,int param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041ac8c(int param_1,int param_2)
+void refresh_context_view(int param_1,int param_2)
 
 {
   int unaff_gp;
@@ -43637,7 +43637,7 @@ void warpZoomToFile(int param_1,int param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041aeec(int param_1,int param_2)
+void update_context_display(int param_1,int param_2)
 
 {
   int iVar1;
@@ -43709,7 +43709,7 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
   XtManageChild(uStack_10);
   uStack_6c = 0;
   uStack_10 = XmCreatePushButton(uStack_4,"menuRescanSubtree",&uStack_68,0);
-  XtAddCallback(uStack_10,0xe3f35b3,FUN_0041e0a8,0);
+  XtAddCallback(uStack_10,0xe3f35b3,info_button_callback,0);
   XtManageChild(uStack_10);
   uStack_6c = 0;
   current_picked_item = XmCreateToggleButton(uStack_4,"menuPruneDirectory",&uStack_68,0);
@@ -43826,7 +43826,7 @@ void CreateSelectionMenus(undefined4 param_1,undefined4 param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041b040(undefined4 param_1,undefined4 param_2)
+void init_context_menus(undefined4 param_1,undefined4 param_2)
 
 {
   undefined4 uVar1;
@@ -44105,7 +44105,7 @@ void CreateSelectionEntries(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041bd0c(undefined4 param_1)
+void configure_context_widget(undefined4 param_1)
 
 {
   undefined4 uVar1;
@@ -44164,7 +44164,7 @@ void createSelectedInfo(undefined4 param_1,undefined4 *param_2,undefined4 param_
                 *(undefined4 *)(curcontextwindows + 0xc));
   XtAddCallback(*(undefined4 *)(curcontextwindows + 0x1c),0xe3f35b3,gl_button_callback,
                 *(undefined4 *)(curcontextwindows + 0xc));
-  XtAddEventHandler(*(undefined4 *)(curcontextwindows + 0x1c),0x10,0,FUN_0041fa18,
+  XtAddEventHandler(*(undefined4 *)(curcontextwindows + 0x1c),0x10,0,gl_motion_handler,
                     *(undefined4 *)(curcontextwindows + 0xc));
   XtAddEventHandler(*(undefined4 *)(curcontextwindows + 0x1c),0x20,0,gl_event_handler,0);
   XtAddEventHandler(*(undefined4 *)(curcontextwindows + 0x1c),4,0,myContext,
@@ -44192,7 +44192,7 @@ void createSelectedInfo(undefined4 param_1,undefined4 *param_2,undefined4 param_
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041be40(undefined4 param_1,int *param_2,undefined4 param_3)
+void create_context_widget(undefined4 param_1,int *param_2,undefined4 param_3)
 
 {
   undefined4 uVar1;
@@ -45445,7 +45445,7 @@ void refresh_view(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041ddf8(int param_1,char param_2)
+void set_items_flag(int param_1,char param_2)
 
 {
   if (param_2 == '\0') {
@@ -45472,18 +45472,18 @@ void FUN_0041ddf8(int param_1,char param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041df54(int param_1,undefined4 param_2)
+void update_items_recursive(int param_1,undefined4 param_2)
 
 {
   int iVar1;
   int iVar2;
   
-  FUN_0041ddf8();
+  set_items_flag();
   iVar1 = 0;
   if (0 < *(int *)(param_1 + 0x14)) {
     iVar2 = 0;
     do {
-      FUN_0041df54(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar2),param_2);
+      update_items_recursive(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar2),param_2);
       iVar1 = iVar1 + 1;
       iVar2 = iVar2 + 4;
     } while (iVar1 < *(int *)(param_1 + 0x14));
@@ -45530,7 +45530,7 @@ void editCB(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041e260(int param_1,undefined4 *param_2,undefined4 param_3,char param_4,undefined4 param_5
+void pick_file_item(int param_1,undefined4 *param_2,undefined4 param_3,char param_4,undefined4 param_5
                  ,undefined4 param_6)
 
 {
@@ -45621,7 +45621,7 @@ void FUN_0041e260(int param_1,undefined4 *param_2,undefined4 param_3,char param_
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041eaf8(int param_1)
+void unmark_items_recursive(int param_1)
 
 {
   char *__dest;
@@ -45658,7 +45658,7 @@ void FUN_0041eaf8(int param_1)
   iVar4 = 0;
   if (0 < *(int *)(param_1 + 0x14)) {
     do {
-      FUN_0041eaf8(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar4));
+      unmark_items_recursive(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar4));
       iVar3 = iVar3 + 1;
       iVar4 = iVar4 + 4;
     } while (iVar3 < *(int *)(param_1 + 0x14));
@@ -45676,7 +45676,7 @@ void FUN_0041eaf8(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041ed94(int param_1)
+void mark_items_recursive(int param_1)
 
 {
   int iVar1;
@@ -45698,7 +45698,7 @@ void FUN_0041ed94(int param_1)
   iVar3 = 0;
   if (0 < *(int *)(param_1 + 0x14)) {
     do {
-      FUN_0041ed94(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar3));
+      mark_items_recursive(*(undefined4 *)(*(int *)(param_1 + 0x18) + iVar3));
       iVar2 = iVar2 + 1;
       iVar3 = iVar3 + 4;
     } while (iVar2 < *(int *)(param_1 + 0x14));
@@ -45756,7 +45756,7 @@ void doIt(char param_1)
     if (param_1 != '\0') {
       uVar1 = 5;
     }
-    FUN_0041e260(*(undefined4 *)(curcontext + 0x44),*(int *)(curcontext + 0x48),uVar1,
+    pick_file_item(*(undefined4 *)(curcontext + 0x44),*(int *)(curcontext + 0x48),uVar1,
                  param_1 == '\0',&DAT_1000b4a0,"opening");
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -45804,7 +45804,7 @@ void zoomToSelection(void)
     update_context_bounds(*(undefined4 *)(curcontext + 0x44),*(undefined4 *)(curcontext + 0x48));
   }
   else {
-    FUN_0041aeec(*(undefined4 *)(curcontext + 0x44),*(undefined4 *)(curcontext + 0x48));
+    update_context_display(*(undefined4 *)(curcontext + 0x44),*(undefined4 *)(curcontext + 0x48));
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -49730,7 +49730,7 @@ void highlightFile(void)
     update_view_recursive();
   }
   else {
-    FUN_0041ac8c();
+    refresh_context_view();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
