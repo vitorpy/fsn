@@ -1446,12 +1446,12 @@ undefined DAT_10013d5c;
 undefined DAT_10013d7c;
 undefined DAT_10013dac;
 undefined1 DAT_10016f04;
-undefined FUN_00430448;
-undefined FUN_004307bc;
-undefined FUN_004308ec;
+undefined search_value_callback;
+undefined search_focus_callback;
+undefined search_activate_callback;
 undefined1 DAT_10016f05;
-undefined FUN_00430b70;
-undefined FUN_00430c0c;
+undefined search_size_callback;
+undefined search_age_callback;
 undefined DAT_10013d2c;
 undefined temp_data_buffer;
 undefined4 *active_item_list;
@@ -37784,7 +37784,7 @@ void create_panel_component(undefined4 param_1,undefined4 param_2,undefined4 par
   XtManageChild(zoom_scale_widget);
   uVar2 = XmCreateSeparator(uVar1,"control_sep",param_2,0);
   XtManageChild(uVar2);
-  FUN_00430cb4(uVar1);
+  init_search_panel(uVar1);
   uVar2 = XmCreateSeparator(uVar1,"control_sep",param_2,0);
   XtManageChild(uVar2);
   FUN_0042f284(uVar1);
@@ -41238,7 +41238,7 @@ void FUN_00415dec(uint param_1,undefined4 param_2)
       puVar4[2] = puVar7[2];
       puVar4[3] = *puVar7;
       puVar4[4] = puVar7[1];
-      uVar5 = FUN_00433b90(auStack_448);
+      uVar5 = eval_icon_script(auStack_448);
       puVar4[8] = uVar5;
       *(byte *)((int)puVar4 + 0x29) = *(byte *)((int)puVar4 + 0x29) | 0x80;
       if (window_width < (int)puVar4[3]) {
@@ -52579,7 +52579,7 @@ void initResources(undefined4 param_1)
     XtGetApplicationResources(uVar2,&fsn_resources,&PTR_s_noscan_10007c30,0x76,0,0);
     XtDestroyWidget(uVar2);
   }
-  FUN_00433904(param_1,&DAT_10012c44,&DAT_10012c4c);
+  init_icon_resources(param_1,&DAT_10012c44,&DAT_10012c4c);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -54561,7 +54561,7 @@ void FUN_0042fda4(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042ffd8(undefined4 *param_1)
+void process_child_recursive(undefined4 *param_1)
 
 {
   int iVar1;
@@ -54643,7 +54643,7 @@ void FUN_0042ffd8(undefined4 *param_1)
     iVar1 = 0;
     if (0 < (int)param_1[5]) {
       do {
-        FUN_0042ffd8(*(undefined4 *)(param_1[6] + iVar1));
+        process_child_recursive(*(undefined4 *)(param_1[6] + iVar1));
         iVar4 = iVar4 + 1;
         iVar1 = iVar1 + 4;
       } while (iVar4 < (int)param_1[5]);
@@ -54717,9 +54717,9 @@ void createSearch(undefined4 param_1)
   XtSetSensitive(DAT_10016ef8,0);
   XtManageChild(DAT_10016ef8);
   XtManageChild(uVar1);
-  XtAddCallback(uVar1,0xe3f44b6,FUN_00430448,0);
-  XtAddCallback(uVar1,0xe3f3641,FUN_004308ec,0);
-  XtAddCallback(uVar1,0xe3f380d,FUN_004307bc,0);
+  XtAddCallback(uVar1,0xe3f44b6,search_value_callback,0);
+  XtAddCallback(uVar1,0xe3f3641,search_activate_callback,0);
+  XtAddCallback(uVar1,0xe3f380d,search_focus_callback,0);
   uStack_24 = 1;
   uStack_28 = 0xf661719;
   uVar2 = XmCreateRowColumn(uVar1,"search",&uStack_28,1);
@@ -54745,7 +54745,7 @@ void createSearch(undefined4 param_1)
   uStack_24 = search_xmstring_3;
   uStack_28 = 0xe3f40b5;
   search_size_comp_button = XmCreatePushButton(uVar3,"searchSizeComp",&uStack_28,1);
-  XtAddCallback(search_size_comp_button,0xe3f35b3,FUN_00430b70,0);
+  XtAddCallback(search_size_comp_button,0xe3f35b3,search_size_callback,0);
   XtManageChild(search_size_comp_button);
   DAT_10016f04 = 0;
   search_size_field = XmCreateTextField(uVar3,"sizetext",&uStack_28,0);
@@ -54759,7 +54759,7 @@ void createSearch(undefined4 param_1)
   uStack_24 = search_xmstring_3;
   uStack_28 = 0xe3f40b5;
   search_age_comp_button = XmCreatePushButton(uVar2,"searchAgeComp",&uStack_28,1);
-  XtAddCallback(search_age_comp_button,0xe3f35b3,FUN_00430c0c,0);
+  XtAddCallback(search_age_comp_button,0xe3f35b3,search_age_callback,0);
   XtManageChild(search_age_comp_button);
   DAT_10016f05 = 0;
   search_age_field = XmCreateTextField(uVar2,"agetext",&uStack_28,0);
@@ -54773,7 +54773,7 @@ void createSearch(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00430cb4(undefined4 param_1)
+void init_search_panel(undefined4 param_1)
 
 {
   undefined4 uVar1;
@@ -55040,7 +55040,7 @@ void parse_data_buffer(int param_1,undefined4 param_2,int *param_3,int param_4)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00431630(int param_1,int param_2,int param_3,int param_4,int *param_5)
+void format_data_output(int param_1,int param_2,int param_3,int param_4,int *param_5)
 
 {
   int iVar1;
@@ -55097,7 +55097,7 @@ void FUN_00431630(int param_1,int param_2,int param_3,int param_4,int *param_5)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00431788(int param_1,int param_2,int *param_3,int param_4,int param_5)
+void parse_data_multi(int param_1,int param_2,int *param_3,int param_4,int param_5)
 
 {
   int iVar1;
@@ -55395,7 +55395,7 @@ void SG_getOverlay2Args(undefined4 param_1,undefined4 param_2,int param_3,int *p
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00431dfc(undefined4 param_1,undefined4 param_2,int param_3,int *param_4)
+void process_data_recursive(undefined4 param_1,undefined4 param_2,int param_3,int *param_4)
 
 {
   int iVar1;
@@ -55442,7 +55442,7 @@ void SG_getOverlay4Args(undefined4 param_1,undefined4 param_2,int param_3,int *p
   
   iVar1 = read_bytecode_value(param_1,param_2,4,&temp_data_buffer,3);
   if (iVar1 < 0) {
-    FUN_00431dfc(param_1,param_2,param_3,param_4);
+    process_data_recursive(param_1,param_2,param_3,param_4);
   }
   else {
     uVar2 = eval_bytecode_instruction(param_1,param_2);
@@ -56013,7 +56013,7 @@ LAB_00432e34:
         if (bVar1) {
           puVar10 = (uint *)0x0;
         }
-        local_4 = FUN_00431788(param_1,param_2,puVar10,uVar6,*param_6);
+        local_4 = parse_data_multi(param_1,param_2,puVar10,uVar6,*param_6);
         if ((local_4 == 0) && (uVar6 < 5)) {
                     // WARNING: Bad instruction - Truncating control flow here
           halt_baddata();
@@ -56033,7 +56033,7 @@ LAB_00432e34:
       if (bVar1) {
         puVar10 = (uint *)0x0;
       }
-      uVar8 = FUN_00431630(param_1,param_2,uVar6,local_4,puVar10);
+      uVar8 = format_data_output(param_1,param_2,uVar6,local_4,puVar10);
       *param_3 = uVar8;
       if (param_7 != (int *)0x0) {
         iVar5 = read_bytecode_value(param_1,param_2,local_4,param_3,uVar6);
@@ -56170,7 +56170,7 @@ void LoadIntlResources(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00433904(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+void init_icon_resources(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 
 {
   undefined4 *puVar1;
@@ -56308,7 +56308,7 @@ void cFindIconByType(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00433b90(undefined4 param_1)
+void eval_icon_script(undefined4 param_1)
 
 {
   int unaff_gp;
