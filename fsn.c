@@ -37619,7 +37619,7 @@ void check_visibility(void)
 {
   pushmatrix();
   gl_picking_setup_wrapper();
-  FUN_00425c80();
+  init_display_lists();
   popmatrix();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -38641,7 +38641,7 @@ void do_warp(int param_1)
       set_camera_lookat((double)view_init_x,(double)view_init_y,0,&local_4);
     }
     else {
-      FUN_00426e34(*(int *)(curcontext + 0x3c),&local_4,&local_8,local_c);
+      get_view_extents(*(int *)(curcontext + 0x3c),&local_4,&local_8,local_c);
       set_camera_lookat((double)local_4,(double)local_8);
     }
   }
@@ -42805,7 +42805,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
       else {
         uVar1 = 4;
       }
-      FUN_00422f58(param_3,iVar2,0,param_4 == '\0',uVar1,0x1f);
+      render_file_icon(param_3,iVar2,0,param_4 == '\0',uVar1,0x1f);
       uVar9 = (undefined4)((ulonglong)dVar15 >> 0x20);
       uVar5 = (uint)((ulonglong)lVar6 >> 0x20);
       if (*(int *)(iVar2 + 0x28) << 3 < 0) {
@@ -46882,7 +46882,7 @@ void highlightOverviewDir(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042194c(int param_1)
+void destroy_gl_resources(int param_1)
 
 {
   undefined4 uVar1;
@@ -47118,7 +47118,7 @@ void deleteCmapWindow(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00421e58(int param_1)
+void create_gl_window(int param_1)
 
 {
   int *piVar1;
@@ -47298,7 +47298,7 @@ void overlayMenuUnmappedCB(void)
   undefined4 uVar1;
   
   uVar1 = XtWindow();
-  FUN_00421e58(uVar1);
+  create_gl_window(uVar1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -47818,7 +47818,7 @@ void draw_file(int param_1,undefined4 *param_2,char param_3,char param_4,undefin
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00422f58(int param_1,undefined4 *param_2,char param_3,char param_4,undefined4 param_5,
+void render_file_icon(int param_1,undefined4 *param_2,char param_3,char param_4,undefined4 param_5,
                  undefined4 param_6)
 
 {
@@ -48029,7 +48029,7 @@ void draw_files(int param_1,char param_2,uint param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00423b3c(int param_1,char param_2,uint param_3)
+void draw_file_item(int param_1,char param_2,uint param_3)
 
 {
   uint uVar1;
@@ -48362,7 +48362,7 @@ void draw_directories(char param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042510c(char param_1)
+void set_render_flag(char param_1)
 
 {
   int iVar1;
@@ -48532,7 +48532,7 @@ void draw_visible_directory(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004259dc(int param_1)
+void render_directory(int param_1)
 
 {
   int unaff_gp;
@@ -48631,7 +48631,7 @@ void draw_visibility(void)
                  *(float *)(curcontext + 8)) / zoom_reference_height);
     scale(fVar6);
     translate(-*(float *)curcontext,-*(float *)(curcontext + 4));
-    FUN_004259dc(topdir);
+    render_directory(topdir);
     iVar1 = endselect(asStack_1000);
     if (iVar1 < 0) {
       draw_directory_tree(topdir);
@@ -48660,7 +48660,7 @@ void draw_visibility(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00425c80(void)
+void init_display_lists(void)
 
 {
   int iVar1;
@@ -48761,7 +48761,7 @@ void draw_second_pick(undefined8 param_1,undefined8 param_2,int param_3)
     draw_legend_color_box(0,0,0x1f);
     popmatrix();
     translate(0,(ulonglong)uVar2 << 0x20);
-    FUN_00423b3c(param_3,1,7,0x1f);
+    draw_file_item(param_3,1,7,0x1f);
     popname();
     popmatrix();
     if (*(int *)(param_3 + 0x28) != 0) {
@@ -48931,7 +48931,7 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
                 *(float *)(curcontext + 8)) / zoom_reference_height);
   scale(fVar10);
   translate(-*(float *)curcontext,-*(float *)(curcontext + 4));
-  FUN_0042510c(1);
+  set_render_flag(1);
   iVar2 = endpick(asStack_3f4);
   popmatrix();
   pushmatrix();
@@ -49230,7 +49230,7 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004268e0(float *param_1,float *param_2,float *param_3,undefined2 *param_4,
+void calculate_view_params(float *param_1,float *param_2,float *param_3,undefined2 *param_4,
                  undefined2 *param_5,undefined4 *param_6,undefined1 *param_7,undefined1 *param_8)
 
 {
@@ -49327,7 +49327,7 @@ void findzoom(void)
 
 {
   if (*(int *)(curcontext + 0x3c) == 0) {
-    FUN_004268e0();
+    calculate_view_params();
   }
   else {
     FUN_0041a648();
@@ -49402,7 +49402,7 @@ void get_warp_entry(int param_1,float *param_2,float *param_3)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00426e34(int param_1,float *param_2,float *param_3)
+void get_view_extents(int param_1,float *param_2,float *param_3)
 
 {
   int *piVar1;
@@ -49488,7 +49488,7 @@ void highlightDirLandscape(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00426ef4(int param_1)
+void update_tree_bounds(int param_1)
 
 {
   int iVar1;
@@ -49554,7 +49554,7 @@ void highlightDir(void)
 
 {
   if (*(int *)(curcontext + 0x3c) == 0) {
-    FUN_00426ef4();
+    update_tree_bounds();
   }
   else {
     FUN_0041aa04();
@@ -49567,7 +49567,7 @@ void highlightDir(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042728c(void)
+void refresh_view_recursive(void)
 
 {
   int unaff_gp;
@@ -49692,7 +49692,7 @@ void highlightFileLandscape(int param_1,int param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042757c(int param_1,int param_2)
+void update_view_recursive(int param_1,int param_2)
 
 {
   int unaff_gp;
@@ -49727,7 +49727,7 @@ void highlightFile(void)
 
 {
   if (*(int *)(curcontext + 0x3c) == 0) {
-    FUN_0042757c();
+    update_view_recursive();
   }
   else {
     FUN_0041ac8c();
@@ -51095,7 +51095,7 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
     translate(-*(float *)curcontext,-*(float *)(curcontext + 4));
     if (param_2 == (undefined4 *)0x0) {
       if (param_1 != 0) {
-        FUN_0042728c(param_1);
+        refresh_view_recursive(param_1);
       }
     }
     else {
@@ -51123,7 +51123,7 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
       draw_overview_content();
     }
     else {
-      FUN_0042194c();
+      destroy_gl_resources();
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here
