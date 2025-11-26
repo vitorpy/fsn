@@ -855,7 +855,7 @@ struct Elf32_Ehdr {
 
 undefined4 __Argc;
 undefined4 __Argv;
-undefined DAT_0fb52740;
+undefined varargs_data;
 undefined DAT_1001db30;
 undefined SUB_0fb6b330;
 pointer __((offset(0x10017720))) curcontext;
@@ -1845,7 +1845,7 @@ void XmCreateText(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -2156,7 +2156,7 @@ void XmTextGetString(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -2461,7 +2461,7 @@ void XmTextSetEditable(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -2769,7 +2769,7 @@ void XtAppAddInput(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -3071,7 +3071,7 @@ void XtRemoveInput(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -3385,7 +3385,7 @@ dirent * readdir(DIR *__dirp)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -3686,7 +3686,7 @@ void XAllocColor(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -3985,7 +3985,7 @@ void XInternAtom(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -4278,11 +4278,11 @@ void * bsearch(void *__key,void *__base,size_t __nmemb,size_t __size,__compar_fn
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   __istart();
   __readenv_sigfpe();
-  __status = parse_command_args(__Argc,__Argv,_DAT_0fb52740);
+  __status = parse_command_args(__Argc,__Argv,varargs_ptr);
                     // WARNING: Subroutine does not return
   exit(__status);
 }
@@ -4570,7 +4570,7 @@ void XmGetColorCalculation(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -4860,7 +4860,7 @@ void XGetTextProperty(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -5157,7 +5157,7 @@ void XmCreateScrolledText(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -5443,7 +5443,7 @@ void XmTextSetString(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -5729,7 +5729,7 @@ DIR * opendir(char *__name)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -6013,7 +6013,7 @@ void defpattern(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -6300,7 +6300,7 @@ void XAllocColorCells(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -6581,7 +6581,7 @@ void XStoreColor(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -6865,7 +6865,7 @@ void XmListDeletePos(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -7147,7 +7147,7 @@ void XtDestroyWidget(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -7423,7 +7423,7 @@ void XmCreateRadioBox(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -7698,7 +7698,7 @@ void XmCreateErrorDialog(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -7972,7 +7972,7 @@ void XMapWindow(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -8245,7 +8245,7 @@ void XmCreatePanedWindow(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -8517,7 +8517,7 @@ void XmCreateScrolledWindow(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -8788,7 +8788,7 @@ void XmMessageBoxGetChild(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -9058,7 +9058,7 @@ void XmStringGetLtoR(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -9327,7 +9327,7 @@ void XmFileSelectionBoxGetChild(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -9595,7 +9595,7 @@ void XtRealloc(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -9862,7 +9862,7 @@ void XmListAddItem(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -10128,7 +10128,7 @@ void XmCreateInformationDialog(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -10393,7 +10393,7 @@ void XmCreateFileSelectionDialog(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -10657,7 +10657,7 @@ void XtAppAddTimeOut(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -10920,7 +10920,7 @@ void XmStringCreateSimple(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -11182,7 +11182,7 @@ void XtFree(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -11443,7 +11443,7 @@ void XmStringFree(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -11703,7 +11703,7 @@ void XRaiseWindow(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -11962,7 +11962,7 @@ void XmTrackingLocate(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -12220,7 +12220,7 @@ void XCreateFontCursor(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -12478,7 +12478,7 @@ void * calloc(size_t __nmemb,size_t __size)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -12735,7 +12735,7 @@ void * realloc(void *__ptr,size_t __size)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -12990,7 +12990,7 @@ void XmTextInsert(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -13244,7 +13244,7 @@ void XmTextGetLastPosition(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -13497,7 +13497,7 @@ void XmStringCreateLtoR(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -13753,7 +13753,7 @@ void XtHasCallbacks(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -14003,7 +14003,7 @@ void XtAppAddConverter(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -14256,7 +14256,7 @@ void XtGetApplicationResources(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -14503,7 +14503,7 @@ void XUnmapWindow(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -14748,7 +14748,7 @@ void XtStringConversionWarning(void)
   (*(code *)&__DT_MIPS_RLD_TEXT_RESOLVE_ADDR)();
   (*(code *)&__DT_MIPS_RLD_TEXT_RESOLVE_ADDR)();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -14993,7 +14993,7 @@ void XtCallCallbacks(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -15237,7 +15237,7 @@ void XtParent(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -15480,7 +15480,7 @@ void XtWarning(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -15722,7 +15722,7 @@ void XParseColor(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -15983,7 +15983,7 @@ void XmMenuPosition(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -16218,7 +16218,7 @@ void rectf(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -16452,7 +16452,7 @@ void loadname(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -16685,7 +16685,7 @@ void XmCreateWarningDialog(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -16921,7 +16921,7 @@ void cmov2(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -17151,7 +17151,7 @@ void linewidth(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -17380,7 +17380,7 @@ void v2f(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -17608,7 +17608,7 @@ void GlxCreateMDraw(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -17839,7 +17839,7 @@ void XmTextFieldGetString(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -18064,7 +18064,7 @@ void XBell(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -18288,7 +18288,7 @@ void XtCreatePopupShell(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -18511,7 +18511,7 @@ void rect(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -18733,7 +18733,7 @@ void XmTextFieldSetString(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -18954,7 +18954,7 @@ void popname(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -19174,7 +19174,7 @@ void XmCreateTextField(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -19393,7 +19393,7 @@ void initnames(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -19611,7 +19611,7 @@ void XmCreatePopupMenu(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -19828,7 +19828,7 @@ void endpick(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -20044,7 +20044,7 @@ void pick(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -20259,7 +20259,7 @@ void picksize(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -20473,7 +20473,7 @@ void XmTextFieldShowPosition(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -20690,7 +20690,7 @@ void bgnpolygon(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -20901,7 +20901,7 @@ void v3f(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -21111,7 +21111,7 @@ void endpolygon(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -21320,7 +21320,7 @@ void XmTextFieldSetInsertionPosition(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -21528,7 +21528,7 @@ void XtRemoveTimeOut(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -21735,7 +21735,7 @@ void pushname(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -21945,7 +21945,7 @@ void charstr(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -22154,7 +22154,7 @@ FILE * popen(char *__command,char *__modes)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -22357,7 +22357,7 @@ FILE * fopen(char *__filename,char *__modes)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -22559,7 +22559,7 @@ FILE * fdopen(int __fd,char *__modes)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -22771,7 +22771,7 @@ void endtmesh(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -22977,7 +22977,7 @@ void __semputc(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -23170,7 +23170,7 @@ void __flsbuf(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -23368,7 +23368,7 @@ void gselect(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -23558,7 +23558,7 @@ void endselect(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -23747,7 +23747,7 @@ void circf(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -23935,7 +23935,7 @@ void linesmooth(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -24122,7 +24122,7 @@ void bgntmesh(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -24316,7 +24316,7 @@ void bgnqstrip(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -24503,7 +24503,7 @@ void XSetWMColormapWindows(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -24684,7 +24684,7 @@ void XCreateColormap(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -24864,7 +24864,7 @@ void XAllocNamedColor(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -25047,7 +25047,7 @@ void endqstrip(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -25224,7 +25224,7 @@ void __semgetc(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -25406,7 +25406,7 @@ void zwritemask(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -25580,7 +25580,7 @@ void wmpack(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -25753,7 +25753,7 @@ void __filbuf(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -25925,7 +25925,7 @@ void bgnclosedline(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -26096,7 +26096,7 @@ void endclosedline(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -26266,7 +26266,7 @@ void setpattern(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -26439,7 +26439,7 @@ void XtAppAddWorkProc(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -26606,7 +26606,7 @@ void XtDispatchEvent(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -26772,7 +26772,7 @@ void GLXwinset(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -26937,7 +26937,7 @@ void arcf(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -27101,7 +27101,7 @@ void arc(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -27264,7 +27264,7 @@ void endpoint(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -27426,7 +27426,7 @@ void color(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -27587,7 +27587,7 @@ void clear(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -27747,7 +27747,7 @@ void XtAppNextEvent(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -27906,7 +27906,7 @@ void XSetErrorHandler(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -28066,7 +28066,7 @@ __uid_t getuid(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -28223,7 +28223,7 @@ void XtSetSensitive(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -28387,7 +28387,7 @@ void XtAppPending(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -28548,7 +28548,7 @@ void gflush(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -28698,7 +28698,7 @@ void zbuffer(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -28847,7 +28847,7 @@ void shademodel(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -28995,7 +28995,7 @@ void subpixel(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -29142,7 +29142,7 @@ void XtSetValues(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -29288,7 +29288,7 @@ void getgdesc(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -29433,7 +29433,7 @@ void pdr2(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -29577,7 +29577,7 @@ void pmv2(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -29720,7 +29720,7 @@ void glcompat(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -29862,7 +29862,7 @@ void viewport(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -30003,7 +30003,7 @@ void perspective(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -30151,7 +30151,7 @@ void XtGetValues(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -30288,7 +30288,7 @@ void XtWindow(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -30424,7 +30424,7 @@ void bgnpoint(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -30563,7 +30563,7 @@ void XtRealizeWidget(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -30696,11 +30696,11 @@ u_short pmap_getport(sockaddr_in *__address,u_long __program,u_long __version,u_
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   __istart();
   __readenv_sigfpe();
-  __status = parse_command_args(__Argc,__Argv,_DAT_0fb52740);
+  __status = parse_command_args(__Argc,__Argv,varargs_ptr);
                     // WARNING: Subroutine does not return
   exit(__status);
 }
@@ -30824,7 +30824,7 @@ void XmCreateForm(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -30961,7 +30961,7 @@ void XmCreateBulletinBoard(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -31090,7 +31090,7 @@ void XtManageChild(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -31218,7 +31218,7 @@ void XtAddEventHandler(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -31353,7 +31353,7 @@ void v2i(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -31477,7 +31477,7 @@ void XtCreateWidget(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -31604,7 +31604,7 @@ void __readenv_sigfpe(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -31725,7 +31725,7 @@ void XtOverrideTranslations(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -31845,7 +31845,7 @@ void XtAddCallback(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -31968,7 +31968,7 @@ void XtCreateManagedWidget(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -32086,7 +32086,7 @@ void * malloc(size_t __size)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -32202,7 +32202,7 @@ void XmAddProtocolCallback(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -32317,7 +32317,7 @@ void XmInternAtom(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -32431,7 +32431,7 @@ void XtAppAddActions(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -32548,7 +32548,7 @@ void XmMainWindowSetAreas(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -32661,7 +32661,7 @@ __gid_t getgid(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -32775,7 +32775,7 @@ void XmCreateLabel(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -32883,7 +32883,7 @@ void XmStringCreate(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -33002,7 +33002,7 @@ void XtAppInitialize(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -33105,7 +33105,7 @@ void XtParseTranslationTable(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -33215,7 +33215,7 @@ void XtDisplay(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -33314,7 +33314,7 @@ void pclos(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -33416,7 +33416,7 @@ void XmCreateCascadeButton(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -33513,7 +33513,7 @@ uint alarm(uint __seconds)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -33614,7 +33614,7 @@ __pid_t fork(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -33724,7 +33724,7 @@ void XtCalloc(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -33812,7 +33812,7 @@ void XmCreateMenuBar(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -33903,7 +33903,7 @@ void XmCreatePulldownMenu(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -33989,7 +33989,7 @@ __pid_t wait(void *__stat_loc)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -34073,7 +34073,7 @@ void XmCreateToggleButton(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -34156,7 +34156,7 @@ void gmatch(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -34242,7 +34242,7 @@ void XUndefineCursor(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -34322,7 +34322,7 @@ void XtScreen(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -34401,7 +34401,7 @@ void XCreateBitmapFromData(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -34479,7 +34479,7 @@ void XmCreatePromptDialog(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -34556,7 +34556,7 @@ void XmListSetBottomPos(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -34632,7 +34632,7 @@ void XmCreateSelectionBox(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -34707,7 +34707,7 @@ void XmSelectionBoxGetChild(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -34781,7 +34781,7 @@ void cpack(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -34854,7 +34854,7 @@ void XmListGetSelectedPos(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -34926,7 +34926,7 @@ void endline(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -34997,7 +34997,7 @@ void XDefineCursor(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35067,7 +35067,7 @@ void XFreePixmap(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35136,7 +35136,7 @@ void XtRemoveWorkProc(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35204,7 +35204,7 @@ void XCreatePixmapCursor(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35271,7 +35271,7 @@ void v2s(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35337,7 +35337,7 @@ void bgnline(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35402,7 +35402,7 @@ void ortho2(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35466,7 +35466,7 @@ void XQueryColors(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35529,7 +35529,7 @@ void XtUnmanageChild(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35591,7 +35591,7 @@ void scale(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35652,7 +35652,7 @@ void rotate(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35716,7 +35716,7 @@ void translate(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35774,7 +35774,7 @@ void __nw__FUi(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35835,7 +35835,7 @@ void swapbuffers(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35894,7 +35894,7 @@ void czclear(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35947,7 +35947,7 @@ void pushmatrix(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -35999,7 +35999,7 @@ void move2(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36050,7 +36050,7 @@ void XtMalloc(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36100,7 +36100,7 @@ void draw2(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36150,7 +36150,7 @@ __off_t lseek(int __fd,__off_t __offset,int __whence)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar2 = &_mips_gp0_value;
   uVar3 = 0;
@@ -36198,7 +36198,7 @@ void __dl__FPv(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36245,7 +36245,7 @@ void multmatrix(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36295,7 +36295,7 @@ void popmatrix(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36339,7 +36339,7 @@ void XtManageChildren(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36382,7 +36382,7 @@ void XmCreatePushButton(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36424,7 +36424,7 @@ void XmCreateScale(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36469,7 +36469,7 @@ void XtGetApplicationNameAndClass(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36512,7 +36512,7 @@ void XGetVisualInfo(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36549,7 +36549,7 @@ void XGetWindowProperty(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36585,7 +36585,7 @@ void XmCreateSeparator(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36620,7 +36620,7 @@ void XCreatePixmap(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36658,7 +36658,7 @@ void XmCreateRowColumn(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36690,7 +36690,7 @@ void XtGetSubresources(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36721,7 +36721,7 @@ void getmcolor(void)
   (**(code **)(unaff_gp + -0x7ff0))();
   (**(code **)(unaff_gp + -0x7ff0))();
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + iStackX_0 * 4;
+  varargs_ptr = auStackX_8 + iStackX_0 * 4;
   __Argc = iStackX_0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
@@ -36754,7 +36754,7 @@ void __start(void)
   undefined4 uVar2;
   
   __Argv = auStackX_4;
-  _DAT_0fb52740 = auStackX_8 + local_res0 * 4;
+  varargs_ptr = auStackX_8 + local_res0 * 4;
   __Argc = local_res0;
   puVar1 = &_mips_gp0_value;
   uVar2 = 0;
