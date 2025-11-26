@@ -7,14 +7,15 @@
 #include "preferences.h"
 #include "fsn_types.h"
 #include "fsn_state.h"
+#include "fsn_igl.h"
 
 void showPreferencePanel(void)
 
 {
   float fVar1;
   undefined **ppuVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  Widget uVar3;
+  Widget uVar4;
   char *__src;
   undefined *puVar5;
   float fVar6;
@@ -32,11 +33,11 @@ void showPreferencePanel(void)
   undefined *local_74;
   undefined4 local_70;
   undefined4 local_6c;
-  undefined4 local_40;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_8;
-  undefined4 local_4;
+  Widget local_40;
+  Widget local_38;
+  Widget local_34;
+  Widget local_8;
+  Widget local_4;
   
   if (preference_panel_shell == 0) {
     local_98 = 0xf662094;
@@ -243,7 +244,7 @@ void showPreferencePanel(void)
     XtManageChild(preference_panel_shell);
   }
   else {
-    XtManageChild();
+    XtManageChild(preference_panel_shell);
     uVar3 = XtDisplay(preference_panel_shell);
     uVar4 = XtWindow(preference_panel_shell);
     XMapWindow(uVar3,uVar4);
@@ -258,7 +259,7 @@ void hidePreferencePanel(void)
 
 {
   if (preference_panel_shell != 0) {
-    XtUnmanageChild();
+    XtUnmanageChild(preference_panel_shell);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();

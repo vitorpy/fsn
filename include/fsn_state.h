@@ -10,7 +10,26 @@
 
 #include "fsn_types.h"
 #include <X11/Intrinsic.h>
+#include <X11/StringDefs.h>
 #include <stdio.h>
+
+/* Motif widget headers */
+#include <Xm/Xm.h>
+#include <Xm/MainW.h>
+#include <Xm/Form.h>
+#include <Xm/Label.h>
+#include <Xm/PushB.h>
+#include <Xm/Scale.h>
+#include <Xm/RowColumn.h>
+#include <Xm/Separator.h>
+#include <Xm/DrawingA.h>
+#include <Xm/PanedW.h>
+#include <Xm/Text.h>
+#include <Xm/TextF.h>
+#include <Xm/ToggleB.h>
+#include <Xm/ScrolledW.h>
+#include <Xm/Protocols.h>
+#include <Xm/AtomMgr.h>
 
 /* Forward declarations for X/Motif types */
 typedef struct _XtAppStruct* XtAppContext;
@@ -60,7 +79,7 @@ extern Widget vertical_scale_widget;
 extern Widget view_angle_widget;
 
 /* Preference panel widgets */
-extern int preference_panel_shell;
+extern Widget preference_panel_shell;
 extern Widget pref_filename_field;
 extern Widget pref_red_scale;
 extern Widget pref_green_scale;
@@ -488,5 +507,57 @@ extern void *boxCyan;
 extern void *boxBlue;
 extern void *boxMagenta;
 extern void *dcolorBoxes;
+
+/*=============================================================================
+ * Missing Variables (Batch 6)
+ *============================================================================*/
+extern char *temp_data_buffer;
+extern void *context_data_block;
+extern XtActionsRec xt_actions_table[];
+extern char blank_string_literal[];
+extern char empty_string_literal[];
+extern char *default_charset;
+extern char context_widget_name[];
+
+/*=============================================================================
+ * Ghidra String Pointers (Batch 4 - main_entry.c)
+ *============================================================================*/
+extern char app_class_name[];
+extern void *PTR_s__landscape_100000e0;
+extern char *fallback_resources[];
+extern char *glwidget_translations;
+
+/*=============================================================================
+ * Callback Functions (Batch 4 - preferences.c)
+ *============================================================================*/
+void quit_application(Widget w, XtPointer client, XtPointer call);
+void pref_panel_map_callback(Widget w, XtPointer client, XtPointer call);
+void pref_color_callback(Widget w, XtPointer client, XtPointer call);
+void toggle_pair_callback(Widget w, XtPointer client, XtPointer call);
+void color_select_callback(Widget w, XtPointer client, XtPointer call);
+void exec_color_toggle_callback(Widget w, XtPointer client, XtPointer call);
+void file_color_toggle_callback(Widget w, XtPointer client, XtPointer call);
+void link_color_toggle_callback(Widget w, XtPointer client, XtPointer call);
+void dir_color_toggle_callback(Widget w, XtPointer client, XtPointer call);
+void rgb_scale_callback(Widget w, XtPointer client, XtPointer call);
+void hsv_scale_callback(Widget w, XtPointer client, XtPointer call);
+void zoom_gl_init_callback(Widget w, XtPointer client, XtPointer call);
+void search_gl_init_callback(Widget w, XtPointer client, XtPointer call);
+
+/*=============================================================================
+ * Ghidra String Pointers (Batch 4 - preferences.c)
+ *============================================================================*/
+extern char *PTR_s_shrinkOnZoom_10008950;
+extern char *PTR_s_monitorTimeout_100089f0;
+extern char *PTR_s_mouseSpeed_10008b5c;
+extern char *PTR_s_groundColor_1000935c;
+extern void *PTR_PTR_100094ec;
+extern float pref_float_array[];
+
+/*=============================================================================
+ * Ghidra String Pointers (Batch 4 - messaging.c)
+ *============================================================================*/
+extern char *PTR_s_Please_be_patient_while_the_file_10007b64;
+extern char *_imsgs[];
 
 #endif /* FSN_STATE_H */

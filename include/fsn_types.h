@@ -11,6 +11,36 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+
+/* Standard library includes for system calls */
+#include <unistd.h>      /* getcwd, etc */
+#include <math.h>        /* powf, etc */
+#include <sys/stat.h>    /* lstat */
+#include <sys/statvfs.h> /* statvfs */
+#include <sys/time.h>    /* gettimeofday */
+#include <dirent.h>      /* opendir, readdir */
+
+/* ============================================================
+ * Ghidra Decompilation Helper Macros
+ * ============================================================ */
+
+/* CONCAT44 - concatenate two 32-bit values into 64-bit */
+#define CONCAT44(hi, lo) (((uint64_t)(uint32_t)(hi) << 32) | (uint32_t)(lo))
+#define CONCAT22(hi, lo) (((uint32_t)(uint16_t)(hi) << 16) | (uint16_t)(lo))
+#define CONCAT11(hi, lo) (((uint16_t)(uint8_t)(hi) << 8) | (uint8_t)(lo))
+
+/* Rounding helpers */
+#define ROUND(x) ((int)((x) + 0.5f))
+#define FLOOR(x) ((int)(x))
+
+/* C++ operator new replacement */
+#define __nw__FUi(size) malloc(size)
+
+/* ============================================================
+ * Ghidra Type Definitions
+ * ============================================================ */
 
 /* Replace Ghidra's undefined types with standard types */
 typedef uint8_t   undefined;
@@ -38,5 +68,12 @@ typedef int bool;
 #define false 0
 #endif
 #endif
+
+/* Note: fsn_igl.h should be included AFTER X11 headers due to type conflicts.
+ * Include fsn_igl.h explicitly in source files that need it, after fsn_state.h */
+
+/* Include stub declarations */
+#include "fsn_stubs.h"
+#include "fsn_stubs_generated.h"
 
 #endif /* FSN_TYPES_H */

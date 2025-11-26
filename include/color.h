@@ -13,14 +13,14 @@
 /* Color space conversions */
 void cmy_to_rgb(double param_1, double param_2);
 void hls_to_rgb(void);
-void hsv_to_rgb(void);
+void hsv_to_rgb(double param_1, double param_2);
 void hsb_to_rgb(undefined4 param_1, undefined4 param_2);
 void yiq_to_rgb(double param_1, double param_2);
 void rgb_to_rgb(double param_1, double param_2);
 void rgb_to_cmy(double param_1, double param_2);
 void rgb_to_irgb(double param_1, double param_2);
 void rgb_to_hls(void);
-void rgb_to_hsv(void);
+void rgb_to_hsv(double param_1, double param_2);
 void rgb_to_hsb(undefined4 param_1, undefined4 param_2);
 void rgb_to_yiq(double param_1, double param_2);
 

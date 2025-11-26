@@ -11,8 +11,8 @@
 #include <stdio.h>
 
 /* External references from fsn.c globals */
-extern pointer PTR_SUB_10009e30;
-extern pointer PTR_SUB_10009e34;
+extern void *PTR_SUB_10009e30;
+extern void *PTR_SUB_10009e34;
 
 void cmy_to_rgb(double param_1,double param_2)
 
@@ -49,11 +49,11 @@ void hls_to_rgb(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void hsv_to_rgb(void)
+void hsv_to_rgb(double param_1, double param_2)
 
 {
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  (void)param_1; (void)param_2;
+  /* TODO: Implement HSV to RGB conversion */
 }
 
 
@@ -187,11 +187,11 @@ void rgb_to_hls(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void rgb_to_hsv(void)
+void rgb_to_hsv(double param_1, double param_2)
 
 {
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  (void)param_1; (void)param_2;
+  /* TODO: Implement RGB to HSV conversion */
 }
 
 

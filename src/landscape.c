@@ -7,6 +7,7 @@
 #include "landscape.h"
 #include "fsn_types.h"
 #include "fsn_state.h"
+#include "fsn_igl.h"
 
 void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
 

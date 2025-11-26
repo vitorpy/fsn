@@ -7,6 +7,7 @@
 #include "warp.h"
 #include "fsn_types.h"
 #include "fsn_state.h"
+#include "fsn_igl.h"
 
 void draw_warp(void)
 
@@ -484,7 +485,7 @@ void warpZoomToFile(int param_1,int param_2)
   uVar1 = (uint)((ulonglong)in_f18 >> 0x20);
   if (param_1 != 0) {
     if (param_1 != *(int *)(curcontext + 0x3c)) {
-      do_warp();
+      do_warp(param_1);
     }
     if (param_2 != 0) {
       set_camera_lookat((double)*(float *)(param_2 + 0x14) -

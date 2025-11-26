@@ -53,7 +53,7 @@ Widget vertical_scale_widget = NULL;
 Widget view_angle_widget = NULL;
 
 /* Preference panel widgets */
-int preference_panel_shell = 0;
+Widget preference_panel_shell = NULL;
 Widget pref_filename_field = NULL;
 Widget pref_red_scale = NULL;
 Widget pref_green_scale = NULL;
@@ -481,3 +481,36 @@ void *boxCyan = NULL;
 void *boxBlue = NULL;
 void *boxMagenta = NULL;
 void *dcolorBoxes = NULL;
+
+/*=============================================================================
+ * Missing Variables (Batch 6)
+ *============================================================================*/
+char *temp_data_buffer = NULL;
+void *context_data_block = NULL;
+XtActionsRec xt_actions_table[16] = {{0}};
+char blank_string_literal[] = " ";
+char empty_string_literal[] = "";
+char *default_charset = "ISO8859-1";
+char context_widget_name[] = "fsn_context";
+
+/*=============================================================================
+ * Ghidra String Pointers (Batch 4)
+ *============================================================================*/
+char app_class_name[] = "Fsn";
+void *PTR_s__landscape_100000e0 = NULL;  /* Landscape option descriptor */
+char *fallback_resources[] = {
+    "*background: #c0c0c0",
+    "*foreground: black",
+    NULL
+};
+char *glwidget_translations = NULL;
+
+char *PTR_s_shrinkOnZoom_10008950 = "shrinkOnZoom";
+char *PTR_s_monitorTimeout_100089f0 = "monitorTimeout";
+char *PTR_s_mouseSpeed_10008b5c = "mouseSpeed";
+char *PTR_s_groundColor_1000935c = "groundColor";
+void *PTR_PTR_100094ec = NULL;
+float pref_float_array[10] = {0.0f};
+
+char *PTR_s_Please_be_patient_while_the_file_10007b64 = "Please be patient while the file system is scanned...";
+char *_imsgs[] = {NULL};
