@@ -1205,8 +1205,8 @@ char wineditor_enabled;
 char rest_mode_enabled;
 char *current_dir_path;
 char *current_file_path;
-undefined DAT_1000b46c;
-undefined DAT_1000b4a0;
+undefined file_path_buffer;
+undefined pick_status_buffer;
 pointer moveDestHelp;
 int DAT_10006e5c;
 undefined1 drawing_active_flag;
@@ -1334,8 +1334,8 @@ int colormap_dirty_flag;
 undefined4 active_colormap_id;
 undefined4 *active_colormap_id;
 short default_line_width;
-undefined DAT_1000e928;
-undefined DAT_1000e930;
+undefined gl_button_name;
+undefined edit_button_name;
 undefined editCB;
 pointer viewerHelp;
 undefined gl_window_callback;
@@ -1357,8 +1357,8 @@ undefined4 DAT_10016e24;
 pointer PTR_s_noscan_10007c30;
 pointer PTR_s_landscape_10008918;
 undefined cp_color_converter;
-undefined DAT_10012c44;
-undefined DAT_10012c4c;
+undefined icon_resource_1;
+undefined icon_resource_2;
 undefined4 landscape_name;
 undefined DAT_0f6d07d4;
 undefined link_color_toggle_callback;
@@ -1456,37 +1456,37 @@ undefined DAT_10013d2c;
 undefined temp_data_buffer;
 undefined4 *active_item_list;
 undefined1[464] _imsgs;
-undefined1 DAT_10013e50;
-undefined DAT_10013e54;
-undefined DAT_10013e58;
-undefined DAT_10013e5c;
-undefined DAT_10013e60;
-undefined DAT_10013e64;
-undefined DAT_10013e84;
-undefined DAT_10013e88;
-undefined DAT_10013e8c;
-undefined DAT_10013e90;
+undefined1 log_buf_0;
+undefined log_buf_1;
+undefined log_buf_2;
+undefined log_buf_3;
+undefined log_buf_4;
+undefined log_buf_5;
+undefined log_buf_13;
+undefined log_buf_14;
+undefined log_buf_15;
+undefined log_buf_16;
 undefined UNK_10013eb4;
-undefined DAT_10013efc;
-undefined DAT_10013f00;
-undefined DAT_10013f04;
-undefined DAT_10013f08;
-undefined DAT_10013f0c;
-undefined DAT_10013f10;
-undefined DAT_10013f14;
-undefined DAT_10013f18;
-undefined DAT_10013f1c;
-undefined DAT_10013f20;
-undefined DAT_10013f24;
-undefined DAT_10013f28;
-undefined DAT_10013f2c;
-undefined DAT_10013f30;
-undefined DAT_10013f34;
-undefined DAT_10013f38;
-undefined DAT_10013f3c;
-undefined DAT_10013f40;
-undefined DAT_10013f44;
-undefined DAT_10013f48;
+undefined log_buf_43;
+undefined log_buf_44;
+undefined log_buf_45;
+undefined log_buf_46;
+undefined log_buf_47;
+undefined log_buf_48;
+undefined log_buf_49;
+undefined log_buf_50;
+undefined log_buf_51;
+undefined log_buf_52;
+undefined log_buf_53;
+undefined log_buf_54;
+undefined log_buf_55;
+undefined log_buf_56;
+undefined log_buf_57;
+undefined log_buf_58;
+undefined log_buf_59;
+undefined log_buf_60;
+undefined log_buf_61;
+undefined log_buf_62;
 pointer PTR_s__SGI_MMX_mwm_nogrmem_10009670;
 undefined context_data_block;
 undefined2 icon_index_array;
@@ -1521,7 +1521,7 @@ string s_path_too_long_10009e94;
 string s_%s_%d_%s_10009ef0;
 string s_path_too_long_10009ea4;
 undefined DAT_10009eb4;
-undefined DAT_10009eb8;
+undefined format_str_1;
 string s_F%d_%d_%d_%s_0_%d_%s_10009ebc;
 string s_0_%d_%s_10009ed4;
 string s_F%d_%d_%d_%s_10009ee0;
@@ -1529,11 +1529,11 @@ string s_S%d_%d_%d_10009efc;
 string s_U%d_%d_%d_10009f08;
 string s_C%d_%d_%d_10009f14;
 int path_buffer;
-undefined DAT_10009f20;
+undefined format_str_2;
 string s_%c%d_%s_10009f24;
-undefined DAT_10009f2c;
+undefined format_str_3;
 undefined database_dirty_flag;
-undefined DAT_10009f3c;
+undefined format_str_4;
 int buffer_initialized_flag;
 int buffer_size;
 void *buffer_pointer_array;
@@ -45757,7 +45757,7 @@ void doIt(char param_1)
       uVar1 = 5;
     }
     pick_file_item(*(undefined4 *)(curcontext + 0x44),*(int *)(curcontext + 0x48),uVar1,
-                 param_1 == '\0',&DAT_1000b4a0,"opening");
+                 param_1 == '\0',&pick_status_buffer,"opening");
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -51331,10 +51331,10 @@ void createViewer(undefined4 param_1,undefined4 *param_2,undefined4 param_3)
   uVar1 = XmCreateRowColumn(*(undefined4 *)(curcontextwindows + 0x10),"viewerButtons",param_2,3);
   XtManageChild(uVar1);
   XtAddEventHandler(uVar1,4,0,window_event_handler,*(undefined4 *)(curcontextwindows + 8));
-  uVar2 = XmCreatePushButton(uVar1,&DAT_1000e928,param_2,0);
+  uVar2 = XmCreatePushButton(uVar1,&gl_button_name,param_2,0);
   XtManageChild(uVar2);
   XtAddCallback(uVar2,0xe3f35b3,gl_window_callback,*(undefined4 *)(curcontextwindows + 8));
-  uVar2 = XmCreatePushButton(uVar1,&DAT_1000e930,param_2,0);
+  uVar2 = XmCreatePushButton(uVar1,&edit_button_name,param_2,0);
   XtAddCallback(uVar2,0xe3f35b3,editCB,*(undefined4 *)(curcontextwindows + 8));
   XtManageChild(uVar2);
   uVar2 = XmCreatePushButton(uVar1,"saveFile",param_2,0);
@@ -52579,7 +52579,7 @@ void initResources(undefined4 param_1)
     XtGetApplicationResources(uVar2,&fsn_resources,&PTR_s_noscan_10007c30,0x76,0,0);
     XtDestroyWidget(uVar2);
   }
-  init_icon_resources(param_1,&DAT_10012c44,&DAT_10012c4c);
+  init_icon_resources(param_1,&icon_resource_1,&icon_resource_2);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -55853,7 +55853,7 @@ void SG_defaultDepthAndTypeResources
     }
     bVar2 = param_4 == (byte *)0x0;
     if (bVar2) {
-      param_4 = &DAT_10013e50;
+      param_4 = &log_buf_0;
     }
     bVar3 = param_6 == (uint *)0x0;
     if (bVar3) {
@@ -55891,9 +55891,9 @@ void SG_defaultDepthAndTypeResources
         do {
           iVar7 = isalpha(uVar6);
           if (iVar7 == 0) {
-            format_log_message(param_1,_imsgs._424_4_,param_4,*pbVar13,&DAT_10013e54,&DAT_10013e58);
+            format_log_message(param_1,_imsgs._424_4_,param_4,*pbVar13,&log_buf_1,&log_buf_2);
             *pbVar13 = 0;
-            format_log_message(param_1,_imsgs._428_4_,param_4,&DAT_10013e5c,&DAT_10013e60,&DAT_10013e64);
+            format_log_message(param_1,_imsgs._428_4_,param_4,&log_buf_3,&log_buf_4,&log_buf_5);
             uVar6 = (uint)*param_4;
             goto LAB_00432e34;
           }
@@ -55918,8 +55918,8 @@ LAB_00432e34:
           pcVar14 = *(char **)(iVar5 + *(uint *)(iVar5 + 0x24) * 4 + 100);
           *param_5 = *(uint *)(iVar5 + 0x24);
           bVar4 = true;
-          format_log_message(param_1,_imsgs._432_4_,&DAT_10013e84,&DAT_10013e88,&DAT_10013e8c,
-                       &DAT_10013e90);
+          format_log_message(param_1,_imsgs._432_4_,&log_buf_13,&log_buf_14,&log_buf_15,
+                       &log_buf_16);
         }
         else {
           iVar7 = strcasecmp("NORMAL",(char *)local_resc);
@@ -56022,8 +56022,8 @@ LAB_00432e34:
       if (((((!bVar3) && (local_4 != *param_6)) && (*param_6 != 0)) ||
           (((!bVar2 && (uVar6 != *param_5)) || (bVar4)))) &&
          (((!bVar3 || (*param_5 != 3)) || (uVar6 != 4)))) {
-        format_log_message(param_1,_imsgs._436_4_,local_resc,*param_6,&DAT_10013efc,&DAT_10013f00);
-        format_log_message(param_1,_imsgs._444_4_,pcVar14,local_4,&DAT_10013f04,&DAT_10013f08);
+        format_log_message(param_1,_imsgs._436_4_,local_resc,*param_6,&log_buf_43,&log_buf_44);
+        format_log_message(param_1,_imsgs._444_4_,pcVar14,local_4,&log_buf_45,&log_buf_46);
       }
       *param_6 = local_4;
       if (param_5 != (uint *)0x0) {
@@ -56058,23 +56058,23 @@ LAB_00432e34:
         }
       }
       if ((param_7 != (int *)0x0) && (*param_7 < 1)) {
-        format_log_message(param_1,_imsgs._448_4_,&DAT_10013f0c,&DAT_10013f10,&DAT_10013f14,&DAT_10013f18)
+        format_log_message(param_1,_imsgs._448_4_,&log_buf_47,&log_buf_48,&log_buf_49,&log_buf_50)
         ;
         local_20 = '\x01';
       }
       if ((param_8 != (int *)0x0) && (*param_8 < 1)) {
-        format_log_message(param_1,_imsgs._452_4_,&DAT_10013f1c,&DAT_10013f20,&DAT_10013f24,&DAT_10013f28)
+        format_log_message(param_1,_imsgs._452_4_,&log_buf_51,&log_buf_52,&log_buf_53,&log_buf_54)
         ;
         local_20 = local_20 + '\x01';
       }
       if ((param_9 != (int *)0x0) && (*param_9 < 1)) {
-        format_log_message(param_1,_imsgs._456_4_,&DAT_10013f2c,&DAT_10013f30,&DAT_10013f34,&DAT_10013f38)
+        format_log_message(param_1,_imsgs._456_4_,&log_buf_55,&log_buf_56,&log_buf_57,&log_buf_58)
         ;
         local_20 = local_20 + '\x01';
       }
       if (local_20 != '\0') {
         param_2 = param_2 * 0x50;
-        format_log_message(param_1,_imsgs._460_4_,&DAT_10013f3c,&DAT_10013f40,&DAT_10013f44,&DAT_10013f48)
+        format_log_message(param_1,_imsgs._460_4_,&log_buf_59,&log_buf_60,&log_buf_61,&log_buf_62)
         ;
         *param_6 = *(uint *)(*(int *)(param_1 + 0x8c) + param_2 + 0x24);
         if (param_5 != (uint *)0x0) {
@@ -62005,7 +62005,7 @@ void FAMMonitorCollection
             sVar1 = strlen(pcVar5);
             pcVar5 = pcVar5 + sVar1;
           }
-          sprintf(pcVar5,&DAT_10009eb8,*p_Var6);
+          sprintf(pcVar5,&format_str_1,*p_Var6);
           sVar1 = strlen(pcVar5);
           p_Var6 = p_Var6 + 1;
           pcVar5 = pcVar5 + sVar1;
@@ -62142,7 +62142,7 @@ void process_path_buffer(undefined4 param_1,char *param_2,int param_3)
   undefined1 auStack_68 [102];
   char local_2 [2];
   
-  sscanf(param_2,&DAT_10009f20,local_2);
+  sscanf(param_2,&format_str_2,local_2);
   if (local_2[0] == 'c') {
     sscanf(param_2,s__c_d__s_10009f24,local_2,&local_6c,auStack_68);
     pcVar2 = strchr(param_2,0x20);
@@ -62162,7 +62162,7 @@ void process_path_buffer(undefined4 param_1,char *param_2,int param_3)
     }
   }
   else {
-    sscanf(param_2,&DAT_10009f2c,local_2,&local_6c);
+    sscanf(param_2,&format_str_3,local_2,&local_6c);
     pcVar3 = strchr(param_2,0x20);
     iVar5 = 0;
     pcVar2 = pcVar3 + 1;
@@ -62309,7 +62309,7 @@ void FAMDebugLevel(undefined4 *param_1,int param_2)
     }
     uVar1 = 0x56;
   }
-  sprintf(acStack_c8,&DAT_10009f3c,uVar1);
+  sprintf(acStack_c8,&format_str_4,uVar1);
   sVar2 = strlen(acStack_c8);
   write_data_buffer(param_1[1],*param_1,acStack_c8,sVar2 + 1);
                     // WARNING: Bad instruction - Truncating control flow here
