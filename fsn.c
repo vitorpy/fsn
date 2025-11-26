@@ -47786,7 +47786,7 @@ void draw_file(int param_1,undefined4 *param_2,char param_3,char param_4,undefin
       draw_legend_color_box(puVar5,param_5,0x10);
       popmatrix();
       pushmatrix();
-      FUN_00433c3c(param_2[8],&fStack_4,&fStack_8,&fStack_c,&fStack_10);
+      get_icon_bounds(param_2[8],&fStack_4,&fStack_8,&fStack_c,&fStack_10);
       scale(view_offset_x,view_offset_x);
       translate(0xbf000000,0xbf000000);
       scale((float)((double)((ulonglong)extraout_var << 0x20) /
@@ -50069,7 +50069,7 @@ void dirfamMonitorDir(int param_1)
   
   if ((fsn_resources == '\0') && (-1 < *(int *)(param_1 + 0x74) << 10)) {
     uVar1 = build_path_string(0,param_1);
-    FUN_00439eec(&database_root_node,uVar1,param_1 + 0x60);
+    update_database_entry(&database_root_node,uVar1,param_1 + 0x60);
     *(byte *)(param_1 + 0x75) = *(byte *)(param_1 + 0x75) | 0x20;
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -56247,7 +56247,7 @@ void FUN_00433904(undefined4 param_1,undefined4 param_2,undefined4 param_3)
 void cIconInit(undefined4 param_1)
 
 {
-  FUN_00434324(&context_data_block,param_1);
+  parse_context_data(&context_data_block,param_1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -56273,7 +56273,7 @@ void load_filetype_rules_wrapper(undefined4 param_1)
 void cFindIconByName(undefined4 param_1)
 
 {
-  FUN_00434a88(&context_data_block,param_1);
+  load_context_block(&context_data_block,param_1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -56382,7 +56382,7 @@ void cGetBounds(int param_1,undefined4 *param_2,undefined4 *param_3,undefined4 *
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00433c3c(int param_1,undefined4 *param_2,undefined4 *param_3,undefined4 *param_4,
+void get_icon_bounds(int param_1,undefined4 *param_2,undefined4 *param_3,undefined4 *param_4,
                  undefined4 *param_5)
 
 {
@@ -56471,7 +56471,7 @@ void set_icon_flags(undefined4 param_1,undefined4 param_2,undefined4 param_3,und
 void __sti__12520_3102cde5(void)
 
 {
-  FUN_004342c4(&context_data_block);
+  reset_context_block(&context_data_block);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -56483,7 +56483,7 @@ void __sti__12520_3102cde5(void)
 void __std__12520_3102cde5(void)
 
 {
-  FUN_00434f0c(&context_data_block,2);
+  set_context_mode(&context_data_block,2);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -56803,7 +56803,7 @@ void __ct__14ByteCodeLoaderFv(undefined4 *param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004342c4(undefined4 *param_1)
+void reset_context_block(undefined4 *param_1)
 
 {
   int unaff_gp;
@@ -56881,7 +56881,7 @@ void LoadFileTypingRules__14ByteCodeLoaderFPc(int *param_1,char *param_2)
               iStack_10 = __buf[1];
               if ((iStack_c < 4) || (0x20 < iStack_c)) {
                 if (iStack_c == 1) {
-                  iVar10 = FUN_00435444(0);
+                  iVar10 = get_icon_result(0);
                   if (*param_1 == 0) {
                     param_1[1] = iVar10;
                     *param_1 = iVar10;
@@ -57030,7 +57030,7 @@ void LoadFileTypingRules__14ByteCodeLoaderFPc(int *param_1,char *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00434324(int *param_1,undefined4 param_2)
+void parse_context_data(int *param_1,undefined4 param_2)
 
 {
   char *pcVar1;
@@ -57320,7 +57320,7 @@ void FindIconByName__14ByteCodeLoaderFPc(int *param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00434a88(int *param_1)
+void load_context_block(int *param_1)
 
 {
   int iVar1;
@@ -57385,7 +57385,7 @@ void FindInfoByName__14ByteCodeLoaderFPc(int *param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00434be4(int *param_1)
+void init_context_block(int *param_1)
 
 {
   int iVar1;
@@ -57435,7 +57435,7 @@ void FindInfoByType__14ByteCodeLoaderFPc(int *param_1,char *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00434cd0(int *param_1,undefined4 param_2)
+void read_context_value(int *param_1,undefined4 param_2)
 
 {
   int iVar1;
@@ -57461,7 +57461,7 @@ void isSuperByName__14ByteCodeLoaderFPcT1(undefined4 param_1,char *param_2,undef
   int iVar1;
   undefined4 *puVar2;
   
-  iVar1 = FUN_00434be4(param_1,param_3);
+  iVar1 = init_context_block(param_1,param_3);
   if (iVar1 != 0) {
     puVar2 = *(undefined4 **)(iVar1 + 0x30);
     while ((puVar2 != (undefined4 *)0x0 && (iVar1 = strcmp(param_2,(char *)*puVar2), iVar1 != 0))) {
@@ -57482,7 +57482,7 @@ void isSuperByType__14ByteCodeLoaderFPcT1(undefined4 param_1,char *param_2,undef
   int iVar1;
   undefined4 *puVar2;
   
-  iVar1 = FUN_00434cd0(param_1,param_3);
+  iVar1 = read_context_value(param_1,param_3);
   if (iVar1 != 0) {
     puVar2 = *(undefined4 **)(iVar1 + 0x30);
     while ((puVar2 != (undefined4 *)0x0 && (iVar1 = strcmp(param_2,(char *)*puVar2), iVar1 != 0))) {
@@ -57555,7 +57555,7 @@ void __dt__14ByteCodeLoaderFv(int *param_1,uint param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00434f0c(int *param_1,uint param_2)
+void set_context_mode(int *param_1,uint param_2)
 
 {
   int iVar1;
@@ -57869,7 +57869,7 @@ void __ct__8RuleInfoFv(undefined4 *param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00435444(undefined4 *param_1)
+void get_icon_result(undefined4 *param_1)
 
 {
   int unaff_gp;
@@ -58029,7 +58029,7 @@ void parse_typed_value(undefined4 param_1,undefined4 param_2,undefined4 param_3,
 void __sti__1251b_3102d580(void)
 
 {
-  FUN_00435748(&TheFileIconInterpreter);
+  finalize_interpreter(&TheFileIconInterpreter);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -58041,7 +58041,7 @@ void __sti__1251b_3102d580(void)
 void __std__1251b_3102d580(void)
 
 {
-  FUN_0043579c(&TheFileIconInterpreter,2);
+  set_interpreter_mode(&TheFileIconInterpreter,2);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -58066,7 +58066,7 @@ void __ct__19FileIconInterpreterFv(int param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00435748(int param_1)
+void finalize_interpreter(int param_1)
 
 {
   int unaff_gp;
@@ -58098,7 +58098,7 @@ void __dt__19FileIconInterpreterFv(int param_1,uint param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0043579c(int param_1,uint param_2)
+void set_interpreter_mode(int param_1,uint param_2)
 
 {
   int unaff_gp;
@@ -61890,7 +61890,7 @@ void FAMMonitorDirectory(undefined4 param_1,char *param_2,int *param_3,undefined
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00439eec(undefined4 param_1,undefined4 param_2,int *param_3,undefined4 param_4)
+void update_database_entry(undefined4 param_1,undefined4 param_2,int *param_3,undefined4 param_4)
 
 {
   int iVar1;
@@ -62130,7 +62130,7 @@ void fam_cancel_monitor_wrapper(undefined4 *param_1,undefined4 *param_2)
 // WARNING: Instruction at (ram,0x0043a72c) overlaps instruction at (ram,0x0043a728)
 // 
 
-void FUN_0043a664(undefined4 param_1,char *param_2,int param_3)
+void process_path_buffer(undefined4 param_1,char *param_2,int param_3)
 
 {
   char cVar1;
@@ -62252,7 +62252,7 @@ void FAMNextEvent(uint *param_1,undefined4 param_2)
       (((iVar1 = search_file_entry(), iVar1 != -1 && (*(int *)(*piVar2 + 0x179c) == 0)) &&
        (*(int *)(*piVar2 + 0xc) != 0)))) &&
      (iVar1 = read_file_buffer(piVar2,*param_1,auStack_c38,0x400), iVar1 != -1)) {
-    FUN_0043a664(param_1,auStack_c38,param_2);
+    process_path_buffer(param_1,auStack_c38,param_2);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
