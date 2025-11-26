@@ -866,9 +866,9 @@ undefined4 view_init_rotation_y;
 int context_count;
 undefined4 cached_context_ptr;
 pointer infoHelp;
-undefined DAT_0e3d4160;
-undefined DAT_0e210e90;
-undefined DAT_0e3d331c;
+undefined xmLabelWidgetClass;
+undefined glxMDrawWidgetClass;
+undefined xmFormWidgetClass;
 undefined4 glwidget_translations;
 undefined4 display_mode_flags;
 undefined4 context_top_widget;
@@ -882,10 +882,10 @@ undefined4 blankXmString;
 undefined4 curcontextid;
 pointer glHelp;
 undefined4 lhLabelColor;
-undefined DAT_0e3d8f04;
+undefined xmSeparatorWidgetClass;
 undefined4 display;
 char relative_path_flag;
-undefined DAT_0e3d4f98;
+undefined xmMainWindowWidgetClass;
 undefined *fallback_resources;
 string glwidget_translations;
 undefined4 panel_widget;
@@ -893,7 +893,7 @@ undefined4 copy_button_widget;
 undefined4 panel_vsep_widget;
 undefined4 message_widget;
 undefined4 pane_form_widget;
-undefined DAT_0e3d616c;
+undefined xmDrawingAreaWidgetClass;
 char redraw_flag;
 undefined default_charset;
 undefined xt_actions_table;
@@ -1041,7 +1041,7 @@ undefined4 localFlag;
 int current_device_id;
 int window_width;
 char special_display_flag;
-undefined DAT_0fb51f00;
+undefined __iob_func_result;
 char *home_directory;
 undefined1 overviewActive;
 char file_append_mode;
@@ -1172,7 +1172,7 @@ undefined overview_input_callback;
 undefined overview_resize_callback;
 undefined overview_init_callback;
 undefined overview_map_callback;
-undefined DAT_0f6d16fc;
+undefined topLevelShellWidgetClass;
 undefined4 overview_popup_shell;
 int overview_popup_shell;
 undefined4 overview_x_window;
@@ -1303,7 +1303,7 @@ undefined cp_color_converter;
 undefined icon_resource_1;
 undefined icon_resource_2;
 undefined4 landscape_name;
-undefined DAT_0f6d07d4;
+undefined applicationShellWidgetClass;
 undefined link_color_toggle_callback;
 undefined exec_color_toggle_callback;
 undefined file_color_toggle_callback;
@@ -36767,7 +36767,7 @@ void setup_context_widgets(void)
   undefined4 local_68;
   undefined4 local_64;
   
-  uVar1 = XtCreateWidget("contextTopWidget",_DAT_0e3d331c,context_top_widget,&local_a0,0);
+  uVar1 = XtCreateWidget("contextTopWidget",xmFormWidgetClass,context_top_widget,&local_a0,0);
   *(undefined4 *)(curcontextwindows + 0xc) = uVar1;
   install_help_callback(*(undefined4 *)(curcontextwindows + 0xc),&infoHelp);
   local_9c = 1;
@@ -36785,7 +36785,7 @@ void setup_context_widgets(void)
   local_9c = 3;
   local_84 = 1;
   local_94 = XtCreateManagedWidget
-                       ("panelhsep",_DAT_0e3d8f04,*(undefined4 *)(curcontextwindows + 0xc),&local_a0
+                       ("panelhsep",xmSeparatorWidgetClass,*(undefined4 *)(curcontextwindows + 0xc),&local_a0
                         ,4);
   local_7c = blankXmString;
   local_a0 = 0xe3f4b1d;
@@ -36805,7 +36805,7 @@ void setup_context_widgets(void)
     uVar1 = 7;
   }
   uVar1 = XtCreateManagedWidget
-                    ("locateHighlightName",_DAT_0e3d4160,*(undefined4 *)(curcontextwindows + 0xc),
+                    ("locateHighlightName",xmLabelWidgetClass,*(undefined4 *)(curcontextwindows + 0xc),
                      &local_a0,uVar1);
   *(undefined4 *)(curcontextwindows + 0x2c) = uVar1;
   local_a0 = 0xe3f4b1d;
@@ -36829,7 +36829,7 @@ void setup_context_widgets(void)
   local_70 = "glxConfig";
   local_6c = &display_mode_flags;
   uVar1 = XtCreateManagedWidget
-                    ("glwidget",_DAT_0e210e90,*(undefined4 *)(curcontextwindows + 0xc),&local_a0,7);
+                    ("glwidget",glxMDrawWidgetClass,*(undefined4 *)(curcontextwindows + 0xc),&local_a0,7);
   *(undefined4 *)(curcontextwindows + 8) = uVar1;
   XtAddCallback(*(undefined4 *)(curcontextwindows + 8),"exposeCallback",glwidget_expose_callback,0);
   iVar2 = init_display_mode();
@@ -36978,10 +36978,10 @@ void main(int param_1,undefined4 *param_2)
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
   XmAddProtocolCallback(toplevel,uVar1,uVar2,quit_application,0);
   XtAppAddActions(app_context,&xt_actions_table,0x10);
-  uStack_a8 = XtCreateManagedWidget("mainw",_DAT_0e3d4f98,toplevel,&uStack_a0,0);
+  uStack_a8 = XtCreateManagedWidget("mainw",xmMainWindowWidgetClass,toplevel,&uStack_a0,0);
   install_help_callback(uStack_a8,&topHelp);
   uStack_ac = get_panel_value(uStack_a8);
-  panel_widget = XtCreateManagedWidget("panel",_DAT_0e3d331c,uStack_a8,&uStack_a0,0);
+  panel_widget = XtCreateManagedWidget("panel",xmFormWidgetClass,uStack_a8,&uStack_a0,0);
   uStack_a0 = 0xe3f40cb;
   uStack_98 = 0xe3f4b1d;
   uStack_9c = 1;
@@ -36995,7 +36995,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_94 = 1;
   uStack_8c = 3;
   copy_button_widget = uStack_84;
-  panel_vsep_widget = XtCreateManagedWidget("panelvsep",_DAT_0e3d8f04,panel_widget,&uStack_a0,4);
+  panel_vsep_widget = XtCreateManagedWidget("panelvsep",xmSeparatorWidgetClass,panel_widget,&uStack_a0,4);
   init_panel_layout();
   iVar3 = init_display_mode();
   if (iVar3 != 0) {
@@ -37047,7 +37047,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_94 = 1;
   uStack_8c = 1;
   uStack_84 = 1;
-  context_top_widget = XtCreateManagedWidget(&context_widget_name,_DAT_0e3d616c,pane_form_widget,&uStack_a0,4);
+  context_top_widget = XtCreateManagedWidget(&context_widget_name,xmDrawingAreaWidgetClass,pane_form_widget,&uStack_a0,4);
   setup_context_widgets();
   XtManageChild(*(undefined4 *)(curcontextwindows + 0xc));
   XmMainWindowSetAreas(uStack_a8,uStack_ac,0,0,0,panel_widget);
@@ -37193,10 +37193,10 @@ void parse_command_args(int param_1,undefined4 *param_2)
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
   XmAddProtocolCallback(toplevel,uVar1,uVar2,quit_application,0);
   XtAppAddActions(app_context,&xt_actions_table,0x10);
-  local_a8 = XtCreateManagedWidget("mainw",_DAT_0e3d4f98,toplevel,&local_a0,0);
+  local_a8 = XtCreateManagedWidget("mainw",xmMainWindowWidgetClass,toplevel,&local_a0,0);
   install_help_callback(local_a8,&topHelp);
   local_ac = get_panel_value(local_a8);
-  panel_widget = XtCreateManagedWidget("panel",_DAT_0e3d331c,local_a8,&local_a0,0);
+  panel_widget = XtCreateManagedWidget("panel",xmFormWidgetClass,local_a8,&local_a0,0);
   local_a0 = 0xe3f40cb;
   local_98 = 0xe3f4b1d;
   local_9c = 1;
@@ -37210,7 +37210,7 @@ void parse_command_args(int param_1,undefined4 *param_2)
   local_94 = 1;
   local_8c = 3;
   copy_button_widget = local_84;
-  panel_vsep_widget = XtCreateManagedWidget("panelvsep",_DAT_0e3d8f04,panel_widget,&local_a0,4);
+  panel_vsep_widget = XtCreateManagedWidget("panelvsep",xmSeparatorWidgetClass,panel_widget,&local_a0,4);
   init_panel_layout();
   iVar3 = init_display_mode();
   if (iVar3 != 0) {
@@ -37262,7 +37262,7 @@ void parse_command_args(int param_1,undefined4 *param_2)
   local_94 = 1;
   local_8c = 1;
   local_84 = 1;
-  context_top_widget = XtCreateManagedWidget(&context_widget_name,_DAT_0e3d616c,pane_form_widget,&local_a0,4);
+  context_top_widget = XtCreateManagedWidget(&context_widget_name,xmDrawingAreaWidgetClass,pane_form_widget,&local_a0,4);
   setup_context_widgets();
   XtManageChild(*(undefined4 *)(curcontextwindows + 0xc));
   XmMainWindowSetAreas(local_a8,local_ac,0,0,0,panel_widget);
@@ -40538,7 +40538,7 @@ void dump_directory_tree(FILE *param_1,undefined4 *param_2,int param_3)
   byte local_9;
   
   process_pending_events();
-  if (_DAT_0fb51f00 == 0) {
+  if (__iob_func_result == 0) {
     iVar1 = param_1->_flags + -1;
     param_1->_flags = iVar1;
     if (iVar1 < 0) {
@@ -40575,7 +40575,7 @@ void dump_directory_tree(FILE *param_1,undefined4 *param_2,int param_3)
   if (0 < (int)param_2[3]) {
     iVar5 = 0;
     do {
-      if (_DAT_0fb51f00 == 0) {
+      if (__iob_func_result == 0) {
         iVar3 = param_1->_flags + -1;
         param_1->_flags = iVar3;
         if (iVar3 < 0) {
@@ -40640,7 +40640,7 @@ void write_file_entry(FILE *param_1)
   undefined2 local_4;
   undefined1 local_2;
   
-  if (_DAT_0fb51f00 == 0) {
+  if (__iob_func_result == 0) {
     iVar1 = param_1->_flags + -1;
     param_1->_flags = iVar1;
     if (iVar1 < 0) {
@@ -40740,7 +40740,7 @@ void refresh_after_change(void)
         }
       }
       fwrite("FuSioN",6,1,__s_00);
-      if (_DAT_0fb51f00 == 0) {
+      if (__iob_func_result == 0) {
         iVar3 = __s_00->_flags + -1;
         __s_00->_flags = iVar3;
         if (iVar3 < 0) {
@@ -40754,7 +40754,7 @@ void refresh_after_change(void)
       else {
         __semputc(2,__s_00);
       }
-      if (_DAT_0fb51f00 == 0) {
+      if (__iob_func_result == 0) {
         iVar3 = __s_00->_flags + -1;
         __s_00->_flags = iVar3;
         if (iVar3 < 0) {
@@ -40769,7 +40769,7 @@ void refresh_after_change(void)
         __semputc(1,__s_00);
       }
       dump_directory_tree(__s_00,topdir,0);
-      if (_DAT_0fb51f00 == 0) {
+      if (__iob_func_result == 0) {
         iVar3 = __s_00->_flags + -1;
         __s_00->_flags = iVar3;
         if (iVar3 < 0) {
@@ -40785,7 +40785,7 @@ void refresh_after_change(void)
       }
       write_database_entry(__s_00);
       dump_database_file(__s_00);
-      if (_DAT_0fb51f00 == 0) {
+      if (__iob_func_result == 0) {
         iVar3 = __s_00->_flags + -1;
         __s_00->_flags = iVar3;
         if (iVar3 < 0) {
@@ -40807,7 +40807,7 @@ void refresh_after_change(void)
         local_14[0] = local_14[0] | 4;
       }
       fwrite(local_14,2,1,__s_00);
-      if (_DAT_0fb51f00 == 0) {
+      if (__iob_func_result == 0) {
         iVar3 = __s_00->_flags + -1;
         __s_00->_flags = iVar3;
         if (iVar3 < 0) {
@@ -41065,7 +41065,7 @@ void init_directory_state(void)
   
   sVar1 = fread(acStack_8,1,6,current_file);
   if ((sVar1 == 6) && (iVar2 = strncmp(acStack_8,"FuSioN",6), iVar2 == 0)) {
-    if (_DAT_0fb51f00 == 0) {
+    if (__iob_func_result == 0) {
       current_file->_flags = current_file->_flags + -1;
       if (current_file->_flags < 0) {
         current_input_byte = __filbuf();
@@ -41381,7 +41381,7 @@ void initialize_db(char *param_1)
   current_file = popen(pcVar4,"r");
   bVar1 = false;
   if (current_file != (FILE *)0x0) {
-    if (_DAT_0fb51f00 == 0) {
+    if (__iob_func_result == 0) {
       current_file->_flags = current_file->_flags + -1;
       if (current_file->_flags < 0) {
         __c = __filbuf();
@@ -41513,7 +41513,7 @@ void display_status_message(char *param_1)
   current_file = popen(pcVar4,"r");
   bVar1 = false;
   if (current_file != (FILE *)0x0) {
-    if (_DAT_0fb51f00 == 0) {
+    if (__iob_func_result == 0) {
       current_file->_flags = current_file->_flags + -1;
       if (current_file->_flags < 0) {
         __c = __filbuf();
@@ -45909,7 +45909,7 @@ void createOverview(void)
   XtGetValues(*(undefined4 *)(curcontextwindows + 8),apcStack_a0,2);
   apcStack_a0[0] = (char *)0xf662094;
   apcStack_a0[1] = (char *)0x1;
-  overview_popup_shell = XtCreatePopupShell("overview",_DAT_0f6d16fc,toplevel,apcStack_a0,1);
+  overview_popup_shell = XtCreatePopupShell("overview",topLevelShellWidgetClass,toplevel,apcStack_a0,1);
   XtAddCallback(overview_popup_shell,0xf6615c9,overview_map_callback,0);
   uStack_a8 = XmCreateForm(overview_popup_shell,"overviewForm",apcStack_a0,0);
   XtManageChild(uStack_a8);
@@ -52514,7 +52514,7 @@ void initResources(undefined4 param_1)
     XtGetApplicationResources(param_1,&fsn_resources,&PTR_s_noscan_10007c30,0x76,0,0);
   }
   else {
-    uVar2 = XtCreateWidget(landscape_name,_DAT_0f6d07d4,param_1,0,0);
+    uVar2 = XtCreateWidget(landscape_name,applicationShellWidgetClass,param_1,0,0);
     XtGetApplicationResources(uVar2,&fsn_resources,&PTR_s_noscan_10007c30,0x76,0,0);
     XtDestroyWidget(uVar2);
   }
@@ -52611,7 +52611,7 @@ void showPreferencePanel(void)
   if (preference_panel_shell == 0) {
     local_98 = 0xf662094;
     local_94 = 1;
-    preference_panel_shell = XtCreatePopupShell("preferencePanel",_DAT_0f6d16fc,toplevel,&local_98,1);
+    preference_panel_shell = XtCreatePopupShell("preferencePanel",topLevelShellWidgetClass,toplevel,&local_98,1);
     XtAddCallback(preference_panel_shell,0xf6615c9,pref_panel_map_callback,0);
     local_4 = XmCreatePanedWindow(preference_panel_shell,"preferencePane",&local_98,0);
     XtManageChild(local_4);
@@ -54174,7 +54174,7 @@ void dumpMarks(FILE *param_1)
   if (0 < selection_count) {
     iVar2 = 0;
     do {
-      if (_DAT_0fb51f00 == 0) {
+      if (__iob_func_result == 0) {
         iVar4 = param_1->_flags + -1;
         param_1->_flags = iVar4;
         if (iVar4 < 0) {
