@@ -976,15 +976,15 @@ undefined autoscan_toggle_callback;
 undefined4 displayHeight;
 undefined4 displayDirectoryHeight;
 int work_proc_id;
-undefined4 DAT_10000158;
-undefined4 DAT_1000015c;
+undefined4 work_float_1;
+undefined4 work_float_2;
 undefined DAT_10000160;
 undefined DAT_10000164;
 undefined DAT_10000168;
 undefined DAT_1000016c;
 undefined gl_setup_func;
-float DAT_10000158;
-float DAT_1000015c;
+float work_float_1;
+float work_float_2;
 float DAT_100174a0;
 float DAT_100165b4;
 undefined2 DAT_100165b8;
@@ -1305,7 +1305,7 @@ undefined4 default_item_type;
 undefined4 database_root_node;
 int database_loaded_flag;
 undefined database_input_handler;
-float DAT_100078fc;
+float colormap_factor;
 float normal_colormap;
 float overlay_colormap;
 float saturation_factor;
@@ -1326,8 +1326,8 @@ undefined4 legend_color_cyan;
 undefined4 legend_color_blue;
 undefined4 legend_color_magenta;
 undefined4 *cached_context_ptr;
-undefined DAT_10007908;
-undefined DAT_10007928;
+undefined render_buffer_1;
+undefined render_buffer_2;
 int redraw_counter;
 char render_mode_flag;
 int colormap_dirty_flag;
@@ -1385,7 +1385,7 @@ undefined4 pref_blue_scale;
 undefined4 pref_val_scale;
 pointer PTR_s_groundColor_1000935c;
 undefined *PTR_PTR_100094ec;
-undefined DAT_100094f0;
+undefined pref_float_array;
 undefined *PTR_s_mouseSpeed_10008b5c;
 int file_selection_dialog;
 undefined pref_update_func;
@@ -1398,7 +1398,7 @@ int selection_count;
 int selection_buffer;
 undefined4 mark_selector_list;
 undefined4 mark_selector_dialog;
-undefined DAT_10013c40;
+undefined search_label_type;
 pointer markHelp;
 undefined mark_dialog_value_callback;
 undefined mark_dialog_focus_callback;
@@ -1408,8 +1408,8 @@ int mark_prompt_dialog;
 undefined mark_dialog_helper;
 undefined DAT_10013c60;
 int busy_cursor;
-undefined DAT_10009530;
-undefined DAT_100095b0;
+undefined cursor_buffer;
+undefined shell_arg_buffer;
 undefined shell_name_arg;
 undefined shell_cmd_flag;
 undefined operation_type_code;
@@ -1440,11 +1440,11 @@ undefined4 search_xmstring_2;
 undefined4 search_xmstring_3;
 undefined4 search_size_comp_button;
 undefined4 search_age_comp_button;
-undefined DAT_10013d30;
+undefined search_label_all;
 pointer searchHelp;
-undefined DAT_10013d5c;
-undefined DAT_10013d7c;
-undefined DAT_10013dac;
+undefined search_label_name;
+undefined search_label_size;
+undefined search_label_age;
 undefined1 search_age_mode;
 undefined search_value_callback;
 undefined search_focus_callback;
@@ -1452,7 +1452,7 @@ undefined search_activate_callback;
 undefined1 search_size_mode;
 undefined search_size_callback;
 undefined search_age_callback;
-undefined DAT_10013d2c;
+undefined search_label_cancel;
 undefined temp_data_buffer;
 undefined4 *active_item_list;
 undefined1[464] _imsgs;
@@ -1505,22 +1505,22 @@ string s_Unknown_10009a20;
 undefined TheFileIconInterpreter;
 undefined __vtbl__13ByteCodedIcon;
 undefined current_icon_rules;
-undefined DAT_10009d30;
-undefined DAT_10009d34;
+undefined icon_rule_buffer_1;
+undefined icon_rule_buffer_2;
 string s_#Tag_10009d38;
 pointer __((offset(0x438f34))) PTR_SUB_10009e30;
 pointer __((offset(0x438f34))) PTR_SUB_10009e34;
 string s_dN0_%d_%d_%s_10009e47;
-undefined DAT_10009e58;
-undefined DAT_10009e5c;
+undefined db_format_1;
+undefined db_format_2;
 string s_%c%d_%d_%d_%s_10009e60;
-undefined DAT_10009e70;
+undefined db_format_3;
 string s_%c%d_%d_%d_%s_10009e74;
 string s_path_too_long_10009e84;
 string s_path_too_long_10009e94;
 string s_%s_%d_%s_10009ef0;
 string s_path_too_long_10009ea4;
-undefined DAT_10009eb4;
+undefined db_format_4;
 undefined format_str_1;
 string s_F%d_%d_%d_%s_0_%d_%s_10009ebc;
 string s_0_%d_%s_10009ed4;
@@ -50229,7 +50229,7 @@ void setup_toplevel_window(undefined4 param_1)
                              local_14,local_4);
     if (iVar2 != 0) {
       dVar4 = atof(local_14[0]);
-      DAT_100078fc = (float)dVar4;
+      colormap_factor = (float)dVar4;
                     // WARNING: Bad instruction - Truncating control flow here
       halt_baddata();
     }
@@ -50858,9 +50858,9 @@ void makePatterns(void)
   int iVar1;
   undefined *puVar2;
   
-  defpattern(1,0x10,&DAT_10007908);
+  defpattern(1,0x10,&render_buffer_1);
   iVar1 = 0;
-  puVar2 = &DAT_10007928;
+  puVar2 = &render_buffer_2;
   do {
     defpattern((iVar1 + 2) * 0x10000 >> 0x10,0x10,puVar2);
     iVar1 = iVar1 + 1;
@@ -52761,7 +52761,7 @@ void showPreferencePanel(void)
     ppuVar2 = &PTR_s_mouseSpeed_10008b5c;
     puVar5 = PTR_s_mouseSpeed_10008b5c;
     while (puVar5 != (undefined *)0x0) {
-      fVar6 = *(float *)(&DAT_100094f0 + (int)ppuVar2[5] * 4);
+      fVar6 = *(float *)(&pref_float_array + (int)ppuVar2[5] * 4);
       uVar4 = 5;
       uVar3 = XmStringCreateSimple(puVar5);
       local_98 = 0xe3f4adf;
@@ -54135,7 +54135,7 @@ void createMarkControls(undefined4 param_1)
   XtAddCallback(mark_selector_dialog,0xe3f380d,mark_dialog_focus_callback,0);
   XtManageChild(mark_selector_dialog);
   install_help_callback(mark_selector_dialog,&markHelp);
-  uVar1 = XmCreatePushButton(param_1,&DAT_10013c40,&uStack_54,0);
+  uVar1 = XmCreatePushButton(param_1,&search_label_type,&uStack_54,0);
   XtAddCallback(uVar1,0xe3f35b3,mark_select_callback,0);
   XtManageChild(uVar1);
   install_help_callback(uVar1,&markHelp);
@@ -54362,9 +54362,9 @@ void displayHourglass(undefined4 param_1)
   
   if (busy_cursor == 0) {
     uVar1 = XtWindow();
-    uStack_4 = XCreateBitmapFromData(display,uVar1,&DAT_10009530,0x20,0x20);
+    uStack_4 = XCreateBitmapFromData(display,uVar1,&cursor_buffer,0x20,0x20);
     uVar1 = XtWindow(param_1);
-    uStack_8 = XCreateBitmapFromData(display,uVar1,&DAT_100095b0,0x20,0x20);
+    uStack_8 = XCreateBitmapFromData(display,uVar1,&shell_arg_buffer,0x20,0x20);
     iVar2 = XtScreen(param_1);
     auStack_20[0] = *(undefined4 *)(iVar2 + 0x38);
     iVar2 = XtScreen(param_1);
@@ -54700,8 +54700,8 @@ void createSearch(undefined4 param_1)
   undefined4 uStack_24;
   
   search_xmstring_1 = XmStringCreateSimple("Search");
-  search_xmstring_2 = XmStringCreateSimple(&DAT_10013d2c);
-  search_xmstring_3 = XmStringCreateSimple(&DAT_10013d30);
+  search_xmstring_2 = XmStringCreateSimple(&search_label_cancel);
+  search_xmstring_3 = XmStringCreateSimple(&search_label_all);
   uStack_28 = 0xe3f3afd;
   uStack_24 = 1;
   uVar1 = XmCreateSelectionBox(param_1,"search",&uStack_28,1);
@@ -54732,7 +54732,7 @@ void createSearch(undefined4 param_1)
   uStack_24 = 2;
   uVar3 = XmCreateRowColumn(uVar2,"searchname",&uStack_28,1);
   XtManageChild(uVar3);
-  uVar4 = XmCreateLabel(uVar3,&DAT_10013d5c,&uStack_28,0);
+  uVar4 = XmCreateLabel(uVar3,&search_label_name,&uStack_28,0);
   XtManageChild(uVar4);
   search_name_field = XmCreateTextField(uVar3,"nametext",&uStack_28,0);
   XtManageChild(search_name_field);
@@ -54740,7 +54740,7 @@ void createSearch(undefined4 param_1)
   uStack_24 = 2;
   uVar3 = XmCreateRowColumn(uVar2,"searchsize",&uStack_28,1);
   XtManageChild(uVar3);
-  uVar4 = XmCreateLabel(uVar3,&DAT_10013d7c,&uStack_28,0);
+  uVar4 = XmCreateLabel(uVar3,&search_label_size,&uStack_28,0);
   XtManageChild(uVar4);
   uStack_24 = search_xmstring_3;
   uStack_28 = 0xe3f40b5;
@@ -54754,7 +54754,7 @@ void createSearch(undefined4 param_1)
   uStack_28 = 0xf661719;
   uVar2 = XmCreateRowColumn(uVar2,"searchage",&uStack_28,1);
   XtManageChild(uVar2);
-  uVar3 = XmCreateLabel(uVar2,&DAT_10013dac,&uStack_28,0);
+  uVar3 = XmCreateLabel(uVar2,&search_label_age,&uStack_28,0);
   XtManageChild(uVar3);
   uStack_24 = search_xmstring_3;
   uStack_28 = 0xe3f40b5;
@@ -59595,14 +59595,14 @@ LAB_00437ddc:
           }
           else if (cVar11 == 'E') {
             __s1 = (char *)pfVar16[-1];
-            printf(&DAT_10009d30,__s1);
+            printf(&icon_rule_buffer_1,__s1);
             cVar11 = pcVar18[1];
             pcVar18 = pcVar18 + 1;
             pfVar16 = pfVar16 + -1;
           }
           else if (cVar11 == 'F') {
             __s1 = (char *)pfVar16[-1];
-            printf(&DAT_10009d34,__s1);
+            printf(&icon_rule_buffer_2,__s1);
             __dl__FPv(__s1);
             cVar11 = pcVar18[1];
             pcVar18 = pcVar18 + 1;
@@ -61761,11 +61761,11 @@ void FAMMonitor__FP13FAMConnectionPcP10FAMRequestPvi
     p_Var5 = a_Stack_c8 + 1;
     do {
       if (p_Var5 == a_Stack_c8 + 1) {
-        sprintf(__s,&DAT_10009e58,iVar1 + -1);
+        sprintf(__s,&db_format_1,iVar1 + -1);
         sVar2 = strlen(__s);
         __s = __s + sVar2;
       }
-      sprintf(__s,&DAT_10009e5c,*p_Var5);
+      sprintf(__s,&db_format_2,*p_Var5);
       sVar2 = strlen(__s);
       p_Var5 = p_Var5 + 1;
       __s = __s + sVar2;
@@ -61781,7 +61781,7 @@ void FAMMonitor__FP13FAMConnectionPcP10FAMRequestPvi
     _Var3 = getuid();
     sprintf(&cStack_c88,s__c_d__d__d__s_10009e60,param_5,uStack_4,_Var3,a_Stack_c8[0],param_2);
     sVar2 = strlen(&cStack_c88);
-    sprintf(acStack_c87 + sVar2,&DAT_10009e70,acStack_84);
+    sprintf(acStack_c87 + sVar2,&db_format_3,acStack_84);
     sVar2 = strlen(acStack_c87 + sVar2);
     sVar4 = strlen(&cStack_c88);
     iVar1 = sVar4 + sVar2 + 2;
@@ -62001,7 +62001,7 @@ void FAMMonitorCollection
         p_Var6 = local_c8 + 1;
         do {
           if (p_Var6 == local_c8 + 1) {
-            sprintf(pcVar5,&DAT_10009eb4,iVar2 + -1);
+            sprintf(pcVar5,&db_format_4,iVar2 + -1);
             sVar1 = strlen(pcVar5);
             pcVar5 = pcVar5 + sVar1;
           }
