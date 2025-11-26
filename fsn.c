@@ -1369,7 +1369,7 @@ int preference_panel_shell;
 undefined FUN_0042cc30;
 undefined FUN_0042ccac;
 undefined toggle_pair_callback;
-undefined FUN_0042d338;
+undefined color_select_callback;
 undefined rgb_scale_callback;
 undefined hsv_scale_callback;
 undefined4 DAT_10016e48;
@@ -1400,9 +1400,9 @@ undefined4 mark_selector_list;
 undefined4 mark_selector_dialog;
 undefined DAT_10013c40;
 pointer markHelp;
-undefined FUN_0042f4d8;
-undefined FUN_0042f5d0;
-undefined FUN_0042f73c;
+undefined mark_dialog_value_callback;
+undefined mark_dialog_focus_callback;
+undefined mark_select_callback;
 undefined FUN_0042f4b4;
 int mark_prompt_dialog;
 undefined FUN_0042f66c;
@@ -37787,7 +37787,7 @@ void create_panel_component(undefined4 param_1,undefined4 param_2,undefined4 par
   init_search_panel(uVar1);
   uVar2 = XmCreateSeparator(uVar1,"control_sep",param_2,0);
   XtManageChild(uVar2);
-  FUN_0042f284(uVar1);
+  init_mark_panel(uVar1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -39380,7 +39380,7 @@ void layout_db(undefined4 param_1,undefined4 param_2)
   miny = (float)((double)-*(float *)(topdir + 0x3c) /
                  (double)((ulonglong)dVar2 & 0xffffffff00000000) -
                 (double)((ulonglong)in_register_00001010 << 0x20));
-  FUN_0042e5c4();
+  refresh_fam_state();
   FUN_00421780();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -40845,7 +40845,7 @@ void refresh_after_change(void)
         __semputc(4,__s_00);
       }
       FUN_00414cf0(__s_00);
-      FUN_0042f8bc(__s_00);
+      dump_database_file(__s_00);
       if (_DAT_0fb51f00 == 0) {
         iVar3 = __s_00->_flags + -1;
         __s_00->_flags = iVar3;
@@ -45594,7 +45594,7 @@ void FUN_0041e260(int param_1,undefined4 *param_2,undefined4 param_3,char param_
         }
         DAT_10016be0 = pcVar1;
         sprintf(acStack_464,"%s&",__s1);
-        FUN_0042fda4(acStack_464);
+        update_status_display(acStack_464);
       }
     }
   }
@@ -52698,7 +52698,7 @@ void showPreferencePanel(void)
     uVar3 = XmCreateRowColumn(local_8,"preferenceHeaderButtons2",&local_98,0);
     XtManageChild(uVar3);
     uVar4 = XmCreatePushButton(uVar3,"preferenceSelect",&local_98,0);
-    XtAddCallback(uVar4,0xe3f35b3,FUN_0042d338,0);
+    XtAddCallback(uVar4,0xe3f35b3,color_select_callback,0);
     XtManageChild(uVar4);
     DAT_10016e48 = XmCreateTextField(uVar3,"preferenceFileName",&local_98,0);
     __src = getenv("HOME");
@@ -52834,8 +52834,8 @@ void showPreferencePanel(void)
     pref_val_scale = XmCreateScale(uVar3,"preferenceValScale",&local_98,0);
     XtManageChild(pref_val_scale);
     XtAddCallback(pref_val_scale,0xe3f4ca5,hsv_scale_callback,0);
-    FUN_0042d618();
-    FUN_0042d6f0();
+    refresh_legend_colors();
+    update_legend_display();
     local_88 = 0xe3f46dd;
     local_98 = 0xe3f4b1d;
     local_90 = 0xe3f40cb;
@@ -52958,7 +52958,7 @@ void hidePreferencePanel(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042d618(void)
+void refresh_legend_colors(void)
 
 {
   uint uVar1;
@@ -52983,7 +52983,7 @@ void FUN_0042d618(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042d6f0(void)
+void update_legend_display(void)
 
 {
   uint in_register_00001000;
@@ -53495,7 +53495,7 @@ void restorePositions(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042e5c4(void)
+void refresh_fam_state(void)
 
 {
   int unaff_gp;
@@ -53874,7 +53874,7 @@ void readPosition(undefined2 *param_1,FILE *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042ec00(undefined2 *param_1,FILE *param_2)
+void write_selection_file(undefined2 *param_1,FILE *param_2)
 
 {
   size_t sVar1;
@@ -54030,7 +54030,7 @@ void addMark(char *param_1,undefined4 *param_2)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042ef04(int param_1,undefined4 *param_2)
+void copy_buffer_data(int param_1,undefined4 *param_2)
 
 {
   int iVar1;
@@ -54131,12 +54131,12 @@ void createMarkControls(undefined4 param_1)
   uVar1 = XmSelectionBoxGetChild(mark_selector_dialog,0xe);
   XtUnmanageChild(uVar1);
   mark_selector_list = XmSelectionBoxGetChild(mark_selector_dialog,8);
-  XtAddCallback(mark_selector_dialog,0xe3f44b6,FUN_0042f4d8,0);
-  XtAddCallback(mark_selector_dialog,0xe3f380d,FUN_0042f5d0,0);
+  XtAddCallback(mark_selector_dialog,0xe3f44b6,mark_dialog_value_callback,0);
+  XtAddCallback(mark_selector_dialog,0xe3f380d,mark_dialog_focus_callback,0);
   XtManageChild(mark_selector_dialog);
   install_help_callback(mark_selector_dialog,&markHelp);
   uVar1 = XmCreatePushButton(param_1,&DAT_10013c40,&uStack_54,0);
-  XtAddCallback(uVar1,0xe3f35b3,FUN_0042f73c,0);
+  XtAddCallback(uVar1,0xe3f35b3,mark_select_callback,0);
   XtManageChild(uVar1);
   install_help_callback(uVar1,&markHelp);
                     // WARNING: Bad instruction - Truncating control flow here
@@ -54147,7 +54147,7 @@ void createMarkControls(undefined4 param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042f284(undefined4 param_1)
+void init_mark_panel(undefined4 param_1)
 
 {
   undefined4 uVar1;
@@ -54266,7 +54266,7 @@ void dumpMarks(FILE *param_1)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0042f8bc(int *param_1)
+void dump_database_file(int *param_1)
 
 {
   int iVar1;
@@ -54340,8 +54340,8 @@ void readMark(FILE *param_1)
     exit(1);
   }
   auStack_400[local_404[0]] = 0;
-  FUN_0042ec00(auStack_43c,param_1);
-  FUN_0042ef04(auStack_400,auStack_43c);
+  write_selection_file(auStack_43c,param_1);
+  copy_buffer_data(auStack_400,auStack_43c);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -54513,7 +54513,7 @@ void usystem(undefined4 param_1)
 // WARNING: Type propagation algorithm not settling
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-void FUN_0042fda4(undefined4 param_1)
+void update_status_display(undefined4 param_1)
 
 {
   __pid_t _Var1;
