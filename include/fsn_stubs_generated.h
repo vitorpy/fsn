@@ -9,26 +9,24 @@
 #include <X11/Intrinsic.h>  /* Widget */
 
 static inline void apply_context_changes(void * p0, int p1) { (void)p0; (void)p1; /* TODO */ }
-static inline int build_path_string(int p0, void * p1) { (void)p0; (void)p1; return 0; /* TODO */ }
+/* Note: Actually defined in pathutil.c - remove stub */
 static inline int check_directory_flags(int p0, int p1, int p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; return 0; /* TODO */ }
 static inline void cleanup_directory(int p0) { (void)p0; /* TODO */ }
 static inline void configure_viewport(int p0, int p1, int p2) { (void)p0; (void)p1; (void)p2; /* TODO */ }
 static inline void copy_selection_data(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 static inline int create_panel_component(Widget p0, void * p1, int p2) { (void)p0; (void)p1; (void)p2; return 0; /* TODO */ }
 static inline void display_status_message(int p0) { (void)p0; /* TODO */ }
-static inline void do_warp(int p0) { (void)p0; /* TODO */ }
 static inline void draw_entry(int p0) { (void)p0; /* TODO */ }
 static inline void draw_file_icon(void * p0) { (void)p0; /* TODO */ }
 static inline void draw_legend_color_box(int p0, int p1, float p2) { (void)p0; (void)p1; (void)p2; /* TODO */ }
 static inline void draw_positioned_item(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 static inline void draw_scaled_element(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 static inline int equalPositions(int p0, int p1) { (void)p0; (void)p1; return 0; /* TODO */ }
-static inline void extract_position_data(int p0, void * p1, void * p2, void * p3, void * p4, void * p5, void * p6, void * p7, void * p8, void * p9) { (void)p0; (void)p1; (void)p2; (void)p3; (void)p4; (void)p5; (void)p6; (void)p7; (void)p8; (void)p9; /* TODO */ }
-static inline void flush_rendering(int p0) { (void)p0; /* TODO */ }
-static inline int get_bytecode_context(int p0, int p1) { (void)p0; (void)p1; return 0; /* TODO */ }
+static inline int extract_position_data(int p0, void * p1, void * p2, void * p3, void * p4, void * p5, void * p6, void * p7, void * p8, void * p9) { (void)p0; (void)p1; (void)p2; (void)p3; (void)p4; (void)p5; (void)p6; (void)p7; (void)p8; (void)p9; return 0; /* TODO */ }
+/* get_bytecode_context: defined in bytecode.c and context.c with 2 args */
 static inline int get_cursor_state(void * p0, void * p1, void * p2) { (void)p0; (void)p1; (void)p2; return 0; /* TODO */ }
 static inline int get_item_by_index(int p0) { (void)p0; return 0; /* TODO */ }
-static inline int get_item_screen_coords(int p0) { (void)p0; return 0; /* TODO */ }
+/* get_item_screen_coords: defined in items.c with 1 arg */
 static inline int get_panel_value(int p0) { (void)p0; return 0; /* TODO */ }
 static inline int get_position_coords(int p0, void * p1, void * p2) { (void)p0; (void)p1; (void)p2; return 0; /* TODO */ }
 static inline int get_selection_params(void * p0, void * p1, int p2) { (void)p0; (void)p1; (void)p2; return 0; /* TODO */ }

@@ -8,9 +8,11 @@
 #include "fsn_types.h"
 #include "fsn_state.h"
 
-void eval_bytecode_instruction(int param_1,int param_2,int param_3)
+undefined4 eval_bytecode_instruction(int param_1, int param_2, int param_3, int param_4, int param_5)
 
 {
+  /* Note: Extra params may be unused - decompilation inconsistency */
+  (void)param_4; (void)param_5;
   int iVar1;
   undefined4 uVar2;
   int *piVar3;
@@ -51,6 +53,7 @@ void eval_bytecode_instruction(int param_1,int param_2,int param_3)
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
+  return 0;  /* Unreachable - added to satisfy return type */
 }
 
 void read_bytecode_value(int param_1,int param_2,int param_3,int *param_4,int param_5)
@@ -67,7 +70,7 @@ void read_bytecode_value(int param_1,int param_2,int param_3,int *param_4,int pa
   if (param_2 == 0) {
     param_2 = *(int *)(param_1 + 0x84);
   }
-  iVar1 = get_bytecode_context();
+  iVar1 = get_bytecode_context(0, 0);
   if (param_5 == 0) {
     param_5 = *(int *)(iVar1 + 0x24);
   }

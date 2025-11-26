@@ -49,7 +49,7 @@ extern char *db_filepath;
  * Context Management
  *============================================================================*/
 extern char *curcontext;
-extern void *altcontext;
+extern char *altcontext;  /* Changed from void* - used with array subscript */
 extern void *curcontextwindows;
 extern void *altcontextwindows;
 extern int context_count;
@@ -288,8 +288,8 @@ extern int monitor_label_color;
 extern void *database_root_node;
 extern int database_loaded_flag;
 extern float database_version;
-extern void *topdir;
-extern void *current_directory_node;
+extern undefined4 *topdir;  /* Changed from void* - used as array with subscript */
+extern undefined4 *current_directory_node;  /* Changed from void* - dereferenced in delete.c/messages.c */
 extern int dir_index;
 extern int directory_pool_index;
 extern int directory_pool_capacity;

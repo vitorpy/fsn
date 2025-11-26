@@ -23,7 +23,7 @@ char *db_filepath = NULL;
  * Context Management
  *============================================================================*/
 char *curcontext = NULL;
-void *altcontext = NULL;
+char *altcontext = NULL;
 void *curcontextwindows = NULL;
 void *altcontextwindows = NULL;
 int context_count = 0;
@@ -262,8 +262,8 @@ int monitor_label_color = 0;
 void *database_root_node = NULL;
 int database_loaded_flag = 0;
 float database_version = 0.0f;
-void *topdir = NULL;
-void *current_directory_node = NULL;
+undefined4 *topdir = NULL;
+undefined4 *current_directory_node = NULL;
 int dir_index = 0;
 int directory_pool_index = 0;
 int directory_pool_capacity = 0;

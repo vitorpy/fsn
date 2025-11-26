@@ -433,9 +433,9 @@ void gotoFileName(undefined4 param_1)
   
   get_position_coords(param_1,&iStack_4,&iStack_8);
   if (iStack_4 != 0) {
-    update_marked_item();
+    update_marked_item(0);
     if (iStack_8 != 0) {
-      get_item_screen_coords();
+      get_item_screen_coords(NULL);
     }
     update_gl_context();
   }

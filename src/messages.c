@@ -249,7 +249,7 @@ void display_status_message(char *param_1)
     else {
       fclose(current_file);
     }
-    deleteMessage(local_4);
+    deleteMessage((undefined4*)local_4);
     iVar6 = statvfs((char *)*topdir,asStack_128);
     if (iVar6 < 0) {
       fprintf((FILE *)0xfb52904,"Could not statvfs %s, exiting\n",*topdir);

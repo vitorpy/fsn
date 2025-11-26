@@ -115,7 +115,7 @@ void zoomto(double param_1,double param_2)
     }
     *(int *)(curcontext + 0x3c) = in_stack_00000020;
     if (in_stack_00000020 != 0) {
-      update_marked_item();
+      update_marked_item(0);
     }
     *(float *)curcontext = (float)param_1;
     *(float *)(curcontext + 4) = (float)param_2;
@@ -170,7 +170,7 @@ void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *para
     }
   }
   else if (iStack_4 == *(int *)(curcontext + 0x3c)) {
-    get_item_screen_coords(iStack_8);
+    get_item_screen_coords((undefined4*)iStack_8);
     fVar1 = *(float *)(iStack_8 + 0x14);
     *param_1 = (float)((double)fVar1 - (double)*(float *)(curcontext + 0x14) * (double)database_version)
     ;
@@ -205,7 +205,7 @@ void warpZoomToFile(int param_1,int param_2)
   uVar1 = (uint)((ulonglong)in_f18 >> 0x20);
   if (param_1 != 0) {
     if (param_1 != *(int *)(curcontext + 0x3c)) {
-      do_warp();
+      do_warp(0);
     }
     if (param_2 != 0) {
       set_camera_lookat((double)*(float *)(param_2 + 0x14) -
@@ -289,7 +289,7 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
   }
   else {
     update_marked_item(iStack_4);
-    get_item_screen_coords(iStack_c);
+    get_item_screen_coords((undefined4*)iStack_c);
     *param_1 = (*(float *)(iStack_4 + 0x34) +
                *(float *)(iStack_c + 0x14) * *(float *)(iStack_4 + 0x58)) -
                *(float *)(curcontext + 0x14) * view_scale_factor;
@@ -375,18 +375,18 @@ void zoomPosition(undefined4 param_1)
   if (iVar1 != 0) {
     if (iStack_18 != *(int *)(curcontext + 0x44)) {
       if (iStack_18 == 0) {
-        clear_marked_state(0);
+        clear_marked_state();
       }
       else {
-        update_marked_item();
+        update_marked_item(0);
       }
     }
     if (iStack_1c != *(int *)(curcontext + 0x48)) {
       if (iStack_1c == 0) {
-        clear_current_selection(0);
+        clear_current_selection();
       }
       else {
-        get_item_screen_coords();
+        get_item_screen_coords(NULL);
       }
     }
     if (cStack_1d == '\0') {

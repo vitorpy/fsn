@@ -20,6 +20,22 @@ static inline void halt_baddata(void) {
 }
 
 /*=============================================================================
+ * Functions defined in stubs.c or other source files (extern declarations)
+ *============================================================================*/
+extern void gl_picking_setup_wrapper(void);
+extern void init_display_lists(void);
+extern void flush_rendering(int param);
+extern void redraw_gl_scene(void);
+extern void do_warp(int param_1);
+extern void clear_current_selection(void);
+extern void set_camera_lookat(double param_1, double param_2);
+extern void clear_marked_state(void);
+extern undefined4 eval_bytecode_instruction(int param_1, int param_2, int param_3, int param_4, int param_5);
+extern void build_path_string(char *param_1, undefined4 *param_2);
+extern int get_bytecode_context(int param_1, int param_2);
+extern void get_item_screen_coords(undefined4 *param_1);
+
+/*=============================================================================
  * IRIX stdio internals - replace with modern equivalents
  *============================================================================*/
 /* __flsbuf - IRIX stdio flush buffer, use putc instead */
@@ -76,7 +92,6 @@ static inline void destroy_gl_resources(void) { /* TODO */ }
 static inline void draw_item_recursive(void) { /* TODO */ }
 static inline void draw_overview_content(void) { /* TODO */ }
 static inline void end_rendering(void) { /* TODO */ }
-static inline void gl_picking_setup_wrapper(void) { /* TODO */ }
 static inline void gl_pop_state(void) { /* TODO */ }
 static inline void gl_push_state(void) { /* TODO */ }
 static inline void glx_reset_context_wrapper(void) { /* TODO */ }
@@ -87,7 +102,6 @@ static inline void init_camera_state(void) { /* TODO */ }
 static inline void init_color_menus(void) { /* TODO */ }
 static inline void init_database_display(void) { /* TODO */ }
 static inline void init_database_state(void) { /* TODO */ }
-static inline void init_display_lists(void) { /* TODO */ }
 static inline int init_display_mode(void) { return 0; }
 static inline void init_display_state(void) { /* TODO */ }
 static inline void init_gl_lists(void) { /* TODO */ }
@@ -98,7 +112,6 @@ static inline void init_view_transform(void) { /* TODO */ }
 static inline void process_pending_events(void) { /* TODO */ }
 static inline void process_search_results(void) { /* TODO */ }
 static inline void read_data_section(void) { /* TODO */ }
-static inline void redraw_gl_scene(void) { /* TODO */ }
 static inline void refresh_after_change(void) { /* TODO */ }
 static inline void refresh_context_view(void) { /* TODO */ }
 static inline void refresh_display(void) { /* TODO */ }

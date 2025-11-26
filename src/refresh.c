@@ -34,7 +34,7 @@ void refresh_after_change(void)
     if (iVar3 < 0) {
       show_error_message("could not open tmp file, not updating");
       free(local_4);
-      deleteMessage(local_10);
+      deleteMessage((undefined4*)local_10);
     }
     else {
       if (file_append_mode == '\0') {
@@ -53,7 +53,7 @@ void refresh_after_change(void)
           if (__s_00 == (FILE *)0x0) {
             show_error_message("could not open tmp file, not updating");
             free(local_4);
-            deleteMessage(local_10);
+            deleteMessage((undefined4*)local_10);
             halt_baddata();
           }
           bVar1 = false;
@@ -155,7 +155,7 @@ void refresh_after_change(void)
       }
       rename(local_4,db_filepath);
       free(local_4);
-      deleteMessage(local_10);
+      deleteMessage((undefined4*)local_10);
       setup_fam_monitoring();
     }
   }

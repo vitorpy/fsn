@@ -15,7 +15,7 @@ void SG_getDefaultDepth(int param_1,undefined4 param_2,int *param_3,int param_4)
   int iVar2;
   
   if (((param_1 != 0) &&
-      (((iVar1 = get_bytecode_context(), param_3 != (int *)0x0 &&
+      (((iVar1 = get_bytecode_context(0, 0), param_3 != (int *)0x0 &&
         (iVar2 = *(int *)(iVar1 + 0x24), *param_3 != *(int *)(iVar1 + iVar2 * 4 + 0x3c))) ||
        ((param_4 != 0 && (iVar2 = *(int *)(iVar1 + 0x24), param_4 != iVar2)))))) &&
      ((((param_3 != (int *)0x0 || (*(int *)(iVar1 + iVar2 * 4 + 0x3c) != 3)) &&
@@ -106,7 +106,7 @@ void SG_getNormalArgs(undefined4 param_1,undefined4 param_2,int param_3,int *par
   uVar1 = parse_data_buffer(param_1,param_2,&temp_data_buffer,2);
   iVar2 = read_bytecode_value(param_1,param_2,uVar1,&temp_data_buffer,2);
   if (-1 < iVar2) {
-    uVar3 = eval_bytecode_instruction(param_1,param_2);
+    uVar3 = eval_bytecode_instruction(param_1,param_2,0,0,0);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar3;
     iVar4 = *param_4;
@@ -137,7 +137,7 @@ void SG_getOverlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *pa
     setup_menu_resources(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar3 = eval_bytecode_instruction(param_1,param_2);
+    uVar3 = eval_bytecode_instruction(param_1,param_2,0,0,0);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar3;
     iVar4 = *param_4;
@@ -166,7 +166,7 @@ void SG_getOverlay2Args(undefined4 param_1,undefined4 param_2,int param_3,int *p
     setup_menu_resources(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar2 = eval_bytecode_instruction(param_1,param_2);
+    uVar2 = eval_bytecode_instruction(param_1,param_2,0,0,0);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar2;
     iVar3 = *param_4;
@@ -195,7 +195,7 @@ void SG_getOverlay4Args(undefined4 param_1,undefined4 param_2,int param_3,int *p
     process_data_recursive(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar2 = eval_bytecode_instruction(param_1,param_2);
+    uVar2 = eval_bytecode_instruction(param_1,param_2,0,0,0);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar2;
     iVar3 = *param_4;
@@ -225,7 +225,7 @@ void SG_getPopupArgs(undefined4 param_1,undefined4 param_2,int param_3,int *para
     process_data_section(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar1 = eval_bytecode_instruction(param_1,param_2);
+    uVar1 = eval_bytecode_instruction(param_1,param_2,0,0,0);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar1;
     iVar3 = *param_4;
@@ -256,7 +256,7 @@ void SG_getUnderlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *p
     process_data_section(param_1,param_2,param_3,param_4);
   }
   else {
-    uVar3 = eval_bytecode_instruction(param_1,param_2);
+    uVar3 = eval_bytecode_instruction(param_1,param_2,0,0,0);
     *(undefined4 *)(param_3 + *param_4 * 8) = 0xf6615ba;
     *(undefined4 *)(param_3 + *param_4 * 8 + 4) = uVar3;
     iVar4 = *param_4;
@@ -281,7 +281,7 @@ void SG_getVisualArgs(undefined4 param_1,undefined4 param_2,undefined4 param_3,u
   undefined4 uVar2;
   int iVar3;
   
-  uVar1 = read_bytecode_value();
+  uVar1 = read_bytecode_value(0, 0, 0, NULL, 0);
   uVar2 = eval_bytecode_instruction(param_1,param_2,uVar1,param_4,param_5);
   *(undefined4 *)(param_6 + *param_7 * 8) = 0xf6615ba;
   *(undefined4 *)(param_6 + *param_7 * 8 + 4) = uVar2;

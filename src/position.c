@@ -480,18 +480,18 @@ void restorePosition(undefined4 param_1)
   *(undefined4 *)(curcontext + 0x3c) = uStack_14;
   if (iStack_18 != *(int *)(curcontext + 0x44)) {
     if (iStack_18 == 0) {
-      clear_marked_state(0);
+      clear_marked_state();
     }
     else {
-      update_marked_item();
+      update_marked_item(0);
     }
   }
   if (iStack_1c != *(int *)(curcontext + 0x48)) {
     if (iStack_1c == 0) {
-      clear_current_selection(0);
+      clear_current_selection();
     }
     else {
-      get_item_screen_coords();
+      get_item_screen_coords(NULL);
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here
@@ -530,18 +530,18 @@ void zoomPosition(undefined4 param_1)
   if (iVar1 != 0) {
     if (iStack_18 != *(int *)(curcontext + 0x44)) {
       if (iStack_18 == 0) {
-        clear_marked_state(0);
+        clear_marked_state();
       }
       else {
-        update_marked_item();
+        update_marked_item(0);
       }
     }
     if (iStack_1c != *(int *)(curcontext + 0x48)) {
       if (iStack_1c == 0) {
-        clear_current_selection(0);
+        clear_current_selection();
       }
       else {
-        get_item_screen_coords();
+        get_item_screen_coords(NULL);
       }
     }
     if (cStack_1d == '\0') {
@@ -609,7 +609,7 @@ void writePosition(undefined2 *param_1,FILE *param_2)
     uStack_6 = 0;
   }
   else {
-    pcVar1 = (char *)build_path_string(0);
+    pcVar1 = (char *)build_path_string(0, NULL);
     sVar2 = strlen(pcVar1);
     uStack_6 = (short)sVar2;
   }
@@ -626,7 +626,7 @@ void writePosition(undefined2 *param_1,FILE *param_2)
     fwrite(pvVar3,1,(size_t)uStack_8,param_2);
   }
   if (*(int *)(param_1 + 10) != 0) {
-    pvVar3 = (void *)build_path_string(0);
+    pvVar3 = (void *)build_path_string(0, NULL);
     fwrite(pvVar3,1,(size_t)uStack_6,param_2);
   }
   if (*(undefined4 **)(param_1 + 0x12) != (undefined4 *)0x0) {

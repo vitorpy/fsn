@@ -188,7 +188,7 @@ void SG_defaultDepthAndTypeResources
       param_9 = (int *)0x0;
       param_8 = (int *)0x0;
     }
-    iVar5 = get_bytecode_context();
+    iVar5 = get_bytecode_context(0, 0);
     if ((((bVar2) || (*(uint *)(iVar5 + 0x24) == (uint)*param_4)) &&
         ((bVar1 || (*param_3 == *(uint *)(iVar5 + *(int *)(iVar5 + 0x24) * 4 + 0x3c))))) &&
        ((bVar3 || (*param_6 == *(uint *)(iVar5 + *(int *)(iVar5 + 0x24) * 4 + 0x50))))) {
@@ -368,7 +368,7 @@ LAB_00432e34:
             }
           }
           else if (param_8 != (int *)0x0) {
-            iVar5 = eval_bytecode_instruction(param_1,param_2);
+            iVar5 = eval_bytecode_instruction(param_1,param_2,0,0,0);
             *param_8 = iVar5;
           }
           if (param_9 != (int *)0x0) {

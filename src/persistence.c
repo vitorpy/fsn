@@ -114,18 +114,18 @@ void restorePosition(undefined4 param_1)
   *(undefined4 *)(curcontext + 0x3c) = uStack_14;
   if (iStack_18 != *(int *)(curcontext + 0x44)) {
     if (iStack_18 == 0) {
-      clear_marked_state(0);
+      clear_marked_state();
     }
     else {
-      update_marked_item();
+      update_marked_item(0);
     }
   }
   if (iStack_1c != *(int *)(curcontext + 0x48)) {
     if (iStack_1c == 0) {
-      clear_current_selection(0);
+      clear_current_selection();
     }
     else {
-      get_item_screen_coords();
+      get_item_screen_coords(NULL);
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here

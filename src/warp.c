@@ -369,7 +369,7 @@ void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *para
     }
   }
   else if (iStack_4 == *(int *)(curcontext + 0x3c)) {
-    get_item_screen_coords(iStack_8);
+    get_item_screen_coords((undefined4*)iStack_8);
     fVar1 = *(float *)(iStack_8 + 0x14);
     *param_1 = (float)((double)fVar1 - (double)*(float *)(curcontext + 0x14) * (double)database_version)
     ;

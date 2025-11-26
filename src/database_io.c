@@ -92,7 +92,7 @@ void scanDatabase(int param_1)
   
   acStack_400[0] = '\0';
   if (*(int *)(param_1 + 0x28) != 0) {
-    build_path_string(acStack_400);
+    build_path_string(acStack_400, (undefined4 *)(*(long*)(param_1 + 0x28)));
   }
   sVar1 = strlen(acStack_400);
   iVar2 = check_directory_flags(param_1,acStack_400,acStack_400 + sVar1,1);
@@ -100,7 +100,7 @@ void scanDatabase(int param_1)
     uVar3 = set_status_message("relaying out file system...please wait",0);
     process_pending_events();
     process_child_directory(param_1);
-    deleteMessage(uVar3);
+    deleteMessage((undefined4*)uVar3);
     update_display();
   }
   refresh_view();
@@ -126,7 +126,7 @@ void rescanDatabase(void)
   if (iVar1 < 0) {
     sprintf(acStack_510,"cannot statvfs %s, leaving display unchanged",*topdir);
     set_status_message(acStack_510,1000);
-    deleteMessage(local_128);
+    deleteMessage((undefined4*)local_128);
   }
   else {
     strcpy(fstyp,(char *)&asStack_124[0].__f_unused);
@@ -135,12 +135,12 @@ void rescanDatabase(void)
     if (iVar1 < 0) {
       sprintf(acStack_510,"cannot stat %s, leaving display unchanged",*topdir);
       set_status_message(acStack_510,1000);
-      deleteMessage(local_128);
+      deleteMessage((undefined4*)local_128);
     }
     else {
       current_device_id = local_88.st_dev._0_4_;
       cleanup_directory(topdir);
-      deleteMessage(local_128);
+      deleteMessage((undefined4*)local_128);
       set_status_message("file system update complete",2000);
     }
   }

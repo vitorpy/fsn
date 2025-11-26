@@ -188,7 +188,7 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
   }
   else {
     update_marked_item(iStack_4);
-    get_item_screen_coords(iStack_c);
+    get_item_screen_coords((undefined4*)iStack_c);
     *param_1 = (*(float *)(iStack_4 + 0x34) +
                *(float *)(iStack_c + 0x14) * *(float *)(iStack_4 + 0x58)) -
                *(float *)(curcontext + 0x14) * view_scale_factor;

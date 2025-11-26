@@ -377,7 +377,7 @@ void check_directory_flags(undefined4 *param_1,char *param_2,char *param_3,char 
     iVar3 = lstat(param_2,&local_90);
     if (iVar3 < 0) {
       *(byte *)(param_1 + 0x1d) = *(byte *)(param_1 + 0x1d) | 4;
-      deleteMessage(uVar2);
+      deleteMessage((undefined4*)uVar2);
     }
     else {
       param_1[2] = local_90.st_nlink;
@@ -385,12 +385,12 @@ void check_directory_flags(undefined4 *param_1,char *param_2,char *param_3,char 
         iVar3 = statvfs(param_2,asStack_12c);
         if (iVar3 < 0) {
           *(byte *)(param_1 + 0x1d) = *(byte *)(param_1 + 0x1d) | 4;
-          deleteMessage(uVar2);
+          deleteMessage((undefined4*)uVar2);
           halt_baddata();
         }
         if ((localFlag != (asStack_12c[0].__f_spare[1] & 0x80000000U)) ||
            (iVar3 = strcmp((char *)&asStack_12c[0].__f_unused,fstyp), iVar3 != 0)) {
-          deleteMessage(uVar2);
+          deleteMessage((undefined4*)uVar2);
           mark_directory_item(param_1);
           halt_baddata();
         }
@@ -398,7 +398,7 @@ void check_directory_flags(undefined4 *param_1,char *param_2,char *param_3,char 
       }
       local_4 = opendir(param_2);
       if (local_4 == (DIR *)0x0) {
-        deleteMessage(uVar2);
+        deleteMessage((undefined4*)uVar2);
         mark_directory_item(param_1);
       }
       else {
@@ -596,7 +596,7 @@ void check_directory_flags(undefined4 *param_1,char *param_2,char *param_3,char 
           } while (iVar3 < iVar11 << 2);
         }
         process_pending_events();
-        deleteMessage(uVar2);
+        deleteMessage((undefined4*)uVar2);
       }
     }
   }
@@ -816,7 +816,7 @@ void create_root_directory(char *param_1)
   *(byte *)(topdir + 0x1d) = *(byte *)(topdir + 0x1d) | 2;
   cleanup_directory(topdir);
   set_status_message("file system database built",2000);
-  deleteMessage(uVar1);
+  deleteMessage((undefined4*)uVar1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }

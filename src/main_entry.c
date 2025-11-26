@@ -73,10 +73,10 @@ void main(int param_1,undefined4 *param_2)
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
   XmAddProtocolCallback(toplevel,uVar1,uVar2,quit_application,0);
   XtAppAddActions(app_context,&xt_actions_table,0x10);
-  uStack_a8 = XtCreateManagedWidget("mainw",xmMainWindowWidgetClass,toplevel,&uStack_a0,0);
+  uStack_a8 = XtCreateManagedWidget("mainw",xmMainWindowWidgetClass,toplevel,(Arg*)&uStack_a0,0);
   install_help_callback(uStack_a8,&topHelp);
   uStack_ac = get_panel_value(uStack_a8);
-  panel_widget = XtCreateManagedWidget("panel",xmFormWidgetClass,uStack_a8,&uStack_a0,0);
+  panel_widget = XtCreateManagedWidget("panel",xmFormWidgetClass,uStack_a8,(Arg*)&uStack_a0,0);
   uStack_a0 = 0xe3f40cb;
   uStack_98 = 0xe3f4b1d;
   uStack_9c = 1;
@@ -90,7 +90,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_94 = 1;
   uStack_8c = 3;
   copy_button_widget = uStack_84;
-  panel_vsep_widget = XtCreateManagedWidget("panelvsep",xmSeparatorWidgetClass,panel_widget,&uStack_a0,4);
+  panel_vsep_widget = XtCreateManagedWidget("panelvsep",xmSeparatorWidgetClass,panel_widget,(Arg*)&uStack_a0,4);
   init_panel_layout();
   iVar3 = init_display_mode();
   if (iVar3 != 0) {
@@ -102,7 +102,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_90 = 0xe3f40f2;
   uStack_9c = 1;
   uStack_94 = 3;
-  uStack_b8 = XmCreateLabel(panel_widget,"messageHeader",&uStack_a0,3);
+  uStack_b8 = XmCreateLabel(panel_widget,"messageHeader",(Arg*)&uStack_a0,3);
   XtManageChild(uStack_b8);
   uStack_a0 = 0xe3f4b1d;
   uStack_98 = 0xe3f40cb;
@@ -112,7 +112,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_94 = 3;
   uStack_84 = 1;
   uStack_8c = uStack_b8;
-  message_widget = XmCreateLabel(panel_widget,"message",&uStack_a0,4);
+  message_widget = XmCreateLabel(panel_widget,"message",(Arg*)&uStack_a0,4);
   XtManageChild(message_widget);
   install_help_callback(message_widget,&messageHelp);
   set_status_message("a 3D File System Navigator",0);
@@ -132,7 +132,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_74 = 1;
   uStack_6c = 0;
   uStack_64 = 0;
-  pane_form_widget = XmCreateForm(panel_widget,"paneForm",&uStack_a0,8);
+  pane_form_widget = XmCreateForm(panel_widget,"paneForm",(Arg*)&uStack_a0,8);
   XtManageChild(pane_form_widget);
   uStack_a0 = 0xe3f4b1d;
   uStack_98 = 0xe3f3701;
@@ -142,17 +142,17 @@ void main(int param_1,undefined4 *param_2)
   uStack_94 = 1;
   uStack_8c = 1;
   uStack_84 = 1;
-  context_top_widget = XtCreateManagedWidget(&context_widget_name,xmDrawingAreaWidgetClass,pane_form_widget,&uStack_a0,4);
+  context_top_widget = XtCreateManagedWidget(&context_widget_name,xmDrawingAreaWidgetClass,pane_form_widget,(Arg*)&uStack_a0,4);
   setup_context_widgets();
-  XtManageChild(*(undefined4 *)(curcontextwindows + 0xc));
+  XtManageChild((Widget)*(undefined4 *)(curcontextwindows + 0xc));
   XmMainWindowSetAreas(uStack_a8,uStack_ac,0,0,0,panel_widget);
   XtRealizeWidget(toplevel);
   XSetErrorHandler(0);
   post_realize_setup(toplevel);
   XtSetSensitive(copy_button_widget,0);
   XtSetSensitive(uStack_ac,0);
-  XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),0);
-  XtSetSensitive(*(undefined4 *)(curcontextwindows + 0xc),0);
+  XtSetSensitive((Widget)*(undefined4 *)(curcontextwindows + 8),0);
+  XtSetSensitive((Widget)*(undefined4 *)(curcontextwindows + 0xc),0);
   set_main_gl_window();
   uStack_a0 = 0xe3f4b1d;
   uStack_98 = 0xe3f4ba9;
@@ -203,8 +203,8 @@ void main(int param_1,undefined4 *param_2)
   init_color_menus();
   XtSetSensitive(copy_button_widget,1);
   XtSetSensitive(uStack_ac,1);
-  XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),1);
-  XtSetSensitive(*(undefined4 *)(curcontextwindows + 0xc),1);
+  XtSetSensitive((Widget)*(undefined4 *)(curcontextwindows + 8),1);
+  XtSetSensitive((Widget)*(undefined4 *)(curcontextwindows + 0xc),1);
   init_display_state();
   init_database_display();
   setup_fam_monitoring();
@@ -284,10 +284,10 @@ void parse_command_args(int param_1,undefined4 *param_2)
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
   XmAddProtocolCallback(toplevel,uVar1,uVar2,quit_application,0);
   XtAppAddActions(app_context,&xt_actions_table,0x10);
-  local_a8 = XtCreateManagedWidget("mainw",xmMainWindowWidgetClass,toplevel,&local_a0,0);
+  local_a8 = XtCreateManagedWidget("mainw",xmMainWindowWidgetClass,toplevel,(Arg*)&local_a0,0);
   install_help_callback(local_a8,&topHelp);
   local_ac = get_panel_value(local_a8);
-  panel_widget = XtCreateManagedWidget("panel",xmFormWidgetClass,local_a8,&local_a0,0);
+  panel_widget = XtCreateManagedWidget("panel",xmFormWidgetClass,local_a8,(Arg*)&local_a0,0);
   local_a0 = 0xe3f40cb;
   local_98 = 0xe3f4b1d;
   local_9c = 1;
@@ -301,7 +301,7 @@ void parse_command_args(int param_1,undefined4 *param_2)
   local_94 = 1;
   local_8c = 3;
   copy_button_widget = local_84;
-  panel_vsep_widget = XtCreateManagedWidget("panelvsep",xmSeparatorWidgetClass,panel_widget,&local_a0,4);
+  panel_vsep_widget = XtCreateManagedWidget("panelvsep",xmSeparatorWidgetClass,panel_widget,(Arg*)&local_a0,4);
   init_panel_layout();
   iVar3 = init_display_mode();
   if (iVar3 != 0) {
@@ -313,7 +313,7 @@ void parse_command_args(int param_1,undefined4 *param_2)
   local_90 = 0xe3f40f2;
   local_9c = 1;
   local_94 = 3;
-  local_b8 = XmCreateLabel(panel_widget,"messageHeader",&local_a0,3);
+  local_b8 = XmCreateLabel(panel_widget,"messageHeader",(Arg*)&local_a0,3);
   XtManageChild(local_b8);
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f40cb;
@@ -323,7 +323,7 @@ void parse_command_args(int param_1,undefined4 *param_2)
   local_94 = 3;
   local_84 = 1;
   local_8c = local_b8;
-  message_widget = XmCreateLabel(panel_widget,"message",&local_a0,4);
+  message_widget = XmCreateLabel(panel_widget,"message",(Arg*)&local_a0,4);
   XtManageChild(message_widget);
   install_help_callback(message_widget,&messageHelp);
   set_status_message("a 3D File System Navigator",0);
@@ -343,7 +343,7 @@ void parse_command_args(int param_1,undefined4 *param_2)
   local_74 = 1;
   local_6c = 0;
   local_64 = 0;
-  pane_form_widget = XmCreateForm(panel_widget,"paneForm",&local_a0,8);
+  pane_form_widget = XmCreateForm(panel_widget,"paneForm",(Arg*)&local_a0,8);
   XtManageChild(pane_form_widget);
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f3701;
@@ -353,17 +353,17 @@ void parse_command_args(int param_1,undefined4 *param_2)
   local_94 = 1;
   local_8c = 1;
   local_84 = 1;
-  context_top_widget = XtCreateManagedWidget(&context_widget_name,xmDrawingAreaWidgetClass,pane_form_widget,&local_a0,4);
+  context_top_widget = XtCreateManagedWidget(&context_widget_name,xmDrawingAreaWidgetClass,pane_form_widget,(Arg*)&local_a0,4);
   setup_context_widgets();
-  XtManageChild(*(undefined4 *)(curcontextwindows + 0xc));
+  XtManageChild((Widget)*(undefined4 *)(curcontextwindows + 0xc));
   XmMainWindowSetAreas(local_a8,local_ac,0,0,0,panel_widget);
   XtRealizeWidget(toplevel);
   XSetErrorHandler(0);
   post_realize_setup(toplevel);
   XtSetSensitive(copy_button_widget,0);
   XtSetSensitive(local_ac,0);
-  XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),0);
-  XtSetSensitive(*(undefined4 *)(curcontextwindows + 0xc),0);
+  XtSetSensitive((Widget)*(undefined4 *)(curcontextwindows + 8),0);
+  XtSetSensitive((Widget)*(undefined4 *)(curcontextwindows + 0xc),0);
   set_main_gl_window();
   local_a0 = 0xe3f4b1d;
   local_98 = 0xe3f4ba9;
@@ -414,8 +414,8 @@ void parse_command_args(int param_1,undefined4 *param_2)
   init_color_menus();
   XtSetSensitive(copy_button_widget,1);
   XtSetSensitive(local_ac,1);
-  XtSetSensitive(*(undefined4 *)(curcontextwindows + 8),1);
-  XtSetSensitive(*(undefined4 *)(curcontextwindows + 0xc),1);
+  XtSetSensitive((Widget)*(undefined4 *)(curcontextwindows + 8),1);
+  XtSetSensitive((Widget)*(undefined4 *)(curcontextwindows + 0xc),1);
   init_display_state();
   init_database_display();
   setup_fam_monitoring();

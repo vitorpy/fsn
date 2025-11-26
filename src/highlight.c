@@ -303,7 +303,7 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
       update_list_state();
     }
     else {
-      __dest = (char *)build_path_string(0);
+      __dest = (char *)build_path_string(0, NULL);
       if (param_2 == (undefined4 *)0x0) {
         if (-1 < *(int *)(param_1 + 0x74) << 2) {
           set_status_text(__dest);

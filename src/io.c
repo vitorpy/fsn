@@ -67,7 +67,7 @@ void writePosition(undefined2 *param_1,FILE *param_2)
     uStack_6 = 0;
   }
   else {
-    pcVar1 = (char *)build_path_string(0);
+    pcVar1 = (char *)build_path_string(0, NULL);
     sVar2 = strlen(pcVar1);
     uStack_6 = (short)sVar2;
   }
@@ -84,7 +84,7 @@ void writePosition(undefined2 *param_1,FILE *param_2)
     fwrite(pvVar3,1,(size_t)uStack_8,param_2);
   }
   if (*(int *)(param_1 + 10) != 0) {
-    pvVar3 = (void *)build_path_string(0);
+    pvVar3 = (void *)build_path_string(0, NULL);
     fwrite(pvVar3,1,(size_t)uStack_6,param_2);
   }
   if (*(undefined4 **)(param_1 + 0x12) != (undefined4 *)0x0) {

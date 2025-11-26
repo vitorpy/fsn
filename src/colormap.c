@@ -97,7 +97,7 @@ void SG_getDefaultColormap(int param_1,int param_2,int param_3)
     }
     param_2 = param_2 * 0x50;
     if (param_3 != *(int *)(*(int *)(param_1 + 0x8c) + param_2 + 0x28)) {
-      iVar1 = get_bytecode_context(param_1);
+      iVar1 = get_bytecode_context(param_1, 0);
       iVar4 = 0;
       if (0 < *(int *)(iVar1 + 0x18)) {
         piVar3 = *(int **)(iVar1 + 0x14);
