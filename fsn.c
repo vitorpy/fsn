@@ -935,13 +935,13 @@ undefined search_button_callback;
 undefined reset_eye;
 undefined4 vertical_scale_widget;
 short cached_view_angle_1;
-undefined4 DAT_1001663c;
+undefined4 view_angle_widget;
 short cached_view_angle_2;
 undefined1 controlsShowing;
 undefined4 labelColors;
 undefined4 monitorLabelColor;
 int legend_widget;
-undefined DAT_100176e4;
+undefined legend_separator_data;
 pointer legendHelp;
 undefined4 legend_separator_widget;
 undefined4 monitorLabelWidget;
@@ -1008,27 +1008,27 @@ float zoom_stack_capacity;
 short camera_position_x;
 short camera_position_y;
 undefined1 camera_position_z;
-undefined1 DAT_1001660d;
-undefined1 DAT_1001660e;
-undefined4 DAT_1001661c;
-undefined4 DAT_10016620;
+undefined1 camera_rotation_changed;
+undefined1 zoom_active_flag;
+undefined4 zoom_param_x;
+undefined4 zoom_param_y;
 undefined4 zoom_init_state;
-undefined4 DAT_10016618;
-undefined DAT_10016610;
+undefined4 zoom_saved_state;
+undefined zoom_start_time;
 undefined search_gl_init_callback;
 int DAT_10016624;
 int DAT_10016628;
 undefined4 *current_directory_node;
 undefined deleteMessage;
 undefined search_dialog_map_callback;
-undefined4 DAT_1001662c;
-undefined4 DAT_10016630;
-float DAT_10016630;
-float DAT_1001662c;
+undefined4 search_float_1;
+undefined4 search_float_2;
+float search_float_2;
+float search_float_1;
 char view_mode_flags;
 pointer __((offset(0x10019008))) altcontextwindows;
 float display_height_exponent;
-undefined1 DAT_10016710;
+undefined1 default_byte_value;
 uint file_memory_pool_ptr;
 uint file_pool_limit;
 void *directory_memory_pool;
@@ -1193,9 +1193,9 @@ undefined1 perm_setuid_char;
 undefined1 perm_setgid_char;
 undefined1 perm_sticky_char;
 undefined *permission_string_table;
-undefined DAT_10016bd1;
-undefined DAT_10016bd4;
-undefined DAT_10016bd7;
+undefined perm_owner_str;
+undefined perm_group_str;
+undefined perm_other_str;
 undefined1 mark_menu_widget;
 char previous_state_char;
 int unmonitor_timeout_seconds;
@@ -1228,7 +1228,7 @@ undefined overview_map_callback;
 undefined DAT_0f6d16fc;
 undefined4 overview_popup_shell;
 int overview_popup_shell;
-undefined4 DAT_10016c08;
+undefined4 overview_x_window;
 undefined4 dir_type_icon;
 undefined4 file_type_icon;
 undefined4 overview_bg_color;
@@ -37809,7 +37809,7 @@ void setScales(void)
       uStack_50 = 0xf66187b;
       iStack_4c = (int)*(short *)(curcontext + 0xc);
       cached_view_angle_1 = *(short *)(curcontext + 0xc);
-      XtSetValues(DAT_1001663c,&uStack_50,1);
+      XtSetValues(view_angle_widget,&uStack_50,1);
     }
     if (cached_view_angle_2 != *(short *)(curcontext + 0xe)) {
       uStack_50 = 0xf66187b;
@@ -37929,7 +37929,7 @@ void toggle_legend(void)
     XtManageChildren(&legendLabel,7);
     uVar1 = XmCreateSeparator(legend_widget,"monitorSep",&local_50,0);
     XtManageChild(uVar1);
-    local_4c = _DAT_100176e4;
+    local_4c = _legend_separator_data;
     local_44 = monitorLabelColor;
     local_50 = 0xf6615f6;
     local_48 = 0xf661554;
@@ -38506,16 +38506,16 @@ void zoomto(double param_1,double param_2)
     camera_position_x = in_stack_0000001a;
     camera_position_y = in_stack_0000001e;
     camera_position_z = in_stack_0000001a != *(short *)(curcontext + 0xc);
-    DAT_1001660d = in_stack_0000001e != *(short *)(curcontext + 0xe);
+    camera_rotation_changed = in_stack_0000001e != *(short *)(curcontext + 0xe);
     if (in_stack_00000020 == 0) {
                     // WARNING: Bad instruction - Truncating control flow here
       halt_baddata();
     }
-    DAT_1001660e = 0;
-    gettimeofday((timeval *)&DAT_10016610,(__timezone_ptr_t)0x0);
-    DAT_1001661c = in_stack_00000024;
-    DAT_10016620 = in_stack_00000028;
-    DAT_10016618 = zoom_init_state;
+    zoom_active_flag = 0;
+    gettimeofday((timeval *)&zoom_start_time,(__timezone_ptr_t)0x0);
+    zoom_param_x = in_stack_00000024;
+    zoom_param_y = in_stack_00000028;
+    zoom_saved_state = zoom_init_state;
     init_gl_state(zoom_gl_init_callback,&zoom_stack_pointer);
   }
   else {
@@ -39180,7 +39180,7 @@ void dirToPath(undefined1 *param_1,int param_2)
 
 {
   if (param_1 == (undefined1 *)0x0) {
-    param_1 = &DAT_10016710;
+    param_1 = &default_byte_value;
   }
   *param_1 = 0;
   if (param_2 != 0) {
@@ -44329,9 +44329,9 @@ void lookup_context_item(uint param_1)
   else {
     file_type_char = 0x3f;
   }
-  strcpy(&DAT_10016bd1,(&permission_string_table)[param_1 >> 6 & 7]);
-  strcpy(&DAT_10016bd4,(&permission_string_table)[param_1 >> 3 & 7]);
-  strcpy(&DAT_10016bd7,(&permission_string_table)[param_1 & 7]);
+  strcpy(&perm_owner_str,(&permission_string_table)[param_1 >> 6 & 7]);
+  strcpy(&perm_group_str,(&permission_string_table)[param_1 >> 3 & 7]);
+  strcpy(&perm_other_str,(&permission_string_table)[param_1 & 7]);
   if ((param_1 & 0x800 | 0x600) != 0) {
     if ((param_1 & 0x800) != 0) {
       if ((param_1 & 0x40) == 0) {
@@ -46229,7 +46229,7 @@ void showOverview(void)
     uVar1 = XtDisplay(overview_popup_shell);
     uVar2 = XtWindow(overview_popup_shell);
     XMapWindow(uVar1,uVar2);
-    XRaiseWindow(display,DAT_10016c08);
+    XRaiseWindow(display,overview_x_window);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
