@@ -24,3 +24,4 @@ fsn.rep/
 
 # System
 .DS_Store
+.venv/

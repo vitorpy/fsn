@@ -20,13 +20,23 @@ FSN (File System Navigator) restoration project - converting a 78K-line Ghidra M
 
 ## Key Scripts (in `analysis/`)
 
-### Module Extraction (USE THESE!)
+### Module Extraction - Tree-sitter (PREFERRED)
 ```bash
-# Extract by explicit function list (preferred for modularization)
-python3 analysis/extract_module.py <module_name> --list 'func1,func2,func3'
+# Activate venv first
+source .venv/bin/activate
 
-# Extract by pattern matching (searches function bodies)
-python3 analysis/extract_module.py <module_name> 'pattern1,pattern2'
+# List functions matching a pattern
+python3 analysis/extract_module_ts.py list draw
+
+# Extract specific functions into a module
+python3 analysis/extract_module_ts.py <module_name> func1,func2,func3
+```
+
+Tree-sitter handles multi-line signatures, complex declarations correctly.
+
+### Legacy Regex Extraction (fallback)
+```bash
+python3 analysis/extract_module.py <module_name> --list 'func1,func2,func3'
 ```
 
 ### Analysis Scripts
@@ -44,6 +54,7 @@ fsn/
 ├── src/               # Extracted modules (.c files)
 ├── include/           # Headers (.h files)
 ├── analysis/          # Python analysis/extraction scripts
+├── .venv/             # Python venv (tree-sitter, etc.)
 ├── .beads/            # Issue tracker database (bd)
 └── build/             # CMake build directory
 ```
@@ -93,7 +104,8 @@ Dependencies: libmotif-dev, libx11-dev, libgl1-mesa-dev, libglu1-mesa-dev
 
 ## Tips for Working Sessions
 
-1. **Before extracting functions**: Find line numbers with grep/grep patterns
-2. **For modularization**: Use `extract_module.py --list` with explicit function names
-3. **Track progress**: Use beads (`bd`) for multi-session work
-4. **Context management**: Use scripts instead of reading entire 78K-line fsn.c
+1. **Activate venv first**: `source .venv/bin/activate`
+2. **Find functions**: `python3 analysis/extract_module_ts.py list <pattern>`
+3. **Extract functions**: `python3 analysis/extract_module_ts.py <module> func1,func2,...`
+4. **Track progress**: Use beads (`bd`) for multi-session work
+5. **Never read entire fsn.c** - Use scripts for context-friendly extraction
