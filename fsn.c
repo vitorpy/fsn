@@ -1179,9 +1179,9 @@ undefined menu_undo_deletes_callback;
 undefined4 menu_process_deletes;
 undefined4 menu_undo_deletes;
 undefined FUN_0041fa18;
-undefined FUN_0041fadc;
-undefined FUN_0041fb20;
-undefined FUN_0041fcc0;
+undefined gl_event_handler;
+undefined gl_toggle_callback;
+undefined gl_button_callback;
 undefined4 DAT_10016b34;
 undefined4 DAT_10016b38;
 undefined4 DAT_10016b40;
@@ -1220,11 +1220,11 @@ undefined DAT_10006e94;
 char DAT_10006ebc;
 pointer overviewHelp;
 string overviewGlw_translations;
-undefined FUN_00420bfc;
-undefined FUN_00420c50;
-undefined FUN_00420ca4;
-undefined FUN_00420e74;
-undefined FUN_00421180;
+undefined overview_expose_callback;
+undefined overview_input_callback;
+undefined overview_resize_callback;
+undefined overview_init_callback;
+undefined overview_map_callback;
 undefined DAT_0f6d16fc;
 undefined4 overview_popup_shell;
 int overview_popup_shell;
@@ -39381,7 +39381,7 @@ void layout_db(undefined4 param_1,undefined4 param_2)
                  (double)((ulonglong)dVar2 & 0xffffffff00000000) -
                 (double)((ulonglong)in_register_00001010 << 0x20));
   refresh_fam_state();
-  FUN_00421780();
+  update_fam_display();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -44160,13 +44160,13 @@ void createSelectedInfo(undefined4 param_1,undefined4 *param_2,undefined4 param_
   param_2[5] = 1;
   uVar2 = XmCreateTextField(uVar1,"fileName",param_2,3);
   *(undefined4 *)(curcontextwindows + 0x1c) = uVar2;
-  XtAddCallback(*(undefined4 *)(curcontextwindows + 0x1c),0xe3f4ca5,FUN_0041fb20,
+  XtAddCallback(*(undefined4 *)(curcontextwindows + 0x1c),0xe3f4ca5,gl_toggle_callback,
                 *(undefined4 *)(curcontextwindows + 0xc));
-  XtAddCallback(*(undefined4 *)(curcontextwindows + 0x1c),0xe3f35b3,FUN_0041fcc0,
+  XtAddCallback(*(undefined4 *)(curcontextwindows + 0x1c),0xe3f35b3,gl_button_callback,
                 *(undefined4 *)(curcontextwindows + 0xc));
   XtAddEventHandler(*(undefined4 *)(curcontextwindows + 0x1c),0x10,0,FUN_0041fa18,
                     *(undefined4 *)(curcontextwindows + 0xc));
-  XtAddEventHandler(*(undefined4 *)(curcontextwindows + 0x1c),0x20,0,FUN_0041fadc,0);
+  XtAddEventHandler(*(undefined4 *)(curcontextwindows + 0x1c),0x20,0,gl_event_handler,0);
   XtAddEventHandler(*(undefined4 *)(curcontextwindows + 0x1c),4,0,myContext,
                     *(undefined4 *)(curcontextwindows + 0xc));
   XtManageChild(*(undefined4 *)(curcontextwindows + 0x1c));
@@ -45814,7 +45814,7 @@ void zoomToSelection(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041fbb4(void)
+void update_gl_context(void)
 
 {
   int iVar1;
@@ -45847,7 +45847,7 @@ void gotoFileName(undefined4 param_1)
     if (iStack_8 != 0) {
       get_item_screen_coords();
     }
-    FUN_0041fbb4();
+    update_gl_context();
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -45971,7 +45971,7 @@ void createOverview(void)
   apcStack_a0[0] = (char *)0xf662094;
   apcStack_a0[1] = (char *)0x1;
   overview_popup_shell = XtCreatePopupShell("overview",_DAT_0f6d16fc,toplevel,apcStack_a0,1);
-  XtAddCallback(overview_popup_shell,0xf6615c9,FUN_00421180,0);
+  XtAddCallback(overview_popup_shell,0xf6615c9,overview_map_callback,0);
   uStack_a8 = XmCreateForm(overview_popup_shell,"overviewForm",apcStack_a0,0);
   XtManageChild(uStack_a8);
   install_help_callback(uStack_a8,&overviewHelp);
@@ -46026,7 +46026,7 @@ void createOverview(void)
   }
   ppcVar3[1] = pcStack_b8;
   overview_gl_widget = GlxCreateMDraw(uStack_a8,"overviewGlw",apcStack_a0,iStack_a4 + 1);
-  XtAddCallback(overview_gl_widget,"exposeCallback",FUN_00420bfc,0);
+  XtAddCallback(overview_gl_widget,"exposeCallback",overview_expose_callback,0);
   iVar2 = init_display_mode();
   if (iVar2 == 0) {
     pcVar4 = "overlayExposeWindow";
@@ -46034,9 +46034,9 @@ void createOverview(void)
   else {
     pcVar4 = "popupExposeWindow";
   }
-  XtAddCallback(overview_gl_widget,pcVar4,FUN_00420c50,0);
-  XtAddCallback(overview_gl_widget,"resizeCallback",FUN_00420ca4,0);
-  XtAddCallback(overview_gl_widget,"ginitCallback",FUN_00420e74,0);
+  XtAddCallback(overview_gl_widget,pcVar4,overview_input_callback,0);
+  XtAddCallback(overview_gl_widget,"resizeCallback",overview_resize_callback,0);
+  XtAddCallback(overview_gl_widget,"ginitCallback",overview_init_callback,0);
   XtManageChild(overview_gl_widget);
   if (DAT_10006e60 == 0) {
     DAT_10006e60 = XtParseTranslationTable(overviewGlw_translations);
@@ -46054,7 +46054,7 @@ void createOverview(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_0041fdf0(void)
+void render_overview_frame(void)
 
 {
   float fVar1;
@@ -46222,7 +46222,7 @@ void showOverview(void)
   undefined4 uVar2;
   
   if (overview_popup_shell == 0) {
-    FUN_0041fdf0();
+    render_overview_frame();
   }
   else {
     XtManageChild();
@@ -46684,7 +46684,7 @@ void overviewPickPointer(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_004213c8(void)
+void get_current_time(void)
 
 {
   int iVar1;
@@ -46779,7 +46779,7 @@ void rescaleOverview(void)
 
 // WARNING: Control flow encountered bad instruction data
 
-void FUN_00421780(void)
+void update_fam_display(void)
 
 {
   float fVar1;
@@ -51259,7 +51259,7 @@ void overviewLocateHighlight(void)
   undefined4 uVar1;
   
   glx_switch_context_wrapper();
-  uVar1 = FUN_004213c8();
+  uVar1 = get_current_time();
   configure_viewport(uVar1,0,0);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
