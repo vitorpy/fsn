@@ -863,8 +863,8 @@ undefined4 view_init_x;
 undefined4 view_init_y;
 undefined4 view_init_z;
 undefined4 view_init_rotation_x;
-undefined4 DAT_100174e0;
-int DAT_10017658;
+undefined4 view_init_rotation_y;
+int context_count;
 undefined4 cached_context_ptr;
 pointer infoHelp;
 undefined DAT_0e3d4160;
@@ -902,10 +902,10 @@ pointer PTR_s_-landscape_100000e0;
 pointer __((offset(0x10018374))) altcontext;
 undefined app_class_name;
 undefined blank_string_literal;
-undefined DAT_1000a300;
+undefined empty_string_literal;
 undefined quit_application;
 pointer topHelp;
-undefined DAT_1000a384;
+undefined context_widget_name;
 pointer messageHelp;
 undefined4 app_context;
 undefined4 emptyXmString;
@@ -999,9 +999,9 @@ undefined2 DAT_100165d8;
 undefined4 DAT_100165d0;
 float DAT_100165ec;
 undefined DAT_100165e0;
-undefined4 DAT_10017610;
+undefined4 cpack_color;
 undefined zoom_gl_init_callback;
-char DAT_10017492;
+char search_results_pending;
 undefined4 zoom_stack_pointer;
 float zoom_stack_size;
 float zoom_stack_capacity;
@@ -1012,7 +1012,7 @@ undefined1 DAT_1001660d;
 undefined1 DAT_1001660e;
 undefined4 DAT_1001661c;
 undefined4 DAT_10016620;
-undefined4 DAT_100174e8;
+undefined4 zoom_init_state;
 undefined4 DAT_10016618;
 undefined DAT_10016610;
 undefined search_gl_init_callback;
@@ -1027,7 +1027,7 @@ float DAT_10016630;
 float DAT_1001662c;
 char view_mode_flags;
 pointer __((offset(0x10019008))) altcontextwindows;
-float DAT_100174f4;
+float display_height_exponent;
 undefined1 DAT_10016710;
 uint file_memory_pool_ptr;
 uint file_pool_limit;
@@ -1045,18 +1045,18 @@ undefined4 maxy;
 undefined4 maxShrinkage;
 float horizontal_scale_factor;
 undefined4 window_width;
-float DAT_100174f8;
+float horizontal_scale_base;
 float vertical_scale_factor;
 undefined4 window_height;
 float reference_dimension;
 undefined4 last_operation_time;
 undefined4 topdir;
 undefined4 minx;
-float DAT_1001758c;
+float item_scale_factor;
 float view_offset_adjustment;
 float view_offset_x;
 int window_height;
-float DAT_1001750c;
+float position_offset;
 undefined compare_files;
 undefined compare_dirs;
 undefined1[16] fstyp;
@@ -1067,7 +1067,7 @@ char special_display_flag;
 undefined DAT_0fb51f00;
 char *home_directory;
 undefined1 overviewActive;
-char DAT_10017497;
+char file_append_mode;
 char *db_filepath;
 undefined1 fsn_resources;
 undefined databaseDumpTimeout;
@@ -1108,7 +1108,7 @@ ushort DAT_10016704;
 ushort DAT_10016706;
 undefined chrtbl;
 undefined4 translate_y_offset;
-undefined4 DAT_10017600;
+undefined4 rect_draw_color;
 float rotation_factor_y;
 undefined4 directory_color_active;
 undefined4 directory_color_normal;
@@ -1118,7 +1118,7 @@ undefined DAT_1000ae90;
 undefined DAT_1000ae94;
 undefined DAT_1000ae98;
 undefined4 monitor_label_color;
-float DAT_100174f0;
+float layout_z_offset;
 float icon_size_multiplier;
 char grid_display_flag;
 undefined4 graphics_state_mode;
@@ -1130,14 +1130,14 @@ float base_y_offset;
 undefined4 highlight_color;
 pointer boxDir;
 undefined4 highlight_packed_color;
-float DAT_100174c4;
-undefined4 DAT_100174c8;
+float camera_lookat_z;
+undefined4 camera_rotation_angle;
 float database_version;
 char overlay_mode_flag;
-float DAT_10017510;
+float layout_height_adjust;
 float layout_offset_base;
-float DAT_1001752c;
-undefined4 DAT_10017534;
+float overlay_position_offset;
+undefined4 layout_short_value;
 float icon_spacing_factor;
 undefined4 view_offset_x;
 undefined1 overlay_mode_flag;
@@ -1182,27 +1182,27 @@ undefined gl_motion_handler;
 undefined gl_event_handler;
 undefined gl_toggle_callback;
 undefined gl_button_callback;
-undefined4 DAT_10016b34;
-undefined4 DAT_10016b38;
-undefined4 DAT_10016b40;
-undefined4 DAT_10016b44;
-undefined4 DAT_10016b4c;
-undefined4 DAT_10016b50;
+undefined4 move_out_label;
+undefined4 move_in_label;
+undefined4 copy_out_label;
+undefined4 copy_in_label;
+undefined4 link_out_label;
+undefined4 link_in_label;
 undefined1 file_type_char;
-undefined1 DAT_10016bd3;
-undefined1 DAT_10016bd6;
-undefined1 DAT_10016bd9;
+undefined1 perm_setuid_char;
+undefined1 perm_setgid_char;
+undefined1 perm_sticky_char;
 undefined *permission_string_table;
 undefined DAT_10016bd1;
 undefined DAT_10016bd4;
 undefined DAT_10016bd7;
 undefined1 mark_menu_widget;
 char previous_state_char;
-int DAT_1001749c;
+int unmonitor_timeout_seconds;
 undefined check_unmonitor_dp;
 char mark_menu_widget;
-char DAT_10017496;
-char DAT_10006e58;
+char wineditor_enabled;
+char rest_mode_enabled;
 char *current_dir_path;
 char *current_file_path;
 undefined DAT_1000b46c;
@@ -1211,13 +1211,13 @@ pointer moveDestHelp;
 int DAT_10006e5c;
 undefined1 drawing_active_flag;
 char drawing_active_flag;
-undefined4 DAT_10016c00;
-undefined4 DAT_10016c04;
-undefined4 DAT_10006e64;
+undefined4 main_gl_window;
+undefined4 overview_gl_context;
+undefined4 gl_buffer_size;
 undefined4 overview_gl_widget;
 int overview_translations;
 undefined DAT_10006e94;
-char DAT_10006ebc;
+char overview_initialized;
 pointer overviewHelp;
 string overviewGlw_translations;
 undefined overview_expose_callback;
@@ -1231,7 +1231,7 @@ int overview_popup_shell;
 undefined4 DAT_10016c08;
 undefined4 dir_type_icon;
 undefined4 file_type_icon;
-undefined4 DAT_100175f0;
+undefined4 overview_bg_color;
 undefined viewport_y;
 undefined matrix_stack_index;
 undefined matrix_stack_capacity;
@@ -1249,7 +1249,7 @@ undefined4 colormap_window_list;
 undefined4 numtop;
 undefined4 current_colormap;
 undefined4 numcmap;
-char DAT_10006f04;
+char cmap_initialized;
 undefined1 DAT_10006f00;
 int DAT_10007010;
 int DAT_10007014;
@@ -1299,8 +1299,8 @@ undefined4 curcontextflag;
 undefined4 selected_id_1;
 undefined4 selected_id_2;
 float view_scale_factor;
-undefined4 DAT_10017528;
-float DAT_10017514;
+undefined4 layout_rotation_value;
+float item_height_offset;
 undefined4 default_item_type;
 undefined4 database_root_node;
 int database_loaded_flag;
@@ -1308,7 +1308,7 @@ undefined database_input_handler;
 float DAT_100078fc;
 float normal_colormap;
 float overlay_colormap;
-float DAT_100175d0;
+float saturation_factor;
 char current_color_index;
 pointer boxRed;
 pointer boxOrange;
@@ -1316,24 +1316,24 @@ pointer boxYellow;
 pointer boxGreen;
 pointer boxCyan;
 pointer boxBlue;
-undefined4 DAT_100175f4;
+undefined4 legend_color_dir;
 pointer boxMagenta;
-undefined4 DAT_1001761c;
-undefined4 DAT_10017620;
-undefined4 DAT_10017624;
-undefined4 DAT_10017628;
-undefined4 DAT_1001762c;
-undefined4 DAT_10017630;
-undefined4 DAT_10017634;
+undefined4 legend_color_red;
+undefined4 legend_color_orange;
+undefined4 legend_color_yellow;
+undefined4 legend_color_green;
+undefined4 legend_color_cyan;
+undefined4 legend_color_blue;
+undefined4 legend_color_magenta;
 undefined4 *cached_context_ptr;
 undefined DAT_10007908;
 undefined DAT_10007928;
 int redraw_counter;
-char DAT_10017491;
+char render_mode_flag;
 int colormap_dirty_flag;
 undefined4 active_colormap_id;
 undefined4 *active_colormap_id;
-short DAT_100174b6;
+short default_line_width;
 undefined DAT_1000e928;
 undefined DAT_1000e930;
 undefined editCB;
@@ -1341,7 +1341,7 @@ pointer viewerHelp;
 undefined gl_window_callback;
 undefined context_menu_callback;
 undefined window_event_handler;
-undefined4 DAT_10016e00;
+undefined4 saved_context_state;
 undefined4 active_file_list;
 string s_FSN_the_3D_File_System_Navigator_100079c4;
 undefined *PTR_s_Please_be_patient_while_the_file_10007b60;
@@ -1410,8 +1410,8 @@ undefined DAT_10013c60;
 int busy_cursor;
 undefined DAT_10009530;
 undefined DAT_100095b0;
-undefined DAT_10009648;
-undefined DAT_1000964c;
+undefined shell_name_arg;
+undefined shell_cmd_flag;
 undefined operation_type_code;
 string s_/bin/sh_10009640;
 uint pattern_match_enabled;
@@ -1419,7 +1419,7 @@ undefined4 search_pattern_string;
 char search_age_mode;
 int search_number_value;
 char search_size_mode;
-int DAT_10016f10;
+int search_count_threshold;
 undefined4 firstSearchDir;
 int state_change_counter;
 undefined4 lastSearchDir;
@@ -1534,7 +1534,7 @@ string s_%c%d_%s_10009f24;
 undefined DAT_10009f2c;
 undefined database_dirty_flag;
 undefined DAT_10009f3c;
-int DAT_10009f40;
+int buffer_initialized_flag;
 int buffer_size;
 void *buffer_pointer_array;
 void *string_buffer;
@@ -36790,7 +36790,7 @@ void setup_event_handlers(void)
   *(undefined4 *)(curcontext + 8) = view_init_z;
   *(undefined2 *)(curcontext + 0xc) = 0;
   *(short *)(curcontext + 0xe) = (short)view_init_rotation_x;
-  *(short *)(curcontext + 0x10) = (short)DAT_100174e0;
+  *(short *)(curcontext + 0x10) = (short)view_init_rotation_y;
   init_view_transform();
   init_camera_state();
   curcontext[0xc51] = 0;
@@ -36858,7 +36858,7 @@ void setup_context_widgets(void)
   local_8c = 1;
   local_84 = 1;
   uVar1 = 5;
-  if (DAT_10017658 != 0) {
+  if (context_count != 0) {
     local_74 = cached_context_ptr;
     local_78 = (char *)0xf6615f6;
     local_6c = (undefined4 *)lhLabelColor;
@@ -37033,7 +37033,7 @@ void main(int param_1,undefined4 *param_2)
   setup_event_handlers();
   glwidget_translations = XtParseTranslationTable(glwidget_translations);
   blankXmString = XmStringCreate(&blank_string_literal,&default_charset);
-  emptyXmString = XmStringCreate(&DAT_1000a300,&default_charset);
+  emptyXmString = XmStringCreate(&empty_string_literal,&default_charset);
   uVar1 = XtDisplay(toplevel);
   uVar1 = XmInternAtom(uVar1,"WM_PROTOCOLS",0);
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
@@ -37108,7 +37108,7 @@ void main(int param_1,undefined4 *param_2)
   uStack_94 = 1;
   uStack_8c = 1;
   uStack_84 = 1;
-  context_top_widget = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,pane_form_widget,&uStack_a0,4);
+  context_top_widget = XtCreateManagedWidget(&context_widget_name,_DAT_0e3d616c,pane_form_widget,&uStack_a0,4);
   setup_context_widgets();
   XtManageChild(*(undefined4 *)(curcontextwindows + 0xc));
   XmMainWindowSetAreas(uStack_a8,uStack_ac,0,0,0,panel_widget);
@@ -37248,7 +37248,7 @@ void parse_command_args(int param_1,undefined4 *param_2)
   setup_event_handlers();
   glwidget_translations = XtParseTranslationTable(glwidget_translations);
   blankXmString = XmStringCreate(&blank_string_literal,&default_charset);
-  emptyXmString = XmStringCreate(&DAT_1000a300,&default_charset);
+  emptyXmString = XmStringCreate(&empty_string_literal,&default_charset);
   uVar1 = XtDisplay(toplevel);
   uVar1 = XmInternAtom(uVar1,"WM_PROTOCOLS",0);
   uVar2 = XmInternAtom(display,"WM_DELETE_WINDOW",0);
@@ -37323,7 +37323,7 @@ void parse_command_args(int param_1,undefined4 *param_2)
   local_94 = 1;
   local_8c = 1;
   local_84 = 1;
-  context_top_widget = XtCreateManagedWidget(&DAT_1000a384,_DAT_0e3d616c,pane_form_widget,&local_a0,4);
+  context_top_widget = XtCreateManagedWidget(&context_widget_name,_DAT_0e3d616c,pane_form_widget,&local_a0,4);
   setup_context_widgets();
   XtManageChild(*(undefined4 *)(curcontextwindows + 0xc));
   XmMainWindowSetAreas(local_a8,local_ac,0,0,0,panel_widget);
@@ -38456,7 +38456,7 @@ void popzoom(void)
 void draw_warp(void)
 
 {
-  cpack(DAT_10017610);
+  cpack(cpack_color);
   clear();
   swapbuffers();
   gflush();
@@ -38515,11 +38515,11 @@ void zoomto(double param_1,double param_2)
     gettimeofday((timeval *)&DAT_10016610,(__timezone_ptr_t)0x0);
     DAT_1001661c = in_stack_00000024;
     DAT_10016620 = in_stack_00000028;
-    DAT_10016618 = DAT_100174e8;
+    DAT_10016618 = zoom_init_state;
     init_gl_state(zoom_gl_init_callback,&zoom_stack_pointer);
   }
   else {
-    if (DAT_10017492 != '\0') {
+    if (search_results_pending != '\0') {
       process_search_results();
     }
     *(int *)(curcontext + 0x3c) = in_stack_00000020;
@@ -39047,7 +39047,7 @@ void process_directory_data(int param_1)
 
 {
   if (((displayHeight != 0) && (displayHeight != 1)) && (displayHeight == 2)) {
-    powf((float)param_1,DAT_100174f4);
+    powf((float)param_1,display_height_exponent);
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -39343,7 +39343,7 @@ void layout_db(undefined4 param_1,undefined4 param_2)
   }
   else {
     fVar1 = (float)process_directory_data(window_width);
-    horizontal_scale_factor = DAT_100174f8 / fVar1;
+    horizontal_scale_factor = horizontal_scale_base / fVar1;
   }
   *(undefined4 *)(topdir + 0x2c) = 0;
   *(undefined4 *)(topdir + 0x30) = 0;
@@ -39498,7 +39498,7 @@ void update_directory_layout(int param_1)
   byte in_fcsr;
   int local_1c [7];
   
-  fVar1 = (float)*(int *)(param_1 + 0xc) * DAT_1001758c;
+  fVar1 = (float)*(int *)(param_1 + 0xc) * item_scale_factor;
   if ((((in_fcsr | 3) ^ 2) & 3) == 0) {
     fVar1 = ROUND(fVar1);
   }
@@ -39759,7 +39759,7 @@ void second_traversal(int param_1,undefined4 param_2,undefined4 param_3,undefine
   *(float *)(param_1 + 0x58) = (float)(double)CONCAT44(uVar8,param_6);
   *(undefined4 *)(param_1 + 0x40) = 0;
   dVar9 = (double)*(float *)(param_1 + 0x3c) / (double)((ulonglong)uVar7 << 0x20) + dVar9;
-  dVar6 = dVar9 + (double)DAT_1001750c;
+  dVar6 = dVar9 + (double)position_offset;
   fVar4 = powf(zoom_base_factor,(float)((double)(float)dVar6 / (double)zoom_reference_height));
   iVar1 = 0;
   iVar2 = 0;
@@ -40775,7 +40775,7 @@ void refresh_after_change(void)
       deleteMessage(local_10);
     }
     else {
-      if (DAT_10017497 == '\0') {
+      if (file_append_mode == '\0') {
         bVar1 = false;
         __s_00 = fdopen(iVar3,"a");
       }
@@ -42368,7 +42368,7 @@ void draw_special(undefined4 *param_1,char *param_2,undefined4 param_3,undefined
              );
     rotate((int)-*(short *)(curcontext + 0xe),0x78);
     translate(0,translate_y_offset);
-    cpack(DAT_10017600);
+    cpack(rect_draw_color);
     dVar5 = (double)-rotation_factor_y;
     fVar6 = (float)(dVar5 / (double)((ulonglong)unaff_000010a0 << 0x20));
     rectf(fVar6,fVar6);
@@ -42748,7 +42748,7 @@ void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param
     lVar6 = (ulonglong)uVar5 << 0x20;
     lVar12 = (ulonglong)uVar10 << 0x20;
     translate(lVar6,lVar12);
-    fVar8 = (float)((double)-(float)param_3[0xf] / dVar16 - (double)DAT_100174f0);
+    fVar8 = (float)((double)-(float)param_3[0xf] / dVar16 - (double)layout_z_offset);
     uVar7 = CONCAT44((int)((ulonglong)lVar6 >> 0x20),fVar8);
     uVar13 = CONCAT44((int)((ulonglong)lVar12 >> 0x20),fVar8);
     rectf(uVar7,uVar13);
@@ -43254,8 +43254,8 @@ void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *para
       clear_current_selection();
       *param_1 = camera_lookat_x;
       *param_2 = camera_lookat_y;
-      *param_3 = DAT_100174c4;
-      *param_4 = (short)DAT_100174c8;
+      *param_3 = camera_lookat_z;
+      *param_4 = (short)camera_rotation_angle;
       *param_6 = *(int *)(curcontext + 0x3c);
     }
     else {
@@ -43273,13 +43273,13 @@ void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *para
                        (double)((ulonglong)(double)fVar1 & 0xffffffff00000000)) -
                       (double)*(float *)(curcontext + 0x18) * (double)database_version);
     if (overlay_mode_flag == '\0') {
-      *param_3 = DAT_1001752c + *(float *)(iStack_8 + 0x1c);
+      *param_3 = overlay_position_offset + *(float *)(iStack_8 + 0x1c);
     }
     else {
       *param_8 = 1;
-      *param_3 = layout_offset_base + DAT_10017510;
+      *param_3 = layout_offset_base + layout_height_adjust;
     }
-    *param_4 = (short)DAT_10017534;
+    *param_4 = (short)layout_short_value;
     *param_6 = *(int *)(curcontext + 0x3c);
     *param_8 = 1;
   }
@@ -44142,14 +44142,14 @@ void createSelectedInfo(undefined4 param_1,undefined4 *param_2,undefined4 param_
   undefined4 uVar2;
   
   move_file_xmstring = XmStringCreate("Move file",&default_charset);
-  DAT_10016b34 = XmStringCreate("Move file out",&default_charset);
-  DAT_10016b38 = XmStringCreate("Move file in",&default_charset);
+  move_out_label = XmStringCreate("Move file out",&default_charset);
+  move_in_label = XmStringCreate("Move file in",&default_charset);
   copy_file_xmstring = XmStringCreate("Copy file",&default_charset);
-  DAT_10016b40 = XmStringCreate("Copy file out",&default_charset);
-  DAT_10016b44 = XmStringCreate("Copy file in",&default_charset);
+  copy_out_label = XmStringCreate("Copy file out",&default_charset);
+  copy_in_label = XmStringCreate("Copy file in",&default_charset);
   link_file_xmstring = XmStringCreate("Link file",&default_charset);
-  DAT_10016b4c = XmStringCreate("Link file out",&default_charset);
-  DAT_10016b50 = XmStringCreate("Link file in",&default_charset);
+  link_out_label = XmStringCreate("Link file out",&default_charset);
+  link_in_label = XmStringCreate("Link file in",&default_charset);
   uVar1 = XmCreateForm(param_1,"selectedInfo",param_2,param_3);
   XtManageChild(uVar1);
   *param_2 = 0xe3f4b1d;
@@ -44335,26 +44335,26 @@ void lookup_context_item(uint param_1)
   if ((param_1 & 0x800 | 0x600) != 0) {
     if ((param_1 & 0x800) != 0) {
       if ((param_1 & 0x40) == 0) {
-        DAT_10016bd3 = 0x53;
+        perm_setuid_char = 0x53;
       }
       else {
-        DAT_10016bd3 = 0x73;
+        perm_setuid_char = 0x73;
       }
     }
     if ((param_1 & 0x400) != 0) {
       if ((param_1 & 8) == 0) {
-        DAT_10016bd6 = 0x6c;
+        perm_setgid_char = 0x6c;
       }
       else {
-        DAT_10016bd6 = 0x73;
+        perm_setgid_char = 0x73;
       }
     }
     if ((param_1 & 0x200) != 0) {
       if ((param_1 & 1) == 0) {
-        DAT_10016bd9 = 0x54;
+        perm_sticky_char = 0x54;
       }
       else {
-        DAT_10016bd9 = 0x74;
+        perm_sticky_char = 0x74;
       }
     }
   }
@@ -44573,7 +44573,7 @@ void setMoveAndCopyButtons(void)
     if (iVar2 != iVar1) {
       if (*(int *)(curcontext + 0x48) != 0) {
         uStack_28 = 0xe3f40b5;
-        uStack_24 = DAT_10016b34;
+        uStack_24 = move_out_label;
         XtSetValues(menu_move_file_1,&uStack_28,1);
         XtSetValues(menu_move_file_2,&uStack_28,1);
         if (altcontext[0xc51] == '\0') {
@@ -44606,7 +44606,7 @@ void setMoveAndCopyButtons(void)
           }
         }
         XtSetSensitive(menu_move_file_2,bVar3);
-        uStack_24 = DAT_10016b40;
+        uStack_24 = copy_out_label;
         uStack_28 = 0xe3f40b5;
         XtSetValues(menu_copy_file_1,&uStack_28,1);
         XtSetValues(menu_copy_file_2,&uStack_28,1);
@@ -44640,7 +44640,7 @@ void setMoveAndCopyButtons(void)
           }
         }
         XtSetSensitive(menu_copy_file_2,bVar3);
-        uStack_24 = DAT_10016b4c;
+        uStack_24 = link_out_label;
         uStack_28 = 0xe3f40b5;
         XtSetValues(menu_link_file_1,&uStack_28,1);
         XtSetValues(menu_link_file_2,&uStack_28,1);
@@ -44679,7 +44679,7 @@ void setMoveAndCopyButtons(void)
       if (iVar1 == 0) {
         halt_baddata();
       }
-      uStack_24 = DAT_10016b38;
+      uStack_24 = move_in_label;
       uStack_28 = 0xe3f40b5;
       XtSetValues(menu_move_file_1,&uStack_28,1);
       XtSetValues(menu_move_file_2,&uStack_28,1);
@@ -44694,7 +44694,7 @@ void setMoveAndCopyButtons(void)
       }
       XtSetSensitive(menu_move_file_2,iVar1 != 0);
       uStack_28 = 0xe3f40b5;
-      uStack_24 = DAT_10016b44;
+      uStack_24 = copy_in_label;
       XtSetValues(menu_copy_file_1,&uStack_28,1);
       XtSetValues(menu_copy_file_2,&uStack_28,1);
       iVar1 = 0;
@@ -44707,7 +44707,7 @@ void setMoveAndCopyButtons(void)
         iVar1 = *(int *)(altcontext + 0x48);
       }
       XtSetSensitive(menu_copy_file_2,iVar1 != 0);
-      uStack_24 = DAT_10016b50;
+      uStack_24 = link_in_label;
       uStack_28 = 0xe3f40b5;
       XtSetValues(menu_link_file_1,&uStack_28,1);
       XtSetValues(menu_link_file_2,&uStack_28,1);
@@ -45047,7 +45047,7 @@ void finalize_draw_frame(void)
         XtRemoveTimeOut();
         iVar3 = *(int *)(curcontext + 0x44);
       }
-      uVar1 = XtAppAddTimeOut(app_context,DAT_1001749c * 1000,check_unmonitor_dp,iVar3);
+      uVar1 = XtAppAddTimeOut(app_context,unmonitor_timeout_seconds * 1000,check_unmonitor_dp,iVar3);
       *(undefined4 *)(*(int *)(curcontext + 0x44) + 100) = uVar1;
     }
   }
@@ -45559,7 +45559,7 @@ void pick_file_item(int param_1,undefined4 *param_2,undefined4 param_3,char para
         show_error_message(acStack_464);
       }
       else {
-        if ((param_4 != '\0') && (DAT_10017496 != '\0')) {
+        if ((param_4 != '\0') && (wineditor_enabled != '\0')) {
           sVar2 = strlen("$WINEDITOR ");
           iVar3 = strncmp(__s1,"$WINEDITOR ",sVar2);
           if (iVar3 == 0) {
@@ -45568,7 +45568,7 @@ void pick_file_item(int param_1,undefined4 *param_2,undefined4 param_3,char para
           }
         }
         display_scan_status(param_6,pcVar1,2000);
-        if (DAT_10006e58 != '\0') {
+        if (rest_mode_enabled != '\0') {
           sVar2 = strlen("REST=");
           XtMalloc(sVar2 + 1);
                     // WARNING: Bad instruction - Truncating control flow here
@@ -45870,7 +45870,7 @@ void gotoFileName(undefined4 param_1)
 void setOverviewWindow(void)
 
 {
-  GLXwinset(display,DAT_10016c00);
+  GLXwinset(display,main_gl_window);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -45898,7 +45898,7 @@ void glx_switch_context_wrapper(void)
 void setOverviewOverlayWindow(void)
 
 {
-  GLXwinset(display,DAT_10016c04);
+  GLXwinset(display,overview_gl_context);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -45953,9 +45953,9 @@ void createOverview(void)
   int iStack_64;
   
   uVar6 = (uint)((ulonglong)in_f18 >> 0x20);
-  if (DAT_10006ebc == '\0') {
+  if (overview_initialized == '\0') {
     XtAppAddActions(app_context,&DAT_10006e94,4);
-    DAT_10006ebc = '\x01';
+    overview_initialized = '\x01';
   }
   apcStack_a0[1] = (char *)auStack_b4;
   apcStack_a0[0] = (char *)0xf6615ba;
@@ -45977,7 +45977,7 @@ void createOverview(void)
   install_help_callback(uStack_a8,&overviewHelp);
   iVar2 = init_display_mode();
   if (iVar2 != 0) {
-    DAT_10006e64 = 0x3000;
+    gl_buffer_size = 0x3000;
   }
   apcStack_a0[1] = (char *)0x1;
   apcStack_a0[0] = (char *)0xe3f4b1d;
@@ -45985,7 +45985,7 @@ void createOverview(void)
   apcStack_a0[4] = (char *)0xe3f46dd;
   uStack_88 = 0xe3f3701;
   pcStack_80 = "glxConfig";
-  puStack_7c = &DAT_10006e64;
+  puStack_7c = &gl_buffer_size;
   apcStack_a0[3] = (char *)0x1;
   uStack_8c = 1;
   uStack_84 = 1;
@@ -46413,7 +46413,7 @@ void drawOverview(void)
 {
   if (overviewActive != '\0') {
     glx_switch_context_wrapper();
-    cpack(DAT_100175f0);
+    cpack(overview_bg_color);
     clear();
     if (topdir != 0) {
       setup_item_render(topdir,0);
@@ -47166,12 +47166,12 @@ void need_pups(void)
 {
   int iVar1;
   
-  if (DAT_10006f04 == '\0') {
+  if (cmap_initialized == '\0') {
     iVar1 = getgdesc(0x11);
     if (iVar1 < 2) {
       DAT_10006f00 = 1;
     }
-    DAT_10006f04 = '\x01';
+    cmap_initialized = '\x01';
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -49183,7 +49183,7 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
                           (double)*(float *)(curcontext + 0x18) *
                           ((double)*(float *)(iStack_4 + 0x3c) /
                            (double)((ulonglong)extraout_var_00 << 0x20) + (double)layout_spacing_height));
-        *param_3 = DAT_10017514 + *(float *)(iStack_4 + 0x24);
+        *param_3 = item_height_offset + *(float *)(iStack_4 + 0x24);
         *param_4 = (short)default_item_type;
         *param_6 = 0;
       }
@@ -49199,7 +49199,7 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
                         (double)*(float *)(curcontext + 0x18) *
                         ((double)*(float *)(iStack_4 + 0x3c) /
                          (double)((ulonglong)extraout_var << 0x20) + (double)layout_spacing_height));
-      *param_3 = DAT_10017514 + *(float *)(iStack_4 + 0x24);
+      *param_3 = item_height_offset + *(float *)(iStack_4 + 0x24);
       *param_4 = (short)default_item_type;
       *param_6 = 0;
     }
@@ -49217,10 +49217,10 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
     }
     else {
       *param_8 = 1;
-      *param_3 = layout_offset_base + *(float *)(iStack_4 + 0x24) + DAT_10017510;
+      *param_3 = layout_offset_base + *(float *)(iStack_4 + 0x24) + layout_height_adjust;
     }
     *param_6 = 0;
-    *param_4 = (short)DAT_10017528;
+    *param_4 = (short)layout_rotation_value;
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -50468,7 +50468,7 @@ void makeDColorBox(uint param_1,int param_2)
     fVar3 = FLOOR(fVar7);
   }
   unpack_color((int)fVar1 + (int)fVar2 * 0x100 + (int)fVar3 * 0x10000,param_2);
-  hsv_to_rgb((double)uStack_10,(double)(uStack_14 * DAT_100175d0));
+  hsv_to_rgb((double)uStack_10,(double)(uStack_14 * saturation_factor));
   if ((((in_fcsr | 3) ^ 2) & 3) == 0) {
     fVar5 = ROUND(fVar5);
   }
@@ -50597,14 +50597,14 @@ void makeColorBoxes(void)
     setup_toplevel_window(toplevel);
     current_color_index = '\x01';
   }
-  create_color_legend_box(DAT_100175f4,boxDir,7);
-  create_color_legend_box(DAT_1001761c,boxRed,0);
-  create_color_legend_box(DAT_10017620,boxOrange,1);
-  create_color_legend_box(DAT_10017624,boxYellow,2);
-  create_color_legend_box(DAT_10017628,boxGreen,3);
-  create_color_legend_box(DAT_1001762c,boxCyan,4);
-  create_color_legend_box(DAT_10017630,boxBlue,5);
-  create_color_legend_box(DAT_10017634,boxMagenta,6);
+  create_color_legend_box(legend_color_dir,boxDir,7);
+  create_color_legend_box(legend_color_red,boxRed,0);
+  create_color_legend_box(legend_color_orange,boxOrange,1);
+  create_color_legend_box(legend_color_yellow,boxYellow,2);
+  create_color_legend_box(legend_color_green,boxGreen,3);
+  create_color_legend_box(legend_color_cyan,boxCyan,4);
+  create_color_legend_box(legend_color_blue,boxBlue,5);
+  create_color_legend_box(legend_color_magenta,boxMagenta,6);
   init_render_state();
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
@@ -50914,7 +50914,7 @@ void get_selection_string(void)
 void beamup(void)
 
 {
-  if (DAT_10017491 != '\0') {
+  if (render_mode_flag != '\0') {
     redraw_counter = 1;
     do {
       redraw_gl_scene();
@@ -50939,7 +50939,7 @@ void beamup(void)
 void beamdown(void)
 
 {
-  if (DAT_10017491 != '\0') {
+  if (render_mode_flag != '\0') {
     redraw_counter = 3;
     do {
       redraw_gl_scene();
@@ -51079,7 +51079,7 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
     color(0);
     clear();
     color(overlayHighlightColor._2_2_);
-    linewidth((int)DAT_100174b6);
+    linewidth((int)default_line_width);
     zbuffer(0);
     pushmatrix();
     scale((float)((double)((ulonglong)uVar2 << 0x20) / (double)*(float *)(curcontext + 0x34)));
@@ -51764,7 +51764,7 @@ void gl_push_state(void)
 void restorecontext(void)
 
 {
-  set_context_state(DAT_10016e00,1);
+  set_context_state(saved_context_state,1);
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
 }
@@ -54502,7 +54502,7 @@ void usystem(undefined4 param_1)
   iStack_1c.it_value.tv_usec = 0;
   setitimer(ITIMER_REAL,&iStack_1c,&iStack_2c);
   alarm(0);
-  execl(s__bin_sh_10009640,&DAT_10009648,&DAT_1000964c,param_1,0);
+  execl(s__bin_sh_10009640,&shell_name_arg,&shell_cmd_flag,param_1,0);
                     // WARNING: Subroutine does not return
   _exit(0x7f);
 }
@@ -54552,7 +54552,7 @@ void update_status_display(undefined4 param_1)
   local_1c.it_value.tv_usec = 0;
   setitimer(ITIMER_REAL,&local_1c,&iStack_2c);
   alarm(0);
-  execl(s__bin_sh_10009640,&DAT_10009648,&DAT_1000964c,param_1,0);
+  execl(s__bin_sh_10009640,&shell_name_arg,&shell_cmd_flag,param_1,0);
                     // WARNING: Subroutine does not return
   _exit(0x7f);
 }
@@ -54611,8 +54611,8 @@ void process_child_recursive(undefined4 *param_1)
           uVar2 = pattern_match_enabled & 4;
         }
         if ((uVar2 != 0) &&
-           (((iVar1 = count_directory_items(puVar3[4]), search_size_mode != '\0' && (DAT_10016f10 <= iVar1)) ||
-            ((search_size_mode == '\0' && (iVar1 <= DAT_10016f10)))))) {
+           (((iVar1 = count_directory_items(puVar3[4]), search_size_mode != '\0' && (search_count_threshold <= iVar1)) ||
+            ((search_size_mode == '\0' && (iVar1 <= search_count_threshold)))))) {
           *(byte *)(puVar3 + 10) = *(byte *)(puVar3 + 10) & 0xf7;
         }
         if ((int)(puVar3[10] << 4) < 0) {
@@ -62326,7 +62326,7 @@ void init_network_state(void)
   int iVar1;
   int iVar2;
   
-  if (DAT_10009f40 != 0) {
+  if (buffer_initialized_flag != 0) {
     buffer_pointer_array = malloc(buffer_size << 2);
     string_buffer = malloc(buffer_size << 2);
     path_buffer = malloc(buffer_size << 2);
@@ -62339,7 +62339,7 @@ void init_network_state(void)
         iVar1 = iVar1 + 4;
       } while (iVar2 < buffer_size);
     }
-    DAT_10009f40 = 0;
+    buffer_initialized_flag = 0;
   }
                     // WARNING: Bad instruction - Truncating control flow here
   halt_baddata();
