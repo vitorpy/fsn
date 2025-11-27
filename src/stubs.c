@@ -490,6 +490,174 @@ void gl_button_handler(Widget w, XtPointer client_data, XEvent *event, Boolean *
 #include <Xm/RowColumn.h>
 #include <Xm/CascadeB.h>
 #include <Xm/MainW.h>
+#include <Xm/PushB.h>
+
+/*-----------------------------------------------------------------------------
+ * create_fsn_menus - Populate menu bar with FSN menus
+ *
+ * Phase 17: Motif Menu Restoration
+ * Creates Session, Show, Display, Help pulldown menus
+ *-----------------------------------------------------------------------------*/
+static void create_fsn_menus(Widget menuBar)
+{
+    Widget sessionPane, showPane, displayPane, helpPane;
+    Widget sessionCascade, showCascade, displayCascade, helpCascade;
+    Widget button;
+    Arg args[10];
+    int n;
+    XmString label;
+
+    /*=========================================================================
+     * SESSION MENU
+     *=========================================================================*/
+    sessionPane = XmCreatePulldownMenu(menuBar, "session_pane", NULL, 0);
+
+    /* Rescan */
+    label = XmStringCreateLocalized("Rescan");
+    n = 0;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    button = XmCreatePushButton(sessionPane, "menuRescan", args, n);
+    /* TODO: XtAddCallback(button, XmNactivateCallback, rescanDatabase, NULL); */
+    XtManageChild(button);
+    XmStringFree(label);
+
+    /* Save */
+    label = XmStringCreateLocalized("Save");
+    n = 0;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    button = XmCreatePushButton(sessionPane, "menuSave", args, n);
+    /* TODO: XtAddCallback(button, XmNactivateCallback, dumpDatabaseCB, NULL); */
+    XtManageChild(button);
+    XmStringFree(label);
+
+    /* Quit - FUNCTIONAL */
+    label = XmStringCreateLocalized("Quit");
+    n = 0;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    button = XmCreatePushButton(sessionPane, "menuQuit", args, n);
+    XtAddCallback(button, XmNactivateCallback, quit_application, NULL);
+    XtManageChild(button);
+    XmStringFree(label);
+
+    /* Session cascade button */
+    label = XmStringCreateLocalized("Session");
+    n = 0;
+    XtSetArg(args[n], XmNsubMenuId, sessionPane); n++;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    sessionCascade = XmCreateCascadeButton(menuBar, "Session", args, n);
+    XtManageChild(sessionCascade);
+    XmStringFree(label);
+
+    /*=========================================================================
+     * SHOW MENU
+     *=========================================================================*/
+    showPane = XmCreatePulldownMenu(menuBar, "show_pane", NULL, 0);
+
+    /* Overview */
+    label = XmStringCreateLocalized("Overview");
+    n = 0;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    button = XmCreatePushButton(showPane, "menuOverview", args, n);
+    /* TODO: XtAddCallback(button, XmNactivateCallback, showOverview, NULL); */
+    XtManageChild(button);
+    XmStringFree(label);
+
+    /* Controls */
+    label = XmStringCreateLocalized("Controls");
+    n = 0;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    button = XmCreatePushButton(showPane, "menuControls", args, n);
+    /* TODO: XtAddCallback(button, XmNactivateCallback, show_controls, NULL); */
+    XtManageChild(button);
+    XmStringFree(label);
+
+    /* Legend */
+    label = XmStringCreateLocalized("Legend");
+    n = 0;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    button = XmCreatePushButton(showPane, "menuLegend", args, n);
+    /* TODO: XtAddCallback(button, XmNactivateCallback, toggle_legend, NULL); */
+    XtManageChild(button);
+    XmStringFree(label);
+
+    /* Preferences */
+    label = XmStringCreateLocalized("Preferences...");
+    n = 0;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    button = XmCreatePushButton(showPane, "menuPreferences", args, n);
+    /* TODO: XtAddCallback(button, XmNactivateCallback, showPreferencePanel, NULL); */
+    XtManageChild(button);
+    XmStringFree(label);
+
+    /* Show cascade button */
+    label = XmStringCreateLocalized("Show");
+    n = 0;
+    XtSetArg(args[n], XmNsubMenuId, showPane); n++;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    showCascade = XmCreateCascadeButton(menuBar, "Show", args, n);
+    XtManageChild(showCascade);
+    XmStringFree(label);
+
+    /*=========================================================================
+     * DISPLAY MENU
+     *=========================================================================*/
+    displayPane = XmCreatePulldownMenu(menuBar, "display_pane", NULL, 0);
+
+    /* Reset View */
+    label = XmStringCreateLocalized("Reset View");
+    n = 0;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    button = XmCreatePushButton(displayPane, "menuResetView", args, n);
+    /* TODO: XtAddCallback(button, XmNactivateCallback, reset_eye, NULL); */
+    XtManageChild(button);
+    XmStringFree(label);
+
+    /* Display cascade button */
+    label = XmStringCreateLocalized("Display");
+    n = 0;
+    XtSetArg(args[n], XmNsubMenuId, displayPane); n++;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    displayCascade = XmCreateCascadeButton(menuBar, "Display", args, n);
+    XtManageChild(displayCascade);
+    XmStringFree(label);
+
+    /*=========================================================================
+     * HELP MENU (right-aligned)
+     *=========================================================================*/
+    helpPane = XmCreatePulldownMenu(menuBar, "help_pane", NULL, 0);
+
+    /* About */
+    label = XmStringCreateLocalized("About FSN...");
+    n = 0;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    button = XmCreatePushButton(helpPane, "menuAbout", args, n);
+    /* TODO: Show about dialog */
+    XtManageChild(button);
+    XmStringFree(label);
+
+    /* Version */
+    label = XmStringCreateLocalized("Version");
+    n = 0;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    button = XmCreatePushButton(helpPane, "menuVersion", args, n);
+    /* TODO: Show version info */
+    XtManageChild(button);
+    XmStringFree(label);
+
+    /* Help cascade button */
+    label = XmStringCreateLocalized("Help");
+    n = 0;
+    XtSetArg(args[n], XmNsubMenuId, helpPane); n++;
+    XtSetArg(args[n], XmNlabelString, label); n++;
+    helpCascade = XmCreateCascadeButton(menuBar, "Help", args, n);
+    XtManageChild(helpCascade);
+    XmStringFree(label);
+
+    /* Set Help menu to be right-aligned (Motif convention) */
+    XtVaSetValues(menuBar, XmNmenuHelpWidget, helpCascade, NULL);
+
+    fprintf(stderr, "create_fsn_menus: Created Session, Show, Display, Help menus\n");
+}
 
 /*-----------------------------------------------------------------------------
  * get_panel_value - Create menu bar for MainWindow
@@ -505,9 +673,13 @@ Widget get_panel_value(Widget parent) {
 
     /* Create menu bar as child of MainWindow */
     menuBar = XmCreateMenuBar(parent, "menuBar", NULL, 0);
+
+    /* Populate with FSN menus - Phase 17 */
+    create_fsn_menus(menuBar);
+
     XtManageChild(menuBar);
 
-    fprintf(stderr, "get_panel_value: Created menuBar widget\n");
+    fprintf(stderr, "get_panel_value: Created menuBar widget with menus\n");
     return menuBar;
 }
 
