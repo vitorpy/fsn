@@ -491,172 +491,190 @@ void gl_button_handler(Widget w, XtPointer client_data, XEvent *event, Boolean *
 #include <Xm/CascadeB.h>
 #include <Xm/MainW.h>
 #include <Xm/PushB.h>
+#include <Xm/Scale.h>
+#include <Xm/Separator.h>
+#include <Xm/TextF.h>
+#include <Xm/SelectioB.h>
+#include <Xm/List.h>
+#include <Xm/Frame.h>
 
 /*-----------------------------------------------------------------------------
  * create_fsn_menus - Populate menu bar with FSN menus
  *
  * Phase 17: Motif Menu Restoration
- * Creates Session, Show, Display, Help pulldown menus
+ * Widget names match resources/Fsn for automatic label configuration
  *-----------------------------------------------------------------------------*/
 static void create_fsn_menus(Widget menuBar)
 {
-    Widget sessionPane, showPane, displayPane, helpPane;
-    Widget sessionCascade, showCascade, displayCascade, helpCascade;
-    Widget button;
-    Arg args[10];
+    Widget pane, cascade, button;
+    Arg args[4];
     int n;
-    XmString label;
 
     /*=========================================================================
-     * SESSION MENU
+     * SESSION MENU - labels from *menuSession.*, *menuRescan.*, etc.
      *=========================================================================*/
-    sessionPane = XmCreatePulldownMenu(menuBar, "session_pane", NULL, 0);
+    pane = XmCreatePulldownMenu(menuBar, "session_pane", NULL, 0);
 
-    /* Rescan */
-    label = XmStringCreateLocalized("Rescan");
-    n = 0;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    button = XmCreatePushButton(sessionPane, "menuRescan", args, n);
-    /* TODO: XtAddCallback(button, XmNactivateCallback, rescanDatabase, NULL); */
+    button = XmCreatePushButton(pane, "menuSplit", NULL, 0);
     XtManageChild(button);
-    XmStringFree(label);
 
-    /* Save */
-    label = XmStringCreateLocalized("Save");
-    n = 0;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    button = XmCreatePushButton(sessionPane, "menuSave", args, n);
-    /* TODO: XtAddCallback(button, XmNactivateCallback, dumpDatabaseCB, NULL); */
+    button = XmCreatePushButton(pane, "menuRescan", NULL, 0);
     XtManageChild(button);
-    XmStringFree(label);
 
-    /* Quit - FUNCTIONAL */
-    label = XmStringCreateLocalized("Quit");
-    n = 0;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    button = XmCreatePushButton(sessionPane, "menuQuit", args, n);
+    button = XmCreatePushButton(pane, "menuSave", NULL, 0);
+    XtManageChild(button);
+
+    button = XmCreatePushButton(pane, "menuQuit", NULL, 0);
     XtAddCallback(button, XmNactivateCallback, quit_application, NULL);
     XtManageChild(button);
-    XmStringFree(label);
 
-    /* Session cascade button */
-    label = XmStringCreateLocalized("Session");
     n = 0;
-    XtSetArg(args[n], XmNsubMenuId, sessionPane); n++;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    sessionCascade = XmCreateCascadeButton(menuBar, "Session", args, n);
-    XtManageChild(sessionCascade);
-    XmStringFree(label);
+    XtSetArg(args[n], XmNsubMenuId, pane); n++;
+    cascade = XmCreateCascadeButton(menuBar, "menuSession", args, n);
+    XtManageChild(cascade);
 
     /*=========================================================================
-     * SHOW MENU
+     * SHOW MENU - labels from *menuShow.*, *menuOverview.*, etc.
      *=========================================================================*/
-    showPane = XmCreatePulldownMenu(menuBar, "show_pane", NULL, 0);
+    pane = XmCreatePulldownMenu(menuBar, "show_pane", NULL, 0);
 
-    /* Overview */
-    label = XmStringCreateLocalized("Overview");
-    n = 0;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    button = XmCreatePushButton(showPane, "menuOverview", args, n);
-    /* TODO: XtAddCallback(button, XmNactivateCallback, showOverview, NULL); */
+    button = XmCreatePushButton(pane, "menuOverview", NULL, 0);
     XtManageChild(button);
-    XmStringFree(label);
 
-    /* Controls */
-    label = XmStringCreateLocalized("Controls");
-    n = 0;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    button = XmCreatePushButton(showPane, "menuControls", args, n);
-    /* TODO: XtAddCallback(button, XmNactivateCallback, show_controls, NULL); */
+    button = XmCreatePushButton(pane, "menuControls", NULL, 0);
     XtManageChild(button);
-    XmStringFree(label);
 
-    /* Legend */
-    label = XmStringCreateLocalized("Legend");
-    n = 0;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    button = XmCreatePushButton(showPane, "menuLegend", args, n);
-    /* TODO: XtAddCallback(button, XmNactivateCallback, toggle_legend, NULL); */
+    button = XmCreatePushButton(pane, "menuLegend", NULL, 0);
     XtManageChild(button);
-    XmStringFree(label);
 
-    /* Preferences */
-    label = XmStringCreateLocalized("Preferences...");
-    n = 0;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    button = XmCreatePushButton(showPane, "menuPreferences", args, n);
-    /* TODO: XtAddCallback(button, XmNactivateCallback, showPreferencePanel, NULL); */
+    button = XmCreatePushButton(pane, "menuPreferences", NULL, 0);
     XtManageChild(button);
-    XmStringFree(label);
 
-    /* Show cascade button */
-    label = XmStringCreateLocalized("Show");
     n = 0;
-    XtSetArg(args[n], XmNsubMenuId, showPane); n++;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    showCascade = XmCreateCascadeButton(menuBar, "Show", args, n);
-    XtManageChild(showCascade);
-    XmStringFree(label);
+    XtSetArg(args[n], XmNsubMenuId, pane); n++;
+    cascade = XmCreateCascadeButton(menuBar, "menuShow", args, n);
+    XtManageChild(cascade);
 
     /*=========================================================================
-     * DISPLAY MENU
+     * DISPLAY MENU - labels from *menuDisplay.*, *menuHeight.*, etc.
      *=========================================================================*/
-    displayPane = XmCreatePulldownMenu(menuBar, "display_pane", NULL, 0);
+    pane = XmCreatePulldownMenu(menuBar, "display_pane", NULL, 0);
 
-    /* Reset View */
-    label = XmStringCreateLocalized("Reset View");
-    n = 0;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    button = XmCreatePushButton(displayPane, "menuResetView", args, n);
-    /* TODO: XtAddCallback(button, XmNactivateCallback, reset_eye, NULL); */
-    XtManageChild(button);
-    XmStringFree(label);
+    /* Height submenu */
+    {
+        Widget heightPane, heightCascade;
+        heightPane = XmCreatePulldownMenu(pane, "height_pane", NULL, 0);
 
-    /* Display cascade button */
-    label = XmStringCreateLocalized("Display");
+        button = XmCreatePushButton(heightPane, "menuHeightNone", NULL, 0);
+        XtManageChild(button);
+
+        button = XmCreatePushButton(heightPane, "menuHeightLinear", NULL, 0);
+        XtManageChild(button);
+
+        button = XmCreatePushButton(heightPane, "menuHeightExaggerated", NULL, 0);
+        XtManageChild(button);
+
+        n = 0;
+        XtSetArg(args[n], XmNsubMenuId, heightPane); n++;
+        heightCascade = XmCreateCascadeButton(pane, "menuHeight", args, n);
+        XtManageChild(heightCascade);
+    }
+
     n = 0;
-    XtSetArg(args[n], XmNsubMenuId, displayPane); n++;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    displayCascade = XmCreateCascadeButton(menuBar, "Display", args, n);
-    XtManageChild(displayCascade);
-    XmStringFree(label);
+    XtSetArg(args[n], XmNsubMenuId, pane); n++;
+    cascade = XmCreateCascadeButton(menuBar, "menuDisplay", args, n);
+    XtManageChild(cascade);
 
     /*=========================================================================
-     * HELP MENU (right-aligned)
+     * DIRECTORY MENU - labels from *menuDirectory.*, *menuMonitor.*, etc.
      *=========================================================================*/
-    helpPane = XmCreatePulldownMenu(menuBar, "help_pane", NULL, 0);
+    pane = XmCreatePulldownMenu(menuBar, "directory_pane", NULL, 0);
 
-    /* About */
-    label = XmStringCreateLocalized("About FSN...");
-    n = 0;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    button = XmCreatePushButton(helpPane, "menuAbout", args, n);
-    /* TODO: Show about dialog */
+    /* Directory Height submenu */
+    {
+        Widget dirHeightPane, dirHeightCascade;
+        dirHeightPane = XmCreatePulldownMenu(pane, "dirheight_pane", NULL, 0);
+
+        button = XmCreatePushButton(dirHeightPane, "menuDirectoryFlat", NULL, 0);
+        XtManageChild(button);
+
+        button = XmCreatePushButton(dirHeightPane, "menuDirectoryFilesOnly", NULL, 0);
+        XtManageChild(button);
+
+        button = XmCreatePushButton(dirHeightPane, "menuDirectoryChildren", NULL, 0);
+        XtManageChild(button);
+
+        n = 0;
+        XtSetArg(args[n], XmNsubMenuId, dirHeightPane); n++;
+        dirHeightCascade = XmCreateCascadeButton(pane, "menuDirectoryHeight", args, n);
+        XtManageChild(dirHeightCascade);
+    }
+
+    button = XmCreatePushButton(pane, "menuMonitorDirectory", NULL, 0);
     XtManageChild(button);
-    XmStringFree(label);
 
-    /* Version */
-    label = XmStringCreateLocalized("Version");
-    n = 0;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    button = XmCreatePushButton(helpPane, "menuVersion", args, n);
-    /* TODO: Show version info */
+    button = XmCreatePushButton(pane, "menuMonitorTree", NULL, 0);
     XtManageChild(button);
-    XmStringFree(label);
 
-    /* Help cascade button */
-    label = XmStringCreateLocalized("Help");
+    button = XmCreatePushButton(pane, "menuStopMonitorTree", NULL, 0);
+    XtManageChild(button);
+
+    button = XmCreatePushButton(pane, "menuRescanSubtree", NULL, 0);
+    XtManageChild(button);
+
+    button = XmCreatePushButton(pane, "menuPruneDirectory", NULL, 0);
+    XtManageChild(button);
+
     n = 0;
-    XtSetArg(args[n], XmNsubMenuId, helpPane); n++;
-    XtSetArg(args[n], XmNlabelString, label); n++;
-    helpCascade = XmCreateCascadeButton(menuBar, "Help", args, n);
-    XtManageChild(helpCascade);
-    XmStringFree(label);
+    XtSetArg(args[n], XmNsubMenuId, pane); n++;
+    cascade = XmCreateCascadeButton(menuBar, "menuDirectory", args, n);
+    XtManageChild(cascade);
+
+    /*=========================================================================
+     * FILE MENU - labels from *menuFile.*, *menuOpenFile.*, etc.
+     *=========================================================================*/
+    pane = XmCreatePulldownMenu(menuBar, "filePane", NULL, 0);
+
+    button = XmCreatePushButton(pane, "menuOpenFile", NULL, 0);
+    XtManageChild(button);
+
+    button = XmCreatePushButton(pane, "menuPrintFile", NULL, 0);
+    XtManageChild(button);
+
+    button = XmCreatePushButton(pane, "menuDeleteFile", NULL, 0);
+    XtManageChild(button);
+
+    n = 0;
+    XtSetArg(args[n], XmNsubMenuId, pane); n++;
+    cascade = XmCreateCascadeButton(menuBar, "menuFile", args, n);
+    XtManageChild(cascade);
+
+    /*=========================================================================
+     * HELP MENU (right-aligned) - labels from *helpButton.*, etc.
+     *=========================================================================*/
+    pane = XmCreatePulldownMenu(menuBar, "help_pane", NULL, 0);
+
+    button = XmCreatePushButton(pane, "window_help", NULL, 0);
+    XtManageChild(button);
+
+    button = XmCreatePushButton(pane, "context_help", NULL, 0);
+    XtManageChild(button);
+
+    button = XmCreatePushButton(pane, "mode_help", NULL, 0);
+    XtManageChild(button);
+
+    button = XmCreatePushButton(pane, "version_help", NULL, 0);
+    XtManageChild(button);
+
+    n = 0;
+    XtSetArg(args[n], XmNsubMenuId, pane); n++;
+    cascade = XmCreateCascadeButton(menuBar, "helpButton", args, n);
+    XtManageChild(cascade);
 
     /* Set Help menu to be right-aligned (Motif convention) */
-    XtVaSetValues(menuBar, XmNmenuHelpWidget, helpCascade, NULL);
+    XtVaSetValues(menuBar, XmNmenuHelpWidget, cascade, NULL);
 
-    fprintf(stderr, "create_fsn_menus: Created Session, Show, Display, Help menus\n");
+    fprintf(stderr, "create_fsn_menus: Created all menus (labels from resources/Fsn)\n");
 }
 
 /*-----------------------------------------------------------------------------
@@ -813,21 +831,271 @@ void setup_context_widgets(void) {
 }
 
 /*-----------------------------------------------------------------------------
- * create_panel_component - Create control panel with row column layout
+ * Control Panel Callbacks (Phase 17)
+ *-----------------------------------------------------------------------------*/
+
+/* reset_eye - Reset camera to initial position */
+void reset_eye(Widget w, XtPointer client, XtPointer call) {
+    (void)w; (void)client; (void)call;
+    /* Reset camera to initial position from resources */
+    *(float *)(curcontext + 0x00) = 10.0f;    /* camera_x */
+    *(float *)(curcontext + 0x04) = -10.0f;   /* camera_y */
+    *(float *)(curcontext + 0x08) = 15.0f;    /* camera_z */
+    *(short *)(curcontext + 0x0c) = 900;      /* rotation_z */
+    *(short *)(curcontext + 0x0e) = 0;        /* rotation_x */
+    calc_h_angle();
+    calc_v_angle();
+    redraw_flag = 1;
+    set_status_message("View reset", 0);
+}
+
+/* go_back - Go back to previous view (stub) */
+static void go_back_callback(Widget w, XtPointer client, XtPointer call) {
+    (void)w; (void)client; (void)call;
+    set_status_message("Go back (not implemented)", 0);
+}
+
+/* birds_eye - Switch to birds eye view */
+static void birds_eye_callback(Widget w, XtPointer client, XtPointer call) {
+    (void)w; (void)client; (void)call;
+    /* Birds eye view: looking straight down from high up */
+    *(float *)(curcontext + 0x00) = 10.0f;    /* camera_x */
+    *(float *)(curcontext + 0x04) = 0.0f;     /* camera_y */
+    *(float *)(curcontext + 0x08) = 100.0f;   /* camera_z (high up) */
+    *(short *)(curcontext + 0x0c) = 0;        /* rotation_z */
+    *(short *)(curcontext + 0x0e) = -900;     /* rotation_x (looking down) */
+    calc_h_angle();
+    calc_v_angle();
+    redraw_flag = 1;
+    set_status_message("Birds eye view", 0);
+}
+
+/* front_view - Switch to front view */
+static void front_view_callback(Widget w, XtPointer client, XtPointer call) {
+    (void)w; (void)client; (void)call;
+    /* Front view: horizontal view from front */
+    *(float *)(curcontext + 0x00) = 10.0f;    /* camera_x */
+    *(float *)(curcontext + 0x04) = -20.0f;   /* camera_y (in front) */
+    *(float *)(curcontext + 0x08) = 5.0f;     /* camera_z */
+    *(short *)(curcontext + 0x0c) = 900;      /* rotation_z (facing blocks) */
+    *(short *)(curcontext + 0x0e) = 0;        /* rotation_x (horizontal) */
+    calc_h_angle();
+    calc_v_angle();
+    redraw_flag = 1;
+    set_status_message("Front view", 0);
+}
+
+/* tilt_scale_callback - Handle tilt slider changes */
+static void tilt_scale_callback(Widget w, XtPointer client, XtPointer call) {
+    XmScaleCallbackStruct *cbs = (XmScaleCallbackStruct *)call;
+    (void)w; (void)client;
+    *(short *)(curcontext + 0x0e) = (short)cbs->value;  /* rotation_x */
+    calc_v_angle();
+    redraw_flag = 1;
+}
+
+/* height_scale_callback - Handle height slider changes */
+static void height_scale_callback(Widget w, XtPointer client, XtPointer call) {
+    XmScaleCallbackStruct *cbs = (XmScaleCallbackStruct *)call;
+    (void)w; (void)client;
+    *(float *)(curcontext + 0x08) = (float)cbs->value;  /* camera_z */
+    redraw_flag = 1;
+}
+
+/* mark_callback - Add current selection to marks (stub) */
+static void mark_callback(Widget w, XtPointer client, XtPointer call) {
+    (void)w; (void)client; (void)call;
+    set_status_message("Mark (not implemented)", 0);
+}
+
+/*-----------------------------------------------------------------------------
+ * create_panel_component - Create left control panel with navigation and search
+ *
+ * Phase 17: Full left panel implementation matching original FSN
  * Returns: Widget - the created row column widget
  *-----------------------------------------------------------------------------*/
 Widget create_panel_component(Widget parent, Arg *args, int nargs) {
-    Widget rowColumn;
+    Widget controls, button, sep, scaleFrame, scaleRC;
+    Widget searchFrame, searchRC, searchRow;
+    Widget marksFrame, marksRC;
+    Arg localArgs[10];
+    int n;
+    (void)args; (void)nargs;
 
     if (!parent) {
         fprintf(stderr, "create_panel_component: parent is NULL\n");
         return NULL;
     }
 
-    /* Create row column container for control panel with provided args */
-    rowColumn = XtCreateManagedWidget("controls", xmRowColumnWidgetClass,
-                                       parent, args, nargs);
+    /* Create main controls RowColumn (vertical orientation) */
+    n = 0;
+    XtSetArg(localArgs[n], XmNorientation, XmVERTICAL); n++;
+    XtSetArg(localArgs[n], XmNentryAlignment, XmALIGNMENT_CENTER); n++;
+    XtSetArg(localArgs[n], XmNpacking, XmPACK_TIGHT); n++;
+    controls = XtCreateManagedWidget("controls", xmRowColumnWidgetClass,
+                                      parent, localArgs, n);
 
-    fprintf(stderr, "create_panel_component: Created controls widget\n");
-    return rowColumn;
+    /*=========================================================================
+     * Navigation Buttons
+     *=========================================================================*/
+
+    /* Reset button */
+    button = XmCreatePushButton(controls, "reset", NULL, 0);
+    XtAddCallback(button, XmNactivateCallback, reset_eye, NULL);
+    XtManageChild(button);
+
+    /* Go back button */
+    button = XmCreatePushButton(controls, "back", NULL, 0);
+    XtAddCallback(button, XmNactivateCallback, go_back_callback, NULL);
+    XtManageChild(button);
+
+    /* Birds eye button */
+    button = XmCreatePushButton(controls, "top", NULL, 0);
+    XtAddCallback(button, XmNactivateCallback, birds_eye_callback, NULL);
+    XtManageChild(button);
+
+    /* Front view button */
+    button = XmCreatePushButton(controls, "front", NULL, 0);
+    XtAddCallback(button, XmNactivateCallback, front_view_callback, NULL);
+    XtManageChild(button);
+
+    /* Separator */
+    sep = XmCreateSeparator(controls, "control_sep", NULL, 0);
+    XtManageChild(sep);
+
+    /*=========================================================================
+     * Tilt and Height Scales
+     *=========================================================================*/
+
+    /* Scales container (horizontal) */
+    n = 0;
+    XtSetArg(localArgs[n], XmNorientation, XmHORIZONTAL); n++;
+    scaleRC = XtCreateManagedWidget("control_scales", xmRowColumnWidgetClass,
+                                     controls, localArgs, n);
+
+    /* Tilt scale (vertical, -900 to 0) */
+    n = 0;
+    XtSetArg(localArgs[n], XmNorientation, XmVERTICAL); n++;
+    XtSetArg(localArgs[n], XmNminimum, -900); n++;
+    XtSetArg(localArgs[n], XmNmaximum, 0); n++;
+    XtSetArg(localArgs[n], XmNvalue, 0); n++;
+    XtSetArg(localArgs[n], XmNshowValue, True); n++;
+    XtSetArg(localArgs[n], XmNprocessingDirection, XmMAX_ON_BOTTOM); n++;
+    vertical_scale_widget = XmCreateScale(scaleRC, "v_scale", localArgs, n);
+    XtAddCallback(vertical_scale_widget, XmNvalueChangedCallback, tilt_scale_callback, NULL);
+    XtAddCallback(vertical_scale_widget, XmNdragCallback, tilt_scale_callback, NULL);
+    XtManageChild(vertical_scale_widget);
+
+    /* Height scale (vertical, 1 to 120) */
+    n = 0;
+    XtSetArg(localArgs[n], XmNorientation, XmVERTICAL); n++;
+    XtSetArg(localArgs[n], XmNminimum, 1); n++;
+    XtSetArg(localArgs[n], XmNmaximum, 120); n++;
+    XtSetArg(localArgs[n], XmNvalue, 15); n++;
+    XtSetArg(localArgs[n], XmNshowValue, True); n++;
+    zoom_scale_widget = XmCreateScale(scaleRC, "z_scale", localArgs, n);
+    XtAddCallback(zoom_scale_widget, XmNvalueChangedCallback, height_scale_callback, NULL);
+    XtAddCallback(zoom_scale_widget, XmNdragCallback, height_scale_callback, NULL);
+    XtManageChild(zoom_scale_widget);
+
+    /* Separator */
+    sep = XmCreateSeparator(controls, "control_sep", NULL, 0);
+    XtManageChild(sep);
+
+    /*=========================================================================
+     * Search Panel (simplified)
+     *=========================================================================*/
+
+    /* Search frame */
+    searchFrame = XmCreateFrame(controls, "searchFrame", NULL, 0);
+    XtManageChild(searchFrame);
+
+    n = 0;
+    XtSetArg(localArgs[n], XmNorientation, XmVERTICAL); n++;
+    searchRC = XtCreateManagedWidget("searchRC", xmRowColumnWidgetClass,
+                                      searchFrame, localArgs, n);
+
+    /* Search label */
+    XtCreateManagedWidget("Search", xmLabelWidgetClass, searchRC, NULL, 0);
+
+    /* Name row */
+    n = 0;
+    XtSetArg(localArgs[n], XmNorientation, XmHORIZONTAL); n++;
+    searchRow = XtCreateManagedWidget("nameRow", xmRowColumnWidgetClass, searchRC, localArgs, n);
+    XtCreateManagedWidget("name", xmLabelWidgetClass, searchRow, NULL, 0);
+    search_name_field = XmCreateTextField(searchRow, "nametext", NULL, 0);
+    XtManageChild(search_name_field);
+
+    /* Size row */
+    n = 0;
+    XtSetArg(localArgs[n], XmNorientation, XmHORIZONTAL); n++;
+    searchRow = XtCreateManagedWidget("sizeRow", xmRowColumnWidgetClass, searchRC, localArgs, n);
+    XtCreateManagedWidget("size", xmLabelWidgetClass, searchRow, NULL, 0);
+    search_size_comp_button = XmCreatePushButton(searchRow, ">", NULL, 0);
+    XtManageChild(search_size_comp_button);
+    search_size_field = XmCreateTextField(searchRow, "sizetext", NULL, 0);
+    XtManageChild(search_size_field);
+
+    /* Age row */
+    n = 0;
+    XtSetArg(localArgs[n], XmNorientation, XmHORIZONTAL); n++;
+    searchRow = XtCreateManagedWidget("ageRow", xmRowColumnWidgetClass, searchRC, localArgs, n);
+    XtCreateManagedWidget("age", xmLabelWidgetClass, searchRow, NULL, 0);
+    search_age_comp_button = XmCreatePushButton(searchRow, ">", NULL, 0);
+    XtManageChild(search_age_comp_button);
+    search_age_field = XmCreateTextField(searchRow, "agetext", NULL, 0);
+    XtManageChild(search_age_field);
+
+    /* OK / Apply / Cancel buttons */
+    n = 0;
+    XtSetArg(localArgs[n], XmNorientation, XmHORIZONTAL); n++;
+    searchRow = XtCreateManagedWidget("searchButtons", xmRowColumnWidgetClass, searchRC, localArgs, n);
+    XtCreateManagedWidget("OK", xmPushButtonWidgetClass, searchRow, NULL, 0);
+    XtCreateManagedWidget("Apply", xmPushButtonWidgetClass, searchRow, NULL, 0);
+    XtCreateManagedWidget("Cancel", xmPushButtonWidgetClass, searchRow, NULL, 0);
+
+    /* Separator */
+    sep = XmCreateSeparator(controls, "control_sep", NULL, 0);
+    XtManageChild(sep);
+
+    /*=========================================================================
+     * Marks Panel (simplified)
+     *=========================================================================*/
+
+    /* Marks frame */
+    marksFrame = XmCreateFrame(controls, "marksFrame", NULL, 0);
+    XtManageChild(marksFrame);
+
+    n = 0;
+    XtSetArg(localArgs[n], XmNorientation, XmVERTICAL); n++;
+    marksRC = XtCreateManagedWidget("marksRC", xmRowColumnWidgetClass,
+                                     marksFrame, localArgs, n);
+
+    /* Marks label */
+    XtCreateManagedWidget("Marks", xmLabelWidgetClass, marksRC, NULL, 0);
+
+    /* Marks list (simple placeholder) */
+    {
+        Widget markList;
+        n = 0;
+        XtSetArg(localArgs[n], XmNvisibleItemCount, 4); n++;
+        markList = XmCreateScrolledList(marksRC, "markList", localArgs, n);
+        XtManageChild(markList);
+        /* Note: mark_selector_list is int in original code, can't store Widget safely */
+    }
+
+    /* go to / delete buttons */
+    n = 0;
+    XtSetArg(localArgs[n], XmNorientation, XmHORIZONTAL); n++;
+    searchRow = XtCreateManagedWidget("markButtons", xmRowColumnWidgetClass, marksRC, localArgs, n);
+    XtCreateManagedWidget("go to", xmPushButtonWidgetClass, searchRow, NULL, 0);
+    XtCreateManagedWidget("delete", xmPushButtonWidgetClass, searchRow, NULL, 0);
+
+    /* Mark button */
+    button = XmCreatePushButton(controls, "mark", NULL, 0);
+    XtAddCallback(button, XmNactivateCallback, mark_callback, NULL);
+    XtManageChild(button);
+
+    fprintf(stderr, "create_panel_component: Created full control panel\n");
+    return controls;
 }
