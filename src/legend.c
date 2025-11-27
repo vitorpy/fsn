@@ -1,91 +1,104 @@
 /**
- * legend.c - Extracted from fsn.c using tree-sitter
+ * legend.c - File age legend bar
  *
- * AS-IS extraction preserving all decompilation artifacts.
+ * Phase 17: Clean reimplementation for modern Motif
+ * Widget names match resources/Fsn for labels and colors
  */
 
 #include "legend.h"
 #include "fsn_types.h"
 #include "fsn_state.h"
+#include <Xm/RowColumn.h>
+#include <Xm/Label.h>
+#include <Xm/Separator.h>
+#include <stdio.h>
 
+/* File age colors from resources/Fsn */
+static const unsigned long fileColors[7] = {
+    0xff0000,  /* color0: 1 wk - red */
+    0xff8400,  /* color1: 2 wk - orange */
+    0xfffc00,  /* color2: 1 mo - yellow */
+    0x20a098,  /* color3: 3 mo - teal */
+    0x0047ff,  /* color4: 6 mo - blue */
+    0xa800ff,  /* color5: 1 yr - purple */
+    0x9a2667   /* color6: > 1 yr - magenta */
+};
+
+/**
+ * toggle_legend - Show/hide the file age legend bar
+ *
+ * Creates legend widget on first call, then toggles visibility.
+ * Widget names (colorslabel, color0-color6, monitorLabel) get
+ * labels from resources/Fsn automatically.
+ */
 void toggle_legend(void)
-
 {
-  undefined4 uVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
-  char acStack_68 [24];
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  int local_2c;
-  
-  legendShowing = 1;
-  if (legend_widget == 0) {
-    local_48 = 0xe3f40f2;
-    local_44 = panel_vsep_widget;
-    local_50 = 0xe3f40cb;
-    local_40 = 0xe3f46dd;
-    local_38 = 0xe3f3701;
-    local_4c = 3;
-    local_3c = 1;
-    local_34 = 1;
-    legend_widget = XmCreateRowColumn(panel_widget,"legend",&local_50,4);
-    install_help_callback(legend_widget,&legendHelp);
-    uVar1 = XmCreateLabel(legend_widget,"colorslabel",&local_50,0);
-    XtManageChild(uVar1);
-    iVar2 = 0;
-    puVar3 = &labelColors;
-    puVar4 = &legendLabel;
-    do {
-      sprintf(acStack_68,"color%d",iVar2);
-      local_4c = puVar3[1];
-      local_44 = *puVar3;
-      local_50 = 0xf6615f6;
-      local_48 = 0xf661554;
-      uVar1 = XmCreateLabel(legend_widget,acStack_68,&local_50,2);
-      iVar2 = iVar2 + 1;
-      puVar3 = puVar3 + 4;
-      *puVar4 = uVar1;
-      puVar4 = puVar4 + 1;
-    } while (iVar2 != 7);
-    XtManageChildren(&legendLabel,7);
-    uVar1 = XmCreateSeparator(legend_widget,"monitorSep",&local_50,0);
-    XtManageChild(uVar1);
-    local_4c = _legend_separator_data;
-    local_44 = monitorLabelColor;
-    local_50 = 0xf6615f6;
-    local_48 = 0xf661554;
-    monitorLabelWidget = XmCreateLabel(legend_widget,"monitorLabel",&local_50,2);
+    Widget label;
+    Arg args[4];
+    int n, i;
+    char widgetName[16];
+
+    /* Toggle visibility if already created */
+    if (legend_widget != NULL) {
+        if (legendShowing) {
+            XtUnmanageChild(legend_widget);
+            if (legend_separator_widget)
+                XtUnmanageChild(legend_separator_widget);
+            legendShowing = 0;
+        } else {
+            XtManageChild(legend_widget);
+            if (legend_separator_widget)
+                XtManageChild(legend_separator_widget);
+            legendShowing = 1;
+        }
+        return;
+    }
+
+    /* First call - create the legend bar */
+    legendShowing = 1;
+
+    /* Create horizontal RowColumn for legend */
+    n = 0;
+    XtSetArg(args[n], XmNorientation, XmHORIZONTAL); n++;
+    XtSetArg(args[n], XmNpacking, XmPACK_TIGHT); n++;
+    legend_widget = XmCreateRowColumn(panel_widget, "legend", args, n);
+
+    /* "ages:" label */
+    label = XmCreateLabel(legend_widget, "colorslabel", NULL, 0);
+    XtManageChild(label);
+
+    /* Color labels (color0 through color6) - labels from resources */
+    for (i = 0; i < 7; i++) {
+        Pixel bg;
+        sprintf(widgetName, "color%d", i);
+
+        /* Convert RGB to Pixel (simplified - assumes TrueColor) */
+        bg = fileColors[i];
+
+        n = 0;
+        XtSetArg(args[n], XmNbackground, bg); n++;
+        label = XmCreateLabel(legend_widget, widgetName, args, n);
+        XtManageChild(label);
+    }
+
+    /* Separator before monitor label */
+    label = XmCreateSeparator(legend_widget, "monitorSep", NULL, 0);
+    XtManageChild(label);
+
+    /* Monitor label */
+    n = 0;
+    XtSetArg(args[n], XmNbackground, 0xc67171); n++;  /* dirMonColor */
+    monitorLabelWidget = XmCreateLabel(legend_widget, "monitorLabel", args, n);
     XtManageChild(monitorLabelWidget);
-    local_2c = legend_widget;
-    local_50 = 0xe3f40cb;
-    local_44 = panel_vsep_widget;
-    local_48 = 0xe3f40f2;
-    local_40 = 0xe3f46dd;
-    local_38 = 0xe3f3701;
-    local_30 = 0xe3f3753;
-    local_4c = 3;
-    local_3c = 1;
-    local_34 = 3;
-    legend_separator_widget = XmCreateSeparator(panel_widget,"legendSep",&local_50,5);
-  }
-  XtManageChild(legend_widget);
-  XtManageChild(legend_separator_widget);
-  local_44 = legend_separator_widget;
-  local_50 = 0xe3f3701;
-  local_48 = 0xe3f3753;
-  local_4c = 3;
-  XtSetValues(pane_form_widget,&local_50,2);
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+
+    /* Create separator between legend and main area */
+    legend_separator_widget = XmCreateSeparator(panel_widget, "legendSep", NULL, 0);
+    XtManageChild(legend_separator_widget);
+
+    /* Show the legend */
+    XtManageChild(legend_widget);
+
+    fprintf(stderr, "toggle_legend: Created legend bar\n");
 }
 
 void draw_legend_color_box(undefined4 *param_1,int param_2,uint param_3)
