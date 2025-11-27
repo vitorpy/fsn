@@ -20,6 +20,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -46,7 +47,7 @@ static int fsn_picking = 0;
 static float fsn_pick_matrix[16];
 static int fsn_viewport[4];
 
-/* Matrix mode state */
+/* Matrix mode state - must be updated via mmode() */
 static int fsn_matrix_mode = MSINGLE;
 
 /* Max Z value for depth calculations */
@@ -130,6 +131,29 @@ static void fsn_load_proj_base(void)
         glLoadMatrixf(fsn_pick_matrix);
 }
 
+/* GL: mmode - sets the current matrix mode (from irix-igl) */
+void mmode(short mode)
+{
+    static int debug_count = 0;
+
+    if (mode != MSINGLE && mode != MVIEWING && mode != MPROJECTION && mode != MTEXTURE)
+        return;
+
+    fsn_matrix_mode = mode;
+    fsn_set_matrix_mode();
+
+    if (debug_count++ < 10) {
+        const char *names[] = {"MSINGLE", "MPROJECTION", "MVIEWING", "MTEXTURE"};
+        fprintf(stderr, "mmode(%s) -> GL mode switched\n", names[mode]);
+    }
+}
+
+/* GL: getmmode - returns the current matrix mode */
+short getmmode(void)
+{
+    return fsn_matrix_mode;
+}
+
 void pushmatrix(void)
 {
     glPushMatrix();
@@ -183,7 +207,19 @@ void _scale3(Coord x, Coord y, Coord z)
 
 void perspective(Angle fovy, float aspect, Coord near_, Coord far_)
 {
+    static int debug_count = 0;
+    GLint current_mode;
+
     if (fovy < 2) return;
+
+    if (debug_count++ < 5) {
+        glGetIntegerv(GL_MATRIX_MODE, &current_mode);
+        fprintf(stderr, "perspective(): fsn_mode=%d GL_MODE=%s fovy=%d\n",
+                fsn_matrix_mode,
+                current_mode == GL_PROJECTION ? "PROJECTION" :
+                current_mode == GL_MODELVIEW ? "MODELVIEW" : "OTHER",
+                fovy);
+    }
 
     if (fsn_matrix_mode == MSINGLE || fsn_matrix_mode == MPROJECTION) {
         fsn_load_proj_base();

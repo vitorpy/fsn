@@ -8,6 +8,9 @@
  */
 
 #include "drawing.h"
+#include "draw_tree.h"
+#include "block_render.h"
+#include "box_geometry.h"
 #include "window.h"
 #include "warp.h"
 #include "fsn_types.h"
@@ -16,12 +19,13 @@
 #include <sys/time.h>
 #include <math.h>
 #include <stdio.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 
 /* Forward declarations for functions we haven't extracted yet */
 static void update_camera_state(void);
 static void update_visibility(void);
 static void setup_zoom_context(void);
-static void render_scene_content(int mode);
 static void finalize_frame(void);
 static void update_frame_timing(void);
 
@@ -29,13 +33,187 @@ static void update_frame_timing(void);
 static void update_camera_state(void) { /* TODO: FUN_004294cc */ }
 static void update_visibility(void) { /* TODO: FUN_0040bbe0 */ }
 static void setup_zoom_context(void) { /* TODO: FUN_0040ca58 */ }
-static void render_scene_content(int mode) { /* TODO: FUN_0042510c */ }
 static void finalize_frame(void) { /* TODO: FUN_00420b70 */ }
 static void update_frame_timing(void) { /* TODO: FUN_0040d804 */ }
 
-/* Zoom parameters - need to add to fsn_state.c */
-static float zoom_power_base = 1.02f;
-static float zoom_power_divisor = 100.0f;
+/**
+ * draw_directories - Draw the ground plane and sky gradient
+ *
+ * Extracted from fsn2.c line 62810 (clean, no halt_baddata).
+ * Draws the iconic FSN landscape using Gouraud shading.
+ *
+ * param_1: char mode flag (0 = draw ground plane, non-0 = skip)
+ */
+static void draw_directories(char param_1)
+{
+    float fVar1;
+    double dVar2;
+    float vertex[3];  /* x, y, z for v3f */
+    static int call_count = 0;
+
+    draw_count_1 = 0;
+    draw_count_2 = 0;
+
+    /* Debug output (first few calls) */
+    if (call_count++ < 5) {
+        int zoom_mode = *(int *)(curcontext + 0x3c);
+        fprintf(stderr, "draw_directories: call %d, grid_flag=%d, zoom_mode=%d, topdir=%p\n",
+                call_count, (int)grid_display_flag, zoom_mode, (void*)topdir);
+    }
+
+    /* Only draw when not in zoom mode */
+    if (*(int *)(curcontext + 0x3c) == 0) {
+        /* Draw test ground plane even without topdir */
+        if (topdir == NULL && call_count <= 3) {
+            fprintf(stderr, "  topdir is NULL - drawing test ground\n");
+            /* Simple green ground plane */
+            cpack(0x228822);  /* Dark green */
+            bgnpolygon();
+            vertex[0] = -50.0f; vertex[1] = -50.0f; vertex[2] = -0.5f;
+            v3f(vertex);
+            vertex[0] = 50.0f; vertex[1] = -50.0f; vertex[2] = -0.5f;
+            v3f(vertex);
+            vertex[0] = 50.0f; vertex[1] = 50.0f; vertex[2] = -0.5f;
+            v3f(vertex);
+            vertex[0] = -50.0f; vertex[1] = 50.0f; vertex[2] = -0.5f;
+            v3f(vertex);
+            endpolygon();
+
+            /* Simple sky gradient - light blue quad high up */
+            cpack(0xffd587);  /* Light blue (BGR) */
+            bgnpolygon();
+            vertex[0] = -100.0f; vertex[1] = 20.0f; vertex[2] = 50.0f;
+            v3f(vertex);
+            vertex[0] = 100.0f; vertex[1] = 20.0f; vertex[2] = 50.0f;
+            v3f(vertex);
+            vertex[0] = 100.0f; vertex[1] = 20.0f; vertex[2] = 0.0f;
+            v3f(vertex);
+            vertex[0] = -100.0f; vertex[1] = 20.0f; vertex[2] = 0.0f;
+            v3f(vertex);
+            endpolygon();
+        }
+
+        /* Only draw original ground if topdir exists (we have directory data) */
+        if (topdir != NULL) {
+            if (param_1 == '\0') {
+                /* Calculate ground plane scale based on zoom */
+                float scale_factor = *(float *)(curcontext + 0x34);
+                if (scale_factor < 0.001f) scale_factor = 1.0f;  /* Guard against zero */
+                fVar1 = powf(zoom_power_base,
+                             (*(float *)(curcontext + 4) -
+                              *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
+                              *(float *)(curcontext + 8)) / zoom_power_divisor);
+                if (fVar1 < 0.001f) fVar1 = 1.0f;  /* Guard against zero */
+                fVar1 = (ground_scale_width * scale_factor) / fVar1;
+                dVar2 = (double)fVar1;
+
+                if (call_count <= 3) {
+                    fprintf(stderr, "  ground: width=%.1f gsw=%.1f fVar1=%.1f zpb=%.1f zpd=%.1f\n",
+                            dVar2, ground_scale_width, fVar1, zoom_power_base, zoom_power_divisor);
+                    fprintf(stderr, "  ground: cam_x=%.1f cam_y=%.1f fwd=%.1f bwd=%.1f hz=%.1f\n",
+                            *(float *)curcontext, *(float *)(curcontext + 4),
+                            ground_offset_forward, ground_offset_backward, ground_horizon_z);
+                }
+
+                if (grid_display_flag == '\0') {
+                    /* Flat sky mode - single color */
+                    cpack(sky_color_top);  /* Use proper sky color */
+                    bgnpolygon();
+                    vertex[0] = (float)((double)*(float *)curcontext - dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = -0.5f;
+                    v3f(vertex);
+                    vertex[0] = (float)((double)*(float *)curcontext + dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = -0.5f;
+                    v3f(vertex);
+                    vertex[0] = (float)((double)*(float *)curcontext + dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = *(float *)(curcontext + 8) + 1000.0f;
+                    v3f(vertex);
+                    vertex[0] = (float)((double)*(float *)curcontext - dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = *(float *)(curcontext + 8) + 1000.0f;
+                    v3f(vertex);
+                    endpolygon();
+                }
+                else {
+                    /* Gouraud shaded sky gradient */
+                    shademodel(1);  /* GOURAUD */
+                    bgnpolygon();
+                    cpack(sky_color_top);
+                    vertex[0] = (float)((double)*(float *)curcontext - dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = -0.5f;
+                    v3f(vertex);
+                    vertex[0] = (float)((double)*(float *)curcontext + dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = -0.5f;
+                    v3f(vertex);
+                    cpack(sky_color_bottom);
+                    vertex[0] = (float)((double)*(float *)curcontext + dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = *(float *)(curcontext + 8) + ground_horizon_z;
+                    v3f(vertex);
+                    vertex[0] = (float)((double)*(float *)curcontext - dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = *(float *)(curcontext + 8) + ground_horizon_z;
+                    v3f(vertex);
+                    endpolygon();
+
+                    /* Far sky (solid color) */
+                    shademodel(0);  /* FLAT */
+                    bgnpolygon();
+                    cpack(sky_color_bottom);
+                    vertex[0] = (float)((double)*(float *)curcontext + dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = *(float *)(curcontext + 8) + ground_horizon_z;
+                    v3f(vertex);
+                    vertex[0] = (float)((double)*(float *)curcontext + dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = *(float *)(curcontext + 8) + 1000.0f;
+                    v3f(vertex);
+                    vertex[0] = (float)((double)*(float *)curcontext - dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = *(float *)(curcontext + 8) + 1000.0f;
+                    v3f(vertex);
+                    vertex[0] = (float)((double)*(float *)curcontext - dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = *(float *)(curcontext + 8) + ground_horizon_z;
+                    v3f(vertex);
+                    endpolygon();
+
+                    /* Ground plane with gradient */
+                    shademodel(1);  /* GOURAUD */
+                    bgnpolygon();
+                    cpack(bg_color_grid);  /* far ground color */
+                    vertex[0] = (float)((double)*(float *)curcontext - dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) - ground_offset_backward;
+                    vertex[2] = -0.5f;
+                    v3f(vertex);
+                    vertex[0] = (float)((double)*(float *)curcontext + dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) - ground_offset_backward;
+                    vertex[2] = -0.5f;
+                    v3f(vertex);
+                    cpack(ground_color_near);  /* near ground color */
+                    vertex[0] = (float)((double)*(float *)curcontext + dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = -0.5f;
+                    v3f(vertex);
+                    vertex[0] = (float)((double)*(float *)curcontext - dVar2);
+                    vertex[1] = *(float *)(curcontext + 4) + ground_offset_forward;
+                    vertex[2] = -0.5f;
+                    v3f(vertex);
+                    endpolygon();
+                    shademodel(0);  /* back to FLAT */
+                }
+            }
+            /* Phase 15: Draw actual directory tree content */
+            draw_tree_content(param_1);
+        }
+    }
+    /* TODO: else FUN_00419424 for zoom mode */
+}
 
 /**
  * checkRedrawScene - Check if redraw is needed (ported from original)
@@ -76,9 +254,15 @@ void draw_scene(void)
     float fVar1;
     struct timeval tStack_start;
     struct timeval tStack_end;
+    static int frame_count = 0;
 
     /* Clear redraw flag */
     redraw_flag = 0;
+
+    /* Debug: show frame rendering (first few frames only) */
+    if (frame_count++ < 3) {
+        fprintf(stderr, "draw_scene: frame %d\n", frame_count);
+    }
 
     /* Set GL context */
     set_main_gl_window();
@@ -122,30 +306,102 @@ void draw_scene(void)
         czclear(bg_color_grid, zbuffer_value);
     }
 
-    /* Setup view transformation matrix */
-    pushmatrix();
+    /* Enable depth testing for proper 3D rendering */
+    glDisable(GL_CULL_FACE);  /* Keep culling off - FSN draws both sides */
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
 
-    /* Apply scale from context */
-    scale(1.0f / *(float *)(curcontext + 0x34));
+    /* DEBUG: Removed - 3D rendering confirmed working */
 
-    /* Apply rotations: rotate around X then Z */
-    rotate((int)*(short *)(curcontext + 0xe), 'x');  /* 0x78 = 'x' */
-    rotate((int)*(short *)(curcontext + 0xc), 'z');  /* 0x7a = 'z' */
+    /* Setup perspective projection using IGL wrapper */
+    {
+        short fov = *(short *)(curcontext + 0x10);
+        if (fov < 10) fov = 450;  /* Default 45 degrees (in tenths) */
 
-    /* Apply zoom scaling if not in zoom mode */
-    if (*(int *)(curcontext + 0x3c) == 0) {
-        fVar1 = powf(zoom_power_base,
-                     (*(float *)(curcontext + 4) -
-                      *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
-                      *(float *)(curcontext + 8)) / zoom_power_divisor);
-        scale(fVar1);
+        if (frame_count <= 3) {
+            fprintf(stderr, "  fov=%d (%.1f deg)\n", fov, fov * 0.1);
+        }
+
+        mmode(MPROJECTION);
+        perspective(fov, 1.0f, 0.1f, 2000.0f);  /* Far clip must reach ground plane */
     }
 
-    /* Translate to camera position */
-    translate(-*(float *)curcontext, -*(float *)(curcontext + 4));
+    /* Setup view transformation using FSN's transform sequence
+     * But we need to understand the coordinate mapping:
+     * FSN: X=left/right, Y=forward, Z=up
+     * OpenGL: X=right, Y=up, -Z=forward
+     *
+     * The rotation around X tilts the view (looking down at ground)
+     * We also need a Z offset to lift the camera above the scene
+     */
+    mmode(MVIEWING);
 
-    /* Render the scene content */
-    render_scene_content(0);   /* TODO: FUN_0042510c */
+    /* CRITICAL: Reset modelview to identity before applying transforms!
+     * Without this, we're transforming from whatever random state was there.
+     */
+    glLoadIdentity();
+
+    pushmatrix();
+
+    float ctx_scale = *(float *)(curcontext + 0x34);
+    if (ctx_scale < 0.001f) ctx_scale = 1.0f;
+
+    short rot_x = *(short *)(curcontext + 0xe);
+    short rot_z = *(short *)(curcontext + 0xc);
+    float cam_x = *(float *)curcontext;
+    float cam_y = *(float *)(curcontext + 4);
+    float cam_z = *(float *)(curcontext + 8);
+
+    if (frame_count <= 3) {
+        fprintf(stderr, "  FSN camera: scale=%.2f rot_x=%d rot_z=%d cam=(%.1f,%.1f,%.1f)\n",
+                ctx_scale, rot_x, rot_z, cam_x, cam_y, cam_z);
+    }
+
+    /* COORDINATE SYSTEM CONVERSION:
+     * FSN: X=right, Y=forward, Z=up
+     * OpenGL: X=right, Y=up, Z=out (camera looks down -Z)
+     */
+    glRotatef(180.0f, 0.0f, 0.0f, 1.0f);  /* Flip right-side up */
+    glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);  /* Swap Y<->Z axes */
+
+    /* Apply FSN transforms in FSN coordinate space */
+    scale(1.0f / ctx_scale);
+    rotate(rot_x, 'x');
+    rotate(rot_z, 'z');
+
+    /* Zoom-based scale using precomputed trig values from calc_h_angle/calc_v_angle
+     * These are stored at curcontext offsets 0x14-0x28 by setup_context_widgets()
+     * cos_z at +0x18, sin_x at +0x20
+     */
+    {
+        float cos_z = *(float *)(curcontext + 0x18);
+        float sin_x = *(float *)(curcontext + 0x20);
+        float zoom_height = zoom_reference_height;
+        float zoom;
+
+        /* Guard against division by zero */
+        if (zoom_height < 1.0f) zoom_height = 100.0f;
+
+        zoom = powf(zoom_base_factor,
+            (cam_y - cos_z * sin_x * cam_z) / zoom_height);
+
+        if (frame_count <= 3) {
+            fprintf(stderr, "  zoom: cos_z=%.3f sin_x=%.3f zoom=%.3f ref_h=%.1f base=%.3f\n",
+                    cos_z, sin_x, zoom, zoom_reference_height, zoom_base_factor);
+        }
+
+        scale(zoom);
+    }
+
+    /* Translate camera position - ORIGINAL: Only X and Y, NO Z!
+     * (from pickLandscape @ fsn.c:48872)
+     */
+    translate(-cam_x, -cam_y);
+
+    /* Render the scene content - draw ground plane and sky */
+    draw_directories(0);
+
+    /* DEBUG: Removed - 3D blocks now rendering correctly */
 
     /* Restore matrix */
     popmatrix();

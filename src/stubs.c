@@ -11,7 +11,9 @@
 #include "fsn_state.h"
 #include "window.h"
 #include "fsn_igl.h"
+#include "drawing.h"
 #include <stdio.h>
+#include <math.h>
 #include <Xm/Xm.h>
 #include <GL/gl.h>
 #include <GL/glx.h>
@@ -199,11 +201,11 @@ void search_gl_init_callback(Widget w, XtPointer client, XtPointer call) {
 
 /**
  * glwidget_expose_callback - Called when GL widget needs redraw
- * Sets redraw_flag to trigger rendering on next main loop iteration
+ * Performs actual rendering when expose event received
  */
 void glwidget_expose_callback(Widget w, XtPointer client, XtPointer call) {
     (void)w; (void)client; (void)call;
-    redraw_flag = 1;
+    draw_scene();
 }
 
 /**
@@ -368,6 +370,41 @@ void set_camera_lookat(double param_1, double param_2) {
     redraw_flag = 1;
 }
 
+/*-----------------------------------------------------------------------------
+ * Trig Precomputation Functions
+ * Extracted from fsn.c lines 37445-37545.
+ * These compute sin/cos/tan of camera angles and store them in curcontext.
+ * Angles are stored as shorts in tenths of degrees (e.g., 450 = 45°).
+ *-----------------------------------------------------------------------------*/
+
+/* calc_h_angle - precompute sin/cos/tan for horizontal (Z) rotation
+ * Context offsets:
+ *   +0x0c: short rotation_z (input, tenths of degrees)
+ *   +0x14: float sin_z (output)
+ *   +0x18: float cos_z (output)
+ *   +0x1c: float tan_z (output)
+ */
+void calc_h_angle(void) {
+    float angle = *(short *)(curcontext + 0x0c) * (M_PI / 1800.0f);
+    *(float *)(curcontext + 0x14) = sinf(angle);
+    *(float *)(curcontext + 0x18) = cosf(angle);
+    *(float *)(curcontext + 0x1c) = tanf(angle);
+}
+
+/* calc_v_angle - precompute sin/cos/tan for vertical (X) rotation
+ * Context offsets:
+ *   +0x0e: short rotation_x (input, tenths of degrees)
+ *   +0x20: float sin_x (output)
+ *   +0x24: float cos_x (output)
+ *   +0x28: float tan_x (output)
+ */
+void calc_v_angle(void) {
+    float angle = *(short *)(curcontext + 0x0e) * (M_PI / 1800.0f);
+    *(float *)(curcontext + 0x20) = sinf(angle);
+    *(float *)(curcontext + 0x24) = cosf(angle);
+    *(float *)(curcontext + 0x28) = tanf(angle);
+}
+
 /*=============================================================================
  * Phase 10: Widget creation functions
  *============================================================================*/
@@ -429,6 +466,37 @@ void setup_context_widgets(void) {
     /* Initialize context pointers if not set */
     if (!curcontext) {
         curcontext = context;
+        /* Initialize context structure with sensible defaults
+         * Context offsets from original:
+         *   +0x00: float camera_x
+         *   +0x04: float camera_y
+         *   +0x08: float camera_z
+         *   +0x0c: short rotation_z
+         *   +0x0e: short rotation_x  (0 = horizontal, -900 = looking down)
+         *   +0x10: short fov (in tenths of degrees)
+         *   +0x18: float zoom_factor_1
+         *   +0x20: float zoom_factor_2
+         *   +0x34: float scale_factor (must be > 0)
+         *   +0x3c: int zoom_mode (0 = normal)
+         */
+        *(float *)(curcontext + 0x00) = 10.0f;    /* camera_x - center on blocks at X=8-12 */
+        *(float *)(curcontext + 0x04) = -10.0f;   /* camera_y - closer to blocks at Y=0 */
+        *(float *)(curcontext + 0x08) = 15.0f;    /* camera_z (height above ground) */
+        *(short *)(curcontext + 0x0c) = 0;        /* rotation_z */
+        *(short *)(curcontext + 0x0e) = -450;     /* rotation_x (45 degrees down) */
+        *(short *)(curcontext + 0x10) = 450;      /* fov = 45 degrees */
+        /* Note: 0x14-0x28 are populated by calc_h_angle/calc_v_angle below */
+        *(float *)(curcontext + 0x34) = 1.0f;     /* scale_factor */
+        *(int *)(curcontext + 0x3c) = 0;          /* zoom_mode = normal */
+
+        /* Precompute sin/cos/tan for camera angles */
+        calc_h_angle();
+        calc_v_angle();
+
+        fprintf(stderr, "setup_context_widgets: INIT camera to (%.1f, %.1f, %.1f)\n",
+                *(float *)(curcontext + 0x00),
+                *(float *)(curcontext + 0x04),
+                *(float *)(curcontext + 0x08));
     }
     if (!altcontext) {
         altcontext = context + 0xc54;  /* Second context at offset 0xc54 */
@@ -483,6 +551,11 @@ void setup_context_widgets(void) {
 
     /* Manage the main form */
     XtManageChild(contextForm);
+
+    /* topdir is now initialized by create_root_directory in main_entry.c */
+
+    /* Request initial redraw */
+    redraw_flag = 1;
 
     fprintf(stderr, "setup_context_widgets: Created widget hierarchy\n");
 }

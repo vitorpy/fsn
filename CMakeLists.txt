@@ -118,6 +118,7 @@ set(FSN_SOURCES_NEED_CLEANUP
     src/dir_core.c
     src/directory.c
     src/display.c
+    src/draw_tree.c
     src/events.c
     src/fam.c
     src/file_core.c
@@ -166,8 +167,11 @@ set(FSN_STUBS
     src/stubs.c
 )
 
-# Start with clean files only + stubs
-set(FSN_SOURCES ${FSN_SOURCES_CLEAN} ${FSN_STUBS})
+# Start with clean files only + stubs + Phase 15 draw_tree + Phase 18 dir_simple
+# Phase 15: draw_tree.c GP-indirect calls decoded to IGL function names
+# Phase 18: dir_simple.c provides working directory scanning
+# Phase 19: block_render.c + box_geometry.c for 3D block rendering
+set(FSN_SOURCES ${FSN_SOURCES_CLEAN} ${FSN_STUBS} src/draw_tree.c src/dir_simple.c src/block_render.c src/box_geometry.c)
 
 # Phase 5: Test that headers compile correctly
 add_executable(test_headers

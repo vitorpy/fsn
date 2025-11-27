@@ -1,27 +1,59 @@
 # FSN Project - Claude Code Instructions
 
+## ⚠️ CORE PRINCIPLE: RESTORATION, NOT REIMPLEMENTATION ⚠️
+
+**This is a RESTORATION project. We preserve and extract original code - we do NOT rewrite it.**
+
+- **SAVE AS MUCH ORIGINAL CODE AS POSSIBLE** - Every line from fsn.c is valuable
+- **Extract functions AS-IS** - Keep Ghidra artifacts (`halt_baddata`, `unaff_gp`, etc.)
+- **Never substitute your own implementation** - Even if you "know a better way"
+- **The decompiled code IS the source of truth** - It represents the original SGI binary
+- **Cleanup comes AFTER functionality** - Make it work first, clean later (separate pass)
+
+When in doubt: **EXTRACT, DON'T REWRITE**
+
+---
+
 ## Project Overview
 
 FSN (File System Navigator) restoration project - converting a 78K-line Ghidra MIPS/IRIX decompile into a functional modern Linux binary. This is the 3D file browser seen in Jurassic Park (1993).
 
-## Current Status: Phase 10 Complete - Window Appears!
+## Current Status: Phase 14 Complete - Rendering Works!
 
 The FSN application now:
 - Compiles and links successfully (296KB binary)
-- Launches and displays a Motif window
-- Creates proper widget hierarchy (menubar, panels, GL drawing area)
+- Launches and displays a Motif window with GL rendering
+- Shows the iconic FSN landscape (ground plane + sky gradient)
 
 ### What Works:
 - X11/Motif initialization and window creation
 - Widget hierarchy (MainWindow, MenuBar, Forms, DrawingArea)
-- Context pointer initialization (curcontext, curcontextwindows)
+- GLX context management and buffer swapping
+- IrisGL compatibility layer (mmode, perspective, transforms)
+- Ground plane and gradient sky rendering
+- Coordinate system conversion (FSN Y-forward to OpenGL -Z)
 
 ### Still Needs Work:
-- GL rendering (drawing area is empty/gray)
-- File browser functionality
-- 3D visualization
+- Directory tree visualization (3D file blocks)
+- File icons and labels
 - Mouse interaction/picking
+- Navigation and zoom controls
 - Many stub functions need real implementations
+
+## Archaeology Reference
+
+**See `docs/FSN_ARCHAEOLOGY.md`** for comprehensive reference:
+- Context structure offsets
+- IrisGL to OpenGL mapping
+- Coordinate system details
+- Decompilation artifacts guide
+- Phase progress tracking
+
+Detailed appendices in `docs/appendix/`:
+- `FUNCTIONS.md` - All 402 functions by category
+- `GLOBALS.md` - Global variables and offsets
+- `STRUCTS.md` - Data structure layouts
+- `IGL_API.md` - Complete IrisGL→OpenGL mapping
 
 ## Build Commands
 
@@ -102,6 +134,9 @@ fsn/
 ├── fsn.c              # Original 78K-line decompile (source of truth)
 ├── src/               # Extracted modules (.c files)
 ├── include/           # Headers (.h files)
+├── docs/              # Archaeology reference documentation
+│   ├── FSN_ARCHAEOLOGY.md  # Main reference
+│   └── appendix/      # Detailed appendices
 ├── analysis/          # Python analysis/extraction scripts
 ├── .venv/             # Python venv (tree-sitter, etc.)
 ├── .beads/            # Issue tracker database (bd)

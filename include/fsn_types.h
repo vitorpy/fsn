@@ -42,6 +42,15 @@
  * Ghidra Type Definitions
  * ============================================================ */
 
+/* Ghidra's 'code' type - represents a function
+ * Used in GP-indirect calls: (**(code **)(gp + offset))(args)
+ * These are MIPS calling convention and will NOT work on x86_64!
+ * Functions using these will compile but crash at runtime.
+ *
+ * We define it as a variadic function returning int to accept any call pattern.
+ */
+typedef int (*code)(...);
+
 /* Replace Ghidra's undefined types with standard types */
 typedef uint8_t   undefined;
 typedef uint8_t   undefined1;

@@ -312,6 +312,10 @@ int32_t getgdesc(int32_t inquiry);
 void glcompat(int32_t mode, int32_t value);
 void subpixel(Boolean enable);
 
+/* Matrix mode */
+void mmode(short mode);
+short getmmode(void);
+
 /* Patterns */
 void defpattern(short index, short size, unsigned short *pattern);
 void setpattern(short index);

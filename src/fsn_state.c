@@ -129,9 +129,11 @@ short cached_view_angle_2 = 0;
 
 /*=============================================================================
  * Zoom State
+ * zoom_reference_height: Height at which zoom factor = 1.0 (original ~100)
+ * zoom_base_factor: Base for exponential zoom (original ~1.05)
  *============================================================================*/
-float zoom_reference_height = 0.0f;
-float zoom_base_factor = 1.0f;
+float zoom_reference_height = 100.0f;
+float zoom_base_factor = 1.05f;
 int zoom_stack_pointer = 0;
 float zoom_stack_size = 0.0f;
 float zoom_stack_capacity = 0.0f;
@@ -186,11 +188,24 @@ int cpack_color = 0xffe16d;           /* skyColor #6de1ff as BGR - draw_warp cle
 int bg_color_normal = 0xffe16d;       /* skyColor #6de1ff as BGR - normal background */
 int bg_color_grid = 0x238823;         /* groundColor #238823 as BGR (R=B so same) */
 int zbuffer_value = 0x7fffff;         /* Z-buffer clear value (far plane) */
-char grid_display_flag = 0;           /* 0=normal sky, 1=grid/ground mode */
+char grid_display_flag = 1;           /* 0=flat sky, 1=gradient sky mode */
 int current_packed_color = 0xffffff;  /* dirColor #ffffff as BGR (same) */
 int highlight_color = 0xffffff;       /* selLineColor #ffffff as BGR (same) */
 int highlight_packed_color = 0xd6e0c4; /* unselLineColor #c4e0d6 as BGR */
 int rect_draw_color = 0xd2d2d2;       /* warpDirColor #d2d2d2 as BGR (same) */
+/* Ground/Sky colors for draw_directories (grass landscape) */
+int sky_color_flat = 0xffe16d;        /* skyColor when gouraud off */
+int sky_color_top = 0xd58700;         /* topSkyColor #0087d5 as BGR */
+int sky_color_bottom = 0xf0ff91;      /* bottomSkyColor #91fff0 as BGR */
+int ground_color_near = 0x1a4f0f;     /* nearGroundColor #0f4f1a as BGR */
+float ground_scale_width = 2000.0f;   /* scale factor for ground plane width */
+float ground_offset_forward = 500.0f; /* y offset for forward horizon */
+float ground_offset_backward = 200.0f;/* y offset for backward horizon */
+float ground_horizon_z = 500.0f;      /* z distance to horizon transition */
+int draw_count_1 = 0;                 /* drawing counter */
+int draw_count_2 = 0;                 /* drawing counter */
+float zoom_power_base = 1.02f;        /* zoom scaling base */
+float zoom_power_divisor = 100.0f;    /* zoom scaling divisor */
 float rotation_factor_y = 0.0f;
 int translate_y_offset = 0;
 float base_y_offset = 0.0f;
@@ -257,9 +272,12 @@ int legend_color_cyan = 0;
 int legend_color_blue = 0;
 int legend_color_magenta = 0;
 
-/* Directory colors */
-int directory_color_active = 0;
-int directory_color_normal = 0;
+/* Directory colors - BGR packed format
+ * Active (selected) = bright cyan #00ffff -> 0xffff00 BGR
+ * Normal = white #ffffff -> 0xffffff BGR
+ */
+int directory_color_active = 0xffff00;   /* Cyan - selected */
+int directory_color_normal = 0xffffff;   /* White - normal */
 int monitor_label_color = 0;
 
 /*=============================================================================
@@ -282,11 +300,11 @@ void *string_copy_buffer = NULL;
 uint string_buffer_limit = 0;
 char database_dirty_flag = 0;
 
-/* Bounds */
-int minx = 0;
-int maxx = 0;
-int miny = 0;
-int maxy = 0;
+/* Bounds - allow camera freedom to see the scene */
+int minx = -1000;
+int maxx = 1000;
+int miny = -1000;
+int maxy = 1000;
 int maxShrinkage = 0;
 
 /*=============================================================================
@@ -387,10 +405,12 @@ float work_float_2 = 0.0f;
 int last_operation_time = 0;
 
 /*=============================================================================
- * Icon State
+ * Icon State - BGR packed colors
+ * dir_type_icon = directory blocks (blue-ish)
+ * file_type_icon = file blocks (white/light gray)
  *============================================================================*/
-int dir_type_icon = 0;
-int file_type_icon = 0;
+int dir_type_icon = 0xff8844;     /* Light blue for directories */
+int file_type_icon = 0xdddddd;    /* Light gray for files */
 int icon_cache_capacity = 0;
 int icon_cache_size = 0;
 int icon_loader_instance = 0;

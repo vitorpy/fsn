@@ -147,10 +147,12 @@ void do_warp(int param_1);
 void draw__13ByteCodedIconFv(undefined1 *param_1);
 void draw_alt(void);
 void draw_box(undefined4 *param_1,int param_2,uint param_3);
-void draw_dir(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4, char param_5);
+/* Phase 18: Updated to use DirectoryNode struct */
+struct DirectoryNode;  /* Forward declaration */
+void draw_dir(struct DirectoryNode *node, undefined4 param_2, undefined4 param_3, float pos_x, char param_5);
 void draw_directories(char param_1);
-void draw_directory(ulonglong param_1,int param_2,char param_3);
-void draw_directory_recursive(undefined4 *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4, undefined4 param_5,undefined4 param_6);
+void draw_directory(intptr_t param_2, char param_3);
+void draw_directory_recursive(struct DirectoryNode *node, char *dir_name, undefined4 param_3, float pos_x, undefined4 param_5, float pos_z);
 void draw_directory_tree(int param_1);
 void draw_entry(int param_1,undefined4 param_2);
 void draw_file(int param_1,undefined4 *param_2,char param_3,char param_4,undefined4 param_5, undefined4 param_6);

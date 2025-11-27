@@ -10,6 +10,9 @@
 #include "fsn_state.h"
 #include "messages.h"
 
+/* Phase 18: Directory scanning */
+extern void create_root_directory(char *path);
+
 void main(int argc,char **argv)
 
 {
@@ -195,6 +198,13 @@ void main(int argc,char **argv)
     pcStack_bc = pcStack_c0;
   }
   display_status_message(pcStack_bc);
+
+  /* Phase 18: Initialize directory tree if not already done by display_status_message */
+  if (topdir == NULL) {
+    fprintf(stderr, "main: Initializing directory tree for: %s\n", pcStack_bc);
+    create_root_directory(pcStack_bc);
+  }
+
   update_display();
   if (initialOverview != '\0') {
     showOverview();
