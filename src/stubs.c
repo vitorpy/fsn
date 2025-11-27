@@ -405,6 +405,80 @@ void calc_v_angle(void) {
     *(float *)(curcontext + 0x28) = tanf(angle);
 }
 
+/* init_view_transform - alias for calc_h_angle
+ * Called after changing rot_z to recompute transform matrices
+ */
+void init_view_transform(void) {
+    calc_h_angle();
+}
+
+/* init_camera_state - recompute vertical angle transforms
+ * Called after changing rot_x
+ */
+void init_camera_state(void) {
+    calc_v_angle();
+}
+
+/*=============================================================================
+ * Phase 16: Mouse camera controls
+ * gl_motion_handler and gl_button_handler for camera navigation
+ * movehoriz() is in movement.c
+ *============================================================================*/
+
+/* Forward declaration - implemented in movement.c */
+void movehoriz(float delta_x, float delta_y);
+
+/* gl_motion_handler - Handle mouse motion events for camera rotate/pan
+ * Registered with XtAddEventHandler for PointerMotionMask
+ *
+ * Left drag = rotate camera (look around)
+ * Right drag = pan camera position
+ */
+void gl_motion_handler(Widget w, XtPointer client_data, XEvent *event, Boolean *cont)
+{
+    (void)w; (void)client_data; (void)cont;
+
+    if (mouse_button_down == 0) return;  /* Only when dragging */
+    if (event->type != MotionNotify) return;
+
+    int x = event->xmotion.x;
+    int y = event->xmotion.y;
+
+    float delta_x = (float)(x - mouse_last_x) * mouse_speed;
+    float delta_y = (float)(y - mouse_last_y) * mouse_speed;
+
+    mouse_last_x = x;
+    mouse_last_y = y;
+
+    if (mouse_button_down == 1) {
+        /* Left button: rotate camera (look around) */
+        *(short *)(curcontext + 0x0c) += (short)(delta_x * 5);  /* rot_z (yaw) */
+        *(short *)(curcontext + 0x0e) += (short)(delta_y * 5);  /* rot_x (pitch) */
+        init_view_transform();
+        init_camera_state();
+        redraw_flag = 1;
+    } else if (mouse_button_down == 3) {
+        /* Right button: pan camera position */
+        movehoriz(delta_x, delta_y);
+    }
+}
+
+/* gl_button_handler - Handle mouse button events (XtEventHandler signature)
+ * Tracks which button is pressed for drag operations
+ */
+void gl_button_handler(Widget w, XtPointer client_data, XEvent *event, Boolean *cont)
+{
+    (void)w; (void)client_data; (void)cont;
+
+    if (event->type == ButtonPress) {
+        mouse_button_down = event->xbutton.button;
+        mouse_last_x = event->xbutton.x;
+        mouse_last_y = event->xbutton.y;
+    } else if (event->type == ButtonRelease) {
+        mouse_button_down = 0;
+    }
+}
+
 /*=============================================================================
  * Phase 10: Widget creation functions
  *============================================================================*/
@@ -482,8 +556,8 @@ void setup_context_widgets(void) {
         *(float *)(curcontext + 0x00) = 10.0f;    /* camera_x - center on blocks at X=8-12 */
         *(float *)(curcontext + 0x04) = -10.0f;   /* camera_y - closer to blocks at Y=0 */
         *(float *)(curcontext + 0x08) = 15.0f;    /* camera_z (height above ground) */
-        *(short *)(curcontext + 0x0c) = 0;        /* rotation_z */
-        *(short *)(curcontext + 0x0e) = -450;     /* rotation_x (45 degrees down) */
+        *(short *)(curcontext + 0x0c) = 900;      /* rotation_z (90 degrees - face the blocks) */
+        *(short *)(curcontext + 0x0e) = 0;        /* rotation_x (0 = horizontal) */
         *(short *)(curcontext + 0x10) = 450;      /* fov = 45 degrees */
         /* Note: 0x14-0x28 are populated by calc_h_angle/calc_v_angle below */
         *(float *)(curcontext + 0x34) = 1.0f;     /* scale_factor */
@@ -533,6 +607,12 @@ void setup_context_widgets(void) {
     /* Register GL widget callbacks */
     XtAddCallback(glWidget, XmNexposeCallback, glwidget_expose_callback, NULL);
     XtAddCallback(glWidget, XmNresizeCallback, glwidget_resize_callback, NULL);
+
+    /* Register mouse event handlers for camera navigation */
+    XtAddEventHandler(glWidget, PointerMotionMask, False,
+                      gl_motion_handler, NULL);
+    XtAddEventHandler(glWidget, ButtonPressMask | ButtonReleaseMask, False,
+                      gl_button_handler, NULL);
 
     /* 3. Create highlight label (offset 0x2c / index 11) */
     n = 0;

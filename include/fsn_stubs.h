@@ -100,7 +100,8 @@ static inline void glx_reset_context_wrapper(void) { /* TODO */ }
 static inline void glx_swap_buffers_wrapper(void) { /* TODO */ }
 static inline void glx_switch_context_wrapper(void) { /* TODO */ }
 static inline void init_app_state(void) { /* TODO */ }
-static inline void init_camera_state(void) { /* TODO */ }
+/* init_camera_state - implemented in stubs.c */
+void init_camera_state(void);
 static inline void init_color_menus(void) { /* TODO */ }
 static inline void init_database_display(void) { /* TODO */ }
 static inline void init_database_state(void) { /* TODO */ }
@@ -110,7 +111,8 @@ static inline void init_gl_lists(void) { /* TODO */ }
 static inline void init_gl_state(void *cb, void *p) { (void)cb; (void)p; /* TODO */ }
 static inline void init_icon_context(void) { /* TODO */ }
 static inline void init_panel_layout(void) { /* TODO */ }
-static inline void init_view_transform(void) { /* TODO */ }
+/* init_view_transform - implemented in stubs.c */
+void init_view_transform(void);
 static inline void process_pending_events(void) { /* TODO */ }
 static inline void process_search_results(void) { /* TODO */ }
 static inline void read_data_section(void) { /* TODO */ }

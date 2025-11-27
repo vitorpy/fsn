@@ -584,6 +584,14 @@ extern char *_imsgs[];
 extern struct timeval zoom_start_time;
 
 /*=============================================================================
+ * Mouse State - for camera navigation
+ *============================================================================*/
+extern int mouse_last_x;
+extern int mouse_last_y;
+extern int mouse_button_down;
+extern float mouse_speed;
+
+/*=============================================================================
  * IRIX Compatibility
  *============================================================================*/
 extern undefined __iob_func_result;

@@ -9,6 +9,9 @@
 
 #include "fsn_types.h"
 
-void movehoriz(undefined8 param_1,undefined4 param_2);
+/* movehoriz - Move camera horizontally based on mouse delta
+ * Cleaned up from original MIPS artifacts to use float params
+ */
+void movehoriz(float delta_x, float delta_y);
 
 #endif /* FSN_MOVEMENT_H */

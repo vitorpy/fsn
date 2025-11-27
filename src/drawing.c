@@ -360,9 +360,11 @@ void draw_scene(void)
     /* COORDINATE SYSTEM CONVERSION:
      * FSN: X=right, Y=forward, Z=up
      * OpenGL: X=right, Y=up, Z=out (camera looks down -Z)
+     *
+     * -90° around X: (X,Y,Z) -> (X, Z, -Y)
+     * This maps FSN Z-up to OpenGL Y-up, FSN Y-forward to OpenGL -Z
      */
-    glRotatef(180.0f, 0.0f, 0.0f, 1.0f);  /* Flip right-side up */
-    glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);  /* Swap Y<->Z axes */
+    glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);  /* Map FSN coords to OpenGL */
 
     /* Apply FSN transforms in FSN coordinate space */
     scale(1.0f / ctx_scale);

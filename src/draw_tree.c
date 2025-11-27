@@ -200,13 +200,23 @@ static void process_tree_node_impl(DirectoryNode *node, char param_3)
                 colors[3] = (color & 0x00FFFFFF) | 0xC0000000;  /* side - medium */
 
                 pushmatrix();
-                /* Position at child location - TODO: fix coordinate transform */
+                /* Position at child location */
                 translate(child->pos_x, child->pos_y, -0.4f);
                 /* Scale: cube is unit size, scale to desired dimensions */
                 scale(block_width, block_depth, block_height);
                 /* Draw all faces (0x3F = FSN_FACE_ALL) with filled mode (0) */
                 draw_legend_color_box((undefined4 *)colors, 0, FSN_FACE_ALL);
                 popmatrix();
+
+                /* Draw directory name label above block */
+                if (child->name) {
+                    pushmatrix();
+                    translate(child->pos_x, child->pos_y, block_height + 0.1f);
+                    cpack(0xFFFFFF);  /* White text */
+                    cmov(0.0f, 0.0f, 0.0f);
+                    charstr(child->name);
+                    popmatrix();
+                }
             }
 
             /* Pop selection name */
@@ -346,6 +356,7 @@ void draw_directory_recursive(DirectoryNode *node, char *dir_name, undefined4 pa
     /* Draw directory name */
     pushmatrix();
     if (node->name) {
+        cmov(0.0f, 0.0f, 0.0f);  /* Set text position at transformed origin */
         charstr(node->name);
     }
     popmatrix();
@@ -356,6 +367,7 @@ void draw_directory_recursive(DirectoryNode *node, char *dir_name, undefined4 pa
         name_len = strlen(dir_name);
         translate((float)name_len * 0.1f, 0.15f);
         scale(0.08f, 0.08f);
+        cmov(0.0f, 0.0f, 0.0f);  /* Set text position */
         charstr(dir_name);
         popmatrix();
     }

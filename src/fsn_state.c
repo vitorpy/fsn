@@ -558,6 +558,14 @@ char *_imsgs[] = {NULL};
 struct timeval zoom_start_time = {0, 0};
 
 /*=============================================================================
+ * Mouse State - for camera navigation
+ *============================================================================*/
+int mouse_last_x = 0;
+int mouse_last_y = 0;
+int mouse_button_down = 0;    /* 0=none, 1=left, 2=middle, 3=right */
+float mouse_speed = 1.0f;     /* Movement speed multiplier */
+
+/*=============================================================================
  * IRIX Compatibility
  *============================================================================*/
 undefined __iob_func_result = 0;  /* IRIX stdio thread-safety check - use fast path */
