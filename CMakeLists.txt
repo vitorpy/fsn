@@ -88,6 +88,7 @@ set(FSN_SOURCES_CLEAN
     src/fam_monitor.c
     src/fsn_state.c
     src/highlight.c
+    src/init_resources.c
     src/landscape.c
     src/main_entry.c
     src/messaging.c

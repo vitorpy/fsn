@@ -89,3 +89,14 @@ DAT_10016ed0 -> search_xmstring_1 : 4 uses - XmStringCreateSimple("Search")
 DAT_10016ed4 -> search_xmstring_2 : 4 uses - XmStringCreateSimple(...)
 DAT_10016f0c -> search_number_value : 4 uses - int, atoi() result for pattern matching
 
+
+# BATCH 7: Rendering colors (from draw_scene/draw_warp analysis in fsn2.c)
+DAT_10017610 -> cpack_color : draw_warp clear color - cpack(DAT_10017610)
+DAT_100175e4 -> bg_color_normal : normal background for czclear when grid mode off
+DAT_100175ec -> bg_color_grid : alternate background for czclear when grid mode on
+DAT_10016638 -> zbuffer_value : Z-buffer clear value from getgdesc(5)
+DAT_10017494 -> grid_display_flag : char, switches between bg_color_normal and bg_color_grid
+DAT_100175e0 -> highlight_color_1 : used in directory drawing with cpack
+DAT_100175e8 -> highlight_color_2 : used in directory drawing with cpack
+DAT_10017594 -> zoom_power_base : float, used in powf() for zoom scaling
+DAT_10017598 -> zoom_power_divisor : float, divisor in zoom calculation

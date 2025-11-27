@@ -1,0 +1,596 @@
+!landscape specific resources
+
+*grass*useGouraud: TRUE
+*grass*groundColor: #238823
+*grass*skyColor: #6de1ff
+*grass*farGroundColor: #418a59
+*grass*nearGroundColor: #0f4f1a
+*grass*topSkyColor: #0087d5
+*grass*bottomSkyColor: #91fff0
+*grass*overviewBackgroundColor: #3a7b4e
+*grass*pruneColor: #62706a
+*grass*unselLineColor: #7bc1a7
+
+*indigo*useGouraud: FALSE
+*indigo*groundColor: #00861f
+*indigo*skyColor: #0098bf
+*indigo*dirColor: #f8f8f8
+*indigo*colorUnselectValueFactor: 0.650000
+
+*desert*useGouraud: TRUE
+*desert*groundColor: #8d7a47
+*desert*skyColor: #8de8ff
+*desert*farGroundColor: #934e28
+*desert*nearGroundColor: #d5b36b
+*desert*topSkyColor: #3916ff
+*desert*bottomSkyColor: #da756c
+*desert*overviewBackgroundColor: #705f38
+*desert*pruneColor: #989285
+*ocean*unselLineColor: #e0cb9f
+
+*ocean*useGouraud: TRUE
+*ocean*groundColor: #002045
+*ocean*skyColor: #0a1f2b
+*ocean*farGroundColor: #461844
+*ocean*nearGroundColor: #002045
+*ocean*topSkyColor: #00005c
+*ocean*bottomSkyColor: #820037
+*ocean*overviewBackgroundColor: #001835
+*ocean*pruneColor: #45494f
+*ocean*unselLineColor: #7492b4
+
+*space*useGouraud: FALSE
+*space*groundColor: #000000
+*space*skyColor: #000000
+
+!program specific resources
+
+*groundColor: #238823
+*skyColor: #6de1ff
+*dirColor: #ffffff
+*pruneColor: #7a8b84
+*warpDirColor: #d2d2d2
+*specialDirColor: #ffc156
+*dirMonColor: #c67171
+*selLineColor: #ffffff
+*unselLineColor: #c4e0d6
+*warpFlashColor: #ffffff
+*spotlightColor: #fffee2
+
+*fileColor0: #ff0000
+*fileColor1: #ff8400
+*fileColor2: #fffc00
+*fileColor3: #20a098
+*fileColor4: #0047ff
+*fileColor5: #a800ff
+*fileColor6: #9a2667
+
+*fileAge0: 7
+*fileAge1: 14
+*fileAge2: 31
+*fileAge3: 92
+*fileAge4: 182
+*fileAge5: 365
+
+*useViewer:TRUE
+*shrinkOnZoom: TRUE
+*beamOnMove: TRUE
+*flashOnWarp: FALSE
+*propagateMonitor: FALSE
+*compressDatabase: TRUE
+
+*maxDisplayedFileName: 16
+*monitorTimeout: 120
+*locateHighlightThickness:3
+*mouseSpeed:0.7
+*initialX:0.0
+*initialY:-37.0
+*initialZ:34.0
+*initialTilt:-700
+*warpX:0.0
+*warpY:-5.0
+*warpZ:3.0
+*warpTilt:-700
+*birdX:0.0
+*birdY:0.0
+*birdZ:100.0
+*birdWarpZ:7.0
+*birdTilt:0
+*viewAngle:600
+*minZoomStep:0.5
+*minNumZoomSteps: 3
+*zoomSpeed:1000000
+*monitoredSkirtSize:0.5
+*heightPower:0.5
+*maxFileHeight:4.0
+*maxDirHeight:2.0
+*fileBaseWidth:0.5
+*fileMargin:0.25
+*xDirMargin:2.0
+*yDirMargin:8.0
+*minFileHeight:0.15
+*zoomBottom:2.3
+*zoomBack:4.0
+*zoomFileBottom:1.0
+*zoomFileBack:1.8
+*warpZoomBottom:1.0
+*warpZoomBack:1.8
+*minFileTextYDistance:4.0
+*minFileTextXDistance:3.0
+*minFileTextZDistance:8.0
+*minFileIconYDistance:6.5
+*minFileIconXDistance:6.0
+*minFileIconZDistance:15.0
+*warpDirDistance:0.5
+*warpSpecialDistance:2.0
+*warpSiblingDistance:4.0
+*warpSpecialWidth:1.5
+*warpSpecialClimb:2.0
+*minDirLineTextXYDistance:6.2
+*minDirLineTextZDistance:6.2
+*minDirTextXYDistance:22.0
+*minDirTextZDistance:22.0
+*fileAsPlaneDistance:18.0
+*fileAsLineDistance:30.0
+*directoryAsCarpetDistance:35.0
+*carpetHideHeight: 0.5
+*directoryHideRatio:50.0
+*carpetFactor:0.66
+*shrinkagePower:1.9
+*shrinkageDistance:8.0
+*skyHeight: 75.0
+*skyWidth: 300.0
+*skyDistance: 450.0
+*groundBack: 50.0
+
+*spaceballLinearFactor: 10000
+*spaceballAngleFactor: 250
+*spaceballTilt: FALSE
+
+*colorTopValueFactor:0.8
+*colorSideValueFactor:0.55
+*colorBackValueFactor:0.3
+*colorUnselectSaturationFactor:0.8
+*colorUnselectValueFactor:0.6
+*colorSelectSaturationFactor:0.3
+*colorSelectValueFactor:1.0
+*colorShadowSaturationFactor:1.0
+*colorShadowValueFactor:0.3
+    
+!translation tables
+
+*glwidget*translations:	#replace	\n\
+	<Btn2Up>:	mousedone()	\n\
+	<Btn2Down>:	mousemark()	\n\
+	~Shift ~Ctrl<Btn2Motion>:	mousemove()	\n\
+	Shift<Btn2Motion>:	mousemovevert()	\n\
+	Ctrl<Btn2Motion>:	mousemovemvert()	\n\
+	Shift<Btn1Down>:	select()	\n\
+	<Btn1Down>:	zoom() \n\
+	~Shift ~Ctrl<PtrMoved>:	locateHighlight() \n\
+	~Shift ~Ctrl<EnterNotify>:	locateHighlight() \n\
+	<LeaveNotify>:		locateClear()	\n\
+	<Key>osfHelp:	PrimitiveHelp()	\n\
+	Alt<Key>r:	reset() \n\
+	Alt<Key>b:	back() \n\
+
+*overviewGlw*translations:	#override	\n\
+	<Btn2Down>:	overviewmove()	\n\
+	<Btn2Motion>:	overviewmove()	\n\
+	Shift<Btn1Down>:	overviewselect() \n\
+	Shift<Btn1Motion>:	overviewselect() \n\
+	<Btn1Down>:	overviewzoom() \n\
+	<Btn1Motion>:	overviewzoom() \n\
+	~Shift ~Ctrl<PtrMoved>:	overviewLocateHighlight()	\n\
+	~Shift ~Ctrl<EnterWindow>:	overviewLocateHighlight()	\n\
+	<Key>osfHelp:	PrimitiveHelp()	\n\
+	Alt<Key>r:	reset() \n\
+	Alt<Key>b:	back() \n\
+
+!widget specific resources
+
+*keyboardFocusPolicy: POINTER
+*glwidget*background : black
+*mainw*showSeparator: TRUE
+*glwidget*width: 600
+*glwidget*height: 600
+
+*menuSession.labelString: Session
+
+*menuSplit.labelString: Split screen
+*menuSplit.accelerator: Alt<Key>s
+*menuSplit.acceleratorText: Alt+S
+
+*menuRescan.labelString: Rescan
+
+*menuSave.labelString: Save database
+
+*menuProcessDeletes.labelString: Process deletes
+
+*menuUndoDeletes.labelString: Undo all deletes
+
+*menuQuit.labelString: Quit
+
+*menuShow.labelString: Show
+
+*menuOverview.labelString: Overview
+*show_pane.menuOverview.accelerator: ~Shift Alt<Key>o
+*show_pane.menuOverview.acceleratorText: Alt+O
+*hide_pane.menuOverview.accelerator: Shift Alt<Key>o
+*hide_pane.menuOverview.acceleratorText: Shift+Alt+O
+
+*menuControls.labelString: Controls
+*show_pane.menuControls.accelerator: ~Shift Alt<Key>c
+*show_pane.menuControls.acceleratorText: Alt+C
+*hide_pane.menuControls.accelerator: Shift Alt<Key>c
+*hide_pane.menuControls.acceleratorText: Shift+Alt+C
+
+*menuLegend.labelString: Legend
+
+*menuPreferences.labelString: Preference Panel
+
+*menuHide.labelString: Hide
+
+*menuDisplay.labelString: Display
+
+*menuHeight.labelString: Height
+
+*menuHeightNone.labelString: None
+*menuHeightNone.accelerator: Alt<Key>n
+*menuHeightNone*acceleratorText: Alt+N
+
+*menuHeightLinear.labelString: Linear
+*menuHeightLinear.accelerator: Alt<Key>l
+*menuHeightLinear*acceleratorText: Alt+L
+
+*menuHeightExaggerated.labelString: Exaggerated
+*menuHeightExaggerated.accelerator: Alt<Key>e
+*menuHeightExaggerated*acceleratorText: Alt+E
+
+*menuDirectory.labelString: Directory
+
+*menuDirectoryHeight.labelString: Directory Height
+
+*menuDirectoryFlat.labelString: Flat
+
+*menuDirectoryFilesOnly.labelString: Files Only
+
+*menuDirectoryChildren.labelString: Including Children
+
+*menuFile.labelString: File
+
+*menuOpenFile.labelString: Open
+*filePane*menuOpenFile.accelerator: Alt<Key>x
+*menuOpenFile.acceleratorText: Alt+X
+
+*menuPrintFile.labelString: Print
+*filePane*menuPrintFile.accelerator: Alt<Key>p
+*menuPrintFile.acceleratorText: Alt+P
+
+*menuDeleteFile.labelString: Delete
+*filePane*menuDeleteFile.accelerator: Alt<Key>d
+*menuDeleteFile.acceleratorText: Alt+D
+
+*menuMonitorDirectory.labelString: Monitor
+
+*menuMonitorTree.labelString: Monitor subtree
+
+*menuStopMonitorTree.labelString: Stop Monitor subtree
+
+*menuRescanSubtree.labelString: Rescan subtree
+
+*menuPruneDirectory.labelString: Prune
+
+
+*messageHeader.labelString: Fsn:  
+*message.alignment: ALIGNMENT_BEGINNING
+*message.recomputeSize:FALSE
+
+*saveFile.labelString: save
+
+*window_help.labelString: On Window...
+*context_help.labelString: On Context...
+*popup_help.labelString: On Popup Menu...
+*session_help.labelString: On Session Menu...
+*mode_help.labelString: On Modes...
+*version_help.labelString: On Version...
+*helpButton.labelString: Help
+
+*HelpDialog*background: grey
+*HelpDialog.HelpLabelString: More
+*HelpDialog.dialogTitle: Help
+
+*panelsep.orientation: VERTICAL
+*panelvsep.orientation: VERTICAL
+*panelhsep.orientation: HORIZONTAL
+
+*locateHighlightName*alignment: ALIGNMENT_BEGINNING
+
+*legend.orientation: HORIZONTAL
+*legendSep.orientation: HORIZONTAL
+
+*colorslabel.labelString: ages:
+*color0.labelString: 1 wk
+*color1.labelString: 2 wk
+*color2.labelString: 1 mo
+*color3.labelString: 3 mo
+*color4.labelString: 6 mo
+*color5.labelString: 1 yr
+*color6.labelString: > 1 yr
+
+*monitorSep.orientation: VERTICAL
+*monitorLabel.labelString: Monitored
+
+*controls.orientation: VERTICAL
+*controls.entryAlignment : ALIGNMENT_CENTER
+*control_scales.orientation: HORIZONTAL
+
+*control_sep.orientation: HORIZONTAL
+
+*reset.labelString: reset       Alt+R
+*top.labelString: birds eye
+*front.labelString: front view
+*back.labelString: go back   Alt+B
+*mark.labelString: mark
+
+*markSelector.okLabelString: go to
+*markSelector.cancelLabelString: delete
+*markSelector.listLabelString: Marks
+*markSelector.resizePolicy: resize_none
+
+*markPrompt.selectionLabelString: Choose name for mark
+*markPrompt.dialogTitle: Mark
+
+*h_scale.orientation: HORIZONTAL
+*h_scale.minimum: -1800
+*h_scale.maximum: 1800
+*h_scale.titleString: Rotate
+
+*v_scale.orientation: VERTICAL
+*v_scale.minimum: -900
+*v_scale.maximum: 0
+*v_scale.processingDirection:MAX_ON_BOTTOM
+*v_scale.titleString: Tilt
+
+*z_scale.orientation: VERTICAL
+*z_scale.minimum: 1
+*z_scale.maximum: 120
+*z_scale.titleString: Height
+
+*persp_scale.orientation: HORIZONTAL
+*persp_scale.minimum: 300
+*persp_scale.maximum: 1500
+*persp_scale.titleString: View angle
+
+*zoom_scale.orientation: HORIZONTAL
+*zoom_scale.minimum: 0
+*zoom_scale.maximum: 3000000
+*zoom_scale.titleString: Zoom speed
+*zoom_scale.processingDirection:MAX_ON_LEFT
+
+*selectedInfo.fileName.value: No file
+*selectedInfo.fileInfo.alignment: ALIGNMENT_BEGINNING
+
+*pane.marginHeight:0
+*pane.marginWidth:0
+*pane.spacing:6
+
+*moveDestExists.messageString: Destination file already exists.  Overwrite?
+
+*viewerButtons.orientation: HORIZONTAL
+
+*activeButton0.background: red
+*activeButton1.background: green
+*activeButtonMask.topAttachment: ATTACH_POSITION
+*activeButtonMask.bottomAttachment: ATTACH_POSITION
+*activeButtonMask.rightAttachment: ATTACH_POSITION
+*activeButtonMask.leftAttachment: ATTACH_POSITION
+*activeButtonMask.topPosition: 10
+*activeButtonMask.bottomPosition: 90
+*activeButtonMask.leftPosition: 10
+*activeButtonMask.rightPosition: 90
+*activeButtonMask.width:10
+*activeButtonMask.height:10
+*activeButtonMask.background: black
+
+*preferencePanel*XmScrolledWindow.scrollingPolicy: AUTOMATIC
+*preferenceHeader.orientation: VERTICAL
+*preferenceHeader.entryAlignment: ALIGNMENT_CENTER
+*preferenceHeaderLabel.labelString: Preference Panel\n\nThis panel is for testing and determining optimum resource values.\nChange at your own risk.
+*preferenceHeader.adjustLast:TRUE
+*preferenceHeaderButtons.orientation: HORIZONTAL
+*preferenceHeaderButtons.adjustLast: TRUE
+*preferenceHeaderButtons2.orientation: HORIZONTAL
+*preferenceHeaderButtons2.adjustLast: TRUE
+*preferenceQuit.labelString: Dismiss
+*preferenceUndo.labelString: Undo All
+*preferenceSaveChanges.labelString: Save Changes
+*preferenceSaveAll.labelString: Save All
+*preferenceSelect.labelString: Select File
+*preferenceFileName.columns: 40
+
+*preferenceBooleans.orientation: VERTICAL
+*preferenceBooleans.packing:PACK_COLUMN
+*preferenceBooleans.numColumns: 3
+*preferenceBooleans.adjustLast: FALSE
+
+*preferenceScales.orientation: VERTICAL
+*preferenceScales.packing:PACK_COLUMN
+*preferenceScales.numColumns: 3
+*preferenceScale.orientation: HORIZONTAL
+*preferenceScale.showValue: TRUE
+
+*preferenceColors.orientation: VERTICAL
+*preferenceColors.packing:PACK_COLUMN
+*preferenceColors.numColumns: 3
+
+*preferenceColorScales.orientation: VERTICAL
+*preferenceColorScales.packing:PACK_COLUMN
+*preferenceColorScales.numColumns: 3
+*preferenceColorScales.adjustLast: FALSE
+*preferenceColorScales.XmScale.orientation: HORIZONTAL
+*preferenceColorScales.XmScale.showValue: TRUE
+*preferenceColorScales.XmScale.minimum:0
+*preferenceColorScales.XmScale.maximum:255
+*preferenceColorScales.XmScale.width:150
+*preferenceRedScale*troughColor: red
+*preferenceRedScale.titleString: red
+*preferenceGreenScale*troughColor: green
+*preferenceGreenScale.titleString: green
+*preferenceBlueScale*troughColor: blue
+*preferenceBlueScale.titleString: blue
+*preferenceHueScale.titleString: hue
+*preferenceSatScale.titleString: sat
+*preferenceValScale.titleString: val
+
+*copyright*background:skyBlue
+*copyright*fontList:-*-helvetica-medium-r-normal-*-20*iso8859-1
+! In the following resources, we have to undo some colors from menus
+! in overlays
+*popupMenu*XmPushButton*background:	 	gray
+*popupMenu*XmToggleButton*background:	gray
+*popupMenu*selectColor:			gray
+*menuBar*XmRowColumn*XmPushButton*background:	 	gray
+*menuBar*XmRowColumn*XmToggleButton*background:	gray
+*menuBar*XmRowColumn*selectColor:			gray
+
+!
+! SGI Look Resources
+!
+
+! Fonts
+
+! all labels should be bold
+*XmLabel*fontList:   		-*-helvetica-bold-r-normal-*-14-*-*-*-*-*-iso8859-1
+*XmLabelGadget*fontList:	-*-helvetica-bold-r-normal-*-14-*-*-*-*-*-iso8859-1
+*XmScale*fontList:   		-*-helvetica-bold-r-normal-*-14-*-*-*-*-*-iso8859-1
+*XmBulletinBoard*labelFontList:	-*-helvetica-bold-r-normal-*-14-*-*-*-*-*-iso8859-1
+*optionMenu.XmLabelGadget*fontList:	-*-helvetica-bold-r-normal-*-14-*-*-*-*-*-iso8859-1
+
+! all buttons, toggles, and radio buttons should be plain
+*XmPushButton*fontList:		-*-helvetica-medium-r-normal-*-14*iso8859-1
+*XmPushButtonGadget*fontList:	-*-helvetica-medium-r-normal-*-14*iso8859-1
+*XmToggleButton*fontList:	-*-helvetica-medium-r-normal-*-14*iso8859-1
+*XmToggleButtonGadget*fontList:	-*-helvetica-medium-r-normal-*-14*iso8859-1
+*optionMenu*fontList:		-*-helvetica-medium-r-normal-*-14*iso8859-1
+*XmIconGadget*fontList:		-*-helvetica-medium-r-normal-*-14*iso8859-1
+*XmBulletinBoard*buttonFontList: -*-helvetica-medium-r-normal-*-14*iso8859-1
+
+! menuBar entries, panes, popups, and option menus should be oblique
+*menuBar*fontList:   		-*-helvetica-bold-o-normal-*-14*iso8859-1
+! for entries in popup menus
+*XmMenuShell*XmPushButton*fontList:  -*-helvetica-bold-o-normal-*-14*iso8859-1
+*XmMenuShell*XmLabelGadget*fontList: -*-helvetica-bold-o-normal-*-14*iso8859-1
+*XmMenuShell*XmLabel*fontList: -*-helvetica-bold-o-normal-*-14*iso8859-1
+*XmMenuShell*XmPushButtonGadget*fontList: -*-helvetica-bold-o-normal-*-14*iso8859-1
+*XmMenuShell*XmCascadeButton*fontList: -*-helvetica-bold-o-normal-*-14*iso8859-1
+*XmMenuShell*XmCascadeButtonGadget*fontList: -*-helvetica-bold-o-normal-*-14*iso8859-1
+*XmMenuShell*XmToggleButton*fontList: -*-helvetica-bold-o-normal-*-14*iso8859-1
+*XmMenuShell*XmToggleButtonGadget*fontList: -*-helvetica-bold-o-normal-*-14*iso8859-1
+*optionPane*fontList:	-*-helvetica-bold-o-normal-*-14*iso8859-1
+
+! Lists
+*XmList*fontList:	-*-helvetica-medium-r-normal-*-14*iso8859-1
+
+! Text fonts
+*XmText.fontList:      -*-lucidatypewriter-medium-r-normal-*-14*iso8859-1
+*XmTextField.fontList: -*-lucidatypewriter-medium-r-normal-*-14*iso8859-1
+
+
+!
+! Spacing stuff, probably belongs in master scheme file
+!
+
+! buttons shouldn't look "cramped"
+! (24 pixels across face from top to bottom and 8 in margin on face)
+*XmPushButton*marginHeight: 	4
+*XmPushButton*marginWidth: 	7
+
+! option menu buttons shouldn't look "cramped" either 
+! but need to be a bit smaller than regular buttons and the
+! same as the menu bar
+*optionMenu*marginHeight: 	0
+*optionMenu*marginTop: 		5
+*optionMenu*marginBottom: 	5
+*optionMenu*marginWidth: 	0
+
+! option menu panes are more like pulldown menus than buttons
+*optionPane*XmPushButton*marginHeight:	1
+*optionPane*XmPushButton*marginWidth:	1
+*optionPane*XmPushButton*marginLeft:	3
+*optionPane*XmPushButton*marginRight:	3
+
+! move the text in lists slightly right to improve legibility
+*XmList*listMarginWidth:        3
+
+! height of menuBar should be 22 pixels 
+*menuBar*marginHeight: 		1
+*menuBar.marginHeight: 		0
+*menuBar*marginLeft:  		1
+*menuBar.spacing:  		7
+*XmMenuShell*marginLeft:  	3
+*XmMenuShell*marginRight:  	4
+
+! spacing between indicator and label should be only 6 in menus
+*XmMenuShell*XmToggleButtonGadget*spacing: 	 2
+*XmMenuShell*XmToggleButtonGadget*marginHeight:  0
+*XmMenuShell*XmToggleButtonGadget*indicatorSize: 10
+
+*XmMenuShell*XmLabelGadget*marginHeight: 4
+
+! spacing between indicator and label should be 8 outside of menus
+*XmToggleButtonGadget*spacing: 	4
+*XmToggleButton*spacing: 	4
+
+! spacing between scrollbars and clients should be 2 pixels
+*XmScrolledWindow*spacing: 	0
+
+! Scrollbars
+*XmScrollBar*width: 		18
+*XmScrollBar*height: 		18
+
+! sliders should be slightly narrower than scrollbars ->
+! 12 pixels across the trough as opposed to 14
+! *XmScale*scaleHeight: 		20
+
+! in a perfect world, text fields would be the same size as buttons
+! (28 pixels including shadow) but since lucidatypwriter14 is really
+! only 13 pixels, our text fields will be 27 pixels high
+*XmText*marginHeight:		4
+
+
+!
+! Color Mappings
+!
+
+*foreground:			 	Black
+*background:			 	gray
+!*XmList*background:     		gray50
+*XmPushButton*background:	 	gray68
+*XmToggleButton*background:	 	gray68
+*XmText.background:		 	gray72
+*XmTextField.background:	 	rosy brown
+*troughColor: 			 	gray52
+
+! color all dialogs, warnings, and errors the same
+!*XmSelectionBox*background:	 	gray84
+*XmSelectionBox*XmText*background: 	rosy brown
+*XmMessageBox*background:	 	gray84
+
+! color all radio and toggle buttons when they are selected
+*fillOnSelect:			True
+*visibleWhenOff:		True
+*selectColor:			yellow
+
+! for keyboard traversal
+*highlightColor:		 	Black
+*XmText*highlightThickness:		1
+*XmTextField*highlightThickness:	1
+*XmPushButton*highlightThickness:	1
+
+!! no need for anything else to highlight itself
+*highlightThickness:	0
+
+
+
+

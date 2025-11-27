@@ -181,11 +181,16 @@ int redraw_counter = 0;
 char render_mode_flag = 0;
 int graphics_state_mode = 0;
 int graphics_render_flags = 0;
-int cpack_color = 0;
-int current_packed_color = 0;
-int highlight_color = 0;
-int highlight_packed_color = 0;
-int rect_draw_color = 0;
+/* Colors from X resources (grass landscape) - packed as BGR for OpenGL */
+int cpack_color = 0xffe16d;           /* skyColor #6de1ff as BGR - draw_warp clear */
+int bg_color_normal = 0xffe16d;       /* skyColor #6de1ff as BGR - normal background */
+int bg_color_grid = 0x238823;         /* groundColor #238823 as BGR (R=B so same) */
+int zbuffer_value = 0x7fffff;         /* Z-buffer clear value (far plane) */
+char grid_display_flag = 0;           /* 0=normal sky, 1=grid/ground mode */
+int current_packed_color = 0xffffff;  /* dirColor #ffffff as BGR (same) */
+int highlight_color = 0xffffff;       /* selLineColor #ffffff as BGR (same) */
+int highlight_packed_color = 0xd6e0c4; /* unselLineColor #c4e0d6 as BGR */
+int rect_draw_color = 0xd2d2d2;       /* warpDirColor #d2d2d2 as BGR (same) */
 float rotation_factor_y = 0.0f;
 int translate_y_offset = 0;
 float base_y_offset = 0.0f;
@@ -404,7 +409,7 @@ char *permission_string_table = NULL;
  * Drawing State
  *============================================================================*/
 char drawing_active_flag = 0;
-char grid_display_flag = 0;
+/* grid_display_flag moved to Rendering State section */
 short default_line_width = 1;
 
 /*=============================================================================

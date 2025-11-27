@@ -35,7 +35,8 @@ static inline int get_view_position(void * p0) { (void)p0; return 0; /* TODO */ 
 static inline int get_window_entry(int p0) { (void)p0; return 0; /* TODO */ }
 static inline void gl_get_dimensions_wrapper(void * p0, void * p1, void * p2) { (void)p0; (void)p1; (void)p2; /* TODO */ }
 static inline void gl_swap_buffers(int p0) { (void)p0; /* TODO */ }
-static inline int init_toplevel_resources(int p0) { (void)p0; return 0; /* TODO */ }
+/* Implemented in init_resources.c */
+extern void init_toplevel_resources(Widget w);
 static inline void install_help_callback(void * p0, void * p1) { (void)p0; (void)p1; /* TODO */ }
 static inline void load_filetype_rules_wrapper(const char * p0) { (void)p0; /* TODO */ }
 static inline int parse_data_buffer(int p0, int p1, void * p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; return 0; /* TODO */ }

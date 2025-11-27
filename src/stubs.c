@@ -9,6 +9,8 @@
 
 #include "fsn_types.h"
 #include "fsn_state.h"
+#include "window.h"
+#include "fsn_igl.h"
 #include <stdio.h>
 #include <Xm/Xm.h>
 #include <GL/gl.h>
@@ -188,6 +190,54 @@ void zoom_gl_init_callback(Widget w, XtPointer client, XtPointer call) {
 
 void search_gl_init_callback(Widget w, XtPointer client, XtPointer call) {
     (void)w; (void)client; (void)call;
+}
+
+/*=============================================================================
+ * Phase 14: GL Widget Callbacks
+ * These trigger rendering when the GL drawing area receives events
+ *============================================================================*/
+
+/**
+ * glwidget_expose_callback - Called when GL widget needs redraw
+ * Sets redraw_flag to trigger rendering on next main loop iteration
+ */
+void glwidget_expose_callback(Widget w, XtPointer client, XtPointer call) {
+    (void)w; (void)client; (void)call;
+    redraw_flag = 1;
+}
+
+/**
+ * glwidget_resize_callback - Called when GL widget is resized
+ * Updates viewport and triggers redraw
+ */
+void glwidget_resize_callback(Widget w, XtPointer client, XtPointer call) {
+    Dimension width, height;
+    (void)client; (void)call;
+
+    XtVaGetValues(w, XmNwidth, &width, XmNheight, &height, NULL);
+    set_main_gl_window();
+    viewport(0, (short)(width - 1), 0, (short)(height - 1));
+    redraw_flag = 1;
+}
+
+/**
+ * glwidget_init_callback - Called when GL widget is first realized
+ * Note: For xmDrawingAreaWidgetClass this won't be called automatically,
+ * we trigger it manually after XtRealizeWidget
+ */
+void glwidget_init_callback(Widget w, XtPointer client, XtPointer call) {
+    (void)w; (void)client; (void)call;
+    set_main_gl_window();
+    zbuffer(1);  /* Enable depth testing */
+    redraw_flag = 1;
+}
+
+/**
+ * gl_input_callback - Called for mouse/keyboard input on GL widget
+ */
+void gl_input_callback(Widget w, XtPointer client, XtPointer call) {
+    (void)w; (void)client; (void)call;
+    /* TODO: Handle mouse/keyboard input */
 }
 
 /* deleteMessage - implemented in delete.c */
@@ -411,6 +461,10 @@ void setup_context_widgets(void) {
     glWidget = XtCreateManagedWidget("glwidget", xmDrawingAreaWidgetClass,
                                       contextForm, args, n);
     cwptr[2] = glWidget;
+
+    /* Register GL widget callbacks */
+    XtAddCallback(glWidget, XmNexposeCallback, glwidget_expose_callback, NULL);
+    XtAddCallback(glWidget, XmNresizeCallback, glwidget_resize_callback, NULL);
 
     /* 3. Create highlight label (offset 0x2c / index 11) */
     n = 0;

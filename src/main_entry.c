@@ -47,7 +47,7 @@ void main(int argc,char **argv)
   toplevel = XtAppInitialize(&app_context, "Fsn", NULL, 0, &argc_copy,
                              argv, NULL, NULL, 0);
   display = XtDisplay(toplevel);
-  init_toplevel_resources((undefined4)toplevel);
+  init_toplevel_resources(toplevel);
   if (argc_copy < 2) {
     if (relative_path_flag == '\0') {
       pcStack_bc = getcwd((char *)0x0,0x400);
@@ -125,16 +125,21 @@ void main(int argc,char **argv)
   install_help_callback(message_widget,&messageHelp);
   set_status_message("a 3D File System Navigator",0);
   {
+    /* pane_form_widget: main GL area, BELOW message bar, fills to bottom
+     * Original fsn2.c line 48580-48597:
+     *   topAttachment=ATTACH_WIDGET, topWidget=message_widget
+     *   bottomAttachment=ATTACH_FORM
+     *   leftAttachment=ATTACH_WIDGET, leftWidget=panel_vsep
+     *   rightAttachment=ATTACH_FORM
+     */
     Arg args[8];
     int n = 0;
-    XtSetArg(args[n], XmNtopAttachment, XmATTACH_FORM); n++;
-    XtSetArg(args[n], XmNbottomAttachment, XmATTACH_WIDGET); n++;
-    XtSetArg(args[n], XmNbottomWidget, message_widget); n++;
-    XtSetArg(args[n], XmNleftAttachment, XmATTACH_FORM); n++;
-    XtSetArg(args[n], XmNrightAttachment, XmATTACH_FORM); n++;
+    XtSetArg(args[n], XmNtopAttachment, XmATTACH_WIDGET); n++;
+    XtSetArg(args[n], XmNtopWidget, message_widget); n++;
+    XtSetArg(args[n], XmNbottomAttachment, XmATTACH_FORM); n++;
+    XtSetArg(args[n], XmNleftAttachment, XmATTACH_WIDGET); n++;
     XtSetArg(args[n], XmNleftWidget, panel_vsep_widget); n++;
-    XtSetArg(args[n], XmNtopOffset, 0); n++;
-    XtSetArg(args[n], XmNbottomOffset, 0); n++;
+    XtSetArg(args[n], XmNrightAttachment, XmATTACH_FORM); n++;
     pane_form_widget = XmCreateForm(panel_widget,"paneForm",args,n);
   }
   XtManageChild(pane_form_widget);
@@ -267,7 +272,7 @@ void parse_command_args(int argc_param,char **argv_param)
   toplevel = XtAppInitialize(&app_context,app_class_name,(XrmOptionDescList)PTR_s__landscape_100000e0,5,&argc_local,
                              argv_param,fallback_resources,(Arg*)&arg_a0,1);
   display = XtDisplay(toplevel);
-  init_toplevel_resources((int)toplevel);
+  init_toplevel_resources(toplevel);
   if (argc_local < 2) {
     if (relative_path_flag == '\0') {
       starting_directory = getcwd((char *)0x0,0x400);
