@@ -319,6 +319,8 @@ short getmmode(void);
 /* Patterns */
 void defpattern(short index, short size, unsigned short *pattern);
 void setpattern(short index);
+long getpattern(void);
+void makePatterns(void);
 
 /* Move/Draw 2D (for line drawing) */
 void move2(Coord x, Coord y);

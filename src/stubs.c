@@ -231,6 +231,7 @@ void glwidget_init_callback(Widget w, XtPointer client, XtPointer call) {
     (void)w; (void)client; (void)call;
     set_main_gl_window();
     zbuffer(1);  /* Enable depth testing */
+    makePatterns();  /* Initialize original FSN stipple patterns */
     redraw_flag = 1;
 }
 

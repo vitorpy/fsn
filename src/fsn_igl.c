@@ -855,41 +855,164 @@ int32_t getgdesc(int32_t inquiry)
 }
 
 /* ============================================================
- * Patterns (Stub)
+ * Patterns - Polygon Stipple (from irix-igl)
+ * OpenGL requires 32x32 bit pattern = 128 bytes
+ * IrisGL uses 16x16 or 32x32 patterns
  * ============================================================ */
 
-static unsigned short *fsn_patterns[256] = {NULL};
-static short fsn_pattern_sizes[256] = {0};
+#define FSN_MAX_PATTERNS 16
 
-void defpattern(short index, short size, unsigned short *pattern)
+/* Pattern storage: each pattern is 32x32 bits = 128 bytes */
+typedef struct {
+    short id;
+    GLubyte pattern[128];
+} fsn_pattern_t;
+
+static fsn_pattern_t fsn_patterns[FSN_MAX_PATTERNS];
+static int fsn_current_pattern_idx = 0;
+static int fsn_patterns_initialized = 0;
+
+/* Original FSN patterns extracted from 1996 MIPS binary */
+static const unsigned short fsn_original_pattern_1[16] = {
+    0x1111, 0x0000, 0x4444, 0x0000,
+    0x1111, 0x0000, 0x4444, 0x0000,
+    0x1111, 0x0000, 0x4444, 0x0000,
+    0x1111, 0x0000, 0x4444, 0x0000
+};
+
+static const unsigned short fsn_original_pattern_2[16] = {
+    0x5555, 0xFFFF, 0x5555, 0xFFFF,
+    0x5555, 0xFFFF, 0x5555, 0xFFFF,
+    0x5555, 0xFFFF, 0x5555, 0xFFFF,
+    0x5555, 0xFFFF, 0x5555, 0xFFFF
+};
+
+static const unsigned short fsn_original_pattern_3[16] = {
+    0x5555, 0x5555, 0x5555, 0x5555,
+    0x5555, 0x5555, 0x5555, 0x5555,
+    0x5555, 0x5555, 0x5555, 0x5555,
+    0x5555, 0x5555, 0x5555, 0x5555
+};
+
+static const unsigned short fsn_original_pattern_4[16] = {
+    0x8888, 0x2222, 0x8888, 0x2222,
+    0x8888, 0x2222, 0x8888, 0x2222,
+    0x8888, 0x2222, 0x8888, 0x2222,
+    0x8888, 0x2222, 0x8888, 0x2222
+};
+
+/* Find pattern slot by ID */
+static int fsn_find_pattern(short id, int create)
 {
-    if (index < 0 || index >= 256) return;
+    int i, free_slot = -1;
 
-    int pat_size;
-    switch (size) {
-        case PATTERN_16: pat_size = PATTERN_16_SIZE; break;
-        case PATTERN_32: pat_size = PATTERN_32_SIZE; break;
-        case PATTERN_64: pat_size = PATTERN_64_SIZE; break;
-        default: return;
+    for (i = 0; i < FSN_MAX_PATTERNS; i++) {
+        if (fsn_patterns[i].id == id)
+            return i;
+        if (free_slot < 0 && fsn_patterns[i].id == 0)
+            free_slot = i;
     }
 
-    if (fsn_patterns[index])
-        free(fsn_patterns[index]);
+    if (create && free_slot >= 0) {
+        fsn_patterns[free_slot].id = id;
+        return free_slot;
+    }
 
-    fsn_patterns[index] = (unsigned short *)malloc(pat_size * sizeof(unsigned short));
-    memcpy(fsn_patterns[index], pattern, pat_size * sizeof(unsigned short));
-    fsn_pattern_sizes[index] = size;
+    return -1;
+}
+
+void defpattern(short n, short size, unsigned short *mask)
+{
+    int i, idx;
+    GLubyte *omask;
+
+    if (n <= 0) return;
+
+    idx = fsn_find_pattern(n, 1);
+    if (idx < 0) return;
+
+    omask = fsn_patterns[idx].pattern;
+
+    /* Convert IrisGL pattern to OpenGL stipple (32x32 bits = 128 bytes) */
+    switch (size) {
+        case 16:
+            /* Expand 16x16 to 32x32 by doubling horizontally and vertically */
+            for (i = 0; i < 16; i++) {
+                /* Each 16-bit row expands to 4 bytes (32 bits) by doubling */
+                omask[4*i + 0] = mask[i] >> 8;
+                omask[4*i + 1] = mask[i] & 0xFF;
+                omask[4*i + 2] = mask[i] >> 8;
+                omask[4*i + 3] = mask[i] & 0xFF;
+                /* Repeat for second half (rows 16-31) */
+                omask[4*i + 64] = mask[i] >> 8;
+                omask[4*i + 65] = mask[i] & 0xFF;
+                omask[4*i + 66] = mask[i] >> 8;
+                omask[4*i + 67] = mask[i] & 0xFF;
+            }
+            break;
+
+        case 32:
+            /* Direct copy - 32 rows of 16-bit values = 64 bytes, expand to 128 */
+            for (i = 0; i < 64; i++) {
+                omask[2*i + 0] = mask[i] >> 8;
+                omask[2*i + 1] = mask[i] & 0xFF;
+            }
+            break;
+
+        default:
+            memset(omask, 0, 128);
+            break;
+    }
+
+    fprintf(stderr, "defpattern(%d, %d, %p) -> slot %d\n", n, size, (void*)mask, idx);
 }
 
 void setpattern(short index)
 {
+    int idx;
+
     if (index == 0) {
         glDisable(GL_POLYGON_STIPPLE);
-    } else if (index > 0 && index < 256 && fsn_patterns[index]) {
-        /* Convert to OpenGL stipple pattern (32x32) */
-        /* For now, just enable stippling with a default pattern */
-        glEnable(GL_POLYGON_STIPPLE);
+        fsn_current_pattern_idx = 0;
+        return;
     }
+
+    idx = fsn_find_pattern(index, 0);
+    if (idx < 0) {
+        fprintf(stderr, "setpattern(%d): pattern not found\n", index);
+        return;
+    }
+
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    glPolygonStipple(fsn_patterns[idx].pattern);
+    glEnable(GL_POLYGON_STIPPLE);
+    fsn_current_pattern_idx = idx;
+}
+
+long getpattern(void)
+{
+    if (fsn_current_pattern_idx > 0 && fsn_current_pattern_idx < FSN_MAX_PATTERNS)
+        return fsn_patterns[fsn_current_pattern_idx].id;
+    return 0;
+}
+
+/* Initialize original FSN patterns - call once at startup */
+void makePatterns(void)
+{
+    if (fsn_patterns_initialized) return;
+
+    /* Clear pattern table */
+    memset(fsn_patterns, 0, sizeof(fsn_patterns));
+
+    /* Define original FSN patterns */
+    defpattern(1, 16, (unsigned short *)fsn_original_pattern_1);
+    defpattern(2, 16, (unsigned short *)fsn_original_pattern_2);
+    defpattern(3, 16, (unsigned short *)fsn_original_pattern_3);
+    defpattern(4, 16, (unsigned short *)fsn_original_pattern_4);
+
+    fsn_patterns_initialized = 1;
+    fprintf(stderr, "makePatterns(): Initialized 4 original FSN stipple patterns\n");
 }
 
 /* ============================================================

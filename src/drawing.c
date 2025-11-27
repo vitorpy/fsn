@@ -65,9 +65,10 @@ static void draw_directories(char param_1)
     if (*(int *)(curcontext + 0x3c) == 0) {
         /* Draw test ground plane even without topdir */
         if (topdir == NULL && call_count <= 3) {
-            fprintf(stderr, "  topdir is NULL - drawing test ground\n");
-            /* Simple green ground plane */
+            fprintf(stderr, "  topdir is NULL - drawing test ground with pattern\n");
+            /* Simple green ground plane with grid pattern */
             cpack(0x228822);  /* Dark green */
+            setpattern(1);  /* Enable FSN sparse diagonal dot pattern */
             bgnpolygon();
             vertex[0] = -50.0f; vertex[1] = -50.0f; vertex[2] = -0.5f;
             v3f(vertex);
@@ -78,6 +79,7 @@ static void draw_directories(char param_1)
             vertex[0] = -50.0f; vertex[1] = 50.0f; vertex[2] = -0.5f;
             v3f(vertex);
             endpolygon();
+            setpattern(0);  /* Disable pattern */
 
             /* Simple sky gradient - light blue quad high up */
             cpack(0xffd587);  /* Light blue (BGR) */
