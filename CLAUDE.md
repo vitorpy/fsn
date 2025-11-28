@@ -18,12 +18,14 @@ When in doubt: **EXTRACT, DON'T REWRITE**
 
 FSN (File System Navigator) restoration project - converting a 78K-line Ghidra MIPS/IRIX decompile into a functional modern Linux binary. This is the 3D file browser seen in Jurassic Park (1993).
 
-## Current Status: Phase 14 Complete - Rendering Works!
+## Current Status: Phase 18 Complete - Text Labels Restored!
 
 The FSN application now:
-- Compiles and links successfully (296KB binary)
+- Compiles and links successfully
 - Launches and displays a Motif window with GL rendering
 - Shows the iconic FSN landscape (ground plane + sky gradient)
+- Renders 3D file blocks with connecting lines
+- Displays text labels using original vector stroked font
 
 ### What Works:
 - X11/Motif initialization and window creation
@@ -32,10 +34,11 @@ The FSN application now:
 - IrisGL compatibility layer (mmode, perspective, transforms)
 - Ground plane and gradient sky rendering
 - Coordinate system conversion (FSN Y-forward to OpenGL -Z)
+- Directory tree visualization (3D file blocks)
+- Original vector font text labels (extracted from binary)
+- Selection spotlight beams
 
 ### Still Needs Work:
-- Directory tree visualization (3D file blocks)
-- File icons and labels
 - Mouse interaction/picking
 - Navigation and zoom controls
 - Many stub functions need real implementations
@@ -132,6 +135,7 @@ python3 analysis/extract_module.py <module_name> --list 'func1,func2,func3'
 ```
 fsn/
 ├── fsn.c              # Original 78K-line decompile (source of truth)
+├── fsn.original       # Original 1996 SGI MIPS binary (340KB)
 ├── src/               # Extracted modules (.c files)
 ├── include/           # Headers (.h files)
 ├── docs/              # Archaeology reference documentation
@@ -143,6 +147,128 @@ fsn/
 ├── build/             # CMake build directory (out-of-source!)
 └── CMakeLists.txt     # Build configuration
 ```
+
+---
+
+## Original Binary & Reverse Engineering
+
+### The Original Binary
+
+**Location:** `fsn.original` in project root
+
+**File Info:**
+```
+ELF 32-bit MSB executable, MIPS, MIPS-I version 1 (SYSV)
+dynamically linked, interpreter /usr/lib/libc.so.1, stripped
+Size: 340,856 bytes
+```
+
+This is the original SGI IRIX binary from December 1996. Despite being stripped, it contains valuable data that can be extracted.
+
+### MIPS Cross-Tools (Arch Linux)
+
+Install: `sudo pacman -S mips-linux-gnu-binutils`
+
+**Available tools:**
+| Tool | Purpose |
+|------|---------|
+| `mips-linux-gnu-objdump` | Disassemble, show sections, dump data |
+| `mips-linux-gnu-objcopy` | Extract binary sections to files |
+| `mips-linux-gnu-readelf` | ELF header/section info |
+| `mips-linux-gnu-nm` | Symbol listing (limited for stripped binaries) |
+
+### Binary Section Layout
+
+```bash
+mips-linux-gnu-objdump -h fsn.original
+```
+
+Key sections:
+| Section | VMA | Size | Contents |
+|---------|-----|------|----------|
+| `.text` | 0x00409440 | 0x32350 | Code (206KB) |
+| `.data` | 0x10000000 | 0x9f50 | Initialized data (40KB) |
+| `.rodata` | 0x0043b7c0 | ~varies | Read-only strings, constants |
+
+### Extracting Data from the Binary
+
+**Step 1: Find data address** (from Ghidra decompile or symbols)
+```bash
+# Search for known patterns in the decompile
+grep -n "chrtbl" fsn.c
+# Result: DAT_10000218 - address 0x10000218
+```
+
+**Step 2: Calculate file offset**
+```
+.data section: VMA=0x10000000, File offset=0x3c000
+Target: 0x10000218
+File offset = 0x3c000 + (0x10000218 - 0x10000000) = 0x3c218
+```
+
+**Step 3: Extract raw bytes**
+```bash
+# Using objcopy to extract .data section
+mips-linux-gnu-objcopy -O binary --only-section=.data fsn.original /tmp/data.bin
+
+# Or using dd for specific offset/size
+dd if=fsn.original bs=1 skip=$((0x3c218)) count=$((128*216)) of=/tmp/chrtbl.bin
+```
+
+**Step 4: Convert to C code**
+```bash
+python3 analysis/extract_font.py /tmp/chrtbl.bin > src/vector_font_data.c
+```
+
+### Known Data Addresses
+
+| Symbol | Address | Size | Description |
+|--------|---------|------|-------------|
+| `chrtbl` | 0x10000218 | 27,648 bytes | Vector font data (128 chars × 216 bytes) |
+| `curcontext` | 0x10009524 | 4 bytes | Current context pointer |
+| `topdir` | 0x10016f00 | 4 bytes | Root directory node pointer |
+
+### Data Format Notes
+
+**Vector Font (`chrtbl`):**
+- 128 characters, 216 bytes each (54 int32s)
+- Big-endian (MIPS MSB)
+- Command format: `{type, x, y}` where:
+  - 0 = end of character
+  - 1 = move/translate pen
+  - 2 = begin line + vertex
+  - 3 = continue line
+  - 4 = end line + vertex
+
+### Quick Reference Commands
+
+```bash
+# Show all sections
+mips-linux-gnu-objdump -h fsn.original
+
+# Disassemble a function (if you know address)
+mips-linux-gnu-objdump -d --start-address=0x409440 --stop-address=0x409500 fsn.original
+
+# Dump hex at offset
+xxd -s 0x3c218 -l 256 fsn.original
+
+# Extract entire .data section
+mips-linux-gnu-objcopy -O binary --only-section=.data fsn.original data_section.bin
+
+# Search for strings
+strings -t x fsn.original | grep -i "fsn"
+```
+
+### Extraction Scripts (in `analysis/`)
+
+| Script | Purpose |
+|--------|---------|
+| `extract_font.py` | Convert binary font data to C array |
+
+When extracting new data, create a Python script that:
+1. Reads big-endian values (`struct.unpack('>i', ...)`)
+2. Outputs formatted C code
+3. Documents the source address and format
 
 ## Implemented Stub Functions (Phase 9-10)
 

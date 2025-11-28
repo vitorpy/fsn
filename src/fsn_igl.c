@@ -251,6 +251,19 @@ void ortho2(Coord left, Coord right, Coord bottom, Coord top)
     glDisable(GL_LIGHTING);
 }
 
+/**
+ * ortho2_ndc - Set up 2D orthographic projection with normalized device coords
+ *
+ * ORIGINAL: fsn.c calls ortho2() with no arguments for text overlay rendering.
+ * This wrapper provides the default bounds (-1, 1, -1, 1) for NDC space.
+ *
+ * Used for 2D text labels rendered as overlays on the 3D scene.
+ */
+void ortho2_ndc(void)
+{
+    ortho2(-1.0f, 1.0f, -1.0f, 1.0f);
+}
+
 void ortho(Coord left, Coord right, Coord bottom, Coord top, Coord near_, Coord far_)
 {
     if (fsn_matrix_mode == MSINGLE || fsn_matrix_mode == MPROJECTION) {

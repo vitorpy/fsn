@@ -420,6 +420,39 @@ void init_camera_state(void) {
     calc_v_angle();
 }
 
+/* setScales - Sync scale widget values to curcontext angles
+ * ORIGINAL: fsn.c:37740-37764
+ * Called after camera changes to update the UI sliders to reflect new values.
+ * Uses cached values to avoid unnecessary XtSetValues calls.
+ *
+ * Resource constant 0xf66187b = XmNvalue
+ */
+void setScales(void) {
+    Arg args[1];
+
+    /* Only update if controls are visible and not in special mode */
+    if (controlsShowing == '\0') return;
+    if (curcontext[0xc53] != '\0') return;  /* Special mode flag */
+
+    /* Update horizontal angle widget (view_angle_widget) */
+    if (cached_view_angle_1 != *(short *)(curcontext + 0x0c)) {
+        cached_view_angle_1 = *(short *)(curcontext + 0x0c);
+        if (view_angle_widget != NULL) {
+            XtSetArg(args[0], XmNvalue, (int)cached_view_angle_1);
+            XtSetValues(view_angle_widget, args, 1);
+        }
+    }
+
+    /* Update vertical angle widget (vertical_scale_widget) */
+    if (cached_view_angle_2 != *(short *)(curcontext + 0x0e)) {
+        cached_view_angle_2 = *(short *)(curcontext + 0x0e);
+        if (vertical_scale_widget != NULL) {
+            XtSetArg(args[0], XmNvalue, (int)cached_view_angle_2);
+            XtSetValues(vertical_scale_widget, args, 1);
+        }
+    }
+}
+
 /*=============================================================================
  * Phase 16: Mouse camera controls
  * gl_motion_handler and gl_button_handler for camera navigation
@@ -835,17 +868,24 @@ void setup_context_widgets(void) {
  * Control Panel Callbacks (Phase 17)
  *-----------------------------------------------------------------------------*/
 
-/* reset_eye - Reset camera to initial position */
+/* reset_eye - Reset camera to initial position
+ * ORIGINAL: fsn.c:37668-37675
+ * Original called save_matrix_state() then set_camera_lookat(view_init_x, view_init_y)
+ * We use the resource-defined view_init_x/y values instead of hardcoded positions.
+ */
 void reset_eye(Widget w, XtPointer client, XtPointer call) {
     (void)w; (void)client; (void)call;
-    /* Reset camera to initial position from resources */
-    *(float *)(curcontext + 0x00) = 10.0f;    /* camera_x */
-    *(float *)(curcontext + 0x04) = -10.0f;   /* camera_y */
-    *(float *)(curcontext + 0x08) = 15.0f;    /* camera_z */
-    *(short *)(curcontext + 0x0c) = 900;      /* rotation_z */
-    *(short *)(curcontext + 0x0e) = 0;        /* rotation_x */
+
+    /* Reset to resource-defined initial position */
+    *(float *)(curcontext + 0x00) = view_init_x;   /* camera_x from resources */
+    *(float *)(curcontext + 0x04) = view_init_y;   /* camera_y from resources */
+    *(float *)(curcontext + 0x08) = 15.0f;         /* camera_z (height) */
+    *(short *)(curcontext + 0x0c) = 900;           /* rotation_z (90°) */
+    *(short *)(curcontext + 0x0e) = 0;             /* rotation_x (level) */
+
     calc_h_angle();
     calc_v_angle();
+    setScales();  /* Sync scale widgets to new values */
     redraw_flag = 1;
     set_status_message("View reset", 0);
 }
@@ -1096,6 +1136,9 @@ Widget create_panel_component(Widget parent, Arg *args, int nargs) {
     button = XmCreatePushButton(controls, "mark", NULL, 0);
     XtAddCallback(button, XmNactivateCallback, mark_callback, NULL);
     XtManageChild(button);
+
+    /* Mark controls as showing for setScales() sync */
+    controlsShowing = 1;
 
     fprintf(stderr, "create_panel_component: Created full control panel\n");
     return controls;

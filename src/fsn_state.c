@@ -175,6 +175,11 @@ float icon_size_multiplier = 1.0f;
 float icon_spacing_factor = 1.0f;
 float position_offset = 0.0f;
 
+/* Original ternary tree child index markers (fsn.c:1065-1067) */
+undefined child_dir_index_1 = 0;
+undefined child_dir_index_2 = 0;
+undefined child_dir_index_3 = 0;
+
 /*=============================================================================
  * Rendering State
  *============================================================================*/

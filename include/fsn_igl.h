@@ -236,6 +236,7 @@ void _scale3(Coord x, Coord y, Coord z);
 /* Projection */
 void perspective(Angle fovy, float aspect, Coord near, Coord far);
 void ortho2(Coord left, Coord right, Coord bottom, Coord top);
+void ortho2_ndc(void);  /* No-arg version for 2D text overlay (-1 to 1 bounds) */
 void ortho(Coord left, Coord right, Coord bottom, Coord top, Coord near, Coord far);
 void viewport(Screencoord left, Screencoord right, Screencoord bottom, Screencoord top);
 

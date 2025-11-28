@@ -198,6 +198,11 @@ extern float icon_size_multiplier;
 extern float icon_spacing_factor;
 extern float position_offset;
 
+/* Original ternary tree child index markers (fsn.c:1065-1067) */
+extern undefined child_dir_index_1;
+extern undefined child_dir_index_2;
+extern undefined child_dir_index_3;
+
 /*=============================================================================
  * Rendering State
  *============================================================================*/

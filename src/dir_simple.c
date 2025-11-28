@@ -36,13 +36,20 @@ undefined4 *allocate_directory_entry(void)
 {
     DirectoryNode *entry;
 
-    /* Grow pool if needed */
+    /*
+     * Grow pool if needed.
+     * WARNING: realloc can move the pool, invalidating any existing pointers
+     * into the pool. We use a large initial size to avoid this during recursion.
+     */
     if (pool_used >= pool_size) {
-        int new_size = pool_size ? pool_size * 2 : 256;
+        int new_size = pool_size ? pool_size * 2 : 8192;  /* Large initial to avoid moves */
         DirectoryNode *new_pool = realloc(entry_pool, new_size * sizeof(DirectoryNode));
         if (!new_pool) {
             fprintf(stderr, "allocate_directory_entry: out of memory\n");
             return NULL;
+        }
+        if (entry_pool != NULL && new_pool != entry_pool) {
+            fprintf(stderr, "WARNING: pool moved during recursion - pointers invalidated!\n");
         }
         entry_pool = new_pool;
         pool_size = new_size;
@@ -124,6 +131,10 @@ void create_root_directory(char *param_1)
 
 /**
  * scan_directory_recursive - Recursively scan directory contents
+ *
+ * ORIGINAL FSN TERNARY STRUCTURE:
+ * - First 3 subdirectories go to child_center, child_left, child_right
+ * - Files stored in files_array with num_files count
  */
 static void scan_directory_recursive(DirectoryNode *entry, const char *path, int depth)
 {
@@ -131,10 +142,9 @@ static void scan_directory_recursive(DirectoryNode *entry, const char *path, int
     struct dirent *ent;
     struct stat st;
     char fullpath[1024];
-    DirectoryNode **children = NULL;
-    int child_count = 0;
-    int child_capacity = 0;
-    int file_count = 0;
+    DirectoryNode **files = NULL;
+    int file_capacity = 0;
+    int dir_count = 0;  /* Count subdirectories for ternary assignment */
 
     /* Limit recursion depth for performance */
     if (depth > 3) {
@@ -145,6 +155,13 @@ static void scan_directory_recursive(DirectoryNode *entry, const char *path, int
     if (dir == NULL) {
         return;
     }
+
+    /* Initialize ternary children to NULL */
+    entry->child_center = NULL;
+    entry->child_left = NULL;
+    entry->child_right = NULL;
+    entry->num_files = 0;
+    entry->files_array = NULL;
 
     /* Scan entries */
     while ((ent = readdir(dir)) != NULL) {
@@ -161,12 +178,6 @@ static void scan_directory_recursive(DirectoryNode *entry, const char *path, int
         }
 
         if (S_ISDIR(st.st_mode)) {
-            /* Grow children array if needed */
-            if (child_count >= child_capacity) {
-                child_capacity = child_capacity ? child_capacity * 2 : 16;
-                children = realloc(children, child_capacity * sizeof(DirectoryNode *));
-            }
-
             /* Create child entry */
             DirectoryNode *child = (DirectoryNode *)allocate_directory_entry();
             if (child == NULL) continue;
@@ -177,52 +188,116 @@ static void scan_directory_recursive(DirectoryNode *entry, const char *path, int
             child->flags = DIR_FLAG_VISIBLE | DIR_FLAG_DIRECTORY;
             child->render_flags = DIR_FLAG_VISIBLE | DIR_FLAG_DIRECTORY;
 
-            children[child_count++] = child;
+            /*
+             * ORIGINAL FSN TERNARY ASSIGNMENT:
+             * First 3 subdirectories go to center/left/right positions
+             */
+            if (dir_count == 0) {
+                entry->child_center = child;
+            } else if (dir_count == 1) {
+                entry->child_left = child;
+            } else if (dir_count == 2) {
+                entry->child_right = child;
+            }
+            /* Directories beyond first 3 are not displayed in original FSN */
+            dir_count++;
 
             /* Recurse into subdirectory */
             scan_directory_recursive(child, fullpath, depth + 1);
         } else {
-            file_count++;
+            /* Store files in files_array */
+            if (entry->num_files >= file_capacity) {
+                file_capacity = file_capacity ? file_capacity * 2 : 16;
+                files = realloc(files, file_capacity * sizeof(DirectoryNode *));
+            }
+
+            /* Create file entry */
+            DirectoryNode *file_node = (DirectoryNode *)allocate_directory_entry();
+            if (file_node == NULL) continue;
+
+            file_node->name = strdup(ent->d_name);
+            file_node->name_len = strlen(ent->d_name);
+            file_node->parent = entry;
+            file_node->flags = DIR_FLAG_VISIBLE;  /* Not a directory */
+            file_node->render_flags = DIR_FLAG_VISIBLE;
+            file_node->total_size = st.st_size;
+
+            files[entry->num_files++] = file_node;
         }
     }
     closedir(dir);
 
-    /* Store children in parent */
-    entry->child_count = child_count;
-    entry->children = children;
-    entry->file_count = file_count;
-    entry->total_size = file_count * 4096;  /* Estimate */
+    /* Store files array */
+    entry->files_array = files;
+    entry->file_count = entry->num_files;
+    entry->total_size = entry->num_files * 4096;  /* Estimate */
 }
 
 /**
  * layout_directory - Position directory entries in 3D space
+ *
+ * ORIGINAL FSN TERNARY LAYOUT:
+ * - child_center at x=0
+ * - child_left at x=-item_spacing_x
+ * - child_right at x=+item_spacing_x
+ * - Z position: parent height + layout_base_height
+ *
+ * Original: fsn.c:42526-42540
  */
 static void layout_directory(DirectoryNode *entry, float x, float y, int depth)
 {
-    int child_count = entry->child_count;
-    DirectoryNode **children = entry->children;
-    float spacing = 3.0f / (depth + 1);
-    float angle_step = (child_count > 0) ? (3.14159f * 2.0f / child_count) : 0;
-    float radius = spacing * 2.0f;
     int i;
+    float child_z;
 
     /* Set this directory's position */
     entry->pos_x = x;
     entry->pos_y = y;
     entry->height = 1.0f + depth * 0.5f;
 
-    /* Position children in a circle around this directory */
-    for (i = 0; i < child_count && children != NULL; i++) {
-        DirectoryNode *child = children[i];
-        float angle = angle_step * i;
-        float child_x = x + radius * cosf(angle);
-        float child_y = y + radius * sinf(angle);
+    /* Calculate child Z position: height + layout_base_height */
+    child_z = entry->height + layout_base_height;
 
-        /* Store offset from parent */
-        child->offset_x = child_x - x;
-        child->offset_y = child_y - y;
+    /*
+     * ORIGINAL FSN TERNARY LAYOUT from fsn.c:42526-42540
+     */
 
-        /* Recurse to layout children */
-        layout_directory(child, child_x, child_y, depth + 1);
+    /* CENTER child at x=0 */
+    if (entry->child_center != NULL) {
+        entry->child_center->offset_x = 0.0f;
+        entry->child_center->offset_y = child_z;
+        layout_directory(entry->child_center, x, y + child_z, depth + 1);
+    }
+
+    /* LEFT child at x=-item_spacing_x */
+    if (entry->child_left != NULL) {
+        entry->child_left->offset_x = -item_spacing_x;
+        entry->child_left->offset_y = child_z;
+        layout_directory(entry->child_left, x - item_spacing_x, y + child_z, depth + 1);
+    }
+
+    /* RIGHT child at x=+item_spacing_x */
+    if (entry->child_right != NULL) {
+        entry->child_right->offset_x = item_spacing_x;
+        entry->child_right->offset_y = child_z;
+        layout_directory(entry->child_right, x + item_spacing_x, y + child_z, depth + 1);
+    }
+
+    /*
+     * Position files within directory using icon_spacing_factor
+     * Original: fsn.c:43389-43392
+     * x = -icon_spacing_factor * (num_files - 1) + icon_spacing_factor * file_index
+     */
+    if (entry->files_array != NULL) {
+        for (i = 0; i < entry->num_files; i++) {
+            DirectoryNode *file = entry->files_array[i];
+            /* Linear spread centered at x=0 */
+            float file_x = -icon_spacing_factor * (entry->num_files - 1) / 2.0f
+                         + icon_spacing_factor * i;
+            file->pos_x = x + file_x;
+            file->pos_y = y;
+            file->offset_x = file_x;
+            file->offset_y = 0.0f;
+            file->height = 0.5f;  /* Files are shorter than directories */
+        }
     }
 }

@@ -59,14 +59,18 @@ typedef struct DirectoryNode {
     /* Offset 0x20-0x27: File array pointer */
     void *file_array;
 
-    /* Offset 0x28-0x2B: Child count */
-    int child_count;
+    /*
+     * ORIGINAL FSN TERNARY CHILDREN (32-bit offsets +0x28, +0x2c, +0x30):
+     * Three fixed child positions for directory tree layout
+     */
+    struct DirectoryNode *child_center;   /* +0x28: Center child (x=0) */
+    struct DirectoryNode *child_left;     /* +0x2c: Left child (x=-item_spacing_x) */
+    struct DirectoryNode *child_right;    /* +0x30: Right child (x=+item_spacing_x) */
 
-    /* Padding */
+    /* Original +0x14/+0x18: num_files and files_array */
+    int num_files;                        /* Number of file entries */
     int _pad3;
-
-    /* Offset 0x30-0x37: Child array pointer */
-    struct DirectoryNode **children;
+    struct DirectoryNode **files_array;   /* Array of file node pointers */
 
     /* Offset 0x38-0x3B: Total size */
     int total_size;
@@ -122,11 +126,14 @@ typedef struct DirectoryNode {
 
 } DirectoryNode;
 
-/* Accessor macros for draw_tree.c compatibility */
+/* Accessor macros - original FSN fields */
 #define DIR_NAME(node)        ((node)->name)
 #define DIR_NAME_LEN(node)    ((node)->name_len)
-#define DIR_CHILD_COUNT(node) ((node)->child_count)
-#define DIR_CHILDREN(node)    ((node)->children)
+#define DIR_NUM_FILES(node)   ((node)->num_files)
+#define DIR_FILES_ARRAY(node) ((node)->files_array)
+#define DIR_CHILD_CENTER(node) ((node)->child_center)
+#define DIR_CHILD_LEFT(node)  ((node)->child_left)
+#define DIR_CHILD_RIGHT(node) ((node)->child_right)
 #define DIR_POS_X(node)       ((node)->pos_x)
 #define DIR_POS_Y(node)       ((node)->pos_y)
 #define DIR_HEIGHT(node)      ((node)->height)

@@ -17,7 +17,7 @@ static inline void copy_selection_data(int p0, int p1) { (void)p0; (void)p1; /* 
 extern Widget create_panel_component(Widget parent, Arg *args, int nargs);  /* Implemented in stubs.c */
 /* display_status_message: defined in status.c and messages.c */
 static inline void draw_entry(int p0) { (void)p0; /* TODO */ }
-static inline void draw_file_icon(void * p0) { (void)p0; /* TODO */ }
+/* draw_file_icon - implemented in vector_font.c */
 /* draw_legend_color_box - implemented in block_render.c */
 static inline void draw_positioned_item(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 static inline void draw_scaled_element(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }

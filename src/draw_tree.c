@@ -10,6 +10,8 @@
 #include "draw_tree.h"
 #include "block_render.h"
 #include "box_geometry.h"
+#include "spotlight.h"
+#include "vector_font.h"
 #include "fsn_types.h"
 #include "fsn_state.h"
 #include "fsn_igl.h"
@@ -18,11 +20,21 @@
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
+#include <GL/gl.h>
 
 /* Forward declarations */
 static void process_tree_node_impl(DirectoryNode *node, char param_3);
 static void draw_file_icon_impl(const char *name);
 static void draw_directory_block(DirectoryNode *node);
+
+/*
+ * ORIGINAL: fsn.c:42680 - Scale factor for text label projection
+ * Computed once per frame in draw_tree_content(), used for 2D text overlay.
+ *
+ * Formula: scale = (icon_size_multiplier * context_scale) / zoom_factor
+ * Used for: screen_y = -height / current_label_scale - layout_z_offset
+ */
+static float current_label_scale = 1.0f;
 
 void draw_tree_content(char param_1)
 {
@@ -43,6 +55,9 @@ void draw_tree_content(char param_1)
                               *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
                               *(float *)(curcontext + 8)) / zoom_reference_height);
                 fVar1 = (icon_size_multiplier * *(float *)(curcontext + 0x34)) / fVar1;
+
+                /* Store scale factor for text label projection */
+                current_label_scale = fVar1;
 
                 if (grid_display_flag == '\0') {
                     cpack(highlight_packed_color);
@@ -98,129 +113,185 @@ void draw_tree_content(char param_1)
 }
 
 /**
+ * draw_child_node - Draw a single child directory/file node
+ */
+static void draw_child_node(DirectoryNode *parent, DirectoryNode *child, char param_3)
+{
+    undefined4 color;
+    float parent_pos[3];
+    float child_pos[3];
+    static int block_debug_count = 0;
+
+    if (child == NULL || !DIR_IS_VISIBLE(child)) {
+        return;
+    }
+
+    /* Recursive call for directories */
+    if (child->render_flags & DIR_FLAG_DIRECTORY) {
+        process_tree_node_impl(child, param_3);
+    }
+
+    /* Push selection name for picking */
+    pushname(child->name_index);
+
+    /* Select color based on flags */
+    if (child->render_flags & DIR_FLAG_DIRECTORY) {
+        color = dir_type_icon;
+    } else if (DIR_IS_SELECTED(child)) {
+        color = directory_color_active;
+    } else {
+        color = file_type_icon;
+    }
+    cpack(color);
+
+    /* Calculate line endpoints */
+    parent_pos[0] = parent->pos_x + child->offset_x;
+    parent_pos[1] = parent->pos_y + child->offset_y;
+    parent_pos[2] = 0.0f;
+
+    child_pos[0] = child->pos_x;
+    child_pos[1] = child->pos_y - child->height;
+    child_pos[2] = 0.0f;
+
+    /* Set thick line for directories */
+    if (child->render_flags & DIR_FLAG_DIRECTORY) {
+        linewidth(3);
+    }
+
+    /* Draw connecting line */
+    bgnline();
+    v3f(parent_pos);
+    v3f(child_pos);
+    endline();
+
+    /* Reset line width */
+    if (child->render_flags & DIR_FLAG_DIRECTORY) {
+        linewidth(1);
+    }
+
+    /* Draw 3D block at child position */
+    {
+        float block_width = 0.6f;
+        float block_depth = 0.6f;
+        float block_height = child->height;
+        uint32_t colors[4];
+
+        if (block_debug_count < 5) {
+            fprintf(stderr, "  BLOCK[%d]: pos=(%.2f,%.2f) height=%.2f name=%s\n",
+                    block_debug_count, child->pos_x, child->pos_y,
+                    block_height, child->name ? child->name : "(null)");
+            block_debug_count++;
+        }
+
+        colors[0] = color;
+        colors[1] = color;
+        colors[2] = (color & 0x00FFFFFF) | 0x80000000;
+        colors[3] = (color & 0x00FFFFFF) | 0xC0000000;
+
+        pushmatrix();
+        translate(child->pos_x, child->pos_y, -0.4f);
+        scale(block_width, block_depth, block_height);
+        draw_legend_color_box((undefined4 *)colors, 0, FSN_FACE_ALL);
+        popmatrix();
+
+        /*
+         * ORIGINAL: fsn.c:42317-42336 (draw_special) - Label rendering
+         *
+         * Labels are rendered using VECTOR STROKED FONT (draw_file_icon),
+         * NOT bitmap charstr(). The original pattern is:
+         *   pushmatrix → translate → rotate → scale → draw_file_icon → popmatrix
+         *
+         * Scale factor 0x3d4ccccd = 0.05 in IEEE 754
+         */
+        if (child->name) {
+            pushmatrix();
+
+            /* Position label near the block (slightly offset from block center) */
+            translate(child->pos_x, child->pos_y - block_height * 0.5f, 0.0f);
+
+            /* Rotate to face camera - original: rotate(-camera_angle, 'x') */
+            rotate(-(int)*(short *)(curcontext + 0xe), 'x');
+
+            /* Scale for label size - original: 0x3d4ccccd = 0.05 */
+            scale(0.05f, 0.05f, 0.05f);
+
+            /* White text color */
+            cpack(0xFFFFFFFF);
+
+            /* Render using original vector stroked font */
+            draw_file_icon(child->name);
+
+            popmatrix();
+        }
+
+        /*
+         * ORIGINAL: fsn.c:49781 - spotlight for selected items
+         * Draw selection beam when item is selected
+         */
+        if (DIR_IS_SELECTED(child)) {
+            spotlight(
+                child->pos_x, child->pos_y, -0.5f,       /* Base at ground */
+                child->pos_x, child->pos_y, block_height + 1.5f, /* Top above block */
+                0.3f,                                     /* Beam width */
+                0xFF00FFFF,                               /* Cyan selection color */
+                0                                         /* Full rendering with pattern */
+            );
+        }
+    }
+
+    popname();
+}
+
+/**
  * process_tree_node_impl - Process and draw directory tree node
  *
- * Updated to use DirectoryNode struct for 64-bit compatibility.
+ * ORIGINAL FSN TERNARY TRAVERSAL:
+ * Visits child_center, child_left, child_right instead of children array.
+ * Then renders files from files_array.
+ *
+ * Based on: fsn.c:42502-42543 (process_pick_item)
  */
 static void process_tree_node_impl(DirectoryNode *node, char param_3)
 {
     int i;
-    undefined4 color;
-    float parent_pos[3];
-    float child_pos[3];
-
-    (void)param_3;  /* unused */
 
     /* Check visibility flag */
     if (!DIR_IS_VISIBLE(node)) {
         return;
     }
 
-    /* If depth indicator is negative, draw scaled element */
+    /* If depth indicator is negative, draw raised platform */
     if (node->depth_indicator < 0) {
+        /*
+         * ORIGINAL: fsn.c:42750-42757
+         * Draw platform under directory node
+         */
         pushmatrix();
-        /* draw_scaled_element stubbed */
+        draw_scaled_element_impl(
+            node->pos_x, node->pos_y, -0.5f,
+            node->pos_x, node->pos_y, 0.0f,
+            0.4f,
+            dir_type_icon,
+            0
+        );
         popmatrix();
     }
 
-    /* Process children */
-    if (node->child_count > 0 && node->children != NULL) {
-        for (i = 0; i < node->child_count; i++) {
-            DirectoryNode *child = node->children[i];
+    /*
+     * ORIGINAL FSN TERNARY TRAVERSAL from fsn.c:42526-42540
+     * Process three fixed child positions: CENTER, LEFT, RIGHT
+     */
+    draw_child_node(node, node->child_center, param_3);
+    draw_child_node(node, node->child_left, param_3);
+    draw_child_node(node, node->child_right, param_3);
 
-            /* Check child visibility */
-            if (!DIR_IS_VISIBLE(child)) {
-                continue;
-            }
-
-            /* Recursive call */
-            process_tree_node_impl(child, param_3);
-
-            /* Push selection name for picking */
-            pushname(child->name_index);
-
-            /* Select color based on flags */
-            if (child->render_flags & DIR_FLAG_DIRECTORY) {
-                color = dir_type_icon;
-            } else if (DIR_IS_SELECTED(child)) {
-                color = directory_color_active;
-            } else {
-                color = file_type_icon;
-            }
-            cpack(color);
-
-            /* Calculate line endpoints */
-            parent_pos[0] = node->pos_x + child->offset_x;
-            parent_pos[1] = node->pos_y + child->offset_y;
-            parent_pos[2] = 0.0f;
-
-            child_pos[0] = child->pos_x;
-            child_pos[1] = child->pos_y - child->height;
-            child_pos[2] = 0.0f;
-
-            /* Set thick line for directories */
-            if (child->render_flags & DIR_FLAG_DIRECTORY) {
-                linewidth(3);
-            }
-
-            /* Draw connecting line */
-            bgnline();
-            v3f(parent_pos);
-            v3f(child_pos);
-            endline();
-
-            /* Reset line width */
-            if (child->render_flags & DIR_FLAG_DIRECTORY) {
-                linewidth(1);
-            }
-
-            /*
-             * Draw 3D block at child position using extracted box geometry
-             * draw_legend_color_box uses unit cube at origin, scaled/translated
-             * Cube spans (-0.5,-0.5,0) to (0.5,0.5,1) - see box_geometry.c
-             */
-            {
-                static int block_debug_count = 0;
-                float block_width = 0.6f;   /* Full width of block */
-                float block_depth = 0.6f;   /* Full depth of block */
-                float block_height = child->height;
-                uint32_t colors[4];
-
-                if (block_debug_count < 5) {
-                    fprintf(stderr, "  BLOCK[%d]: pos=(%.2f,%.2f) height=%.2f name=%s\n",
-                            block_debug_count, child->pos_x, child->pos_y,
-                            block_height, child->name ? child->name : "(null)");
-                    block_debug_count++;
-                }
-
-                /* Set up color array: [top, front, back, side] */
-                colors[0] = color;          /* top - same as line color */
-                colors[1] = color;          /* front */
-                colors[2] = (color & 0x00FFFFFF) | 0x80000000;  /* back - darker */
-                colors[3] = (color & 0x00FFFFFF) | 0xC0000000;  /* side - medium */
-
-                pushmatrix();
-                /* Position at child location */
-                translate(child->pos_x, child->pos_y, -0.4f);
-                /* Scale: cube is unit size, scale to desired dimensions */
-                scale(block_width, block_depth, block_height);
-                /* Draw all faces (0x3F = FSN_FACE_ALL) with filled mode (0) */
-                draw_legend_color_box((undefined4 *)colors, 0, FSN_FACE_ALL);
-                popmatrix();
-
-                /* Draw directory name label above block */
-                if (child->name) {
-                    pushmatrix();
-                    translate(child->pos_x, child->pos_y, block_height + 0.1f);
-                    cpack(0xFFFFFF);  /* White text */
-                    cmov(0.0f, 0.0f, 0.0f);
-                    charstr(child->name);
-                    popmatrix();
-                }
-            }
-
-            /* Pop selection name */
-            popname();
+    /*
+     * Render files within this directory
+     * Original: fsn.c:42518-42524
+     */
+    if (node->files_array != NULL) {
+        for (i = 0; i < node->num_files; i++) {
+            draw_child_node(node, node->files_array[i], param_3);
         }
     }
 }
@@ -245,8 +316,18 @@ void draw_directory(intptr_t param_2, char param_3)
     }
 
     if (node->depth_indicator < 0) {
+        /*
+         * ORIGINAL: fsn.c:48686-48690
+         * Draw raised platform under directory when depth_indicator < 0
+         */
         pushmatrix();
-        draw_scaled_element(0, (int)maxy);
+        draw_scaled_element_impl(
+            node->pos_x, node->pos_y, -0.5f,    /* Base at ground */
+            node->pos_x, node->pos_y, 0.0f,     /* Top at node base */
+            0.4f,                                /* Platform width */
+            dir_type_icon,                       /* Directory color */
+            0                                    /* Full rendering */
+        );
         popmatrix();
     }
 

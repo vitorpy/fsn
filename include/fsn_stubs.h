@@ -22,6 +22,7 @@ static inline void halt_baddata(void) {
 /*=============================================================================
  * Functions defined in stubs.c or other source files (extern declarations)
  *============================================================================*/
+extern void makePatterns(void);  /* fsn_igl.c - Initialize stipple patterns */
 extern void gl_picking_setup_wrapper(void);
 extern void init_display_lists(void);
 extern void flush_rendering(int param);
@@ -107,7 +108,7 @@ static inline void init_database_display(void) { /* TODO */ }
 static inline void init_database_state(void) { /* TODO */ }
 static inline int init_display_mode(void) { return 0; }
 static inline void init_display_state(void) { /* TODO */ }
-static inline void init_gl_lists(void) { /* TODO */ }
+static inline void init_gl_lists(void) { makePatterns(); }
 static inline void init_gl_state(void *cb, void *p) { (void)cb; (void)p; /* TODO */ }
 static inline void init_icon_context(void) { /* TODO */ }
 static inline void init_panel_layout(void) { /* TODO */ }
