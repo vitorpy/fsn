@@ -1,0 +1,627 @@
+# Disassembly of FUN_00422f58
+# Address: 0x00422f58
+# End: 0x004237a8
+# Size: 0x850 (2128 bytes)
+# Detection: jr ra
+# GP = 0x1001db30
+#
+# Annotations: GP offsets, function calls, float constants
+#
+
+
+fsn.original:     file format elf32-tradbigmips
+
+
+Disassembly of section .text:
+
+00422f58 <draw_file+0xc>:
+  422f58:	27bdffb0 	addiu	sp,sp,-80
+  422f5c:	afbf0024 	sw	ra,36(sp)
+  422f60:	afbc0020 	sw	gp,32(sp)
+  422f64:	afa40050 	sw	a0,80(sp)
+  422f68:	afa50054 	sw	a1,84(sp)
+  422f6c:	afa60058 	sw	a2,88(sp)
+  422f70:	afa7005c 	sw	a3,92(sp)
+  422f74:	8ca20028 	lw	v0,40(a1)
+  422f78:	00000000 	nop
+  422f7c:	0002c140 	sll	t8,v0,0x5
+  422f80:	07010206 	bgez	t8,42379c <draw_file+0x850>
+  422f84:	8fbf0024 	lw	ra,36(sp)
+  422f88:	0002cac0 	sll	t9,v0,0xb
+  422f8c:	07200202 	bltz	t9,423798 <draw_file+0x84c>
+  422f90:	00025280 	sll	t2,v0,0xa
+  422f94:	0541000d 	bgez	t2,422fcc <draw_file+0x80>
+  422f98:	00000000 	nop
+  422f9c:	8f998738 	lw	t9,-30920(gp)  # FUN_00429290
+  422fa0:	00000000 	nop
+  422fa4:	0320f809 	jalr	t9  # call FUN_00429290
+  422fa8:	00000000 	nop
+  422fac:	8fbc0020 	lw	gp,32(sp)
+  422fb0:	00022400 	sll	a0,v0,0x10
+  422fb4:	8f9982e4 	lw	t9,-32028(gp)
+  422fb8:	00045c03 	sra	t3,a0,0x10
+  422fbc:	0320f809 	jalr	t9
+  422fc0:	01602025 	move	a0,t3
+  422fc4:	8fbc0020 	lw	gp,32(sp)
+  422fc8:	00000000 	nop
+  422fcc:	8f8c897c 	lw	t4,-30340(gp)  # curcontext
+  422fd0:	8fae0050 	lw	t6,80(sp)
+  422fd4:	8d8c0000 	lw	t4,0(t4)
+  422fd8:	8fa90054 	lw	t1,84(sp)
+  422fdc:	91840c50 	lbu	a0,3152(t4)
+  422fe0:	00000000 	nop
+  422fe4:	0004682b 	sltu	t5,zero,a0
+  422fe8:	11a0000e 	beqz	t5,423024 <draw_file+0xd8>
+  422fec:	01a02025 	move	a0,t5
+  422ff0:	8dc40074 	lw	a0,116(t6)
+  422ff4:	00000000 	nop
+  422ff8:	00047880 	sll	t7,a0,0x2
+  422ffc:	000fc7c2 	srl	t8,t7,0x1f
+  423000:	0018202b 	sltu	a0,zero,t8
+  423004:	10800008 	beqz	a0,423028 <draw_file+0xdc>
+  423008:	308200ff 	andi	v0,a0,0xff
+  42300c:	8f848a24 	lw	a0,-30172(gp)  # fsn_resources
+  423010:	00000000 	nop
+  423014:	90840005 	lbu	a0,5(a0)
+  423018:	00000000 	nop
+  42301c:	0004402b 	sltu	t0,zero,a0
+  423020:	01002025 	move	a0,t0
+  423024:	308200ff 	andi	v0,a0,0xff
+  423028:	10400006 	beqz	v0,423044 <draw_file+0xf8>
+  42302c:	00000000 	nop
+  423030:	8f818a24 	lw	at,-30172(gp)  # fsn_resources
+  423034:	00000000 	nop
+  423038:	c4240080 	lwc1	$f4,128(at)
+  42303c:	10000004 	b	423050 <draw_file+0x104>
+  423040:	e7a4003c 	swc1	$f4,60(sp)
+  423044:	c526001c 	lwc1	$f6,28(t1)
+  423048:	00000000 	nop
+  42304c:	e7a6003c 	swc1	$f6,60(sp)
+  423050:	8faa0054 	lw	t2,84(sp)
+  423054:	00000000 	nop
+  423058:	8d4b0020 	lw	t3,32(t2)
+  42305c:	00000000 	nop
+  423060:	15600002 	bnez	t3,42306c <draw_file+0x120>
+  423064:	00000000 	nop
+  423068:	a3a0005f 	sb	zero,95(sp)
+  42306c:	8f9984b8 	lw	t9,-31560(gp)  # pushmatrix
+  423070:	afa20030 	sw	v0,48(sp)
+  423074:	0320f809 	jalr	t9  # call pushmatrix
+  423078:	00000000 	nop
+  42307c:	8fbc0020 	lw	gp,32(sp)
+  423080:	8fa30054 	lw	v1,84(sp)
+  423084:	8f9984a0 	lw	t9,-31584(gp)  # translate
+  423088:	c46c0014 	lwc1	$f12,20(v1)
+  42308c:	c46e0018 	lwc1	$f14,24(v1)
+  423090:	0320f809 	jalr	t9  # call translate
+  423094:	24060000 	li	a2,0
+  423098:	8fa20030 	lw	v0,48(sp)
+  42309c:	8fbc0020 	lw	gp,32(sp)
+  4230a0:	10400046 	beqz	v0,4231bc <draw_file+0x270>
+  4230a4:	93af005b 	lbu	t7,91(sp)
+  4230a8:	8f818a24 	lw	at,-30172(gp)  # fsn_resources
+  4230ac:	8fac0054 	lw	t4,84(sp)
+  4230b0:	c4280080 	lwc1	$f8,128(at)
+  4230b4:	c590001c 	lwc1	$f16,28(t4)
+  4230b8:	460042a1 	cvt.d.s	$f10,$f8
+  4230bc:	460084a1 	cvt.d.s	$f18,$f16
+  4230c0:	4632503c 	c.lt.d	$f10,$f18
+  4230c4:	00000000 	nop
+  4230c8:	4500003c 	bc1f	4231bc <draw_file+0x270>
+  4230cc:	93af005b 	lbu	t7,91(sp)
+  4230d0:	8f9984b8 	lw	t9,-31560(gp)  # pushmatrix
+  4230d4:	00000000 	nop
+  4230d8:	0320f809 	jalr	t9  # call pushmatrix
+  4230dc:	00000000 	nop
+  4230e0:	8fbc0020 	lw	gp,32(sp)
+  4230e4:	44804000 	mtc1	zero,$f8
+  4230e8:	8f818a24 	lw	at,-30172(gp)  # fsn_resources
+  4230ec:	8fad0054 	lw	t5,84(sp)
+  4230f0:	c4240070 	lwc1	$f4,112(at)
+  4230f4:	3c014014 	lui	at,0x4014
+  4230f8:	44814800 	mtc1	at,$f9  # $f9 = 2.3125f
+  4230fc:	460021a1 	cvt.d.s	$f6,$f4
+  423100:	00000000 	nop
+  423104:	46283403 	div.d	$f16,$f6,$f8
+  423108:	8f998494 	lw	t9,-31596(gp)  # scale
+  42310c:	8da6001c 	lw	a2,28(t5)
+  423110:	46208320 	cvt.s.d	$f12,$f16
+  423114:	0320f809 	jalr	t9  # call scale
+  423118:	46006386 	mov.s	$f14,$f12
+  42311c:	8fbc0020 	lw	gp,32(sp)
+  423120:	3c01c000 	lui	at,0xc000
+  423124:	44816000 	mtc1	at,$f12  # $f12 = -2.0f
+  423128:	8f9984a0 	lw	t9,-31584(gp)  # translate
+  42312c:	3c014000 	lui	at,0x4000  # 2.0f
+  423130:	44817000 	mtc1	at,$f14  # $f14 = 2.0f
+  423134:	0320f809 	jalr	t9  # call translate
+  423138:	24060000 	li	a2,0
+  42313c:	8fae0054 	lw	t6,84(sp)
+  423140:	8fbc0020 	lw	gp,32(sp)
+  423144:	8dc20028 	lw	v0,40(t6)
+  423148:	8fa50060 	lw	a1,96(sp)
+  42314c:	0002c0c0 	sll	t8,v0,0x3
+  423150:	07010008 	bgez	t8,423174 <draw_file+0x228>
+  423154:	00025f42 	srl	t3,v0,0x1d
+  423158:	8f898978 	lw	t1,-30344(gp)  # dcolorBoxes
+  42315c:	0002cf42 	srl	t9,v0,0x1d
+  423160:	00194080 	sll	t0,t9,0x2
+  423164:	01095021 	addu	t2,t0,t1
+  423168:	8d440000 	lw	a0,0(t2)
+  42316c:	10000006 	b	423188 <draw_file+0x23c>
+  423170:	24840010 	addiu	a0,a0,16
+  423174:	8f8d8978 	lw	t5,-30344(gp)  # dcolorBoxes
+  423178:	000b6080 	sll	t4,t3,0x2
+  42317c:	018d7021 	addu	t6,t4,t5
+  423180:	8dc40000 	lw	a0,0(t6)
+  423184:	00000000 	nop
+  423188:	8f9986b4 	lw	t9,-31052(gp)  # FUN_00422284
+  42318c:	8fa60064 	lw	a2,100(sp)
+  423190:	0320f809 	jalr	t9  # call FUN_00422284
+  423194:	00000000 	nop
+  423198:	8fbc0020 	lw	gp,32(sp)
+  42319c:	00000000 	nop
+  4231a0:	8f9984d8 	lw	t9,-31528(gp)  # popmatrix
+  4231a4:	00000000 	nop
+  4231a8:	0320f809 	jalr	t9  # call popmatrix
+  4231ac:	00000000 	nop
+  4231b0:	8fbc0020 	lw	gp,32(sp)
+  4231b4:	00000000 	nop
+  4231b8:	93af005b 	lbu	t7,91(sp)
+  4231bc:	00000000 	nop
+  4231c0:	11e00068 	beqz	t7,423364 <draw_file+0x418>
+  4231c4:	93ac005f 	lbu	t4,95(sp)
+  4231c8:	8f998464 	lw	t9,-31644(gp)  # cpack
+  4231cc:	00002025 	move	a0,zero
+  4231d0:	0320f809 	jalr	t9  # call cpack
+  4231d4:	00000000 	nop
+  4231d8:	8fbc0020 	lw	gp,32(sp)
+  4231dc:	00000000 	nop
+  4231e0:	8f9984b8 	lw	t9,-31560(gp)  # pushmatrix
+  4231e4:	00000000 	nop
+  4231e8:	0320f809 	jalr	t9  # call pushmatrix
+  4231ec:	00000000 	nop
+  4231f0:	8fbc0020 	lw	gp,32(sp)
+  4231f4:	8fb80054 	lw	t8,84(sp)
+  4231f8:	8f858a24 	lw	a1,-30172(gp)  # fsn_resources
+  4231fc:	8f030004 	lw	v1,4(t8)
+  423200:	8ca20014 	lw	v0,20(a1)
+  423204:	00602025 	move	a0,v1
+  423208:	0043082a 	slt	at,v0,v1
+  42320c:	10200003 	beqz	at,42321c <draw_file+0x2d0>
+  423210:	00000000 	nop
+  423214:	10000001 	b	42321c <draw_file+0x2d0>
+  423218:	00402025 	move	a0,v0
+  42321c:	44845000 	mtc1	a0,$f10
+  423220:	8f81805c 	lw	at,-32676(gp)  # DAT_10010000
+  423224:	468054a1 	cvt.d.w	$f18,$f10
+  423228:	c425bb10 	lwc1	$f5,-17648(at)
+  42322c:	c424bb14 	lwc1	$f4,-17644(at)
+  423230:	c4a80070 	lwc1	$f8,112(a1)
+  423234:	46249182 	mul.d	$f6,$f18,$f4
+  423238:	3c014000 	lui	at,0x4000  # 2.0f
+  42323c:	44819800 	mtc1	at,$f19  # $f19 = 2.0f
+  423240:	44809000 	mtc1	zero,$f18
+  423244:	8f81805c 	lw	at,-32676(gp)  # DAT_10010000
+  423248:	46004407 	neg.s	$f16,$f8
+  42324c:	460082a1 	cvt.d.s	$f10,$f16
+  423250:	00000000 	nop
+  423254:	46325103 	div.d	$f4,$f10,$f18
+  423258:	46203320 	cvt.s.d	$f12,$f6
+  42325c:	c426bb1c 	lwc1	$f6,-17636(at)
+  423260:	c427bb18 	lwc1	$f7,-17640(at)
+  423264:	8f9984a0 	lw	t9,-31584(gp)  # translate
+  423268:	3c063cf5 	lui	a2,0x3cf5
+  42326c:	34c6c28f 	ori	a2,a2,0xc28f
+  423270:	46262201 	sub.d	$f8,$f4,$f6
+  423274:	0320f809 	jalr	t9  # call translate
+  423278:	462043a0 	cvt.s.d	$f14,$f8
+  42327c:	8fbc0020 	lw	gp,32(sp)
+  423280:	24050078 	li	a1,120
+  423284:	8f99897c 	lw	t9,-30340(gp)  # curcontext
+  423288:	00000000 	nop
+  42328c:	8f390000 	lw	t9,0(t9)
+  423290:	00000000 	nop
+  423294:	8724000e 	lh	a0,14(t9)
+  423298:	8f998498 	lw	t9,-31592(gp)  # rotate
+  42329c:	00042023 	negu	a0,a0
+  4232a0:	00044400 	sll	t0,a0,0x10
+  4232a4:	0320f809 	jalr	t9  # call rotate
+  4232a8:	00082403 	sra	a0,t0,0x10
+  4232ac:	8fbc0020 	lw	gp,32(sp)
+  4232b0:	3c063f80 	lui	a2,0x3f80  # 1.0f
+  4232b4:	8f81805c 	lw	at,-32676(gp)  # DAT_10010000
+  4232b8:	8f998494 	lw	t9,-31596(gp)  # scale
+  4232bc:	c42cbb20 	lwc1	$f12,-17632(at)
+  4232c0:	0320f809 	jalr	t9  # call scale
+  4232c4:	46006386 	mov.s	$f14,$f12
+  4232c8:	8fbc0020 	lw	gp,32(sp)
+  4232cc:	8faa0054 	lw	t2,84(sp)
+  4232d0:	8f828a24 	lw	v0,-30172(gp)  # fsn_resources
+  4232d4:	8d430004 	lw	v1,4(t2)
+  4232d8:	8c420014 	lw	v0,20(v0)
+  4232dc:	00000000 	nop
+  4232e0:	0043082a 	slt	at,v0,v1
+  4232e4:	10200012 	beqz	at,423330 <draw_file+0x3e4>
+  4232e8:	8fab0054 	lw	t3,84(sp)
+  4232ec:	44828000 	mtc1	v0,$f16
+  4232f0:	44832000 	mtc1	v1,$f4
+  4232f4:	468082a0 	cvt.s.w	$f10,$f16
+  4232f8:	3c013f80 	lui	at,0x3f80  # 1.0f
+  4232fc:	44817000 	mtc1	at,$f14  # $f14 = 1.0f
+  423300:	468021a0 	cvt.s.w	$f6,$f4
+  423304:	8f998494 	lw	t9,-31596(gp)  # scale
+  423308:	44067000 	mfc1	a2,$f14
+  42330c:	46003221 	cvt.d.s	$f8,$f6
+  423310:	460054a1 	cvt.d.s	$f18,$f10
+  423314:	00000000 	nop
+  423318:	46289403 	div.d	$f16,$f18,$f8
+  42331c:	0320f809 	jalr	t9  # call scale
+  423320:	46208320 	cvt.s.d	$f12,$f16
+  423324:	8fbc0020 	lw	gp,32(sp)
+  423328:	00000000 	nop
+  42332c:	8fab0054 	lw	t3,84(sp)
+  423330:	8f9985f8 	lw	t9,-31240(gp)  # FUN_004189b0
+  423334:	8d640000 	lw	a0,0(t3)
+  423338:	0320f809 	jalr	t9  # call FUN_004189b0
+  42333c:	00000000 	nop
+  423340:	8fbc0020 	lw	gp,32(sp)
+  423344:	00000000 	nop
+  423348:	8f9984d8 	lw	t9,-31528(gp)  # popmatrix
+  42334c:	00000000 	nop
+  423350:	0320f809 	jalr	t9  # call popmatrix
+  423354:	00000000 	nop
+  423358:	8fbc0020 	lw	gp,32(sp)
+  42335c:	00000000 	nop
+  423360:	93ac005f 	lbu	t4,95(sp)
+  423364:	8fa6003c 	lw	a2,60(sp)
+  423368:	118000dc 	beqz	t4,4236dc <draw_file+0x790>
+  42336c:	00000000 	nop
+  423370:	8f9982d0 	lw	t9,-32048(gp)
+  423374:	00002025 	move	a0,zero
+  423378:	0320f809 	jalr	t9
+  42337c:	00000000 	nop
+  423380:	8fbc0020 	lw	gp,32(sp)
+  423384:	00000000 	nop
+  423388:	8f9984b8 	lw	t9,-31560(gp)  # pushmatrix
+  42338c:	00000000 	nop
+  423390:	0320f809 	jalr	t9  # call pushmatrix
+  423394:	00000000 	nop
+  423398:	8fbc0020 	lw	gp,32(sp)
+  42339c:	8fa6003c 	lw	a2,60(sp)
+  4233a0:	8f818a24 	lw	at,-30172(gp)  # fsn_resources
+  4233a4:	8f998494 	lw	t9,-31596(gp)  # scale
+  4233a8:	c42c0070 	lwc1	$f12,112(at)
+  4233ac:	0320f809 	jalr	t9  # call scale
+  4233b0:	46006386 	mov.s	$f14,$f12
+  4233b4:	8fad0054 	lw	t5,84(sp)
+  4233b8:	8fbc0020 	lw	gp,32(sp)
+  4233bc:	8da20028 	lw	v0,40(t5)
+  4233c0:	00000000 	nop
+  4233c4:	000278c0 	sll	t7,v0,0x3
+  4233c8:	05e10008 	bgez	t7,4233ec <draw_file+0x4a0>
+  4233cc:	00000000 	nop
+  4233d0:	8f888978 	lw	t0,-30344(gp)  # dcolorBoxes
+  4233d4:	0002c742 	srl	t8,v0,0x1d
+  4233d8:	0018c880 	sll	t9,t8,0x2
+  4233dc:	03284821 	addu	t1,t9,t0
+  4233e0:	8d240000 	lw	a0,0(t1)
+  4233e4:	10000007 	b	423404 <draw_file+0x4b8>
+  4233e8:	24840010 	addiu	a0,a0,16
+  4233ec:	8f8c8978 	lw	t4,-30344(gp)  # dcolorBoxes
+  4233f0:	00025742 	srl	t2,v0,0x1d
+  4233f4:	000a5880 	sll	t3,t2,0x2
+  4233f8:	016c6821 	addu	t5,t3,t4
+  4233fc:	8da40000 	lw	a0,0(t5)
+  423400:	00000000 	nop
+  423404:	8f9986b4 	lw	t9,-31052(gp)  # FUN_00422284
+  423408:	8fa50060 	lw	a1,96(sp)
+  42340c:	0320f809 	jalr	t9  # call FUN_00422284
+  423410:	24060010 	li	a2,16
+  423414:	8fbc0020 	lw	gp,32(sp)
+  423418:	00000000 	nop
+  42341c:	8f9984d8 	lw	t9,-31528(gp)  # popmatrix
+  423420:	00000000 	nop
+  423424:	0320f809 	jalr	t9  # call popmatrix
+  423428:	00000000 	nop
+  42342c:	8fbc0020 	lw	gp,32(sp)
+  423430:	00000000 	nop
+  423434:	8f9984b8 	lw	t9,-31560(gp)  # pushmatrix
+  423438:	00000000 	nop
+  42343c:	0320f809 	jalr	t9  # call pushmatrix
+  423440:	00000000 	nop
+  423444:	8fbc0020 	lw	gp,32(sp)
+  423448:	8fae0054 	lw	t6,84(sp)
+  42344c:	8f998828 	lw	t9,-30680(gp)  # FUN_00433c3c
+  423450:	27af0040 	addiu	t7,sp,64
+  423454:	8dc40020 	lw	a0,32(t6)
+  423458:	afaf0010 	sw	t7,16(sp)
+  42345c:	27a5004c 	addiu	a1,sp,76
+  423460:	27a60048 	addiu	a2,sp,72
+  423464:	0320f809 	jalr	t9  # call FUN_00433c3c
+  423468:	27a70044 	addiu	a3,sp,68
+  42346c:	8fbc0020 	lw	gp,32(sp)
+  423470:	3c063f80 	lui	a2,0x3f80  # 1.0f
+  423474:	8f818a24 	lw	at,-30172(gp)  # fsn_resources
+  423478:	8f998494 	lw	t9,-31596(gp)  # scale
+  42347c:	c42c0070 	lwc1	$f12,112(at)
+  423480:	0320f809 	jalr	t9  # call scale
+  423484:	46006386 	mov.s	$f14,$f12
+  423488:	8fbc0020 	lw	gp,32(sp)
+  42348c:	3c01bf00 	lui	at,0xbf00  # -0.5f
+  423490:	44816000 	mtc1	at,$f12  # $f12 = -0.5f
+  423494:	8f9984a0 	lw	t9,-31584(gp)  # translate
+  423498:	8fa6003c 	lw	a2,60(sp)
+  42349c:	0320f809 	jalr	t9  # call translate
+  4234a0:	46006386 	mov.s	$f14,$f12
+  4234a4:	c7aa0044 	lwc1	$f10,68(sp)
+  4234a8:	c7a6004c 	lwc1	$f6,76(sp)
+  4234ac:	3c013ff0 	lui	at,0x3ff0
+  4234b0:	46005121 	cvt.d.s	$f4,$f10
+  4234b4:	460034a1 	cvt.d.s	$f18,$f6
+  4234b8:	44810800 	mtc1	at,$f1  # $f1 = 1.875f
+  4234bc:	44800000 	mtc1	zero,$f0
+  4234c0:	46322201 	sub.d	$f8,$f4,$f18
+  4234c4:	c7a40048 	lwc1	$f4,72(sp)
+  4234c8:	46280403 	div.d	$f16,$f0,$f8
+  4234cc:	c7aa0040 	lwc1	$f10,64(sp)
+  4234d0:	460024a1 	cvt.d.s	$f18,$f4
+  4234d4:	460051a1 	cvt.d.s	$f6,$f10
+  4234d8:	46323201 	sub.d	$f8,$f6,$f18
+  4234dc:	8fbc0020 	lw	gp,32(sp)
+  4234e0:	3c063f80 	lui	a2,0x3f80  # 1.0f
+  4234e4:	8f998494 	lw	t9,-31596(gp)  # scale
+  4234e8:	46208320 	cvt.s.d	$f12,$f16
+  4234ec:	00000000 	nop
+  4234f0:	46280403 	div.d	$f16,$f0,$f8
+  4234f4:	0320f809 	jalr	t9  # call scale
+  4234f8:	462083a0 	cvt.s.d	$f14,$f16
+  4234fc:	c7a0004c 	lwc1	$f0,76(sp)
+  423500:	44801000 	mtc1	zero,$f2
+  423504:	8fbc0020 	lw	gp,32(sp)
+  423508:	46020032 	c.eq.s	$f0,$f2
+  42350c:	00000000 	nop
+  423510:	45000007 	bc1f	423530 <draw_file+0x5e4>
+  423514:	00000000 	nop
+  423518:	c7aa0048 	lwc1	$f10,72(sp)
+  42351c:	00000000 	nop
+  423520:	46025032 	c.eq.s	$f10,$f2
+  423524:	00000000 	nop
+  423528:	4501000a 	bc1t	423554 <draw_file+0x608>
+  42352c:	8fb80054 	lw	t8,84(sp)
+  423530:	c7ae0048 	lwc1	$f14,72(sp)
+  423534:	8f9984a0 	lw	t9,-31584(gp)  # translate
+  423538:	44061000 	mfc1	a2,$f2
+  42353c:	46000307 	neg.s	$f12,$f0
+  423540:	0320f809 	jalr	t9  # call translate
+  423544:	46007387 	neg.s	$f14,$f14
+  423548:	8fbc0020 	lw	gp,32(sp)
+  42354c:	00000000 	nop
+  423550:	8fb80054 	lw	t8,84(sp)
+  423554:	8f99882c 	lw	t9,-30676(gp)  # FUN_00433ca8
+  423558:	8f040020 	lw	a0,32(t8)
+  42355c:	0320f809 	jalr	t9  # call FUN_00433ca8
+  423560:	00000000 	nop
+  423564:	8fbc0020 	lw	gp,32(sp)
+  423568:	00000000 	nop
+  42356c:	8f9984d8 	lw	t9,-31528(gp)  # popmatrix
+  423570:	00000000 	nop
+  423574:	0320f809 	jalr	t9  # call popmatrix
+  423578:	00000000 	nop
+  42357c:	8fbc0020 	lw	gp,32(sp)
+  423580:	2404ffff 	li	a0,-1
+  423584:	8f9982d0 	lw	t9,-32048(gp)
+  423588:	00000000 	nop
+  42358c:	0320f809 	jalr	t9
+  423590:	00000000 	nop
+  423594:	8fbc0020 	lw	gp,32(sp)
+  423598:	00002025 	move	a0,zero
+  42359c:	8f9982d4 	lw	t9,-32044(gp)
+  4235a0:	00000000 	nop
+  4235a4:	0320f809 	jalr	t9
+  4235a8:	00000000 	nop
+  4235ac:	8fbc0020 	lw	gp,32(sp)
+  4235b0:	00000000 	nop
+  4235b4:	8f9984b8 	lw	t9,-31560(gp)  # pushmatrix
+  4235b8:	00000000 	nop
+  4235bc:	0320f809 	jalr	t9  # call pushmatrix
+  4235c0:	00000000 	nop
+  4235c4:	8fbc0020 	lw	gp,32(sp)
+  4235c8:	8fa6003c 	lw	a2,60(sp)
+  4235cc:	8f818a24 	lw	at,-30172(gp)  # fsn_resources
+  4235d0:	8f998494 	lw	t9,-31596(gp)  # scale
+  4235d4:	c42c0070 	lwc1	$f12,112(at)
+  4235d8:	0320f809 	jalr	t9  # call scale
+  4235dc:	46006386 	mov.s	$f14,$f12
+  4235e0:	8fb90054 	lw	t9,84(sp)
+  4235e4:	8fbc0020 	lw	gp,32(sp)
+  4235e8:	8f220028 	lw	v0,40(t9)
+  4235ec:	00000000 	nop
+  4235f0:	000248c0 	sll	t1,v0,0x3
+  4235f4:	05210008 	bgez	t1,423618 <draw_file+0x6cc>
+  4235f8:	00027742 	srl	t6,v0,0x1d
+  4235fc:	8f8c8978 	lw	t4,-30344(gp)  # dcolorBoxes
+  423600:	00025742 	srl	t2,v0,0x1d
+  423604:	000a5880 	sll	t3,t2,0x2
+  423608:	016c6821 	addu	t5,t3,t4
+  42360c:	8da40000 	lw	a0,0(t5)
+  423610:	10000006 	b	42362c <draw_file+0x6e0>
+  423614:	24840010 	addiu	a0,a0,16
+  423618:	8f988978 	lw	t8,-30344(gp)  # dcolorBoxes
+  42361c:	000e7880 	sll	t7,t6,0x2
+  423620:	01f8c821 	addu	t9,t7,t8
+  423624:	8f240000 	lw	a0,0(t9)
+  423628:	00000000 	nop
+  42362c:	8f9986b4 	lw	t9,-31052(gp)  # FUN_00422284
+  423630:	8fa50060 	lw	a1,96(sp)
+  423634:	0320f809 	jalr	t9  # call FUN_00422284
+  423638:	24060010 	li	a2,16
+  42363c:	8fbc0020 	lw	gp,32(sp)
+  423640:	2404ffff 	li	a0,-1
+  423644:	8f9982d4 	lw	t9,-32044(gp)
+  423648:	00000000 	nop
+  42364c:	0320f809 	jalr	t9
+  423650:	00000000 	nop
+  423654:	8fa80054 	lw	t0,84(sp)
+  423658:	8fbc0020 	lw	gp,32(sp)
+  42365c:	8d020028 	lw	v0,40(t0)
+  423660:	8fa50060 	lw	a1,96(sp)
+  423664:	000250c0 	sll	t2,v0,0x3
+  423668:	05410008 	bgez	t2,42368c <draw_file+0x740>
+  42366c:	2401ffef 	li	at,-17
+  423670:	8f8d8978 	lw	t5,-30344(gp)  # dcolorBoxes
+  423674:	00025f42 	srl	t3,v0,0x1d
+  423678:	000b6080 	sll	t4,t3,0x2
+  42367c:	018d7021 	addu	t6,t4,t5
+  423680:	8dc40000 	lw	a0,0(t6)
+  423684:	10000007 	b	4236a4 <draw_file+0x758>
+  423688:	24840010 	addiu	a0,a0,16
+  42368c:	8f998978 	lw	t9,-30344(gp)  # dcolorBoxes
+  423690:	00027f42 	srl	t7,v0,0x1d
+  423694:	000fc080 	sll	t8,t7,0x2
+  423698:	03194021 	addu	t0,t8,t9
+  42369c:	8d040000 	lw	a0,0(t0)
+  4236a0:	00000000 	nop
+  4236a4:	8fa60064 	lw	a2,100(sp)
+  4236a8:	8f9986b4 	lw	t9,-31052(gp)  # FUN_00422284
+  4236ac:	00c14824 	and	t1,a2,at
+  4236b0:	0320f809 	jalr	t9  # call FUN_00422284
+  4236b4:	01203025 	move	a2,t1
+  4236b8:	8fbc0020 	lw	gp,32(sp)
+  4236bc:	00000000 	nop
+  4236c0:	8f9984d8 	lw	t9,-31528(gp)  # popmatrix
+  4236c4:	00000000 	nop
+  4236c8:	0320f809 	jalr	t9  # call popmatrix
+  4236cc:	00000000 	nop
+  4236d0:	8fbc0020 	lw	gp,32(sp)
+  4236d4:	1000001f 	b	423754 <draw_file+0x808>
+  4236d8:	00000000 	nop
+  4236dc:	8f818a24 	lw	at,-30172(gp)  # fsn_resources
+  4236e0:	8f998494 	lw	t9,-31596(gp)  # scale
+  4236e4:	c42c0070 	lwc1	$f12,112(at)
+  4236e8:	0320f809 	jalr	t9  # call scale
+  4236ec:	46006386 	mov.s	$f14,$f12
+  4236f0:	8faa0054 	lw	t2,84(sp)
+  4236f4:	8fbc0020 	lw	gp,32(sp)
+  4236f8:	8d420028 	lw	v0,40(t2)
+  4236fc:	8fa50060 	lw	a1,96(sp)
+  423700:	000260c0 	sll	t4,v0,0x3
+  423704:	05810008 	bgez	t4,423728 <draw_file+0x7dc>
+  423708:	0002cf42 	srl	t9,v0,0x1d
+  42370c:	8f8f8978 	lw	t7,-30344(gp)  # dcolorBoxes
+  423710:	00026f42 	srl	t5,v0,0x1d
+  423714:	000d7080 	sll	t6,t5,0x2
+  423718:	01cfc021 	addu	t8,t6,t7
+  42371c:	8f040000 	lw	a0,0(t8)
+  423720:	10000006 	b	42373c <draw_file+0x7f0>
+  423724:	24840010 	addiu	a0,a0,16
+  423728:	8f898978 	lw	t1,-30344(gp)  # dcolorBoxes
+  42372c:	00194080 	sll	t0,t9,0x2
+  423730:	01095021 	addu	t2,t0,t1
+  423734:	8d440000 	lw	a0,0(t2)
+  423738:	00000000 	nop
+  42373c:	8f9986b4 	lw	t9,-31052(gp)  # FUN_00422284
+  423740:	8fa60064 	lw	a2,100(sp)
+  423744:	0320f809 	jalr	t9  # call FUN_00422284
+  423748:	00000000 	nop
+  42374c:	8fbc0020 	lw	gp,32(sp)
+  423750:	00000000 	nop
+  423754:	8f9984d8 	lw	t9,-31528(gp)  # popmatrix
+  423758:	00000000 	nop
+  42375c:	0320f809 	jalr	t9  # call popmatrix
+  423760:	00000000 	nop
+  423764:	8fab0054 	lw	t3,84(sp)
+  423768:	8fbc0020 	lw	gp,32(sp)
+  42376c:	8d6c0028 	lw	t4,40(t3)
+  423770:	00000000 	nop
+  423774:	000c7280 	sll	t6,t4,0xa
+  423778:	05c10008 	bgez	t6,42379c <draw_file+0x850>
+  42377c:	8fbf0024 	lw	ra,36(sp)
+  423780:	8f9982e4 	lw	t9,-32028(gp)
+  423784:	00002025 	move	a0,zero
+  423788:	0320f809 	jalr	t9
+  42378c:	00000000 	nop
+  423790:	8fbc0020 	lw	gp,32(sp)
+  423794:	00000000 	nop
+  423798:	8fbf0024 	lw	ra,36(sp)
+  42379c:	27bd0050 	addiu	sp,sp,80
+  4237a0:	03e00008 	jr	ra
+  4237a4:	00000000 	nop
+
+
+======================================================================
+ANALYSIS SUMMARY: FUN_00422f58
+======================================================================
+
+FUNCTION CALLS:
+----------------------------------------
+  FUN_004189b0
+  FUN_00422284 (5x)
+  FUN_00429290
+  FUN_00433c3c
+  FUN_00433ca8
+  cpack
+  popmatrix (6x)
+  pushmatrix (6x)
+  rotate
+  scale (8x)
+  translate (5x)
+
+IRISGL CALLS (with addresses):
+----------------------------------------
+  0x00423074: pushmatrix
+  0x00423090: translate
+  0x004230d8: pushmatrix
+  0x00423114: scale
+  0x00423134: translate
+  0x004231a8: popmatrix
+  0x004231d0: cpack
+  0x004231e8: pushmatrix
+  0x00423274: translate
+  0x004232a4: rotate
+  0x004232c0: scale
+  0x0042331c: scale
+  0x00423350: popmatrix
+  0x00423390: pushmatrix
+  0x004233ac: scale
+  0x00423424: popmatrix
+  0x0042343c: pushmatrix
+  0x00423480: scale
+  0x0042349c: translate
+  0x004234f4: scale
+  0x00423540: translate
+  0x00423574: popmatrix
+  0x004235bc: pushmatrix
+  0x004235d8: scale
+  0x004236c8: popmatrix
+  0x004236e8: scale
+  0x0042375c: popmatrix
+
+FLOAT CONSTANTS LOADED:
+----------------------------------------
+  0x40140000 = 2.3125f
+  0xc0000000 = -2.0f
+  0x40000000 = 2.0f
+  0x3f800000 = 1.0f
+  0xbf000000 = -0.5f
+  0x3ff00000 = 1.875f
+
+GP SYMBOL REFERENCES:
+----------------------------------------
+  DAT_10010000
+  FUN_004189b0
+  FUN_00422284
+  FUN_00429290
+  FUN_00433c3c
+  FUN_00433ca8
+  cpack
+  curcontext
+  dcolorBoxes
+  fsn_resources
+  popmatrix
+  pushmatrix
+  rotate
+  scale
+  translate
+
+======================================================================

@@ -1,0 +1,335 @@
+======================================================================
+CALL TREE ANALYSIS SUMMARY
+======================================================================
+
+Root function: draw_scene
+Total functions analyzed: 29
+Total code size: 24912 bytes (0x6150)
+
+FUNCTIONS WITH IRISGL CALLS:
+----------------------------------------
+
+FUN_0040ca58:
+    0x0040ca64: pushmatrix
+    0x0040caac: popmatrix
+
+FUN_004189b0:
+    0x00418ab0: translate
+
+FUN_00419424:
+    0x004194bc: bgnline
+    0x004194d4: cpack
+    0x0041952c: v3f
+    0x0041957c: v3f
+    0x00419594: cpack
+    0x004195f4: v3f
+    0x00419654: v3f
+    0x0041969c: bgnline
+    0x004196b4: cpack
+    0x00419714: v3f
+    0x00419778: v3f
+    0x004197d4: v3f
+    0x00419834: v3f
+    0x0041987c: bgnline
+    0x00419894: cpack
+    0x004198e4: v3f
+    0x00419934: v3f
+    0x0041994c: cpack
+    0x0041999c: v3f
+    0x004199ec: v3f
+    0x00419a38: cpack
+    0x00419a50: bgnline
+    0x00419aa8: v3f
+    0x00419af8: v3f
+    0x00419b5c: v3f
+    0x00419bb8: v3f
+    0x00419c60: pushmatrix
+    0x00419c94: translate
+    0x00419cb8: pushmatrix
+    0x00419cd0: cpack
+    0x00419cec: translate
+    0x00419d3c: rectf
+    0x00419d54: popmatrix
+    0x00419d78: cpack
+    0x00419dc8: rect
+    0x00419e10: rectf
+    0x00419e28: pushmatrix
+    0x00419e80: translate
+    0x00419ea4: rotate
+    0x00419ec0: scale
+    0x00419ef0: popmatrix
+    0x0041a12c: pushmatrix
+    0x0041a158: translate
+    0x0041a200: popmatrix
+    0x0041a308: popmatrix
+
+FUN_00422284:
+    0x004222c0: cpack
+    0x00422310: v3f
+    0x00422330: v3f
+    0x00422350: v3f
+    0x00422370: v3f
+    0x004223c4: cpack
+    0x004223f8: v3f
+    0x00422414: v3f
+    0x0042246c: cpack
+    0x004224b8: v3f
+    0x004224d8: v3f
+    0x004224f8: v3f
+    0x00422518: v3f
+    0x0042258c: cpack
+    0x004225c4: cpack
+    0x00422628: v3f
+    0x004226a0: v3f
+    0x004226cc: v3f
+    0x004226f8: v3f
+    0x00422724: v3f
+    0x00422770: cpack
+    0x004227d4: v3f
+    0x00422848: v3f
+    0x00422878: v3f
+    0x004228a4: v3f
+    0x004228d0: v3f
+    0x00422954: v3f
+    0x004229c8: v3f
+    0x004229f4: v3f
+    0x00422a20: v3f
+    0x00422a4c: v3f
+    0x00422a9c: cpack
+    0x00422af4: v3f
+    0x00422b68: v3f
+    0x00422b98: v3f
+    0x00422bc4: v3f
+    0x00422bf0: v3f
+    0x00422c40: cpack
+    0x00422c98: v3f
+    0x00422d0c: v3f
+    0x00422d38: v3f
+    0x00422d64: v3f
+    0x00422d94: v3f
+    0x00422e10: v3f
+    0x00422e84: v3f
+    0x00422eb4: v3f
+    0x00422ee0: v3f
+    0x00422f0c: v3f
+
+FUN_00422f58:
+    0x00423074: pushmatrix
+    0x00423090: translate
+    0x004230d8: pushmatrix
+    0x00423114: scale
+    0x00423134: translate
+    0x004231a8: popmatrix
+    0x004231d0: cpack
+    0x004231e8: pushmatrix
+    0x00423274: translate
+    0x004232a4: rotate
+    0x004232c0: scale
+    0x0042331c: scale
+    0x00423350: popmatrix
+    0x00423390: pushmatrix
+    0x004233ac: scale
+    0x00423424: popmatrix
+    0x0042343c: pushmatrix
+    0x00423480: scale
+    0x0042349c: translate
+    0x004234f4: scale
+    0x00423540: translate
+    0x00423574: popmatrix
+    0x004235bc: pushmatrix
+    0x004235d8: scale
+    0x004236c8: popmatrix
+    0x004236e8: scale
+    0x0042375c: popmatrix
+
+FUN_004237b4:
+    0x0042381c: pushmatrix
+    0x0042385c: translate
+    0x00423878: scale
+    0x004238e8: cpack
+    0x00423984: popmatrix
+    0x004239b4: pushmatrix
+    0x004239f4: translate
+    0x00423a10: scale
+    0x00423a7c: cpack
+    0x00423b18: popmatrix
+
+FUN_00423b3c:
+    0x00423ef4: pushmatrix
+    0x00423f1c: translate
+    0x00423ff0: popmatrix
+    0x004240c0: pushmatrix
+    0x004240e8: translate
+    0x004241bc: popmatrix
+
+FUN_0042425c:
+    0x00424420: pushmatrix
+    0x00424440: translate
+    0x00424460: scale
+    0x00424484: pushmatrix
+    0x004244a0: cpack
+    0x004244b8: translate
+    0x00424514: rectf
+    0x0042452c: popmatrix
+    0x00424594: cpack
+    0x004245e0: rect
+    0x00424640: pushmatrix
+    0x0042467c: scale
+    0x0042469c: scale
+    0x004247f4: cpack
+    0x00424824: popmatrix
+    0x00424898: pushmatrix
+    0x004248f4: translate
+    0x00424910: scale
+    0x00424948: cpack
+    0x00424978: popmatrix
+    0x00424990: pushmatrix
+    0x004249a8: translate
+    0x004249e4: popmatrix
+    0x004249fc: popmatrix
+    0x00424a48: pushmatrix
+    0x00424b14: popmatrix
+    0x00424c04: cpack
+    0x00424cd4: v3f
+    0x00424cec: v3f
+    0x00424dd4: pushmatrix
+    0x00424e0c: translate
+    0x00424e24: scale
+    0x00424ed0: rotate
+    0x00424f18: translate
+    0x00424f30: scale
+    0x00424f6c: translate
+    0x00424f84: scale
+    0x0042501c: rotate
+    0x00425038: translate
+    0x00425050: scale
+    0x00425080: popmatrix
+
+FUN_0042510c:
+    0x0042521c: bgnline
+    0x00425234: cpack
+    0x00425290: v3f
+    0x004252e0: v3f
+    0x004252f8: cpack
+    0x00425358: v3f
+    0x004253b8: v3f
+    0x00425400: bgnline
+    0x00425418: cpack
+    0x00425478: v3f
+    0x004254dc: v3f
+    0x00425540: v3f
+    0x004255a0: v3f
+    0x004255e8: bgnline
+    0x00425600: cpack
+    0x00425650: v3f
+    0x004256a0: v3f
+    0x004256b8: cpack
+    0x00425708: v3f
+    0x00425758: v3f
+    0x004257b4: cpack
+    0x004257cc: bgnline
+    0x00425828: v3f
+    0x00425878: v3f
+    0x004258dc: v3f
+    0x00425940: v3f
+
+FUN_004259dc:
+    0x00425ae4: pushmatrix
+    0x00425afc: translate
+    0x00425b1c: scale
+    0x00425b34: scale
+    0x00425b64: popmatrix
+
+FUN_00425c80:
+    0x00425d14: scale
+    0x00425d2c: rotate
+    0x00425d48: rotate
+    0x00425db8: scale
+    0x00425de4: translate
+
+FUN_00427a3c:
+    0x00427ae0: v3f
+    0x00427af8: v3f
+    0x00427b10: v3f
+    0x00427b44: cpack
+    0x00427b5c: pushmatrix
+    0x00427b90: translate
+    0x00427bd4: popmatrix
+    0x00427c1c: v3f
+    0x00427c34: v3f
+    0x00427c4c: v3f
+    0x00427cac: bgnline
+    0x00427cc4: v3f
+    0x00427cdc: v3f
+    0x00427cf4: v3f
+
+draw_scene:
+    0x0040cc8c: czclear
+    0x0040ccb0: czclear
+    0x0040ccc8: pushmatrix
+    0x0040cd08: scale
+    0x0040cd2c: rotate
+    0x0040cd50: rotate
+    0x0040cde0: scale
+    0x0040ce1c: translate
+    0x0040ce4c: popmatrix
+
+======================================================================
+
+CALL TREE:
+----------------------------------------
+draw_scene
+├── draw_scene (1152 bytes, 9 IGL calls)
+│   ├── FUN_0040d804 (412 bytes)
+│   ├── FUN_0040bbe0 (60 bytes)
+│   ├── FUN_0040ca58 (108 bytes, 2 IGL calls)
+│   │   ├── FUN_00425c80 (600 bytes, 5 IGL calls)
+│   │   │   ├── FUN_00425bd8 (156 bytes)
+│   │   │       └── FUN_00425bd8 (recursive)
+│   │   │   ├── FUN_004259dc (496 bytes, 5 IGL calls)
+│   │   │   │   ├── FUN_00422284 (3272 bytes, 48 IGL calls)
+│   │   │       └── FUN_004259dc (recursive)
+│   │       ├── FUN_00411e68 (48 bytes)
+│       ├── FUN_0040bfa0 (64 bytes)
+│   ├── FUN_0042510c (2244 bytes, 26 IGL calls)
+│   │   ├── FUN_0042425c (3748 bytes, 41 IGL calls)
+│   │   │   ├── FUN_00423b3c (1812 bytes, 6 IGL calls)
+│   │   │   │   ├── FUN_004237b4 (892 bytes, 10 IGL calls)
+│   │   │   │   ├── FUN_00422f58 (2128 bytes, 27 IGL calls)
+│   │   │   │   │   ├── FUN_00422284 (3272 bytes, 48 IGL calls)
+│   │   │   │   │   ├── FUN_00433c3c (88 bytes)
+│   │   │   │   │   ├── FUN_004189b0 (628 bytes, 1 IGL calls)
+│   │   │   │   │   ├── FUN_00429290 (32 bytes)
+│   │   │   │       ├── FUN_00433ca8 (88 bytes)
+│   │   │       ├── FUN_00427a3c (776 bytes, 14 IGL calls)
+│   │   │   ├── FUN_00422284 (3272 bytes, 48 IGL calls)
+│   │   │   ├── FUN_004189b0 (628 bytes, 1 IGL calls)
+│   │   │   └── FUN_0042425c (recursive)
+│   │       ├── FUN_00427a3c (776 bytes, 14 IGL calls)
+│       ├── FUN_00419424 (3880 bytes, 45 IGL calls)
+│       │   ├── FUN_00420000 (792 bytes)
+│       │       ├── FUN_00421f10 (120 bytes)
+│       │   ├── FUN_004189b0 (628 bytes, 1 IGL calls)
+│       │   ├── FUN_00422f58 (2128 bytes, 27 IGL calls)
+│       │   │   ├── FUN_00422284 (3272 bytes, 48 IGL calls)
+│       │   │   ├── FUN_00433c3c (88 bytes)
+│       │   │   ├── FUN_004189b0 (628 bytes, 1 IGL calls)
+│       │   │   ├── FUN_00429290 (32 bytes)
+│       │       ├── FUN_00433ca8 (88 bytes)
+│       │   ├── FUN_00427a3c (776 bytes, 14 IGL calls)
+│           ├── FUN_004237b4 (892 bytes, 10 IGL calls)
+│   ├── FUN_00420b70 (140 bytes)
+│   │   ├── FUN_00420000 (792 bytes)
+│   │       ├── FUN_00421f10 (120 bytes)
+│       ├── FUN_0041fdb0 (52 bytes)
+    ├── FUN_004294cc (172 bytes)
+    │   ├── FUN_0040bc28 (60 bytes)
+    │   ├── FUN_00420b70 (140 bytes)
+    │   │   ├── FUN_00420000 (792 bytes)
+    │   │       ├── FUN_00421f10 (120 bytes)
+    │       ├── FUN_0041fdb0 (52 bytes)
+        ├── FUN_00430000 (856 bytes)
+        │   ├── FUN_00411e38 (36 bytes)
+            └── FUN_00430000 (recursive)
+
+======================================================================

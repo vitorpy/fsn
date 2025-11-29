@@ -9,7 +9,6 @@
 #include "fsn_types.h"
 #include "fsn_state.h"
 #include "fsn_igl.h"
-#include "vector_font.h"
 #include <stdio.h>
 
 void draw_warp(void)
