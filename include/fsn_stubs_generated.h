@@ -33,7 +33,7 @@ static inline int get_selection_params(void * p0, void * p1, int p2) { (void)p0;
 static inline int get_view_extents(void * p0, void * p1, void * p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; return 0; /* TODO */ }
 static inline int get_view_position(void * p0) { (void)p0; return 0; /* TODO */ }
 static inline int get_window_entry(int p0) { (void)p0; return 0; /* TODO */ }
-static inline void gl_get_dimensions_wrapper(void * p0, void * p1, void * p2) { (void)p0; (void)p1; (void)p2; /* TODO */ }
+void gl_get_dimensions_wrapper(void *p0, void *p1, void *p2);
 static inline void gl_swap_buffers(int p0) { (void)p0; /* TODO */ }
 /* Implemented in init_resources.c */
 extern void init_toplevel_resources(Widget w);

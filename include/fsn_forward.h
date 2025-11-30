@@ -256,7 +256,7 @@ void getTypeName__8RuleInfoFv(void);
 void getValue__8RuleInfoFi(void);
 
 /* gl_* functions */
-void gl_get_dimensions_wrapper(void);
+void gl_get_dimensions_wrapper(void *out_w, void *out_h, void *out_zmax);
 void gl_picking_setup_wrapper(void);
 void gl_pop_state(void);
 void gl_push_state(void);
@@ -469,7 +469,8 @@ void highlightFile(void);
 void highlightFileLandscape(int param_1,int param_2);
 void highlightFileWarp(int param_1,int param_2);
 void highlightOverviewDir(int param_1);
-void highlightSpecialDir(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4 );
+/* FIXED: First two params are floats based on assembly analysis */
+void highlightSpecialDir(float param_1, float param_2, undefined4 param_3, undefined4 param_4);
 void initResources(undefined4 param_1);
 void initnames(void);
 void landscapeZoomToFile(int param_1,int param_2);
@@ -557,7 +558,9 @@ void zbuffer(Boolean enable);
 void zclear(void);
 void zoomPosition(undefined4 param_1);
 void zoomToSelection(void);
-void zoomto(double param_1,double param_2);
+void zoomto(double param_1, double param_2, double param_3,
+            short param_4, short param_5, int param_6,
+            undefined4 param_7, undefined4 param_8);
 void zwritemask(uint32_t mask);
 
 /* parse_* functions */

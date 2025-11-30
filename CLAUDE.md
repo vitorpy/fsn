@@ -9,8 +9,9 @@
 - **Never substitute your own implementation** - Even if you "know a better way"
 - **The decompiled code IS the source of truth** - It represents the original SGI binary
 - **Cleanup comes AFTER functionality** - Make it work first, clean later (separate pass)
+- **FIX VERIFIED DECOMPILATION BUGS** - When binary disassembly proves Ghidra wrong, fix it!
 
-When in doubt: **EXTRACT, DON'T REWRITE**
+When in doubt: **EXTRACT, DON'T REWRITE** (but verify against binary when suspicious)
 
 ---
 
@@ -129,23 +130,78 @@ python3 analysis/extract_module.py <module_name> --list 'func1,func2,func3'
 - `count_function_calls.py` - Find most-used functions
 - `count_global_usage.py` - Find most-used globals
 - `apply_renames.py` - Apply function/global renames from CSV
+- `disassemble_function.py` - Auto-extract and annotate disassembly (NEW)
+
+### Binary Analysis & GP Resolution (NEW)
+
+When Ghidra produces incorrect decompilation (e.g., bizarre bitwise ANDs), use these tools to verify against the actual binary:
+
+```bash
+# Explode fsn_original_backup.c into individual function files
+python3 analysis/explode_fsn.py -i fsn_original_backup.c -o fsn_original.exploded
+
+# Resolve GP offsets and add annotations to exploded files
+python3 analysis/resolve_indirect_calls.py \
+  --input fsn_original.exploded \
+  --output fsn_original.exploded.cleanup \
+  --binary fsn.original
+
+# Quick GP offset lookup
+python3 analysis/resolve_got.py /tmp/offsets.txt
+```
+
+**Output directories:**
+- `fsn_original.exploded/` - Raw exploded functions (937 files)
+- `fsn_original.exploded.cleanup/` - Annotated with resolved GP offsets
+- `fsn_original.exploded.cleanup/GP_MAPPING.md` - Full offset→symbol table
+- `fsn_original.exploded.cleanup/INDEX.md` - Function catalog + structure docs
+
+### Verifying Decompilation Against Binary
+
+**See `docs/DECOMPILATION_PROCEDURE.md`** for the complete step-by-step procedure.
+
+Quick reference:
+```bash
+# Auto-disassemble and annotate a function
+python3 analysis/disassemble_function.py FUN_00422f58
+
+# Manual: Find function address from dynamic symbols
+mips-linux-gnu-objdump -T fsn.original | grep draw_scene
+
+# Manual: Disassemble specific function
+mips-linux-gnu-objdump -d --start-address=0x40cac4 --stop-address=0x40cf00 fsn.original
+```
+
+**Known Ghidra decompilation bugs (FIXED):**
+- Z coordinate in `draw_directories()` was decompiled as bizarre `& 0xffffffff00000000`
+- Actual code: `Z = curcontext[8] + view_offset_z` (simple float addition)
+- See `fsn_original.exploded.cleanup/INDEX.md` for full analysis
 
 ## Project Structure
 
 ```
 fsn/
-├── fsn.c              # Original 78K-line decompile (source of truth)
-├── fsn.original       # Original 1996 SGI MIPS binary (340KB)
-├── src/               # Extracted modules (.c files)
-├── include/           # Headers (.h files)
-├── docs/              # Archaeology reference documentation
-│   ├── FSN_ARCHAEOLOGY.md  # Main reference
-│   └── appendix/      # Detailed appendices
-├── analysis/          # Python analysis/extraction scripts
-├── .venv/             # Python venv (tree-sitter, etc.)
-├── .beads/            # Issue tracker database (bd)
-├── build/             # CMake build directory (out-of-source!)
-└── CMakeLists.txt     # Build configuration
+├── fsn.c                      # Original 78K-line decompile (source of truth)
+├── fsn_original_backup.c      # Backup with original FUN_ names
+├── fsn.original               # Original 1996 SGI MIPS binary (340KB)
+├── src/                       # Extracted modules (.c files)
+├── include/                   # Headers (.h files)
+├── docs/                      # Archaeology reference documentation
+│   ├── FSN_ARCHAEOLOGY.md     # Main reference
+│   └── appendix/              # Detailed appendices
+├── analysis/                  # Python analysis/extraction scripts
+│   ├── explode_fsn.py         # Split C file into per-function files
+│   ├── resolve_indirect_calls.py  # Resolve GP offsets to symbols
+│   ├── resolve_got.py         # Quick GP offset lookup
+│   └── ...                    # Other extraction scripts
+├── fsn_original.exploded/     # Raw exploded functions (937 files)
+├── fsn_original.exploded.cleanup/  # Annotated with resolved GP offsets
+│   ├── GP_MAPPING.md          # Full offset→symbol table
+│   └── INDEX.md               # Function catalog + structure docs
+├── .venv/                     # Python venv (tree-sitter, etc.)
+├── .beads/                    # Issue tracker database (bd)
+├── build/                     # CMake build directory (out-of-source!)
+└── CMakeLists.txt             # Build configuration
 ```
 
 ---
@@ -326,3 +382,54 @@ These indicate issues to fix in later phases:
 3. **Find functions**: `python3 analysis/extract_module_ts.py list <pattern>`
 4. **Track progress**: Use beads (`bd`) for multi-session work
 5. **Never read entire fsn.c** - Use scripts for context-friendly extraction
+
+## Automated Verification & Graphics Testing (NEW)
+
+To speed up restoration and verify graphics logic without running the full GUI, use these tools:
+
+### 1. Static Verification (Assembly vs C)
+Compares the function call sequence and float constants in your C code against the original binary.
+
+```bash
+# Basic usage (if function name matches)
+source .venv/bin/activate && python3 analysis/verify_function.py draw_child_node src/draw_tree.c
+
+# When C name differs from Binary name (e.g. refactored/renamed)
+# FUN_xxxx is the original name/address, --name specifies the C function to check
+source .venv/bin/activate && python3 analysis/verify_function.py FUN_0040cad0 src/drawing.c --name redraw_gl_scene
+```
+**Verdict:** "FAIL" usually means you missed a call or got the order wrong. "PASS" means logic structure matches.
+
+### 2. Graphics Unit Testing (Headless)
+Runs a specific function with a **mocked** GL layer that prints calls to stdout instead of rendering.
+
+**Step 1: Create a test case** (e.g., `tests/test_my_func.c`)
+```c
+#include "../src/my_module.c" // Include source to test static functions
+
+int main() {
+    // Setup global state if needed (e.g. curcontext)
+    curcontext = context; 
+    
+    // Setup data
+    MyStruct data = { ... };
+
+    // Call function
+    my_draw_function(&data);
+    return 0;
+}
+```
+
+**Step 2: Run the test**
+```bash
+./tools/run_gfx_test.sh tests/test_my_func.c
+```
+
+**Output:**
+```
+call pushmatrix
+call translate 10.0 0.0 0.0
+call bgnline
+call v3f ...
+```
+Compare this output against the assembly analysis from `verify_function.py`!

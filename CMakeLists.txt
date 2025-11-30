@@ -82,6 +82,7 @@ set(FSN_SOURCES_CLEAN
     src/context_funcs.c
     src/convert.c
     src/delete.c
+    src/init_app_state.c
     src/drawing.c
     src/dump.c
     src/edit.c
@@ -104,63 +105,6 @@ set(FSN_SOURCES_CLEAN
     src/warp.c
     src/window.c
     src/zoom.c
-)
-
-# Files needing Ghidra artifact cleanup (53 files)
-set(FSN_SOURCES_NEED_CLEANUP
-    src/buffer.c
-    src/bytecode.c
-    src/calc.c
-    src/clipboard.c
-    src/context.c
-    src/database.c
-    src/database_io.c
-    src/dir_core.c
-    src/directory.c
-    src/display.c
-    src/draw_tree.c
-    src/tree_traverse_original.c
-    src/events.c
-    src/fam.c
-    src/file_core.c
-    src/file_ops.c
-    src/finalize.c
-    src/gl_utils.c
-    src/help.c
-    src/icons.c
-    src/init.c
-    src/interpreter.c
-    src/io.c
-    src/items.c
-    src/layout.c
-    src/legend.c
-    src/main.c
-    src/marks.c
-    src/menus.c
-    src/messages.c
-    src/network.c
-    src/overview.c
-    src/panels.c
-    src/pathutil.c
-    src/picking.c
-    src/position.c
-    src/processing.c
-    src/refresh.c
-    src/rendering.c
-    src/reset.c
-    src/resources.c
-    src/search.c
-    src/search_func.c
-    src/selection.c
-    src/selection2.c
-    src/setup.c
-    src/state.c
-    src/status.c
-    src/tree.c
-    src/view_camera.c
-    src/viewport.c
-    src/visibility.c
-    src/widget.c
 )
 
 # Stub implementations

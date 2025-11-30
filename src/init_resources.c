@@ -62,7 +62,13 @@ typedef struct {
     float warpZ;
     int warpTilt;
     int viewAngle;
-    /* More parameters from Fsn file... */
+    /* Layout parameters - from resources/Fsn */
+    float skyHeight;       /* → view_offset_z (default 75.0) */
+    float skyDistance;     /* → view_offset_y (default 450.0) */
+    float groundBack;      /* → base_y_offset (default 50.0) */
+    float xDirMargin;      /* → item_spacing_x (default 2.0) */
+    float yDirMargin;      /* → layout_base_height (default 8.0) */
+    float fileMargin;      /* → icon_spacing_factor (default 0.25) */
 } FsnResources;
 
 static FsnResources fsn_res;
@@ -117,14 +123,38 @@ static XtResource resources[] = {
       XtOffsetOf(FsnResources, selLineColor), XtRImmediate, (XtPointer)DEFAULT_SEL_LINE_COLOR },
     { "unselLineColor", "UnselLineColor", "CpColor", sizeof(int),
       XtOffsetOf(FsnResources, unselLineColor), XtRImmediate, (XtPointer)DEFAULT_UNSEL_LINE_COLOR },
+    /* Gradient sky/ground colors for draw_directories() */
+    { "farGroundColor", "FarGroundColor", "CpColor", sizeof(int),
+      XtOffsetOf(FsnResources, farGroundColor), XtRImmediate, (XtPointer)DEFAULT_FAR_GROUND },
+    { "nearGroundColor", "NearGroundColor", "CpColor", sizeof(int),
+      XtOffsetOf(FsnResources, nearGroundColor), XtRImmediate, (XtPointer)DEFAULT_NEAR_GROUND },
+    { "topSkyColor", "TopSkyColor", "CpColor", sizeof(int),
+      XtOffsetOf(FsnResources, topSkyColor), XtRImmediate, (XtPointer)DEFAULT_TOP_SKY },
+    { "bottomSkyColor", "BottomSkyColor", "CpColor", sizeof(int),
+      XtOffsetOf(FsnResources, bottomSkyColor), XtRImmediate, (XtPointer)DEFAULT_BOTTOM_SKY },
     { "initialX", "InitialX", XtRFloat, sizeof(float),
       XtOffsetOf(FsnResources, initialX), XtRImmediate, (XtPointer)0 },
     { "initialY", "InitialY", XtRFloat, sizeof(float),
       XtOffsetOf(FsnResources, initialY), XtRImmediate, (XtPointer)0 },
     { "initialZ", "InitialZ", XtRFloat, sizeof(float),
       XtOffsetOf(FsnResources, initialZ), XtRImmediate, (XtPointer)0 },
+    { "initialTilt", "InitialTilt", XtRInt, sizeof(int),
+      XtOffsetOf(FsnResources, initialTilt), XtRImmediate, (XtPointer)-700 },
     { "useGouraud", "UseGouraud", XtRBoolean, sizeof(Boolean),
       XtOffsetOf(FsnResources, useGouraud), XtRImmediate, (XtPointer)True },
+    /* Layout parameters from resources/Fsn (ORIGINAL values) */
+    { "skyHeight", "SkyHeight", XtRFloat, sizeof(float),
+      XtOffsetOf(FsnResources, skyHeight), XtRImmediate, (XtPointer)0 },
+    { "skyDistance", "SkyDistance", XtRFloat, sizeof(float),
+      XtOffsetOf(FsnResources, skyDistance), XtRImmediate, (XtPointer)0 },
+    { "groundBack", "GroundBack", XtRFloat, sizeof(float),
+      XtOffsetOf(FsnResources, groundBack), XtRImmediate, (XtPointer)0 },
+    { "xDirMargin", "XDirMargin", XtRFloat, sizeof(float),
+      XtOffsetOf(FsnResources, xDirMargin), XtRImmediate, (XtPointer)0 },
+    { "yDirMargin", "YDirMargin", XtRFloat, sizeof(float),
+      XtOffsetOf(FsnResources, yDirMargin), XtRImmediate, (XtPointer)0 },
+    { "fileMargin", "FileMargin", XtRFloat, sizeof(float),
+      XtOffsetOf(FsnResources, fileMargin), XtRImmediate, (XtPointer)0 },
 };
 
 /**
@@ -149,15 +179,46 @@ void init_toplevel_resources(Widget w)
     cpack_color = fsn_res.skyColor;
     bg_color_normal = fsn_res.skyColor;
     bg_color_grid = fsn_res.groundColor;
-    current_packed_color = fsn_res.dirColor;
-    highlight_color = fsn_res.selLineColor;
     highlight_packed_color = fsn_res.unselLineColor;
+    use_gouraud_shading = fsn_res.useGouraud ? 1 : 0;
+    grid_display_flag = use_gouraud_shading ? 1 : 0;
 
-    /* Initial view position from resources */
-    view_init_x = fsn_res.initialX;
-    view_init_y = fsn_res.initialY;
-    view_init_z = fsn_res.initialZ;
+    /* Gradient sky/ground colors for draw_directories() - ORIGINAL FSN variables
+     * These are used by the restored draw_directories() from fsn.c:48177-48298
+     */
+    graphics_state_mode = fsn_res.topSkyColor;       /* Sky top (dark blue) */
+    current_packed_color = fsn_res.bottomSkyColor;   /* Sky bottom (light cyan) */
+    graphics_render_flags = fsn_res.farGroundColor;  /* Ground far (dark green) */
+    highlight_color = fsn_res.nearGroundColor;       /* Ground near (light green) */
+
+    fprintf(stderr, "initResources: sky gradient top=0x%06x bottom=0x%06x\n",
+            graphics_state_mode, current_packed_color);
+    fprintf(stderr, "initResources: ground gradient far=0x%06x near=0x%06x\n",
+            graphics_render_flags, highlight_color);
+
+    /* Initial view position - use sensible defaults if resources failed to load
+     * Original FSN resources/Fsn values: initialX=0, initialY=-37, initialZ=34, initialTilt=-700
+     */
+    view_init_x = (fsn_res.initialX != 0.0f) ? fsn_res.initialX : 0.0f;
+    view_init_y = (fsn_res.initialY != 0.0f) ? fsn_res.initialY : -20.0f;
+    view_init_z = (fsn_res.initialZ != 0.0f) ? fsn_res.initialZ : 25.0f;
+    view_init_tilt = (fsn_res.initialTilt != 0) ? fsn_res.initialTilt : -700;
+
+    /* Layout parameters from resources/Fsn (ORIGINAL values)
+     * These control sky/ground positioning and directory layout spacing
+     */
+    view_offset_z = (fsn_res.skyHeight != 0.0f) ? fsn_res.skyHeight : 75.0f;
+    view_offset_y = (fsn_res.skyDistance != 0.0f) ? fsn_res.skyDistance : 450.0f;
+    base_y_offset = (fsn_res.groundBack != 0.0f) ? fsn_res.groundBack : 50.0f;
+    item_spacing_x = (fsn_res.xDirMargin != 0.0f) ? fsn_res.xDirMargin : 2.0f;
+    layout_base_height = (fsn_res.yDirMargin != 0.0f) ? fsn_res.yDirMargin : 8.0f;
+    icon_spacing_factor = (fsn_res.fileMargin != 0.0f) ? fsn_res.fileMargin : 0.25f;
 
     fprintf(stderr, "initResources: skyColor=0x%06x groundColor=0x%06x\n",
             fsn_res.skyColor, fsn_res.groundColor);
+    fprintf(stderr, "initResources: view_init=(%.1f, %.1f, %.1f)\n",
+            view_init_x, view_init_y, view_init_z);
+    fprintf(stderr, "initResources: layout: skyH=%.1f skyD=%.1f gndB=%.1f xDir=%.1f yDir=%.1f fileM=%.2f\n",
+            view_offset_z, view_offset_y, base_y_offset,
+            item_spacing_x, layout_base_height, icon_spacing_factor);
 }

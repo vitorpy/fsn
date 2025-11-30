@@ -21,7 +21,7 @@ void update_gl_context(void);
 void glx_switch_context_wrapper(void);
 void destroy_gl_resources(int param_1);
 void create_gl_window(int param_1);
-void gl_get_dimensions_wrapper(void);
+void gl_get_dimensions_wrapper(void *out_w, void *out_h, void *out_zmax);
 void init_gl_lists(void);
 void gl_swap_buffers(undefined1 param_1);
 void gl_push_state(void);

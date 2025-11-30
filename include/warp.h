@@ -11,7 +11,7 @@
 
 void draw_warp(void);
 void do_warp(int param_1);
-void draw_warp_directory(undefined8 param_1,undefined8 param_2,undefined4 *param_3,char param_4);
+void draw_warp_directory(float *dir_position, float unused_param, undefined4 *param_3, char param_4);
 void pickWarp(int *param_1,undefined4 *param_2,undefined4 *param_3);
 void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *param_4,
                   undefined2 *param_5,int *param_6,undefined1 *param_7,undefined1 *param_8);

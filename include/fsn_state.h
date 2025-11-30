@@ -132,6 +132,7 @@ extern Widget dir_children_toggle;
 extern float view_init_x;
 extern float view_init_y;
 extern float view_init_z;
+extern int view_init_tilt;         /* Initial camera tilt (rotation_x) in tenths of degrees */
 extern float view_init_rotation_x;
 extern float view_init_rotation_y;
 extern float view_offset_x;
@@ -216,6 +217,7 @@ extern int bg_color_normal;
 extern int bg_color_grid;
 extern int zbuffer_value;
 extern char grid_display_flag;
+extern char use_gouraud_shading;
 extern int current_packed_color;
 extern int highlight_color;
 extern int highlight_packed_color;

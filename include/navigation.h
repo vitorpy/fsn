@@ -16,6 +16,8 @@ void do_warp(int param_1);
 void pushzoom(void);
 void popzoom(void);
 void get_warp_entry(int param_1,float *param_2,float *param_3);
-void zoomto(double param_1,double param_2);
+void zoomto(double param_1, double param_2, double param_3,
+            short param_4, short param_5, int param_6,
+            undefined4 param_7, undefined4 param_8);
 
 #endif // FSN_NAVIGATION_H

@@ -153,4 +153,10 @@ typedef struct DirectoryNode {
 /* Check if selected (bit 19 set - original check: (flags << 0xd) < 0) */
 #define DIR_IS_SELECTED(node) ((node)->render_flags & DIR_FLAG_SELECTED)
 
+/*=============================================================================
+ * Height mode functions (dir_simple.c)
+ *============================================================================*/
+/* Recalculate heights for all nodes after displayHeight mode change */
+extern void recalculate_tree_heights(void);
+
 #endif /* FSN_DIR_H */

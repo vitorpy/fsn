@@ -9,8 +9,8 @@
 
 #include "fsn_types.h"
 
-void highlightSpecialDir(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
-                        );
+/* FIXED: First two params are floats based on assembly analysis */
+void highlightSpecialDir(float param_1, float param_2, undefined4 param_3, undefined4 param_4);
 void highlightDirWarp(undefined8 param_1,undefined8 param_2,int param_3);
 void highlightFileWarp(int param_1,int param_2);
 void highlightOverviewDir(int param_1);

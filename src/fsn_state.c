@@ -107,6 +107,7 @@ Widget dir_children_toggle = NULL;
 float view_init_x = 0.0f;
 float view_init_y = 0.0f;
 float view_init_z = 0.0f;
+int view_init_tilt = -700;         /* Initial camera tilt (rotation_x) - default -70 degrees */
 float view_init_rotation_x = 0.0f;
 float view_init_rotation_y = 0.0f;
 float view_offset_x = 0.0f;
@@ -150,9 +151,9 @@ int window_width = 0;
 int window_height = 0;
 float window_scale_x = 1.0f;
 float window_scale_y = 1.0f;
-int displayHeight = 0;
-int displayDirectoryHeight = 0;
-float display_height_exponent = 1.0f;
+int displayHeight = 1;              /* 0=None, 1=Linear, 2=Exaggerated */
+int displayDirectoryHeight = 1;     /* 0=Flat, 1=FilesOnly, 2=Children */
+float display_height_exponent = 0.5f;  /* Exponent for power scaling (sqrt) */
 
 /*=============================================================================
  * Layout State
@@ -161,7 +162,7 @@ float horizontal_scale_factor = 1.0f;
 float horizontal_scale_base = 1.0f;
 float vertical_scale_factor = 1.0f;
 float reference_dimension = 0.0f;
-float layout_base_height = 0.0f;
+float layout_base_height = 5.0f;    /* Y-depth per hierarchy level (original FSN) */
 float layout_height_adjust = 0.0f;
 float layout_offset_base = 0.0f;
 float layout_spacing_height = 0.0f;
@@ -169,10 +170,10 @@ float layout_z_offset = 0.0f;
 int layout_rotation_value = 0;
 int layout_short_value = 0;
 float item_scale_factor = 1.0f;
-float item_spacing_x = 0.0f;
+float item_spacing_x = 8.0f;        /* Horizontal spacing between child islands (original FSN) */
 float item_height_offset = 0.0f;
 float icon_size_multiplier = 1.0f;
-float icon_spacing_factor = 1.0f;
+float icon_spacing_factor = 1.5f;   /* File spacing within islands (original FSN) */
 float position_offset = 0.0f;
 
 /* Original ternary tree child index markers (fsn.c:1065-1067) */
@@ -194,6 +195,7 @@ int bg_color_normal = 0xffe16d;       /* skyColor #6de1ff as BGR - normal backgr
 int bg_color_grid = 0x238823;         /* groundColor #238823 as BGR (R=B so same) */
 int zbuffer_value = 0x7fffff;         /* Z-buffer clear value (far plane) */
 char grid_display_flag = 1;           /* 0=flat sky, 1=gradient sky mode */
+char use_gouraud_shading = 1;         /* Resource flag: use Gouraud shading */
 int current_packed_color = 0xffffff;  /* dirColor #ffffff as BGR (same) */
 int highlight_color = 0xffffff;       /* selLineColor #ffffff as BGR (same) */
 int highlight_packed_color = 0xd6e0c4; /* unselLineColor #c4e0d6 as BGR */
@@ -203,7 +205,7 @@ int sky_color_flat = 0xffe16d;        /* skyColor when gouraud off */
 int sky_color_top = 0xd58700;         /* topSkyColor #0087d5 as BGR */
 int sky_color_bottom = 0xf0ff91;      /* bottomSkyColor #91fff0 as BGR */
 int ground_color_near = 0x1a4f0f;     /* nearGroundColor #0f4f1a as BGR */
-float ground_scale_width = 2000.0f;   /* scale factor for ground plane width */
+float ground_scale_width = 2000.0f;  /* Original FSN value (fsn_resources+0x110) */
 float ground_offset_forward = 500.0f; /* y offset for forward horizon */
 float ground_offset_backward = 200.0f;/* y offset for backward horizon */
 float ground_horizon_z = 500.0f;      /* z distance to horizon transition */

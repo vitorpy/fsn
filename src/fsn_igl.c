@@ -46,6 +46,8 @@ static GLuint *fsn_pick_buffer = NULL;
 static int fsn_picking = 0;
 static float fsn_pick_matrix[16];
 static int fsn_viewport[4];
+static int fsn_pick_mouse_x = 0;  /* Mouse X for picking (set externally) */
+static int fsn_pick_mouse_y = 0;  /* Mouse Y for picking (set externally) */
 
 /* Matrix mode state - must be updated via mmode() */
 static int fsn_matrix_mode = MSINGLE;
@@ -222,6 +224,14 @@ void perspective(Angle fovy, float aspect, Coord near_, Coord far_)
     }
 
     if (fsn_matrix_mode == MSINGLE || fsn_matrix_mode == MPROJECTION) {
+        /* CRITICAL FIX: Reset GL_MODELVIEW to identity for MSINGLE mode.
+         * OpenGL always applies: v' = PROJECTION × MODELVIEW × v
+         * If MODELVIEW contains garbage, all vertices are corrupted.
+         */
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+        glMatrixMode(GL_PROJECTION);  /* MSINGLE requires explicit mode set */
         fsn_load_proj_base();
         gluPerspective((GLdouble)(0.1 * fovy), (GLdouble)aspect,
                        (GLdouble)near_, (GLdouble)far_);
@@ -237,6 +247,7 @@ void perspective(Angle fovy, float aspect, Coord near_, Coord far_)
 void ortho2(Coord left, Coord right, Coord bottom, Coord top)
 {
     if (fsn_matrix_mode == MSINGLE || fsn_matrix_mode == MPROJECTION) {
+        glMatrixMode(GL_PROJECTION);  /* MSINGLE requires explicit mode set */
         fsn_load_proj_base();
         gluOrtho2D((GLdouble)left, (GLdouble)right,
                    (GLdouble)bottom, (GLdouble)top);
@@ -267,6 +278,7 @@ void ortho2_ndc(void)
 void ortho(Coord left, Coord right, Coord bottom, Coord top, Coord near_, Coord far_)
 {
     if (fsn_matrix_mode == MSINGLE || fsn_matrix_mode == MPROJECTION) {
+        glMatrixMode(GL_PROJECTION);  /* MSINGLE requires explicit mode set */
         fsn_load_proj_base();
         glOrtho((GLdouble)left, (GLdouble)right, (GLdouble)bottom, (GLdouble)top,
                 (GLdouble)near_, (GLdouble)far_);
@@ -293,6 +305,44 @@ void viewport(Screencoord left, Screencoord right, Screencoord bottom, Screencoo
     glViewport(left, bottom, width, height);
     glScissor(left, bottom, width, height);
     glEnable(GL_SCISSOR_TEST);
+}
+
+/**
+ * fix_irisgl_coordinate_mismatch - Apply IRIS GL to OpenGL coordinate conversion
+ *
+ * ⚠️ DEVIATION FROM ORIGINAL FSN CODE
+ *
+ * The original FSN ran on SGI IRIX with native IRIS GL, which used:
+ *   X = right, Y = forward (into screen), Z = up
+ *
+ * OpenGL uses:
+ *   X = right, Y = up, Z = backward (out of screen)
+ *
+ * The irix-igl compatibility library passes coordinates through WITHOUT
+ * conversion. This function applies the necessary -90° X rotation to
+ * transform FSN's Y-forward/Z-up space into OpenGL's Y-up/-Z-forward space.
+ *
+ * Call this ONCE per frame, after perspective() but before view transforms.
+ */
+void fix_irisgl_coordinate_mismatch(void)
+{
+    /* Convert FSN coords to OpenGL: Y-forward/Z-up → Y-up/-Z-forward
+     *
+     * FSN (IRIS GL): X=right, Y=forward, Z=up
+     * OpenGL:        X=right, Y=up,      Z=backward
+     *
+     * -90° X rotation maps:
+     *   FSN Y (forward) → OpenGL -Z (forward)
+     *   FSN Z (up)      → OpenGL Y (up)
+     *
+     * FIXED: Apply to GL_MODELVIEW, not GL_PROJECTION.
+     * This keeps projection clean and applies coordinate conversion
+     * properly in the vertex pipeline: v' = PROJECTION × MODELVIEW × v
+     */
+    glMatrixMode(GL_MODELVIEW);
+    glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
+    /* Return to projection for FSN's MSINGLE transforms */
+    glMatrixMode(GL_PROJECTION);
 }
 
 /* ============================================================
@@ -569,12 +619,24 @@ void picksize(short deltax, short deltay)
     fsn_pick_deltay = deltay;
 }
 
+/**
+ * set_pick_coords - Set mouse coordinates for next pick operation
+ *
+ * Call this before pick() to specify where to pick.
+ * Y is in window coordinates (top=0), will be flipped for GL.
+ */
+void set_pick_coords(int x, int y)
+{
+    fsn_pick_mouse_x = x;
+    fsn_pick_mouse_y = y;
+}
+
 void pick(short *buffer, int32_t bufsize)
 {
-    /* Get current cursor position - this needs to be provided externally */
-    /* For now, use center of viewport */
-    int x = fsn_viewport[0] + fsn_viewport[2] / 2;
-    int y = fsn_viewport[1] + fsn_viewport[3] / 2;
+    /* Use mouse coordinates set by set_pick_coords() */
+    /* Flip Y: window coords have Y=0 at top, GL has Y=0 at bottom */
+    int x = fsn_pick_mouse_x;
+    int y = fsn_viewport[3] - fsn_pick_mouse_y;
 
     /* Create pick matrix */
     glMatrixMode(GL_PROJECTION);

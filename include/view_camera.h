@@ -17,7 +17,9 @@ void reset_eye(void);
 void set_camera_lookat(double param_1,double param_2);
 void pushzoom(void);
 void popzoom(void);
-void zoomto(double param_1,double param_2);
+void zoomto(double param_1, double param_2, double param_3,
+            short param_4, short param_5, int param_6,
+            undefined4 param_7, undefined4 param_8);
 void shrinkDueToZoom(void);
 void findzoom_warp(float *param_1,float *param_2,float *param_3,undefined2 *param_4,
                   undefined2 *param_5,int *param_6,undefined1 *param_7,undefined1 *param_8);

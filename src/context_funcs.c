@@ -8,6 +8,7 @@
 #include "fsn_state.h"
 #include "context_funcs.h"
 
+#include "fsn_context.h"
 void myContext(undefined4 param_1,undefined4 param_2)
 
 {
@@ -30,6 +31,7 @@ void setcontext(int param_1,undefined1 param_2)
 void newcontext(uint param_1,char param_2)
 
 {
+    FsnContext *ctx = (FsnContext *)curcontext;
   int iVar1;
   Display *displayVar;
   Window windowVar;
@@ -69,7 +71,7 @@ void newcontext(uint param_1,char param_2)
       XUnmapWindow(displayVar,windowVar);
       update_widget_state();
       refresh_display();
-      curcontext[0xc53] = 0;
+      ctx->special_mode_flag = 0;
       altcontext[0xc53] = 1;
       ui_layout_setup_wrapper();
     }

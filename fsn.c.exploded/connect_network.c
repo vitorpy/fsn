@@ -1,0 +1,48 @@
+/**
+ * connect_network
+ *
+ * Extracted from fsn.c lines 62517-62557
+ * Category: Other
+ */
+
+void connect_network(int *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int *piVar1;
+  int iVar2;
+  int unaff_gp;
+  undefined2 local_18;
+  undefined2 local_16;
+  undefined4 local_14;
+  int local_4;
+  
+  piVar1 = (int *)(**(code **)(unaff_gp + -0x7b5c))(0x17a0);
+  local_18 = 2;
+  local_14 = param_2;
+  iVar2 = (**(code **)(unaff_gp + -0x7c88))(&local_18,param_3,param_4,6);
+  local_16 = (undefined2)iVar2;
+  if ((iVar2 != 0) && (local_4 = (**(code **)(unaff_gp + -0x7c6c))(2,2,0), -1 < local_4)) {
+    iVar2 = (**(code **)(unaff_gp + -0x7c50))(local_4,&local_18,0x10);
+    if (iVar2 < 0) {
+      (**(code **)(unaff_gp + -0x7da4))(local_4);
+    }
+    else {
+      iVar2 = *param_1;
+      *param_1 = (int)piVar1;
+      piVar1[5] = (int)(piVar1 + 7);
+      piVar1[6] = (int)(piVar1 + 7);
+      *piVar1 = local_4;
+      piVar1[3] = 0;
+      piVar1[4] = 0;
+      piVar1[0x2f7] = (int)(piVar1 + 0x2f9);
+      piVar1[0x2f8] = (int)(piVar1 + 0x2f9);
+      piVar1[0x2f6] = 0;
+      piVar1[0x2f5] = 1;
+      piVar1[2] = 0;
+      piVar1[0x5e7] = 0;
+      piVar1[1] = iVar2;
+    }
+  }
+                    // WARNING: Bad instruction - Truncating control flow here
+  halt_baddata();
+}

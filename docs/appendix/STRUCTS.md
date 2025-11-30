@@ -4,63 +4,61 @@
 
 ## Rendering Context Structure
 
-The primary context structure accessed via `curcontext` pointer.
+The primary context structure accessed via `curcontext` pointer. Refactored in Phase 18 to use a formal C structure with explicit padding for alignment guarantees.
 
 ```c
 // Size: ~3280 bytes (0xCD0)
-// Access: char* curcontext
+// Access: FsnContext* ctx = (FsnContext*)curcontext
 
-struct fsn_context {
-    // +0x000: Camera Position (12 bytes)
-    float camera_x;              // +0x00: X position (left/right)
-    float camera_y;              // +0x04: Y position (forward/back)
-    float camera_z;              // +0x08: Z position (height)
-
-    // +0x00C: Camera Rotation (6 bytes)
-    short rotation_z;            // +0x0c: Yaw in tenths of degrees
-    short rotation_x;            // +0x0e: Pitch in tenths of degrees
-    short fov;                   // +0x10: FOV in tenths (default 450)
-
-    // +0x012: Padding/unknown (6 bytes)
-    char  padding_12[6];         // +0x12
-
-    // +0x018: Zoom Parameters (32 bytes)
-    float zoom_factor_1;         // +0x18: Zoom multiplier
-    char  padding_1c[4];         // +0x1c
-    float zoom_factor_2;         // +0x20: Zoom divisor
-    char  padding_24[16];        // +0x24
-
-    // +0x034: Scale (8 bytes)
-    float scale_factor;          // +0x34: View scale (default 1.0)
-    char  padding_38[4];         // +0x38
-
-    // +0x03C: Mode Flags (4 bytes)
-    int   zoom_mode;             // +0x3c: 0=normal, non-0=zooming
-
-    // +0x040 to +0xC4B: Various state (3084 bytes)
-    char  state_data[3084];      // Unknown fields
-
-    // +0xC4C: Timing (4 bytes)
-    int   render_time_usec;      // +0xc4c: Frame time in microseconds
-};
+typedef struct FsnContext {
+    /* +0x00 */ float camera_x;
+    /* +0x04 */ float camera_y;
+    /* +0x08 */ float camera_z;
+    
+    /* +0x0c */ int16_t rotation_z;   /* Yaw (tenths of degrees) */
+    /* +0x0e */ int16_t rotation_x;   /* Pitch (tenths of degrees) */
+    /* +0x10 */ int16_t fov;          /* Field of View (tenths of degrees) */
+    
+    /* +0x12 */ char _pad_12[2];      /* Align next float to 0x14 */
+    
+    /* +0x14 */ float sin_z;          /* Precomputed sin(rot_z) */
+    /* +0x18 */ float cos_z;          /* Precomputed cos(rot_z) */
+    /* +0x1c */ float tan_z;          /* Precomputed tan(rot_z) */
+    
+    /* +0x20 */ float sin_x;          /* Precomputed sin(rot_x) */
+    /* +0x24 */ float cos_x;          /* Precomputed cos(rot_x) */
+    /* +0x28 */ float tan_x;          /* Precomputed tan(rot_x) */
+    
+    /* +0x2c */ char _pad_2c[8];      /* Padding 0x2c -> 0x34 */
+    
+    /* +0x34 */ float scale_factor;   /* View scale (default 1.0) */
+    
+    /* +0x38 */ char _pad_38[4];      /* Padding 0x38 -> 0x3c */
+    
+    /* +0x3c */ int32_t zoom_mode;    /* 0=normal, non-0=zooming */
+    
+    /* +0x40 */ char _pad_40[0xc4c - 0x40]; /* Huge gap of unknown state */
+    
+    /* +0xc4c */ int32_t render_time_usec; /* Frame render time */
+    
+    /* +0xc50 */ char _pad_c50[3];         /* Padding to 0xc53 */
+    /* +0xc53 */ char special_mode_flag;   /* Accessed in stubs.c setScales */
+} FsnContext;
 ```
 
-### Common Access Patterns
+### Access Patterns
 
+**Old (Deprecated):**
 ```c
-// Camera position
 float cam_x = *(float *)curcontext;
-float cam_y = *(float *)(curcontext + 4);
-float cam_z = *(float *)(curcontext + 8);
-
-// Camera rotation
 short rot_x = *(short *)(curcontext + 0xe);
-short rot_z = *(short *)(curcontext + 0xc);
-short fov   = *(short *)(curcontext + 0x10);
+```
 
-// Scale and zoom
-float scale = *(float *)(curcontext + 0x34);
-int zoom    = *(int *)(curcontext + 0x3c);
+**New (Recommended):**
+```c
+FsnContext *ctx = (FsnContext *)curcontext;
+float cam_x = ctx->camera_x;
+short rot_x = ctx->rotation_x;
 ```
 
 ## Widget Array Structure

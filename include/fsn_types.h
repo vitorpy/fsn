@@ -70,13 +70,7 @@ typedef uint64_t  ulonglong;
 typedef int64_t   longlong;
 
 /* Boolean type (if not using stdbool.h) */
-#ifndef __cplusplus
-#ifndef bool
-typedef int bool;
-#define true  1
-#define false 0
-#endif
-#endif
+/* Moved to fsn_igl.h */
 
 /* Note: fsn_igl.h should be included AFTER X11 headers due to type conflicts.
  * Include fsn_igl.h explicitly in source files that need it, after fsn_state.h */

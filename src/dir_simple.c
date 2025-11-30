@@ -28,6 +28,76 @@ static short next_name_index = 1;
 /* Forward declarations */
 static void scan_directory_recursive(DirectoryNode *entry, const char *path, int depth);
 static void layout_directory(DirectoryNode *entry, float x, float y, int depth);
+static float calculate_file_height(off_t file_size);
+static void recalculate_node_heights(DirectoryNode *node);
+
+/**
+ * calculate_file_height - Compute block height based on file size and mode
+ *
+ * ORIGINAL: fsn.c:38989 - Height calculation with power scaling
+ * displayHeight modes:
+ *   0 = None - all files same height
+ *   1 = Linear - logarithmic scaling (looks linear perceptually)
+ *   2 = Exaggerated - power scaling with display_height_exponent
+ */
+static float calculate_file_height(off_t file_size)
+{
+    float base_height = 0.5f;
+    float max_height = 5.0f;
+    float log_size, norm;
+
+    switch (displayHeight) {
+        case 0:  /* None - all same height */
+            return base_height;
+
+        case 1:  /* Linear - logarithmic scaling for visual proportionality */
+            /* Normalize: 1KB=0.5, 1MB=2.0, 1GB=3.5 */
+            if (file_size <= 0) return base_height;
+            log_size = log10f((float)file_size + 1.0f);
+            return base_height + (log_size / 9.0f) * (max_height - base_height);
+
+        case 2:  /* Exaggerated - power scaling (ORIGINAL: fsn.c:38989) */
+            if (file_size <= 0) return base_height;
+            norm = (float)file_size / (1024.0f * 1024.0f);  /* Normalize to MB */
+            return base_height + powf(norm, display_height_exponent) * max_height;
+
+        default:
+            return base_height;
+    }
+}
+
+/**
+ * recalculate_tree_heights - Recalculate heights for all nodes after mode change
+ */
+void recalculate_tree_heights(void)
+{
+    if (topdir == NULL) return;
+    recalculate_node_heights((DirectoryNode *)topdir);
+}
+
+static void recalculate_node_heights(DirectoryNode *node)
+{
+    int i;
+
+    if (node == NULL) return;
+
+    /* Recalculate this node's height if it's a file */
+    if (!(node->render_flags & DIR_FLAG_DIRECTORY)) {
+        node->height = calculate_file_height(node->total_size);
+    }
+
+    /* Recurse through ternary children */
+    recalculate_node_heights(node->child_center);
+    recalculate_node_heights(node->child_left);
+    recalculate_node_heights(node->child_right);
+
+    /* Process files array */
+    if (node->files_array != NULL) {
+        for (i = 0; i < node->num_files; i++) {
+            recalculate_node_heights(node->files_array[i]);
+        }
+    }
+}
 
 /**
  * allocate_directory_entry - Allocate a new directory entry
@@ -283,21 +353,22 @@ static void layout_directory(DirectoryNode *entry, float x, float y, int depth)
     }
 
     /*
-     * Position files within directory using icon_spacing_factor
-     * Original: fsn.c:43389-43392
+     * ORIGINAL: Position files within directory using icon_spacing_factor
+     * From fsn.c:43389-43392 - NOT centered, starts from left edge
      * x = -icon_spacing_factor * (num_files - 1) + icon_spacing_factor * file_index
      */
     if (entry->files_array != NULL) {
         for (i = 0; i < entry->num_files; i++) {
             DirectoryNode *file = entry->files_array[i];
-            /* Linear spread centered at x=0 */
-            float file_x = -icon_spacing_factor * (entry->num_files - 1) / 2.0f
+            /* ORIGINAL formula - starts from left, NOT centered */
+            float file_x = -icon_spacing_factor * (entry->num_files - 1)
                          + icon_spacing_factor * i;
             file->pos_x = x + file_x;
             file->pos_y = y;
             file->offset_x = file_x;
             file->offset_y = 0.0f;
-            file->height = 0.5f;  /* Files are shorter than directories */
+            /* Calculate height based on file size and displayHeight mode */
+            file->height = calculate_file_height(file->total_size);
         }
     }
 }

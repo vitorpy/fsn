@@ -13,9 +13,16 @@
 
 #include "fsn_types.h"
 
+/* Forward declaration for DirectoryNode */
+struct DirectoryNode;
+
 /* These are the primary entry points from draw_tree.c */
 /* draw_tree_content: renders the directory tree nodes (files and folders) */
 void draw_tree_content(char param_1);
+
+/* process_tree_node_impl: draws a directory tree node and its children */
+/* Exported for use by drawing.c's restored draw_directories() */
+void process_tree_node_impl(struct DirectoryNode *node, char param_3);
 
 /* Other declarations are in fsn_forward.h */
 

@@ -240,6 +240,9 @@ void ortho2_ndc(void);  /* No-arg version for 2D text overlay (-1 to 1 bounds) *
 void ortho(Coord left, Coord right, Coord bottom, Coord top, Coord near, Coord far);
 void viewport(Screencoord left, Screencoord right, Screencoord bottom, Screencoord top);
 
+/* Coordinate system conversion (DEVIATION - see fsn_igl.c for rationale) */
+void fix_irisgl_coordinate_mismatch(void);
+
 /* Color */
 void color(Colorindex c);
 void cpack(uint32_t color);
@@ -301,6 +304,7 @@ void pushname(short name);
 void popname(void);
 void loadname(short name);
 void picksize(short deltax, short deltay);
+void set_pick_coords(int x, int y);  /* Set mouse coords for picking */
 
 /* Text */
 void charstr(String str);

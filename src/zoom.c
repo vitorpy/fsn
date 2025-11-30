@@ -11,6 +11,7 @@
 #include "fsn_igl.h"
 #include <sys/time.h>
 
+#include "fsn_context.h"
 /* TODO: This should be in fsn_state.h */
 extern struct timeval zoom_start_time;
 
@@ -49,8 +50,7 @@ void pushzoom(void)
     puVar3[3] = *puVar5;
     puVar3[4] = puVar4[4];
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void popzoom(void)
@@ -77,40 +77,47 @@ void popzoom(void)
   if (*(int *)(curcontext + 0x40) < 0) {
     *(undefined4 *)(curcontext + 0x40) = 9;
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
-void zoomto(double param_1,double param_2)
-
+/*
+ * FIXED: Reconstructed function signature from parameter usage analysis.
+ * Ghidra only decoded 2 of 3 double parameters. The CONCAT44 patterns were
+ * reconstructing the third double (Z position) from register/stack halves.
+ *
+ * Parameters (inferred from usage):
+ *   param_1 (double) -> curcontext[0] = X position
+ *   param_2 (double) -> curcontext[4] = Y position
+ *   param_3 (double) -> curcontext[8] = Z position (was CONCAT44)
+ *   param_4 (short)  -> curcontext[0xc] = rotation X
+ *   param_5 (short)  -> curcontext[0xe] = rotation Y
+ *   param_6 (int)    -> compared with curcontext[0x3c] = target directory
+ *   param_7 (int)    -> zoom_param_x
+ *   param_8 (int)    -> zoom_param_y
+ */
+void zoomto(double param_1, double param_2, double param_3,
+            short param_4, short param_5, int param_6,
+            undefined4 param_7, undefined4 param_8)
 {
-  undefined4 in_register_00001040;
-  undefined4 in_register_00001080;
-  undefined4 in_stack_00000014;
-  short in_stack_0000001a;
-  short in_stack_0000001e;
-  int in_stack_00000020;
-  undefined4 in_stack_00000024;
-  undefined4 in_stack_00000028;
-  
+    FsnContext *ctx = (FsnContext *)curcontext;
   init_gl_state(0,0);
   set_main_gl_window();
-  if (in_stack_00000020 == *(int *)(curcontext + 0x3c)) {
+  if (param_6 == ctx->zoom_mode) {
     zoom_stack_pointer = (float)param_1;
     zoom_stack_size = (float)param_2;
-    zoom_stack_capacity = (float)(double)CONCAT44(in_register_00001080,in_stack_00000014);
-    camera_position_x = in_stack_0000001a;
-    camera_position_y = in_stack_0000001e;
-    camera_position_z = in_stack_0000001a != *(short *)(curcontext + 0xc);
-    camera_rotation_changed = in_stack_0000001e != *(short *)(curcontext + 0xe);
-    if (in_stack_00000020 == 0) {
-                    // WARNING: Bad instruction - Truncating control flow here
-      halt_baddata();
+    zoom_stack_capacity = (float)param_3;
+    camera_position_x = param_4;
+    camera_position_y = param_5;
+    camera_position_z = param_4 != ctx->rotation_z;
+    camera_rotation_changed = param_5 != ctx->rotation_x;
+    if (param_6 == 0) {
+      /* Early return - halt_baddata was Ghidra artifact */
+      return;
     }
     zoom_active_flag = 0;
     gettimeofday((struct timeval *)&zoom_start_time, NULL);
-    zoom_param_x = in_stack_00000024;
-    zoom_param_y = in_stack_00000028;
+    zoom_param_x = param_7;
+    zoom_param_y = param_8;
     zoom_saved_state = zoom_init_state;
     init_gl_state(zoom_gl_init_callback,&zoom_stack_pointer);
   }
@@ -118,29 +125,27 @@ void zoomto(double param_1,double param_2)
     if (search_results_pending != '\0') {
       process_search_results();
     }
-    *(int *)(curcontext + 0x3c) = in_stack_00000020;
-    if (in_stack_00000020 != 0) {
+    ctx->zoom_mode = param_6;
+    if (param_6 != 0) {
       update_marked_item(0);
     }
-    *(float *)curcontext = (float)param_1;
-    *(float *)(curcontext + 4) = (float)param_2;
-    *(float *)(curcontext + 8) = (float)(double)CONCAT44(in_register_00001040,in_stack_00000014);
-    *(short *)(curcontext + 0xc) = in_stack_0000001a;
+    ctx->camera_x = (float)param_1;
+    ctx->camera_y = (float)param_2;
+    ctx->camera_z = (float)param_3;
+    ctx->rotation_z = param_4;
     init_view_transform();
-    *(short *)(curcontext + 0xe) = in_stack_0000001e;
+    ctx->rotation_x = param_5;
     init_camera_state();
     redraw_gl_scene();
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void shrinkDueToZoom(void)
 
 {
   init_gl_state(search_gl_init_callback,0);
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 /* findzoom_warp and warpZoomToFile are defined in warp.c */
@@ -148,14 +153,14 @@ void shrinkDueToZoom(void)
 void zoomToSelection(void)
 
 {
-  if (*(int *)(curcontext + 0x3c) == 0) {
+    FsnContext *ctx = (FsnContext *)curcontext;
+  if (ctx->zoom_mode == 0) {
     update_context_bounds((void *)(curcontext + 0x44),(void *)(curcontext + 0x48));
   }
   else {
     update_context_display((void *)(curcontext + 0x44),(void *)(curcontext + 0x48));
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 /* findzoom_landscape is defined in landscape.c */
@@ -163,14 +168,14 @@ void zoomToSelection(void)
 void findzoom(void)
 
 {
-  if (*(int *)(curcontext + 0x3c) == 0) {
+    FsnContext *ctx = (FsnContext *)curcontext;
+  if (ctx->zoom_mode == 0) {
     calculate_view_params();
   }
   else {
     calculate_item_params();
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 /* landscapeZoomToFile is defined in landscape.c */
@@ -216,6 +221,5 @@ void zoomPosition(undefined4 param_1)
       set_camera_lookat((double)fStack_8,(double)fStack_c);
     }
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }

@@ -11,28 +11,34 @@
 #include "fsn_state.h"
 #include "fsn_igl.h"
 
-void highlightSpecialDir(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
-                        )
-
+#include "fsn_context.h"
+void highlightSpecialDir(float param_1, float param_2, undefined4 param_3, undefined4 param_4)
 {
-  undefined8 in_f4;
-  undefined8 in_f6;
+    FsnContext *ctx = (FsnContext *)curcontext;
   float fVar1;
-  uint in_register_00001080;
-  
-  translate((float)(double)CONCAT44((int)((ulonglong)in_f4 >> 0x20),param_1),
-            (float)(double)CONCAT44((int)((ulonglong)in_f6 >> 0x20),param_2),param_3,param_4,0);
-  rotate((int)-*(short *)(curcontext + 0xe),0x78);
-  translate(0,translate_y_offset);
-  fVar1 = (float)((double)-rotation_factor_y / (double)((ulonglong)in_register_00001080 << 0x20));
-  rect(fVar1,fVar1);
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+
+  /*
+   * FIXED: Ghidra CONCAT44 artifacts were confused function argument passing.
+   * Assembly shows params passed via $f12-$f15 (MIPS float convention).
+   * See analysis/FUN_0041a8fc.annotated.asm
+   */
+  translate(param_1, param_2, 0);
+  rotate((int)-ctx->rotation_x, 'x');
+  translate(0, translate_y_offset);
+
+  /*
+   * FIXED: (ulonglong)in_register << 0x20 is Ghidra artifact for constant 2.0
+   * Assembly at 0x41a99c-0x41a9bc: lui at,0x4000; mtc1 at,$f17; mtc1 zero,$f16
+   * This constructs double 2.0 (0x4000000000000000), then div.d by it.
+   */
+  fVar1 = (float)(-rotation_factor_y / 2.0);
+  rect(fVar1, fVar1);
 }
 
 void highlightDirWarp(undefined8 param_1,undefined8 param_2,int param_3)
 
 {
+    FsnContext *ctx = (FsnContext *)curcontext;
   int iVar1;
   int *piVar2;
   int iVar3;
@@ -45,9 +51,9 @@ void highlightDirWarp(undefined8 param_1,undefined8 param_2,int param_3)
   
   uVar8 = (undefined4)((ulonglong)param_2 >> 0x20);
   uVar5 = (uint)((ulonglong)param_1 >> 0x20);
-  if (param_3 != *(int *)(curcontext + 0x3c)) {
+  if (param_3 != ctx->zoom_mode) {
     pushmatrix();
-    iVar4 = *(int *)(curcontext + 0x3c);
+    iVar4 = ctx->zoom_mode;
     if (param_3 == *(int *)(iVar4 + 0x28)) {
       draw_positioned_item((ulonglong)uVar5 << 0x20,(double)*(float *)(iVar4 + 0x3c) + (double)layout_base_height)
       ;
@@ -65,15 +71,24 @@ void highlightDirWarp(undefined8 param_1,undefined8 param_2,int param_3)
         piVar2 = *(int **)(iVar4 + 0x18);
         do {
           if (param_3 == *piVar2) {
-            uVar7 = CONCAT44(uVar5,(float)((double)-icon_spacing_factor *
-                                           (double)((ulonglong)in_register_00001090 << 0x20) *
-                                           (double)(iVar3 + -1) +
-                                          (double)icon_spacing_factor * (double)iVar1));
-            translate(uVar7,iVar3,iVar4,0);
-            uVar6 = (undefined4)((ulonglong)uVar7 >> 0x20);
-            rotate(0xfffffc7c,0x7a);
-            translate(CONCAT44(uVar6,0x3f333333),CONCAT44(uVar8,0xbde66666));
-            rect(0xbca3d70a,0xbca3d70a);
+            /*
+             * FIXED: CONCAT44 patterns decoded from assembly FUN_0041a9f8.annotated.asm
+             *
+             * Line 41ab58-64: lui at,0x3fe0; mtc1 zero,$f18 constructs double 0.5
+             * Formula: -icon_spacing_factor * 0.5 * (count-1) + icon_spacing_factor * index
+             * This centers the items around 0.
+             */
+            float centered_x = (float)(-icon_spacing_factor * 0.5 * (double)(iVar3 - 1) +
+                                       icon_spacing_factor * (double)iVar1);
+            translate(centered_x, 0, 0);
+            rotate(-900, 'z');  /* 0xfffffc7c = -900, 0x7a = 'z' */
+            /*
+             * FIXED: translate constants loaded from data section at offsets -20644, -20640
+             * 0x3f333333 = 0.7f, 0xbde66666 = -0.1125f
+             */
+            translate(0.7f, -0.1125f, 0);
+            /* 0xbca3d70a = -0.02f */
+            rect(-0.02f, -0.02f);
             break;
           }
           iVar1 = iVar1 + 1;
@@ -83,19 +98,19 @@ void highlightDirWarp(undefined8 param_1,undefined8 param_2,int param_3)
     }
     popmatrix();
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
-void highlightFileWarp(int param_1,int param_2)
-
+void highlightFileWarp(int param_1, int param_2)
 {
-  uint in_register_00001040;
-  
-  if (param_1 == *(int *)(curcontext + 0x3c)) {
+    FsnContext *ctx = (FsnContext *)curcontext;
+  if (param_1 == ctx->zoom_mode) {
     pushmatrix();
-    translate(0,(float)((double)*(float *)(param_1 + 0x3c) /
-                       (double)((ulonglong)in_register_00001040 << 0x20)));
+    /*
+     * FIXED: (ulonglong)in_register << 0x20 is Ghidra artifact for constant 2.0
+     * Same pattern as highlightSpecialDir - division by 2.0
+     */
+    translate(0, (float)(*(float *)(param_1 + 0x3c) / 2.0f));
     draw_entry(param_2);
     translate(*(undefined4 *)(param_2 + 0x14),*(undefined4 *)(param_2 + 0x18));
     if ((curcontext[0xc50] == '\0') || (overlay_mode_flag == '\0')) {
@@ -104,33 +119,32 @@ void highlightFileWarp(int param_1,int param_2)
     else {
       scale(view_offset_x,view_offset_x);
     }
-                    // WARNING: Bad instruction - Truncating control flow here
-    halt_baddata();
+    /* halt_baddata was inner block artifact */
+    popmatrix();
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void highlightOverviewDir(int param_1)
-
 {
   undefined4 uVar1;
   int iVar2;
   double dVar3;
-  uint uVar4;
-  undefined8 in_f10;
   undefined4 uStack_14;
   float fStack_10;
   float fStack_c;
   float fStack_8;
-  
-  uVar4 = (uint)((ulonglong)in_f10 >> 0x20);
+
   if (overviewActive != '\0') {
     begin_overview_render();
     color(0);
     clear();
     color(overlayHighlightColor);
-    dVar3 = (double)*(float *)(param_1 + 0x3c) / (double)((ulonglong)uVar4 << 0x20);
+    /*
+     * FIXED: (ulonglong)uVar4 << 0x20 is Ghidra artifact for constant 2.0
+     * Same pattern as other highlight functions.
+     */
+    dVar3 = (double)*(float *)(param_1 + 0x3c) / 2.0;
     rectf((float)((double)*(float *)(param_1 + 0x34) - dVar3 * (double)*(float *)(param_1 + 0x58)),
           (float)((double)*(float *)(param_1 + 0x38) - dVar3));
     iVar2 = *(int *)(param_1 + 0x28);
@@ -138,10 +152,14 @@ void highlightOverviewDir(int param_1)
       fStack_c = *(float *)(iVar2 + 0x34) + *(float *)(param_1 + 0x4c) * *(float *)(param_1 + 0x58);
       fStack_8 = (float)((double)*(float *)(iVar2 + 0x38) + (double)*(float *)(param_1 + 0x50));
       uStack_14 = *(undefined4 *)(param_1 + 0x34);
+      /*
+       * FIXED: (ulonglong)(double)value & 0xffffffff00000000 is Ghidra artifact for 2.0
+       * Assembly at 0x421a90-0x421abc shows register reuse where $f6/$f7 is
+       * overwritten from loaded value to constant 2.0 before division.
+       * See analysis/FUN_00421940.annotated.asm
+       */
       fStack_10 = (float)((double)*(float *)(param_1 + 0x38) +
-                         (double)-*(float *)(param_1 + 0x3c) /
-                         (double)((ulonglong)(double)*(float *)(iVar2 + 0x38) & 0xffffffff00000000))
-      ;
+                         (double)-*(float *)(param_1 + 0x3c) / 2.0);
       bgnline();
       v2f((float *)&fStack_c);
       v2f((float *)&uStack_14);
@@ -155,36 +173,35 @@ void highlightOverviewDir(int param_1)
     popmatrix();
     end_rendering();
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void highlightDirLandscape(int param_1)
-
 {
   int iVar1;
   double dVar2;
   float fVar3;
-  uint in_register_00001080;
   undefined4 uStack_18;
   float fStack_14;
   undefined4 uStack_10;
   float fStack_c;
   float fStack_8;
   undefined4 uStack_4;
-  
+
   if (param_1 != *(int *)(curcontext + 0x44)) {
     pushmatrix();
-    translate(*(undefined4 *)(param_1 + 0x34),*(undefined4 *)(param_1 + 0x38));
+    translate(*(undefined4 *)(param_1 + 0x34), *(undefined4 *)(param_1 + 0x38));
     scale(*(undefined4 *)(param_1 + 0x58));
     if (-1 < *(int *)(param_1 + 0x74) << 0xd) {
-      scale(*(undefined4 *)(param_1 + 0x3c),*(undefined4 *)(param_1 + 0x3c));
-                    // WARNING: Bad instruction - Truncating control flow here
-      halt_baddata();
+      scale(*(undefined4 *)(param_1 + 0x3c), *(undefined4 *)(param_1 + 0x3c));
+      /* halt_baddata was early return in conditional */
     }
-    fVar3 = (float)((double)-*(float *)(param_1 + 0x3c) /
-                   (double)((ulonglong)in_register_00001080 << 0x20));
-    rect(fVar3,fVar3);
+    /*
+     * FIXED: (ulonglong)in_register << 0x20 is Ghidra artifact for constant 2.0
+     * Same pattern as other highlight functions.
+     */
+    fVar3 = (float)(-*(float *)(param_1 + 0x3c) / 2.0);
+    rect(fVar3, fVar3);
     popmatrix();
     iVar1 = *(int *)(param_1 + 0x28);
     if (iVar1 != 0) {
@@ -193,9 +210,12 @@ void highlightDirLandscape(int param_1)
       dVar2 = (double)*(float *)(iVar1 + 0x38) + (double)*(float *)(param_1 + 0x50);
       fStack_8 = (float)dVar2;
       uStack_18 = *(undefined4 *)(param_1 + 0x34);
+      /*
+       * FIXED: (ulonglong)dVar2 & 0xffffffff00000000 is Ghidra artifact for constant 2.0
+       * Assembly shows register reuse with mtc1 constructing 2.0 constant.
+       */
       fStack_14 = (float)((double)*(float *)(param_1 + 0x38) -
-                         (double)*(float *)(param_1 + 0x3c) /
-                         (double)((ulonglong)dVar2 & 0xffffffff00000000));
+                         (double)*(float *)(param_1 + 0x3c) / 2.0);
       uStack_4 = uStack_10;
       bgnline();
       v3f((float *)&fStack_c);
@@ -209,21 +229,20 @@ void highlightDirLandscape(int param_1)
       popmatrix();
     }
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void highlightDir(void)
 
 {
-  if (*(int *)(curcontext + 0x3c) == 0) {
+    FsnContext *ctx = (FsnContext *)curcontext;
+  if (ctx->zoom_mode == 0) {
     update_tree_bounds();
   }
   else {
     draw_item_recursive();
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void highlightFileLandscape(int param_1,int param_2)
@@ -241,26 +260,26 @@ void highlightFileLandscape(int param_1,int param_2)
   else {
     scale(view_offset_x,view_offset_x);
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void highlightFile(void)
 
 {
-  if (*(int *)(curcontext + 0x3c) == 0) {
+    FsnContext *ctx = (FsnContext *)curcontext;
+  if (ctx->zoom_mode == 0) {
     update_view_recursive();
   }
   else {
     refresh_context_view();
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
 
 {
+    FsnContext *ctx = (FsnContext *)curcontext;
   char *__dest;
   float fVar1;
   uint uVar2;
@@ -280,17 +299,17 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
     linewidth((int)default_line_width);
     zbuffer(0);
     pushmatrix();
-    scale((float)((double)((ulonglong)uVar2 << 0x20) / (double)*(float *)(curcontext + 0x34)));
-    rotate((int)*(short *)(curcontext + 0xe),0x78);
-    rotate((int)*(short *)(curcontext + 0xc),0x7a);
-    if (*(int *)(curcontext + 0x3c) == 0) {
+    scale((float)((double)((ulonglong)uVar2 << 0x20) / (double)ctx->scale_factor));
+    rotate((int)ctx->rotation_x,0x78);
+    rotate((int)ctx->rotation_z,0x7a);
+    if (ctx->zoom_mode == 0) {
       fVar1 = powf(zoom_base_factor,
-                   (*(float *)(curcontext + 4) -
-                   *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
-                   *(float *)(curcontext + 8)) / zoom_reference_height);
+                   (ctx->camera_y -
+                   ctx->cos_z * ctx->sin_x *
+                   ctx->camera_z) / zoom_reference_height);
       scale(fVar1);
     }
-    translate(-*(float *)curcontext,-*(float *)(curcontext + 4));
+    translate(-ctx->camera_x,-ctx->camera_y);
     if (param_2 == (undefined4 *)0x0) {
       if (param_1 != 0) {
         refresh_view_recursive(param_1);
@@ -325,8 +344,7 @@ void baseLocateHighlight(int param_1,undefined4 *param_2,int param_3)
       destroy_gl_resources();
     }
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void locateHighlight(void)
@@ -339,8 +357,7 @@ void locateHighlight(void)
   set_main_gl_window();
   gl_get_dimensions_wrapper(&uStack_4,&uStack_c,&uStack_8);
   configure_viewport(uStack_4,uStack_c,uStack_8);
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void overviewLocateHighlight(void)
@@ -351,8 +368,7 @@ void overviewLocateHighlight(void)
   glx_switch_context_wrapper();
   uVar1 = get_current_time();
   configure_viewport(uVar1,0,0);
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void locateHighlightAction(undefined4 param_1,int param_2)
@@ -365,8 +381,7 @@ void locateHighlightAction(undefined4 param_1,int param_2)
     gl_pop_state();
     gflush();
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void highlightByName(undefined4 param_1)
@@ -382,8 +397,7 @@ void highlightByName(undefined4 param_1)
   else {
     configure_viewport(iStack_4,uStack_8,0);
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void locateClear(void)
@@ -398,8 +412,7 @@ void locateClear(void)
     active_colormap_id = 0;
     draw_overview_content();
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }
 
 void locateClearAction(undefined4 param_1,int param_2)
@@ -412,6 +425,5 @@ void locateClearAction(undefined4 param_1,int param_2)
     gl_pop_state();
     gflush();
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /* halt_baddata was Ghidra epilogue artifact */
 }

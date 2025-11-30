@@ -9,9 +9,11 @@
 #include "fsn_state.h"
 #include "fsn_igl.h"
 
+#include "fsn_context.h"
 void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
 
 {
+    FsnContext *ctx = (FsnContext *)curcontext;
   short sVar1;
   int iVar2;
   undefined4 uVar3;
@@ -43,15 +45,15 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
   picksize(5,5);
   pick(asStack_3f4,500);
   gl_picking_setup_wrapper();
-  scale((float)((double)((ulonglong)uVar11 << 0x20) / (double)*(float *)(curcontext + 0x34)));
-  rotate((int)*(short *)(curcontext + 0xe),0x78);
-  rotate((int)*(short *)(curcontext + 0xc),0x7a);
+  scale((float)((double)((ulonglong)uVar11 << 0x20) / (double)ctx->scale_factor));
+  rotate((int)ctx->rotation_x,0x78);
+  rotate((int)ctx->rotation_z,0x7a);
   fVar10 = powf(zoom_base_factor,
-                (*(float *)(curcontext + 4) -
-                *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
-                *(float *)(curcontext + 8)) / zoom_reference_height);
+                (ctx->camera_y -
+                ctx->cos_z * ctx->sin_x *
+                ctx->camera_z) / zoom_reference_height);
   scale(fVar10);
-  translate(-*(float *)curcontext,-*(float *)(curcontext + 4));
+  translate(-ctx->camera_x,-ctx->camera_y);
   set_render_flag(1);
   iVar2 = endpick(asStack_3f4);
   popmatrix();
@@ -60,15 +62,15 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
   pick(asStack_7dc,500);
   uVar11 = 0;
   gl_picking_setup_wrapper();
-  scale((float)((double)((ulonglong)uVar11 << 0x20) / (double)*(float *)(curcontext + 0x34)));
-  rotate((int)*(short *)(curcontext + 0xe),0x78);
-  rotate((int)*(short *)(curcontext + 0xc),0x7a);
+  scale((float)((double)((ulonglong)uVar11 << 0x20) / (double)ctx->scale_factor));
+  rotate((int)ctx->rotation_x,0x78);
+  rotate((int)ctx->rotation_z,0x7a);
   fVar10 = powf(zoom_base_factor,
-                (*(float *)(curcontext + 4) -
-                *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
-                *(float *)(curcontext + 8)) / zoom_reference_height);
+                (ctx->camera_y -
+                ctx->cos_z * ctx->sin_x *
+                ctx->camera_z) / zoom_reference_height);
   scale(fVar10,0x3f800000);
-  translate(-*(float *)curcontext,-*(float *)(curcontext + 4));
+  translate(-ctx->camera_x,-ctx->camera_y);
   iVar5 = 0;
   iVar7 = 0;
   if (0 < iVar2) {
@@ -136,6 +138,7 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
                        undefined1 *param_8)
 
 {
+    FsnContext *ctx = (FsnContext *)curcontext;
   uint extraout_var;
   uint extraout_var_00;
   int iStack_c;
@@ -157,14 +160,16 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
           iStack_4 = *(int *)(iStack_8 + 0x28);
         }
         update_marked_item(iStack_4);
+        /*
+         * FIXED: (ulonglong)extraout_var << 0x20 is Ghidra artifact for constant 2.0
+         * Same pattern as highlight.c functions - division by 2.0
+         */
         *param_1 = (float)((double)*(float *)(iStack_4 + 0x34) -
-                          (double)*(float *)(curcontext + 0x14) *
-                          ((double)*(float *)(iStack_4 + 0x3c) /
-                           (double)((ulonglong)extraout_var_00 << 0x20) + (double)layout_spacing_height));
+                          (double)ctx->sin_z *
+                          ((double)*(float *)(iStack_4 + 0x3c) / 2.0 + (double)layout_spacing_height));
         *param_2 = (float)((double)*(float *)(iStack_4 + 0x38) -
-                          (double)*(float *)(curcontext + 0x18) *
-                          ((double)*(float *)(iStack_4 + 0x3c) /
-                           (double)((ulonglong)extraout_var_00 << 0x20) + (double)layout_spacing_height));
+                          (double)ctx->cos_z *
+                          ((double)*(float *)(iStack_4 + 0x3c) / 2.0 + (double)layout_spacing_height));
         *param_3 = item_height_offset + *(float *)(iStack_4 + 0x24);
         *param_4 = (short)default_item_type;
         *param_6 = 0;
@@ -173,14 +178,13 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
     else {
       clear_current_selection();
       update_marked_item(iStack_4);
+      /* FIXED: Same / 2.0 pattern */
       *param_1 = (float)((double)*(float *)(iStack_4 + 0x34) -
-                        (double)*(float *)(curcontext + 0x14) *
-                        ((double)*(float *)(iStack_4 + 0x3c) /
-                         (double)((ulonglong)extraout_var << 0x20) + (double)layout_spacing_height));
+                        (double)ctx->sin_z *
+                        ((double)*(float *)(iStack_4 + 0x3c) / 2.0 + (double)layout_spacing_height));
       *param_2 = (float)((double)*(float *)(iStack_4 + 0x38) -
-                        (double)*(float *)(curcontext + 0x18) *
-                        ((double)*(float *)(iStack_4 + 0x3c) /
-                         (double)((ulonglong)extraout_var << 0x20) + (double)layout_spacing_height));
+                        (double)ctx->cos_z *
+                        ((double)*(float *)(iStack_4 + 0x3c) / 2.0 + (double)layout_spacing_height));
       *param_3 = item_height_offset + *(float *)(iStack_4 + 0x24);
       *param_4 = (short)default_item_type;
       *param_6 = 0;
@@ -191,9 +195,9 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
     get_item_screen_coords((undefined4*)iStack_c);
     *param_1 = (*(float *)(iStack_4 + 0x34) +
                *(float *)(iStack_c + 0x14) * *(float *)(iStack_4 + 0x58)) -
-               *(float *)(curcontext + 0x14) * view_scale_factor;
+               ctx->sin_z * view_scale_factor;
     *param_2 = (*(float *)(iStack_4 + 0x38) + *(float *)(iStack_c + 0x18)) -
-               *(float *)(curcontext + 0x18) * view_scale_factor;
+               ctx->cos_z * view_scale_factor;
     if (overlay_mode_flag == '\0') {
       *param_3 = layout_offset_base + *(float *)(iStack_4 + 0x24) + *(float *)(iStack_c + 0x1c);
     }
@@ -210,21 +214,23 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
 
 /* highlightDirLandscape and highlightFileLandscape are defined in highlight.c */
 
-void landscapeZoomToFile(int param_1,int param_2)
-
+void landscapeZoomToFile(int param_1, int param_2)
 {
+    FsnContext *ctx = (FsnContext *)curcontext;
   double dVar1;
-  ulonglong in_f4;
   float fVar2;
-  
+
   if (param_1 != 0) {
     if (param_2 == 0) {
-      dVar1 = (double)*(float *)(param_1 + 0x3c) / (double)(in_f4 & 0xffffffff00000000) +
-              (double)layout_spacing_height;
+      /*
+       * FIXED: (in_f4 & 0xffffffff00000000) is Ghidra artifact for constant 2.0
+       * Same pattern as findzoom_warp and highlight functions.
+       */
+      dVar1 = (double)*(float *)(param_1 + 0x3c) / 2.0 + (double)layout_spacing_height;
       set_camera_lookat((double)*(float *)(param_1 + 0x34) -
-                   (double)*(float *)(curcontext + 0x14) * dVar1,
+                   (double)ctx->sin_z * dVar1,
                    (double)*(float *)(param_1 + 0x38) -
-                   (double)*(float *)(curcontext + 0x18) * dVar1);
+                   (double)ctx->cos_z * dVar1);
     }
     else {
       if (overlay_mode_flag == '\0') {
@@ -235,9 +241,9 @@ void landscapeZoomToFile(int param_1,int param_2)
       }
       set_camera_lookat(((double)*(float *)(param_1 + 0x34) +
                    (double)fVar2 * (double)*(float *)(param_1 + 0x58)) -
-                   (double)*(float *)(curcontext + 0x14) * (double)view_scale_factor,
+                   (double)ctx->sin_z * (double)view_scale_factor,
                    ((double)*(float *)(param_1 + 0x38) + (double)*(float *)(param_2 + 0x18)) -
-                   (double)*(float *)(curcontext + 0x18) * (double)view_scale_factor);
+                   (double)ctx->cos_z * (double)view_scale_factor);
     }
   }
                     // WARNING: Bad instruction - Truncating control flow here

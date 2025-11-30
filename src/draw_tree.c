@@ -22,8 +22,9 @@
 #include <stdio.h>
 #include <GL/gl.h>
 
+#include "fsn_context.h"
 /* Forward declarations */
-static void process_tree_node_impl(DirectoryNode *node, char param_3);
+void process_tree_node_impl(DirectoryNode *node, char param_3);
 static void draw_file_icon_impl(const char *name);
 static void draw_directory_block(DirectoryNode *node);
 
@@ -31,84 +32,131 @@ static void draw_directory_block(DirectoryNode *node);
  * ORIGINAL: fsn.c:42680 - Scale factor for text label projection
  * Computed once per frame in draw_tree_content(), used for 2D text overlay.
  *
- * Formula: scale = (icon_size_multiplier * context_scale) / zoom_factor
+ * Formula: scale = (ground_scale_width * context_scale) / zoom_factor
  * Used for: screen_y = -height / current_label_scale - layout_z_offset
  */
 static float current_label_scale = 1.0f;
 
 void draw_tree_content(char param_1)
 {
+    FsnContext *ctx = (FsnContext *)curcontext;
     float fVar1;
-    float fStack_c;
-    float fStack_8;
-    float fStack_4;
+    float coords[3]; // Use an explicit array for v3f
+
     DirectoryNode *root = (DirectoryNode *)topdir;
 
     selected_id_1 = 0;
     selected_id_2 = 0;
 
-    if (*(int *)(curcontext + 0x3c) == 0) {
+    if (ctx->zoom_mode == 0) {
         if (root != NULL) {
             if (param_1 == '\0') {
                 fVar1 = powf(zoom_base_factor,
-                             (*(float *)(curcontext + 4) -
-                              *(float *)(curcontext + 0x18) * *(float *)(curcontext + 0x20) *
-                              *(float *)(curcontext + 8)) / zoom_reference_height);
-                fVar1 = (icon_size_multiplier * *(float *)(curcontext + 0x34)) / fVar1;
+                             (ctx->camera_y -
+                              ctx->cos_z * ctx->sin_x *
+                              ctx->camera_z) / zoom_reference_height);
+                /* Original uses DAT_100175a0 = ground_scale_width (2000.0) */
+                fVar1 = (ground_scale_width * ctx->scale_factor) / fVar1;
 
                 /* Store scale factor for text label projection */
                 current_label_scale = fVar1;
 
                 if (grid_display_flag == '\0') {
-                    cpack(highlight_packed_color);
-                    bgnpolygon();
-                    fStack_c = *(float *)curcontext - fVar1;
-                    fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
-                    fStack_4 = -0.5;
-                    v3f(&fStack_c);
-                    fStack_c = *(float *)curcontext + fVar1;
-                    fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
-                    fStack_4 = -0.5;
-                    v3f(&fStack_c);
-                    fStack_c = *(float *)curcontext + fVar1;
-                    fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
-                    fStack_4 = *(float *)(curcontext + 8);
-                    v3f(&fStack_c);
-                    fStack_c = *(float *)curcontext - fVar1;
-                    fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
-                    fStack_4 = *(float *)(curcontext + 8);
-                    v3f(&fStack_c);
+                    // FLAT MODE
+                    zbuffer(1); // Enable Z-buffer
+
+                    // First square
+                    cpack(highlight_packed_color); // From fsn_resources+344
+                    bgnpolygon(); // Changed to polygon for filled rendering
+                    coords[0] = ctx->camera_x - fVar1;
+                    coords[1] = ctx->camera_y + view_offset_y;
+                    coords[2] = -0.5f;
+                    v3f(coords);
+                    coords[0] = ctx->camera_x + fVar1;
+                    coords[1] = ctx->camera_y + view_offset_y;
+                    coords[2] = -0.5f;
+                    v3f(coords);
+                    coords[0] = ctx->camera_x + fVar1;
+                    coords[1] = ctx->camera_y + view_offset_y;
+                    coords[2] = ctx->camera_z;
+                    v3f(coords);
+                    coords[0] = ctx->camera_x - fVar1;
+                    coords[1] = ctx->camera_y + view_offset_y;
+                    coords[2] = ctx->camera_z;
+                    v3f(coords);
                     endpolygon();
+
+                    zbuffer(0); // Disable Z-buffer
+
+                    // Second square (overlaps first, potentially for highlights or different Z)
+                    cpack(bg_color_normal); // From fsn_resources+332
+                    bgnpolygon(); // Changed to polygon
+                    coords[0] = ctx->camera_x - fVar1;
+                    coords[1] = ctx->camera_y + view_offset_y;
+                    coords[2] = -0.5f;
+                    v3f(coords);
+                    coords[0] = ctx->camera_x + fVar1;
+                    coords[1] = ctx->camera_y + view_offset_y;
+                    coords[2] = -0.5f;
+                    v3f(coords);
+                    coords[0] = ctx->camera_x + fVar1;
+                    coords[1] = ctx->camera_y + view_offset_y;
+                    coords[2] = ctx->camera_z;
+                    v3f(coords);
+                    coords[0] = ctx->camera_x - fVar1;
+                    coords[1] = ctx->camera_y + view_offset_y;
+                    coords[2] = ctx->camera_z;
+                    v3f(coords);
+                    endpolygon();
+
+                    zbuffer(1); // Enable Z-buffer (again?)
+                    zbuffer(0); // Disable Z-buffer (again?)
+
+
                 } else {
-                    /* Gradient shading mode */
-                    shademodel(1);
-                    bgnpolygon();
-                    cpack(graphics_state_mode);
-                    fStack_c = *(float *)curcontext - fVar1;
-                    fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
-                    fStack_4 = -0.5;
-                    v3f(&fStack_c);
-                    fStack_c = *(float *)curcontext + fVar1;
-                    fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
-                    fStack_4 = -0.5;
-                    v3f(&fStack_c);
-                    cpack(current_packed_color);
-                    fStack_c = *(float *)curcontext + fVar1;
-                    fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
-                    fStack_4 = *(float *)(curcontext + 8) + view_offset_z;
-                    v3f(&fStack_c);
-                    fStack_c = *(float *)curcontext - fVar1;
-                    fStack_8 = *(float *)(curcontext + 4) + view_offset_y;
-                    fStack_4 = *(float *)(curcontext + 8) + view_offset_z;
-                    v3f(&fStack_c);
+                    // GRADIENT MODE
+                    shademodel(1); // Only for gradient (from C code)
+                    cpack(bg_color_normal); // From fsn_resources+328
+                    bgnpolygon(); // Changed to polygon for gradient fill
+                    // Original C code logic for sky gradient, re-purposed for wireframe.
+                    // Vertices for a single square, not two distinct polygons.
+                    float cam_x = ctx->camera_x;
+                    float cam_y = ctx->camera_y;
+                    float cam_z = ctx->camera_z;
+                    float sky_y = cam_y + view_offset_y;
+
+                    // Bottom-left (at horizon level Z = -0.5)
+                    coords[0] = cam_x - fVar1;
+                    coords[1] = sky_y;
+                    coords[2] = -0.5f;
+                    v3f(coords);
+
+                    // Bottom-right
+                    coords[0] = cam_x + fVar1;
+                    coords[1] = sky_y;
+                    coords[2] = -0.5f;
+                    v3f(coords);
+
+                    // Top-right (at sky height - camera relative!)
+                    coords[0] = cam_x + fVar1;
+                    coords[1] = sky_y;
+                    coords[2] = cam_z + view_offset_z;
+                    v3f(coords);
+
+                    // Top-left
+                    coords[0] = cam_x - fVar1;
+                    coords[1] = sky_y;
+                    coords[2] = cam_z + view_offset_z;
+                    v3f(coords);
                     endpolygon();
-                    shademodel(0);
+
+                    shademodel(0); // Restore shademodel (from C code)
                 }
             }
             process_tree_node_impl(root, param_1);
         }
     } else {
-        apply_context_changes((void *)(intptr_t)*(int *)(curcontext + 0x3c), (int)param_1);
+        apply_context_changes((void *)(intptr_t)ctx->zoom_mode, (int)param_1);
     }
 }
 
@@ -117,6 +165,7 @@ void draw_tree_content(char param_1)
  */
 static void draw_child_node(DirectoryNode *parent, DirectoryNode *child, char param_3)
 {
+    FsnContext *ctx = (FsnContext *)curcontext;
     undefined4 color;
     float parent_pos[3];
     float child_pos[3];
@@ -210,7 +259,7 @@ static void draw_child_node(DirectoryNode *parent, DirectoryNode *child, char pa
             translate(child->pos_x, child->pos_y - block_height * 0.5f, 0.0f);
 
             /* Rotate to face camera - original: rotate(-camera_angle, 'x') */
-            rotate(-(int)*(short *)(curcontext + 0xe), 'x');
+            rotate(-(int)ctx->rotation_x, 'x');
 
             /* Scale for label size - original: 0x3d4ccccd = 0.05 */
             scale(0.05f, 0.05f, 0.05f);
@@ -251,7 +300,7 @@ static void draw_child_node(DirectoryNode *parent, DirectoryNode *child, char pa
  *
  * Based on: fsn.c:42502-42543 (process_pick_item)
  */
-static void process_tree_node_impl(DirectoryNode *node, char param_3)
+void process_tree_node_impl(DirectoryNode *node, char param_3)
 {
     int i;
 

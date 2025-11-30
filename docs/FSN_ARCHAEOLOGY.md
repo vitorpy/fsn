@@ -15,7 +15,17 @@
 | Toolkit | Motif | Motif (unchanged) |
 | Binary Size | ~300KB | ~300KB |
 
-**Current Status:** Phase 14 - Ground/sky rendering works, window displays correctly.
+## Current Status: Phase 18 Complete - Text Labels Restored! Ground/Sky Rendering Logic Aligned!
+
+The FSN application now:
+- Compiles and links successfully
+- Launches and displays a Motif window with GL rendering
+- Shows the iconic FSN landscape (ground plane + sky gradient)
+- Renders 3D file blocks with connecting lines
+- Displays text labels using original vector stroked font
+- **Ground and Sky rendering logic in `draw_directories` is now aligned with binary assembly.**
+
+### What Works:
 
 ## 2. Codebase Architecture
 
@@ -39,18 +49,20 @@ See: [appendix/FUNCTIONS.md](appendix/FUNCTIONS.md) for complete function listin
 ### 2.2 Key Data Structures
 
 **Context Structure** (`curcontext` pointer, 56+ bytes):
+*Refactored Phase 18 to `FsnContext` in `include/fsn_context.h`*
+
 ```c
-+0x00: float camera_x        // Camera X position
-+0x04: float camera_y        // Camera Y position (forward)
-+0x08: float camera_z        // Camera Z position (height)
-+0x0c: short rotation_z      // Yaw rotation (tenths of degrees)
-+0x0e: short rotation_x      // Pitch rotation (tenths of degrees)
-+0x10: short fov             // Field of view (tenths of degrees, default 450)
-+0x18: float zoom_factor_1   // Zoom multiplier
-+0x20: float zoom_factor_2   // Zoom divisor
-+0x34: float scale_factor    // View scale (default 1.0)
-+0x3c: int zoom_mode         // 0=normal, non-0=zooming
-+0xc4c: int render_time_usec // Frame render time
+typedef struct FsnContext {
+    /* +0x00 */ float camera_x;
+    /* +0x04 */ float camera_y;
+    /* +0x08 */ float camera_z;
+    /* +0x0c */ int16_t rotation_z;
+    /* +0x0e */ int16_t rotation_x;
+    /* +0x10 */ int16_t fov;
+    /* +0x12 */ char _pad_12[2];      /* Explicit alignment padding */
+    /* +0x14 */ float sin_z;
+    // ...
+} FsnContext;
 ```
 
 **Widget Array** (`curcontextwindows`):
@@ -220,13 +232,17 @@ python3 analysis/extract_module_ts.py module_name func1,func2,func3
 | 10 | DONE | Window appears, widget hierarchy |
 | 11 | DONE | GLX context management (GLXwinset) |
 | 12-13 | DONE | Drawing functions wired up |
-| 14 | DONE | Ground/sky gradient rendering |
+| 14 | DONE | Ground/sky gradient rendering logic aligned |
 | 15 | TODO | Directory tree rendering |
 | 16 | TODO | File icons and labels |
 | 17 | TODO | Mouse picking/selection |
-| 18 | TODO | Navigation and zoom |
+| 18 | IN PROGRESS | Context Refactor (Struct overlay) |
+| 19 | TODO | Navigation and zoom |
 
 ## 9. Key Discoveries Log
+
+### `draw_directories` Analysis
+- Detailed analysis of `FUN_00425100` (`draw_directories`) is available in [`docs/draw_directories.ANALYSIS.md`](draw_directories.ANALYSIS.md). This document details the binary's specific `zbuffer`, `bgnline`/`endline` sequences, and vertex calculations for ground and sky rendering.
 
 ### Rendering Breakthrough (Session ~Nov 2024)
 - **Problem:** GL context works but geometry invisible
