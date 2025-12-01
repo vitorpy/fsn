@@ -180,6 +180,7 @@ void create_root_directory(char *param_1)
     root->parent = NULL;
     root->flags = DIR_FLAG_VISIBLE | DIR_FLAG_DIRECTORY;
     root->render_flags = DIR_FLAG_VISIBLE | DIR_FLAG_DIRECTORY;
+    root->depth_indicator = -1;  /* Enable pedestal rendering */
 
     /* Set initial position at origin */
     root->pos_x = 0.0f;
@@ -257,6 +258,7 @@ static void scan_directory_recursive(DirectoryNode *entry, const char *path, int
             child->parent = entry;
             child->flags = DIR_FLAG_VISIBLE | DIR_FLAG_DIRECTORY;
             child->render_flags = DIR_FLAG_VISIBLE | DIR_FLAG_DIRECTORY;
+            child->depth_indicator = -1;  /* Enable pedestal rendering */
 
             /*
              * ORIGINAL FSN TERNARY ASSIGNMENT:
@@ -324,51 +326,81 @@ static void layout_directory(DirectoryNode *entry, float x, float y, int depth)
     entry->pos_y = y;
     entry->height = 1.0f + depth * 0.5f;
 
-    /* Calculate child Z position: height + layout_base_height */
-    child_z = entry->height + layout_base_height;
+    /* Calculate child Y offset - children positioned slightly behind parent.
+     * Original FSN: children spread WIDE in X, with minimal Y offset.
+     * Use block spacing (2.0) for consistent visual separation.
+     */
+    child_z = item_spacing_x;
 
     /*
      * ORIGINAL FSN TERNARY LAYOUT from fsn.c:42526-42540
      */
 
-    /* CENTER child at x=0 */
+    /* CENTER child - line goes from parent center to child position */
     if (entry->child_center != NULL) {
         entry->child_center->offset_x = 0.0f;
-        entry->child_center->offset_y = child_z;
+        entry->child_center->offset_y = 0.0f;  /* Line starts at parent's Y */
         layout_directory(entry->child_center, x, y + child_z, depth + 1);
     }
 
-    /* LEFT child at x=-item_spacing_x */
+    /* LEFT child - line starts slightly left of parent center */
     if (entry->child_left != NULL) {
-        entry->child_left->offset_x = -item_spacing_x;
-        entry->child_left->offset_y = child_z;
+        entry->child_left->offset_x = -0.5f;   /* Small visual spread */
+        entry->child_left->offset_y = 0.0f;    /* Line starts at parent's Y */
         layout_directory(entry->child_left, x - item_spacing_x, y + child_z, depth + 1);
     }
 
-    /* RIGHT child at x=+item_spacing_x */
+    /* RIGHT child - line starts slightly right of parent center */
     if (entry->child_right != NULL) {
-        entry->child_right->offset_x = item_spacing_x;
-        entry->child_right->offset_y = child_z;
+        entry->child_right->offset_x = 0.5f;   /* Small visual spread */
+        entry->child_right->offset_y = 0.0f;   /* Line starts at parent's Y */
         layout_directory(entry->child_right, x + item_spacing_x, y + child_z, depth + 1);
     }
 
     /*
-     * ORIGINAL: Position files within directory using icon_spacing_factor
-     * From fsn.c:43389-43392 - NOT centered, starts from left edge
-     * x = -icon_spacing_factor * (num_files - 1) + icon_spacing_factor * file_index
+     * ORIGINAL: Position files in SQUARE GRID layout
+     * From FUN_00412604 (first_traversal) analysis:
+     * - Grid dimension = floor(sqrt(num_files - 1)) + 1
+     * - Grid spacing = xDirMargin + yDirMargin = 10.0
+     * - Starting offset centers the grid: (1 - grid_dim) * spacing
+     * - Row-major order: column increments first, then row
      */
-    if (entry->files_array != NULL) {
+    if (entry->files_array != NULL && entry->num_files > 0) {
+        int grid_dim;
+        float grid_spacing = item_spacing_x + layout_base_height;  /* 2.0 + 8.0 = 10.0 */
+        float start_offset;
+        int row, col;
+
+        /* Calculate grid dimension */
+        if (entry->num_files == 1) {
+            grid_dim = 1;
+        } else {
+            grid_dim = (int)floorf(sqrtf((float)(entry->num_files - 1))) + 1;
+        }
+
+        /* Center the grid */
+        start_offset = (1.0f - (float)grid_dim) * grid_spacing * 0.5f;
+
+        /* Position each file in the grid */
+        row = 0;
+        col = 0;
         for (i = 0; i < entry->num_files; i++) {
             DirectoryNode *file = entry->files_array[i];
-            /* ORIGINAL formula - starts from left, NOT centered */
-            float file_x = -icon_spacing_factor * (entry->num_files - 1)
-                         + icon_spacing_factor * i;
+            float file_x = start_offset + (float)col * grid_spacing;
+            float file_y = (float)row * grid_spacing;
+
             file->pos_x = x + file_x;
-            file->pos_y = y;
-            file->offset_x = file_x;
-            file->offset_y = 0.0f;
-            /* Calculate height based on file size and displayHeight mode */
+            file->pos_y = y + file_y;
+            file->offset_x = 0.0f;  /* Line starts at parent center */
+            file->offset_y = 0.0f;  /* Line starts at parent's Y */
             file->height = calculate_file_height(file->total_size);
+
+            /* Move to next grid position (row-major) */
+            col++;
+            if (col >= grid_dim) {
+                col = 0;
+                row++;
+            }
         }
     }
 }

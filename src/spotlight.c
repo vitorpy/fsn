@@ -132,7 +132,7 @@ void draw_scaled_element_impl(float base_x, float base_y, float base_z,
         cpack(color);
 
         pushmatrix();
-        translate(top_x, top_y);
+        translate(top_x, top_y, top_z);  /* Fixed: was missing Z coordinate */
         circf(0.0f, 0.0f, width);
         popmatrix();
 

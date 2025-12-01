@@ -29,8 +29,6 @@ extern const int32_t chrtbl[128][54];
 
 void draw_file_icon(const char *str)
 {
-    float pen_x = 0.0f;  /* Accumulated horizontal position */
-
     if (!str) return;
 
     while (*str) {
@@ -44,78 +42,69 @@ void draw_file_icon(const char *str)
 
         glyph = chrtbl[c];
 
+        /* Check first command - if 0, skip this character */
+        if (glyph[0] == 0) continue;
+
         /* Process up to 18 commands for this character */
         for (i = 0; i < 18; i++) {
             int32_t cmd = glyph[i * 3];
             int32_t x = glyph[i * 3 + 1];
             int32_t y = glyph[i * 3 + 2];
 
-            switch (cmd) {
-                case 0:
-                    /* End of character */
-                    if (in_line) {
-                        endline();
-                        in_line = 0;
-                    }
-                    goto next_char;
-
-                case 1:
-                    /* Move pen (translate) - advance to next char position */
-                    if (in_line) {
-                        endline();
-                        in_line = 0;
-                    }
-                    /* The x value here is typically the character advance width */
-                    pen_x += (float)x;
-                    break;
-
-                case 2:
-                    /* Begin line + vertex */
-                    if (in_line) {
-                        endline();
-                    }
-                    bgnline();
-                    in_line = 1;
-                    {
-                        float v[2];
-                        v[0] = pen_x + (float)x;
-                        v[1] = (float)y;
-                        v2f(v);
-                    }
-                    break;
-
-                case 3:
-                    /* Continue line - add vertex */
-                    if (in_line) {
-                        float v[2];
-                        v[0] = pen_x + (float)x;
-                        v[1] = (float)y;
-                        v2f(v);
-                    }
-                    break;
-
-                case 4:
-                    /* End line + final vertex */
-                    if (in_line) {
-                        float v[2];
-                        v[0] = pen_x + (float)x;
-                        v[1] = (float)y;
-                        v2f(v);
-                        endline();
-                        in_line = 0;
-                    }
-                    break;
-
-                default:
-                    /* Unknown command - skip */
-                    break;
+            if (cmd == 0) {
+                /* End of character */
+                if (in_line) {
+                    endline();
+                    in_line = 0;
+                }
+                break;
             }
-        }
-
-        next_char:
-        /* If no explicit move command, advance by default width */
-        if (c != 0) {
-            /* Character spacing handled by move commands in font data */
+            else if (cmd == 1) {
+                /*
+                 * ORIGINAL: translate((float)x, (float)y)
+                 * Move to next character position using matrix translate
+                 */
+                if (in_line) {
+                    endline();
+                    in_line = 0;
+                }
+                translate((float)x, (float)y);
+            }
+            else if (cmd == 2) {
+                /* Begin line + first vertex */
+                if (in_line) {
+                    endline();
+                }
+                bgnline();
+                in_line = 1;
+                {
+                    int32_t v[2];
+                    v[0] = x;
+                    v[1] = y;
+                    v2i(v);
+                }
+            }
+            else if (cmd == 3) {
+                /* Continue line - add vertex */
+                if (in_line) {
+                    int32_t v[2];
+                    v[0] = x;
+                    v[1] = y;
+                    v2i(v);
+                }
+            }
+            else if (cmd == 4) {
+                /* End line + final vertex */
+                if (in_line) {
+                    int32_t v[2];
+                    v[0] = x;
+                    v[1] = y;
+                    v2i(v);
+                    endline();
+                    in_line = 0;
+                }
+            }
+            /* Unknown commands are ignored */
         }
     }
 }

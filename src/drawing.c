@@ -92,7 +92,8 @@ static void FUN_0042510c(char param_1) { draw_directories(param_1); }
  * draw_directories - Draw ground plane, sky gradient, and directory tree
  *
  * Called from draw_scene at GP-0x7938 (address 0x00425100).
- * FIXED: Ghidra decompilation bugs corrected via binary analysis.
+ * REWRITTEN to match fsn_original.exploded.cleanup/draw_directories.c
+ * Uses bgnpolygon() for filled rendering (not bgnline wireframe).
  *
  * param_1: 0 = draw ground plane, non-0 = skip ground
  */
@@ -117,10 +118,12 @@ static void draw_directories(char param_1)
                 fVar1 = (ground_scale_width * ctx->scale_factor) / fVar1;
 
                 if (grid_display_flag == '\0') {
-                    /* Flat mode: three line quads with zbuffer toggles */
-                    zbuffer(1);
-                    bgnline();
+                    /*
+                     * FLAT MODE: Single polygon (original lines 27-49)
+                     * Uses highlight_packed_color (DAT_100175d8)
+                     */
                     cpack(highlight_packed_color);
+                    bgnpolygon();
                     coords[0] = ctx->camera_x - fVar1;
                     coords[1] = ctx->camera_y + view_offset_y;
                     coords[2] = -0.5f;
@@ -129,71 +132,35 @@ static void draw_directories(char param_1)
                     coords[1] = ctx->camera_y + view_offset_y;
                     coords[2] = -0.5f;
                     v3f(coords);
-                    cpack(bg_color_normal);
                     coords[0] = ctx->camera_x + fVar1;
                     coords[1] = ctx->camera_y + view_offset_y;
-                    coords[2] = ctx->camera_z;
+                    coords[2] = ctx->camera_z + view_offset_z;
                     v3f(coords);
                     coords[0] = ctx->camera_x - fVar1;
                     coords[1] = ctx->camera_y + view_offset_y;
-                    coords[2] = ctx->camera_z;
+                    coords[2] = ctx->camera_z + view_offset_z;
                     v3f(coords);
-                    endline();
-
-                    zbuffer(0);
-                    bgnline();
-                    cpack(bg_color_normal);
-                    coords[0] = ctx->camera_x + fVar1;
-                    coords[1] = ctx->camera_y + view_offset_y;
-                    coords[2] = ctx->camera_z;
-                    v3f(coords);
-                    coords[0] = ctx->camera_x + fVar1;
-                    coords[1] = ctx->camera_y + view_offset_y;
-                    coords[2] = -0.5f;
-                    v3f(coords);
-                    coords[0] = ctx->camera_x - fVar1;
-                    coords[1] = ctx->camera_y + view_offset_y;
-                    coords[2] = -0.5f;
-                    v3f(coords);
-                    coords[0] = ctx->camera_x - fVar1;
-                    coords[1] = ctx->camera_y + view_offset_y;
-                    coords[2] = ctx->camera_z;
-                    v3f(coords);
-                    endline();
-
-                    zbuffer(1);
-                    bgnline();
-                    cpack(sky_color_top);
-                    coords[0] = ctx->camera_x - fVar1;
-                    coords[1] = ctx->camera_y + view_offset_y;
-                    coords[2] = -0.5f;
-                    v3f(coords);
-                    coords[0] = ctx->camera_x + fVar1;
-                    coords[1] = ctx->camera_y + view_offset_y;
-                    coords[2] = -0.5f;
-                    v3f(coords);
-                    cpack(sky_color_flat);
-                    coords[0] = ctx->camera_x + fVar1;
-                    coords[1] = ctx->camera_y + view_offset_y;
-                    coords[2] = ctx->camera_z;
-                    v3f(coords);
-                    coords[0] = ctx->camera_x - fVar1;
-                    coords[1] = ctx->camera_y + view_offset_y;
-                    coords[2] = ctx->camera_z;
-                    v3f(coords);
-                    endline();
-
-                    zbuffer(0);
+                    endpolygon();
                 } else {
-                    /* Gradient mode: sky and ground line quads */
+                    /*
+                     * GRADIENT MODE: Three polygons (original lines 52-118)
+                     * 1. Sky gradient (top→bottom colors)
+                     * 2. Sky fill polygon
+                     * 3. Ground gradient (far→near colors)
+                     */
                     float cam_x = ctx->camera_x;
                     float cam_y = ctx->camera_y;
                     float cam_z = ctx->camera_z;
                     float sky_y = cam_y + view_offset_y;
 
+                    /*
+                     * Polygon 1: Sky gradient (original lines 52-72)
+                     * Top: graphics_state_mode (DAT_100175e0)
+                     * Bottom: current_packed_color (DAT_100175dc)
+                     */
                     shademodel(1);
-                    bgnline();
-                    cpack(graphics_state_mode);  /* top sky */
+                    bgnpolygon();
+                    cpack(graphics_state_mode);  /* top sky color */
                     coords[0] = cam_x - fVar1;
                     coords[1] = sky_y;
                     coords[2] = -0.5f;
@@ -202,7 +169,7 @@ static void draw_directories(char param_1)
                     coords[1] = sky_y;
                     coords[2] = -0.5f;
                     v3f(coords);
-                    cpack(current_packed_color); /* bottom sky */
+                    cpack(current_packed_color);  /* bottom sky color */
                     coords[0] = cam_x + fVar1;
                     coords[1] = sky_y;
                     coords[2] = cam_z + view_offset_z;
@@ -211,10 +178,14 @@ static void draw_directories(char param_1)
                     coords[1] = sky_y;
                     coords[2] = cam_z + view_offset_z;
                     v3f(coords);
-                    endline();
+                    endpolygon();
                     shademodel(0);
 
-                    bgnline();
+                    /*
+                     * Polygon 2: Sky fill (original lines 74-96)
+                     * Single color: current_packed_color (DAT_100175dc)
+                     */
+                    bgnpolygon();
                     cpack(current_packed_color);
                     coords[0] = cam_x + fVar1;
                     coords[1] = sky_y;
@@ -232,11 +203,16 @@ static void draw_directories(char param_1)
                     coords[1] = sky_y;
                     coords[2] = cam_z + view_offset_z;
                     v3f(coords);
-                    endline();
+                    endpolygon();
 
+                    /*
+                     * Polygon 3: Ground gradient (original lines 97-118)
+                     * Far: graphics_render_flags (DAT_100175ec)
+                     * Near: highlight_color (DAT_100175e8)
+                     */
                     shademodel(1);
-                    bgnline();
-                    cpack(graphics_render_flags);  /* ground far */
+                    bgnpolygon();
+                    cpack(graphics_render_flags);  /* ground far color */
                     coords[0] = cam_x - fVar1;
                     coords[1] = cam_y - base_y_offset;
                     coords[2] = -0.5f;
@@ -245,7 +221,7 @@ static void draw_directories(char param_1)
                     coords[1] = cam_y - base_y_offset;
                     coords[2] = -0.5f;
                     v3f(coords);
-                    cpack(highlight_color);       /* ground near */
+                    cpack(highlight_color);  /* ground near color */
                     coords[0] = cam_x + fVar1;
                     coords[1] = sky_y;
                     coords[2] = -0.5f;
@@ -254,7 +230,7 @@ static void draw_directories(char param_1)
                     coords[1] = sky_y;
                     coords[2] = -0.5f;
                     v3f(coords);
-                    endline();
+                    endpolygon();
                     shademodel(0);
                 }
             }

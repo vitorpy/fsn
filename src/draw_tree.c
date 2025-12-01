@@ -28,6 +28,26 @@ void process_tree_node_impl(DirectoryNode *node, char param_3);
 static void draw_file_icon_impl(const char *name);
 static void draw_directory_block(DirectoryNode *node);
 
+/**
+ * scale_color_brightness - Scale RGB color brightness by a factor
+ *
+ * Used for per-face shading on 3D blocks. Original FSN resources:
+ * - colorTopValueFactor: 0.8 (top face 80% brightness)
+ * - colorSideValueFactor: 0.55 (side faces 55% brightness)
+ * - colorBackValueFactor: 0.3 (back face 30% brightness)
+ *
+ * @param color: Packed BGR color (0x00BBGGRR format)
+ * @param factor: Brightness multiplier (0.0-1.0)
+ * @return: Scaled color in same format
+ */
+static uint32_t scale_color_brightness(uint32_t color, float factor)
+{
+    uint8_t r = (uint8_t)((color & 0xFF) * factor);
+    uint8_t g = (uint8_t)(((color >> 8) & 0xFF) * factor);
+    uint8_t b = (uint8_t)(((color >> 16) & 0xFF) * factor);
+    return r | (g << 8) | (b << 16);
+}
+
 /*
  * ORIGINAL: fsn.c:42680 - Scale factor for text label projection
  * Computed once per frame in draw_tree_content(), used for 2D text overlay.
@@ -193,21 +213,35 @@ static void draw_child_node(DirectoryNode *parent, DirectoryNode *child, char pa
     }
     cpack(color);
 
-    /* Calculate line endpoints */
+    /*
+     * Calculate line endpoints - connecting parent to child
+     * ORIGINAL (FUN_0042425c.c): Line starts from parent + child's offset
+     *
+     * parent_pos: Where line starts = parent position + child's layout offset
+     * child_pos: Where line ends = child's absolute position
+     *
+     * This creates proper "branching" visuals where lines radiate from
+     * the parent to each child's position.
+     */
+    /*
+     * ORIGINAL: Z = 0xbd4ccccd = -0.05f
+     * Lines are drawn BELOW block level (Z=0) but ABOVE ground plane (Z=-0.5)
+     */
     parent_pos[0] = parent->pos_x + child->offset_x;
     parent_pos[1] = parent->pos_y + child->offset_y;
-    parent_pos[2] = 0.0f;
+    parent_pos[2] = -0.05f;
 
     child_pos[0] = child->pos_x;
-    child_pos[1] = child->pos_y - child->height;
-    child_pos[2] = 0.0f;
+    child_pos[1] = child->pos_y;
+    child_pos[2] = -0.05f;
 
     /* Set thick line for directories */
     if (child->render_flags & DIR_FLAG_DIRECTORY) {
         linewidth(3);
     }
 
-    /* Draw connecting line */
+    /* Draw connecting line - WHITE for visibility */
+    cpack(0xffffff);
     bgnline();
     v3f(parent_pos);
     v3f(child_pos);
@@ -220,25 +254,37 @@ static void draw_child_node(DirectoryNode *parent, DirectoryNode *child, char pa
 
     /* Draw 3D block at child position */
     {
-        float block_width = 0.6f;
-        float block_depth = 0.6f;
+        /*
+         * Block scaling: Original uses xDirMargin resource (2.0)
+         * item_spacing_x is loaded from xDirMargin in init_resources.c
+         */
+        float block_width = item_spacing_x;   /* Was 0.6f - now from resources */
+        float block_depth = item_spacing_x;   /* Was 0.6f - now from resources */
         float block_height = child->height;
         uint32_t colors[4];
 
         if (block_debug_count < 5) {
-            fprintf(stderr, "  BLOCK[%d]: pos=(%.2f,%.2f) height=%.2f name=%s\n",
+            fprintf(stderr, "  BLOCK[%d]: pos=(%.2f,%.2f) size=(%.2f,%.2f,%.2f) name=%s\n",
                     block_debug_count, child->pos_x, child->pos_y,
-                    block_height, child->name ? child->name : "(null)");
+                    block_width, block_depth, block_height,
+                    child->name ? child->name : "(null)");
             block_debug_count++;
         }
 
-        colors[0] = color;
-        colors[1] = color;
-        colors[2] = (color & 0x00FFFFFF) | 0x80000000;
-        colors[3] = (color & 0x00FFFFFF) | 0xC0000000;
+        /*
+         * Face colors with brightness factors from resources/Fsn:
+         * - colorTopValueFactor: 0.8 (top face 80% brightness)
+         * - colorSideValueFactor: 0.55 (side faces 55% brightness)
+         * - colorBackValueFactor: 0.3 (back face 30% brightness)
+         * - Front face uses base color (100%)
+         */
+        colors[0] = scale_color_brightness(color, 0.8f);   /* top */
+        colors[1] = color;                                  /* front (base) */
+        colors[2] = scale_color_brightness(color, 0.3f);   /* back */
+        colors[3] = scale_color_brightness(color, 0.55f);  /* sides */
 
         pushmatrix();
-        translate(child->pos_x, child->pos_y, -0.4f);
+        translate(child->pos_x, child->pos_y, 0.0f);  /* Z=0 = ground level */
         scale(block_width, block_depth, block_height);
         draw_legend_color_box((undefined4 *)colors, 0, FSN_FACE_ALL);
         popmatrix();
@@ -250,22 +296,39 @@ static void draw_child_node(DirectoryNode *parent, DirectoryNode *child, char pa
          * NOT bitmap charstr(). The original pattern is:
          *   pushmatrix → translate → rotate → scale → draw_file_icon → popmatrix
          *
+         * Original places text ON THE GROUND in front of blocks.
          * Scale factor 0x3d4ccccd = 0.05 in IEEE 754
+         */
+        /*
+         * ORIGINAL: fsn.c draw_special (lines 56268-56320)
+         *
+         * Pattern: pushmatrix → translate(pos) → rotate(-rot_x, 'x') →
+         *          translate(0, offset) → scale(0.05, 0.05) → draw_file_icon
+         *
+         * Scale = 0x3d4ccccd = 0.05f
          */
         if (child->name) {
             pushmatrix();
 
-            /* Position label near the block (slightly offset from block center) */
-            translate(child->pos_x, child->pos_y - block_height * 0.5f, 0.0f);
+            /*
+             * Text rendering - vector font draws in XY plane
+             * Need to rotate to lay flat on ground, then tilt toward camera
+             */
 
-            /* Rotate to face camera - original: rotate(-camera_angle, 'x') */
-            rotate(-(int)ctx->rotation_x, 'x');
+            /* Position at block X, slightly in front (Y+), on ground (Z) */
+            translate(child->pos_x, child->pos_y + 1.0f, -0.45f);
 
-            /* Scale for label size - original: 0x3d4ccccd = 0.05 */
-            scale(0.05f, 0.05f, 0.05f);
+            /* First: rotate -90 around X to lay text flat on ground */
+            rotate(-900, 'x');
+
+            /* Then: rotate around Z to face forward */
+            /* rotate(0, 'z'); */
 
             /* White text color */
             cpack(0xFFFFFFFF);
+
+            /* Scale for visibility */
+            scale(0.1f, 0.1f, 0.1f);
 
             /* Render using original vector stroked font */
             draw_file_icon(child->name);
