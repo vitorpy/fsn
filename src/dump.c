@@ -7,6 +7,7 @@
 #include "dump.h"
 #include "fsn_types.h"
 #include "fsn_state.h"
+#include <stdint.h>
 
 /* TODO: This should be in fsn_state.h */
 extern undefined __iob_func_result;
@@ -67,7 +68,8 @@ void dumpMarks(FILE *param_1)
       asStack_8[0] = (short)sVar1;
       fwrite(asStack_8,2,1,param_1);
       fwrite(*(void **)(selection_buffer + iVar2 + 0x38),1,(int)asStack_8[0],param_1);
-      copy_selection_data((int)(iVar3 * 0x40 + selection_buffer),(int)param_1);
+      copy_selection_data((undefined2 *)(uintptr_t)(iVar3 * 0x40 + selection_buffer),
+                          (undefined4)(uintptr_t)param_1);
       iVar3 = iVar3 + 1;
       iVar2 = iVar2 + 0x40;
     } while (iVar3 < selection_count);

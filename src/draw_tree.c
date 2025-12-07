@@ -26,7 +26,7 @@
 /* Forward declarations */
 void process_tree_node_impl(DirectoryNode *node, char param_3);
 static void draw_file_icon_impl(const char *name);
-static void draw_directory_block(DirectoryNode *node);
+static void draw_directory_block(DirectoryNode *node, uint32_t base_color, char is_directory);
 
 /**
  * scale_color_brightness - Scale RGB color brightness by a factor
@@ -46,6 +46,31 @@ static uint32_t scale_color_brightness(uint32_t color, float factor)
     uint8_t g = (uint8_t)(((color >> 8) & 0xFF) * factor);
     uint8_t b = (uint8_t)(((color >> 16) & 0xFF) * factor);
     return r | (g << 8) | (b << 16);
+}
+
+/* Draw a single directory/file block with per-face shading and margins */
+static void draw_directory_block(DirectoryNode *node, uint32_t base_color, char is_directory)
+{
+    if (!node) return;
+
+    /* Directory blocks are slightly larger to differentiate islands */
+    float footprint = file_base_width + icon_spacing_factor;
+    float block_width = is_directory ? footprint * 1.25f : footprint;
+    float block_depth = is_directory ? footprint * 1.25f : footprint;
+    float block_height = node->height;
+    uint32_t colors[4];
+
+    /* Face colors using resource-driven brightness factors */
+    colors[0] = scale_color_brightness(base_color, color_top_value_factor);   /* top */
+    colors[1] = base_color;                                                   /* front */
+    colors[2] = scale_color_brightness(base_color, color_back_value_factor);  /* back */
+    colors[3] = scale_color_brightness(base_color, color_side_value_factor);  /* sides */
+
+    pushmatrix();
+    translate(node->pos_x, node->pos_y, 0.0f);  /* Z=0 = ground level */
+    scale(block_width, block_depth, block_height);
+    draw_legend_color_box((undefined4 *)colors, 0, FSN_FACE_ALL);
+    popmatrix();
 }
 
 /*
@@ -185,11 +210,9 @@ void draw_tree_content(char param_1)
  */
 static void draw_child_node(DirectoryNode *parent, DirectoryNode *child, char param_3)
 {
-    FsnContext *ctx = (FsnContext *)curcontext;
     undefined4 color;
     float parent_pos[3];
     float child_pos[3];
-    static int block_debug_count = 0;
 
     if (child == NULL || !DIR_IS_VISIBLE(child)) {
         return;
@@ -258,36 +281,7 @@ static void draw_child_node(DirectoryNode *parent, DirectoryNode *child, char pa
          * Block scaling: Original uses xDirMargin resource (2.0)
          * item_spacing_x is loaded from xDirMargin in init_resources.c
          */
-        float block_width = item_spacing_x;   /* Was 0.6f - now from resources */
-        float block_depth = item_spacing_x;   /* Was 0.6f - now from resources */
-        float block_height = child->height;
-        uint32_t colors[4];
-
-        if (block_debug_count < 5) {
-            fprintf(stderr, "  BLOCK[%d]: pos=(%.2f,%.2f) size=(%.2f,%.2f,%.2f) name=%s\n",
-                    block_debug_count, child->pos_x, child->pos_y,
-                    block_width, block_depth, block_height,
-                    child->name ? child->name : "(null)");
-            block_debug_count++;
-        }
-
-        /*
-         * Face colors with brightness factors from resources/Fsn:
-         * - colorTopValueFactor: 0.8 (top face 80% brightness)
-         * - colorSideValueFactor: 0.55 (side faces 55% brightness)
-         * - colorBackValueFactor: 0.3 (back face 30% brightness)
-         * - Front face uses base color (100%)
-         */
-        colors[0] = scale_color_brightness(color, 0.8f);   /* top */
-        colors[1] = color;                                  /* front (base) */
-        colors[2] = scale_color_brightness(color, 0.3f);   /* back */
-        colors[3] = scale_color_brightness(color, 0.55f);  /* sides */
-
-        pushmatrix();
-        translate(child->pos_x, child->pos_y, 0.0f);  /* Z=0 = ground level */
-        scale(block_width, block_depth, block_height);
-        draw_legend_color_box((undefined4 *)colors, 0, FSN_FACE_ALL);
-        popmatrix();
+        draw_directory_block(child, color, (child->render_flags & DIR_FLAG_DIRECTORY) != 0);
 
         /*
          * ORIGINAL: fsn.c:42317-42336 (draw_special) - Label rendering
@@ -328,7 +322,8 @@ static void draw_child_node(DirectoryNode *parent, DirectoryNode *child, char pa
             cpack(0xFFFFFFFF);
 
             /* Scale for visibility */
-            scale(0.1f, 0.1f, 0.1f);
+            /* Flip Y to avoid mirrored text after laying flat */
+            scale(0.1f, -0.1f, 0.1f);
 
             /* Render using original vector stroked font */
             draw_file_icon(child->name);
@@ -343,7 +338,7 @@ static void draw_child_node(DirectoryNode *parent, DirectoryNode *child, char pa
         if (DIR_IS_SELECTED(child)) {
             spotlight(
                 child->pos_x, child->pos_y, -0.5f,       /* Base at ground */
-                child->pos_x, child->pos_y, block_height + 1.5f, /* Top above block */
+                child->pos_x, child->pos_y, child->height + 1.5f, /* Top above block */
                 0.3f,                                     /* Beam width */
                 0xFF00FFFF,                               /* Cyan selection color */
                 0                                         /* Full rendering with pattern */
@@ -378,11 +373,18 @@ void process_tree_node_impl(DirectoryNode *node, char param_3)
          * ORIGINAL: fsn.c:42750-42757
          * Draw platform under directory node
          */
+        fprintf(stderr, "pedestal: node=%p name=%s pos=(%.2f,%.2f) depth=%d width=0.40\n",
+                (void *)node,
+                node->name ? node->name : "(null)",
+                node->pos_x, node->pos_y,
+                node->depth_indicator);
         pushmatrix();
+        /* ORIGINAL constants: base z -0.5, top z 0, width 0.4 */
+        float pedestal_width = 0.4f;
         draw_scaled_element_impl(
             node->pos_x, node->pos_y, -0.5f,
             node->pos_x, node->pos_y, 0.0f,
-            0.4f,
+            pedestal_width,
             dir_type_icon,
             0
         );
@@ -432,11 +434,18 @@ void draw_directory(intptr_t param_2, char param_3)
          * ORIGINAL: fsn.c:48686-48690
          * Draw raised platform under directory when depth_indicator < 0
          */
+        fprintf(stderr, "pedestal(draw_directory): node=%p name=%s pos=(%.2f,%.2f) depth=%d width=%.2f\n",
+                (void *)node,
+                node->name ? node->name : "(null)",
+                node->pos_x, node->pos_y,
+                node->depth_indicator,
+                0.4f);
         pushmatrix();
+        float pedestal_width = 0.4f;
         draw_scaled_element_impl(
-            node->pos_x, node->pos_y, -0.5f,    /* Base at ground */
-            node->pos_x, node->pos_y, 0.0f,     /* Top at node base */
-            0.4f,                                /* Platform width */
+            node->pos_x, node->pos_y, -0.5f,     /* Base at ground-0.5 */
+            node->pos_x, node->pos_y, 0.0f,      /* Top at node base */
+            pedestal_width,                      /* Platform width */
             dir_type_icon,                       /* Directory color */
             0                                    /* Full rendering */
         );

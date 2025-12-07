@@ -78,7 +78,7 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
       sVar1 = asStack_3f4[iVar5];
       if (sVar1 == 1) {
         uVar3 = get_item_by_index((int)asStack_3f4[iVar5 + 1]);
-        render_tree_level(uVar3);
+        render_tree_level(uVar3, 0, 0);
       }
       iVar7 = iVar7 + 1;
       iVar5 = iVar5 + 1 + (int)sVar1;

@@ -13,25 +13,27 @@ static inline void apply_context_changes(void * p0, int p1) { (void)p0; (void)p1
 static inline int check_directory_flags(int p0, int p1, int p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; return 0; /* TODO */ }
 static inline void cleanup_directory(int p0) { (void)p0; /* TODO */ }
 static inline void configure_viewport(int p0, int p1, int p2) { (void)p0; (void)p1; (void)p2; /* TODO */ }
-static inline void copy_selection_data(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
+static inline void copy_selection_data(undefined2 *p0, undefined4 p1) { (void)p0; (void)p1; /* TODO */ }
 extern Widget create_panel_component(Widget parent, Arg *args, int nargs);  /* Implemented in stubs.c */
 /* display_status_message: defined in status.c and messages.c */
 static inline void draw_entry(int p0) { (void)p0; /* TODO */ }
 /* draw_file_icon - implemented in vector_font.c */
 /* draw_legend_color_box - implemented in block_render.c */
-static inline void draw_positioned_item(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
+void draw_positioned_item(undefined4 param_1, undefined4 param_2);
 static inline void draw_scaled_element(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
-static inline int equalPositions(int p0, int p1) { (void)p0; (void)p1; return 0; /* TODO */ }
-static inline int extract_position_data(int p0, void * p1, void * p2, void * p3, void * p4, void * p5, void * p6, void * p7, void * p8, void * p9) { (void)p0; (void)p1; (void)p2; (void)p3; (void)p4; (void)p5; (void)p6; (void)p7; (void)p8; (void)p9; return 0; /* TODO */ }
+void equalPositions(void);
+void extract_position_data(void *param_1, void *param_2, void *param_3, void *param_4,
+                           void *param_5, void *param_6, void *param_7, void *param_8, void *param_9,
+                           void *param_10);
 /* get_bytecode_context: defined in bytecode.c and context.c with 2 args */
 static inline int get_cursor_state(void * p0, void * p1, void * p2) { (void)p0; (void)p1; (void)p2; return 0; /* TODO */ }
-static inline int get_item_by_index(int p0) { (void)p0; return 0; /* TODO */ }
+int get_item_by_index(int p0);
 /* get_item_screen_coords: defined in items.c with 1 arg */
 extern Widget get_panel_value(Widget parent);  /* Implemented in stubs.c */
-static inline int get_position_coords(int p0, void * p1, void * p2) { (void)p0; (void)p1; (void)p2; return 0; /* TODO */ }
-static inline int get_selection_params(void * p0, void * p1, int p2) { (void)p0; (void)p1; (void)p2; return 0; /* TODO */ }
+void get_position_coords(int param_1, int *param_2, undefined4 *param_3);
+static inline void get_selection_params(int *p0, undefined4 *p1, undefined4 *p2) { (void)p0; (void)p1; (void)p2; /* TODO */ }
 static inline int get_view_extents(void * p0, void * p1, void * p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; return 0; /* TODO */ }
-static inline int get_view_position(void * p0) { (void)p0; return 0; /* TODO */ }
+void get_view_position(void *param_1);
 static inline int get_window_entry(int p0) { (void)p0; return 0; /* TODO */ }
 void gl_get_dimensions_wrapper(void *p0, void *p1, void *p2);
 static inline void gl_swap_buffers(int p0) { (void)p0; /* TODO */ }
@@ -44,16 +46,16 @@ static inline void post_realize_setup(int p0) { (void)p0; /* TODO */ }
 static inline void process_child_directory(void * p0) { (void)p0; /* TODO */ }
 static inline void process_data_recursive(int p0, int p1, int p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; /* TODO */ }
 static inline void process_data_section(int p0, int p1, int p2, int p3) { (void)p0; (void)p1; (void)p2; (void)p3; /* TODO */ }
-static inline void process_pick_item(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
+void process_pick_item(int p0); /* Implemented in picking.c */
 static inline int read_bytecode_value(int p0, int p1, int p2, void * p3, int p4) { (void)p0; (void)p1; (void)p2; (void)p3; (void)p4; return 0; /* TODO */ }
 static inline void recalc_layout(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 static inline void refresh_toplevel(int p0) { (void)p0; /* TODO */ }
 static inline void refresh_view_recursive(int p0) { (void)p0; /* TODO */ }
-static inline void render_file_icon(int p0, int p1, int p2, int p3, int p4, float p5) { (void)p0; (void)p1; (void)p2; (void)p3; (void)p4; (void)p5; /* TODO */ }
-static inline void render_tree_level(int p0) { (void)p0; /* TODO */ }
+static inline void render_file_icon(int p0, undefined4 *p1, char p2, char p3, undefined4 p4, undefined4 p5) { (void)p0; (void)p1; (void)p2; (void)p3; (void)p4; (void)p5; /* TODO */ }
+static inline void render_tree_level(undefined8 p0, undefined8 p1, int p2) { (void)p0; (void)p1; (void)p2; /* TODO */ }
 static inline void set_context_state(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
 static inline void set_gl_context(int p0, int p1) { (void)p0; (void)p1; /* TODO */ }
-static inline void set_render_flag(int p0) { (void)p0; /* TODO */ }
+static inline void set_render_flag(char p0) { (void)p0; /* TODO */ }
 /* set_status_message: defined in status.c and messages.c */
 static inline void set_status_text(int p0) { (void)p0; /* TODO */ }
 static inline void set_window_property(void * p0, void * p1, int p2) { (void)p0; (void)p1; (void)p2; /* TODO */ }

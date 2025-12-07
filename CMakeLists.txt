@@ -61,6 +61,11 @@ endif()
 # FSN IrisGL Compatibility Layer (64-bit safe SGI GL to OpenGL)
 set(FSN_IGL_SOURCES
     src/fsn_igl.c
+    src/picking.c
+    src/zoom.c
+    src/warp.c
+    src/position.c
+    src/igl_stubs.c
 )
 
 add_library(fsn_igl STATIC ${FSN_IGL_SOURCES})
@@ -86,6 +91,7 @@ set(FSN_SOURCES_CLEAN
     src/drawing.c
     src/dump.c
     src/edit.c
+    src/item_lookup.c
     src/fam_monitor.c
     src/fsn_state.c
     src/highlight.c
@@ -98,6 +104,8 @@ set(FSN_SOURCES_CLEAN
     src/preferences.c
     src/rule_info.c
     src/scan.c
+    src/file_ops.c
+    src/status_stub.c
     src/sgi_utils.c
     src/sorting.c
     src/string_utils.c
@@ -105,11 +113,19 @@ set(FSN_SOURCES_CLEAN
     src/warp.c
     src/window.c
     src/zoom.c
+  src/picking.c
+  src/zoom.c
+  src/warp.c
+  src/position.c
 )
 
 # Stub implementations
 set(FSN_STUBS
     src/stubs.c
+  src/picking.c
+  src/zoom.c
+  src/warp.c
+  src/position.c
 )
 
 # Start with clean files only + stubs + Phase 15 draw_tree + Phase 18 dir_simple
@@ -124,6 +140,10 @@ add_executable(test_headers
     src/test_headers.c
     src/fsn_state.c
     src/fam_monitor.c
+  src/picking.c
+  src/zoom.c
+  src/warp.c
+  src/position.c
 )
 target_link_libraries(test_headers
     fsn_igl
@@ -137,10 +157,16 @@ target_link_libraries(test_headers
 # Phase 5: Test fsn_igl compilation
 add_executable(test_igl
     src/test_igl.c
+  src/picking.c
+  src/zoom.c
+  src/warp.c
+  src/item_lookup.c
+  src/position.c
 )
 target_link_libraries(test_igl
     fsn_igl
     ${OPENGL_LIBRARIES}
+    ${X11_LIBRARIES}
     m
 )
 

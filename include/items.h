@@ -10,7 +10,7 @@
 #include "fsn_types.h"
 
 void count_directory_items(void);
-void get_item_by_index(void);
+int get_item_by_index(int param_1);
 void mark_directory_item(int param_1);
 void handle_item_action(int param_1,undefined4 param_2);
 void process_pick_item(int param_1);

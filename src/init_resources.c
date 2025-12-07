@@ -8,6 +8,7 @@
 #include "fsn_types.h"
 #include "fsn_state.h"
 #include <X11/Intrinsic.h>
+#include <stdlib.h>
 #include <X11/StringDefs.h>
 #include <stdio.h>
 #include <string.h>
@@ -69,6 +70,10 @@ typedef struct {
     float xDirMargin;      /* → item_spacing_x (default 2.0) */
     float yDirMargin;      /* → layout_base_height (default 8.0) */
     float fileMargin;      /* → icon_spacing_factor (default 0.25) */
+    float fileBaseWidth;   /* → file_base_width (default 0.5) */
+    float colorTopValueFactor;   /* → color_top_value_factor (default 0.8) */
+    float colorSideValueFactor;  /* → color_side_value_factor (default 0.55) */
+    float colorBackValueFactor;  /* → color_back_value_factor (default 0.3) */
 } FsnResources;
 
 static FsnResources fsn_res;
@@ -155,6 +160,14 @@ static XtResource resources[] = {
       XtOffsetOf(FsnResources, yDirMargin), XtRImmediate, (XtPointer)0 },
     { "fileMargin", "FileMargin", XtRFloat, sizeof(float),
       XtOffsetOf(FsnResources, fileMargin), XtRImmediate, (XtPointer)0 },
+    { "fileBaseWidth", "FileBaseWidth", XtRFloat, sizeof(float),
+      XtOffsetOf(FsnResources, fileBaseWidth), XtRImmediate, (XtPointer)0 },
+    { "colorTopValueFactor", "ColorTopValueFactor", XtRFloat, sizeof(float),
+      XtOffsetOf(FsnResources, colorTopValueFactor), XtRImmediate, (XtPointer)0 },
+    { "colorSideValueFactor", "ColorSideValueFactor", XtRFloat, sizeof(float),
+      XtOffsetOf(FsnResources, colorSideValueFactor), XtRImmediate, (XtPointer)0 },
+    { "colorBackValueFactor", "ColorBackValueFactor", XtRFloat, sizeof(float),
+      XtOffsetOf(FsnResources, colorBackValueFactor), XtRImmediate, (XtPointer)0 },
 };
 
 /**
@@ -195,14 +208,31 @@ void init_toplevel_resources(Widget w)
             graphics_state_mode, current_packed_color);
     fprintf(stderr, "initResources: ground gradient far=0x%06x near=0x%06x\n",
             graphics_render_flags, highlight_color);
+    fprintf(stderr, "initResources: resource initial=(%.1f, %.1f, %.1f, tilt=%d)\n",
+            fsn_res.initialX, fsn_res.initialY, fsn_res.initialZ, fsn_res.initialTilt);
 
-    /* Initial view position - use sensible defaults if resources failed to load
-     * Original FSN resources/Fsn values: initialX=0, initialY=-37, initialZ=34, initialTilt=-700
+    /*
+     * Initial view position - prefer resource overrides, fallback to
+     * original FSN defaults: initialX=0, initialY=-37, initialZ=34, initialTilt=-700.
      */
     view_init_x = (fsn_res.initialX != 0.0f) ? fsn_res.initialX : 0.0f;
-    view_init_y = (fsn_res.initialY != 0.0f) ? fsn_res.initialY : -20.0f;
-    view_init_z = (fsn_res.initialZ != 0.0f) ? fsn_res.initialZ : 25.0f;
+    view_init_y = (fsn_res.initialY != 0.0f) ? fsn_res.initialY : -37.0f;
+    view_init_z = (fsn_res.initialZ != 0.0f) ? fsn_res.initialZ : 34.0f;
     view_init_tilt = (fsn_res.initialTilt != 0) ? fsn_res.initialTilt : -700;
+
+    /* Optional env overrides to quickly tune camera without rebuilding */
+    const char *y_off_env = getenv("FSN_INIT_Y_OFFSET");
+    const char *z_off_env = getenv("FSN_INIT_Z_OFFSET");
+    if (y_off_env) {
+        float dy = strtof(y_off_env, NULL);
+        view_init_y += dy;
+        fprintf(stderr, "initResources: applied FSN_INIT_Y_OFFSET=%.2f -> y=%.2f\n", dy, view_init_y);
+    }
+    if (z_off_env) {
+        float dz = strtof(z_off_env, NULL);
+        view_init_z += dz;
+        fprintf(stderr, "initResources: applied FSN_INIT_Z_OFFSET=%.2f -> z=%.2f\n", dz, view_init_z);
+    }
 
     /* Layout parameters from resources/Fsn (ORIGINAL values)
      * These control sky/ground positioning and directory layout spacing
@@ -213,12 +243,20 @@ void init_toplevel_resources(Widget w)
     item_spacing_x = (fsn_res.xDirMargin != 0.0f) ? fsn_res.xDirMargin : 2.0f;
     layout_base_height = (fsn_res.yDirMargin != 0.0f) ? fsn_res.yDirMargin : 8.0f;
     icon_spacing_factor = (fsn_res.fileMargin != 0.0f) ? fsn_res.fileMargin : 0.25f;
+    file_base_width = (fsn_res.fileBaseWidth != 0.0f) ? fsn_res.fileBaseWidth : 0.5f;
+    color_top_value_factor = (fsn_res.colorTopValueFactor != 0.0f) ? fsn_res.colorTopValueFactor : 0.8f;
+    color_side_value_factor = (fsn_res.colorSideValueFactor != 0.0f) ? fsn_res.colorSideValueFactor : 0.55f;
+    color_back_value_factor = (fsn_res.colorBackValueFactor != 0.0f) ? fsn_res.colorBackValueFactor : 0.3f;
 
     fprintf(stderr, "initResources: skyColor=0x%06x groundColor=0x%06x\n",
             fsn_res.skyColor, fsn_res.groundColor);
     fprintf(stderr, "initResources: view_init=(%.1f, %.1f, %.1f)\n",
             view_init_x, view_init_y, view_init_z);
-    fprintf(stderr, "initResources: layout: skyH=%.1f skyD=%.1f gndB=%.1f xDir=%.1f yDir=%.1f fileM=%.2f\n",
+    fprintf(stderr, "initResources: layout: skyH=%.1f skyD=%.1f gndB=%.1f xDir=%.1f yDir=%.1f fileM=%.2f baseW=%.2f\n",
             view_offset_z, view_offset_y, base_y_offset,
-            item_spacing_x, layout_base_height, icon_spacing_factor);
+            item_spacing_x, layout_base_height, icon_spacing_factor, file_base_width);
+    fprintf(stderr, "initResources: applied initial=(%.1f, %.1f, %.1f, tilt=%d)\n",
+            view_init_x, view_init_y, view_init_z, view_init_tilt);
+    fprintf(stderr, "initResources: face brightness factors top=%.2f side=%.2f back=%.2f\n",
+            color_top_value_factor, color_side_value_factor, color_back_value_factor);
 }

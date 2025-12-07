@@ -1,27 +1,11 @@
 Function Call Frequency (All Functions)
 ================================================================================
 
-FUN_0040cad0         :   32 calls
-FUN_0042b6c0         :   27 calls
-FUN_0042a82c         :   21 calls
-FUN_00411b30         :   21 calls
-FUN_0042a788         :   20 calls
-FUN_00410264         :   19 calls
-FUN_00421f10         :   18 calls
 FUN_0042a8e4         :   18 calls
-FUN_00411094         :   15 calls
-FUN_00410da4         :   14 calls
 FUN_00432094         :   13 calls
-FUN_004341fc         :   13 calls
-FUN_00435668         :   13 calls
-FUN_00411ea4         :   12 calls
-FUN_0040ff64         :   12 calls
 FUN_00411998         :   12 calls
 FUN_0041d920         :   12 calls
-FUN_0040bbe0         :   11 calls
 FUN_0041d69c         :   11 calls
-FUN_0042a7d0         :   10 calls
-FUN_0042a7f0         :   10 calls
 FUN_00413580         :   10 calls
 FUN_00432a34         :   10 calls
 FUN_0040f150         :    9 calls
@@ -197,7 +181,6 @@ FUN_0042f284         :    2 calls
 FUN_0041bd0c         :    2 calls
 FUN_0041b040         :    2 calls
 FUN_0042b0c4         :    2 calls
-FUN_0041892c         :    2 calls
 FUN_004101e4         :    2 calls
 FUN_00426e34         :    2 calls
 FUN_00411578         :    2 calls
@@ -283,7 +266,6 @@ FUN_0040d2cc         :    1 calls
 FUN_0040d9a8         :    1 calls
 FUN_0040da14         :    1 calls
 FUN_0040de38         :    1 calls
-FUN_0040eef0         :    1 calls
 FUN_0040ef44         :    1 calls
 FUN_0040eff8         :    1 calls
 FUN_0040f20c         :    1 calls

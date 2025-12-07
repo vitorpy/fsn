@@ -197,6 +197,10 @@ extern float item_spacing_x;
 extern float item_height_offset;
 extern float icon_size_multiplier;
 extern float icon_spacing_factor;
+extern float file_base_width;
+extern float color_top_value_factor;
+extern float color_side_value_factor;
+extern float color_back_value_factor;
 extern float position_offset;
 
 /* Original ternary tree child index markers (fsn.c:1065-1067) */

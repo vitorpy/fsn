@@ -236,7 +236,7 @@ void get_icon_attribute(void);
 void get_icon_bounds(int param_1,undefined4 *param_2,undefined4 *param_3,undefined4 *param_4, undefined4 *param_5);
 void get_icon_result(undefined4 *param_1);
 void get_icon_string(void);
-void get_item_by_index(void);
+int get_item_by_index(int param_1);
 void get_item_screen_coords(undefined4 *param_1);
 void get_panel_value(undefined4 param_1);
 void get_path_entry(int param_1);

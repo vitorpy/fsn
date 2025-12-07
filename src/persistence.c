@@ -5,6 +5,7 @@
  */
 
 #include "persistence.h"
+#include <stdint.h>
 #include "fsn_types.h"
 #include "fsn_state.h"
 #include "fsn_igl.h"
@@ -101,8 +102,8 @@ void restorePosition(undefined4 param_1)
   short sStack_4;
   short sStack_2;
   
-  extract_position_data(param_1,&sStack_2,&sStack_4,&uStack_8,&uStack_c,&uStack_10,&uStack_14,&iStack_18,
-               &iStack_1c,(undefined1 *)((int)curcontext + 0xc50));
+  extract_position_data((void *)(uintptr_t)param_1,&sStack_2,&sStack_4,&uStack_8,&uStack_c,&uStack_10,&uStack_14,&iStack_18,
+                &iStack_1c,(undefined1 *)((int)curcontext + 0xc50));
   if (sStack_2 != ctx->rotation_z) {
     ctx->rotation_z = sStack_2;
     init_view_transform();

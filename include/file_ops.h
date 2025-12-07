@@ -35,6 +35,6 @@ void highlightFile(void);
 void landscapeZoomToFile(int param_1,int param_2);
 void viewFile(undefined4 param_1,undefined4 *param_2);
 void copy_file_item(undefined4 param_1,undefined4 *param_2);
-void load_filetype_rules_wrapper(undefined4 param_1);
+void load_filetype_rules_wrapper(const char *param_1);
 
 #endif /* FSN_FILE_OPS_H */

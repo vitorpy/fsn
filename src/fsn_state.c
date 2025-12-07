@@ -174,6 +174,10 @@ float item_spacing_x = 8.0f;        /* Horizontal spacing between child islands 
 float item_height_offset = 0.0f;
 float icon_size_multiplier = 1.0f;
 float icon_spacing_factor = 1.5f;   /* File spacing within islands (original FSN) */
+float file_base_width = 0.5f;       /* Base width/depth of file blocks */
+float color_top_value_factor = 0.8f;   /* Brightness multiplier for top face */
+float color_side_value_factor = 0.55f; /* Brightness multiplier for side faces */
+float color_back_value_factor = 0.3f;  /* Brightness multiplier for back face */
 float position_offset = 0.0f;
 
 /* Original ternary tree child index markers (fsn.c:1065-1067) */
