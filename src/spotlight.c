@@ -112,6 +112,7 @@ void draw_scaled_element_impl(float base_x, float base_y, float base_z,
                               float top_x, float top_y, float top_z,
                               float width, unsigned int color, int outline_only)
 {
+    /* Caller is responsible for positioning; coordinates are local relative to current matrix. */
     float left[3];
     float right[3];
     float base[3];

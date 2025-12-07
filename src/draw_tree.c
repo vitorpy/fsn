@@ -381,9 +381,11 @@ void process_tree_node_impl(DirectoryNode *node, char param_3)
         pushmatrix();
         /* ORIGINAL constants: base z -0.5, top z 0, width 0.4 */
         float pedestal_width = 0.4f;
+        float pedestal_height = 0.5f; /* Raise from ground (-0.5) to block base (0) */
+        translate(node->pos_x, node->pos_y, -0.5f);
         draw_scaled_element_impl(
-            node->pos_x, node->pos_y, -0.5f,
-            node->pos_x, node->pos_y, 0.0f,
+            0.0f, 0.0f, 0.0f,
+            0.0f, 0.0f, pedestal_height,
             pedestal_width,
             dir_type_icon,
             0
@@ -442,9 +444,11 @@ void draw_directory(intptr_t param_2, char param_3)
                 0.4f);
         pushmatrix();
         float pedestal_width = 0.4f;
+        float pedestal_height = 0.5f;
+        translate(node->pos_x, node->pos_y, -0.5f);
         draw_scaled_element_impl(
-            node->pos_x, node->pos_y, -0.5f,     /* Base at ground-0.5 */
-            node->pos_x, node->pos_y, 0.0f,      /* Top at node base */
+            0.0f, 0.0f, 0.0f,                    /* Base at translated origin */
+            0.0f, 0.0f, pedestal_height,         /* Top at block base */
             pedestal_width,                      /* Platform width */
             dir_type_icon,                       /* Directory color */
             0                                    /* Full rendering */
