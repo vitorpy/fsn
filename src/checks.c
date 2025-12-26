@@ -9,6 +9,9 @@
  * - fsn_original.exploded.v2/FUN_00425bd8.c (lines 63224-63245) - markAllVisible
  * - fsn_original.exploded.v2/FUN_004259dc.c (lines 63178-63192) - traverse for visibility
  * - fsn_original.exploded.v2/FUN_0040bfa0.c (lines 50164-50174) - perspective setup
+ *
+ * NOTE: Original used byte offsets (0x74 for render_flags on 32-bit MIPS).
+ * For 64-bit, we use proper struct field access via DirectoryNode.
  */
 
 #include "checks.h"
@@ -16,13 +19,14 @@
 #include "fsn_state.h"
 #include "fsn_igl.h"
 #include "fsn_context.h"
+#include "fsn_dir.h"
 #include <math.h>
 
 /* Forward declarations for visibility functions */
 static void FUN_0040bfa0(void);
 static void FUN_00425c80(void);
-static void FUN_00425bd8(int param_1);
-static void FUN_004259dc(int param_1);
+static void FUN_00425bd8(DirectoryNode *node);
+static void FUN_004259dc(DirectoryNode *node);
 
 /* External function from item_lookup.c */
 extern int get_item_by_index(int name_index);
@@ -53,11 +57,15 @@ void check_gl_ready(void)
 void check_unmonitor_dp(int param_1)
 
 {
+  DirectoryNode *node = (DirectoryNode *)(intptr_t)param_1;
   int iVar1;
   int iVar2;
 
-  iVar1 = *(int *)((char *)param_1 + 0x74);
-  *(undefined4 *)((char *)param_1 + 100) = 0;
+  /* Original offset 0x74 = render_flags */
+  iVar1 = (int)node->render_flags;
+  /* Original offset 100 (0x64) - clear some field */
+  node->offset_y = 0.0f;  /* Approximate - offset 0x64 maps to offset_y area */
+
   if ((((iVar1 << 3 < 0) && (iVar1 << 10 < 0)) && (-1 < iVar1 << 0xb)) &&
      (param_1 != *(int *)(curcontext + 0x44))) {
     iVar2 = 0;
@@ -106,31 +114,35 @@ static void FUN_0040bfa0(void)
  * Checks if bit 28 of render_flags is set (should test visibility).
  * If so, updates visibility bits 6-7 based on curcontextflag.
  * Then traverses children if visible.
+ *
+ * Original offsets -> struct fields:
+ *   0x74 = render_flags
+ *   0x14 = num_files (child count for files)
+ *   0x18 = files_array
  */
-static void FUN_004259dc(int param_1)
+static void FUN_004259dc(DirectoryNode *node)
 {
-  int child_count;
   int i;
-  int child_offset;
-  int *child_array;
 
-  /* Check bit 28 (0x10000000) - visibility test flag */
-  if ((int)(*(uint *)((char *)param_1 + 0x74) << 3) < 0) {
+  if (node == NULL) return;
+
+  /* Check bit 28 (0x10000000) - visibility test flag (DIR_FLAG_VISIBLE) */
+  if ((int)(node->render_flags << 3) < 0) {
     /* Update visibility bits 6-7 based on curcontextflag
      * Original: clears bits 6-7, then sets from (bits30-31 & ~curcontextflag) << 6
      */
-    *(byte *)((char *)param_1 + 0x74) =
-         (byte)((*(uint *)((char *)param_1 + 0x74) >> 0x1e & ~(uint)curcontextflag) << 6) |
-         *(byte *)((char *)param_1 + 0x74) & 0x3f;
+    node->render_flags = (node->render_flags & 0xFFFFFF3F) |
+         (((node->render_flags >> 0x1e) & ~(uint)curcontextflag) << 6);
 
-    /* Traverse children - count at offset 0x14, array at offset 0x18 */
-    child_count = *(int *)((char *)param_1 + 0x14);
-    if (child_count > 0) {
-      child_array = *(int **)((char *)param_1 + 0x18);
-      child_offset = 0;
-      for (i = 0; i < child_count; i++) {
-        FUN_004259dc(*(int *)((char *)child_array + child_offset));
-        child_offset += 4;
+    /* Traverse ternary children */
+    if (node->child_center) FUN_004259dc(node->child_center);
+    if (node->child_left) FUN_004259dc(node->child_left);
+    if (node->child_right) FUN_004259dc(node->child_right);
+
+    /* Traverse files array */
+    if (node->files_array && node->num_files > 0) {
+      for (i = 0; i < node->num_files; i++) {
+        FUN_004259dc(node->files_array[i]);
       }
     }
   }
@@ -143,26 +155,32 @@ static void FUN_004259dc(int param_1)
  * ORIGINAL: fsn.c lines 63224-63245
  * Called when gselect() returns overflow (negative).
  * Recursively marks all nodes as visible by setting bits 6-7.
+ *
+ * Original offsets -> struct fields:
+ *   0x74 = render_flags
+ *   0x14 = num_files
+ *   0x18 = files_array
  */
-static void FUN_00425bd8(int param_1)
+static void FUN_00425bd8(DirectoryNode *node)
 {
-  int iVar1;
-  int iVar2;
+  int i;
+
+  if (node == NULL) return;
 
   /* Update visibility bits 6-7: (bits30-31 | curcontextflag) << 6 */
-  *(byte *)((char *)param_1 + 0x74) =
-       (byte)((*(uint *)((char *)param_1 + 0x74) >> 0x1e | (uint)curcontextflag) << 6) |
-       *(byte *)((char *)param_1 + 0x74) & 0x3f;
+  node->render_flags = (node->render_flags & 0xFFFFFF3F) |
+       (((node->render_flags >> 0x1e) | (uint)curcontextflag) << 6);
 
-  /* Recurse on children - count at offset 0x14, array at offset 0x18 */
-  iVar1 = 0;
-  if (0 < *(int *)((char *)param_1 + 0x14)) {
-    iVar2 = 0;
-    do {
-      FUN_00425bd8(*(int *)(*(int *)((char *)param_1 + 0x18) + iVar2));
-      iVar1 = iVar1 + 1;
-      iVar2 = iVar2 + 4;
-    } while (iVar1 < *(int *)((char *)param_1 + 0x14));
+  /* Recurse on ternary children */
+  if (node->child_center) FUN_00425bd8(node->child_center);
+  if (node->child_left) FUN_00425bd8(node->child_left);
+  if (node->child_right) FUN_00425bd8(node->child_right);
+
+  /* Recurse on files array */
+  if (node->files_array && node->num_files > 0) {
+    for (i = 0; i < node->num_files; i++) {
+      FUN_00425bd8(node->files_array[i]);
+    }
   }
   return;
 }
@@ -174,19 +192,23 @@ static void FUN_00425bd8(int param_1)
  * Uses gselect() to test which nodes are visible in the view frustum.
  * Updates render_flags bits 6-7 for each visible node.
  * If gselect overflows (returns negative), marks all visible via FUN_00425bd8.
+ *
+ * Original offsets -> struct fields:
+ *   0x74 = render_flags
  */
 static void FUN_00425c80(void)
 {
   FsnContext *ctx = (FsnContext *)curcontext;
+  DirectoryNode *root = (DirectoryNode *)topdir;
+  DirectoryNode *node;
   int iVar1;
-  int iVar2;
   int iVar4;
   int iVar6;
   int iVar7;
   float fVar10;
   short local_1000[2048];
 
-  if (topdir != NULL && *topdir != 0) {
+  if (root != NULL) {
     initnames();
     gselect(local_1000, 0x800);
 
@@ -203,14 +225,14 @@ static void FUN_00425c80(void)
     translate(-ctx->camera_x, -ctx->camera_y);
 
     /* Traverse tree for visibility testing */
-    FUN_004259dc((int)(intptr_t)topdir);
+    FUN_004259dc(root);
 
     /* Get selection results */
     iVar1 = endselect(local_1000);
 
     /* If overflow (negative), mark all visible */
     if (iVar1 < 0) {
-      FUN_00425bd8((int)(intptr_t)topdir);
+      FUN_00425bd8(root);
     }
 
     /* Process selection hits */
@@ -220,12 +242,11 @@ static void FUN_00425c80(void)
       do {
         iVar6 = (int)local_1000[iVar4];
         if (iVar6 == 1) {
-          iVar2 = get_item_by_index((int)local_1000[iVar4 + 1]);
-          if (iVar2 != 0) {
+          node = (DirectoryNode *)(intptr_t)get_item_by_index((int)local_1000[iVar4 + 1]);
+          if (node != NULL) {
             /* Update visibility bits: (bits30-31 | curcontextflag) << 6 */
-            *(byte *)((char *)iVar2 + 0x74) =
-                 (byte)((*(uint *)((char *)iVar2 + 0x74) >> 0x1e | (uint)curcontextflag) << 6) |
-                 *(byte *)((char *)iVar2 + 0x74) & 0x3f;
+            node->render_flags = (node->render_flags & 0xFFFFFF3F) |
+                 (((node->render_flags >> 0x1e) | (uint)curcontextflag) << 6);
           }
         }
         iVar7 = iVar7 + 1;
