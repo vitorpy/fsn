@@ -24,6 +24,5 @@ void editCB(void)
     strcat(acStack_564,"&");
     system(acStack_564);
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }

@@ -129,8 +129,7 @@ void pickLandscape(int *param_1,undefined4 *param_2,undefined4 *param_3)
   *param_1 = iStack_4;
   *param_2 = uStack_8;
   *param_3 = uStack_c;
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }
 
 void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 *param_4,
@@ -208,8 +207,7 @@ void findzoom_landscape(float *param_1,float *param_2,float *param_3,undefined2 
     *param_6 = 0;
     *param_4 = (short)layout_rotation_value;
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }
 
 /* highlightDirLandscape and highlightFileLandscape are defined in highlight.c */
@@ -246,6 +244,5 @@ void landscapeZoomToFile(int param_1, int param_2)
                    (double)ctx->cos_z * (double)view_scale_factor);
     }
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }
