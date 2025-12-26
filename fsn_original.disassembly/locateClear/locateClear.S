@@ -1,0 +1,60 @@
+# Function: locateClear
+# Address: 0x004294c0 - 0x00429578
+# Size: 0xb8 (184 bytes)
+# End detected by: jr ra
+# GP = 0x1001db30
+#
+
+
+fsn.original:     file format elf32-tradbigmips
+
+
+Disassembly of section .text:
+
+004294c0 <locateClear>:
+  4294c0:	3c1c0fbf 	lui	gp,0xfbf
+  4294c4:	279c4670 	addiu	gp,gp,18032
+  4294c8:	0399e021 	addu	gp,gp,t9
+  4294cc:	8f8e8068 	lw	t6,-32664(gp)
+  4294d0:	27bdffe0 	addiu	sp,sp,-32
+  4294d4:	8dce7990 	lw	t6,31120(t6)
+  4294d8:	afbf001c 	sw	ra,28(sp)
+  4294dc:	11c00022 	beqz	t6,429568 <locateClear+0xa8>
+  4294e0:	afbc0018 	sw	gp,24(sp)
+  4294e4:	8f998020 	lw	t9,-32736(gp)
+  4294e8:	00000000 	nop
+  4294ec:	27399464 	addiu	t9,t9,-27548
+  4294f0:	0320f809 	jalr	t9
+  4294f4:	00000000 	nop
+  4294f8:	8fbc0018 	lw	gp,24(sp)
+  4294fc:	00000000 	nop
+  429500:	8f998520 	lw	t9,-31456(gp)
+  429504:	00000000 	nop
+  429508:	0320f809 	jalr	t9
+  42950c:	00000000 	nop
+  429510:	8fbc0018 	lw	gp,24(sp)
+  429514:	00002025 	move	a0,zero
+  429518:	8f998304 	lw	t9,-31996(gp)
+  42951c:	00000000 	nop
+  429520:	0320f809 	jalr	t9
+  429524:	00000000 	nop
+  429528:	8fbc0018 	lw	gp,24(sp)
+  42952c:	00000000 	nop
+  429530:	8f998308 	lw	t9,-31992(gp)
+  429534:	00000000 	nop
+  429538:	0320f809 	jalr	t9
+  42953c:	00000000 	nop
+  429540:	8fbc0018 	lw	gp,24(sp)
+  429544:	00000000 	nop
+  429548:	8f818068 	lw	at,-32664(gp)
+  42954c:	8f99867c 	lw	t9,-31108(gp)
+  429550:	ac207990 	sw	zero,31120(at)
+  429554:	8f818068 	lw	at,-32664(gp)
+  429558:	0320f809 	jalr	t9
+  42955c:	ac207994 	sw	zero,31124(at)
+  429560:	8fbc0018 	lw	gp,24(sp)
+  429564:	00000000 	nop
+  429568:	8fbf001c 	lw	ra,28(sp)
+  42956c:	27bd0020 	addiu	sp,sp,32
+  429570:	03e00008 	jr	ra
+  429574:	00000000 	nop

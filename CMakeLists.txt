@@ -89,6 +89,7 @@ set(FSN_SOURCES_CLEAN
     src/delete.c
     src/init_app_state.c
     src/drawing.c
+    src/overview.c
     src/dump.c
     src/edit.c
     src/item_lookup.c

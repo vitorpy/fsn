@@ -259,6 +259,7 @@ extern char overviewActive;
 extern char overview_initialized;
 extern int overview_gl_context;
 extern Widget overview_gl_widget;
+extern Widget overview_widget;           /* Overview window widget */
 extern int overview_popup_shell;
 extern int overview_x_window;
 extern int overview_bg_color;

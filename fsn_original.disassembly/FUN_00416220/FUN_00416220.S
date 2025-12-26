@@ -1,0 +1,144 @@
+# Function: FUN_00416220
+# Address: 0x00416220 - 0x00416428
+# Size: 0x208 (520 bytes)
+# End detected by: jr ra
+# GP = 0x1001db30
+#
+
+
+fsn.original:     file format elf32-tradbigmips
+
+
+Disassembly of section .text:
+
+00416220 <rescanDatabase+0xb24>:
+  416220:	3c1c0fc0 	lui	gp,0xfc0
+  416224:	279c7910 	addiu	gp,gp,30992
+  416228:	0399e021 	addu	gp,gp,t9
+  41622c:	8f8e809c 	lw	t6,-32612(gp)
+  416230:	27bdffe0 	addiu	sp,sp,-32
+  416234:	8dce0000 	lw	t6,0(t6)
+  416238:	afbf001c 	sw	ra,28(sp)
+  41623c:	afbc0018 	sw	gp,24(sp)
+  416240:	11c00009 	beqz	t6,416268 <rescanDatabase+0xb6c>
+  416244:	afa40020 	sw	a0,32(sp)
+  416248:	8f84806c 	lw	a0,-32660(gp)
+  41624c:	8f9982c8 	lw	t9,-32056(gp)
+  416250:	8c846690 	lw	a0,26256(a0)
+  416254:	0320f809 	jalr	t9
+  416258:	00000000 	nop
+  41625c:	8fbc0018 	lw	gp,24(sp)
+  416260:	1000001e 	b	4162dc <rescanDatabase+0xbe0>
+  416264:	00401825 	move	v1,v0
+  416268:	8f84806c 	lw	a0,-32660(gp)
+  41626c:	00000000 	nop
+  416270:	8c846690 	lw	a0,26256(a0)
+  416274:	00000000 	nop
+  416278:	8c8f0000 	lw	t7,0(a0)
+  41627c:	00000000 	nop
+  416280:	25f8ffff 	addiu	t8,t7,-1
+  416284:	ac980000 	sw	t8,0(a0)
+  416288:	8f84806c 	lw	a0,-32660(gp)
+  41628c:	00000000 	nop
+  416290:	8c846690 	lw	a0,26256(a0)
+  416294:	00000000 	nop
+  416298:	8c990000 	lw	t9,0(a0)
+  41629c:	00000000 	nop
+  4162a0:	07210008 	bgez	t9,4162c4 <rescanDatabase+0xbc8>
+  4162a4:	00000000 	nop
+  4162a8:	8f9982d8 	lw	t9,-32040(gp)
+  4162ac:	00000000 	nop
+  4162b0:	0320f809 	jalr	t9
+  4162b4:	00000000 	nop
+  4162b8:	8fbc0018 	lw	gp,24(sp)
+  4162bc:	10000006 	b	4162d8 <rescanDatabase+0xbdc>
+  4162c0:	00402825 	move	a1,v0
+  4162c4:	8c820004 	lw	v0,4(a0)
+  4162c8:	00000000 	nop
+  4162cc:	90450000 	lbu	a1,0(v0)
+  4162d0:	24480001 	addiu	t0,v0,1
+  4162d4:	ac880004 	sw	t0,4(a0)
+  4162d8:	00a01825 	move	v1,a1
+  4162dc:	24010002 	li	at,2
+  4162e0:	1061000f 	beq	v1,at,416320 <rescanDatabase+0xc24>
+  4162e4:	00000000 	nop
+  4162e8:	8f848098 	lw	a0,-32616(gp)
+  4162ec:	8f85805c 	lw	a1,-32676(gp)
+  4162f0:	8f9983f8 	lw	t9,-31752(gp)
+  4162f4:	24840020 	addiu	a0,a0,32
+  4162f8:	0320f809 	jalr	t9
+  4162fc:	24a5aa00 	addiu	a1,a1,-22016
+  416300:	8fbc0018 	lw	gp,24(sp)
+  416304:	24040001 	li	a0,1
+  416308:	8f9983a0 	lw	t9,-31840(gp)
+  41630c:	00000000 	nop
+  416310:	0320f809 	jalr	t9
+  416314:	00000000 	nop
+  416318:	8fbc0018 	lw	gp,24(sp)
+  41631c:	00000000 	nop
+  416320:	8f87806c 	lw	a3,-32660(gp)
+  416324:	8f84806c 	lw	a0,-32660(gp)
+  416328:	8f9982cc 	lw	t9,-32052(gp)
+  41632c:	8ce76690 	lw	a3,26256(a3)
+  416330:	2405000c 	li	a1,12
+  416334:	24060001 	li	a2,1
+  416338:	0320f809 	jalr	t9
+  41633c:	24846b20 	addiu	a0,a0,27424
+  416340:	8fbc0018 	lw	gp,24(sp)
+  416344:	24010001 	li	at,1
+  416348:	1041000f 	beq	v0,at,416388 <rescanDatabase+0xc8c>
+  41634c:	00000000 	nop
+  416350:	8f848098 	lw	a0,-32616(gp)
+  416354:	8f85805c 	lw	a1,-32676(gp)
+  416358:	8f9983f8 	lw	t9,-31752(gp)
+  41635c:	24840020 	addiu	a0,a0,32
+  416360:	0320f809 	jalr	t9
+  416364:	24a5aa2c 	addiu	a1,a1,-21972
+  416368:	8fbc0018 	lw	gp,24(sp)
+  41636c:	24040001 	li	a0,1
+  416370:	8f9983a0 	lw	t9,-31840(gp)
+  416374:	00000000 	nop
+  416378:	0320f809 	jalr	t9
+  41637c:	00000000 	nop
+  416380:	8fbc0018 	lw	gp,24(sp)
+  416384:	00000000 	nop
+  416388:	8f86806c 	lw	a2,-32660(gp)
+  41638c:	8f87806c 	lw	a3,-32660(gp)
+  416390:	8f9982cc 	lw	t9,-32052(gp)
+  416394:	8fa40020 	lw	a0,32(sp)
+  416398:	94c66b24 	lhu	a2,27428(a2)
+  41639c:	8ce76690 	lw	a3,26256(a3)
+  4163a0:	0320f809 	jalr	t9
+  4163a4:	24050001 	li	a1,1
+  4163a8:	8fbc0018 	lw	gp,24(sp)
+  4163ac:	00000000 	nop
+  4163b0:	8f89806c 	lw	t1,-32660(gp)
+  4163b4:	00000000 	nop
+  4163b8:	95296b24 	lhu	t1,27428(t1)
+  4163bc:	00000000 	nop
+  4163c0:	1049000f 	beq	v0,t1,416400 <rescanDatabase+0xd04>
+  4163c4:	00000000 	nop
+  4163c8:	8f848098 	lw	a0,-32616(gp)
+  4163cc:	8f85805c 	lw	a1,-32676(gp)
+  4163d0:	8f9983f8 	lw	t9,-31752(gp)
+  4163d4:	24840020 	addiu	a0,a0,32
+  4163d8:	0320f809 	jalr	t9
+  4163dc:	24a5aa58 	addiu	a1,a1,-21928
+  4163e0:	8fbc0018 	lw	gp,24(sp)
+  4163e4:	24040001 	li	a0,1
+  4163e8:	8f9983a0 	lw	t9,-31840(gp)
+  4163ec:	00000000 	nop
+  4163f0:	0320f809 	jalr	t9
+  4163f4:	00000000 	nop
+  4163f8:	8fbc0018 	lw	gp,24(sp)
+  4163fc:	00000000 	nop
+  416400:	8f8b806c 	lw	t3,-32660(gp)
+  416404:	8faa0020 	lw	t2,32(sp)
+  416408:	956b6b24 	lhu	t3,27428(t3)
+  41640c:	8f82806c 	lw	v0,-32660(gp)
+  416410:	014b6021 	addu	t4,t2,t3
+  416414:	a1800000 	sb	zero,0(t4)
+  416418:	8fbf001c 	lw	ra,28(sp)
+  41641c:	27bd0020 	addiu	sp,sp,32
+  416420:	03e00008 	jr	ra
+  416424:	24426b20 	addiu	v0,v0,27424

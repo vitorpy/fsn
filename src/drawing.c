@@ -17,6 +17,7 @@
 #include "fsn_types.h"
 #include "fsn_state.h"
 #include "fsn_igl.h"
+#include "overview.h"
 #include <sys/time.h>
 #include <math.h>
 #include <stdio.h>
@@ -63,7 +64,12 @@ static void FUN_0042510c(char param_1);  /* Binary alias for draw_directories */
 static void update_camera_state(void) { /* FUN_004294cc - clear selection */ }
 static void update_visibility(void) { /* FUN_0040bbe0 - XRaiseWindow */ }
 static void setup_zoom_context(void) { /* FUN_0040ca58 - visibility culling */ }
-static void finalize_frame(void) { /* FUN_00420b70 - overview overlay */ }
+static void finalize_frame(void) {
+    /* FUN_00420b70 - draw overview overlay if active */
+    if (overviewActive != '\0') {
+        drawOverviewOverlay();
+    }
+}
 static void update_frame_timing(void) { /* FUN_0040d804 - UI scale update */ }
 static void FUN_004294cc(void) { update_camera_state(); }
 static void FUN_0040bbe0(void) { update_visibility(); }

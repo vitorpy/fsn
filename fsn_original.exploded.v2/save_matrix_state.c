@@ -1,0 +1,53 @@
+/**
+ * save_matrix_state
+ *
+ * Extracted from fsn.c lines 51508-51553
+ * Category: Filesystem
+ */
+
+void save_matrix_state(void)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  int iVar3;
+  int *piVar4;
+  undefined4 *puVar5;
+  undefined4 *puVar6;
+  undefined4 *puVar7;
+  int unaff_gp;
+  undefined4 local_38 [12];
+  undefined4 auStack_8 [2];
+  
+  (**(code **)(unaff_gp + -0x784c) /* -> FUN_0042dc64 */)(local_38) /* =FUN_0042dc64 */;
+  iVar2 = (**(code **)(unaff_gp + -0x7834) /* -> equalPositions */)
+                    (local_38,*(int *)(**(int **)(unaff_gp + -0x767c) /* -> curcontextwindows */ + 0x34) +
+                              *(int *)(**(int **)(unaff_gp + -0x7684) /* -> curcontext */ + 0x40) * 0x38) /* =equalPositions */;
+  piVar4 = curcontext /* was: *(int **)(unaff_gp + -0x7684) */ /* -> curcontext */;
+  if (iVar2 == 0) {
+    iVar2 = *piVar4;
+    iVar2->_field_40 /* was: *(int *)(iVar2 + 0x40) */ = iVar2->_field_40 /* was: *(int *)(iVar2 + 0x40) */ + 1;
+    iVar2 = *piVar4;
+    iVar3 = iVar2->_field_40 /* was: *(int *)(iVar2 + 0x40) */;
+    if (9 < iVar3) {
+      piVar4 = curcontext /* was: *(int **)(unaff_gp + -0x7684) */ /* -> curcontext */;
+      iVar2->_field_40 /* was: *(undefined4 *)(iVar2 + 0x40) */ = 0;
+      iVar3 = *(int *)(*piVar4 + 0x40);
+    }
+    puVar1 = (undefined4 *)(*(int *)(*curcontextwindows /* was: *(int **)(unaff_gp + -0x767c) */ /* -> curcontextwindows */ + 0x34) + iVar3 * 0x38);
+    puVar7 = local_38;
+    do {
+      puVar6 = puVar7;
+      puVar5 = puVar1;
+      puVar7 = puVar6 + 3;
+      *puVar5 = *puVar6;
+      puVar5[1] = puVar6[1];
+      puVar5[2] = puVar6[2];
+      puVar1 = puVar5 + 3;
+    } while (puVar7 != auStack_8);
+    puVar5[3] = *puVar7;
+    puVar5[4] = puVar6[4];
+  }
+                    // WARNING: Bad instruction - Truncating control flow here
+  halt_baddata();
+}

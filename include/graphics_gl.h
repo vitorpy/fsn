@@ -76,7 +76,7 @@ void glcompat(void);
 void highlightFile(void);
 void gl_swap_buffers(undefined1 param_1);
 void highlightDirLandscape(int param_1);
-void highlightOverviewDir(int param_1);
+/* highlightOverviewDir - declared in overview.h */
 void bgnqstrip(void);
 void set_gl_context(int param_1,undefined1 param_2);
 void GLXwinset(Display *dpy, Window win);

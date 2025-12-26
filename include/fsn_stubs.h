@@ -91,12 +91,12 @@ static inline void setState__13ByteCodedIconFiN41(unsigned int p1, unsigned int 
  * Real implementations will be extracted from disabled modules later.
  *============================================================================*/
 
-static inline void begin_overview_render(void) { /* TODO */ }
+/* begin_overview_render - implemented in overview.c */
+/* draw_overview_content - implemented in overview.c */
 static inline void calculate_item_params(void) { /* TODO */ }
 static inline void calculate_view_params(void) { /* TODO */ }
 static inline void destroy_gl_resources(void) { /* TODO */ }
 static inline void draw_item_recursive(void) { /* TODO */ }
-static inline void draw_overview_content(void) { /* TODO */ }
 static inline void end_rendering(void) { /* TODO */ }
 static inline void gl_pop_state(void) { /* TODO */ }
 static inline void gl_push_state(void) { /* TODO */ }
@@ -134,7 +134,7 @@ static inline void setup_directory_handler(void) { /* TODO */ }
 static inline void setup_event_handlers(void) { /* TODO */ }
 static inline void setup_fam_monitoring(void) { /* TODO */ }
 static inline void setup_rendering(void) { /* TODO */ }
-static inline void showOverview(void) { /* TODO */ }
+/* showOverview - implemented in overview.c */
 static inline void show_controls(void) { /* TODO */ }
 static inline void toggle_legend(void) { /* TODO */ }
 static inline void ui_layout_setup_wrapper(void) { /* TODO */ }

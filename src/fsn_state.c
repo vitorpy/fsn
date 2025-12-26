@@ -237,6 +237,7 @@ char overviewActive = 0;
 char overview_initialized = 0;
 int overview_gl_context = 0;
 Widget overview_gl_widget = NULL;
+Widget overview_widget = NULL;        /* Overview window widget */
 int overview_popup_shell = 0;
 int overview_x_window = 0;
 int overview_bg_color = 0;

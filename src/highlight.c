@@ -10,6 +10,7 @@
 #include "fsn_types.h"
 #include "fsn_state.h"
 #include "fsn_igl.h"
+#include "overview.h"
 
 #include "fsn_context.h"
 void highlightSpecialDir(float param_1, float param_2, undefined4 param_3, undefined4 param_4)
@@ -125,56 +126,7 @@ void highlightFileWarp(int param_1, int param_2)
   /* halt_baddata was Ghidra epilogue artifact */
 }
 
-void highlightOverviewDir(int param_1)
-{
-  undefined4 uVar1;
-  int iVar2;
-  double dVar3;
-  undefined4 uStack_14;
-  float fStack_10;
-  float fStack_c;
-  float fStack_8;
-
-  if (overviewActive != '\0') {
-    begin_overview_render();
-    color(0);
-    clear();
-    color(overlayHighlightColor);
-    /*
-     * FIXED: (ulonglong)uVar4 << 0x20 is Ghidra artifact for constant 2.0
-     * Same pattern as other highlight functions.
-     */
-    dVar3 = (double)*(float *)(param_1 + 0x3c) / 2.0;
-    rectf((float)((double)*(float *)(param_1 + 0x34) - dVar3 * (double)*(float *)(param_1 + 0x58)),
-          (float)((double)*(float *)(param_1 + 0x38) - dVar3));
-    iVar2 = *(int *)(param_1 + 0x28);
-    if (iVar2 != 0) {
-      fStack_c = *(float *)(iVar2 + 0x34) + *(float *)(param_1 + 0x4c) * *(float *)(param_1 + 0x58);
-      fStack_8 = (float)((double)*(float *)(iVar2 + 0x38) + (double)*(float *)(param_1 + 0x50));
-      uStack_14 = *(undefined4 *)(param_1 + 0x34);
-      /*
-       * FIXED: (ulonglong)(double)value & 0xffffffff00000000 is Ghidra artifact for 2.0
-       * Assembly at 0x421a90-0x421abc shows register reuse where $f6/$f7 is
-       * overwritten from loaded value to constant 2.0 before division.
-       * See analysis/FUN_00421940.annotated.asm
-       */
-      fStack_10 = (float)((double)*(float *)(param_1 + 0x38) +
-                         (double)-*(float *)(param_1 + 0x3c) / 2.0);
-      bgnline();
-      v2f((float *)&fStack_c);
-      v2f((float *)&uStack_14);
-      endline();
-    }
-    pushmatrix();
-    ortho2(-1.0f, 1.0f, -1.0f, 1.0f);
-    cmov2(0xbf733333,0xbf666666);
-    build_path_string((char *)0,(undefined4 *)param_1);
-    charstr((char *)uVar1);
-    popmatrix();
-    end_rendering();
-  }
-  /* halt_baddata was Ghidra epilogue artifact */
-}
+/* highlightOverviewDir - now implemented in overview.c with DirectoryNode* parameter */
 
 void highlightDirLandscape(int param_1)
 {
@@ -360,16 +312,7 @@ void locateHighlight(void)
   /* halt_baddata was Ghidra epilogue artifact */
 }
 
-void overviewLocateHighlight(void)
-
-{
-  undefined4 uVar1;
-  
-  glx_switch_context_wrapper();
-  uVar1 = get_current_time();
-  configure_viewport(uVar1,0,0);
-  /* halt_baddata was Ghidra epilogue artifact */
-}
+/* overviewLocateHighlight - now implemented in overview.c */
 
 void locateHighlightAction(undefined4 param_1,int param_2)
 

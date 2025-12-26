@@ -177,6 +177,50 @@ mips-linux-gnu-objdump -d --start-address=0x40cac4 --stop-address=0x40cf00 fsn.o
 - Actual code: `Z = curcontext[8] + view_offset_z` (simple float addition)
 - See `fsn_original.exploded.cleanup/INDEX.md` for full analysis
 
+### Artifact Remediation Pipeline (NEW)
+
+Full cleanup pipeline that transforms raw Ghidra decompile into annotated, readable code:
+
+```bash
+# Run full pipeline (offset replacement + GP cleanup + Claude baddata analysis)
+source .venv/bin/activate
+python3 analysis/run_cleanup.py
+
+# Fast mode (skip Claude-powered baddata analysis)
+python3 analysis/run_cleanup.py --skip-baddata
+
+# Dry run to preview
+python3 analysis/run_cleanup.py --dry-run
+```
+
+**Individual scripts:**
+```bash
+# Replace raw offsets with struct member access
+python3 analysis/offset_to_struct.py input.c -o output.c
+
+# Clean GP artifacts (annotate calls, replace data access)
+python3 analysis/gp_cleanup.py input.c -o output.c
+
+# Generate disassembly for all functions in a file
+python3 analysis/batch_disassemble.py fsn_original.exploded.cleanup/*.c
+
+# Analyze halt_baddata with Claude CLI (generates C pseudocode)
+python3 analysis/baddata_analyze.py input.c -o output.c
+```
+
+**Output directories:**
+- `fsn_original.exploded.v2/` - Fully cleaned functions with all transformations
+- `fsn_original.disassembly/` - MIPS assembly for 919 functions
+- `include/gp_globals.h` - Generated extern declarations for GP data
+
+**Remediation statistics (as of 2025-12-26):**
+| Artifact | Count | Status |
+|----------|-------|--------|
+| Struct offsets | 1,431 | ✅ Replaced with `node->member` |
+| GP function calls | 358 | ✅ Annotated with `/* =symbol */` |
+| GP data access | 523 | ✅ Replaced with global names |
+| halt_baddata | 831 | ✅ 770 analyzed with C pseudocode |
+
 ## Project Structure
 
 ```

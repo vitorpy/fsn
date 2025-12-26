@@ -1,0 +1,213 @@
+# Function: FUN_00429c44
+# Address: 0x00429c44 - 0x00429f60
+# Size: 0x31c (796 bytes)
+# End detected by: jr ra
+# GP = 0x1001db30
+#
+
+
+fsn.original:     file format elf32-tradbigmips
+
+
+Disassembly of section .text:
+
+00429c44 <createViewer+0xc>:
+  429c44:	27bdffc0 	addiu	sp,sp,-64
+  429c48:	afb00020 	sw	s0,32(sp)
+  429c4c:	00a08025 	move	s0,a1
+  429c50:	8f85805c 	lw	a1,-32676(gp)
+  429c54:	8f99837c 	lw	t9,-31876(gp)
+  429c58:	afbf0034 	sw	ra,52(sp)
+  429c5c:	00c03825 	move	a3,a2
+  429c60:	afbc0030 	sw	gp,48(sp)
+  429c64:	afb3002c 	sw	s3,44(sp)
+  429c68:	afb20028 	sw	s2,40(sp)
+  429c6c:	afb10024 	sw	s1,36(sp)
+  429c70:	02003025 	move	a2,s0
+  429c74:	0320f809 	jalr	t9
+  429c78:	24a5e910 	addiu	a1,a1,-5872
+  429c7c:	8fbc0030 	lw	gp,48(sp)
+  429c80:	00000000 	nop
+  429c84:	8f918984 	lw	s1,-30332(gp)
+  429c88:	8f8589d0 	lw	a1,-30256(gp)
+  429c8c:	8e2e0000 	lw	t6,0(s1)
+  429c90:	00000000 	nop
+  429c94:	adc20010 	sw	v0,16(t6)
+  429c98:	8e2f0000 	lw	t7,0(s1)
+  429c9c:	8f9987a4 	lw	t9,-30812(gp)
+  429ca0:	8de40010 	lw	a0,16(t7)
+  429ca4:	0320f809 	jalr	t9
+  429ca8:	00000000 	nop
+  429cac:	8fbc0030 	lw	gp,48(sp)
+  429cb0:	24130001 	li	s3,1
+  429cb4:	8f9880a0 	lw	t8,-32608(gp)
+  429cb8:	8f9980a0 	lw	t9,-32608(gp)
+  429cbc:	8f8880a0 	lw	t0,-32608(gp)
+  429cc0:	27181399 	addiu	t8,t8,5017
+  429cc4:	27391d63 	addiu	t9,t9,7523
+  429cc8:	25082375 	addiu	t0,t0,9077
+  429ccc:	ae180000 	sw	t8,0(s0)
+  429cd0:	ae130004 	sw	s3,4(s0)
+  429cd4:	ae190008 	sw	t9,8(s0)
+  429cd8:	ae13000c 	sw	s3,12(s0)
+  429cdc:	ae080010 	sw	t0,16(s0)
+  429ce0:	ae130014 	sw	s3,20(s0)
+  429ce4:	8e290000 	lw	t1,0(s1)
+  429ce8:	8f998508 	lw	t9,-31480(gp)
+  429cec:	8f85805c 	lw	a1,-32676(gp)
+  429cf0:	8d240010 	lw	a0,16(t1)
+  429cf4:	02003025 	move	a2,s0
+  429cf8:	24070003 	li	a3,3
+  429cfc:	0320f809 	jalr	t9
+  429d00:	24a5e918 	addiu	a1,a1,-5864
+  429d04:	8fbc0030 	lw	gp,48(sp)
+  429d08:	00409025 	move	s2,v0
+  429d0c:	8f998388 	lw	t9,-31864(gp)
+  429d10:	00402025 	move	a0,v0
+  429d14:	0320f809 	jalr	t9
+  429d18:	00000000 	nop
+  429d1c:	8fbc0030 	lw	gp,48(sp)
+  429d20:	8e2a0000 	lw	t2,0(s1)
+  429d24:	8f878020 	lw	a3,-32736(gp)
+  429d28:	8f99838c 	lw	t9,-31860(gp)
+  429d2c:	8d4b0008 	lw	t3,8(t2)
+  429d30:	02402025 	move	a0,s2
+  429d34:	24050004 	li	a1,4
+  429d38:	00003025 	move	a2,zero
+  429d3c:	24e7a440 	addiu	a3,a3,-23488
+  429d40:	0320f809 	jalr	t9
+  429d44:	afab0010 	sw	t3,16(sp)
+  429d48:	8fbc0030 	lw	gp,48(sp)
+  429d4c:	02402025 	move	a0,s2
+  429d50:	8f85805c 	lw	a1,-32676(gp)
+  429d54:	8f9984e0 	lw	t9,-31520(gp)
+  429d58:	02003025 	move	a2,s0
+  429d5c:	00003825 	move	a3,zero
+  429d60:	0320f809 	jalr	t9
+  429d64:	24a5e928 	addiu	a1,a1,-5848
+  429d68:	8fbc0030 	lw	gp,48(sp)
+  429d6c:	afa20038 	sw	v0,56(sp)
+  429d70:	8f998388 	lw	t9,-31864(gp)
+  429d74:	00402025 	move	a0,v0
+  429d78:	0320f809 	jalr	t9
+  429d7c:	00000000 	nop
+  429d80:	8fbc0030 	lw	gp,48(sp)
+  429d84:	8e2c0000 	lw	t4,0(s1)
+  429d88:	8f8580a0 	lw	a1,-32608(gp)
+  429d8c:	8f868020 	lw	a2,-32736(gp)
+  429d90:	8f9983ac 	lw	t9,-31828(gp)
+  429d94:	8fa40038 	lw	a0,56(sp)
+  429d98:	8d870008 	lw	a3,8(t4)
+  429d9c:	24a5124b 	addiu	a1,a1,4683
+  429da0:	0320f809 	jalr	t9
+  429da4:	24c69f60 	addiu	a2,a2,-24736
+  429da8:	8fbc0030 	lw	gp,48(sp)
+  429dac:	02402025 	move	a0,s2
+  429db0:	8f85805c 	lw	a1,-32676(gp)
+  429db4:	8f9984e0 	lw	t9,-31520(gp)
+  429db8:	02003025 	move	a2,s0
+  429dbc:	00003825 	move	a3,zero
+  429dc0:	0320f809 	jalr	t9
+  429dc4:	24a5e930 	addiu	a1,a1,-5840
+  429dc8:	8fbc0030 	lw	gp,48(sp)
+  429dcc:	8e2d0000 	lw	t5,0(s1)
+  429dd0:	8f8580a0 	lw	a1,-32608(gp)
+  429dd4:	8f9983ac 	lw	t9,-31828(gp)
+  429dd8:	afa20038 	sw	v0,56(sp)
+  429ddc:	8f86864c 	lw	a2,-31156(gp)
+  429de0:	8da70008 	lw	a3,8(t5)
+  429de4:	00402025 	move	a0,v0
+  429de8:	0320f809 	jalr	t9
+  429dec:	24a5124b 	addiu	a1,a1,4683
+  429df0:	8fbc0030 	lw	gp,48(sp)
+  429df4:	8fa40038 	lw	a0,56(sp)
+  429df8:	8f998388 	lw	t9,-31864(gp)
+  429dfc:	00000000 	nop
+  429e00:	0320f809 	jalr	t9
+  429e04:	00000000 	nop
+  429e08:	8fbc0030 	lw	gp,48(sp)
+  429e0c:	02402025 	move	a0,s2
+  429e10:	8f85805c 	lw	a1,-32676(gp)
+  429e14:	8f9984e0 	lw	t9,-31520(gp)
+  429e18:	02003025 	move	a2,s0
+  429e1c:	00003825 	move	a3,zero
+  429e20:	0320f809 	jalr	t9
+  429e24:	24a5e938 	addiu	a1,a1,-5832
+  429e28:	8e2e0000 	lw	t6,0(s1)
+  429e2c:	8fbc0030 	lw	gp,48(sp)
+  429e30:	adc20018 	sw	v0,24(t6)
+  429e34:	8e2f0000 	lw	t7,0(s1)
+  429e38:	8f998388 	lw	t9,-31864(gp)
+  429e3c:	8de40018 	lw	a0,24(t7)
+  429e40:	0320f809 	jalr	t9
+  429e44:	00000000 	nop
+  429e48:	8fbc0030 	lw	gp,48(sp)
+  429e4c:	8e230000 	lw	v1,0(s1)
+  429e50:	8f8580a0 	lw	a1,-32608(gp)
+  429e54:	8f868020 	lw	a2,-32736(gp)
+  429e58:	8f9983ac 	lw	t9,-31828(gp)
+  429e5c:	8c640018 	lw	a0,24(v1)
+  429e60:	8c670008 	lw	a3,8(v1)
+  429e64:	24a5124b 	addiu	a1,a1,4683
+  429e68:	0320f809 	jalr	t9
+  429e6c:	24c6a2d8 	addiu	a2,a2,-23848
+  429e70:	8fbc0030 	lw	gp,48(sp)
+  429e74:	240a0003 	li	t2,3
+  429e78:	8f9880a0 	lw	t8,-32608(gp)
+  429e7c:	8f9980a0 	lw	t9,-32608(gp)
+  429e80:	8f8880a0 	lw	t0,-32608(gp)
+  429e84:	8f8980a0 	lw	t1,-32608(gp)
+  429e88:	8f8b80a0 	lw	t3,-32608(gp)
+  429e8c:	8f8c80a0 	lw	t4,-32608(gp)
+  429e90:	271827b5 	addiu	t8,t8,10165
+  429e94:	27391d63 	addiu	t9,t9,7523
+  429e98:	25082375 	addiu	t0,t0,9077
+  429e9c:	25291399 	addiu	t1,t1,5017
+  429ea0:	256b13eb 	addiu	t3,t3,5099
+  429ea4:	258c19aa 	addiu	t4,t4,6570
+  429ea8:	ae180000 	sw	t8,0(s0)
+  429eac:	ae130004 	sw	s3,4(s0)
+  429eb0:	ae190008 	sw	t9,8(s0)
+  429eb4:	ae13000c 	sw	s3,12(s0)
+  429eb8:	ae080010 	sw	t0,16(s0)
+  429ebc:	ae130014 	sw	s3,20(s0)
+  429ec0:	ae090018 	sw	t1,24(s0)
+  429ec4:	ae0a001c 	sw	t2,28(s0)
+  429ec8:	ae0b0020 	sw	t3,32(s0)
+  429ecc:	ae120024 	sw	s2,36(s0)
+  429ed0:	ae0c0028 	sw	t4,40(s0)
+  429ed4:	ae00002c 	sw	zero,44(s0)
+  429ed8:	8e2d0000 	lw	t5,0(s1)
+  429edc:	8f998110 	lw	t9,-32496(gp)
+  429ee0:	8f85805c 	lw	a1,-32676(gp)
+  429ee4:	8da40010 	lw	a0,16(t5)
+  429ee8:	02003025 	move	a2,s0
+  429eec:	24070006 	li	a3,6
+  429ef0:	0320f809 	jalr	t9
+  429ef4:	24a5e944 	addiu	a1,a1,-5820
+  429ef8:	8e2e0000 	lw	t6,0(s1)
+  429efc:	8fbc0030 	lw	gp,48(sp)
+  429f00:	adc20014 	sw	v0,20(t6)
+  429f04:	8e230000 	lw	v1,0(s1)
+  429f08:	8f99838c 	lw	t9,-31860(gp)
+  429f0c:	8c6f0008 	lw	t7,8(v1)
+  429f10:	8f878784 	lw	a3,-30844(gp)
+  429f14:	8c640014 	lw	a0,20(v1)
+  429f18:	24050004 	li	a1,4
+  429f1c:	00003025 	move	a2,zero
+  429f20:	0320f809 	jalr	t9
+  429f24:	afaf0010 	sw	t7,16(sp)
+  429f28:	8fbc0030 	lw	gp,48(sp)
+  429f2c:	8e380000 	lw	t8,0(s1)
+  429f30:	8f998388 	lw	t9,-31864(gp)
+  429f34:	8f040014 	lw	a0,20(t8)
+  429f38:	0320f809 	jalr	t9
+  429f3c:	00000000 	nop
+  429f40:	8fbf0034 	lw	ra,52(sp)
+  429f44:	8fbc0030 	lw	gp,48(sp)
+  429f48:	8fb00020 	lw	s0,32(sp)
+  429f4c:	8fb10024 	lw	s1,36(sp)
+  429f50:	8fb20028 	lw	s2,40(sp)
+  429f54:	8fb3002c 	lw	s3,44(sp)
+  429f58:	03e00008 	jr	ra
+  429f5c:	27bd0040 	addiu	sp,sp,64

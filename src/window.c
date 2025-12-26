@@ -83,24 +83,5 @@ void setOverlayWindow(void)
     }
 }
 
-/**
- * setOverviewWindow - Set overview GL window context
- * Original: GLXwinset(display, main_gl_window)
- */
-void setOverviewWindow(void)
-{
-    if (display && main_gl_window) {
-        GLXwinset(display, (Window)main_gl_window);
-    }
-}
-
-/**
- * setOverviewOverlayWindow - Set overview overlay context
- * Original: GLXwinset(display, overview_gl_context)
- */
-void setOverviewOverlayWindow(void)
-{
-    if (display && overview_gl_context) {
-        GLXwinset(display, (Window)overview_gl_context);
-    }
-}
+/* setOverviewWindow - now implemented in overview.c */
+/* setOverviewOverlayWindow - now implemented in overview.c */

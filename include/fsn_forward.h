@@ -468,7 +468,7 @@ void highlightDirWarp(undefined8 param_1,undefined8 param_2,int param_3);
 void highlightFile(void);
 void highlightFileLandscape(int param_1,int param_2);
 void highlightFileWarp(int param_1,int param_2);
-void highlightOverviewDir(int param_1);
+/* highlightOverviewDir - declared in overview.h with DirectoryNode* type */
 /* FIXED: First two params are floats based on assembly analysis */
 void highlightSpecialDir(float param_1, float param_2, undefined4 param_3, undefined4 param_4);
 void initResources(undefined4 param_1);

@@ -15,6 +15,7 @@
 #include "fsn_igl.h"
 #include "drawing.h"
 #include "fsn_context.h"
+#include "overview.h"
 #include <stdio.h>
 #include <math.h>
 #include <Xm/Xm.h>
@@ -871,6 +872,27 @@ static void postMenu(Widget w, XtPointer client, XEvent *event)
 /* Forward declarations for height mode callbacks */
 static void file_height_mode_callback(Widget w, XtPointer client, XtPointer call);
 static void dir_height_mode_callback(Widget w, XtPointer client, XtPointer call);
+static void toggle_overview_callback(Widget w, XtPointer client, XtPointer call);
+
+/**
+ * toggle_overview_callback - Toggle overview minimap visibility
+ *
+ * ORIGINAL: Part of fsn.c Show menu handling
+ * Toggles overviewActive flag and triggers initial overview draw.
+ */
+static void toggle_overview_callback(Widget w, XtPointer client, XtPointer call)
+{
+    (void)w; (void)client; (void)call;
+
+    if (overviewActive == '\0') {
+        showOverview();
+        set_status_message("Overview shown", 0);
+    } else {
+        hideOverview();
+        set_status_message("Overview hidden", 0);
+    }
+    redraw_flag = 1;
+}
 
 /*-----------------------------------------------------------------------------
  * create_fsn_menus - Populate menu bar with FSN menus
@@ -913,6 +935,7 @@ static void create_fsn_menus(Widget menuBar)
     pane = XmCreatePulldownMenu(menuBar, "show_pane", NULL, 0);
 
     button = XmCreatePushButton(pane, "menuOverview", NULL, 0);
+    XtAddCallback(button, XmNactivateCallback, toggle_overview_callback, NULL);
     XtManageChild(button);
 
     button = XmCreatePushButton(pane, "menuControls", NULL, 0);

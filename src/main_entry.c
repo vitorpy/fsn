@@ -9,6 +9,7 @@
 #include "fsn_types.h"
 #include "fsn_state.h"
 #include "messages.h"
+#include "overview.h"
 
 /* Phase 18: Directory scanning */
 extern void create_root_directory(char *path);

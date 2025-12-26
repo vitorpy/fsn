@@ -207,29 +207,7 @@ void pick_file_item(int param_1, undefined4 *param_2, undefined4 param_3, char p
     update_status_display((undefined4)(uintptr_t)status_buf);
 }
 
-void overviewPickPointer(void)
-{
-    short hits[500];
-    int hit_count;
-
-    picksize(2, 2);
-    pushmatrix();
-    initnames();
-    pick(hits, 500);
-    ortho2((float)minx, (float)maxx, (float)miny, (float)maxy);
-    setup_item_render((int)(uintptr_t)topdir, 1);
-    hit_count = endpick(hits);
-    popmatrix();
-
-    for (int i = 0, seen = 0; seen < hit_count; seen++) {
-        int name_count = hits[i];
-        if (name_count == 1) {
-            (void)get_item_by_index(hits[i + 1]);
-            break;
-        }
-        i += 1 + name_count;
-    }
-}
+/* overviewPickPointer - now implemented in overview.c */
 
 void draw_second_pick(undefined8 param_1, undefined8 param_2, int param_3)
 {
