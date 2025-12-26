@@ -19,10 +19,11 @@
 #include <sys/stat.h>
 #include <math.h>
 
-/* Memory pool for directory entries */
-static DirectoryNode *entry_pool = NULL;
-static int pool_size = 0;
-static int pool_used = 0;
+/* Block-based allocator constants (match original SGI: fsn.c:39173-39192) */
+#define BLOCK_NODE_COUNT    64   /* Nodes per block (original: 0x40) */
+#define BLOCK_INDEX_INITIAL 16   /* Initial block index slots */
+#define BLOCK_INDEX_GROW    16   /* Grow block index by this many */
+
 static short next_name_index = 1;
 
 /* Forward declarations */
@@ -100,41 +101,109 @@ static void recalculate_node_heights(DirectoryNode *node)
 }
 
 /**
- * allocate_directory_entry - Allocate a new directory entry
+ * allocate_directory_entry - Allocate a new directory entry from block pool
+ *
+ * ORIGINAL: fsn.c:39173-39192 (FUN_00411c04)
+ *
+ * Uses a block-based bump allocator that NEVER moves existing allocations.
+ * This is critical for recursive scanning where pointers are held on stack.
+ *
+ * Algorithm:
+ * 1. If current block exhausted, allocate new block
+ * 2. Store new block pointer in dir_index array (grow if needed)
+ * 3. Bump pointer within current block
+ * 4. Return pointer to allocated node
  */
 undefined4 *allocate_directory_entry(void)
 {
-    DirectoryNode *entry;
+    DirectoryNode *node;
+    size_t node_size = sizeof(DirectoryNode);
+    size_t block_size = BLOCK_NODE_COUNT * node_size;
 
-    /*
-     * Grow pool if needed.
-     * WARNING: realloc can move the pool, invalidating any existing pointers
-     * into the pool. We use a large initial size to avoid this during recursion.
-     */
-    if (pool_used >= pool_size) {
-        int new_size = pool_size ? pool_size * 2 : 8192;  /* Large initial to avoid moves */
-        DirectoryNode *new_pool = realloc(entry_pool, new_size * sizeof(DirectoryNode));
-        if (!new_pool) {
+    /* Check if current block is exhausted or not yet allocated */
+    if ((directory_memory_pool == NULL) ||
+        (directory_memory_pool >= directory_pool_limit)) {
+
+        /* Allocate new block - calloc zeros memory */
+        directory_memory_pool = calloc(BLOCK_NODE_COUNT, node_size);
+        if (directory_memory_pool == NULL) {
             fprintf(stderr, "allocate_directory_entry: out of memory\n");
             return NULL;
         }
-        if (entry_pool != NULL && new_pool != entry_pool) {
-            fprintf(stderr, "WARNING: pool moved during recursion - pointers invalidated!\n");
+        directory_pool_limit = (char *)directory_memory_pool + block_size;
+
+        /* Initialize block index array on first allocation */
+        if (directory_pool_index == 0) {
+            dir_index = malloc(BLOCK_INDEX_INITIAL * sizeof(void *));
+            if (dir_index == NULL) {
+                fprintf(stderr, "allocate_directory_entry: dir_index alloc failed\n");
+                free(directory_memory_pool);
+                directory_memory_pool = NULL;
+                return NULL;
+            }
+            directory_pool_capacity = BLOCK_INDEX_INITIAL;
         }
-        entry_pool = new_pool;
-        pool_size = new_size;
+        /* Grow block index array if full */
+        else if (directory_pool_index >= directory_pool_capacity) {
+            int new_cap = directory_pool_capacity + BLOCK_INDEX_GROW;
+            void **new_idx = realloc(dir_index, new_cap * sizeof(void *));
+            if (new_idx == NULL) {
+                fprintf(stderr, "allocate_directory_entry: dir_index grow failed\n");
+                free(directory_memory_pool);
+                directory_memory_pool = NULL;
+                return NULL;
+            }
+            dir_index = new_idx;
+            directory_pool_capacity = new_cap;
+        }
+
+        /* Store block pointer in index array */
+        dir_index[directory_pool_index++] = directory_memory_pool;
     }
 
-    entry = &entry_pool[pool_used++];
-    memset(entry, 0, sizeof(DirectoryNode));
+    /* Get pointer to current slot (before bump) */
+    node = (DirectoryNode *)directory_memory_pool;
 
-    /* Set name index for picking */
-    entry->name_index = next_name_index++;
+    /* Initialize node */
+    memset(node, 0, node_size);
+    node->name_index = next_name_index++;
+    node->render_flags = DIR_FLAG_VISIBLE;
 
-    /* Set visibility flag (bit 28 = visible) */
-    entry->render_flags = DIR_FLAG_VISIBLE;
+    /* Bump pointer to next slot */
+    directory_memory_pool = (char *)directory_memory_pool + node_size;
 
-    return (undefined4 *)entry;
+    return (undefined4 *)node;
+}
+
+/**
+ * free_directory_pool - Free all directory pool blocks
+ *
+ * Call this on application shutdown or when rescanning.
+ */
+void free_directory_pool(void)
+{
+    int i;
+
+    /* Free all allocated blocks */
+    if (dir_index != NULL) {
+        for (i = 0; i < directory_pool_index; i++) {
+            if (dir_index[i] != NULL) {
+                free(dir_index[i]);
+            }
+        }
+        free(dir_index);
+        dir_index = NULL;
+    }
+
+    /* Reset state */
+    directory_pool_index = 0;
+    directory_pool_capacity = 0;
+    directory_memory_pool = NULL;
+    directory_pool_limit = NULL;
+    next_name_index = 1;
+
+    /* Clear topdir */
+    topdir = NULL;
 }
 
 /**
@@ -196,8 +265,8 @@ void create_root_directory(char *param_1)
     /* Set global topdir */
     topdir = (undefined4 *)root;
 
-    fprintf(stderr, "create_root_directory: scanned %d entries, topdir=%p\n",
-            pool_used, (void *)topdir);
+    fprintf(stderr, "create_root_directory: allocated %d blocks, topdir=%p\n",
+            directory_pool_index, (void *)topdir);
 }
 
 /**

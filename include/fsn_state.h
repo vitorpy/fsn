@@ -319,7 +319,7 @@ extern int database_loaded_flag;
 extern float database_version;
 extern undefined4 *topdir;  /* Changed from void* - used as array with subscript */
 extern undefined4 *current_directory_node;  /* Changed from void* - dereferenced in delete.c/messages.c */
-extern int dir_index;
+extern void **dir_index;  /* Block index array for directory pool */
 extern int directory_pool_index;
 extern int directory_pool_capacity;
 extern void *directory_memory_pool;

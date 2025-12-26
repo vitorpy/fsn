@@ -159,4 +159,10 @@ typedef struct DirectoryNode {
 /* Recalculate heights for all nodes after displayHeight mode change */
 extern void recalculate_tree_heights(void);
 
+/*=============================================================================
+ * Memory management (dir_simple.c)
+ *============================================================================*/
+/* Free all directory pool blocks - call on shutdown or rescan */
+extern void free_directory_pool(void);
+
 #endif /* FSN_DIR_H */
