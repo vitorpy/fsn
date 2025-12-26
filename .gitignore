@@ -25,3 +25,12 @@ fsn.rep/
 # System
 .DS_Store
 .venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Temporary analysis files
+gp_*.txt
+off_*.txt
+offsets_tmp.txt
