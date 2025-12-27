@@ -42,7 +42,7 @@ void cIconToTypeName(void)
 
 {
                     // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }
 
 void cIconGetValue(void)

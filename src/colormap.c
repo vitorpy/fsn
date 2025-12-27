@@ -100,7 +100,7 @@ void allocOverlayColor(Widget param_1,undefined4 param_2)
     fprintf((FILE *)0xfb52904,"Could not allocate overlay color %s\n",param_2);
   }
                     // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }
 
 void SG_getDefaultColormap(int param_1,int param_2,int param_3)

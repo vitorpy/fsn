@@ -243,7 +243,7 @@ void SG_getNormalArgs(undefined4 param_1,undefined4 param_2,int param_3,int *par
     *param_4 = *param_4 + 1;
   }
                     // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }
 
 void SG_getOverlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *param_4)
@@ -483,7 +483,7 @@ void SG_getUnderlayArgs(undefined4 param_1,undefined4 param_2,int param_3,int *p
     *param_4 = *param_4 + 1;
   }
                     // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }
 
 void SG_getVisualArgs(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,

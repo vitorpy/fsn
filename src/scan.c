@@ -36,7 +36,7 @@ void scanDatabase(int param_1)
   glx_swap_buffers_wrapper();
   refresh_after_change();
                     // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }
 
 void rescanDatabase(void)
