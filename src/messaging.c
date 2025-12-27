@@ -106,5 +106,5 @@ void format_log_message(undefined4 param_1,char *param_2,undefined4 param_3,unde
   fprintf((FILE *)0xfb52904,(char *)_imsgs[176/4],local_404,local_408,acStack_400);
   fflush((FILE *)0xfb52904);
                     // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }

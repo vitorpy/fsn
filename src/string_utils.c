@@ -12,7 +12,7 @@ void get_icon_string(void)
 
 {
                     // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }
 
 void find_string_index(int param_1)
@@ -27,12 +27,12 @@ void find_string_index(int param_1)
     do {
       if (param_1 == *piVar2) {
                     // WARNING: Bad instruction - Truncating control flow here
-        halt_baddata();
+        return;
       }
       iVar1 = iVar1 + 1;
       piVar2 = piVar2 + 1;
     } while (iVar1 < buffer_size);
   }
                     // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }

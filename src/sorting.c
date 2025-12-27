@@ -19,7 +19,7 @@ void sort_entries(undefined4 param_1,uint param_2,int param_3,int param_4,undefi
   uVar1 = param_2 + param_4 * (param_3 + -1);
   if (param_2 <= uVar1) {
                     // WARNING: Bad instruction - Truncating control flow here
-    halt_baddata();
+    return;
   }
   if (0 < local_14) {
     local_10 = local_10 + param_4;
@@ -29,5 +29,5 @@ void sort_entries(undefined4 param_1,uint param_2,int param_3,int param_4,undefi
   }
   *param_6 = local_10;
                     // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  return;
 }
