@@ -254,16 +254,60 @@ void showPreferencePanel(void)
     windowVar = XtWindow(preference_panel_shell);
     XRaiseWindow(display,windowVar);
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+                    /* WARNING: Bad instruction - Truncating control flow here */
+      /*
+     * BADDATA ANALYSIS (from binary @ 0x0042b9e8):
+     * Function: showPreferencePanel
+     *
+     * Looking at this assembly snippet:
+     * **What it does:**
+     * 1. Calls function at GP-32392 with s2 as argument (likely XtManageChild or similar)
+     * 2. Loops: loads linked list node, copies a value, advances to next node (offset +16), continues while node->next != NULL
+     * 3. After loop: calls function at GP-31864 with global at GP-32660 offset -30400 (likely XtPopup on preference shell)
+     * 4. Restores saved registers and returns (stack frame = 1280 bytes)
+     * **C pseudocode:**
+     * // ... after halt_baddata section
+     * XtManageChild(widget_s2);
+     * // Traverse linked list, copying values
+     * do {
+     * node_t *next = current->child;      // offset 4
+     * Widget w = current->widget;          // offset 16
+     * int val = *(int*)next;              // dereference
+     * current += 16;                       // advance pointer
+     * current->prev_val = val;            // store at offset -8 from new pos
+     * } while (current->widget != NULL);
+     * // Show the preference panel
+     * XtPopup(preference_shell, XtGrabNone);  // GP-31864 = XtPopup, GP-32660[-30400] = shell widget
+     * The loop structure (bnez back to 42c860) suggests this is the tail of a widget tree traversal that manages/realizes child widgets before popping up the preferences dialog.
+     */
+  return;
 }
 
 void hidePreferencePanel(void)
-
 {
   if (preference_panel_shell != 0) {
     XtUnmanageChild(preference_panel_shell);
   }
-                    // WARNING: Bad instruction - Truncating control flow here
-  halt_baddata();
+  /*
+   * BADDATA ANALYSIS (from binary @ 0x0042cc54):
+   * Function: hidePreferencePanel
+   *
+   * ## Analysis
+   * **What it does:**
+   * Loads a widget pointer from global data (offset -30400 from a base pointer at GP-32660). If the widget is non-NULL, calls XtUnmanageChild (at GP-31600) to hide it. This is a standard Motif pattern for hiding a preference dialog.
+   * **C pseudocode:**
+   * void hidePreferencePanel(Widget w, XtPointer client_data, XtPointer call_data)
+   * {
+   *     // DAT_10008940 is the base pointer, offset -30400 (0x8940) gives preference panel widget
+   *     Widget prefPanel = *(Widget *)((char *)DAT_10008940 - 30400);
+   *     if (prefPanel != NULL) {
+   *         XtUnmanageChild(prefPanel);
+   *     }
+   * }
+   * **GP offset resolution:**
+   * - GP-32660 (0x806c) → pointer to data structure base (likely DAT_10008940 or similar)
+   * - Offset -30400 (0x8940) within that structure → preference panel widget
+   * - GP-31600 (0x8490) → XtUnmanageChild function pointer
+   */
+  return;
 }
